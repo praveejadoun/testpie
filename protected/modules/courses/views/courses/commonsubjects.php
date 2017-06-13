@@ -1,7 +1,7 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
-	//'id'=>'batches-form',
+	'id'=>'subjects-form',
 	'enableAjaxValidation'=>true,
-)); ?>
+));?>
 
 <?php
  $this->breadcrumbs=array(
