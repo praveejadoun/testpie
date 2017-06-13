@@ -46,6 +46,39 @@ $batch = Batches::model()->findByAttributes(array('id' => $_REQUEST['id']));
         <tbody><tr>
 
                 <td valign="top">
+                    
+                    <div class="c_batch_tbar">
+		        
+			<a id="explorer_change" class="sb_but" style="top:-40px; right:40px;" href="#">Change Batch</a>        
+                
+        <a class="sb_but_close" style="top:-40px; right:0px;" href="/index.php?r=courses"><span>close</span></a>        
+        <!-- Course - Batch - Class Teacher Name -->
+        <div class="cb_left">
+            <ul>
+                <li><strong>Course / Batch : </strong> Master of Science Degree / Batch_A</li>
+                <li><strong>Class Teacher : </strong> Ani  Abraham                </li>
+            </ul>
+        </div> <!-- END div class="cb_left" -->
+        <!-- END Course - Batch - Class Teacher Name -->
+        
+        <!-- Students - Subjects - Employees Numbers -->
+        <div class="cb_right">
+            <div class="status_bx">
+            
+                <ul>
+					                   <li><span>8</span>
+                             Students                   </li>
+                   <li><span>4</span>Subjects</li>
+                   <li><span>1</span>
+                            Teachers                   </li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div> <!-- END div class="cb_right" -->
+        <!-- END Students - Subjects - Employees Numbers -->
+        
+        <!-- END Actions -->
+
 <?php
 if ($batch != NULL) {
        
@@ -111,7 +144,7 @@ if ($batch != NULL) {
 									  echo 'Female';
 								  }
                                                             ?></td>
-                                                            <td >
+                                                            <td>
                                                                 <div style="position:absolute;">
                                                                     <div  id="<?php echo $i; ?>" class="act_but"><?php echo Yii::t('Batch', 'Actions'); ?></div>
                                                                     <div class="act_drop" id="<?php echo $i . 'x'; ?>">
@@ -119,10 +152,10 @@ if ($batch != NULL) {
                                                                         <ul>
                                                                             <li class="add"><?php echo CHtml::link(Yii::t('Batch', 'Add Leave') . '<span>' . Yii::t('Batch', 'for add leave') . '</span>', array('#'), array('class' => 'addevnt', 'name' => $posts_1->id)) ?></li>
                                                                             <li class="delete"><?php echo CHtml::link(Yii::t('Batch', 'Make Inactive') . '<span>' . Yii::t('Batch', 'make students inactive') . '</span>', array('/students/students/inactive', 'sid' => $posts_1->id, 'id' => $_REQUEST['id']), array('confirm' => 'Are You Sure , Make Inactive ?')) ?></li>
-                                                                            <li class="edit"><a href="#">Edit Leave<span>for add leave</span></a></li>
+                                                                          <!--  <li class="edit"><a href="#">Edit Leave<span>for add leave</span></a></li>
                                                                             <li class="delete"><a href="#">Delete Leave<span>for add leave</span></a></li>
                                                                             <li class="add"><a href="#">Add Fees<span>for add leave</span></a></li>
-                                                                            <li class="add"><a href="#">Add Report<span>for add leave</span></a></li>
+                                                                            <li class="add"><a href="#">Add Report<span>for add leave</span></a></li>-->
                                                                         </ul>
                                                                     </div>
                                                                     <div class="clear"></div>
@@ -273,6 +306,37 @@ if ($batch != NULL) {
 </script>
 
 
+ <script language="javascript">
+				function getid()
+				{
+				var id= document.getElementById('drop').value;
+				window.location = "index.php?r=batches/manage&id="+id;
+				}
+				</script>
+				<script>
+				$(document).ready(function() {
+				$(".act_but").click(function(){	$('.act_drop').hide();	
+            	if ($("#"+this.id+'x').is(':hidden')){
+					
+                	$("#"+this.id+'x').show();
+					
+				}
+            	else{
+                	$("#"+this.id+'x').hide();
+            	}
+            return false;
+       			 });
+				  $('#'+this.id+'x').click(function(e) {
+            		e.stopPropagation();
+        			});
+        		
+});
+$(document).click(function() {
+					
+            		$('.act_drop').hide();
+					
+        			});
+</script>
 
 
 

@@ -124,11 +124,11 @@ class CoursesController extends RController
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Courses']))
+		if(isset($_GET['Courses']))
 		{
 			
-			$model->attributes=$_POST['Courses'];
-			$list = $_POST['Courses'];
+			$model->attributes=$_GET['Courses'];
+			$list = $_GET['Courses'];
 				
 			
 			

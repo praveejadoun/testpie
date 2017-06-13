@@ -47,7 +47,7 @@
                   <div class="formConInner">     
             <table width="60%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                    <?php $courses=Courses::model()->findByAttributes(array('id'=>$_REQUEST['id'])); ?>
+                    <?php $courses=Courses::model()->findByAttributes(array('id'=>$_REQUEST['id']));?>
                     
                     <td><?php echo $form->labelEx($model,Yii::t('Batch','Teacher')); ?></td>
                       
@@ -69,7 +69,7 @@
              </div>
              <?php //foreach($posts as $posts_1) { ?>
                  <?php //$subject=Subjects::model()->findAll("batch_id=:x AND is_deleted=:y AND is_active=:z", array(':x'=>$posts->id,':y'=>0,':z'=>1));?>
-                   <?php 
+                   <?php
                    if($courses!=null){
                    if(isset($_REQUEST['id']))
                 {
