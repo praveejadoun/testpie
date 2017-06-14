@@ -60,10 +60,12 @@ $(document).click(function() {
  
  
  <?php    $batch=Batches::model()->findByAttributes(array('id'=>$_REQUEST['id'])); 
+
           if($batch!=NULL)
 		   {
 			   $course=Courses::model()->findByAttributes(array('id'=>$batch->course_id));
-		       if($course!=NULL)
+		       
+                       if($course!=NULL)
 			   {
 				   $coursename = $course->course_name; 
 				   $batchname = $batch->name;
@@ -76,7 +78,7 @@ $(document).click(function() {
            }?>
           
           
-	<div class="c_batch_tbar">
+	<div class="c_batch_tbar" style="padding:0px; margin:0px;">
     <?php if((Yii::app()->controller->id=='batches' and (Yii::app()->controller->action->id=='batchstudents' or Yii::app()->controller->action->id=='settings')) or (Yii::app()->controller->id=='subject' and Yii::app()->controller->action->id=='index') or (Yii::app()->controller->id=='weekdays' and (Yii::app()->controller->action->id=='timetable' or Yii::app()->controller->action->id=='index')) or (Yii::app()->controller->id=='classTiming' and Yii::app()->controller->action->id=='index') or (Yii::app()->controller->id=='studentAttentance' and Yii::app()->controller->action->id=='index') or (Yii::app()->controller->id=='gradingLevels' and Yii::app()->controller->action->id=='index') or (Yii::app()->controller->id=='exam' and Yii::app()->controller->action->id=='index'))
 			{
 				?>
@@ -84,7 +86,8 @@ $(document).click(function() {
             <?php
 			
 			$rurl = explode('index.php?r=',Yii::app()->request->getUrl());
-			$rurl = explode('&id=',$rurl[1]);
+                       
+			$rurl = explode('&id=',$rurl[1]); 
 			echo CHtml::ajaxLink('Change Batch',array('/site/explorer','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'sb_but','style'=>'top:-40px; right:40px;')); ?>
            
 <?php 
@@ -101,7 +104,7 @@ $(document).click(function() {
                 <li><strong><?php echo Yii::t('Batch','Class Teacher : '); ?></strong> <?php $employee=Employees::model()->findByAttributes(array('id'=>$batch->employee_id));
 		    if($employee!=NULL)
 		    {
-			   echo ucfirst($employee->first_name).' '.ucfirst($employee->middle_name).' '.ucfirst($employee->last_name); 
+			   echo ucfirst($employee->first_name).' '.ucfirst($employee->middle_name).' '.ucfirst($employee->last_name);
 		    }?></li>
             </ul>
         </div>
@@ -110,7 +113,7 @@ $(document).click(function() {
     			<ul>
         			<li><span><?php echo count(Students::model()->findAll("batch_id=:x and is_deleted=:y", array(':x'=>$_REQUEST['id'],':y'=>0))); ?></span><?php echo Yii::t('Batch','Students');?></li>
             		<li><span><?php echo count(Subjects::model()->findAll("batch_id=:x", array(':x'=>$_REQUEST['id']))); ?></span><?php echo Yii::t('Batch','Subjects');?></li>
-            		<li><span><?php echo count(TimetableEntries::model()->findAll(array('condition'=>'batch_id=:x', 'group'=>'employee_id','params'=>array(':x'=>$_REQUEST['id'])))); ?></span><?php echo Yii::t('Batch','Employees');?></li>
+            		<li><span><?php //echo count(TimetableEntries::model()->findAll(array('condition'=>'batch_id=:x', 'group'=>'employee_id','params'=>array(':x'=>$_REQUEST['id']))));?></span><?php echo Yii::t('Batch','Employees');?></li>
         		</ul>
      		<div class="clear"></div>
    			</div>
@@ -121,7 +124,7 @@ $(document).click(function() {
             <div class="act_drop" id="tabdropx">
 				<div class="but_bg_outer"></div><div class="but_bg"><div id="1" class="act_but_hover">Actions</div></div>
                 <ul>
-					<li class="addstud"><?php echo CHtml::link(Yii::t('Batch','Add Student<span>for add new student</span>'), array('/students/students/create','bid'=>$_REQUEST['id'])) ?></li>
+					<li class="addstud"><?php echo CHtml::link(Yii::t('Batch','Add Student<span>for add new student</span>'), array('/students/students/create','bid'=>$_REQUEST['id'])); ?></li>
 					<li class="newsub"><?php echo CHtml::link(Yii::t('Batch','New Subject<span>for add new subject</span>'), array('#'),array('id'=>'add_subject-name-side')) ?></li>
                    	<li class="mark"><?php echo CHtml::link(Yii::t('Batch','Mark Attendance<span>for add leave</span>'), array('/courses/studentAttentance','id'=>$_REQUEST['id'])) ?></li>
 				   	<li class="promote"><?php echo CHtml::link(Yii::t('Batch','Promote Batch<span>for promote a batch</span>'), array('batches/promote','id'=>$_REQUEST['id'])) ?></li>
