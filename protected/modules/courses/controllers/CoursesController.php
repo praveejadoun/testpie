@@ -409,4 +409,14 @@ class CoursesController extends RController
 			Yii::app()->end();
 		}
 	}
+        
+        public function actionDeleterow()
+	{
+
+		$postRecord = Subjects::model()->findByPk($_REQUEST['id']);
+		$postRecord->delete();
+		 Yii::app()->user->setFlash('notification','Data Saved Successfully');
+		$this->redirect(array('commonsubjects','cou'=>$_REQUEST['cou']));
+		
+	}
 }

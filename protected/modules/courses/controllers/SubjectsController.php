@@ -165,6 +165,7 @@ class SubjectsController extends RController
                     Yii::app()->clientScript->scriptMap['jquery.js'] = false;
                     $this->renderPartial('create1',array('model'=>$model,'id'=>1,'batch_id'=>$_GET['val1']),false,true);
                 }
+                
         }
 		public function actionAddnew1() {
                 $model=new Subjects;
@@ -214,7 +215,7 @@ class SubjectsController extends RController
 
 			}
 		
-			Yii::app()->clientScript->scriptMap['jquery.js'] = false;
+			Yii::app()->clientScript->scriptMap['jquery.js'] = true;
 			$this->renderPartial('update',array('model'=>$model,'batch_id'=>$_GET['val1']),false,true);
 		}
 	}

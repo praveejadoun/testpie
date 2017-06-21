@@ -1,8 +1,12 @@
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'subjects-form',
-	'enableAjaxValidation'=>false,
-));?>
+<style>
+#jobDialog123
+{
+	height:auto;
+}
+</style>
 
+
+<?php $this->renderPartial('_flash');?>
 <?php
  $this->breadcrumbs=array(
 	'Courses',
@@ -61,7 +65,11 @@ echo '</div>';
 echo '&nbsp;&nbsp;'; ?>
  <div class="contrht_bttns" >
      <ul>
-      <li><?php echo CHtml::link('<span>'.Yii::t('courses','Add Course').'</span>', array('create')); ?></li>
+      <li><?php echo CHtml::ajaxLink(Yii::t('Courses','Add Subject'),$this->createUrl('subjects/Addnew'),array(
+        'onclick'=>'$("#jobDialog1").dialog("open"); return false;',
+        'update'=>'#jobDialog1','type' =>'GET','data' => array( 'val1' =>$_REQUEST['cou'] ),'dataType' => 'text',),array('id'=>'showJobDialog12'.$_REQUEST['cou'],'class'=>'add')); 
+      
+         ?></li>
      </ul> 
  </div>                    
 <?php 
@@ -83,7 +91,7 @@ if(isset($_REQUEST['cou']))
 if(isset($_REQUEST['cou']))
 {
 	
-$emp_sub = Subjects::model()->findAll("course_id=:x", array(':x'=>$_REQUEST['cou']));	
+$emp_sub = Subjects::model()->findAll("course_id=:x AND is_deleted=:y AND is_active=:z", array(':x'=>$_REQUEST['cou'],':y'=>0,':z'=>1));	
 
 	if(count($emp_sub)==0)
 	{
@@ -125,12 +133,11 @@ $emp_sub = Subjects::model()->findAll("course_id=:x", array(':x'=>$_REQUEST['cou
         <td> 
            
 
-            <?php echo CHtml::ajaxLink(Yii::t('Subjects','Edit'),$this->createUrl('subjects/addupdate'),array(
+           <?php echo CHtml::ajaxLink(Yii::t('Subjects','Edit'),$this->createUrl('subjects/addupdate'),array(
         'onclick'=>'$("#jobDialog").dialog("open"); return false;',
-        'update'=>'#jobDialog','type' =>'GET','data' => array( 'id'=>$emp_sub_1->id ),'dataType' => 'text'),array('id'=>'showJobDialog123'.$emp_sub_1->id,'class'=>'add'));?>
+        'update'=>'#jobDialog','type' =>'GET','data' => array( 'val1' =>$emp_sub_1->id,'course_id'=>$_REQUEST['cou'] ),'dataType' => 'text'),array('id'=>'showJobDialog123'.$emp_sub_1->id,'class'=>'add')); ?>
   
-    <?php echo CHtml::link(Yii::t('courses','Delete'), array('delete1', 'id'=>$emp_sub_1->id), array('confirm' => 'Are you sure?','onclick'=>"show()")); ?></td>
-    
+  <?php  echo CHtml::link(Yii::t('subjects','Remove'), array('deleterow', 'id'=>$emp_sub_1->id,'cou'=>$_REQUEST['cou'],), array('confirm' => 'Are you sure?','onclick'=>"show()")); ?>
      </tr>
     <?php } ?>
     </table>
@@ -148,7 +155,7 @@ $emp_sub = Subjects::model()->findAll("course_id=:x", array(':x'=>$_REQUEST['cou
 
 <?php } ?>
 
-<?php $this->endWidget(); ?>
+
 
 <script language="javascript">
 function course()
