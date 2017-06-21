@@ -190,6 +190,7 @@ class CoursesController extends RController
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
+                   
 			// we only allow deletion via POST request
 			$this->loadModel($id);
 			//$this->is_deleted =1;
@@ -208,6 +209,9 @@ class CoursesController extends RController
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 	
+        	
+        
+        
 	public function actionDeactivate($id)
 	{
 		
@@ -368,7 +372,31 @@ class CoursesController extends RController
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+        
+        public function loadModel1($id)
+	{
+		$model=Subjects::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
 
+        
+        public function actionDelete1($id)
+	{
+            
+		if(Yii::app()->request->isPostRequest)
+		{
+			// we only allow deletion via POST request
+			$this->loadModel($id)->delete();
+
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if(!isset($_GET['ajax']))
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
 	/**
 	 * Performs the AJAX validation.
 	 * @param CModel the model to be validated
