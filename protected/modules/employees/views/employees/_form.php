@@ -13,14 +13,14 @@
 ?>
 
 
-	<?php //if($form->errorSummary($model)){; ?>
+	<?php if($form->errorSummary($model)){; ?>
 
     
     <div class="errorSummary">Input Error<br />
     <span>Please fix the following error(s).</span>
     </div>
     
-    <?php // } ?>
+    <?php  } ?>
     
 <p class="note">Fields with <span class="required">*</span> are required.</p>
 <div class="formCon" style="background:#fcf1d4; width:100%; border:0px #fac94a solid; color:#000;background:url(images/yellow-pattern.png); width:100%; border:0p ">

@@ -658,7 +658,7 @@ background:#525252 url(../images/navli-bg.png) repeat-x bottom;
 	
 }
 .sub_nav li a:hover.ico4{
-	background: url(../images/sub_navicons_hover.png)) no-repeat 0px -180px;
+	background: url(../images/sub_navicons_hover.png) no-repeat 0px -180px;
 	
 }
 .sub_nav li a:hover.ico5{
@@ -2372,7 +2372,7 @@ box-shadow: inner 0 0 5px #888;
 .emp_tab_nav li a
 {
 	margin:0px;
-	padding:8px 20px 0px 20px;
+	padding:8px 7px 0px 3px;
 	font-size:12px;
 	height:23px;
 	font-weight:bold;
@@ -2401,7 +2401,7 @@ box-shadow: inner 0 0 5px #888;
 {
 	background:#fff; /*url(../images/form-pattern.png);*/
 	color:#576D7E;
-	padding:8px 20px 0px 20px;
+	padding:8px 2px 0px 2px;
 	height:24px;
 	border-left:#aec3d3 solid 1px;
 	border-right:#aec3d3 solid 1px;
@@ -6079,4 +6079,14 @@ tr.mailbx_con_tble_bx > td > div {
 	background:url(../images/no_news_icon.png) 0px 6px no-repeat;
 	font-weight:700;
 	color:#a85201;
+}
+.document_table {
+    padding: 0px 0px;
+    margin: 0px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border-top: 1px #d1e0ea solid;
+    border-right: 1px #d1e0ea solid;
+    border-left: 1px #d1e0ea solid;
 }

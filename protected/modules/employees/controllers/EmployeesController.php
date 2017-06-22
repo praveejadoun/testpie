@@ -274,7 +274,103 @@ class EmployeesController extends RController
 			'model'=>$this->loadModel($_REQUEST['id']),
 		));
 	}
+                
 
+        public function actionAchievments()
+	 {
+		 
+	      $model=new Employees;
+              
+              
+	       if(isset($_POST['Employees']))
+                   
+		{
+                   
+                    $model->attributes=$_POST['Employees'];
+                    
+                     $model->validate();
+                     
+                     
+			if($model->save())
+			{
+                        
+				       $form_data = $_POST['Employees'];
+                                       
+                                              $model->achievements_title = $form_data['achievements_title'];
+                                              $model->achievements_document_name = $form_data['achievements_document_name'];
+                                              $model->achievements_description = $form_data['achievements_description'];
+                                              
+                                             // $contact->ID=$id;
+                                            //$model->name= $form_data['name'];
+                                        $model->save();
+						
+			$this->redirect(array('achievments'));
+                         }
+                         
+                       
+                }
+                
+                 else
+                {
+                $criteria = new CDbCriteria;
+		//$criteria->compare('is_deleted',0);  // normal DB field
+		//$criteria->condition='is_deleted=:is_del';
+		//$criteria->params = array(':is_del'=>0);
+		 
+		
+		if(isset($_REQUEST['Studentleavetype']['name']) and $_REQUEST['Studentleavetype']['name']!=NULL)
+		{
+			$model->name = $_REQUEST['Studentleavetype']['name'];
+			$criteria->condition=$criteria->condition.' and '.'name = :name';
+		    $criteria->params[':name'] = $_REQUEST['Studentleavetype']['name'];
+		}
+		
+		if(isset($_REQUEST['Studentleavetype']['code']) and $_REQUEST['Studentleavetype']['code']!=NULL)
+		{
+			$model->code = $_REQUEST['Studentleavetype']['code'];
+			$criteria->condition=$criteria->condition.' and '.'code = :code';
+		    $criteria->params[':code'] = $_REQUEST['Studentleavetype']['code'];
+		}
+		
+		if(isset($_REQUEST['Studentleavetype']['label']) and $_REQUEST['Studentleavetype']['label']!=NULL)
+		{
+			$model->label = $_REQUEST['Studentleavetype']['label'];
+			$criteria->condition=$criteria->condition.' and '.'label = :label';
+		    $criteria->params[':label'] = $_REQUEST['Studentleavetype']['label'];
+		}
+		
+		if(isset($_REQUEST['Studentleavetype']['colorcode']) and $_REQUEST['Studentleavetype']['colorcode']!=NULL)
+		{
+			$model->colorcode = $_REQUEST['Studentleavetype']['colorcode'];
+			$criteria->condition=$criteria->condition.' and '.'colorcode = :colorcode';
+		    $criteria->params[':colorcode'] = $_REQUEST['Studentleavetype']['colorcode'];
+		}		
+		
+		if(isset($_REQUEST['Studentleavetype']['status']) and $_REQUEST['Studentleavetype']['status']!=NULL)
+		{
+			$model->status = $_REQUEST['Studentleavetype']['status'];
+			$criteria->condition=$criteria->condition.' and '.'is_active = :status';
+		    $criteria->params[':status'] = $_REQUEST['Studentleavetype']['status'];
+		}
+                
+		
+                $criteria->order = 'name ASC';
+	        $total = Studentleavetype::model()->count($criteria);
+		$pages = new CPagination($total);
+        $pages->setPageSize(Yii::app()->params['listPerPage']);
+        $pages->applyLimit($criteria);  // the trick is here!
+		$posts = Studentleavetype::model()->findAll($criteria);
+                
+		$this->render('manage',array('model'=>$model,
+		'list'=>$posts,
+		'pages' => $pages,
+		'item_count'=>$total,
+                 'page_size'=>Yii::app()->params['listPerPage'],)) ;
+                
+                 }
+	 }
+
+        
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -440,7 +536,7 @@ class EmployeesController extends RController
 	 */
 	public function loadModel($id)
 	{
-		$model=Employees::model()->find($id);
+		$model=Employees::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

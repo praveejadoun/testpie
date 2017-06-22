@@ -56,6 +56,9 @@
  * @property string $updated_at
  * @property integer $photo_file_size
  * @property integer $user_id
+ * @property string $achievement_title
+ * @property string $achievement_description
+ * @property string $achievement_document_name
  */
 class Employees extends CActiveRecord
 {
@@ -186,6 +189,9 @@ class Employees extends CActiveRecord
 			'updated_at' => 'Updated At',
 			'photo_file_size' => 'Photo File Size',
 			'user_id' => 'User',
+                        'achievement_title' => 'Title',
+                        'achievement_description' => 'Description',
+                        'achievement_document_type' => 'Document',
 		);
 	}
 
@@ -252,6 +258,9 @@ class Employees extends CActiveRecord
 		$criteria->compare('updated_at',$this->updated_at,true);
 		$criteria->compare('photo_file_size',$this->photo_file_size);
 		$criteria->compare('user_id',$this->user_id);
+                $criteria->compare('achievement_title',$this->achievement_title);
+                $criteria->compare('achievement_description',$this->achievement_description);
+                $criteria->compare('achievement_document_type',$this->achievement_document_type);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
