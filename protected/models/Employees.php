@@ -107,6 +107,7 @@ class Employees extends CActiveRecord
 			array('employee_number, first_name, last_name, gender, date_of_birth, employee_department_id', 'required'),
 			array('experience_year, experience_month', 'exp_validation'),
 			array('employee_number','unique'),
+                        array('achievement_title,achievement_document_name,achievement_description','length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('photo_data', 'file', 'types'=>'jpg, gif, png','allowEmpty' => true, 'maxSize' => 5242880),

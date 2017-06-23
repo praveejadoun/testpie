@@ -96,12 +96,12 @@ else
            <!-- <h3>Personal Details</h3>-->
             <table width="85%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                <td valign="bottom" ><?php echo $form->labelEx($model,Yii::t('employees','Name <span class="required">*</span>')); ?></td>
+                <td valign="bottom" ><?php echo $form->labelEx($model,Yii::t('employees','Achievement Title <span class="required">*</span>')); ?></td>
                 <td>&nbsp;</td>
                 
                 <!--<td valign="bottom"><?php //echo $form->labelEx($model,Yii::t('students','middle_name')); ?></td>
                 <td>&nbsp;</td>-->
-                <td valign="bottom"><?php echo $form->labelEx($model,Yii::t('employees','Code <span class="required">*</span>')); ?></td>
+                <td valign="bottom"><?php echo $form->labelEx($model,Yii::t('employees','Description <span class="required">*</span>')); ?></td>
                 </tr>
                 <tr>
                 <td valign="top"><?php echo $form->textField($model,'achievement_title',array('size'=>30,'maxlength'=>255)); ?>
@@ -121,11 +121,11 @@ else
                 <td>&nbsp;</td>
                 </tr>
                 <tr>
-                <td valign="bottom"><?php echo $form->labelEx($model,Yii::t('employees','Label <span class="required">*</span>')); ?></td>
+                <td valign="bottom"><?php echo $form->labelEx($model,Yii::t('employees','Document Name <span class="required">*</span>')); ?></td>
                 <td>&nbsp;</td>
                 <!--<td valign="bottom"><?php //echo $form->labelEx($model,Yii::t('students','date_of_birth')); ?></td>
                 <td>&nbsp;</td>-->
-                <td valign="bottom"><?php echo $form->labelEx($model,Yii::t('employees','Color Code <span class="required">*</span>')); ?></td>
+                
                 </tr>
                  <tr>
                 <td valign="top"><?php echo $form->textField($model,'achievement_document_name',array('size'=>30,'maxlength'=>255)); ?>

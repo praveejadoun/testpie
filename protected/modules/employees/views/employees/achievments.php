@@ -37,7 +37,7 @@ $this->breadcrumbs=array(
     </ul>
     </div>
     <div class="clear"></div>
-  
+<?php  $list = Employees::model()->findAll("id=:x", array(':x'=>$_REQUEST['id']));?>
                           <div class="emp_cntntbx">
                             <div class="document_table">
                             	                                <table width="100%" cellspacing="0" cellpadding="0">
@@ -54,35 +54,33 @@ $this->breadcrumbs=array(
                                     <td align="center" width="100"><strong>Document Name</strong></td>                                    
                                     <td align="center" width="150"><strong>Actions</strong></td>
                                     </tr>
-                                    	                                                <tr>
-                                                    <td align="center">Jjjkhjhuihu</td>
-                                                    <td align="center">Bjbjbhjbj</td>
-                                                    <td align="center">Jhjhjhjh</td>
+                                    <?php	if($list!=null){      ?>                                          
+                                        
+                            <?php 
+                                        if(isset($_REQUEST['page']))
+                            {
+                            	$i=($pages->pageSize*$_REQUEST['page'])-9;
+                           }
+                            else
+                            {
+                            	$i=1;
+                            }
+                            $cls="even";
+                            ?>
+                            
+                            <?php 
+							foreach($list as $list_1)
+                            {
+							?>
+                                <tr class=<?php echo $cls;?>>
+                                <td><?php echo $i; ?></td>
+                                <td><?php echo $list_1->achievement_title ?></td>
+                                <td><?php echo $list_1->achievement_description ?></td>
+                                <td><?php echo $list_1->achievement_document_name ?></td>
+                                </tr>    
                                                     
-                                                    <td align="center">
-                                                    	<ul class="tt-wrapper">
-                                                        	
-                                                           
-															<li>
-                                                           		<a class="tt-download" href="/index.php?r=employees/achievements/download&amp;id=4&amp;employee_id=23"><span>Download</span></a>															</li>
-                                                            														 <li>
-                                                         <li>
-                                                             	<a class="tt-image" href="#"><span style="width:170px;height:140px; left:-30px;"><img  src="uploadedfiles/employee_achievement_document/130/th3z454y3GqiiDnxIM6Srl0jP5WlvnSz.e" width="170" height="140" /></span></a>	</li>                                                         
-														 </li>
-														 
-														
-                                                           
-															 <li>
-                                                             	<a class="tt-edit" href="/index.php?r=employees/achievements/update&amp;id=4&amp;employee_id=23"><span>Edit</span></a>															</li>
-															
-															
-															<li>
-                                                           
-																<a class="tt-delete" href="/index.php?r=employees/achievements/deletes&amp;id=4&amp;employee_id=23" id="yt0"><span>Delete</span></a>															</li>
-                                                          
-                                                        </ul>
-                                                    </td>
-												</tr>
+                           <?php      }                  
+				}?>								
                                                                             </table>
                               
                             </div>

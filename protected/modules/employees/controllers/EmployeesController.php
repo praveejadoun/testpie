@@ -280,34 +280,27 @@ class EmployeesController extends RController
 	 {
 		 
 	      $model=new Employees;
-              
-              
+              $model->attributes=$_POST['Employees'];
+              $model =$model->findByAttributes(array('id'=>$_REQUEST['id']));
 	       if(isset($_POST['Employees']))
                    
 		{
-                   
-                    $model->attributes=$_POST['Employees'];
-                    
-                     $model->validate();
-                     
-                     
-			if($model->save())
-			{
-                        
-				       $form_data = $_POST['Employees'];
-                                       
-                                              $model->achievements_title = $form_data['achievements_title'];
-                                              $model->achievements_document_name = $form_data['achievements_document_name'];
-                                              $model->achievements_description = $form_data['achievements_description'];
+               if($model->save())
+               {
+                   $form_data = $_POST['Employees'];
+                                      
+                                              $model->achievement_title = $form_data['achievement_title'];
+                                              $model->achievement_document_name = $form_data['achievement_document_name'];
+                                              $model->achievement_description = $form_data['achievement_description'];
                                               
                                              // $contact->ID=$id;
                                             //$model->name= $form_data['name'];
                                         $model->save();
-						
-			$this->redirect(array('achievments'));
-                         }
-                         
-                       
+               }
+		$this->redirect('employees/employees/achievments',array(
+			'model'=>$this->loadModel($_REQUEST['id']),
+		));				
+			
                 }
                 
                  else
@@ -318,50 +311,44 @@ class EmployeesController extends RController
 		//$criteria->params = array(':is_del'=>0);
 		 
 		
-		if(isset($_REQUEST['Studentleavetype']['name']) and $_REQUEST['Studentleavetype']['name']!=NULL)
+		if(isset($_REQUEST['Employees']['achievement_title']) and $_REQUEST['Employees']['achievement_title']!=NULL)
 		{
-			$model->name = $_REQUEST['Studentleavetype']['name'];
-			$criteria->condition=$criteria->condition.' and '.'name = :name';
-		    $criteria->params[':name'] = $_REQUEST['Studentleavetype']['name'];
+			$model->name = $_REQUEST['Employees']['achievement_title'];
+			$criteria->condition=$criteria->condition.' and '.'achievement_title = :achievement_title';
+		    $criteria->params[':achievement_title'] = $_REQUEST['Employees']['achievement_title'];
 		}
 		
-		if(isset($_REQUEST['Studentleavetype']['code']) and $_REQUEST['Studentleavetype']['code']!=NULL)
+		if(isset($_REQUEST['Employees']['achievement_document_name']) and $_REQUEST['Employees']['achievement_document_name']!=NULL)
 		{
-			$model->code = $_REQUEST['Studentleavetype']['code'];
-			$criteria->condition=$criteria->condition.' and '.'code = :code';
-		    $criteria->params[':code'] = $_REQUEST['Studentleavetype']['code'];
+			$model->code = $_REQUEST['Employees']['achievement_document_name'];
+			$criteria->condition=$criteria->condition.' and '.'achievement_document_name = :achievement_document_name';
+		    $criteria->params[':achievement_document_name'] = $_REQUEST['Employees']['achievement_document_name'];
 		}
 		
-		if(isset($_REQUEST['Studentleavetype']['label']) and $_REQUEST['Studentleavetype']['label']!=NULL)
+		if(isset($_REQUEST['Employees']['achievement_description']) and $_REQUEST['Employees']['achievement_description']!=NULL)
 		{
-			$model->label = $_REQUEST['Studentleavetype']['label'];
-			$criteria->condition=$criteria->condition.' and '.'label = :label';
-		    $criteria->params[':label'] = $_REQUEST['Studentleavetype']['label'];
+			$model->label = $_REQUEST['Employees']['achievement_description'];
+			$criteria->condition=$criteria->condition.' and '.'achievement_description = :achievement_description';
+		    $criteria->params[':achievement_description'] = $_REQUEST['Employees']['achievement_description'];
 		}
 		
-		if(isset($_REQUEST['Studentleavetype']['colorcode']) and $_REQUEST['Studentleavetype']['colorcode']!=NULL)
-		{
-			$model->colorcode = $_REQUEST['Studentleavetype']['colorcode'];
-			$criteria->condition=$criteria->condition.' and '.'colorcode = :colorcode';
-		    $criteria->params[':colorcode'] = $_REQUEST['Studentleavetype']['colorcode'];
-		}		
+				
 		
-		if(isset($_REQUEST['Studentleavetype']['status']) and $_REQUEST['Studentleavetype']['status']!=NULL)
-		{
-			$model->status = $_REQUEST['Studentleavetype']['status'];
-			$criteria->condition=$criteria->condition.' and '.'is_active = :status';
-		    $criteria->params[':status'] = $_REQUEST['Studentleavetype']['status'];
-		}
+		
                 
 		
-                $criteria->order = 'name ASC';
-	        $total = Studentleavetype::model()->count($criteria);
+                $criteria->order = 'achievement_title ASC';
+	        $total = Employees::model()->count($criteria);
 		$pages = new CPagination($total);
         $pages->setPageSize(Yii::app()->params['listPerPage']);
         $pages->applyLimit($criteria);  // the trick is here!
-		$posts = Studentleavetype::model()->findAll($criteria);
+		$posts = Employees::model()->findAll($criteria);
                 
-		$this->render('manage',array('model'=>$model,
+                $this->render('achievments',array(
+			'model'=>$this->loadModel($_REQUEST['id']),
+		
+                
+		
 		'list'=>$posts,
 		'pages' => $pages,
 		'item_count'=>$total,
