@@ -5,15 +5,15 @@
  *
  * The followings are the available columns in table 'batches':
  * @property integer $id
- * @property string $name
- * @property integer $course_id
+ * @property string $employee_id
+ * @property integer $achievement_title
  * @property string $start_date
  * @property string $end_date
  * @property integer $is_active
  * @property integer $is_deleted
  * @property string $employee_id
  */
-class Batches extends CActiveRecord
+class Achievements extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.

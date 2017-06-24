@@ -3,6 +3,7 @@ $this->breadcrumbs=array(
 	'Batches'=>array('/courses'),
 	'Promote',
 );
+
 ?>
 <script type="text/javascript">
 function formSubmit()
@@ -10,7 +11,8 @@ function formSubmit()
 document.getElementById("checkform").submit();
 }
 </script>
- <?php $this->renderPartial('left_side');?>
+
+ 
 <?php $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
                 'id'=>'jobDialog',
                 'options'=>array(
@@ -21,8 +23,9 @@ document.getElementById("checkform").submit();
                     'height'=>'auto',
                 ),
                 )); ?>
+ 
 <?php $batch=Batches::model()->findByAttributes(array('id'=>$_REQUEST['id'])); ?>
-          
+    
 
 
 	<?php if($batch!=NULL)

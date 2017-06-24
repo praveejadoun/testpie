@@ -64,8 +64,8 @@ echo CHtml::dropDownList('id','',$data,array('prompt'=>'Select','onchange'=>'cou
 echo '</div>';
 echo '&nbsp;&nbsp;'; ?>
  <div class="contrht_bttns" >
-     <ul>
-      <li><?php echo CHtml::ajaxLink(Yii::t('Courses','Add Subject'),$this->createUrl('subjects/Addnew'),array(
+     <ul style="margin:99px 400px 0px 0px;padding:8px 10px 8px 10px;">
+      <li ><?php echo CHtml::ajaxLink(Yii::t('Courses','Add Subject'),$this->createUrl('subjects/Addnew'),array(
         'onclick'=>'$("#jobDialog1").dialog("open"); return false;',
         'update'=>'#jobDialog1','type' =>'GET','data' => array( 'val1' =>$_REQUEST['cou'] ),'dataType' => 'text',),array('id'=>'showJobDialog12'.$_REQUEST['cou'],'class'=>'add')); 
       

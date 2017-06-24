@@ -127,7 +127,7 @@ $(document).click(function() {
 					<li class="addstud"><?php echo CHtml::link(Yii::t('Batch','Add Student<span>for add new student</span>'), array('/students/students/create','bid'=>$_REQUEST['id'])); ?></li>
 					<li class="newsub"><?php echo CHtml::link(Yii::t('Batch','New Subject<span>for add new subject</span>'), array('#'),array('id'=>'add_subject-name-side')) ?></li>
                    	<li class="mark"><?php echo CHtml::link(Yii::t('Batch','Mark Attendance<span>for add leave</span>'), array('/courses/studentAttentance','id'=>$_REQUEST['id'])) ?></li>
-				   	<li class="promote"><?php echo CHtml::link(Yii::t('Batch','Promote Batch<span>for promote a batch</span>'), array('batches/promote','id'=>$_REQUEST['id'])) ?></li>
+				   	<li class="promote"><?php echo CHtml::link(Yii::t('Batch','Promote Batch<span>for promote a batch</span>'), array('batches/promote_popup','id'=>$_REQUEST['id'])) ?></li>
                      <?php if($batch->is_active=='1')
 					{?>
                     <li class="deactivate"><?php echo CHtml::link(Yii::t('Batch','Deactivate Batch'), array('batches/deactivate','id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure,Deactivate This Batch ?')) ?></li><?php }

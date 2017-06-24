@@ -284,4 +284,5 @@ class Employees extends CActiveRecord
 	{
 			return $this->first_name.' '.$this->middle_name.' '.$this->last_name;
 	}
+      
 }

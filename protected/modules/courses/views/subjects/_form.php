@@ -48,7 +48,7 @@ $model;
 
 
 	<div class="row">
-		<?php echo "<pre>";print_r($batch_id);//echo $form->labelEx($model,'batch_id'); ?>
+		<?php //echo $form->labelEx($model,'batch_id'); ?>
 		<?php echo $form->hiddenField($model,'batch_id',array('value'=>$batch_id)); ?>
 		<?php echo $form->error($model,'batch_id'); ?>
 	</div>
