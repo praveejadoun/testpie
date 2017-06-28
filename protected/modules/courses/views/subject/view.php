@@ -15,7 +15,7 @@ $this->breadcrumbs=array(
 
 <h1><?php echo Yii::t('Subjects','View Subjects');?></h1>
 
-<?php /*?><?php $this->widget('zii.widgets.CDetailView', array(
+<?php ?><?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id',
@@ -31,7 +31,7 @@ $this->breadcrumbs=array(
 	),
 )); 
 
-?><?php */?>
+?><?php ?>
 <div class="tableinnerlist" style="padding-right:25px;">
 <table width="100%" border="0" cellspacing="1" cellpadding="0">
   <tr>

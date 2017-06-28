@@ -154,15 +154,16 @@ class BatchesController extends RController
 	     $model=Batches::model()->findByPk($_REQUEST['id']);   
 		 $model->saveAttributes(array('is_active'=>'0'));                               
 		 
-		 $this->redirect(array('batchstudents', 'id' =>$_REQUEST['id']));
+		 $this->redirect(array('courses/deactivatedbatches'));
 	}
 	public function actionActivate() 
 	{  
 	
-	     $model=Batches::model()->findByPk($_REQUEST['id']);   
+	     $model=Batches::model()->findByPk($_REQUEST['id']);  
+          
 		 $model->saveAttributes(array('is_active'=>'1'));                               
 		 
-		 $this->redirect(array('batchstudents', 'id' =>$_REQUEST['id']));
+		 $this->redirect(array('courses/deactivatedbatches'));
 	}
 	public function actionAddnew() {
         //$model=$this->loadModel(3);
@@ -338,14 +339,14 @@ class BatchesController extends RController
 	 */
 	public function actionDelete($id)
 	{
-		if(Yii::app()->request->isPostRequest)
+		if($id)
 		{
 			// we only allow deletion via POST request
 			$this->loadModel($id)->delete();
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('courses/deactivatedbatches'));
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
@@ -402,5 +403,8 @@ class BatchesController extends RController
 			Yii::app()->end();
 		}
 	}
+        
+       
+        
 	
 }

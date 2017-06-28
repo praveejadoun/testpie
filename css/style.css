@@ -3449,7 +3449,9 @@ div.act_but_hover{
 .act_drop li.edit{background:url(../images/act-li-bg.png) no-repeat 6px 8px; }
 .act_drop li.delete{background:url(../images/act-li-bg.png) no-repeat 6px -43px; }
 .act_drop li.addstud{background:url(../images/add_student.png) no-repeat 12px 13px;}
+.act_drop li.newexm{background:url(../images/new_exam.png) no-repeat 12px 13px;}
 .act_drop li.newsub{background:url(../images/new_sub.png) no-repeat 10px 11px;}
+.act_drop li.addteach{background:url(../images/e-form.png) no-repeat 12px 13px;}
 .act_drop li.mark{background:url(../images/mark_a.png) no-repeat 12px 10px;}
 .act_drop li.promote{background:url(../images/promote.png) no-repeat 12px 11px;}
 .act_drop li.deactivate{background:url(../images/deactivate.png) no-repeat 12px 13px;}

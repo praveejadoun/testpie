@@ -125,8 +125,10 @@ $(document).click(function() {
 				<div class="but_bg_outer"></div><div class="but_bg"><div id="1" class="act_but_hover">Actions</div></div>
                 <ul>
 					<li class="addstud"><?php echo CHtml::link(Yii::t('Batch','Add Student<span>for add new student</span>'), array('/students/students/create','bid'=>$_REQUEST['id'])); ?></li>
+                                        <li class="newexm"><?php echo CHtml::link(Yii::t('Batch','Exams<span>for add new exam</span>'), array('/examination/exam','id'=>$_REQUEST['id'])); ?></li>
 					<li class="newsub"><?php echo CHtml::link(Yii::t('Batch','New Subject<span>for add new subject</span>'), array('#'),array('id'=>'add_subject-name-side')) ?></li>
                    	<li class="mark"><?php echo CHtml::link(Yii::t('Batch','Mark Attendance<span>for add leave</span>'), array('/courses/studentAttentance','id'=>$_REQUEST['id'])) ?></li>
+                                        <li class="addteach"><?php echo CHtml::link(Yii::t('Batch','Assign Teacher<span>assign class teacher</span>'),array('#') ,array('id'=>'update_subjects-side')) ?></li>
 				   	<li class="promote"><?php echo CHtml::link(Yii::t('Batch','Promote Batch<span>for promote a batch</span>'), array('batches/promote_popup','id'=>$_REQUEST['id'])) ?></li>
                      <?php if($batch->is_active=='1')
 					{?>
@@ -211,12 +213,28 @@ $(document).click(function() {
 			$studnot='<div class="cbi_green">Active students</div>';
 			$studlink = '';
 		}
+                $employee=Employees::model()->findByAttributes(array('id'=>$batch->employee_id));
+                if($employee!=NULL)
+                {
+                        $empnot='<div class="cbi_green">Class Teacher Assigned</div>';
+			$emplink = '';
+			   
+                }
+                else
+                {
+                     $empnot='<div class="cbi_red">Class Teacher Not Assigned</div>';
+			$emplink = CHtml::link(Yii::t('Batch','Add Student'), array('/students/students/create'),array('class'=>'addstud'));
+			$allgreen=0;   
+                }
+                
+             
 		
 		?>
     <?php if($allgreen==0)
 	{?>
-    <div class="cb_info_bx">
-    
+    <div class="cb_info_bx" style="padding-bottom: 10px;">
+    <div style="border-bottom: 1px solid #fff; margin-bottom: 10px;">
+        <div style="border-bottom: 1px solid #EEDE9C; margin-right: 12px; padding-bottom: 120px;" >   
         <div class="cbi_ibx cbi_ico3" style="border-left:none">
         	<h3>Active Students</h3>
             <?php echo $studnot; ?>
@@ -247,6 +265,13 @@ $(document).click(function() {
         	<h3>Timetable</h3>
             <?php echo $ttabnot; ?>
             <?php echo $ttablink; ?>
+        </div>
+        </div>
+    </div>
+         <div class="cbi_ibx cbi_ico6" style="border-left:none">
+        	<h3>Class Teacher</h3>
+            <?php  echo $empnot; ?>
+            <?phpecho $emplink; ?>
         </div>
          
     <div class="clear"></div>
@@ -282,7 +307,7 @@ $(document).click(function() {
         <li>
         
         <?php     
-                  if(Yii::app()->controller->id=='subject' or Yii::app()->controller->id=='defaultsubjects')
+                  if(Yii::app()->controller->id=='subject' )
                   {
                   echo CHtml::link(Yii::t('Batch','Subjects'), array('/courses/subject','id'=>$_REQUEST['id']),array('class'=>'active'));
                   }
@@ -461,7 +486,7 @@ $(document).click(function() {
     $('#add_subject-name-side').bind('click', function() {
         $.ajax({
             type: "POST",
-            url: "<?php echo Yii::app()->request->baseUrl;?>/index.php?r=courses/defaultsubjects/returnForm",
+            url: "<?php echo Yii::app()->request->baseUrl;?>/index.php?r=courses/subject/returnForm",
             data:{"YII_CSRF_TOKEN":"<?php echo Yii::app()->request->csrfToken;?>"},
                 beforeSend : function() {
                     $("#subject-name-grid-side").addClass("ajax-sending");
@@ -483,4 +508,35 @@ $(document).click(function() {
         });//ajax
         return false;
     });//bind
+    
+    $('#update_subjects-side').bind('click', function() {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo Yii::app()->request->baseUrl;?>/index.php?r=courses/subject/returnForm",
+            data:{"batch_id":<?php echo $_GET['id'];?>,"YII_CSRF_TOKEN":"<?php echo Yii::app()->request->csrfToken;?>"},
+                beforeSend : function() {
+                    $("#subjects-grid-side").addClass("ajax-sending");
+                },
+                complete : function() {
+                    $("#subjects-grid-side").removeClass("ajax-sending");
+                },
+            success: function(data) {
+                $.fancybox(data,
+                        {    "transitionIn"      : "elastic",
+                            "transitionOut"   : "elastic",
+                            "speedIn"                : 600,
+                            "speedOut"            : 200,
+                            "overlayShow"     : false,
+                            "hideOnContentClick": false,
+                            "afterClose":    function() {
+								window.location.reload();
+								}  //onclosed function
+                        });//fancybox
+            } //success
+        });//ajax
+        return false;
+    });//bind
+	
+    
+    
 	</script>

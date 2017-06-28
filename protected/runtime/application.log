@@ -1,60 +1,1082 @@
-2017/06/11 07:17:57 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'sms.t.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: SELECT * FROM `timetable_entries` `t` WHERE batch_id=:x GROUP BY employee_id. Bound with :x='21'.
-2017/06/11 07:17:57 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'sms.t.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by' in E:\wamp\www\sms\core\db\CDbCommand.php:517
+2017/06/28 07:26:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
 Stack trace:
-#0 E:\wamp\www\sms\core\db\CDbCommand.php(375): CDbCommand->queryInternal('fetchAll', Array, Array)
-#1 E:\wamp\www\sms\core\db\ar\CActiveRecord.php(1290): CDbCommand->queryAll()
-#2 E:\wamp\www\sms\core\db\ar\CActiveRecord.php(1410): CActiveRecord->query(Object(CDbCriteria), true)
-#3 E:\wamp\www\sms\protected\modules\courses\views\batches\tab.php(113): CActiveRecord->findAll(Array)
-#4 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
-#5 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', NULL, true)
-#6 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', NULL, true)
-#7 E:\wamp\www\sms\protected\modules\courses\views\batches\batchstudents.php(56): CController->renderPartial('tab')
-#8 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
-#9 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', NULL, true)
-#10 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', NULL, true)
-#11 E:\wamp\www\sms\core\web\CController.php(779): CController->renderPartial('batchstudents', NULL, true)
-#12 E:\wamp\www\sms\protected\modules\courses\controllers\BatchesController.php(139): CController->render('batchstudents')
-#13 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): BatchesController->actionBatchstudents()
-#14 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
-#15 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
-#16 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
-#17 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
-#18 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
-#19 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
-#20 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
-#21 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
-#22 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('batchstudents')
-#23 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
-#24 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
-#25 E:\wamp\www\sms\index.php(52): CApplication->run()
-#26 {main} REQUEST_URI=/sms/index.php?r=courses/batches/batchstudents&id=21
-2017/06/11 07:18:24 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'sms.t.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: SELECT * FROM `timetable_entries` `t` WHERE batch_id=:x GROUP BY employee_id. Bound with :x='21'.
-2017/06/11 07:18:24 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'sms.t.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by' in E:\wamp\www\sms\core\db\CDbCommand.php:517
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 07:26:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
 Stack trace:
-#0 E:\wamp\www\sms\core\db\CDbCommand.php(375): CDbCommand->queryInternal('fetchAll', Array, Array)
-#1 E:\wamp\www\sms\core\db\ar\CActiveRecord.php(1290): CDbCommand->queryAll()
-#2 E:\wamp\www\sms\core\db\ar\CActiveRecord.php(1410): CActiveRecord->query(Object(CDbCriteria), true)
-#3 E:\wamp\www\sms\protected\modules\courses\views\batches\tab.php(113): CActiveRecord->findAll(Array)
-#4 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
-#5 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', NULL, true)
-#6 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', NULL, true)
-#7 E:\wamp\www\sms\protected\modules\courses\views\batches\batchstudents.php(57): CController->renderPartial('tab')
-#8 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
-#9 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', NULL, true)
-#10 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', NULL, true)
-#11 E:\wamp\www\sms\core\web\CController.php(779): CController->renderPartial('batchstudents', NULL, true)
-#12 E:\wamp\www\sms\protected\modules\courses\controllers\BatchesController.php(139): CController->render('batchstudents')
-#13 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): BatchesController->actionBatchstudents()
-#14 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
-#15 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
-#16 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
-#17 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
-#18 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
-#19 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
-#20 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
-#21 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
-#22 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('batchstudents')
-#23 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
-#24 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
-#25 E:\wamp\www\sms\index.php(52): CApplication->run()
-#26 {main} REQUEST_URI=/sms/index.php?r=courses/batches/batchstudents&id=21
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 07:26:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 07:26:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 07:26:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 07:26:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 07:26:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 07:26:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(148): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnForm()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnForm
+2017/06/28 07:26:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(148): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnForm()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnForm
+2017/06/28 07:26:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 07:26:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 07:26:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(148): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnForm()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnForm
+2017/06/28 07:26:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(148): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnForm()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnForm
+2017/06/28 07:26:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 07:26:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 07:30:47 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in E:\wamp\www\sms\core\web\CController.php:328
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#3 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#4 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#5 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#7 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('View')
+#9 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#10 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#11 E:\wamp\www\sms\index.php(52): CApplication->run()
+#12 {main} REQUEST_URI=/sms/index.php?r=courses/subject/View
+2017/06/28 07:30:48 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in E:\wamp\www\sms\core\web\CController.php:328
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#3 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#4 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#5 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#7 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('View')
+#9 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#10 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#11 E:\wamp\www\sms\index.php(52): CApplication->run()
+#12 {main} REQUEST_URI=/sms/index.php?r=courses/subject/View
+2017/06/28 07:30:48 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in E:\wamp\www\sms\core\web\CController.php:328
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#3 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#4 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#5 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#7 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('View')
+#9 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#10 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#11 E:\wamp\www\sms\index.php(52): CApplication->run()
+#12 {main} REQUEST_URI=/sms/index.php?r=courses/subject/View
+2017/06/28 07:30:48 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in E:\wamp\www\sms\core\web\CController.php:328
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#3 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#4 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#5 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#7 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('View')
+#9 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#10 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#11 E:\wamp\www\sms\index.php(52): CApplication->run()
+#12 {main} REQUEST_URI=/sms/index.php?r=courses/subject/View
+2017/06/28 07:30:48 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in E:\wamp\www\sms\core\web\CController.php:328
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#3 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#4 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#5 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#7 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('View')
+#9 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#10 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#11 E:\wamp\www\sms\index.php(52): CApplication->run()
+#12 {main} REQUEST_URI=/sms/index.php?r=courses/subject/View
+2017/06/28 07:30:49 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in E:\wamp\www\sms\core\web\CController.php:328
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#3 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#4 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#5 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#7 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('View')
+#9 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#10 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#11 E:\wamp\www\sms\index.php(52): CApplication->run()
+#12 {main} REQUEST_URI=/sms/index.php?r=courses/subject/View
+2017/06/28 07:30:49 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in E:\wamp\www\sms\core\web\CController.php:328
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#3 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#4 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#5 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#7 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('View')
+#9 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#10 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#11 E:\wamp\www\sms\index.php(52): CApplication->run()
+#12 {main} REQUEST_URI=/sms/index.php?r=courses/subject/View
+2017/06/28 07:30:49 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in E:\wamp\www\sms\core\web\CController.php:328
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#3 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#4 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#5 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#7 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('View')
+#9 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#10 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#11 E:\wamp\www\sms\index.php(52): CApplication->run()
+#12 {main} REQUEST_URI=/sms/index.php?r=courses/subject/View
+2017/06/28 07:30:49 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in E:\wamp\www\sms\core\web\CController.php:328
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#3 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#4 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#5 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#7 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('View')
+#9 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#10 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#11 E:\wamp\www\sms\index.php(52): CApplication->run()
+#12 {main} REQUEST_URI=/sms/index.php?r=courses/subject/View
+2017/06/28 07:30:50 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in E:\wamp\www\sms\core\web\CController.php:328
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#3 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#4 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#5 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#7 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('View')
+#9 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#10 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#11 E:\wamp\www\sms\index.php(52): CApplication->run()
+#12 {main} REQUEST_URI=/sms/index.php?r=courses/subject/View
+2017/06/28 07:30:50 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in E:\wamp\www\sms\core\web\CController.php:328
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#3 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#4 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#5 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#7 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('View')
+#9 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#10 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#11 E:\wamp\www\sms\index.php(52): CApplication->run()
+#12 {main} REQUEST_URI=/sms/index.php?r=courses/subject/View
+2017/06/28 07:30:50 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in E:\wamp\www\sms\core\web\CController.php:328
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#3 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#4 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#5 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#7 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('View')
+#9 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#10 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#11 E:\wamp\www\sms\index.php(52): CApplication->run()
+#12 {main} REQUEST_URI=/sms/index.php?r=courses/subject/View
+2017/06/28 07:30:50 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in E:\wamp\www\sms\core\web\CController.php:328
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#3 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#4 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#5 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#7 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('View')
+#9 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#10 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#11 E:\wamp\www\sms\index.php(52): CApplication->run()
+#12 {main} REQUEST_URI=/sms/index.php?r=courses/subject/View
+2017/06/28 07:30:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(148): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnForm()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnForm
+2017/06/28 07:30:52 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in E:\wamp\www\sms\core\web\CController.php:328
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(301): CController->invalidActionParams(Object(CInlineAction))
+#1 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#2 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#3 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#4 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#5 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#7 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('View')
+#9 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#10 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#11 E:\wamp\www\sms\index.php(52): CApplication->run()
+#12 {main} REQUEST_URI=/sms/index.php?r=courses/subject/View
+2017/06/28 07:39:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 07:39:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 07:39:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 07:39:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 07:39:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 07:39:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 07:39:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(148): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnForm()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnForm
+2017/06/28 07:39:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(148): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnForm()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnForm
+2017/06/28 07:40:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 07:52:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "subjects_view".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('subjects_view')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('subjects_view')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/subject/subjects_view
+2017/06/28 07:52:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 07:55:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "_ajax_form".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('_ajax_form')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('_ajax_form')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/subject/_ajax_form
+2017/06/28 07:55:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnView()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnView')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnView
+2017/06/28 08:10:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(148): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnForm()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnForm
+2017/06/28 08:13:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(148): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnForm()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnForm
+2017/06/28 08:13:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(148): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnForm()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnForm
+2017/06/28 08:13:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(148): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnForm()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnForm
+2017/06/28 08:13:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(148): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnForm()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnForm
+2017/06/28 10:29:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\BatchesController.php:390
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\BatchesController.php(104): BatchesController->loadModel('update_subject-...')
+#1 [internal function]: BatchesController->actionUpdate('update_subject-...')
+#2 E:\wamp\www\sms\core\web\actions\CAction.php(104): ReflectionMethod->invokeArgs(Object(BatchesController), Array)
+#3 E:\wamp\www\sms\core\web\actions\CInlineAction.php(48): CAction->runWithParamsInternal(Object(BatchesController), Object(ReflectionMethod), Array)
+#4 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#5 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#7 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#9 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#11 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('update')
+#13 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
+#14 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#15 E:\wamp\www\sms\index.php(52): CApplication->run()
+#16 {main} REQUEST_URI=/sms/index.php?r=courses/batches/update&id=update_subject-name-side
+2017/06/28 10:35:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "returnForm".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('returnForm')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/batches/returnForm
+2017/06/28 10:35:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "returnForm".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('returnForm')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/batches/returnForm
+2017/06/28 10:35:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "returnForm".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('returnForm')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/batches/returnForm
+2017/06/28 10:40:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "returnForm".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('returnForm')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/batches/returnForm
+2017/06/28 10:41:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "returnForm".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('returnForm')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/batches/returnForm
+2017/06/28 10:42:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "returnForm".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('returnForm')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/batches/returnForm
+2017/06/28 10:42:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "returnForm".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('returnForm')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/batches/returnForm
+2017/06/28 10:43:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "returnForm".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('returnForm')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/batches/returnForm
+2017/06/28 10:43:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "returnForm".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('returnForm')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/batches/returnForm
+2017/06/28 10:51:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "returnForm".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('returnForm')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/batches/returnForm
+2017/06/28 10:54:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "returnForm".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('returnForm')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/batches/returnForm
+2017/06/28 10:55:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(148): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnForm()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnForm
+2017/06/28 10:55:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(148): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnForm()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnForm
+2017/06/28 10:56:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(148): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnForm()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnForm
+2017/06/28 11:01:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "courses/defaultsubject/returnForm".' in E:\wamp\www\sms\core\web\CWebApplication.php:281
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/default...')
+#1 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\wamp\www\sms\index.php(52): CApplication->run()
+#3 {main} REQUEST_URI=/sms/index.php?r=courses/defaultsubject/returnForm
+2017/06/28 11:03:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "courses/defaultsubject/returnForm".' in E:\wamp\www\sms\core\web\CWebApplication.php:281
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/default...')
+#1 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\wamp\www\sms\index.php(52): CApplication->run()
+#3 {main} REQUEST_URI=/sms/index.php?r=courses/defaultsubject/returnForm
+2017/06/28 11:03:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "courses/defaultsubject/returnForm".' in E:\wamp\www\sms\core\web\CWebApplication.php:281
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/default...')
+#1 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\wamp\www\sms\index.php(52): CApplication->run()
+#3 {main} REQUEST_URI=/sms/index.php?r=courses/defaultsubject/returnForm
+2017/06/28 11:04:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(148): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnForm()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnForm
+2017/06/28 11:04:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(148): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnForm()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnForm
+2017/06/28 11:15:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(148): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionReturnForm()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('returnForm')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/returnForm
+2017/06/28 11:24:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(245): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionAjax_delete()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('ajax_delete')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/ajax_delete
+2017/06/28 11:31:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(245): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionAjax_delete()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('ajax_delete')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/ajax_delete
+2017/06/28 11:31:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(245): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionAjax_delete()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('ajax_delete')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/ajax_delete
+2017/06/28 11:32:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(245): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionAjax_delete()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('ajax_delete')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/ajax_delete
+2017/06/28 11:38:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(245): SubjectController->loadModel('102')
+#1 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): SubjectController->actionAjax_delete()
+#2 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#3 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#5 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#6 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#7 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#9 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('ajax_delete')
+#11 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/subject...')
+#12 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#13 E:\wamp\www\sms\index.php(52): CApplication->run()
+#14 {main} REQUEST_URI=/sms/index.php?r=courses/subject/ajax_delete

@@ -3,7 +3,6 @@ $this->breadcrumbs=array(
 	'Batches'=>array('/courses'),
 	'Promote',
 );
-
 ?>
 <script type="text/javascript">
 function formSubmit()
@@ -23,7 +22,6 @@ document.getElementById("checkform").submit();
                     'height'=>'auto',
                 ),
                 )); ?>
- 
 <?php $batch=Batches::model()->findByAttributes(array('id'=>$_REQUEST['id'])); ?>
     
 

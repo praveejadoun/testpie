@@ -2,7 +2,7 @@
 {
 	color:#F00;
 }
-@charset "utf-8";
+
 /* CSS Document */
 /*form style*/
 .formWrapper{
@@ -847,7 +847,7 @@ table.detail-view td{
 	padding:10px 0px 0px 10px;
 	margin:20px 0px 0px 0px;
 	width:945px;
-	height:115px;
+	min-height:250px;
 	border:1px #eede9c solid;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -896,6 +896,7 @@ table.detail-view td{
 .cbi_ico3{background:url(../images/cb_info_icons.png) no-repeat 65px -214px;}
 .cbi_ico4{background:url(../images/cb_info_icons.png) no-repeat 65px -328px;}
 .cbi_ico5{background:url(../images/cb_info_icons.png) no-repeat 65px -450px;}
+.cbi_ico6{background:url(../images/cb_info_icons.png) no-repeat 65px -450px;}
 .cbi_ibx h3{
 	padding:0px;
 	margin:0px;

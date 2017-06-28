@@ -3,45 +3,35 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/courses/deactivatedbatches.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/controllers/SubjectNameController.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/courses/commonsubjects.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/students/views/students/create.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/batches/update.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/_form_3.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/contact.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/students/views/studentleavetype/_form.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/index.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/create2.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/view.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/students/views/students/assesments.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/students/controllers/StudentleavetypeController.php</file>
             <file>file:/E:/wamp/www/sms/protected/models/Students.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/courses/managecourse.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/subjects/view.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/students/views/students/manage.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/batches/view.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/subjectName/create.php</file>
-            <file>file:/E:/wamp/www/sms/protected/models/Courses.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/subject/index.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/subjects/subjects.php</file>
-            <file>file:/E:/wamp/www/sms/assets/cad68fca/jquery.yiiactiveform.js</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/students/views/students/_form.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/courses/_form1.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/batches/_form1.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/index1.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/logcategory/index.php</file>
+            <file>file:/E:/wamp/www/sms/protected/models/Employees.php</file>
             <file>file:/E:/wamp/www/sms/protected/modules/courses/views/subjects/_form.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/subjects/create.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/batches/_form.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/address.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/controllers/LogcategoryController.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/create.php</file>
+            <file>file:/E:/wamp/www/sms/protected/models/EmployeeLeaveTypes.php</file>
             <file>file:/E:/wamp/www/sms/protected/models/Batches.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/_form1.php</file>
             <file>file:/E:/wamp/www/sms/protected/modules/students/controllers/StudentsController.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/batches/batchstudents.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/courses/update.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/subjects/index.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/courses/_form.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/controllers/CoursesController.php</file>
-            <file>file:/E:/wamp/www/sms/assets/cad68fca/jquery.min.js</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/controllers/SubjectsController.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/subjects/update.php</file>
-            <file>file:/E:/wamp/www/sms/core/web/helpers/CHtml.php</file>
-            <file>file:/E:/wamp/www/sms/protected/models/Subjects.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/controllers/BatchesController.php</file>
-            <file>file:/E:/wamp/www/sms/core/zii/widgets/jui/CJuiDialog.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/batches/create.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/courses/create.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/controllers/EmployeesController.php</file>
+            <file>file:/E:/wamp/www/sms/protected/models/acheivements.php</file>
+            <file>file:/E:/wamp/www/sms/css/style.css</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/addinfo.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/students/views/studentleavetype/manage.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/update2.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/achievments.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/_form.php</file>
             <file>file:/E:/wamp/www/sms/protected/modules/courses/views/subjects/create1.php</file>
-            <file>file:/E:/wamp/www/sms/core/zii/widgets/jui/CJuiWidget.php</file>
         </group>
     </open-files>
 </project-private>

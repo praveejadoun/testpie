@@ -48,6 +48,10 @@
                    
                       
                    <?php $batch=Batches::model()->findAll("is_deleted=:y AND is_active=:z", array(':y'=>0,':z'=>0)); ?>
+                      <?php if($batch!=null)
+                      {
+                          ?>
+                     
                        <div class="tableinnerlist">
                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
 		  <tbody>
@@ -64,11 +68,12 @@
 		  </tr>
                   
           <?php 
+         
 		  foreach($batch as $batch_1)
 				{ ?>
                   <tr>
                       <td>		<?php echo $batch_1->id;?></td>
-                       <td>		<?php echo $batch_1->name;?></td>
+                       <td>		<?php echo $batch_1->course_id;?></td>
                         <td>		<?php echo $batch_1->name;?></td>
                        		
 					<?php  $settings=UserSettings::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
@@ -85,19 +90,28 @@
 				<td align="center">	<?php echo $date2; ?> </td>
 					
 					<td><?php 
-                                         echo ''.CHtml::ajaxLink(
-  "Delete", $this->createUrl('batches/remove'), array('success'=>'rowdelete('.$batch_1->id.')','type' =>'GET','data' => array( 'val1' =>$batch_1->id ),'dataType' => 'text'),array('confirm'=>"Are you sure?\n\n Note: All details (students, timetable, fees, exam) related to this batch will be deleted."));
-                                        
-                                       
-	echo CHtml::link(Yii::t('Batch','Active'), array('/students/students/active', 'sid'=>$posts_1->id,'id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure , Make active ?')); 	
-                                } ?> 
+                                         echo CHtml::link(Yii::t(
+  'Batch','Delete'), array('batches/delete', 'id' =>$batch_1->id),array('confirm'=>"Are you sure?\n\n Note: All details (students, timetable, fees, exam) related to this batch will be deleted.")); ?>
+                                            <span>|</span>                    
+                 <?php if($batch->is_active=='1')
+					{?>
+                  <?php echo CHtml::link(Yii::t('Batch','Deactivate Batch'), array('batches/deactivate','id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure You Want To Deactivate This Batch ?')) ?><?php }
+	else
+	{ ?>
+   <?php echo CHtml::link(Yii::t('Batch','Activate'), array('batches/activate','id' =>$batch_1->id),array('confirm'=>'Are You Sure You Want To Activate This Batch ?')) ?><?php }?>                         
+	
+                            <?php    } ?> 
+            
                                         </td>
                   </tr>      
          </tbody>
         </table>
 
                            </div>
-                 
+                      <?php } 
+                            else {
+                                  echo '<br><div class="notifications nt_red" style="padding-top:10px;margin-top:-15px;">'.'<i>'.Yii::t('Batch','No Deactivated Batch Found').'</i></div>'; 
+                                                        }?>
                       </div>
                     </td>
                 </tr>
