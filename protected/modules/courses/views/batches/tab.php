@@ -128,7 +128,8 @@ $(document).click(function() {
                                         <li class="newexm"><?php echo CHtml::link(Yii::t('Batch','Exams<span>for add new exam</span>'), array('/examination/exam','id'=>$_REQUEST['id'])); ?></li>
 					<li class="newsub"><?php echo CHtml::link(Yii::t('Batch','New Subject<span>for add new subject</span>'), array('#'),array('id'=>'add_subject-name-side')) ?></li>
                    	<li class="mark"><?php echo CHtml::link(Yii::t('Batch','Mark Attendance<span>for add leave</span>'), array('/courses/studentAttentance','id'=>$_REQUEST['id'])) ?></li>
-                                        <li class="addteach"><?php echo CHtml::link(Yii::t('Batch','Assign Teacher<span>assign class teacher</span>'),array('#') ,array('id'=>'update_subjects-side')) ?></li>
+                                        <li class="addteach"><?php echo CHtml::ajaxLink(Yii::t('Batch','Assign Teacher<span>assign class teacher</span>'),$this->createUrl('addupdate'),array('onclick'=>'$("#jobDialog123").dialog("open"); return false;',
+                                                                'update'=>'#jobDialog123','type' =>'GET','data' => array( 'val1' =>$batch->id,'course_id'=>$batch->course_id ),'dataType' => 'text'),array('id'=>'showJobDialog12'.$batch->id,'class'=>'add'));?></li>
 				   	<li class="promote"><?php echo CHtml::link(Yii::t('Batch','Promote Batch<span>for promote a batch</span>'), array('batches/promote_popup','id'=>$_REQUEST['id'])) ?></li>
                      <?php if($batch->is_active=='1')
 					{?>
@@ -512,7 +513,7 @@ $(document).click(function() {
     $('#update_subjects-side').bind('click', function() {
         $.ajax({
             type: "POST",
-            url: "<?php echo Yii::app()->request->baseUrl;?>/index.php?r=courses/subject/returnForm",
+            url: "<?php echo Yii::app()->request->baseUrl;?>/index.php?r=courses/batches/addupdate",
             data:{"batch_id":<?php echo $_GET['id'];?>,"YII_CSRF_TOKEN":"<?php echo Yii::app()->request->csrfToken;?>"},
                 beforeSend : function() {
                     $("#subjects-grid-side").addClass("ajax-sending");

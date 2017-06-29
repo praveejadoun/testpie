@@ -138,8 +138,9 @@ public function   init() {
                                                 'form_ajax_binding.js'=>false
         );
 
-        $model=$this->loadModel($_POST['id']);
-        $this->renderPartial('view',array('model'=>$model),false, true);
+        
+       
+        $this->renderPartial('view',array('model'=>$model->id),false, true);
       }
 
              public function actionReturnForm(){
@@ -242,7 +243,8 @@ public function   init() {
 
      public function actionAjax_delete(){
                  $id=$_POST['id'];
-                 $deleted=$this->loadModel($id);
+                 $deleted=$model->loadModel($id);
+              
                 if ($deleted->delete() ){
                echo json_encode (array('success'=>true,'msg'=>deleted));
                exit;

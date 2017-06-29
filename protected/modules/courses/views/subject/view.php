@@ -15,7 +15,7 @@ $this->breadcrumbs=array(
 
 <h1><?php echo Yii::t('Subjects','View Subjects');?></h1>
 
-<?php ?><?php $this->widget('zii.widgets.CDetailView', array(
+<?php ?><?php /*$this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id',
@@ -29,14 +29,14 @@ $this->breadcrumbs=array(
 		'created_at',
 		'updated_at',
 	),
-)); 
+)); */
 
-?><?php ?>
+?><?php $subject=Subjects::model()->findByAttributes("id=$id");?>
 <div class="tableinnerlist" style="padding-right:25px;">
 <table width="100%" border="0" cellspacing="1" cellpadding="0">
   <tr>
     <td><?php echo Yii::t('Subjects','Subject Name');?></td>
-    <td><?php echo $model->name; ?></td>
+    <td><?php echo $subject->name; ?></td>
   </tr>
     <tr>
     <td><?php echo Yii::t('Subjects','Subject Code');?></td>
