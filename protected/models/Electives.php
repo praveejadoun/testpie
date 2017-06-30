@@ -5,6 +5,9 @@
  *
  * The followings are the available columns in table 'electives':
  * @property integer $id
+ * @property string $name
+ * @property string $code
+ * @property integer $max_weekly_classes
  * @property integer $elective_group_id
  * @property string $created_at
  * @property string $updated_at
@@ -36,11 +39,12 @@ class Electives extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('elective_group_id', 'numerical', 'integerOnly'=>true),
+			array('elective_group_id,max_weekly_classes', 'numerical', 'integerOnly'=>true),
+                        array('name, code, max_weekly_classes','required'),
 			array('created_at, updated_at', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, elective_group_id, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, elective_group_id, name, code, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -63,6 +67,9 @@ class Electives extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'elective_group_id' => 'Elective Group',
+                        'name'=>'Name',
+                        'code'=>'Code',
+                        'max_weekly_classes'=>'Max Weekly Classes',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
 		);
@@ -81,6 +88,9 @@ class Electives extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('elective_group_id',$this->elective_group_id);
+                $criteria->compare('name',$this->name,true);
+                $criteria->compare('code',$this->code,true);
+                $criteria->compare('max_weekly_classes',$this->max_weekly_classes,true);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);
 

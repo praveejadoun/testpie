@@ -36,7 +36,7 @@ $this->breadcrumbs=array(
 <table width="100%" border="0" cellspacing="1" cellpadding="0">
   <tr>
     <td><?php echo Yii::t('Subjects','Subject Name');?></td>
-    <td><?php echo $subject->name; ?></td>
+    <td><?php echo $model->name; ?></td>
   </tr>
     <tr>
     <td><?php echo Yii::t('Subjects','Subject Code');?></td>

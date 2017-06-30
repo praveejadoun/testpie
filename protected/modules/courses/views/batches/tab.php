@@ -323,7 +323,7 @@ $(document).click(function() {
         
         <li>
         
-        <?php     
+        <?php    
                   if(Yii::app()->controller->id=='weekdays' or Yii::app()->controller->id=='classTiming')
                   {
                   echo CHtml::link(Yii::t('Batch','Timetable'), array('weekdays/timetable','id'=>$_REQUEST['id']),array('class'=>'active'));
@@ -350,6 +350,20 @@ $(document).click(function() {
         ?>
         </li>
         
+        
+         <li>
+        <?php     
+                  if(Yii::app()->controller->action->id=='studentelectives' )
+                  {
+                  echo CHtml::link(Yii::t('Batch','Electives'), array('batches/studentelectives','id'=>$_REQUEST['id']),array('class'=>'active'));
+                  }
+                  else
+                  {
+                  echo CHtml::link(Yii::t('Batch','Electives'), array('batches/studentelectives','id'=>$_REQUEST['id']));
+                  }
+        ?>
+        </li>
+        
         <li>
         
         <?php     
@@ -365,7 +379,18 @@ $(document).click(function() {
         
         </li>
         
-        
+         <li>
+        <?php     
+                  if(Yii::app()->controller->action->id=='waitinglist')
+                  {
+                  echo CHtml::link(Yii::t('Batch','Waiting List Students'), array('batches/waitinglist','id'=>$_REQUEST['id']),array('class'=>'active'));
+                  }
+                  else
+                  {
+                  echo CHtml::link(Yii::t('Batch','Waiting List Students'), array('batches/waitinglist','id'=>$_REQUEST['id']));
+                  }
+        ?>
+        </li>
         
         <li>
         <?php     

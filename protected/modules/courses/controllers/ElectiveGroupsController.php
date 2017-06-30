@@ -125,12 +125,16 @@ class ElectiveGroupsController extends RController
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('ElectiveGroups');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+	
+         public function actionIndex(){
+
+		$model=new ElectiveGroups('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['id']))
+			$model->batch_id=$_GET['id'];
+
+		$this->render('index',array('model'=>$model));
+		
 	}
 
 	/**
@@ -173,4 +177,110 @@ class ElectiveGroupsController extends RController
 			Yii::app()->end();
 		}
 	}
+        
+         public function actionReturnView(){
+              
+
+               //don't reload these scripts or they will mess up the page
+                //yiiactiveform.js still needs to be loaded that's why we don't use
+                // Yii::app()->clientScript->scriptMap['*.js'] = false;
+                $cs=Yii::app()->clientScript;
+                $cs->scriptMap=array(
+                                                 'jquery.min.js'=>false,
+                                                 'jquery.js'=>false,
+                                                 'jquery.fancybox-1.3.4.js'=>false,
+                                                 'jquery.fancybox.js'=>false,
+                                                 'jquery-ui-1.8.12.custom.min.js'=>false,
+                                                 'json2.js'=>false,
+                                                 'jquery.form.js'=>false,
+                                                'form_ajax_binding.js'=>false
+        );
+
+        
+        $model=$this->loadModel($_POST['id']);
+        $this->renderPartial('view',array('model'=>$model),false, true);
+      }
+        
+        public function actionReturnForm(){
+
+              //Figure out if we are updating a Model or creating a new one.
+             if(isset($_POST['update_id']))$model= $this->loadModel($_POST['update_id']);else $model=new ElectiveGroups;
+            //  Comment out the following line if you want to perform ajax validation instead of client validation.
+            //  You should also set  'enableAjaxValidation'=>true and
+            //  comment  'enableClientValidation'=>true  in CActiveForm instantiation ( _ajax_form  file).
+
+
+             //$this->performAjaxValidation($model);
+
+               //don't reload these scripts or they will mess up the page
+                //yiiactiveform.js still needs to be loaded that's why we don't use
+                // Yii::app()->clientScript->scriptMap['*.js'] = false;
+                $cs=Yii::app()->clientScript;
+                $cs->scriptMap=array(
+                                                 'jquery.min.js'=>false,
+                                                 'jquery.js'=>false,
+                                                 'jquery.fancybox-1.3.4.js'=>false,
+                                                 'jquery.fancybox.js'=>false,
+                                                 'jquery-ui-1.8.12.custom.min.js'=>false,
+                                                 'json2.js'=>false,
+                                                 'jquery.form.js'=>false,
+                                                 'form_ajax_binding.js'=>false
+        );
+
+
+        $this->renderPartial('_ajax_form', array('model'=>$model), false, true);
+      }
+      
+      public function actionAjax_Create(){
+
+               if(isset($_POST['ElectiveGroups']))
+		{
+                       $model=new ElectiveGroups;
+                      //set the submitted values
+                        $model->attributes=$_POST['ElectiveGroups'];
+                       //return the JSON result to provide feedback.
+			            if($model->save(false)){
+                                echo json_encode(array('success'=>true,'id'=>$model->primaryKey) );
+                                exit;
+                        } else
+                        {
+                            echo json_encode(array('success'=>false));
+                            exit;
+                        }
+		}
+  }
+
+     public function actionAjax_Update(){
+		if(isset($_POST['ElectiveGroups']))
+		{
+           $model=$this->loadModel($_POST['update_id']);
+			$model->attributes=$_POST['ElectiveGroups'];
+			/*$data=SubjectName::model()->findByAttributes(array('id'=>$model->name));
+						if($data!=NULL)
+						{
+							$model->name=$data->name;
+							$model->code=$data->code;
+							
+						}*/
+			if( $model->save(false)){
+                         echo json_encode(array('success'=>true));
+		             }else
+                     echo json_encode(array('success'=>false));
+                }
+    }
+        public function actionAjax_delete(){ 
+                 $id=$_POST['id'];
+                 $deleted=$this->loadModel($id);
+            
+                if ($deleted->delete() ){
+               echo json_encode (array('success'=>true,'msg'=>deleted));
+               exit;
+                }else{
+                  echo json_encode (array('success'=>false));
+                  exit;
+                           }
+      }
+      
+      
+
 }

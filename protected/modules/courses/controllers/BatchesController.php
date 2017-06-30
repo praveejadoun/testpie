@@ -142,6 +142,10 @@ class BatchesController extends RController
 	{ 
 	     $this->render('promote_popup'); 
 	}
+        public function actionStudentelectives() 
+	{      
+            $this->render('studentelectives'); 
+	}
 	public function actionSettings() 
 	{                                    
 		 

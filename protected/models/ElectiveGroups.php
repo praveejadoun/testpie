@@ -6,6 +6,8 @@
  * The followings are the available columns in table 'elective_groups':
  * @property integer $id
  * @property string $name
+ * @property string $code
+ * @property integer $max_weekly_classes
  * @property integer $batch_id
  * @property integer $is_deleted
  * @property string $created_at
@@ -38,13 +40,13 @@ class ElectiveGroups extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('batch_id, is_deleted', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>255),
-			array('batch_id, name', 'required'),
+			array('batch_id, is_deleted,max_weekly_classes', 'numerical', 'integerOnly'=>true),
+			array('name, code', 'length', 'max'=>255),
+			array('batch_id, name, code', 'required'),
 			array('created_at, updated_at', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, batch_id, is_deleted, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, name, code, batch_id, is_deleted, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,6 +69,8 @@ class ElectiveGroups extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
+                        'code' => 'Code',
+                        'max_weekly_classes' => 'Max Weekly Classes',
 			'batch_id' => 'Batch',
 			'is_deleted' => 'Is Deleted',
 			'created_at' => 'Created At',
@@ -87,6 +91,8 @@ class ElectiveGroups extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
+                $criteria->compare('code',$this->code,true);
+                $criteria->compare('max_weekly_classes',$this->max_weekly_classes);
 		$criteria->compare('batch_id',$this->batch_id);
 		$criteria->compare('is_deleted',$this->is_deleted);
 		$criteria->compare('created_at',$this->created_at,true);

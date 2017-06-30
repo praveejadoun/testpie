@@ -180,7 +180,7 @@ $(function() {
             $.ajax({
                 type: "POST",
                 url: "<?php echo Yii::app()->request->baseUrl;?>/index.php?r=courses/subject/returnForm",
-                data:{"batch_id":id,"YII_CSRF_TOKEN":"<?php echo Yii::app()->request->csrfToken;?>"},
+                data:{"update_id":id,"YII_CSRF_TOKEN":"<?php echo Yii::app()->request->csrfToken;?>"},
                 beforeSend : function() {
                     $("#subjects-grid").addClass("ajax-sending");
                 },

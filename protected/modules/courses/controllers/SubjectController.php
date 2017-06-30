@@ -100,7 +100,7 @@ public function   init() {
 	public function loadModel($id)
 	{
 		$model=Subjects::model()->findByPk($id);
-		if($model!=null)
+		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
@@ -139,8 +139,8 @@ public function   init() {
         );
 
         
-       
-        $this->renderPartial('view',array('model'=>$model->id),false, true);
+        $model=$this->loadModel($_POST['id']);
+        $this->renderPartial('view',array('model'=>$model),false, true);
       }
 
              public function actionReturnForm(){
@@ -241,10 +241,10 @@ public function   init() {
 		}
   }
 
-     public function actionAjax_delete(){
+     public function actionAjax_delete(){ 
                  $id=$_POST['id'];
-                 $deleted=$model->loadModel($id);
-              
+                 $deleted=$this->loadModel($id);
+            
                 if ($deleted->delete() ){
                echo json_encode (array('success'=>true,'msg'=>deleted));
                exit;
