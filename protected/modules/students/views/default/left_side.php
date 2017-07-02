@@ -1,12 +1,5 @@
 <!--upgrade_div_starts-->
-<!--<div class="upgrade_bx">
-	<div class="up_banr_imgbx"><a href="http://open-school.org/contact.php" target="_blank"><img src="http://tryopenschool.com/images/promo_bnnr_innerpage.png" width="231" height="200" /></a></div>
-	<div class="up_banr_firstbx">
-   	  <h1>You are Using Community Edition</h1>
-	  <a href="http://open-school.org/contact.php" target="_blank">upgrade to premium version!</a>
-    </div>-->
-	
-</div>
+
 <!--upgrade_div_ends-->
 <div id="othleft-sidebar">
 <!--<div class="lsearch_bar">
@@ -27,75 +20,42 @@
 			'activeCssClass'=>'list_active',
 			'items'=>array(
 					array('label'=>''.Yii::t('students','Students List').'<span>'.Yii::t('students','All Students Details').'</span>', 'url'=>array('students/manage') ,'linkOptions'=>array('class'=>'lbook_ico'),
-                                   'active'=> ((Yii::app()->controller->id=='students') && (in_array(Yii::app()->controller->action->id,array('manage','update')))) ? true : false
+                                   'active'=> ((Yii::app()->controller->id=='students') && (in_array(Yii::app()->controller->action->id,array('manage')))) ? true : false
 					    ),                               
 					array('label'=>''.Yii::t('students','Create New Student').'<span>'.Yii::t('students','New Admission').'</span>',  'url'=>array('students/create') ,'linkOptions'=>array('class'=>'sl_ico' ),'active'=> (Yii::app()->controller->action->id=='create'  or Yii::app()->controller->id=='studentPreviousDatas' or Yii::app()->controller->id=='studentAdditionalFields'), 'itemOptions'=>array('id'=>'menu_1') 
 					       ),
-                                       /* array('label'=>''.Yii::t('students','Manage Log Category').'<span>'.Yii::t('students','Manage Students Log Category').'</span>',  'url'=>array('/students/studentCategories') ,'linkOptions'=>array('class'=>'sl_ico' ),'active'=> ((Yii::app()->controller->id=='logcategory') && (in_array(Yii::app()->controller->action->id,array('index'))) ? true : false), 'itemOptions'=>array('id'=>'menu_1') 
-					       ),*/
-                            
 						   	array('label'=>Yii::t('students','Manage Student Category').'<span>'.Yii::t('students','Manage Students Category'.'</span>'), 'url'=>array('/students/studentCategory'),'linkOptions'=>array('class'=>'sm_ico' ),'active'=> (Yii::app()->controller->id=='studentCategory'),),
 						   array('label'=>''.t('<h1>Manage Guardians</h1>')),
 			
 						array('label'=>''.Yii::t('students','List Guardians').'<span>'.Yii::t('students','All Guardians Details').'</span>', 'url'=>array('guardians/admin'),'active'=> ((Yii::app()->controller->id=='guardians') && (in_array(Yii::app()->controller->action->id,array('update','view','admin','index'))) ? true : false),'linkOptions'=>array('id'=>'menu_2','class'=>'lbook_ico')),
 						
-                                                array('label'=>''.t('<h1>Students Leave Type</h1>')),
-			
-						array('label'=>''.Yii::t('students','Add Leave Type').'<span>'.Yii::t('students','Manage Leave Type').'</span>', 'url'=>array('studentleavetype/manage'),'active'=> ((Yii::app()->controller->id=='studentleavetype') && (in_array(Yii::app()->controller->action->id,array('manage','update'))) ? true : false),'linkOptions'=>array('id'=>'menu_2','class'=>'lbook_ico')),
-						
-                                               /*      array('label'=>''.t('<h1>Online Registration</h1>')),
-			
-						  array('label'=>''.Yii::t('students','Online Applicants').'<span>'.Yii::t('Courses','Manage Online Registrations').'</span>',  'url'=>array(''),'active'=> ((Yii::app()->controller->id=='sunil') && (in_array(Yii::app()->controller->action->id,array('onlineapplicants'))) ? true : false), 'linkOptions'=>array('class'=>'gs_ico' ), 'itemOptions'=>array('id'=>'menu_1') 
-					       ),
-                            
-                                               array('label'=>''.'<h1>'.Yii::t('students','Online Registration').'</h1>'),
-					
-						array('label'=>Yii::t('students','Online Applicants').'<span>'.Yii::t('students','Manage Online Registration').'</span>', 'url'=>array('onlineadmission/onlineapplicants'),'active'=>((Yii::app()->controller->id=='onlineadmission') && (in_array(Yii::app()->controller->action->id,array('onlineapplicants'))) ? true : false)),'linkOptions'=>array('class'=>'ar_ico'),'itemOptions'=>array('id'=>'menu_1'),
-						 
-                            			array('label'=>Yii::t('students','Student Approval').'<span>'.Yii::t('students','Approve Online Registrations').'</span>', 'url'=>array('onlineadmission/approval'),'active'=>((Yii::app()->controller->id=='onlineadmission') && (in_array(Yii::app()->controller->action->id,array('approval'))) ? true : false)),'linkOptions'=>array('class'=>'ar_ico'),'itemOptions'=>array('id'=>'menu_1'),
-                                                  
-                                                array('label'=>Yii::t('students','Waiting List').'<span>'.Yii::t('students','Manage Waiting List').'</span>', 'url'=>array('waitingliststudents/list'),'active'=>((Yii::app()->controller->id=='waitingliststudents') && (in_array(Yii::app()->controller->action->id,array('list'))) ? true : false)),'linkOptions'=>array('class'=>'ar_ico'),'itemOptions'=>array('id'=>'menu_1'),
-
-                                                array('label'=>Yii::t('students','Incomplete Registrations').'<span>'.Yii::t('students','Manage Incomplete Registrations').'</span>', 'url'=>array('onlineadmission/incompletereg'),'active'=>((Yii::app()->controller->id=='onlineadmission') && (in_array(Yii::app()->controller->action->id,array('incompletereg'))) ? true : false)),'linkOptions'=>array('class'=>'ar_ico'),'itemOptions'=>array('id'=>'menu_1'),*/
-
-                                                  /*   array('label'=>''.t('<h1>Students Leave Management</h1>')),
-					
-						array('label'=>''.Yii::t('students','Add Leave Type').'<span>'.Yii::t('students','Manage Leave Type').'</span>', 'url'=>array('studentleavetype/manage'),'active'=>((Yii::app()->controller->id=='studentleavetype') && (in_array(Yii::app()->controller->action->id,array('manage'))) ? true : false)),'linkOptions'=>array('class'=>'ar_ico'),'itemOptions'=>array('id'=>'menu_1'),
-						 
-                                                 */   array('label'=>''.'<h1>'.Yii::t('students','Archive').'</h1>'),
-					
-						array('label'=>Yii::t('students','Students').'<span>'.Yii::t('students','Manage Students Archive').'</span>', 'url'=>array('archive/students'),'active'=>((Yii::app()->controller->id=='archive') && (in_array(Yii::app()->controller->action->id,array('students','update'))) ? true : false)),'linkOptions'=>array('class'=>'ar_ico'),'itemOptions'=>array('id'=>'menu_1'),
-						 
-                                                array('label'=>Yii::t('students','Guardians').'<span>'.Yii::t('students','Manage Guardians Archive').'</span>', 'url'=>array('archive/guardians'),'active'=>((Yii::app()->controller->id=='archive') && (in_array(Yii::app()->controller->action->id,array('guardians','update_1'))) ? true : false)),'linkOptions'=>array('class'=>'ar_ico'),'itemOptions'=>array('id'=>'menu_1'),
-						 
-                           
-						/*array('label'=>t('Create New Guardian'), 'url'=>'#',
+						array('label'=>t('Create New Guardian'), 'url'=>'#',
 							'active'=> ((Yii::app()->controller->id=='guardians') && (in_array(Yii::app()->controller->action->id,array('update','view','admin','index'))) ? true : false)                                                                                           
 						      ),
 							  array('label'=>t('Associate Guardian'), 'url'=>'#',
 							'active'=> ((Yii::app()->controller->id=='guardians') && (in_array(Yii::app()->controller->action->id,array('update','view','admin','index'))) ? true : false)                                                                                           
-						      ),*/
+						      ),
 						                                                                                    
 					    
 					    
 					       
 					    
-					/*array('label'=>''.t('Attendance Management<span>Manage your Dashboard</span>'), 'url'=>'javascript:void(0);','linkOptions'=>array('id'=>'menu_3','class'=>'menu_3'), 'itemOptions'=>array('id'=>'menu_3'),
+					array('label'=>''.t('Attendance Management<span>Manage your Dashboard</span>'), 'url'=>'javascript:void(0);','linkOptions'=>array('id'=>'menu_3','class'=>'menu_3'), 'itemOptions'=>array('id'=>'menu_3'),
 					       'items'=>array(
 						array('label'=>t('Attendance Register'), 'url'=>'#'),
 						array('label'=>t('Attendance Report'), 'url'=>'#',
 								'active'=> ((Yii::app()->controller->id=='bemenu') && (in_array(Yii::app()->controller->action->id,array('update','view','admin','index'))) ? true : false)),
 						
 						
-					    )),*/
+					    )),
 						 
 					
 					
-						//array('label'=>t('Manage Additional Fields'), 'url'=>'#','active'=>Yii::app()->controller->id=='studentCategories' ? true : false),
+						array('label'=>t('Manage Additional Fields'), 'url'=>'#','active'=>Yii::app()->controller->id=='studentCategories' ? true : false),
 						
 						
-						//array('label'=>'Like/Rating', 'url'=>array('/like/admin')),
-						//array('label'=>'Survey', 'url'=>array('/survey/admin')),
+						array('label'=>'Like/Rating', 'url'=>array('/like/admin')),
+						array('label'=>'Survey', 'url'=>array('/survey/admin')),
 						     
 						
 					  
@@ -104,7 +64,7 @@
 				),
 			)); 
 			
-			/*echo CHtml::ajaxLink(
+			echo CHtml::ajaxLink(
 	'Students',          // the link body (it will NOT be HTML-encoded.)
 	array('/site/explorer'), // the URL for the AJAX request. If empty, it is assumed to be the current URL.
 	array(
@@ -153,4 +113,4 @@
             
         });
     </script>
-*/
+

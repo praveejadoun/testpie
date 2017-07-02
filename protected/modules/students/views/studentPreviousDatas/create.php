@@ -16,14 +16,6 @@ $this->breadcrumbs=array(
     <td valign="top">
     <div class="cont_right formWrapper">
 <h1><?php echo Yii::t('students','New Admission');?></h1>
- <div id="jobDialog"></div>
-                    <div class="contrht_bttns">
-                        <ul>
-                           
-                            <li style="padding: 56px 15px 74px 15px;color:#666;"><?php echo CHtml::link('<span>'.Yii::t('students','View Profile').'</span>', array('/students/students/view','id' => $_REQUEST['id'])); ?></li>
-                            
-                        </ul>
-                    </div>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
  	</div>

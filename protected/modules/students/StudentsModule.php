@@ -4,8 +4,6 @@ class StudentsModule extends CWebModule
 {
 	public $defaultController = 'students';
 	public function init()
-               
-                
 	{
 		// this method is called when the module is being created
 		// you may place code here to customize the module or the application
@@ -19,7 +17,6 @@ class StudentsModule extends CWebModule
 
 	public function beforeControllerAction($controller, $action)
 	{
-             
 		if(parent::beforeControllerAction($controller, $action))
 		{
 			// this method is called before any module controller action is performed

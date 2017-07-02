@@ -35,20 +35,20 @@ $('.search-form form').submit(function(){
     <td valign="top">
     <div class="cont_right formWrapper">
 <h1><?php echo Yii::t('students','Manage Guardians');?></h1>
-<!--<?php ?><div class="c_subbutCon" align="right" style="width:100%">
-    <div class="c_cubbut" style="width:163px;">
+<?php /*?><div class="c_subbutCon" align="right" style="width:100%">
+    <div class="c_cubbut" style="width:320px;">
     <ul>
     <li>
-    <?php// echo CHtml::link('Create New Guardian', array('create'),array('class'=>'addbttn'));?>
+    <?php echo CHtml::link('Create New Guardian', array(''),array('class'=>'addbttn'));?>
   </li>
-  <!-- <li>
-    <?php //echo CHtml::link('Associate Guardian', array('addguardian'),array('class'=>'addbttn last'));?>
-  </li>-->
-  <!--  </ul>
+   <li>
+    <?php echo CHtml::link('Associate Guardian', array(''),array('class'=>'addbttn last'));?>
+  </li>
+    </ul>
     <div class="clear"></div>
     </div>
-    </div><?php ?>-->
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+    </div><?php */?>
+<?php //echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -108,14 +108,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			'header'=>'Action',
 			'class'=>'CButtonColumn',
 			'htmlOptions' => array('style'=>'width:80px;'),
-			 'template' => '{update} {delete}',
+			 'template' => '{delete}',
 			 'headerHtmlOptions'=>array('style'=>'font-size:12px; font-weight:bold;')
 			 
-		)
+		),
 	),
 )); ?>
-
-
  	</div>
     </td>
   </tr>

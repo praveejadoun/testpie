@@ -1,30 +1,13 @@
-<?php if(!Yii::app()->controller->action->id=='create') 
-{?>
-<div class="captionWrapper">
-        <ul>
-            <li><h2 class="cur">Student Details</h2></li>
-            <li><h2>Parent Details</h2></li>
-            <li><h2>Emergency Contact</h2></li>
-            <li><h2>Previous Details</h2></li>
-            <li class="last"><h2>Student Profile</h2></li>
-        </ul>
-	</div>
-<?php
-}
-else
-{?>
+
 <div class="captionWrapper">
   <ul>
-    	<li><h2 ><?php echo CHtml::link(Yii::t('students','Student Details'), array('students/update','id' => $_REQUEST['id'],'class'=>cur)); ?></h2></li>
-        <li><h2 ><?php echo CHtml::link(Yii::t('students','Guardian Details'), array('guardians/create','id' => $_REQUEST['id'],'class'=>cur)); ?></h2></li>
-        
+    	<li><h2 >Student Details</h2></li>
+        <li><h2 >Parent Details</h2></li>
+        <li><h2>Emergency Contact</h2></li>
         <li><h2 class="cur">Previous Details</h2></li>
-        <li class="last"><h2><?php echo CHtml::link(Yii::t('students','Student Documents'), array('studentdocument/create','id' => $_REQUEST['id'],'class'=>cur)); ?></h2></li>
+        <li class="last"><h2>Student Profile</h2></li>
     </ul>
 </div>
-<?php
-
-}?>
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'student-previous-datas-form',
 	'enableAjaxValidation'=>false,
