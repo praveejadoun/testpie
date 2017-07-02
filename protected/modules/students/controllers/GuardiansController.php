@@ -106,7 +106,7 @@ class GuardiansController extends RController
 			{
 				//echo $model->ward_id; exit;
 				$student = Students::model()->findByAttributes(array('id'=>$model->ward_id));
-                                $student->saveAttributes(array('parent_id'=>$model->id));
+				$student->saveAttributes(array('parent_id'=>$model->id));
 				
 				if($_POST['Guardians']['user_create']==0)
 				{
@@ -160,76 +160,14 @@ class GuardiansController extends RController
 					}
 						
 				}
-				$this->redirect(array('create','id'=>$model->ward_id));
+				$this->redirect(array('addguardian','id'=>$model->ward_id));
 			}
-                        else
-                        {
-                            echo "sunil";
-                        }
-                        
-                       
 		}
-                $criteria = new CDbCriteria;
-		//$criteria->compare('is_deleted',0);  // normal DB field
-		//$criteria->condition='is_deleted=:is_del';
-		//$criteria->params = array(':is_del'=>0);
-		
-		
-		if(isset($_REQUEST['name']) and $_REQUEST['name']!=NULL)
-                    
-		{
-		if((substr_count( $_REQUEST['name'],' '))==0)
-		 { 	
-		 $criteria->condition=$criteria->condition.' and '.'(first_name LIKE :name or last_name LIKE :name)';
-		 $criteria->params[':name'] = $_REQUEST['name'].'%';
-		}
-                
-		else if((substr_count( $_REQUEST['name'],' '))>=1)
-		{
-		 $name=explode(" ",$_REQUEST['name']);
-		 $criteria->condition=$criteria->condition.' and '.'(first_name LIKE :name or last_name LIKE :name)';
-		 $criteria->params[':name'] = $name[0].'%';
-		 $criteria->condition=$criteria->condition.' and '.'(first_name LIKE :name1 or last_name LIKE :name1)';
-		 $criteria->params[':name1'] = $name[1].'%';
-		 	
-		}
-		}
-		if(isset($_REQUEST['guardians']['relation']) and $_REQUEST['guardians']['relation']!=NULL)
-		{
-			$model->batch_id = $_REQUEST['guardians']['relation'];
-			$criteria->condition=$criteria->condition.' and '.'relation = :relation';
-		    $criteria->params[':relation'] = $_REQUEST['guardians']['relation'];
-		}
-		
-		if(isset($_REQUEST['guardians']['email']) and $_REQUEST['guardians']['email']!=NULL)
-		{
-			$model->label = $_REQUEST['guardians']['email'];
-			$criteria->condition=$criteria->condition.' and '.'email = :email';
-		    $criteria->params[':email'] = $_REQUEST['guardians']['email'];
-		}
-		
-		
-		
-                $criteria->order = 'first_name ASC';
-	        $total = Guardians::model()->count($criteria);
-		$pages = new CPagination($total);
-        $pages->setPageSize(Yii::app()->params['listPerPage']);
-        $pages->applyLimit($criteria);  // the trick is here!
-		$posts = Guardians::model()->findAll($criteria);
-                
-		$this->render('create',array('model'=>$model,
-		'list'=>$posts,
-		'pages' => $pages,
-		'item_count'=>$total,
-                 'page_size'=>Yii::app()->params['listPerPage'],)) ;
-                $this->render('create',array(
+
+		$this->render('create',array(
 			'model'=>$model,'check_flag'=>$check_flag
 		));
-                 }
-                
-                
-		
-
+	}
 
 	/**
 	 * Updates a particular model.
@@ -246,22 +184,19 @@ class GuardiansController extends RController
 
 		if(isset($_POST['Guardians']))
 		{
-                  
+			
 			$model->attributes=$_POST['Guardians'];
 			if($model->save())
 			{
-       
-				if($_REQUEST['std']!=NULL)
+				if($_REQUEST['std']==NULL)
 				{
-                                    
 					$student = Students::model()->findByAttributes(array('id'=>$_REQUEST['sid']));
-                                       // print_r($student);exit;
 					$student->saveAttributes(array('parent_id'=>$_REQUEST['id']));
 					//echo $_REQUEST['id'].'/'.$student->first_name; exit;
 					$this->redirect(array('addguardian','id'=>$_REQUEST['sid'],'gid'=>$_REQUEST['id']));
 				}
 				{
-					$this->redirect(array('admin'/*,'id'=>$_REQUEST['std']*/));
+					$this->redirect(array('students/view','id'=>$_REQUEST['std']));
 				}
 			}
 		}

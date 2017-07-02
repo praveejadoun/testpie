@@ -27,7 +27,7 @@ class StudentsController extends RController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','manage','Website','savesearch','events','attentance','Assesments','DisplaySavedImage','Fees','Payfees','Pdf','Pdflist','Printpdf','Printpdflist','Remove','Search','inactive','active','deletes'),
+				'actions'=>array('index','view','manage','Website','savesearch','events','attentance','Assesments','DisplaySavedImage','Fees','Payfees','Pdf','Printpdf','Remove','Search','inactive','active','deletes'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -50,7 +50,6 @@ class StudentsController extends RController
 	 */
 	public function actionView($id)
 	{
-            
 		//$this->layout='';
 		//header("Content-type: image/jpeg");
 		//echo $model->photo_data;
@@ -67,40 +66,15 @@ class StudentsController extends RController
 			'model'=>$this->loadModel($_REQUEST['id']),
 		));
 	}
-        public function actionPrintpdflist()
-	{
-           
-		//$this->layout='';
-		//header("Content-type: image/jpeg");
-		//echo $model->photo_data;
-		$this->render('printpdflist',array(
-			'model'=>$model,
-		));
-	}
 	 public function actionPdf()
     {
 		$student = Students::model()->findByAttributes(array('id'=>$_REQUEST['id']));
-             
 		$student = $student->first_name.' '.$student->last_name.' Profile.pdf';
         
         # HTML2PDF has very similar syntax
         $html2pdf = Yii::app()->ePdf->HTML2PDF();
-        
+
         $html2pdf->WriteHTML($this->renderPartial('printpdf', array('model'=>$this->loadModel($_REQUEST['id'])), true));
-        $html2pdf->Output($student);
- 
-        ////////////////////////////////////////////////////////////////////////////////////
-	}
-        public function actionPdflist()
-    {
-          
-		$student = Students::model();
-		$student = $student->first_name.' '.$student->last_name.' Profile.pdf';
-        
-        # HTML2PDF has very similar syntax
-        $html2pdf = Yii::app()->ePdf->HTML2PDF();
-        
-        $html2pdf->WriteHTML($this->renderPartial('printpdflist', array('model'=>$model)));
         $html2pdf->Output($student);
  
         ////////////////////////////////////////////////////////////////////////////////////
@@ -140,7 +114,7 @@ class StudentsController extends RController
 		if(isset($_POST['Students']))
 		{
 		
-                        $model->attributes=$_POST['Students'];
+			$model->attributes=$_POST['Students'];
 			$list = $_POST['Students'];
 			if($model->admission_date)
 			$model->admission_date=date('Y-m-d',strtotime($model->admission_date));
@@ -286,7 +260,7 @@ class StudentsController extends RController
             $model->photo_data=file_get_contents($file->tempName);
       		  }
 			if($model->save())
-				$this->redirect(array('guardians/create','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('update',array(
@@ -316,15 +290,14 @@ class StudentsController extends RController
 	 */
 	public function actionDelete($id)
 	{
-            
-		if($id)
+		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
 			$this->loadModel($id)->delete();
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('manage'));
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
@@ -342,10 +315,8 @@ class StudentsController extends RController
 		$criteria->compare('is_deleted',0);  // normal DB field
 		$criteria->condition='is_deleted=:is_del';
 		$criteria->params = array(':is_del'=>0);
-               
 		if(isset($_REQUEST['val']))
 		{
-                    
 		 $criteria->condition=$criteria->condition.' and '.'(first_name LIKE :match or last_name LIKE :match or middle_name LIKE :match)';
 		 //$criteria->params = array(':match' => $_REQUEST['val'].'%');
 		  $criteria->params[':match'] = $_REQUEST['val'].'%';
@@ -487,10 +458,9 @@ class StudentsController extends RController
 			$criteria->condition=$criteria->condition.' and '.'is_active = :status';
 		    $criteria->params[':status'] = $_REQUEST['Students']['status'];
 		}
-                
 		
-                
-                $criteria->order = 'first_name ASC';
+		
+		$criteria->order = 'first_name ASC';
 		
 		$total = Students::model()->count($criteria);
 		$pages = new CPagination($total);
@@ -505,9 +475,6 @@ class StudentsController extends RController
 		'item_count'=>$total,
 		'page_size'=>Yii::app()->params['listPerPage'],)) ;
 	 }
-
-         
-		
 	 
 	public function actionIndex()
 	{
@@ -518,13 +485,13 @@ class StudentsController extends RController
 		$criteria->limit = '10';
 		$posts = Students::model()->findAll($criteria);
 		
-               
-                $this->render('index',array(
+		
+		$this->render('index',array(
 			'total'=>$total,'list'=>$posts
 		));
 	}
 	
-        public function actionSavesearch()
+	public function actionSavesearch()
 	{
 		$dataProvider=new CActiveDataProvider('Students');
 		$this->render('index',array(
@@ -779,20 +746,4 @@ class StudentsController extends RController
 		$examscores = ExamScores::model()->DeleteAllByAttributes(array('student_id'=>$_REQUEST['sid']));
 		$this->redirect(array('/courses/batches/batchstudents','id'=>$_REQUEST['id']));
 	}
-        public function actionDeleteAll()
-	{
-            
-		
-		print_r($_REQUEST);exit;
-			// we only allow deletion via POST request
-			//$this->loadModel()->deleteAll();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('manage'));
-		
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	}
-
-}       
+}
