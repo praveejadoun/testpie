@@ -3280,3 +3280,86 @@ Stack trace:
 #24 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
 #25 E:\wamp\www\sms\index.php(52): CApplication->run()
 #26 {main} REQUEST_URI=/sms/index.php?r=courses/batches/batchstudents&id=26
+2017/07/02 05:34:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "waitinglist".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('waitinglist')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('waitinglist')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/batches/waitinglist&id=26
+2017/07/02 05:36:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "waitinglist".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('waitinglist')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('waitinglist')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/batches/waitinglist&id=26
+2017/07/02 05:45:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "waitinglist".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('waitinglist')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('waitinglist')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/batches/waitinglist&id=26
+2017/07/02 06:14:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "promote".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('promote')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('promote')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/batches/promote&id=26
+2017/07/02 08:20:09 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect datetime value: '02-07-2017' for column 'created_at' at row 1. The SQL statement executed was: UPDATE `guardians` SET `id`=:yp0, `uid`=:yp1, `ward_id`=:yp2, `first_name`=:yp3, `last_name`=:yp4, `relation`=:yp5, `email`=:yp6, `office_phone1`=:yp7, `office_phone2`=:yp8, `mobile_phone`=:yp9, `office_address_line1`=:yp10, `office_address_line2`=:yp11, `city`=:yp12, `state`=:yp13, `country_id`=:yp14, `dob`=:yp15, `occupation`=:yp16, `income`=:yp17, `education`=:yp18, `created_at`=:yp19, `updated_at`=:yp20, `is_deleted`=:yp21, `batch_id`=:yp22 WHERE `guardians`.`id`=46. Bound with :yp0=46, :yp1=98, :yp2=86, :yp3='vanam', :yp4='vanam', :yp5='father', :yp6='vanam123@gmail.com', :yp7='', :yp8='', :yp9='123456789', :yp10='', :yp11='', :yp12='', :yp13='', :yp14=NULL, :yp15=NULL, :yp16='', :yp17='', :yp18='', :yp19='02-07-2017', :yp20='02-07-2017', :yp21=0, :yp22=NULL.
+2017/07/02 08:20:09 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect datetime value: '02-07-2017' for column 'created_at' at row 1' in E:\wamp\www\sms\core\db\CDbCommand.php:337
+Stack trace:
+#0 E:\wamp\www\sms\core\db\ar\CActiveRecord.php(1689): CDbCommand->execute()
+#1 E:\wamp\www\sms\core\db\ar\CActiveRecord.php(1064): CActiveRecord->updateByPk('46', Array)
+#2 E:\wamp\www\sms\core\db\ar\CActiveRecord.php(781): CActiveRecord->update(NULL)
+#3 E:\wamp\www\sms\protected\modules\students\controllers\GuardiansController.php(189): CActiveRecord->save()
+#4 [internal function]: GuardiansController->actionUpdate('46')
+#5 E:\wamp\www\sms\core\web\actions\CAction.php(104): ReflectionMethod->invokeArgs(Object(GuardiansController), Array)
+#6 E:\wamp\www\sms\core\web\actions\CInlineAction.php(48): CAction->runWithParamsInternal(Object(GuardiansController), Object(ReflectionMethod), Array)
+#7 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#8 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#9 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#10 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#11 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#12 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#13 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#14 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('update')
+#16 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('students/guardi...')
+#17 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#18 E:\wamp\www\sms\index.php(52): CApplication->run()
+#19 {main} REQUEST_URI=/sms/index.php?r=students/guardians/update&id=46&sid=86
+2017/07/02 08:24:10 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect datetime value: '02-07-2017' for column 'created_at' at row 1. The SQL statement executed was: INSERT INTO `guardians` (`is_deleted`, `first_name`, `last_name`, `relation`, `education`, `occupation`, `income`, `email`, `office_phone1`, `office_phone2`, `mobile_phone`, `office_address_line1`, `office_address_line2`, `city`, `state`, `country_id`, `ward_id`, `created_at`, `updated_at`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9, :yp10, :yp11, :yp12, :yp13, :yp14, :yp15, :yp16, :yp17, :yp18). Bound with :yp0=0, :yp1='ram', :yp2='vanam', :yp3='father', :yp4='inter', :yp5='SE', :yp6='1000000', :yp7='ramvanam@gmail.com', :yp8='', :yp9='', :yp10='123456478', :yp11='', :yp12='', :yp13='', :yp14='', :yp15=1, :yp16=86, :yp17='02-07-2017', :yp18='02-07-2017'.
+2017/07/02 08:24:10 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect datetime value: '02-07-2017' for column 'created_at' at row 1' in E:\wamp\www\sms\core\db\CDbCommand.php:337
+Stack trace:
+#0 E:\wamp\www\sms\core\db\ar\CActiveRecord.php(1017): CDbCommand->execute()
+#1 E:\wamp\www\sms\core\db\ar\CActiveRecord.php(781): CActiveRecord->insert(NULL)
+#2 E:\wamp\www\sms\protected\modules\students\controllers\GuardiansController.php(105): CActiveRecord->save()
+#3 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): GuardiansController->actionCreate()
+#4 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#5 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#7 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#8 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#9 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#11 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('create')
+#13 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('students/guardi...')
+#14 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#15 E:\wamp\www\sms\index.php(52): CApplication->run()
+#16 {main} REQUEST_URI=/sms/index.php?r=students/guardians/create&id=86
+2017/07/02 08:25:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "waitinglist".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('waitinglist')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('waitinglist')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/batches/waitinglist&id=26
