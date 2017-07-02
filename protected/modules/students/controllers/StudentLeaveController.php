@@ -23,7 +23,6 @@ public function   init() {
              $this->registerAssets();
               parent::init();
  }
-
   private function registerAssets(){
 
             Yii::app()->clientScript->registerCoreScript('jquery');
