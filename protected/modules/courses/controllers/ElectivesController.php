@@ -127,7 +127,7 @@ class ElectivesController extends RController
 	 */
         public function actionIndex(){
 
-		$model=new Subjects('search');
+		$model=new Electives('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['id']))
 			$model->batch_id=$_GET['id'];
@@ -209,6 +209,30 @@ class ElectivesController extends RController
         $this->renderPartial('_ajax_form', array('model'=>$model), false, true);
       }
       
+       public function actionReturnView(){
+              
+
+               //don't reload these scripts or they will mess up the page
+                //yiiactiveform.js still needs to be loaded that's why we don't use
+                // Yii::app()->clientScript->scriptMap['*.js'] = false;
+                $cs=Yii::app()->clientScript;
+                $cs->scriptMap=array(
+                                                 'jquery.min.js'=>false,
+                                                 'jquery.js'=>false,
+                                                 'jquery.fancybox-1.3.4.js'=>false,
+                                                 'jquery.fancybox.js'=>false,
+                                                 'jquery-ui-1.8.12.custom.min.js'=>false,
+                                                 'json2.js'=>false,
+                                                 'jquery.form.js'=>false,
+                                                'form_ajax_binding.js'=>false
+        );
+
+        
+        $model=$this->loadModel($_POST['id']);
+        $this->renderPartial('view',array('model'=>$model),false, true);
+      }
+      
+      
       public function actionAjax_Create(){
 
                if(isset($_POST['Electives']))
@@ -236,4 +260,36 @@ class ElectivesController extends RController
                         }
 		}
   }
+   public function actionAjax_delete(){ 
+                 $id=$_POST['id'];
+                 $deleted=$this->loadModel($id);
+            
+                if ($deleted->delete() ){
+               echo json_encode (array('success'=>true,'msg'=>deleted));
+               exit;
+                }else{
+                  echo json_encode (array('success'=>false));
+                  exit;
+                           }
+      }
+      
+       public function actionAjax_Update(){
+		if(isset($_POST['Electives']))
+		{
+           $model=$this->loadModel($_POST['update_id']);
+			$model->attributes=$_POST['Electives'];
+			/*$data=SubjectName::model()->findByAttributes(array('id'=>$model->name));
+						if($data!=NULL)
+						{
+							$model->name=$data->name;
+							$model->code=$data->code;
+							
+						}*/
+			if( $model->save(false)){
+                         echo json_encode(array('success'=>true));
+		             }else
+                     echo json_encode(array('success'=>false));
+                }
+    }
+      
 }

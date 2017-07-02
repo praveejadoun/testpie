@@ -9,18 +9,19 @@
  * @ver 1.3
  -->
 <?php
-
+/*
 if (!$model->isNewRecord)
 {
   $criteria = new CDbCriteria;
   $criteria->condition='batch_id=:bat_id';
 	$criteria->params=array(':bat_id'=>$model->batch_id);
-	$criteria->compare('is_deleted',0); 
-}
+	$criteria->compare('is_deleted',0);
+        
+}*/
   
   $data = CHtml::listData(SubjectName::model()->findAll(),'id','name') ?>
  
-<?php $data1 = CHtml::listData(Subjects::model()->findAll($criteria),'id','name') ?>
+<?php //$data1 = CHtml::listData(Subjects::model()->findAll($criteria),'id','name') ?>
 <div id="subjects_form_con" class="client-val-form" style="width:350px">
     <?php if ($model->isNewRecord) : ?>    <h3 id="create_header"><?php echo Yii::t('Subjects','Create New Elective');?></h3>
     <?php  elseif (!$model->isNewRecord):  ?>    <h3 id="update_header"><?php echo Yii::t('Subjects','Update Elective');?></h3>
@@ -83,25 +84,25 @@ if (!$model->isNewRecord)
     <div style="font-weight:bold">Please correct these errors:</div>
     ', NULL, array('class' => 'errorsum notification errorshow png_bg')); ?>    <p class="note">Fields with <span class="required">*</span> are required.</p>
 	
-    <?php
+    <?php/*
 	if(isset($batch_id) and $batch_id==0)
-	{
+	{*/
 	?>
         <div class="row">
-			<?php echo $form->labelEx($model,Yii::t('Subjects','batch_id'), array('style'=>'color:#000000')); ?>
+			<?php //echo $form->labelEx($model,Yii::t('Subjects','batch_id'), array('style'=>'color:#000000')); ?>
             <?php 
-			 $criteria  = new CDbCriteria;
+			/* $criteria  = new CDbCriteria;
 		     $criteria ->compare('is_deleted',0); 
 			echo $form->dropDownList($model, 'batch_id', CHtml::listData(Batches::model()->findAll($criteria),'id','coursename'),array('prompt'=>'Select'));
-			?>
+			*/?>
              <span id="success-Subjects_name" class="hid input-notification-success  success png_bg right" style="float:right; margin:8px 122px 0px 0px;"></span>
             <div>
                 <small></small>
             </div>
-            <?php echo $form->error($model,'batch_id'); ?>
+            <?php //echo $form->error($model,'batch_id'); ?>
      	</div>
  	<?php
-	}
+	//}
 	?>
 
 	
@@ -127,13 +128,18 @@ if (!$model->isNewRecord)
         </div>
             <?php echo $form->error($model,'name'); ?>
     </div>
-    
+     <?php      
+		$criteria=new CDbCriteria;
+		$criteria->condition='is_deleted=:is_del';
+		$criteria->params=array(':is_del'=>0);
+		
+	?>
     
       <div class="row">
 			<?php echo $form->labelEx($model,Yii::t('Electives','elective_group_id'), array('style'=>'color:#000000')); ?>
             <?php 
 			
-			echo $form->dropDownList($model, 'elective_group_id', CHtml::listData(electiveGroups::model()->findAll(),'id','name'),array('prompt'=>'Select'));
+			echo $form->dropDownList($model, 'elective_group_id', CHtml::listData(electiveGroups::model()->findAll($criteria),'id','name'),array('prompt'=>'Select'));
 			?>
              <span id="success-Subjects_name" class="hid input-notification-success  success png_bg right" style="float:right; margin:8px 122px 0px 0px;"></span>
             <div>
@@ -205,7 +211,16 @@ if (!$model->isNewRecord)
         </div>
             <?php echo $form->error($model,'created_at'); ?>
     </div>
-
+      <div class="row">
+            <?php //echo $form->labelEx($model,'is_deleted'); ?>
+            <?php echo $form->hiddenField($model,'is_deleted'); ?>
+        <span id="success-GradingLevels_is_deleted"
+              class="hid input-notification-success  success png_bg right"></span>
+        <div>
+            <small></small>
+        </div>
+            <?php echo $form->error($model,'is_deleted'); ?>
+    </div>
         
     
     <input type="hidden" name="YII_CSRF_TOKEN"

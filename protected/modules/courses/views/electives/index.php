@@ -88,10 +88,10 @@ $del_title=Yii::t('admin_subjects', 'Delete Confirmation');
           'columns' => array(
           		
 		'name',
-		'code',
+		'elective_group_id',
 		
 		
-		'max_weekly_classes',
+		
 		/*
 		'elective_group_id',
 		'is_deleted',
@@ -154,7 +154,7 @@ $(function() {
         $(this).bind('click', function() {
             $.ajax({
                 type: "POST",
-                url: "<?php echo Yii::app()->request->baseUrl;?>/index.php?r=courses/subject/returnView",
+                url: "<?php echo Yii::app()->request->baseUrl;?>/index.php?r=courses/electives/returnView",
                 data:{"id":id,"YII_CSRF_TOKEN":"<?php echo Yii::app()->request->csrfToken;?>"},
                 beforeSend : function() {
                     $("#subjects-grid").addClass("ajax-sending");
@@ -185,7 +185,7 @@ $(function() {
         $(this).bind('click', function() {
             $.ajax({
                 type: "POST",
-                url: "<?php echo Yii::app()->request->baseUrl;?>/index.php?r=courses/subject/returnForm",
+                url: "<?php echo Yii::app()->request->baseUrl;?>/index.php?r=courses/electives/returnForm",
                 data:{"update_id":id,"YII_CSRF_TOKEN":"<?php echo Yii::app()->request->csrfToken;?>"},
                 beforeSend : function() {
                     $("#subjects-grid").addClass("ajax-sending");
@@ -223,7 +223,7 @@ $(function() {
         deletes[id] = function() {
             $.ajax({
                 type: "POST",
-                url: "<?php echo Yii::app()->request->baseUrl;?>/index.php?r=courses/subject/ajax_delete",
+                url: "<?php echo Yii::app()->request->baseUrl;?>/index.php?r=courses/electives/ajax_delete",
                 data:{"id":id,"YII_CSRF_TOKEN":"<?php echo Yii::app()->request->csrfToken;?>"},
                     beforeSend : function() {
                     $("#subjects-grid").addClass("ajax-sending");

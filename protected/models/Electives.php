@@ -8,9 +8,11 @@
  * @property string $name
  * @property string $code
  * @property integer $max_weekly_classes
+ * @property integer $batch_id
  * @property integer $elective_group_id
  * @property string $created_at
  * @property string $updated_at
+ * @property string $is_deleted
  */
 class Electives extends CActiveRecord
 {
@@ -39,12 +41,12 @@ class Electives extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('elective_group_id,max_weekly_classes', 'numerical', 'integerOnly'=>true),
-                        array('name, code, max_weekly_classes','required'),
+			array('elective_group_id,max_weekly_classes,is_deleted', 'numerical', 'integerOnly'=>true),
+                        array('name, code, max_weekly_classes,batch_id','required'),
 			array('created_at, updated_at', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, elective_group_id, name, code, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, elective_group_id, name, code, created_at, is_deleted, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,6 +58,7 @@ class Electives extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                     
 		);
 	}
 
@@ -70,8 +73,10 @@ class Electives extends CActiveRecord
                         'name'=>'Name',
                         'code'=>'Code',
                         'max_weekly_classes'=>'Max Weekly Classes',
+                        'batch_id' =>'Batch Id',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
+                        'is_deleted' => 'Is Deleted'
 		);
 	}
 
@@ -91,8 +96,10 @@ class Electives extends CActiveRecord
                 $criteria->compare('name',$this->name,true);
                 $criteria->compare('code',$this->code,true);
                 $criteria->compare('max_weekly_classes',$this->max_weekly_classes,true);
+                $criteria->compare('batch_id',$this->batch_id,true);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);
+                $criteria->compare('is_deleted',$this->is_deleted,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

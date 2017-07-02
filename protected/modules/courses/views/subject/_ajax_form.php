@@ -93,7 +93,7 @@ if (!$model->isNewRecord)
 			 $criteria  = new CDbCriteria;
 		     $criteria ->compare('is_deleted',0); 
 			echo $form->dropDownList($model, 'batch_id', CHtml::listData(Batches::model()->findAll($criteria),'id','coursename'),array('prompt'=>'Select'));
-			?>
+			print_r($form);exit;?>
              <span id="success-Subjects_name" class="hid input-notification-success  success png_bg right" style="float:right; margin:8px 122px 0px 0px;"></span>
             <div>
                 <small></small>

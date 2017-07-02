@@ -126,9 +126,10 @@ $(document).click(function() {
                 <ul>
 					<li class="addstud"><?php echo CHtml::link(Yii::t('Batch','Add Student<span>for add new student</span>'), array('/students/students/create','bid'=>$_REQUEST['id'])); ?></li>
                                         <li class="newexm"><?php echo CHtml::link(Yii::t('Batch','Exams<span>for add new exam</span>'), array('/examination/exam','id'=>$_REQUEST['id'])); ?></li>
-					<li class="newsub"><?php echo CHtml::link(Yii::t('Batch','New Subject<span>for add new subject</span>'), array('#'),array('id'=>'add_subject-name-side')) ?></li>
+					<li class="newsub"><?php echo CHtml::link(Yii::t('Batch','New Subject<span>for add new subject</span>'), array('#'),array('id'=>'add_subjects-side')) ?></li>
+                                        <li class="mark"><?php echo CHtml::link(Yii::t('Batch','Add Elective<span>for add new elective</span>'), array('/courses/electives','id'=>$_REQUEST['id'])) ?></li>
                    	<li class="mark"><?php echo CHtml::link(Yii::t('Batch','Mark Attendance<span>for add leave</span>'), array('/courses/studentAttentance','id'=>$_REQUEST['id'])) ?></li>
-                                        <li class="addteach"><?php echo CHtml::ajaxLink(Yii::t('Batch','Assign Teacher<span>assign class teacher</span>'),$this->createUrl('addupdate'),array('onclick'=>'$("#jobDialog123").dialog("open"); return false;',
+                                        <li class="addteach"><?php echo CHtml::ajaxLink(Yii::t('Batch','Assign Teacher<span>assign class teacher</span>'),$this->createUrl('batches/addupdate'),array('onclick'=>'$("#jobDialog123").dialog("open"); return false;',
                                                                 'update'=>'#jobDialog123','type' =>'GET','data' => array( 'val1' =>$batch->id,'course_id'=>$batch->course_id ),'dataType' => 'text'),array('id'=>'showJobDialog12'.$batch->id,'class'=>'add'));?></li>
 				   	<li class="promote"><?php echo CHtml::link(Yii::t('Batch','Promote Batch<span>for promote a batch</span>'), array('batches/promote_popup','id'=>$_REQUEST['id'])) ?></li>
                      <?php if($batch->is_active=='1')
@@ -353,7 +354,7 @@ $(document).click(function() {
         
          <li>
         <?php     
-                  if(Yii::app()->controller->action->id=='studentelectives' )
+                  if(Yii::app()->controller->action->id=='studentelectives' or Yii::app()->controller->id=='electives' or Yii::app()->controller->id=='electiveGroups')
                   {
                   echo CHtml::link(Yii::t('Batch','Electives'), array('batches/studentelectives','id'=>$_REQUEST['id']),array('class'=>'active'));
                   }
