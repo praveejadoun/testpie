@@ -172,7 +172,7 @@ public function   init() {
       }
 
         public function actionIndex(){
-
+            
 		$model=new StudentCategories('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['StudentCategories']))

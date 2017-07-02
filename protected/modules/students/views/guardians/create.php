@@ -104,16 +104,190 @@ $this->breadcrumbs=array(
     </td>
     <td valign="top">
     <div class="cont_right formWrapper">
-        <h1><?php echo Yii::t('students','New Admission');?></h1>
+        <?php if(Yii::app()->controller->action->id=='create')
+            {
+        ?>
+        <h1>Enrolment: <?php echo $model->first_name; ?></h1>
+        <div id="jobDialog"></div>
+                    <div class="contrht_bttns">
+                        <ul>
+                           
+                            <li style="padding: 56px 15px 74px 15px;"><?php echo CHtml::link('<span>'.Yii::t('students','View Profile').'</span>', array('/students/students/view','id' => $_REQUEST['id'])); ?></li>
+                            
+                        </ul>
+                    </div>
+
         <div class="captionWrapper">
         <ul>
-            <li><h2 >Student Details</h2></li>
-            <li><h2 class="cur">Parent Details</h2></li>
-            <li><h2>Emergency Contact</h2></li>
-            <li><h2>Previous Details</h2></li>
-            <li class="last"><h2>Student Profile</h2></li>
+            <li><h2 ><?php echo CHtml::link(Yii::t('students','Student Details'), array('students/update','id' => $_REQUEST['id'],'class'=>cur)); ?></h2></li>
+            <li><h2 class="cur">Guardian Details</h2></li>
+            
+            <li><h2><?php echo CHtml::link(Yii::t('students','Previous Details'), array('studentpreviousdatas/create','id' => $_REQUEST['id'],'class'=>cur)); ?></h2></li>
+            <li class="last"><h2><?php echo CHtml::link(Yii::t('students','Student Documents'), array('studentdocument/create','id' => $_REQUEST['id'],'class'=>cur)); ?></h2></li>
         </ul>
         </div>
+        
+  <?php }
+        ?>
+        <div class="list_contner">
+                    <div class="clear"></div>
+                    <?php 
+					if($list)
+                    {
+					?>
+                    <div class="tablebx">  
+                        <div class="pagecon">
+							<?php 
+                             
+                               /* $this->widget('CLinkPager', array(
+                              'currentPage'=>$pages->getCurrentPage(),
+                              'itemCount'=>$item_count,
+                              'pageSize'=>$page_size,
+                              'maxButtonCount'=>5,
+                              //'nextPageLabel'=>'My text >',
+                              'header'=>'',
+                            'htmlOptions'=>array('class'=>'pages'),
+                            ));*/?>
+                        </div> <!-- End div class="pagecon" --> 
+                                                              
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            
+                            <tr class="tablebx_topbg">
+                               
+                                <td><?php echo Yii::t('students','Sl. No.');?></td>	
+                                <td><?php echo Yii::t('guardians','Name');?></td>
+                                <td><?php echo Yii::t('studentleavetype','Relation');?></td>
+                                <td><?php echo Yii::t('studentleavetype','Email');?></td>
+                               
+                                <td><?php echo Yii::t('studentleavetype','Action');?></td>
+                                <!--<td style="border-right:none;">Task</td>-->
+                            </tr>
+                            <?php 
+                            if(isset($_REQUEST['page']))
+                            {
+                            	$i=($pages->pageSize*$_REQUEST['page'])-9;
+                           }
+                            else
+                            {
+                            	$i=1;
+                            }
+                            $cls="even";
+                            ?>
+                            
+                            <?php 
+						foreach($list as $list_1)
+                          {
+							?>
+                                <tr class=<?php echo $cls;?>>
+                                <td><?php echo $i; ?></td>
+                                <td><?php echo CHtml::link($list_1->first_name.'   '.$list_1->last_name,array('view','id'=>$list_1->id)) ?></td>
+
+                                <td><?php echo $list_1->relation ?></td>
+                                <td><?php echo $list_1->email ?></td>
+                               
+                              
+                                
+                                    
+                                <td class="listbx_subhdng"><?php echo CHtml::link(Yii::t('studentleavetype','Edit'), array('update','id'=>$list_1->id)); ?><span> |</span>
+                                                           
+                                <?php echo CHtml::link(Yii::t('studentleavetype','Delete'), array('delete','id'=>$list_1->id),array('confirm'=>'Are you sure you want to delete this?')); ?>
+
+                                    
+                                </td>                  
+                                </tr>
+								<?php
+                                if($cls=="even")
+                                {
+                                	$cls="odd" ;
+                                }
+                                else
+                                {
+                                	$cls="even"; 
+                                }
+                                $i++;
+							} 
+							?>
+                        </table>
+                        
+                        <div class="pagecon">
+                           
+                            
+                           
+                        <?php                                        
+                         /*
+                        
+
+$this->widget('CLinkPager', array(
+                              'currentPage'=>$pages->getCurrentPage(),
+                              'itemCount'=>$item_count,
+                              'pageSize'=>$page_size,
+                              'maxButtonCount'=>5,
+                              //'nextPageLabel'=>'My text >',
+                              'header'=>'',
+                            'htmlOptions'=>array
+('class'=>'pages'),
+                            ));*/
+?>
+                          
+                            
+                            
+                           
+                        </div> <!-- END div class="pagecon" 2 -->
+                        <div class="clear"></div>
+                        
+                    </div> <!-- END div class="tablebx" -->
+                    
+                    <?php 
+					}
+                    else
+                    {
+                    	echo '<div class="listhdg" align="center">'.Yii::t('students','Nothing Found!!').'</div>';	
+                    }?>
+                </div> <!-- END div class="list_contner" -->
+                <!-- END List Content -->
+                <br />
+                
+           
+            <!--</div> 
+            </div>-->
+            
+       
+    
+</body>
+<script>
+    var ch = $("#ch");
+$('body').click(function() {
+	$('#osload').hide();
+	$('#name').hide();
+	$('#admissionnumber').hide();
+	$('#batch').hide();
+	$('#cat').hide();
+	$('#pos').hide();
+	$('#grd').hide();
+	$('#gender').hide();
+	$('#marital').hide();
+	$('#bloodgroup').hide();
+	$('#nationality').hide();
+	if($("#dobtxt").val().length <=0)
+	{
+		$('#dob').hide();
+	}
+	if($("#admdatetxt").val().length <=0)
+	{
+		$('#admission').hide();
+	}
+	$('#status').hide();
+ 
+});
+
+$('.filterbxcntnt_inner').click(function(event){
+   event.stopPropagation();
+});
+
+$('.load_filter').click(function(event){
+   event.stopPropagation();
+});
+</script>
         <!-- Radio Box -->
         <div class="formCon_existng_g">
         
@@ -270,7 +444,7 @@ $this->breadcrumbs=array(
 			echo $this->renderPartial('_form', array('model'=>$model,'check_flag'=>$check_flag)); 
 		}
          ?>
- 	</div>
+ 	 </div> <!-- END div class="cont_right formWrapper" -->
     </td>
   </tr>
 </table>
