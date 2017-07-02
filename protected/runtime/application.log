@@ -3977,3 +3977,11 @@ Stack trace:
 #21 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
 #22 E:\wamp\www\sms\index.php(52): CApplication->run()
 #23 {main} REQUEST_URI=/sms/index.php?r=courses/electives/returnForm
+2017/07/02 10:01:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "waitinglist".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('waitinglist')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('waitinglist')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/batches/waitinglist&id=26
