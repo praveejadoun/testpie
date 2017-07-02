@@ -176,9 +176,9 @@ function rowdelete(id)
         'update'=>'#jobDialog123','type' =>'GET','data' => array( 'val1' =>$batch_1->id,'course_id'=>$posts_1->id ),'dataType' => 'text'),array('id'=>'showJobDialog12'.$batch_1->id,'class'=>'add')); 
 		 echo ''.CHtml::ajaxLink(
   "Delete", $this->createUrl('batches/remove'), array('success'=>'rowdelete('.$batch_1->id.')','type' =>'GET','data' => array( 'val1' =>$batch_1->id ),'dataType' => 'text'),array('confirm'=>"Are you sure?\n\n Note: All details (students, timetable, fees, exam) related to this batch will be deleted."));
- ?> <?php echo '  '.CHtml::link(Yii::t('Courses','Add Student'), array('/students/students/create','bid'=>$batch_1->id)).'</td>';
-					echo '</tr>';
-					echo '<div id="jobDialog123"></div>';
+ ?> <?php echo '  '.CHtml::link(Yii::t('Courses','Add Student'), array('/students/students/create','bid'=>$batch_1->id)).'<div id="jobDialog123"></div></td>';
+ echo '</tr>';
+					
 				}
 			   ?>
          </tbody>
@@ -213,9 +213,10 @@ function rowdelete(id)
 		 echo ''.CHtml::ajaxLink(
   "Delete",  $this->createUrl('subjects/remove'),  array('success'=>'rowdelete('.$subject_1->id.')','type' =>'GET','data' => array( 'val1' =>$subject_1->id ),'dataType' => 'text'),array('confirm'=>"Are you sure?\n\n Note: All details (students, timetable, fees, exam) related to this batch will be deleted."));
  ?> <?php //echo '  '.CHtml::link(Yii::t('Courses','Add Student'), array('/students/students/create','bid'=>$batch_1->id)).*/'</td>';
-					echo '</td>';
+echo '<div id="jobDialog123"></div>';					
+ echo '</td>';
                                         echo '</tr>';
-					echo '<div id="jobDialog123"></div>';
+					
 				}
 			   ?>
          </tbody>

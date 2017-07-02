@@ -172,13 +172,13 @@ if (!$model->isNewRecord)
         <div class="row">
             
                 <?php //echo $form->labelEx($model,Yii::t('Electives','Elective Group')); ?>
-                <?php echo $form->hiddenField($model,'elective_group_id'); ?>
+                <?php //echo $form->hiddenField($model,'elective_group_id'); ?>
                 <span id="success-Subjects_is_deleted"
               class="hid input-notification-success  success png_bg right"></span>
         <div>
             <small></small>
         </div>
-                <td><?php echo $form->error($model,'elective_group_id'); ?></td>
+                <td><?php //echo $form->error($model,'elective_group_id'); ?></td>
              
  
     </div>

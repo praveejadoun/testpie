@@ -253,7 +253,7 @@ if(Yii::app()->user->hasFlash('errorMessage')): ?>
 		<?php //echo $form->labelEx($model,'created_at'); ?>
          <?php  if(Yii::app()->controller->action->id == 'create')
 		{
-		 echo $form->hiddenField($model,'created_at',array('value'=>date('d-m-Y')));
+		 echo $form->hiddenField($model,'created_at',array('value'=>date('Y-m-d')));
 		}
 		else
 		{
@@ -265,9 +265,14 @@ if(Yii::app()->user->hasFlash('errorMessage')): ?>
 
 	<div class="row">
 		<?php //echo $form->labelEx($model,'updated_at'); ?>
-		<?php echo $form->hiddenField($model,'updated_at',array('value'=>date('d-m-Y'))); ?>
+		<?php echo $form->hiddenField($model,'updated_at',array('value'=>date('Y-m-d'))); ?>
 		<?php echo $form->error($model,'updated_at'); ?>
 	</div>
+        <div class="row">
+				<?php //echo $form->labelEx($model,'is_deleted'); ?>
+                <?php echo $form->hiddenField($model,'is_deleted'); ?>
+                <?php echo $form->error($model,'is_deleted'); ?>
+            </div>
 
 	
 </div>
@@ -290,16 +295,35 @@ else
 		<?php 
 		
 			//echo 'hi';
-			echo CHtml::submitButton($model->isNewRecord ? 'Emergency Contact »' : 'Save',array('class'=>'formbut')); 
+			echo CHtml::submitButton($model->isNewRecord ? 'Save and Add Another »' : 'Save',array('class'=>'formbut')); 
 		
 		?>
 </div>
+
+<div id="new_guardian" style="padding:0px 0 0 0px; text-align:right; <?php echo $display_new; ?>">
+		<?php 
+		
+			//echo 'hi';
+			echo CHtml::submitButton($model->isNewRecord ? 'Save and Continue »' : 'Save',array('class'=>'formbut')); 
+		
+		?>
+</div>
+<div id="new_guardian" style="padding:0px 0 0 0px; text-align:right; <?php echo $display_new; ?>">
+		<?php 
+		
+			//echo 'hi'; 
+			echo CHtml::linkButton('Next',array('class'=>'formbut',array('submit'=>CController::createUrl('/students/studentpreviousdatas/create',array('id'=>$guardian_id,'sid'=>$_REQUEST['id'])))) );
+		
+		?>
+</div>
+
 <div id="existing_guardian" style="padding:0px 0 0 0px; text-align:left; <?php echo $display_existing; ?>">
 		<?php 
 		
 			//echo $guardian_id;
 			echo CHtml::submitButton('Emergency Contact »',array('submit' =>CController::createUrl('/students/guardians/update',array('id'=>$guardian_id,'sid'=>$_REQUEST['id'])),'class'=>'formbut')); 
 		?>
+    
 </div>
 
 <?php $this->endWidget(); ?>

@@ -47,6 +47,27 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   if (restore) selObj.selectedIndex=0;
 }
 </script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.selecctall').click(function (event) {
+            if (this.checked) {
+                $('.ch1').each(function () {
+                    this.checked = true;
+                });
+            } else {
+                $('.ch1').each(function () {
+                    this.checked = false;
+                });
+            }
+        });
+
+    });
+
+</script>
+
+
 <body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
@@ -113,11 +134,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                         </ul>
                     </div> <!-- END div class="bttns_imprtcntact" -->
                     
-                    <div class="bttns_addstudent">
-                        <ul>
-                        	<li><?php echo CHtml::link(Yii::t('students','Add Student'), array('create'),array('class'=>'addbttn last')); ?></li>
-                        </ul>
-                    </div> <!-- END div class="bttns_addstudent" -->
+                    <!-- END div class="bttns_addstudent" -->
                     
                 </div> <!-- END div class="search_btnbx" -->
                 
@@ -881,7 +898,26 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                 <!-- END Alphabetic Sort -->
                 
                 <!-- List Content -->                                          
-                <div class="list_contner">
+                
+                    <div style="margin-top:20px; position:relative;">
+                        <div class="clear"></div>
+                        <div style="display: inline-block;margin-bottom: 14px;margin-top: 14px; width: 100%;">
+                        <div style="float:left;">
+                         <div class="bttns_addstudent">   
+                      <ul>
+                        	<li><?php echo CHtml::link(Yii::t('students','Add Student'), array('create'),array('class'=>'addbttn last')); ?></li>
+                                <li><?php echo CHtml::link(Yii::t('students','Delete All'),array('deleteall','id'=>$list),array('class'=>'addbttn last','confirm'=>'Are you sure you want to delete this?')); ?></li>
+
+                      </ul>
+                         </div>
+                         <!--    <div class="ea_pdf" style="top:0px; right:6px;">
+ <?php //echo CHtml::link('<img src="images/pdf-but.png">', array('Students/pdflist'),array('target'=>'_blank')); ?>
+	</div>-->
+                    </div> 
+                            
+                        </div>
+                    </div>
+                    <div class="list_contner">
                     <div class="clear"></div>
                     <?php 
 					if($list)
@@ -890,7 +926,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                     <div class="tablebx">  
                         <div class="pagecon">
 							<?php 
-                              $this->widget('CLinkPager', array(
+                             
+                               /* $this->widget('CLinkPager', array(
                               'currentPage'=>$pages->getCurrentPage(),
                               'itemCount'=>$item_count,
                               'pageSize'=>$page_size,
@@ -898,16 +935,23 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                               //'nextPageLabel'=>'My text >',
                               'header'=>'',
                             'htmlOptions'=>array('class'=>'pages'),
-                            ));?>
+                            ));*/?>
                         </div> <!-- End div class="pagecon" --> 
                                                               
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            
                             <tr class="tablebx_topbg">
+                               <td style="text-align:center">
+<!--                                    <div class="btn-group mailbox-checkall-buttons">
+                                        <input id="ch" class="chkbox checkall" name="ch1" onclick="checkall()" type="checkbox">
+                                    </div>-->
+                                </td>
                                 <td><?php echo Yii::t('students','Sl. No.');?></td>	
                                 <td><?php echo Yii::t('students','Student Name');?></td>
                                 <td><?php echo Yii::t('students','Admission No.');?></td>
                                 <td><?php echo Yii::t('students','Course/Batch');?></td>
                                 <td><?php echo Yii::t('students','Gender');?></td>
+                                <td><?php echo Yii::t('students','Action');?></td>
                                 <!--<td style="border-right:none;">Task</td>-->
                             </tr>
                             <?php 
@@ -927,6 +971,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                             {
 							?>
                                 <tr class=<?php echo $cls;?>>
+                                <td><?php  //echo $form->checkBox($model,'attribute',array('value' => $list_1->id,"class" => "checkbox1","onclick"=>"selectcheck()")); ?></td>    
                                 <td><?php echo $i; ?></td>
                                 <td><?php echo CHtml::link($list_1->first_name.'  '.$list_1->middle_name.'  '.$list_1->last_name,array('view','id'=>$list_1->id)) ?></td>
                                 <td><?php echo $list_1->admission_no ?></td>
@@ -958,6 +1003,13 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                                     ?>
                                 </td>
                                 
+                                    
+                                <td class="listbx_subhdng"><?php echo CHtml::link(Yii::t('students','Edit'), array('update','id'=>$list_1->id)); ?><span> |</span>
+                                                           
+                                <?php echo CHtml::link(Yii::t('students','Delete'), array('delete','id'=>$list_1->id),array('confirm'=>'Are you sure you want to delete this?')); ?>
+
+                                    
+                                </td>
                                 <!--<td style="border-right:none;">Task</td>-->
                                 </tr>
 								<?php
@@ -975,19 +1027,33 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                         </table>
                         
                         <div class="pagecon">
-                        <?php                                          
-                          $this->widget('CLinkPager', array(
-                          'currentPage'=>$pages->getCurrentPage(),
-                          'itemCount'=>$item_count,
-                          'pageSize'=>$page_size,
-                          'maxButtonCount'=>5,
-                          //'nextPageLabel'=>'My text >',
-                          'header'=>'',
-                        'htmlOptions'=>array('class'=>'pages'),
-                        ));?>
+                           
+                            
+                           
+                        <?php                                        
+                         
+                        
+
+$this->widget('CLinkPager', array(
+                              'currentPage'=>$pages->getCurrentPage(),
+                              'itemCount'=>$item_count,
+                              'pageSize'=>$page_size,
+                              'maxButtonCount'=>5,
+                              //'nextPageLabel'=>'My text >',
+                              'header'=>'',
+                            'htmlOptions'=>array
+('class'=>'pages'),
+                            ));
+?>
+                          
+                            
+                            
+                           
                         </div> <!-- END div class="pagecon" 2 -->
                         <div class="clear"></div>
+                        
                     </div> <!-- END div class="tablebx" -->
+                    
                     <?php 
 					}
                     else
@@ -997,14 +1063,18 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                 </div> <!-- END div class="list_contner" -->
                 <!-- END List Content -->
                 <br />
+                
             </div> <!-- END div class="cont_right formWrapper" -->
             <!--</div> 
             </div>-->
+            
         </td>
     </tr>
 </table>
+    
 </body>
 <script>
+    var ch = $("#ch");
 $('body').click(function() {
 	$('#osload').hide();
 	$('#name').hide();
@@ -1036,4 +1106,83 @@ $('.filterbxcntnt_inner').click(function(event){
 $('.load_filter').click(function(event){
    event.stopPropagation();
 });
+/*function checkall()
+{
+    
+	if($("#ch").is(":checked"))
+	{ 
+		$('.checkbox1').prop('checked', true);
+	}
+	else
+	{
+		$('.checkbox1').each(function() { //loop through each checkbox
+		   this.checked = false; //deselect all checkboxes with class "checkbox1"                       
+		});         
+	}
+}
+function selectcheck()
+{
+	var numberOfChecked = $('.checkbox1:checked').length; //count of all checked checkboxes with class "checkbox1"
+	var totalCheckboxes = $('.checkbox1:checkbox').length; //count of all textboxes with class "checkbox1"
+	if(numberOfChecked == totalCheckboxes)
+		ch.checked=true;
+	else
+		ch.checked=false;	
+}
+
+function delete_all()
+{
+	var numberOfChecked = $('.checkbox1:checked').length; //count of all checked checkboxes with class "checkbox1"
+	var totalCheckboxes = $('.checkbox1:checkbox').length; //count of all textboxes with class "checkbox1"
+	var notChecked = $('.checkbox1:not(":checked")').length;//totalCheckboxes - numberOfChecked;
+	
+	if(numberOfChecked > 0)
+	{		
+		var favorite = [];
+		$.each($("input[name='convs']:checked"), function(){            
+			favorite.push($(this).val());
+		});
+		var r = confirm("Are you sure ? Do you want to delete this?");
+		if(r==true){
+			$.ajax({
+				url:"/index.php?r=students/students/delete_all",
+				type:'POST',
+				data:{id:favorite, "YII_CSRF_TOKEN":"ce4e11b27b5c1977be8ce91f77ca6a90f8e3cda1"},
+				dataType:"json",
+				success:function(response){
+					if(response.status=="success"){
+						window.location.reload();
+					}
+					else{
+						alert("Error");
+					}
+				}
+			});
+		}
+		else
+		{
+		
+		return false;
+		}
+	}else{
+		alert("Please select atleast one Student");
+		return false;
+	}*/
+}
+</script>		</div><!-- content -->
+	</div>
+	<div class="span-5 last">
+		<div id="sidebar">
+				</div><!-- sidebar -->
+	</div>
+</div>
+    <div class="clear"></div>
+  </div>
+ </div>
+<script>
+    /*
+  window.intercomSettings = {
+    app_id: "jrgna4bh"
+  };*/
 </script>
+<script>//(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/jrgna4bh';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>

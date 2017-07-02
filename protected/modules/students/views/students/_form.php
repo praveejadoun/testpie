@@ -1,20 +1,22 @@
-<?php 
+<?php
 if(Yii::app()->controller->action->id=='create') 
 {
 	$config=Configurations::model()->findByPk(7);
 	$adm_no='';
 	$adm_no_1 = '';
-	if($config->config_value==1)
-	{
+	//if($config->config_value==1)
+	//{
 		$adm_no	= Students::model()->findAll(array('order' => 'id DESC','limit' => 1));
+                //echo "<pre>";
+                //print_r($adm_no);
 		$adm_no_1=$adm_no[0]['id']+1;
-	}
+	//}
 	?>
 	<div class="captionWrapper">
         <ul>
             <li><h2 class="cur">Student Details</h2></li>
-            <li><h2>Parent Details</h2></li>
-            <li><h2>Emergency Contact</h2></li>
+            <li><h2>Guardian Details</h2></li>
+           
             <li><h2>Previous Details</h2></li>
             <li class="last"><h2>Student Profile</h2></li>
         </ul>
@@ -26,6 +28,16 @@ else
 	echo '<br><br>';
 	$adm_no	= Students::model()->findByAttributes(array('id' => $_REQUEST['id']));
 	$adm_no_1 = $adm_no->admission_no;
+?>
+        <div class="captionWrapper" style="margin: -30px 0 20px 0px;">
+        <ul>
+            <li><h2 class="cur">Student Details</h2></li>
+            <li><h2><?php echo CHtml::link(Yii::t('students','Guardian Details'), array('guardians/create','id' => $_REQUEST['id'],'class'=>cur)); ?></h2></li>
+            <li><h2><?php echo CHtml::link(Yii::t('students','Previous Details'), array('studentpreviousdatas/create','id' => $_REQUEST['id'],'class'=>cur)); ?></h2></li>
+            <li class="last"><h2><?php echo CHtml::link(Yii::t('students','Student Documents'), array('studentdocument/create','id' => $_REQUEST['id'],'class'=>cur)); ?></h2></li>
+        </ul>
+	</div>
+<?php
 }
 ?>
 
@@ -51,9 +63,19 @@ else
                 <tr>
                     <td align="right"><?php echo $form->labelEx($model,Yii::t('students','admission_no')); ?></td>
                     <td style="padding-left:8px;">
-						<?php echo $form->textField($model,'admission_no',array('size'=>20,'maxlength'=>255,'value'=>$adm_no_1,'disabled'=>true,)); 
-                        echo $form->hiddenField($model,'admission_no',array('value'=>$adm_no_1)); ?>
-                        <?php echo $form->error($model,'admission_no'); ?>
+                      <?php  if(Yii::app()->controller->action->id=='create') 
+                        {
+						 //echo $form->textField($model,'admission_no',array('size'=>20,'maxlength'=>255,'value'=>$adm_no_1)); 
+                        echo $form->hiddenField($model,'admission_no',array('value'=>$adm_no_1)); 
+                         //echo $form->error($model,'admission_no'); 
+                        }
+                        else
+                        {
+                         echo $form->textField($model,'admission_no',array('size'=>20,'maxlength'=>255,'value'=>$adm_no_1,'disabled'=>true)); 
+                         //echo $form->hiddenField($model,'admission_no',array('value'=>$adm_no_1)); 
+                        }
+                        
+                     ?>
                     </td>
                     <!--<td><input name="" type="checkbox"  value="" /></td>
                     <td><input name="" type="text" style="width:40px;" /></td>-->
@@ -462,6 +484,6 @@ else
     </div><!-- form -->
     <div class="clear"></div>
     <div style="padding:0px 0 0 0px; text-align:left">
-    	<?php echo CHtml::submitButton($model->isNewRecord ? 'Parent Details »' : 'Save',array('class'=>'formbut')); ?>
+    	<?php echo CHtml::submitButton($model->isNewRecord ? 'Guardian Details »' : 'Save',array('class'=>'formbut')); ?>
     </div>
 <?php $this->endWidget(); ?>
