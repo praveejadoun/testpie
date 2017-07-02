@@ -25,5 +25,4 @@ class StudentsModule extends CWebModule
 		}
 		else
 			return false;
-	}
-}
+	}}
