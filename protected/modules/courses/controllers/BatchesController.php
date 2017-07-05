@@ -54,7 +54,8 @@ class BatchesController extends RController
 			'model'=>$this->loadModel($id),
 		));
 	}
-
+        
+      
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -128,6 +129,11 @@ class BatchesController extends RController
 		$this->render('update',array(
 			'model'=>$model,
 		));
+	}
+        public function actionElectives() 
+	{                                    
+		 
+		 $this->render('electives'); 
 	}
 	public function actionManage() 
 	{                                    

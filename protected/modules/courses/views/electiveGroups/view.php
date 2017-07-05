@@ -30,11 +30,11 @@ $this->breadcrumbs=array(
 <div class="tableinnerlist" style="padding-right:25px;">
 <table width="100%" border="0" cellspacing="1" cellpadding="0">
   <tr>
-    <td><?php echo Yii::t('Electivegroups','Elective Group Name');?></td>
+    <td><?php echo Yii::t('Electivegroups','Subject Name');?></td>
     <td><?php echo $model->name; ?></td>
   </tr>
     <tr>
-    <td><?php echo Yii::t('Electivegroups','Elective Group Code');?></td>
+    <td><?php echo Yii::t('Electivegroups','Subject Code');?></td>
     <td><?php echo $model->code; ?></td>
   </tr>
     <tr>
@@ -44,9 +44,9 @@ $this->breadcrumbs=array(
 	echo $posts->name;
 	?></td>
   </tr>
-    <tr>
-    <td><?php echo Yii::t('Electivegroups','Max Weekly Classes');?></td>
-    <td><?php echo $model->max_weekly_classes; ?></td>
-  </tr>
+    <!--<tr>
+    <td><?php //echo Yii::t('Electivegroups','Max Weekly Classes');?></td>
+    <td><?php //echo $model->max_weekly_classes; ?></td>
+  </tr>-->
 </table>
 </div>

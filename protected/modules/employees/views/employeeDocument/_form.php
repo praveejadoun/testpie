@@ -1,8 +1,8 @@
 <div class="captionWrapper">
 	<ul>
-            <li><h2  class="cur"><a href="#">Employee Details</a></h2></li>
+            <li><h2  ><a href="#">Employee Details</a></h2></li>
             <li><h2><a href="#">Employee Contact Details</a></h2></li>
-            <li><h2><a href="#">Employee Documents</a></h2></li>
+            <li><h2 class="cur"><a href="#">Employee Documents</a></h2></li>
     </ul>
 </div>
 <?php $form=$this->beginWidget('CActiveForm', array(

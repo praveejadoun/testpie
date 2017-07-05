@@ -62,7 +62,7 @@ Yii::app()->clientScript->registerScript(
     <?php echo CHtml::link('<span>'.Yii::t('Batch','Electives').'</span>', array('/courses/electives','id'=>$_REQUEST['id']),array('class'=>'addbttn last'));?>
     </li>
     <li>
-    <?php echo CHtml::link('<span>'.Yii::t('Batch','Add Student').'</span>', array('/students/students/create','bid'=>$_REQUEST['id']),array('class'=>'addbttn last'));?>
+    <?php echo CHtml::link('<span>'.Yii::t('Batch','Add Student').'</span>', array('/courses/batches/electives','id'=>$_REQUEST['id']),array('class'=>'addbttn last'));?>
     </li>
     
     </ul>

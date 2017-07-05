@@ -354,7 +354,7 @@ $(document).click(function() {
         
          <li>
         <?php     
-                  if(Yii::app()->controller->action->id=='studentelectives' or Yii::app()->controller->id=='electives' or Yii::app()->controller->id=='electiveGroups')
+                  if(Yii::app()->controller->action->id=='studentelectives' or Yii::app()->controller->id=='electives' or Yii::app()->controller->id=='electiveGroups' or Yii::app()->controller->action->id=='electives')
                   {
                   echo CHtml::link(Yii::t('Batch','Electives'), array('batches/studentelectives','id'=>$_REQUEST['id']),array('class'=>'active'));
                   }
