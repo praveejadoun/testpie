@@ -26,7 +26,7 @@ $this->breadcrumbs=array(
     
     </div>-->
     <h1><?php echo Yii::t('employees','Add New Employee');?></h1>
-    <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+    <?php echo $this->renderPartial('_form', array('model'=>$model,'val1'=>$_GET['id'])); ?>
 
     </div>
     
