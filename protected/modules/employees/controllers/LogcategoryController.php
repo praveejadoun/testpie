@@ -61,16 +61,16 @@ class LogcategoryController extends RController
 	 */
 	public function actionCreate()
 	{
-		$model=new EmployeeAttendances;
+		$model=new EmployeeLogCategory;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['EmployeeAttendances']))
+		if(isset($_POST['EmployeeLogCategory']))
 		{
-			$model->attributes=$_POST['EmployeeAttendances'];
+			$model->attributes=$_POST['EmployeeLogCategory'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('index'));
 		}
 
 		$this->render('create',array(
@@ -123,11 +123,11 @@ class LogcategoryController extends RController
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['EmployeeAttendances']))
+		if(isset($_POST['EmployeeLogCategory']))
 		{
-			$model->attributes=$_POST['EmployeeAttendances'];
+			$model->attributes=$_POST['EmployeeLogCategory'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('index'));
 		}
 
 		$this->render('update',array(
@@ -142,25 +142,24 @@ class LogcategoryController extends RController
 	 */
 	public function actionDelete($id)
 	{
-		if(Yii::app()->request->isPostRequest)
-		{
+		
 			// we only allow deletion via POST request
 			$this->loadModel($id)->delete();
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			if(!isset($_GET['ajax'])){
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	}
+		{	throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+        }}
 
 	/**
 	 * Lists all models.
 	 */
 	public function actionIndex()
 	{
-		$model=new EmployeeAttendances;
+		$model=new EmployeeLogCategory;
 		$this->render('index',array(
 			'model'=>$model,
 		));
@@ -188,7 +187,7 @@ class LogcategoryController extends RController
 	 */
 	public function loadModel($id)
 	{
-		$model=EmployeeAttendances::model()->findByPk($id);
+		$model=EmployeeLogCategory::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
