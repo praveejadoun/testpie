@@ -7,6 +7,7 @@
  * @property integer $id
  * @property integer $employee_id
  * @property integer $subject_id
+ * @property integer $elective_id
  */
 class EmployeesSubjects extends CActiveRecord
 {
@@ -35,10 +36,10 @@ class EmployeesSubjects extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('employee_id, subject_id', 'numerical', 'integerOnly'=>true),
+			array('employee_id, subject_id, elective_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, employee_id, subject_id', 'safe', 'on'=>'search'),
+			array('id, employee_id, subject_id, elective_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,6 +63,7 @@ class EmployeesSubjects extends CActiveRecord
 			'id' => 'ID',
 			'employee_id' => 'Employee',
 			'subject_id' => 'Subject',
+                        'elective_id'=>'Elective'
 		);
 	}
 
@@ -79,6 +81,7 @@ class EmployeesSubjects extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('employee_id',$this->employee_id);
 		$criteria->compare('subject_id',$this->subject_id);
+                $criteria->compaare('elective_id'.$this->elective_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -103,4 +106,26 @@ class EmployeesSubjects extends CActiveRecord
 			}
 			return $results;
 	}
+        
+        public function Employeenotassignedelective($id,$elect)
+	{
+		    $results=array();
+			$emp=Employees::model()->findAllByAttributes(array('employee_department_id'=>$id));
+			if($emp!=NULL)
+			{
+				$i=0;
+				foreach($emp as $emp1)
+				{
+					if(EmployeesSubjects::model()->findByAttributes(array('employee_id'=>$emp1->id,'elective_id'=>$elect))==NULL)
+					{
+						$results[$i] = $emp1;
+						$i++;
+					}
+					
+				}
+			}
+			return $results;
+	}
+        
+        
 }
