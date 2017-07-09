@@ -1,6 +1,6 @@
 <?php
 
-class EmployeesController extends RController
+class EmployeeDocumentController extends RController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -61,72 +61,34 @@ class EmployeesController extends RController
 	 */
 	public function actionCreate()
 	{
-      		$model=new Employees;
+      		$model=new EmployeeDocument;
 
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 
-		if(isset($_POST['Employees']))
+		if(isset($_POST['EmployeeDocument']))
 		{
 			
-			$model->attributes=$_POST['Employees'];
-			$list = $_POST['Employees'];
+			$model->attributes=$_POST['EmployeeDocument'];
+			$list = $_POST['EmployeeDocument'];
 			
 			/*
 			* Checking whether date of birth is null
 			*/
-			if(!$list['date_of_birth']){
-				$dob="";
-			}
-			else{
-				$dob=date('Y-m-d',strtotime($list['date_of_birth']));
-			}
 			
-			/*
-			* If experience is given in years or in months, experience detail field become mandatory.
-			*/
-			if (($list['experience_year']&&$list['experience_year']!='0')||($list['experience_month']&&$list['experience_month']!='0')) {
-					$model->setScenario('hasExperience');
-			}
-			//if($model->save())
-			//{
-				$model->employee_number = $list['employee_number'];
-				$model->joining_date = date('Y-m-d',strtotime($list['joining_date']));
-				$model->first_name = $list['first_name'];
-				$model->middle_name = $list['middle_name'];
-				$model->last_name = $list['last_name'];
-				$model->gender = $list['gender'];
-				$model->date_of_birth = $dob;
-				$model->employee_department_id = $list['employee_department_id'];
-				$model->employee_position_id = $list['employee_position_id'];
-				$model->employee_category_id = $list['employee_category_id'];
-				$model->employee_grade_id = $list['employee_grade_id'];
-				$model->job_title = $list['job_title'];
-				$model->qualification = $list['qualification'];
-				$model->status = $list['status'];
-				$model->experience_year = $list['experience_year'];
-				$model->experience_month = $list['experience_month'];
-				$model->experience_detail = $list['experience_detail'];
-				$model->marital_status = $list['marital_status'];
-				$model->children_count = $list['children_count'];
-				
-				$model->father_name = $list['father_name'];
-				$model->mother_name = $list['mother_name'];
-				$model->husband_name = $list['husband_name'];
-				$model->blood_group = $list['blood_group'];
-				$model->nationality_id = $list['nationality_id'];
-				if($file=CUploadedFile::getInstance($model,'photo_data'))
+				$model->document_name = $list['document_name'];
+				if($file=CUploadedFile::getInstance($model,'document_data'))
 					 {
-					$model->photo_file_name=$file->name;
-					$model->photo_content_type=$file->type;
-					$model->photo_file_size=$file->size;
-					$model->photo_data=file_get_contents($file->tempName);
+					$model->document_file_name=$file->name;
+					$model->document_content_type=$file->type;
+					$model->document_file_size=$file->size;
+					$model->document_data=file_get_contents($file->tempName);
 					  }
 				
 				
 				if($model->save())
 				{
-				$this->redirect(array('create2','id'=>$model->id));
+				$this->redirect(array('employees/view','id'=>$_REQUEST['id']));
 				}
 			//}
 		}

@@ -130,7 +130,7 @@ $(document).click(function() {
                                         <li class="mark"><?php echo CHtml::link(Yii::t('Batch','Add Elective<span>for add new elective</span>'), array('/courses/electives','id'=>$_REQUEST['id'])) ?></li>
                    	<li class="mark"><?php echo CHtml::link(Yii::t('Batch','Mark Attendance<span>for add leave</span>'), array('/courses/studentAttentance','id'=>$_REQUEST['id'])) ?></li>
                                         <li class="addteach"><?php echo CHtml::ajaxLink(Yii::t('Batch','Assign Teacher<span>assign class teacher</span>'),$this->createUrl('batches/addupdate'),array('onclick'=>'$("#jobDialog123").dialog("open"); return false;',
-                                                                'update'=>'#jobDialog123','type' =>'GET','data' => array( 'val1' =>$batch->id,'course_id'=>$batch->course_id ),'dataType' => 'text'),array('id'=>'showJobDialog12'.$batch->id,'class'=>'add'));?></li>
+                                                                'update'=>'#jobDialog123','type' =>'GET','data' => array( 'val1' =>$batch->id,'course_id'=>$batch->course_id ),'dataType' => 'text'),array('id'=>'showJobDialog12'.$batch->id,'class'=>'add'));?><div id="jobDialog123"></div></li>
 				   	<li class="promote"><?php echo CHtml::link(Yii::t('Batch','Promote Batch<span>for promote a batch</span>'), array('batches/promote_popup','id'=>$_REQUEST['id'])) ?></li>
                      <?php if($batch->is_active=='1')
 					{?>
@@ -354,7 +354,7 @@ $(document).click(function() {
         
          <li>
         <?php     
-                  if(Yii::app()->controller->action->id=='studentelectives' or Yii::app()->controller->id=='electives' or Yii::app()->controller->id=='electiveGroups')
+                  if(Yii::app()->controller->action->id=='studentelectives' or Yii::app()->controller->id=='electives' or Yii::app()->controller->id=='electiveGroups' or Yii::app()->controller->action->id=='electives')
                   {
                   echo CHtml::link(Yii::t('Batch','Electives'), array('batches/studentelectives','id'=>$_REQUEST['id']),array('class'=>'active'));
                   }

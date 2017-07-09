@@ -77,6 +77,8 @@ $del_title=Yii::t('admin_subjects', 'Delete Confirmation');
  $del=Yii::t('admin_subjects', 'Delete');
  $cancel=Yii::t('admin_subjects', 'Cancel');
    ?>
+        <?php $posts=ElectiveGroups::model()->findByAttributes(array('id'=>$model->elective_group_id));
+	?>
 <?php
     $this->widget('zii.widgets.grid.CGridView', array(
          'id' => 'subjects-grid',

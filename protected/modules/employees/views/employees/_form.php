@@ -1,9 +1,54 @@
+<?php
+if(Yii::app()->controller->action->id=='create') 
+{
+	$config=Configurations::model()->findByPk(7);
+	$employee_no='';
+	$employee_no_1 = '';
+	//if($config->config_value==1)
+	//{
+		$employee_no	= Employees::model()->findAll(array('order' => 'id DESC','limit' => 1));
+                //echo "<pre>";
+                //print_r($adm_no);
+		$employee_no_1=$employee_no[0]['id']+1;
+	//}
+	?>
+	<div class="captionWrapper">
+        <ul>
+            <li><h2 class="cur">Employee Details</h2></li>
+            <li><h2>Employee Contact Details</h2></li>
+           
+            <li><h2>Employee Documents</h2></li>
+            
+        </ul>
+	</div>
+<?php  
+}
+else
+{
+	echo '<br><br>';
+	$employee_no	= Employees::model()->findByAttributes(array('id' => $_REQUEST['id']));
+	$emloyee_no_1 = $employee_no->employee_number;
+?>
+        <div class="captionWrapper" style="margin: -30px 0 20px 0px;">
+        <ul>
+            <li><h2 class="cur">Employee Details</h2></li>
+            <li><h2><?php echo CHtml::link(Yii::t('Employees','Employee Contact Details'), array('employees/update2','id' => $_REQUEST['id'])); ?></h2></li>
+            <li><h2><?php echo CHtml::link(Yii::t('Employees','Employee Documents'), array('employeedocument/create','id' => $_REQUEST['id'])); ?></h2></li>
+           
+        </ul>
+	</div>
+<?php
+}
+?>
+
+<!--
 <div class="captionWrapper">
 	<ul>
-    	<li><h2  class="cur">Employee Details</h2></li>
-        <li><h2>Employee Contact Details</h2></li>
+            <li><h2  class="cur"><a href="#">Employee Details</a></h2></li>
+            <li><h2><a href="#">Employee Contact Details</a></h2></li>
+            <li><h2><a href="#">Employee Documents</a></h2></li>
     </ul>
-</div>
+</div>-->
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'employees-form',
 	'enableAjaxValidation'=>false,

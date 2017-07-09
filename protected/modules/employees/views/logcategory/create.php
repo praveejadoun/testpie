@@ -1,8 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Employee Departments'=>array('admin'),
-	$model->name=>array('view','id'=>$model->id),
-	'Update',
+	'Courses'=>array('/courses'),
+	'Create',
 );
 
 ?>
@@ -15,10 +14,12 @@ $this->breadcrumbs=array(
     </td>
     <td valign="top">
     <div class="cont_right formWrapper">
-<h1><?php echo Yii::t('employees','Update Department');?></h1><br />
+
+<h1><?php echo Yii::t('Logcategory','Create Log Category');?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
-</div>
+
+ 	</div>
     </td>
   </tr>
 </table>

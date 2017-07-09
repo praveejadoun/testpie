@@ -111,6 +111,17 @@ class EmployeesSubjectsController extends RController
 		
 	}
 
+        public function actionDeleterowelective()
+	{
+
+		$postRecord = EmployeesSubjects::model()->findByPk($_REQUEST['id']);
+		$postRecord->delete();
+		 Yii::app()->user->setFlash('notification','Data Saved Successfully');
+		$this->redirect(array('create','bid'=>$_REQUEST['bid'],'elect'=>$_REQUEST['elect'],'dep'=>$_REQUEST['dep']));
+		
+	}
+        
+        
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
@@ -152,6 +163,18 @@ class EmployeesSubjectsController extends RController
 		
 	}
 
+        public function actionAssignElective()
+	{
+	$model = new EmployeesSubjects;
+
+	$model->employee_id = $_REQUEST['emp_id_1'];
+	$model->elective_id = $_REQUEST['elect'];
+	$model->save();
+	$this->redirect(array('create','bid'=>$_REQUEST['bid'],'elect'=>$_REQUEST['elect'],'dep'=>$_REQUEST['dep']));
+		
+	}
+        
+        
 	/**
 	 * Manages all models.
 	 */

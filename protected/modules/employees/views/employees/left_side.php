@@ -31,7 +31,7 @@
 						                
 					array('label'=>''.Yii::t('employees','Create Employee').'<span>'.Yii::t('employees','Add New Employee Details').'</span>',  'url'=>array('employees/create'),'linkOptions'=>array('class'=>'sl_ico' ),'active'=> (Yii::app()->controller->id=='employees' and (Yii::app()->controller->action->id=='create' or Yii::app()->controller->action->id=='create2')), 'itemOptions'=>array('id'=>'menu_1') 
 					       ),
-                                        array('label'=>''.Yii::t('employees','Manage Log Category').'<span>'.Yii::t('employees','Manage Teacher Log Category').'</span>',  'url'=>array('logcategory/index'),'linkOptions'=>array('class'=>'sl_ico' ),'active'=> (Yii::app()->controller->id=='logcategory' and (Yii::app()->controller->action->id=='index' or Yii::app()->controller->action->id=='create2')), 'itemOptions'=>array('id'=>'menu_1') 
+                                        array('label'=>''.Yii::t('employees','Manage Log Category').'<span>'.Yii::t('employees','Manage Teacher Log Category').'</span>',  'url'=>array('logcategory/index'),'linkOptions'=>array('class'=>'sl_ico' ),'active'=> (Yii::app()->controller->id=='logcategory' and (Yii::app()->controller->action->id=='index' or Yii::app()->controller->action->id=='create' or Yii::app()->controller->action->id=='update')), 'itemOptions'=>array('id'=>'menu_1') 
 					       ),
 						   array('label'=>''.'<h1>'.Yii::t('employees','Employee Leave Management').'</h1>'), 
 					

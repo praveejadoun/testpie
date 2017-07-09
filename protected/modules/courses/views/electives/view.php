@@ -27,14 +27,14 @@ $this->breadcrumbs=array(
 <div class="tableinnerlist" style="padding-right:25px;">
 <table width="100%" border="0" cellspacing="1" cellpadding="0">
   <tr>
-    <td><?php echo Yii::t('Electives','Name');?></td>
+    <td><?php echo Yii::t('Electives','Subject Name');?></td>
     <td><?php echo $model->name; ?></td>
   </tr>
    
     <tr>
     <td><?php echo Yii::t('Electives','Elective Group');?></td>
     <td><?php
-    $posts=ElectiveGroups::model()->findByAttributes(array('id'=>$model->id));
+    $posts=ElectiveGroups::model()->findByAttributes(array('id'=>$model->elective_group_id));
 	echo $posts->name;
 	?></td>
   </tr>
