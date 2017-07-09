@@ -21,7 +21,7 @@ $model;
 		$criteria->condition='is_deleted=:is_del';
 		$criteria->params=array(':is_del'=>0);
 	?>
-    <td><div><?php echo $form->dropDownList($model,'course_id',CHtml::listData(Courses::model()->findAll($criteria),'id','concatened'),array('selected' =>'course_name')); ?>
+    <td><div><?php echo $form->dropDownList($model,'course_id',CHtml::listData(Courses::model()->findAll($criteria),'id','concatened'),array('prompt' =>'select')); ?>
 		<?php echo $form->error($model,'course_id'); ?></div></td>
   
    

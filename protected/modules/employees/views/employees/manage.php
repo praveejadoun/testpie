@@ -222,7 +222,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <li><div onClick="hide('admissionnumber')" style="cursor:pointer;"><?php echo Yii::t('employees','EmployeeNumber');?></div>
 <div id="admissionnumber" style="display:none; width:210px; padding-top:0px; height:30px" class="drop" >
 <div class="droparrow" style="left:10px;"></div>
-<input type="search" placeholder="search" name="employeenumber" value="<?php echo isset($_GET['employee_number']) ? CHtml::encode($_GET['employee_number']) : '' ; ?>" />
+<input type="search" placeholder="search" name="employeenumber" value="<?php echo isset($_GET['employeenumber']) ? CHtml::encode($_GET['employeenumber']) : '' ; ?>" />
 <input type="submit" value="Apply" />
 </div>
 </li>
@@ -422,10 +422,10 @@ echo CHtml::activeDropDownList($model,'status',array('1' => 'Present', '0' => 'F
     <?php } ?>
     
     
-    <?php if(isset($_REQUEST['Employees']['employee_number']) and $_REQUEST['Employees']['employee_number']!=NULL)
+    <?php if(isset($_REQUEST['employeenumber']) and $_REQUEST['employeenumber']!=NULL)
     { 
 	    $j++; ?>
-    <li>Employee Number : <?php echo $_REQUEST['Employees']['employee_number']?><a href="<?php echo Yii::app()->request->getUrl().'&Employees[employee_number]='?>"></a></li>
+    <li>Employee Number : <?php echo $_REQUEST['employeenumber']?><a href="<?php echo Yii::app()->request->getUrl().'&employee_number='?>"></a></li>
     <?php } ?>
     
     
@@ -940,6 +940,7 @@ else
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
     
   <tr class="tablebx_topbg">
+      <td></td>
     <td><?php echo Yii::t('employees','Sl. No.');?></td>	
     <td><?php echo Yii::t('employees','Employee Name');?></td>
     <td><?php echo Yii::t('employees','Employee No.');?></td>
@@ -965,6 +966,7 @@ else
   <?php foreach($list as $list_1)
 	{ ?>
  <tr class=<?php echo $cls;?> id=<?php echo $i;?>>
+     <td></td>
     <td><?php echo $i; ?></td>
     <td><?php echo CHtml::link($list_1->first_name.'  '.$list_1->middle_name.'  '.$list_1->last_name,array('view','id'=>$list_1->id)) ?></td>
     <td><?php echo $list_1->employee_number ?></td>

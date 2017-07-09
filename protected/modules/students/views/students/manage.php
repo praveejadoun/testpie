@@ -113,11 +113,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                         </ul>
                     </div> <!-- END div class="bttns_imprtcntact" -->
                     
-                    <div class="bttns_addstudent">
-                        <ul>
-                        	<li><?php echo CHtml::link(Yii::t('students','Add Student'), array('create'),array('class'=>'addbttn last')); ?></li>
-                        </ul>
-                    </div> <!-- END div class="bttns_addstudent" -->
+                 
                     
                 </div> <!-- END div class="search_btnbx" -->
                 
@@ -880,7 +876,25 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                 </div> <!-- END div class="list_contner_hdng" -->
                 <!-- END Alphabetic Sort -->
                 
-                <!-- List Content -->                                          
+                <!-- List Content -->   
+                    <div style="margin-top:20px; position:relative;">
+                        <div class="clear"></div>
+                        <div style="display: inline-block;margin-bottom: 14px;margin-top: 14px; width: 100%;">
+                        <div style="float:left;">
+                         <div class="bttns_addstudent">   
+                      <ul>
+                        	<li><?php echo CHtml::link(Yii::t('employees','Add Student'), array('create'),array('class'=>'addbttn last')); ?></li>
+                                <li><?php echo CHtml::link(Yii::t('employees','Delete All'),array('deleteall',id=>$list),array('class'=>'addbttn last','confirm'=>'Are you sure you want to delete this?')); ?></li>
+
+                      </ul>
+                         </div>
+                             <div class="ea_pdf" style="top:0px; right:6px;">
+ <?php echo CHtml::link('<img src="images/pdf-but.png">', array('employees/printpdf1'),array('target'=>'_blank')); ?>
+	</div>
+                    </div> 
+                            
+                        </div>
+                    </div>
                 <div class="list_contner">
                     <div class="clear"></div>
                     <?php 
