@@ -6059,3 +6059,17 @@ Stack trace:
 =======
 >>>>>>> 9ea8e7bd0c43f35005168e815797fba9ba817012
 >>>>>>> 2a4c71f2863e7fbe440a5bfef0a3e84fabdb86eb
+2017/07/09 07:21:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "waitinglist".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('waitinglist')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('waitinglist')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('courses/batches...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=courses/batches/waitinglist&id=26
+2017/07/09 07:31:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "students/employees/printpdf1".' in E:\wamp\www\sms\core\web\CWebApplication.php:281
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('students/employ...')
+#1 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\wamp\www\sms\index.php(52): CApplication->run()
+#3 {main} REQUEST_URI=/sms/index.php?r=students/employees/printpdf1
