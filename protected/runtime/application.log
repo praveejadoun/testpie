@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 2017/06/28 07:26:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
 Stack trace:
 #0 E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php(141): SubjectController->loadModel('102')
@@ -6037,6 +6039,7 @@ Stack trace:
 #24 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
 #25 E:\wamp\www\sms\index.php(52): CApplication->run()
 #26 {main} REQUEST_URI=/sms/index.php?r=employees/employeesSubjects/create
+<<<<<<< HEAD
 2017/07/09 06:37:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "waitinglist".' in E:\wamp\www\sms\core\web\CController.php:477
 Stack trace:
 #0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('waitinglist')
@@ -6053,3 +6056,6 @@ Stack trace:
 #3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
 #4 E:\wamp\www\sms\index.php(52): CApplication->run()
 #5 {main} REQUEST_URI=/sms/index.php?r=courses/batches/waitinglist&id=26
+=======
+>>>>>>> 9ea8e7bd0c43f35005168e815797fba9ba817012
+>>>>>>> 2a4c71f2863e7fbe440a5bfef0a3e84fabdb86eb
