@@ -1,5 +1,12 @@
 <!--upgrade_div_starts-->
-
+<div class="upgrade_bx">
+<!--	<div class="up_banr_imgbx"></div>
+	<div class="up_banr_firstbx">
+   	  <h1></h1>
+	  
+    </div>-->
+	
+</div>
 <!--upgrade_div_ends-->
 <div id="othleft-sidebar">
 <!--<div class="lsearch_bar">
@@ -29,33 +36,33 @@
 			
 						array('label'=>''.Yii::t('students','List Guardians').'<span>'.Yii::t('students','All Guardians Details').'</span>', 'url'=>array('guardians/admin'),'active'=> ((Yii::app()->controller->id=='guardians') && (in_array(Yii::app()->controller->action->id,array('update','view','admin','index'))) ? true : false),'linkOptions'=>array('id'=>'menu_2','class'=>'lbook_ico')),
 						
-						array('label'=>t('Create New Guardian'), 'url'=>'#',
+						/*array('label'=>t('Create New Guardian'), 'url'=>'#',
 							'active'=> ((Yii::app()->controller->id=='guardians') && (in_array(Yii::app()->controller->action->id,array('update','view','admin','index'))) ? true : false)                                                                                           
 						      ),
 							  array('label'=>t('Associate Guardian'), 'url'=>'#',
 							'active'=> ((Yii::app()->controller->id=='guardians') && (in_array(Yii::app()->controller->action->id,array('update','view','admin','index'))) ? true : false)                                                                                           
-						      ),
+						      ),*/
 						                                                                                    
 					    
 					    
 					       
 					    
-					array('label'=>''.t('Attendance Management<span>Manage your Dashboard</span>'), 'url'=>'javascript:void(0);','linkOptions'=>array('id'=>'menu_3','class'=>'menu_3'), 'itemOptions'=>array('id'=>'menu_3'),
+					/*array('label'=>''.t('Attendance Management<span>Manage your Dashboard</span>'), 'url'=>'javascript:void(0);','linkOptions'=>array('id'=>'menu_3','class'=>'menu_3'), 'itemOptions'=>array('id'=>'menu_3'),
 					       'items'=>array(
 						array('label'=>t('Attendance Register'), 'url'=>'#'),
 						array('label'=>t('Attendance Report'), 'url'=>'#',
 								'active'=> ((Yii::app()->controller->id=='bemenu') && (in_array(Yii::app()->controller->action->id,array('update','view','admin','index'))) ? true : false)),
 						
 						
-					    )),
+					    )),*/
 						 
 					
 					
-						array('label'=>t('Manage Additional Fields'), 'url'=>'#','active'=>Yii::app()->controller->id=='studentCategories' ? true : false),
+						//array('label'=>t('Manage Additional Fields'), 'url'=>'#','active'=>Yii::app()->controller->id=='studentCategories' ? true : false),
 						
 						
-						array('label'=>'Like/Rating', 'url'=>array('/like/admin')),
-						array('label'=>'Survey', 'url'=>array('/survey/admin')),
+						//array('label'=>'Like/Rating', 'url'=>array('/like/admin')),
+						//array('label'=>'Survey', 'url'=>array('/survey/admin')),
 						     
 						
 					  
@@ -64,7 +71,7 @@
 				),
 			)); 
 			
-			echo CHtml::ajaxLink(
+			/*echo CHtml::ajaxLink(
 	'Students',          // the link body (it will NOT be HTML-encoded.)
 	array('/site/explorer'), // the URL for the AJAX request. If empty, it is assumed to be the current URL.
 	array(
@@ -113,4 +120,4 @@
             
         });
     </script>
-
+*/
