@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 2017/06/28 07:26:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in E:\wamp\www\sms\protected\modules\courses\controllers\SubjectController.php:104
 Stack trace:
@@ -6073,3 +6074,5 @@ Stack trace:
 #1 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
 #2 E:\wamp\www\sms\index.php(52): CApplication->run()
 #3 {main} REQUEST_URI=/sms/index.php?r=students/employees/printpdf1
+=======
+>>>>>>> dbcaacb5f33cee0f7367e59356fbe596c6aca40a
