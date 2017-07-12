@@ -6092,3 +6092,29 @@ tr.mailbx_con_tble_bx > td > div {
     border-right: 1px #d1e0ea solid;
     border-left: 1px #d1e0ea solid;
 }
+.tt-wrapper {
+    padding: 0px;
+    margin: 0px;
+}
+.tt-wrapper li {
+    float: left;
+    display: inline-block;
+    display: -webkit-inline-box;
+    list-style: none;
+}
+.tt-wrapper li .tt-download {
+    background-position: -93px 0px;
+}
+.tt-wrapper li a {
+    display: block;
+    width: 26px;
+    height: 26px;
+    margin: 0 4px;
+    outline: none;
+    background: url(../images/edit.png) no-repeat top left;
+        background-position-x: left;
+        background-position-y: top;
+    text-indent: -9000px;
+    position: relative;
+}
+

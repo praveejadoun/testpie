@@ -276,87 +276,25 @@ class EmployeesController extends RController
 	}
                 
 
-        public function actionAchievments()
-	 {
-		 
-	      $model=new Employees;
-              $model->attributes=$_POST['Employees'];
-              $model =$model->findByAttributes(array('id'=>$_REQUEST['id']));
-	       if(isset($_POST['Employees']))
-                   
-		{
-               if($model->save())
-               {
-                   $form_data = $_POST['Employees'];
-                                      
-                                              $model->achievement_title = $form_data['achievement_title'];
-                                              $model->achievement_document_name = $form_data['achievement_document_name'];
-                                              $model->achievement_description = $form_data['achievement_description'];
-                                              
-                                             // $contact->ID=$id;
-                                            //$model->name= $form_data['name'];
-                                        $model->save();
-               }
-		$this->redirect('employees/employees/achievments',array(
-			'model'=>$this->loadModel($_REQUEST['id']),
-		));				
-			
-                }
-                
-                 else
-                {
-                $criteria = new CDbCriteria;
-		//$criteria->compare('is_deleted',0);  // normal DB field
-		//$criteria->condition='is_deleted=:is_del';
-		//$criteria->params = array(':is_del'=>0);
-		 
-		
-		if(isset($_REQUEST['Employees']['achievement_title']) and $_REQUEST['Employees']['achievement_title']!=NULL)
-		{
-			$model->name = $_REQUEST['Employees']['achievement_title'];
-			$criteria->condition=$criteria->condition.' and '.'achievement_title = :achievement_title';
-		    $criteria->params[':achievement_title'] = $_REQUEST['Employees']['achievement_title'];
-		}
-		
-		if(isset($_REQUEST['Employees']['achievement_document_name']) and $_REQUEST['Employees']['achievement_document_name']!=NULL)
-		{
-			$model->code = $_REQUEST['Employees']['achievement_document_name'];
-			$criteria->condition=$criteria->condition.' and '.'achievement_document_name = :achievement_document_name';
-		    $criteria->params[':achievement_document_name'] = $_REQUEST['Employees']['achievement_document_name'];
-		}
-		
-		if(isset($_REQUEST['Employees']['achievement_description']) and $_REQUEST['Employees']['achievement_description']!=NULL)
-		{
-			$model->label = $_REQUEST['Employees']['achievement_description'];
-			$criteria->condition=$criteria->condition.' and '.'achievement_description = :achievement_description';
-		    $criteria->params[':achievement_description'] = $_REQUEST['Employees']['achievement_description'];
-		}
-		
-				
-		
-		
-                
-		
-                $criteria->order = 'achievement_title ASC';
-	        $total = Employees::model()->count($criteria);
-		$pages = new CPagination($total);
-        $pages->setPageSize(Yii::app()->params['listPerPage']);
-        $pages->applyLimit($criteria);  // the trick is here!
-		$posts = Employees::model()->findAll($criteria);
-                
-                $this->render('achievments',array(
-			'model'=>$this->loadModel($_REQUEST['id']),
-		
-                
-		
-		'list'=>$posts,
-		'pages' => $pages,
-		'item_count'=>$total,
-                 'page_size'=>Yii::app()->params['listPerPage'],)) ;
-                
-                 }
-	 }
+       public function actionAchievements()
+	{
+		$model=new EmployeeAchievements;
 
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['EmployeeAchievements']))
+		{
+			$model->attributes=$_POST['EmployeeAchievements'];
+			if($model->save())
+				$this->redirect(array('achievements','id'=>$_REQUEST['id']));
+		}
+
+		$this->render('achievements',array(
+			'model'=>$model,
+		));
+		
+	}
         
 	/**
 	 * Updates a particular model.
