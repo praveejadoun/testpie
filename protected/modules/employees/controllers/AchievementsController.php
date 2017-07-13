@@ -86,6 +86,46 @@ class AchievementsController extends RController
 			
                 }
 	}
+        
+        
+        	public function actionUpdate($id)
+	{
+		$model=$this->loadModel($id);
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+		
+		if(isset($_POST['EmployeeAchievements']))
+		{
+			$model->attributes=$_POST['EmployeeAchievements'];
+			if($model->save())
+				$this->redirect(array('employees/achievements','id'=>$_REQUEST['employee_id']));
+		}
+
+		$this->render('update',array(
+			'model'=>$model,
+		));
+	}
+	
+        
+        public function loadModel($id)
+	{
+		$model=EmployeeAchievements::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+         public function actionDelete($id)
+	{
+		
+			// we only allow deletion via POST request
+			$this->loadModel($id)->delete();
+
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if(!isset($_GET['ajax']))
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		
+	} 
 }
 ?>
 
