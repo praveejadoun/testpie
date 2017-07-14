@@ -98,6 +98,13 @@ class AchievementsController extends RController
 		if(isset($_POST['EmployeeAchievements']))
 		{
 			$model->attributes=$_POST['EmployeeAchievements'];
+                        if($file=CUploadedFile::getInstance($model,'achievdoc_data'))
+					 {
+					$model->achievdoc_file_name=$file->name;
+					$model->achievdoc_content_type=$file->type;
+					$model->achievdoc_file_size=$file->size;
+					$model->achievdoc_data=file_get_contents($file->tempName);
+					  }
 			if($model->save())
 				$this->redirect(array('employees/achievements','id'=>$_REQUEST['employee_id']));
 		}
@@ -106,7 +113,7 @@ class AchievementsController extends RController
 			'model'=>$model,
 		));
 	}
-	
+	 
         
         public function loadModel($id)
 	{

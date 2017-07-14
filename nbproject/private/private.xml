@@ -3,36 +3,28 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/achievements/create.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/_form_3.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/students/views/students/assesments.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/view.php</file>
-            <file>file:/E:/wamp/www/sms/protected/models/Students.php</file>
-            <file>file:/E:/wamp/www/sms/images/upload_file.png</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/electives/index.php</file>
+            <file>file:/E:/wamp/www/sms/core/web/CUploadedFile.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employeeDocument/_form.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/achievements.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/_form1.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/students/controllers/StudentsController.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/controllers/AchievementsController.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/controllers/EmployeesController.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/courses/managecourse.php</file>
             <file>file:/E:/wamp/www/sms/protected/models/EmployeeAchievements.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/controllers/ElectivesController.php</file>
+            <file>file:/E:/wamp/www/sms/protected/config/environment.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/update.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/profileleft.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/achievements/update.php</file>
             <file>file:/E:/wamp/www/sms/protected/modules/employees/controllers/EmployeeDocumentController.php</file>
             <file>file:/E:/wamp/www/sms/protected/models/Employees.php</file>
+            <file>file:/E:/wamp/www/sms/protected/yiic</file>
             <file>file:/E:/wamp/www/sms/protected/modules/employees/views/achievements/_form.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/batches/_form.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/create.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employeeLeaveTypes/index.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/achievements.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/students/controllers/StudentsController.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/employees/controllers/EmployeeLeaveTypesController.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employeeLeaveTypes/_form.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/employees/controllers/AchievementsController.php</file>
-            <file>file:/E:/wamp/www/sms/images/eye.png</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/employees/controllers/EmployeesController.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employeeLeaveTypes/create.php</file>
-            <file>file:/E:/wamp/www/sms/css/style.css</file>
-            <file>file:/E:/wamp/www/sms/protected/models/ExamGroups.php</file>
-            <file>file:/E:/wamp/www/sms/images/edit.png</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/students/controllers/StudentPreviousDatasController.php</file>
-            <file>file:/E:/wamp/www/sms/images/v-del-but.png</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/batches/create.php</file>
+            <file>file:/E:/wamp/www/sms/protected/modules/employees/views/achievements/profileleft.php</file>
             <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/_form.php</file>
-            <file>file:/E:/wamp/www/sms/protected/modules/courses/views/electives/_ajax_form.php</file>
+            <file>file:/E:/wamp/www/sms/protected/config/console.php</file>
+            <file>file:/E:/wamp/www/sms/protected/yiic.php</file>
         </group>
     </open-files>
 </project-private>
