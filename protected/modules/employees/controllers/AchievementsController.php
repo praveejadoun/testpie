@@ -113,7 +113,12 @@ class AchievementsController extends RController
 			'model'=>$model,
 		));
 	}
-	 
+	 public function actionRemove()
+	{
+		$model = EmployeeAchievements::model()->findByAttributes(array('id'=>$_REQUEST['id']));
+		$model->saveAttributes(array('achievdoc_file_name'=>'','achievdoc_data'=>''));
+		$this->redirect(array('update','id'=>$_REQUEST['id']));
+	}
         
         public function loadModel($id)
 	{
@@ -122,6 +127,18 @@ class AchievementsController extends RController
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+        public function actionDisplaySavedImage()
+		{
+			$model=$this->loadModel($_GET['id']);
+			header('Pragma: public');
+			header('Expires: 0');
+			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+			header('Content-Transfer-Encoding: binary');
+			header('Content-length: '.$model->achievdoc_file_size);
+			header('Content-Type: '.$model->achievdoc_content_type);
+			header('Content-Disposition: attachment; filename='.$model->achievdoc_file_name);
+			echo $model->achievdoc_data;
+		}
          public function actionDelete($id)
 	{
 		
@@ -130,7 +147,7 @@ class AchievementsController extends RController
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array(''));
 		
 	} 
 }

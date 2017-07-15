@@ -274,7 +274,27 @@ class EmployeesController extends RController
 			'model'=>$this->loadModel($_REQUEST['id']),
 		));
 	}
-                
+         public function actionLog()
+	{
+		$model = new Employees;
+		/*$this->render('address',array(
+			'model'=>$model,
+		));*/
+		$this->render('log',array(
+			'model'=>$this->loadModel($_REQUEST['id']),
+		));
+	}       
+
+         public function actionDocuments()
+	{
+		$model = new EmployeeDocument;
+		/*$this->render('address',array(
+			'model'=>$model,
+		));*/
+		$this->render('documents',array(
+			'model'=>$model,
+		));
+	}       
 
        public function actionAchievements()
 	{
@@ -306,39 +326,7 @@ class EmployeesController extends RController
 		));
 		
 	}
-        public function actionUpdate3($id)
-	{
-		$model=$this->loadModel2($id);
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-		
-		if(isset($_POST['EmployeeAchievements']))
-		{
-			$model->attributes=$_POST['EmployeeAchievements'];
-			if($file=CUploadedFile::getInstance($model,'achievdoc_data'))
-					 {
-					$model->achievdoc_file_name=$file->name;
-					$model->achievdoc_content_type=$file->type;
-					$model->achievdoc_file_size=$file->size;
-					$model->achievdoc_data=file_get_contents($file->tempName);
-					  }
-			if($model->save())
-				$this->redirect(array('update2','id'=>$model->id));
-		}
-
-		$this->render('update3',array(
-			'model'=>$model,
-		));
-	}
-        public function loadModel2($id)
-	{
-		$model=EmployeeAchievements::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
-	}
-        
+       
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -743,6 +731,25 @@ class EmployeesController extends RController
 		
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
+        public function actionDelete1($id)
+	{
+		
+			// we only allow deletion via POST request
+			$this->loadModel2($id)->delete();
+
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if(!isset($_GET['ajax']))
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('achievements','id'=>$_REQUEST['employee_id']));
+		
+			
+	}
+        public function loadModel2($id)
+	{
+		$model=EmployeeAchievements::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
 	}
 }
 

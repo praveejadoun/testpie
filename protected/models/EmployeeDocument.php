@@ -13,6 +13,7 @@
  * @property string $created_at
  * @property string $updated_at
  * @property integer $document_file_size
+
  */
 class EmployeeDocument extends CActiveRecord
 {

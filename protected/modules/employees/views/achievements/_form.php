@@ -95,7 +95,8 @@ else
                          <div class="bttns_addstudent"style="-webkit-box-shadow: none;box-shadow: none;">   
                       <ul>
                         	<li><?php echo CHtml::link(Yii::t('employees','Download'), array('create'),array('class'=>'addbttn last','style'=>'margin: 57px 0px 0px -57px;')); ?></li>
-                                <li><?php echo CHtml::link(Yii::t('employees','Remove'),array('deleteall',id=>$list),array('class'=>'addbttn last','style'=>'margin: 57px 0px 0px -57px;','confirm'=>'Are you sure you want to delete this?')); ?></li>
+                                <li><?php echo CHtml::link(Yii::t('employees','View'), array(''),array('class'=>'addbttn last','style'=>'margin: 57px 0px 0px -57px;')); ?></li>
+                               
 
                       </ul>
                          </div>
@@ -117,16 +118,19 @@ else
 			
 			else
 			{
+                            
 				if(Yii::app()->controller->action->id=='update') {
-					echo CHtml::link(Yii::t('Employees','Remove'), array('remove', 'id'=>$_REQUEST['id']),array('confirm'=>'Are you sure?')); 
-					//echo '<img class="imgbrder" src="'.$this->createUrl('Employees/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->achievdoc_file_name.'" width="100" height="100" />';	
+                                    echo '<div class="bttns_addstudent",style="-webkit-box-shadow: none;box-shadow: none;"> ';
+					echo CHtml::link(Yii::t('employees','Remove'),array('remove',id=>$_REQUEST['id']),array('class'=>'addbttn last','style'=>'margin: 57px 0px 0px -57px;','confirm'=>'Are you sure you want to delete this?'));
+				    echo'</div>';
+                                        //echo '<img class="imgbrder" src="'.$this->createUrl('Achievements/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->achievdoc_file_name.'" width="100" height="100" />';	
 				}
 				else if(Yii::app()->controller->action->id=='create') {
 					echo CHtml::hiddenField('achievdoc_file_name',$model->achievdoc_file_name);
 					echo CHtml::hiddenField('achievdoc_content_type',$model->achievdoc_content_type);
 					echo CHtml::hiddenField('achievdoc_file_size',$model->achievdoc_file_size);
 					echo CHtml::hiddenField('achievdoc_data',bin2hex($model->achievdoc_data));
-					echo '<img class="imgbrder" src="'.$this->createUrl('Employees/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->achievdoc_file_name.'" width="100" height="100" />';
+					//echo '<img class="imgbrder" src="'.$this->createUrl('Employees/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->achievdoc_file_name.'" width="100" height="100" />';
 				}
 			}
 		}
