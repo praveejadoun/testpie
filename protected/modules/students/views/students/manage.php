@@ -884,7 +884,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                          <div class="bttns_addstudent">   
                       <ul>
                         	<li><?php echo CHtml::link(Yii::t('employees','Add Student'), array('create'),array('class'=>'addbttn last')); ?></li>
-                                <li><?php echo CHtml::link(Yii::t('employees','Delete All'),array('deleteall',id=>$list),array('class'=>'addbttn last','confirm'=>'Are you sure you want to delete this?')); ?></li>
+                                <li><?php echo CHtml::link(Yii::t('employees','Delete All'),array('deleteall','id'=>$list),array('class'=>'addbttn last','confirm'=>'Are you sure you want to delete this?')); ?></li>
 
                       </ul>
                          </div>

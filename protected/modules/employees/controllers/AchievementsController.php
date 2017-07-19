@@ -147,7 +147,7 @@ class AchievementsController extends RController
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array(''));
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('employees/achievements','id'=>$_REQUEST['employee_id']));
 		
 	} 
 }

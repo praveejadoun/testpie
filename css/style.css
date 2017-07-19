@@ -6179,3 +6179,73 @@ tr.mailbx_con_tble_bx > td > div {
 .tt-wrapper li .tt-delete {
     background-position: -62px 0px;
 }
+.log_comment_box {
+    border: 1px solid #e8ebee;
+    font-size: 12px;
+    margin: 0 0 10px;
+    padding: 10px 15px 30px;
+    position: relative;
+    width: 652px;
+}
+.edit_bttns_1
+{
+	margin:0px;
+	padding:0px;
+	position:absolute;
+	
+	right:10px;
+	/*border:#a0a0a0 1px solid;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	background: #fcfcfc url(../images/filterbttn_bg.png) repeat-x bottom;
+	-moz-box-shadow: 0 0 3px #fff;
+	-webkit-box-shadow: 0 0 3px #fff;
+	box-shadow: 0 0 3px #fff;*/
+}
+.edit_bttns_1 ul
+{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+}
+.edit_bttns_1 li
+{
+	margin:0px 5px;
+	padding:0px;
+	float:left;
+	
+}
+.edit_bttns_1 li a
+{
+	margin:0px;
+	font-size:12px;
+	display:block;
+	color:#fff;
+	font-weight:bold;
+	background:url(../images/top_but_left.png) no-repeat left;
+	
+	
+}
+.edit_bttns_1 li a span{
+	background:url(../images/top_but_right.png) no-repeat right;
+	padding:7px 15px 7px 15px;
+	display:block;
+	color:#fff;
+}
+.edit_bttns_1 li a:hover{
+	background:url(../images/top_but_left_hov.png) no-repeat left;
+}
+.edit_bttns_1 li a span:hover{
+	background:url(../images/top_but_right_hov.png) no-repeat right;
+}
+.document_table {
+    padding: 0px 0px;
+    margin: 0px;
+    /*-webkit-border-radius: 3px;*/
+    /*-moz-border-radius: 3px;*/
+    border-radius: 3px;
+    border-top: 1px #d1e0ea solid;
+    border-right: 1px #d1e0ea solid;
+    border-left: 1px #d1e0ea solid;
+}

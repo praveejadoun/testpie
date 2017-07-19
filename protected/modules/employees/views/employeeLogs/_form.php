@@ -57,7 +57,7 @@
             </table>
            <div class="row">
 				<?php //echo $form->labelEx($model,'employee_id'); ?>
-                <?php echo $form->hiddenField($model,'employee_id',array('value'=>$_REQUEST['id'])); ?>
+                <?php echo $form->hiddenField($model,'employee_id',array('value'=>$_REQUEST['employee_id'])); ?>
                 <?php echo $form->error($model,'employee_id'); ?>
             </div>
              <div class="row">
@@ -81,4 +81,6 @@
     
    
    <?php $this->endWidget(); ?>
+
+
 

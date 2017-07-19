@@ -276,12 +276,19 @@ class EmployeesController extends RController
 	}
          public function actionLog()
 	{
-		$model = new Employees;
-		/*$this->render('address',array(
-			'model'=>$model,
-		));*/
+		$model = new EmployeeLogs;
+		if(isset($_POST['EmployeeLogs']))
+		{
+			$model->attributes=$_POST['EmployeeLogs'];
+                        
+			if($model->save())
+                        {
+				$this->redirect(array('log','id'=>$_REQUEST['id']));
+                        }
+		}
+
 		$this->render('log',array(
-			'model'=>$this->loadModel($_REQUEST['id']),
+			'model'=>$model,
 		));
 	}       
 

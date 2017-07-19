@@ -620,3 +620,537 @@ Stack trace:
 #3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
 #4 E:\wamp\www\sms\index.php(52): CApplication->run()
 #5 {main} REQUEST_URI=/sms/index.php?r=employees/employees/achievments&id=18
+2017/07/19 05:43:00 [error] [exception.CException] exception 'CException' with message 'Property "EmployeeLogs.employeelog_id" is not defined.' in E:\wamp\www\sms\core\base\CComponent.php:131
+Stack trace:
+#0 E:\wamp\www\sms\core\db\ar\CActiveRecord.php(129): CComponent->__get('employeelog_id')
+#1 E:\wamp\www\sms\core\web\helpers\CHtml.php(2063): CActiveRecord->__get('employeelog_id')
+#2 E:\wamp\www\sms\core\web\helpers\CHtml.php(1791): CHtml::resolveValue(Object(EmployeeLogs), 'employeelog_id')
+#3 E:\wamp\www\sms\core\web\helpers\CHtml.php(1213): CHtml::activeInputField('hidden', Object(EmployeeLogs), 'employeelog_id', Array)
+#4 E:\wamp\www\sms\core\web\widgets\CActiveForm.php(583): CHtml::activeHiddenField(Object(EmployeeLogs), 'employeelog_id', Array)
+#5 E:\wamp\www\sms\protected\modules\employees\views\employees\_form4.php(60): CActiveForm->hiddenField(Object(EmployeeLogs), 'employeelog_id', Array)
+#6 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#7 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#8 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#9 E:\wamp\www\sms\protected\modules\employees\views\employees\log.php(41): CController->renderPartial('_form4', Array)
+#10 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#11 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#12 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#13 E:\wamp\www\sms\core\web\CController.php(779): CController->renderPartial('log', Array, true)
+#14 E:\wamp\www\sms\protected\modules\employees\controllers\EmployeesController.php(292): CController->render('log', Array)
+#15 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): EmployeesController->actionLog()
+#16 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#17 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#18 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#19 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#20 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#21 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#22 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#23 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('log')
+#25 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#26 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#27 E:\wamp\www\sms\index.php(52): CApplication->run()
+#28 {main} REQUEST_URI=/sms/index.php?r=employees/employees/log&id=18
+2017/07/19 05:45:49 [error] [exception.CException] exception 'CException' with message 'Property "EmployeeLogs.employee_id" is not defined.' in E:\wamp\www\sms\core\base\CComponent.php:131
+Stack trace:
+#0 E:\wamp\www\sms\core\db\ar\CActiveRecord.php(129): CComponent->__get('employee_id')
+#1 E:\wamp\www\sms\core\web\helpers\CHtml.php(2063): CActiveRecord->__get('employee_id')
+#2 E:\wamp\www\sms\core\web\helpers\CHtml.php(1791): CHtml::resolveValue(Object(EmployeeLogs), 'employee_id')
+#3 E:\wamp\www\sms\core\web\helpers\CHtml.php(1213): CHtml::activeInputField('hidden', Object(EmployeeLogs), 'employee_id', Array)
+#4 E:\wamp\www\sms\core\web\widgets\CActiveForm.php(583): CHtml::activeHiddenField(Object(EmployeeLogs), 'employee_id', Array)
+#5 E:\wamp\www\sms\protected\modules\employees\views\employees\_form4.php(60): CActiveForm->hiddenField(Object(EmployeeLogs), 'employee_id', Array)
+#6 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#7 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#8 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#9 E:\wamp\www\sms\protected\modules\employees\views\employees\log.php(41): CController->renderPartial('_form4', Array)
+#10 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#11 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#12 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#13 E:\wamp\www\sms\core\web\CController.php(779): CController->renderPartial('log', Array, true)
+#14 E:\wamp\www\sms\protected\modules\employees\controllers\EmployeesController.php(292): CController->render('log', Array)
+#15 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): EmployeesController->actionLog()
+#16 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#17 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#18 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#19 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#20 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#21 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#22 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#23 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('log')
+#25 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#26 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#27 E:\wamp\www\sms\index.php(52): CApplication->run()
+#28 {main} REQUEST_URI=/sms/index.php?r=employees/employees/log&id=18
+2017/07/19 05:46:09 [error] [exception.CException] exception 'CException' with message 'Property "EmployeeLogs.employee_id" is not defined.' in E:\wamp\www\sms\core\base\CComponent.php:131
+Stack trace:
+#0 E:\wamp\www\sms\core\db\ar\CActiveRecord.php(129): CComponent->__get('employee_id')
+#1 E:\wamp\www\sms\core\web\helpers\CHtml.php(2063): CActiveRecord->__get('employee_id')
+#2 E:\wamp\www\sms\core\web\helpers\CHtml.php(1791): CHtml::resolveValue(Object(EmployeeLogs), 'employee_id')
+#3 E:\wamp\www\sms\core\web\helpers\CHtml.php(1213): CHtml::activeInputField('hidden', Object(EmployeeLogs), 'employee_id', Array)
+#4 E:\wamp\www\sms\core\web\widgets\CActiveForm.php(583): CHtml::activeHiddenField(Object(EmployeeLogs), 'employee_id', Array)
+#5 E:\wamp\www\sms\protected\modules\employees\views\employees\_form4.php(60): CActiveForm->hiddenField(Object(EmployeeLogs), 'employee_id', Array)
+#6 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#7 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#8 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#9 E:\wamp\www\sms\protected\modules\employees\views\employees\log.php(41): CController->renderPartial('_form4', Array)
+#10 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#11 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#12 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#13 E:\wamp\www\sms\core\web\CController.php(779): CController->renderPartial('log', Array, true)
+#14 E:\wamp\www\sms\protected\modules\employees\controllers\EmployeesController.php(292): CController->render('log', Array)
+#15 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): EmployeesController->actionLog()
+#16 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#17 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#18 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#19 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#20 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#21 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#22 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#23 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('log')
+#25 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#26 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#27 E:\wamp\www\sms\index.php(52): CApplication->run()
+#28 {main} REQUEST_URI=/sms/index.php?r=employees/employees/log&id=18
+2017/07/19 05:46:10 [error] [exception.CException] exception 'CException' with message 'Property "EmployeeLogs.employee_id" is not defined.' in E:\wamp\www\sms\core\base\CComponent.php:131
+Stack trace:
+#0 E:\wamp\www\sms\core\db\ar\CActiveRecord.php(129): CComponent->__get('employee_id')
+#1 E:\wamp\www\sms\core\web\helpers\CHtml.php(2063): CActiveRecord->__get('employee_id')
+#2 E:\wamp\www\sms\core\web\helpers\CHtml.php(1791): CHtml::resolveValue(Object(EmployeeLogs), 'employee_id')
+#3 E:\wamp\www\sms\core\web\helpers\CHtml.php(1213): CHtml::activeInputField('hidden', Object(EmployeeLogs), 'employee_id', Array)
+#4 E:\wamp\www\sms\core\web\widgets\CActiveForm.php(583): CHtml::activeHiddenField(Object(EmployeeLogs), 'employee_id', Array)
+#5 E:\wamp\www\sms\protected\modules\employees\views\employees\_form4.php(60): CActiveForm->hiddenField(Object(EmployeeLogs), 'employee_id', Array)
+#6 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#7 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#8 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#9 E:\wamp\www\sms\protected\modules\employees\views\employees\log.php(41): CController->renderPartial('_form4', Array)
+#10 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#11 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#12 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#13 E:\wamp\www\sms\core\web\CController.php(779): CController->renderPartial('log', Array, true)
+#14 E:\wamp\www\sms\protected\modules\employees\controllers\EmployeesController.php(292): CController->render('log', Array)
+#15 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): EmployeesController->actionLog()
+#16 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#17 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#18 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#19 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#20 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#21 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#22 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#23 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('log')
+#25 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#26 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#27 E:\wamp\www\sms\index.php(52): CApplication->run()
+#28 {main} REQUEST_URI=/sms/index.php?r=employees/employees/log&id=18
+2017/07/19 05:46:11 [error] [exception.CException] exception 'CException' with message 'Property "EmployeeLogs.employee_id" is not defined.' in E:\wamp\www\sms\core\base\CComponent.php:131
+Stack trace:
+#0 E:\wamp\www\sms\core\db\ar\CActiveRecord.php(129): CComponent->__get('employee_id')
+#1 E:\wamp\www\sms\core\web\helpers\CHtml.php(2063): CActiveRecord->__get('employee_id')
+#2 E:\wamp\www\sms\core\web\helpers\CHtml.php(1791): CHtml::resolveValue(Object(EmployeeLogs), 'employee_id')
+#3 E:\wamp\www\sms\core\web\helpers\CHtml.php(1213): CHtml::activeInputField('hidden', Object(EmployeeLogs), 'employee_id', Array)
+#4 E:\wamp\www\sms\core\web\widgets\CActiveForm.php(583): CHtml::activeHiddenField(Object(EmployeeLogs), 'employee_id', Array)
+#5 E:\wamp\www\sms\protected\modules\employees\views\employees\_form4.php(60): CActiveForm->hiddenField(Object(EmployeeLogs), 'employee_id', Array)
+#6 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#7 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#8 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#9 E:\wamp\www\sms\protected\modules\employees\views\employees\log.php(41): CController->renderPartial('_form4', Array)
+#10 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#11 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#12 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#13 E:\wamp\www\sms\core\web\CController.php(779): CController->renderPartial('log', Array, true)
+#14 E:\wamp\www\sms\protected\modules\employees\controllers\EmployeesController.php(292): CController->render('log', Array)
+#15 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): EmployeesController->actionLog()
+#16 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#17 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#18 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#19 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#20 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#21 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#22 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#23 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('log')
+#25 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#26 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#27 E:\wamp\www\sms\index.php(52): CApplication->run()
+#28 {main} REQUEST_URI=/sms/index.php?r=employees/employees/log&id=18
+2017/07/19 05:46:12 [error] [exception.CException] exception 'CException' with message 'Property "EmployeeLogs.employee_id" is not defined.' in E:\wamp\www\sms\core\base\CComponent.php:131
+Stack trace:
+#0 E:\wamp\www\sms\core\db\ar\CActiveRecord.php(129): CComponent->__get('employee_id')
+#1 E:\wamp\www\sms\core\web\helpers\CHtml.php(2063): CActiveRecord->__get('employee_id')
+#2 E:\wamp\www\sms\core\web\helpers\CHtml.php(1791): CHtml::resolveValue(Object(EmployeeLogs), 'employee_id')
+#3 E:\wamp\www\sms\core\web\helpers\CHtml.php(1213): CHtml::activeInputField('hidden', Object(EmployeeLogs), 'employee_id', Array)
+#4 E:\wamp\www\sms\core\web\widgets\CActiveForm.php(583): CHtml::activeHiddenField(Object(EmployeeLogs), 'employee_id', Array)
+#5 E:\wamp\www\sms\protected\modules\employees\views\employees\_form4.php(60): CActiveForm->hiddenField(Object(EmployeeLogs), 'employee_id', Array)
+#6 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#7 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#8 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#9 E:\wamp\www\sms\protected\modules\employees\views\employees\log.php(41): CController->renderPartial('_form4', Array)
+#10 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#11 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#12 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#13 E:\wamp\www\sms\core\web\CController.php(779): CController->renderPartial('log', Array, true)
+#14 E:\wamp\www\sms\protected\modules\employees\controllers\EmployeesController.php(292): CController->render('log', Array)
+#15 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): EmployeesController->actionLog()
+#16 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#17 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#18 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#19 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#20 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#21 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#22 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#23 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('log')
+#25 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#26 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#27 E:\wamp\www\sms\index.php(52): CApplication->run()
+#28 {main} REQUEST_URI=/sms/index.php?r=employees/employees/log&id=18
+2017/07/19 05:46:13 [error] [exception.CException] exception 'CException' with message 'Property "EmployeeLogs.employee_id" is not defined.' in E:\wamp\www\sms\core\base\CComponent.php:131
+Stack trace:
+#0 E:\wamp\www\sms\core\db\ar\CActiveRecord.php(129): CComponent->__get('employee_id')
+#1 E:\wamp\www\sms\core\web\helpers\CHtml.php(2063): CActiveRecord->__get('employee_id')
+#2 E:\wamp\www\sms\core\web\helpers\CHtml.php(1791): CHtml::resolveValue(Object(EmployeeLogs), 'employee_id')
+#3 E:\wamp\www\sms\core\web\helpers\CHtml.php(1213): CHtml::activeInputField('hidden', Object(EmployeeLogs), 'employee_id', Array)
+#4 E:\wamp\www\sms\core\web\widgets\CActiveForm.php(583): CHtml::activeHiddenField(Object(EmployeeLogs), 'employee_id', Array)
+#5 E:\wamp\www\sms\protected\modules\employees\views\employees\_form4.php(60): CActiveForm->hiddenField(Object(EmployeeLogs), 'employee_id', Array)
+#6 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#7 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#8 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#9 E:\wamp\www\sms\protected\modules\employees\views\employees\log.php(41): CController->renderPartial('_form4', Array)
+#10 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#11 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#12 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#13 E:\wamp\www\sms\core\web\CController.php(779): CController->renderPartial('log', Array, true)
+#14 E:\wamp\www\sms\protected\modules\employees\controllers\EmployeesController.php(292): CController->render('log', Array)
+#15 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): EmployeesController->actionLog()
+#16 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#17 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#18 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#19 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#20 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#21 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#22 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#23 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('log')
+#25 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#26 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#27 E:\wamp\www\sms\index.php(52): CApplication->run()
+#28 {main} REQUEST_URI=/sms/index.php?r=employees/employees/log&id=18
+2017/07/19 05:46:13 [error] [exception.CException] exception 'CException' with message 'Property "EmployeeLogs.employee_id" is not defined.' in E:\wamp\www\sms\core\base\CComponent.php:131
+Stack trace:
+#0 E:\wamp\www\sms\core\db\ar\CActiveRecord.php(129): CComponent->__get('employee_id')
+#1 E:\wamp\www\sms\core\web\helpers\CHtml.php(2063): CActiveRecord->__get('employee_id')
+#2 E:\wamp\www\sms\core\web\helpers\CHtml.php(1791): CHtml::resolveValue(Object(EmployeeLogs), 'employee_id')
+#3 E:\wamp\www\sms\core\web\helpers\CHtml.php(1213): CHtml::activeInputField('hidden', Object(EmployeeLogs), 'employee_id', Array)
+#4 E:\wamp\www\sms\core\web\widgets\CActiveForm.php(583): CHtml::activeHiddenField(Object(EmployeeLogs), 'employee_id', Array)
+#5 E:\wamp\www\sms\protected\modules\employees\views\employees\_form4.php(60): CActiveForm->hiddenField(Object(EmployeeLogs), 'employee_id', Array)
+#6 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#7 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#8 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#9 E:\wamp\www\sms\protected\modules\employees\views\employees\log.php(41): CController->renderPartial('_form4', Array)
+#10 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#11 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#12 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#13 E:\wamp\www\sms\core\web\CController.php(779): CController->renderPartial('log', Array, true)
+#14 E:\wamp\www\sms\protected\modules\employees\controllers\EmployeesController.php(292): CController->render('log', Array)
+#15 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): EmployeesController->actionLog()
+#16 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#17 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#18 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#19 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#20 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#21 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#22 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#23 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('log')
+#25 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#26 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#27 E:\wamp\www\sms\index.php(52): CApplication->run()
+#28 {main} REQUEST_URI=/sms/index.php?r=employees/employees/log&id=18
+2017/07/19 05:46:24 [error] [exception.CException] exception 'CException' with message 'Property "EmployeeLogs.employee_id" is not defined.' in E:\wamp\www\sms\core\base\CComponent.php:131
+Stack trace:
+#0 E:\wamp\www\sms\core\db\ar\CActiveRecord.php(129): CComponent->__get('employee_id')
+#1 E:\wamp\www\sms\core\web\helpers\CHtml.php(2063): CActiveRecord->__get('employee_id')
+#2 E:\wamp\www\sms\core\web\helpers\CHtml.php(1791): CHtml::resolveValue(Object(EmployeeLogs), 'employee_id')
+#3 E:\wamp\www\sms\core\web\helpers\CHtml.php(1213): CHtml::activeInputField('hidden', Object(EmployeeLogs), 'employee_id', Array)
+#4 E:\wamp\www\sms\core\web\widgets\CActiveForm.php(583): CHtml::activeHiddenField(Object(EmployeeLogs), 'employee_id', Array)
+#5 E:\wamp\www\sms\protected\modules\employees\views\employees\_form4.php(60): CActiveForm->hiddenField(Object(EmployeeLogs), 'employee_id', Array)
+#6 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#7 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#8 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#9 E:\wamp\www\sms\protected\modules\employees\views\employees\log.php(41): CController->renderPartial('_form4', Array)
+#10 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#11 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#12 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#13 E:\wamp\www\sms\core\web\CController.php(779): CController->renderPartial('log', Array, true)
+#14 E:\wamp\www\sms\protected\modules\employees\controllers\EmployeesController.php(292): CController->render('log', Array)
+#15 E:\wamp\www\sms\core\web\actions\CInlineAction.php(50): EmployeesController->actionLog()
+#16 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#17 E:\wamp\www\sms\core\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#18 E:\wamp\www\sms\core\web\filters\CFilter.php(41): CFilterChain->run()
+#19 E:\wamp\www\sms\protected\modules\rights\components\RController.php(36): CFilter->filter(Object(CFilterChain))
+#20 E:\wamp\www\sms\core\web\filters\CInlineFilter.php(59): RController->filterRights(Object(CFilterChain))
+#21 E:\wamp\www\sms\core\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#22 E:\wamp\www\sms\core\web\CController.php(283): CFilterChain->run()
+#23 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('log')
+#25 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#26 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#27 E:\wamp\www\sms\index.php(52): CApplication->run()
+#28 {main} REQUEST_URI=/sms/index.php?r=employees/employees/log&id=18
+2017/07/19 07:22:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "employees/employeelogs/delete".' in E:\wamp\www\sms\core\web\CWebApplication.php:281
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#1 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\wamp\www\sms\index.php(52): CApplication->run()
+#3 {main} REQUEST_URI=/sms/index.php?r=employees/employeelogs/delete&id=
+2017/07/19 07:34:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "employees/employeelogs/delete".' in E:\wamp\www\sms\core\web\CWebApplication.php:281
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#1 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\wamp\www\sms\index.php(52): CApplication->run()
+#3 {main} REQUEST_URI=/sms/index.php?r=employees/employeelogs/delete&id=
+2017/07/19 07:34:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "employees/employeelogs/delete".' in E:\wamp\www\sms\core\web\CWebApplication.php:281
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#1 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#2 E:\wamp\www\sms\index.php(52): CApplication->run()
+#3 {main} REQUEST_URI=/sms/index.php?r=employees/employeelogs/delete&id=4
+2017/07/19 07:39:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('index')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('index')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employeelogs/index
+2017/07/19 07:46:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "achievments".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('achievments')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('achievments')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employees/achievments&id=18
+2017/07/19 09:21:34 [error] [exception.CException] exception 'CException' with message 'EmployeeLogsController cannot find the requested view "update".' in E:\wamp\www\sms\core\web\CController.php:875
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(779): CController->renderPartial('update', Array, true)
+#1 E:\wamp\www\sms\protected\modules\employees\controllers\EmployeeLogsController.php(45): CController->render('update', Array)
+#2 [internal function]: EmployeeLogsController->actionUpdate('8')
+#3 E:\wamp\www\sms\core\web\actions\CAction.php(104): ReflectionMethod->invokeArgs(Object(EmployeeLogsController), Array)
+#4 E:\wamp\www\sms\core\web\actions\CInlineAction.php(48): CAction->runWithParamsInternal(Object(EmployeeLogsController), Object(ReflectionMethod), Array)
+#5 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#6 E:\wamp\www\sms\core\web\CController.php(278): CController->runAction(Object(CInlineAction))
+#7 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('update')
+#9 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#10 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#11 E:\wamp\www\sms\index.php(52): CApplication->run()
+#12 {main} REQUEST_URI=/sms/index.php?r=employees/employeelogs/update&id=8
+2017/07/19 09:23:41 [error] [exception.CException] exception 'CException' with message 'EmployeeLogsController cannot find the requested view "profileleft".' in E:\wamp\www\sms\core\web\CController.php:875
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\employees\views\employeeLogs\update.php(11): CController->renderPartial('profileleft')
+#1 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#2 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#3 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#4 E:\wamp\www\sms\core\web\CController.php(779): CController->renderPartial('update', Array, true)
+#5 E:\wamp\www\sms\protected\modules\employees\controllers\EmployeeLogsController.php(45): CController->render('update', Array)
+#6 [internal function]: EmployeeLogsController->actionUpdate('8')
+#7 E:\wamp\www\sms\core\web\actions\CAction.php(104): ReflectionMethod->invokeArgs(Object(EmployeeLogsController), Array)
+#8 E:\wamp\www\sms\core\web\actions\CInlineAction.php(48): CAction->runWithParamsInternal(Object(EmployeeLogsController), Object(ReflectionMethod), Array)
+#9 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#10 E:\wamp\www\sms\core\web\CController.php(278): CController->runAction(Object(CInlineAction))
+#11 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('update')
+#13 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#14 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#15 E:\wamp\www\sms\index.php(52): CApplication->run()
+#16 {main} REQUEST_URI=/sms/index.php?r=employees/employeelogs/update&id=8
+2017/07/19 09:24:38 [error] [exception.CException] exception 'CException' with message 'EmployeeLogsController cannot find the requested view "employees/profileleft".' in E:\wamp\www\sms\core\web\CController.php:875
+Stack trace:
+#0 E:\wamp\www\sms\protected\modules\employees\views\employeeLogs\update.php(11): CController->renderPartial('employees/profi...')
+#1 E:\wamp\www\sms\core\web\CBaseController.php(119): require('E:\\wamp\\www\\sms...')
+#2 E:\wamp\www\sms\core\web\CBaseController.php(88): CBaseController->renderInternal('E:\\wamp\\www\\sms...', Array, true)
+#3 E:\wamp\www\sms\core\web\CController.php(866): CBaseController->renderFile('E:\\wamp\\www\\sms...', Array, true)
+#4 E:\wamp\www\sms\core\web\CController.php(779): CController->renderPartial('update', Array, true)
+#5 E:\wamp\www\sms\protected\modules\employees\controllers\EmployeeLogsController.php(45): CController->render('update', Array)
+#6 [internal function]: EmployeeLogsController->actionUpdate('8')
+#7 E:\wamp\www\sms\core\web\actions\CAction.php(104): ReflectionMethod->invokeArgs(Object(EmployeeLogsController), Array)
+#8 E:\wamp\www\sms\core\web\actions\CInlineAction.php(48): CAction->runWithParamsInternal(Object(EmployeeLogsController), Object(ReflectionMethod), Array)
+#9 E:\wamp\www\sms\core\web\CController.php(300): CInlineAction->runWithParams(Array)
+#10 E:\wamp\www\sms\core\web\CController.php(278): CController->runAction(Object(CInlineAction))
+#11 E:\wamp\www\sms\core\web\CController.php(257): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('update')
+#13 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#14 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#15 E:\wamp\www\sms\index.php(52): CApplication->run()
+#16 {main} REQUEST_URI=/sms/index.php?r=employees/employeelogs/update&id=8
+2017/07/19 09:25:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "DisplaySavedImage".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('DisplaySavedIma...')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('DisplaySavedIma...')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employeelogs/DisplaySavedImage&id=8
+2017/07/19 09:25:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "DisplaySavedImage".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('DisplaySavedIma...')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('DisplaySavedIma...')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employeelogs/DisplaySavedImage&id=8
+2017/07/19 09:25:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "DisplaySavedImage".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('DisplaySavedIma...')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('DisplaySavedIma...')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employeelogs/DisplaySavedImage&id=8
+2017/07/19 09:25:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "DisplaySavedImage".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('DisplaySavedIma...')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('DisplaySavedIma...')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employeelogs/DisplaySavedImage&id=8
+2017/07/19 09:26:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "DisplaySavedImage".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('DisplaySavedIma...')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('DisplaySavedIma...')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employeelogs/DisplaySavedImage&id=8
+2017/07/19 09:36:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('index')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('index')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employeelogs/index
+2017/07/19 09:43:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "logs".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('logs')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('logs')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employees/logs&id=18
+2017/07/19 10:17:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "view".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('view')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('view')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employeelogs/view&id=19
+2017/07/19 10:18:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "log".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('log')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('log')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employeelogs/log&id=18
+2017/07/19 10:19:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "log".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('log')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('log')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employeelogs/log&id=18
+2017/07/19 10:19:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "log".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('log')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('log')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employeelogs/log&id=18
+2017/07/19 10:20:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "log".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('log')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('log')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employeelogs/log&id=18
+2017/07/19 10:37:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "achievments".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('achievments')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('achievments')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employees/achievments&id=18
+2017/07/19 10:39:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "achievments".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('achievments')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('achievments')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employees/achievments&id=18
+2017/07/19 10:39:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "achievments".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('achievments')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('achievments')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employees/achievments&id=18
+2017/07/19 10:39:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "achievments".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('achievments')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('achievments')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employees/achievments&id=18
+2017/07/19 10:40:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "achievments".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('achievments')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('achievments')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employees/achievments&id=18
+2017/07/19 10:40:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "achievments".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('achievments')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('achievments')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employees/achievments&id=18
+2017/07/19 10:40:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "achievments".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('achievments')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('achievments')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employees/achievments&id=18
+2017/07/19 10:40:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "achievments".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('achievments')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('achievments')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employees/achievments&id=18
+2017/07/19 11:24:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "achievments".' in E:\wamp\www\sms\core\web\CController.php:477
+Stack trace:
+#0 E:\wamp\www\sms\core\web\CController.php(262): CController->missingAction('achievments')
+#1 E:\wamp\www\sms\core\web\CWebApplication.php(277): CController->run('achievments')
+#2 E:\wamp\www\sms\core\web\CWebApplication.php(136): CWebApplication->runController('employees/emplo...')
+#3 E:\wamp\www\sms\core\base\CApplication.php(158): CWebApplication->processRequest()
+#4 E:\wamp\www\sms\index.php(52): CApplication->run()
+#5 {main} REQUEST_URI=/sms/index.php?r=employees/employees/achievments&id=18
