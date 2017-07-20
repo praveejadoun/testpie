@@ -1,10 +1,4 @@
-<div class="captionWrapper">
-	<ul>
-            <li><h2  ><a href="/sms/index.php?r=employees/employees/update&id=<?php echo $_REQUEST['id']?>">Employee Details</a></h2></li>
-            <li><h2><a href="/sms/index.php?r=employees/employees/update2&id=<?php echo $_REQUEST['id']?>">Employee Contact Details</a></h2></li>
-            <li><h2 class="cur"><a href="#">Employee Documents</a></h2></li>
-    </ul>
-</div>
+
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'employeeDocument-form',
 	'enableAjaxValidation'=>false,

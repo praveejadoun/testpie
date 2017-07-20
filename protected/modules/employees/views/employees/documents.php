@@ -29,8 +29,8 @@ $this->breadcrumbs=array(
     <li><?php echo CHtml::link(Yii::t('employees','Address'), array('address', 'id'=>$_REQUEST['id'])); ?></li>
     <li><?php echo CHtml::link(Yii::t('employees','Contact'), array('contact', 'id'=>$_REQUEST['id'])); ?></li>
     <li><?php echo CHtml::link(Yii::t('employees','Additional Info'), array('addinfo', 'id'=>$_REQUEST['id'])); ?></li>
-    <li><?php echo CHtml::link(Yii::t('employees','Achievments'), array('achievments', 'id'=>$_REQUEST['id'])); ?></li>
-    <li><?php echo CHtml::link(Yii::t('employees','Log'), array('addinfo', 'id'=>$_REQUEST['id'])); ?></li>
+    <li><?php echo CHtml::link(Yii::t('employees','Achievments'), array('achievements', 'id'=>$_REQUEST['id'])); ?></li>
+    <li><?php echo CHtml::link(Yii::t('employees','Log'), array('log', 'id'=>$_REQUEST['id'])); ?></li>
     <li><?php echo CHtml::link(Yii::t('employees','Documents'), array('documents', 'id'=>$_REQUEST['id']),array('class'=>'active')); ?></li>
     <li><?php echo CHtml::link(Yii::t('employees','Attendance'), array('addinfo', 'id'=>$_REQUEST['id'])); ?></li>
     <li><?php echo CHtml::link(Yii::t('employees','SubjectAssociation'), array('addinfo', 'id'=>$_REQUEST['id'])); ?></li>
@@ -39,61 +39,51 @@ $this->breadcrumbs=array(
     <div class="clear"></div>
     
     <?php
-	$achievement = EmployeeAchievements::model()->findAll("employee_id=:x", array(':x'=>$_REQUEST['id']));
+	$empdoc = EmployeeDocument::model()->findAll("employee_id=:x and is_deleted=:y and is_active=:z", array(':x'=>$_REQUEST['id'],':y'=>'0',':z'=>'1'));
 	?>
-        <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #b9c7d0;">
-            <tbody>
+    
+    <div class="document_table" style="margin-top: 10px;">
+        <div class="formCon" style="margin:0px;">
+        <div class="formConInner"style="height:15px;">
+    <table width="100%" cellspacing="0" cellpadding="0" ">
+        <tbody>
             <tr>
-                <th  style=" float: left; padding: 19px; font-size: 17px;">Achievement Details</th>
+                <th style="float: left;height: 18px;padding: 0px;font-size: 17px;"><?php echo Yii::t('employees','Document Name');?></th>
             </tr>
-            </tbody>
-            </table>
-                                                      </div>                                         
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    
-  <tr class="tablebx_topbg">
-      <td></td>
-   
-    <td><?php echo Yii::t('employees','Employee Name');?></td>
-  
-  
-  </tr>
-  
- 
-  
-  <?php foreach($list as $list_1)
+        </tbody>
+        
+    </table>
+        </div>
+        </div>
+        <?php foreach($empdoc as $empdoc_1)
 	{ ?>
- <tr class=<?php echo $cls;?> id=<?php echo $i;?>>
-     
-    
-    <td><?php echo CHtml::link($list_1->document_name,array('view','id'=>$list_1->id)) ?></td>
-   
-	
- 
-    <td><?php //echo CHtml::ajaxlink('Delete',array('employees/manage','id'=>$list_1->id),array('confirm'=>'Do you want to delete Employee ?')) 
-		//echo CHtml::ajaxLink('Delete', array('deletes','id'=>$list_1->id), array('update'=>'#'.$i),array('confirm'=>'Do you want to delete this employee ?'));
-		echo CHtml::ajaxLink('Delete', array('deletes','id'=>$list_1->id), array('success'=>'rowdelete('.$i.')'),array('confirm'=>'Do you want to delete this employee ?'));
-		//echo CHtml::ajaxLink('Delete', array('deletes'), array('update'=>'#forAjaxRefresh'),array('onclick'=>'js: alert(Do you want to delete Employee ?);'));
-	?></td>
-    <!--<td style="border-right:none;">Task</td>-->
-  </tr><?php
-  if($cls=="even")
-  {
-	 $cls="odd" ;
-  }
-  else
-  {
-	  $cls="even"; 
-  }
-	$i++;} ?>
-</table>
-    
-  
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-top:none;border-bottom: 2px solid #def;height:60px;">
+            <tbody>
+                <tr>
+                <td width="90" align="center"><?php echo $empdoc_1->document_name ?></td>
+                <td width="100" align="right">
+                <div style="width:127px"><div class="tag_approved">Approved</div></div> </td>
+                <td  align="center" style="padding-left: 100px;">
+                    <ul  class="sub_act"  >
+                      <li style="list-style:none;">
+                           <?php echo CHtml::link(Yii::t('Achievements','Approved'),array('','id'=>$empdoc_1->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
+		           <?php echo CHtml::link(Yii::t('Achievements','Disapprove'),array('employeedocument/disapprove','id'=>$empdoc_1->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>	
+                           <?php echo CHtml::link(Yii::t('Achievements','Edit'),array('employeedocument/update','id'=>$empdoc_1->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
+                         
+                           <?php echo CHtml::link(Yii::t('Documents','Delete'), array('/employees/employeedocument/delete', 'id'=>$empdoc_1->id,'employee_id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure , Delete ?')) ?>
+                             <?php echo CHtml::link(Yii::t('Achievements','Download'),array('','id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>       
+                      </li>
+                    </ul>
+                </td>
+                </tr>
+        </table>
+        <?php } ?>
+    </div>
+</div>
 
-</div>
-</div>
 <?php echo $this->renderPartial('_form5', array('model'=>$model)); ?>
 </div>
+        </div>
     
     </td>
   </tr>
@@ -101,15 +91,3 @@ $this->breadcrumbs=array(
 
 
 
-<style type="text/css">
-.document_table {
-    padding: 0px 0px;
-    margin: 0px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    border-top: 1px #d1e0ea solid;
-    border-right: 1px #d1e0ea solid;
-    border-left: 1px #d1e0ea solid;
-}
-</style>

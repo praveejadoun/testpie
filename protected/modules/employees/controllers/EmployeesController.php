@@ -295,12 +295,31 @@ class EmployeesController extends RController
          public function actionDocuments()
 	{
 		$model = new EmployeeDocument;
-		/*$this->render('address',array(
-			'model'=>$model,
-		));*/
+		if(isset($_POST['EmployeeDocument']))
+		{
+			$model->attributes=$_POST['EmployeeDocument'];
+                        $list = $_POST['EmployeeDocument'];
+                     $model->document_name = $list['document_name'];
+				if($file=CUploadedFile::getInstance($model,'document_data'))
+					 {
+					$model->document_file_name=$file->name;
+					$model->document_content_type=$file->type;
+					$model->document_file_size=$file->size;
+					$model->document_data=file_get_contents($file->tempName);
+					  }
+				
+				
+                      
+			if($model->save())
+                        {
+				$this->redirect(array('documents','id'=>$_REQUEST['id']));
+                        }
+		}
+
 		$this->render('documents',array(
 			'model'=>$model,
 		));
+		
 	}       
 
        public function actionAchievements()

@@ -6239,13 +6239,3 @@ tr.mailbx_con_tble_bx > td > div {
 .edit_bttns_1 li a span:hover{
 	background:url(../images/top_but_right_hov.png) no-repeat right;
 }
-.document_table {
-    padding: 0px 0px;
-    margin: 0px;
-    /*-webkit-border-radius: 3px;*/
-    /*-moz-border-radius: 3px;*/
-    border-radius: 3px;
-    border-top: 1px #d1e0ea solid;
-    border-right: 1px #d1e0ea solid;
-    border-left: 1px #d1e0ea solid;
-}

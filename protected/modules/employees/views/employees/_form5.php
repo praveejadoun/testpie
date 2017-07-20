@@ -36,7 +36,7 @@
   <div class="row">
 		<?php //echo $form->labelEx($model,'course_id'); 
 		?>
-		<?php echo $form->hiddenField($model,'employee_id',array('value'=>$val1)); ?>
+		<?php echo $form->hiddenField($model,'employee_id',array('value'=>$_REQUEST['id'])); ?>
 		<?php echo $form->error($model,'employee_id'); ?>
 	</div>
   <tr>
@@ -100,12 +100,23 @@
 	</div>
 
 </div>
+        <div class="row">
+				<?php //echo $form->labelEx($model,'is_active'); ?>
+                <?php echo $form->hiddenField($model,'is_active'); ?>
+                <?php echo $form->error($model,'is_active'); ?>
+            </div>
+            
+            <div class="row">
+				<?php //echo $form->labelEx($model,'is_deleted'); ?>
+                <?php echo $form->hiddenField($model,'is_deleted'); ?>
+                <?php echo $form->error($model,'is_deleted'); ?>
+            </div>
 </div>
 <div class="clear"></div>
 	<div style="padding:0px 0 0 0px; text-align:left">
 	
 		<?php echo CHtml::Button($model->isNewRecord ? 'Add Another' : 'Save',array('class'=>'formbut')); ?>
-			<?php echo CHtml::submitButton($model->isNewRecord ? 'Next Step »' : 'Save',array('class'=>'formbut')); ?>
+			<?php echo CHtml::submitButton($model->isNewRecord ? 'Save' : 'Save',array('class'=>'formbut')); ?>
 
         </div>
 
