@@ -117,7 +117,7 @@ class AchievementsController extends RController
 	{
 		$model = EmployeeAchievements::model()->findByAttributes(array('id'=>$_REQUEST['id']));
 		$model->saveAttributes(array('achievdoc_file_name'=>'','achievdoc_data'=>''));
-		$this->redirect(array('update','id'=>$_REQUEST['id']));
+		$this->redirect(array('update','id'=>$_REQUEST['id'],'employee_id'=>$_REQUEST['employee_id']));
 	}
         
         public function loadModel($id)
@@ -139,17 +139,12 @@ class AchievementsController extends RController
 			header('Content-Disposition: attachment; filename='.$model->achievdoc_file_name);
 			echo $model->achievdoc_data;
 		}
-         public function actionDelete($id)
+       public function actionDelete()
 	{
-		
-			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('employees/achievements','id'=>$_REQUEST['employee_id']));
-		
-	} 
+		$model = EmployeeAchievements::model()->findByAttributes(array('id'=>$_REQUEST['id']));
+		$model->delete();	
+		$this->redirect(array('employees/achievements','id'=>$_REQUEST['employee_id']));
+        }	
 }
 ?>
 

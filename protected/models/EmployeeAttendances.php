@@ -41,7 +41,7 @@ class EmployeeAttendances extends CActiveRecord
 			array('employee_id, employee_leave_type_id, is_half_day', 'numerical', 'integerOnly'=>true),
 			array('reason', 'length', 'max'=>255),
 			array('attendance_date', 'safe'),
-			array('employee_leave_type_id, reason', 'required'),
+			array(' reason', 'required'),
 			array('reason','CRegularExpressionValidator', 'pattern'=>'/^[A-Za-z_]+$/','message'=>"{attribute} should contain only letters."),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

@@ -31,7 +31,7 @@ $this->breadcrumbs=array(
     <li><?php echo CHtml::link(Yii::t('employees','Additional Info'), array('addinfo', 'id'=>$_REQUEST['id'])); ?></li>
     <li><?php echo CHtml::link(Yii::t('employees','Achievments'), array('achievments', 'id'=>$_REQUEST['id']),array('class'=>'active')); ?></li>
     <li><?php echo CHtml::link(Yii::t('employees','Log'), array('log', 'id'=>$_REQUEST['id'])); ?></li>
-    <li><?php echo CHtml::link(Yii::t('employees','Documents'), array('addinfo', 'id'=>$_REQUEST['id'])); ?></li>
+    <li><?php echo CHtml::link(Yii::t('employees','Documents'), array('documents', 'id'=>$_REQUEST['id'])); ?></li>
     <li><?php echo CHtml::link(Yii::t('employees','Attendance'), array('addinfo', 'id'=>$_REQUEST['id'])); ?></li>
     <li><?php echo CHtml::link(Yii::t('employees','SubjectAssociation'), array('addinfo', 'id'=>$_REQUEST['id'])); ?></li>
     </ul>
@@ -70,10 +70,9 @@ $this->breadcrumbs=array(
 			echo '<td>'.$achievements->achievement_document_name.'</td>';
 			echo '<td align="center"  class="sub_act">'; ?> 
 					 <?php echo CHtml::link(Yii::t('Achievements','Edit'),array('achievements/update','id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
-		<?php  echo ''.CHtml::ajaxLink(
-  "Delete", $this->createUrl('delete1'), array('type' =>'GET','data' => array( 'id' =>$achievements->id,'employee_id'=>$_REQUEST['id'] ),'dataType' => 'text'),array('confirm'=>"Are you sure?\n\n Note: All details (students, timetable, fees, exam) related to this batch will be deleted."));?>
+		 <?php echo CHtml::link(Yii::t('Achievements','Delete'), array('/employees/achievements/delete', 'id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure , Delete ?')) ?>
 		 <?php echo CHtml::link(Yii::t('Achievements','Download'),array('','id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>	
-                 <?php echo CHtml::link(Yii::t('Achievements','View'),array('','id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
+                 <?php //echo CHtml::link(Yii::t('Achievements','View'),array('','id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
  <?php echo'</td></tr>';?>
 		<?php }
 	}

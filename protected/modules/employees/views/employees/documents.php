@@ -32,8 +32,8 @@ $this->breadcrumbs=array(
     <li><?php echo CHtml::link(Yii::t('employees','Achievments'), array('achievements', 'id'=>$_REQUEST['id'])); ?></li>
     <li><?php echo CHtml::link(Yii::t('employees','Log'), array('log', 'id'=>$_REQUEST['id'])); ?></li>
     <li><?php echo CHtml::link(Yii::t('employees','Documents'), array('documents', 'id'=>$_REQUEST['id']),array('class'=>'active')); ?></li>
-    <li><?php echo CHtml::link(Yii::t('employees','Attendance'), array('addinfo', 'id'=>$_REQUEST['id'])); ?></li>
-    <li><?php echo CHtml::link(Yii::t('employees','SubjectAssociation'), array('addinfo', 'id'=>$_REQUEST['id'])); ?></li>
+    <li><?php echo CHtml::link(Yii::t('employees','Attendance'), array('attendance', 'id'=>$_REQUEST['id'])); ?></li>
+    <li><?php echo CHtml::link(Yii::t('employees','SubjectAssociation'), array('subjectassociation', 'id'=>$_REQUEST['id'])); ?></li>
     </ul>
     </div>
     <div class="clear"></div>
@@ -66,7 +66,7 @@ $this->breadcrumbs=array(
                 <td  align="center" style="padding-left: 100px;">
                     <ul  class="sub_act"  >
                       <li style="list-style:none;">
-                           <?php echo CHtml::link(Yii::t('Achievements','Approved'),array('','id'=>$empdoc_1->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
+                           <?php echo CHtml::link(Yii::t('Achievements','Approved'),array(''/*,'id'=>$empdoc_1->id*/,'id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
 		           <?php echo CHtml::link(Yii::t('Achievements','Disapprove'),array('employeedocument/disapprove','id'=>$empdoc_1->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>	
                            <?php echo CHtml::link(Yii::t('Achievements','Edit'),array('employeedocument/update','id'=>$empdoc_1->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
                          

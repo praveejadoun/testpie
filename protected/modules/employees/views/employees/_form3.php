@@ -56,10 +56,14 @@
                 </tr>
                 <tr>
                 <td valign="botttom"><?php echo $form->labelEx($model,Yii::t('employees','Document Name <span class="required">*</span>')); ?></td>
+                
+                </tr>
+                <tr>
+                 <td valign="botttom" ><?php echo $form->textField($model,'achievement_document_name',array('size'=>30,'maxlength'=>255)); ?>
+                <?php echo $form->error($model,'achievement_document_name'); ?> </td>
                 <td>&nbsp;</td>
-                 <td style="float:left;    margin: 37px 0px -28px -130px;"><?php echo $form->textField($model,'achievement_document_name',array('size'=>30,'maxlength'=>255)); ?>
-                <?php echo $form->error($model,'achievement_document_name'); ?>
-	<?php 
+                <td>
+                <?php 
 		
 		
 		if($model->isNewRecord)
@@ -79,11 +83,8 @@
 		}
 		
 		 ?>
-        
-        </td>
-  </tr>
-                 
-             
+                </td>
+                 </tr>
             </table>
              <div class="row">
 				<?php //echo $form->labelEx($model,'updated_at'); ?>
@@ -107,8 +108,8 @@
 	</div>
           
            <div class="clear"></div>
-    <div style="padding:45px 0 0 0px; text-align:left">
-    	<?php echo CHtml::submitButton($model->isNewRecord ? 'Create »' : 'Save',array('class'=>'formbut')); ?>
+    <div style="padding:10px 0 0 0px; text-align:left">
+    	<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'formbut')); ?>
     </div>
         </div>
     </div>

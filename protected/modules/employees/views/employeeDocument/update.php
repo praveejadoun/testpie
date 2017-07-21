@@ -21,29 +21,35 @@ $this->breadcrumbs=array(
     </ul>
     </div>
     
-    <div class="emp_right_contner" style="min-height: 200px;" >
+    <div class="emp_right_contner" style="min-height: 70px;" >
     <div class="emp_tabwrapper">
     <div class="emp_tab_nav">
     <ul style="width:998px;">
-    <li><?php echo CHtml::link(Yii::t('employees','Profile'), array('view', 'id'=>$_REQUEST['id'])); ?></li>
-    <li><?php echo CHtml::link(Yii::t('employees','Address'), array('address', 'id'=>$_REQUEST['id'])); ?></li>
-    <li><?php echo CHtml::link(Yii::t('employees','Contact'), array('contact', 'id'=>$_REQUEST['id'])); ?></li>
-    <li><?php echo CHtml::link(Yii::t('employees','Additional Info'), array('addinfo', 'id'=>$_REQUEST['id'])); ?></li>
-    <li><?php echo CHtml::link(Yii::t('employees','Achievments'), array('achievements', 'id'=>$_REQUEST['id'])); ?></li>
-    <li><?php echo CHtml::link(Yii::t('employees','Log'), array('log', 'id'=>$_REQUEST['id'])); ?></li>
-    <li><?php echo CHtml::link(Yii::t('employees','Documents'), array('documents', 'id'=>$_REQUEST['id']),array('class'=>'active')); ?></li>
-    <li><?php echo CHtml::link(Yii::t('employees','Attendance'), array('addinfo', 'id'=>$_REQUEST['id'])); ?></li>
-    <li><?php echo CHtml::link(Yii::t('employees','SubjectAssociation'), array('addinfo', 'id'=>$_REQUEST['id'])); ?></li>
+    <li><?php echo CHtml::link(Yii::t('employees','Profile'), array('employees/view', 'id'=>$_REQUEST['employee_id'])); ?></li>
+    <li><?php echo CHtml::link(Yii::t('employees','Address'), array('employees/address', 'id'=>$_REQUEST['employee_id'])); ?></li>
+    <li><?php echo CHtml::link(Yii::t('employees','Contact'), array('employees/contact', 'id'=>$_REQUEST['employee_id'])); ?></li>
+    <li><?php echo CHtml::link(Yii::t('employees','Additional Info'), array('employees/addinfo', 'id'=>$_REQUEST['employee_id'])); ?></li>
+    <li><?php echo CHtml::link(Yii::t('employees','Achievments'), array('employees/achievements', 'id'=>$_REQUEST['employee_id'])); ?></li>
+    <li><?php echo CHtml::link(Yii::t('employees','Log'), array('employees/log', 'id'=>$_REQUEST['employee_id'])); ?></li>
+    <li><?php echo CHtml::link(Yii::t('employees','Documents'), array('employees/documents', 'id'=>$_REQUEST['employee_id']),array('class'=>'active')); ?></li>
+    <li><?php echo CHtml::link(Yii::t('employees','Attendance'), array('employees/attendance', 'id'=>$_REQUEST['employee_id'])); ?></li>
+    <li><?php echo CHtml::link(Yii::t('employees','SubjectAssociation'), array('employees/subjectassociation', 'id'=>$_REQUEST['employee_id'])); ?></li>
     </ul>
     </div>
     <div class="clear"></div>
     
    
 </div>
-
+    </div>
+<div class="edit_bttns_1">
+    <ul>
+   
+     <li><?php echo CHtml::link(Yii::t('employees','<span>Documents List</span>'), array('employees/documents','id'=>$_REQUEST['employee_id']),array('class'=>'edit last')); ?><!--<a class=" edit last" href="">Edit</a>--></li>
+    </ul>
+    </div>
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
 </div>
-        </div>
+        
     
     </td>
   </tr>

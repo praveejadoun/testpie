@@ -12,6 +12,7 @@
  * @property string $achievdoc_file_name
  * @property string $achievdoc_content_type
  * @property string $achievdoc_data
+ * @property integer $is_deleted
  * @property string $created_at
  * @property string $updated_at
  * @property integer $achievdoc_file_size
@@ -43,7 +44,7 @@ class EmployeeAchievements extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, employee_id, achievdoc_file_size', 'numerical', 'integerOnly'=>true),
+			array('id, employee_id, achievdoc_file_size,is_deleted', 'numerical', 'integerOnly'=>true),
 			array('achievement_title, achievement_document_name, achievement_description, achievdoc_file_name, achievdoc_content_type', 'length', 'max'=>255),
 			array('achievdoc_data', 'file', 'types'=>'jpg, gif, png','allowEmpty' => true, 'maxSize' => 5242880),
                         array('created_at, updated_at', 'safe'),
@@ -51,7 +52,7 @@ class EmployeeAchievements extends CActiveRecord
 			
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-                        array('id, employee_id, achievement_title, achievement_document_name, achievement_description, achievdoc_file_name, achievdoc_content_type, achievdoc_data, created_at, updated_at, achievdoc_file_size', 'safe', 'on'=>'search'),
+                        array('id, employee_id, achievement_title, achievement_document_name, achievement_description, achievdoc_file_name, achievdoc_content_type, achievdoc_data, is_deleted, created_at, updated_at, achievdoc_file_size', 'safe', 'on'=>'search'),
 
 
 		);
@@ -82,6 +83,7 @@ class EmployeeAchievements extends CActiveRecord
                         'achievdoc_file_name' => 'Achievdoc File Name',
 			'achievdoc_content_type' => 'Achievdoc Content Type',
 			'achievdoc_data' => 'Achievdoc Data',
+                        'is_deleted' => 'Is Deleted',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
 			'achievdoc_file_size' => 'Achievdoc File Size',
@@ -108,6 +110,7 @@ class EmployeeAchievements extends CActiveRecord
                 $criteria->compare('achievdoc_file_name',$this->achievdoc_file_name,true);
 		$criteria->compare('achievdoc_content_type',$this->achievdoc_content_type,true);
 		$criteria->compare('achievdoc_data',$this->achievdoc_data,true);
+                $criteria->compare('is_deleted',$this->is_deleted,true);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);
 		$criteria->compare('achievdoc_file_size',$this->achievdoc_file_size);

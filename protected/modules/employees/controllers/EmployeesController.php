@@ -777,5 +777,12 @@ class EmployeesController extends RController
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+       public function actionAttendance()
+	{
+		$model=new Employees;
+		$this->render('attendance',array(
+			'model'=>$this->loadModel($_REQUEST['id']),
+		));
+	}
 }
 

@@ -111,9 +111,9 @@ class EmployeeDocumentController extends RController
 		}
 	public function actionRemove()
 	{
-		$model = Employees::model()->findByAttributes(array('id'=>$_REQUEST['id']));
-		$model->saveAttributes(array('photo_file_name'=>'','photo_data'=>''));
-		$this->redirect(array('update','id'=>$_REQUEST['id']));
+		$model = EmployeeDocument::model()->findByAttributes(array('id'=>$_REQUEST['id']));
+		$model->saveAttributes(array('document_file_name'=>'','document_data'=>''));
+		$this->redirect(array('update','id'=>$_REQUEST['id'],'employee_id'=>$_REQUEST['employee_id']));
 	}
 	
 	 public function actionUpdate($id)
@@ -126,8 +126,15 @@ class EmployeeDocumentController extends RController
 		if(isset($_POST['EmployeeDocument']))
 		{
 			$model->attributes=$_POST['EmployeeDocument'];
+                        if($file=CUploadedFile::getInstance($model,'document_data'))
+					 {
+					$model->document_file_name=$file->name;
+					$model->document_content_type=$file->type;
+					$model->document_file_size=$file->size;
+					$model->document_data=file_get_contents($file->tempName);
+					  }
 			if($model->save())
-				$this->redirect(array('employees/log','id'=>$_REQUEST['employee_id']));
+				$this->redirect(array('employees/documents','id'=>$_REQUEST['employee_id']));
 		}
 
 		$this->render('update',array(

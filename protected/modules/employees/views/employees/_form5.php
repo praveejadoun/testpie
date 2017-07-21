@@ -21,39 +21,16 @@
     </div>
     <div class="formCon">
         <div class="formConInner">
-<p class="note">Fields with <span class="required">*</span> are required.</p>
+
 
 <table width="85%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td valign="bottom" style="padding-bottom:3px;"><?php echo $form->labelEx($model,Yii::t('employeeDocument','document_name')); ?></td>
-   
+    <td><p>Choose the file size is max. 200kb</p></td>
   </tr>
   <tr>
     <td valign="top" width="45%"><?php echo $form->textField($model,'document_name',array('size'=>32,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'document_name'); ?></td>
-    
-  </tr>	
-  <div class="row">
-		<?php //echo $form->labelEx($model,'course_id'); 
-		?>
-		<?php echo $form->hiddenField($model,'employee_id',array('value'=>$_REQUEST['id'])); ?>
-		<?php echo $form->error($model,'employee_id'); ?>
-	</div>
-  <tr>
-    <td></td>
-    <td> </td>
-    <td ><?php 
-	if($model->document_data==NULL)
-	{
-	echo $form->labelEx($model,'upload_Document');
-	}
-	else
-	{
-	echo $form->labelEx($model,'Document');	
-	}
-	
-	 ?>
-		</td>
     <td>
 	<?php 
 		
@@ -90,7 +67,15 @@
 		 ?>
         
         </td>
-  </tr>
+    
+  </tr>	
+  <div class="row">
+		<?php //echo $form->labelEx($model,'course_id'); 
+		?>
+		<?php echo $form->hiddenField($model,'employee_id',array('value'=>$_REQUEST['id'])); ?>
+		<?php echo $form->error($model,'employee_id'); ?>
+	</div>
+  
 
 </table>
 <div class="row">
