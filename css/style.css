@@ -6092,3 +6092,150 @@ tr.mailbx_con_tble_bx > td > div {
     border-right: 1px #d1e0ea solid;
     border-left: 1px #d1e0ea solid;
 }
+.tt-wrapper {
+    padding: 0px;
+    margin: 0px;
+}
+.tt-wrapper li {
+    float: left;
+    display: inline-block;
+    display: -webkit-inline-box;
+    list-style: none;
+}
+.tt-wrapper li .tt-download {
+    background-position: -93px 0px;
+}
+.tt-wrapper li a {
+    display: block;
+    width: 26px;
+    height: 26px;
+    margin: 0 4px;
+    outline: none;
+    background: url(../images/edit.png) no-repeat top left;
+        background-position-x: left;
+        background-position-y: top;
+    text-indent: -9000px;
+    position: relative;
+}
+.tt-wrapper li a span:before, .tt-wrapper li a span:after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    margin-left: -9px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid rgba(0,0,0,0.1);
+}
+.tt-wrapper li a span:after {
+    bottom: -14px;
+    margin-left: -10px;
+    border-top: 10px solid #c1cfd4;
+}
+.tt-wrapper li .tt-image {
+    background: url(../images/achi-img-icon.png) no-repeat;
+}
+.tt-wrapper li a {
+    display: block;
+    width: 26px;
+    height: 26px;
+    margin: 0 4px;
+    outline: none;
+    background: url(../images/doc_icons.png) no-repeat top left;
+    text-indent: -9000px;
+    position: relative;
+}
+.tt-wrapper li a span {
+    width: 82px;
+    height: auto;
+    line-height: 20px;
+    padding: 10px;
+    left: 50%;
+    margin-left: -55px;
+    font-family: 'Alegreya SC', Georgia, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 14px;
+    color: #719DAB;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 4px solid #c1cfd4;
+    background: rgba(255,255,255,1);
+    text-indent: 0px;
+    border-radius: 5px;
+    position: absolute;
+    pointer-events: none;
+    bottom: 100px;
+    opacity: 0;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+.tt-wrapper li .tt-delete {
+    background-position: -62px 0px;
+}
+.log_comment_box {
+    border: 1px solid #e8ebee;
+    font-size: 12px;
+    margin: 0 0 10px;
+    padding: 10px 15px 30px;
+    position: relative;
+    width: 652px;
+}
+.edit_bttns_1
+{
+	margin:0px;
+	padding:0px;
+	position:absolute;
+	
+	right:10px;
+	/*border:#a0a0a0 1px solid;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	background: #fcfcfc url(../images/filterbttn_bg.png) repeat-x bottom;
+	-moz-box-shadow: 0 0 3px #fff;
+	-webkit-box-shadow: 0 0 3px #fff;
+	box-shadow: 0 0 3px #fff;*/
+}
+.edit_bttns_1 ul
+{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+}
+.edit_bttns_1 li
+{
+	margin:0px 5px;
+	padding:0px;
+	float:left;
+	
+}
+.edit_bttns_1 li a
+{
+	margin:0px;
+	font-size:12px;
+	display:block;
+	color:#fff;
+	font-weight:bold;
+	background:url(../images/top_but_left.png) no-repeat left;
+	
+	
+}
+.edit_bttns_1 li a span{
+	background:url(../images/top_but_right.png) no-repeat right;
+	padding:7px 15px 7px 15px;
+	display:block;
+	color:#fff;
+}
+.edit_bttns_1 li a:hover{
+	background:url(../images/top_but_left_hov.png) no-repeat left;
+}
+.edit_bttns_1 li a span:hover{
+	background:url(../images/top_but_right_hov.png) no-repeat right;
+}

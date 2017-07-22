@@ -115,12 +115,12 @@ break;
     <div style="border:#CCC 1px; width:700px; padding:10px 10px; background:#E1EAEF;">
         <table style="font-size:14px;">
             <?php 
-				$department = EmployeeDepartments::model()->findByAttributes(array('id'=>$_REQUEST['id']));
+				$employee = Employees::model()->findByAttributes(array('id'=>$_REQUEST['id']));
             ?>
             <tr>
-                <td style="width:100px;"><b>Department</b></td>
+                <td style="width:100px;"><b>Employee</b></td>
                 <td style="width:10px;">:</td>
-                <td style="width:250px;"><?php echo $department->name; ?></td>
+                <td style="width:250px;"><?php echo $employee->first_name.' '.$employee->last_name; ?></td>
             
                 <td><b>Month</b></td>
                 <td style="width:10px;">:</td>
@@ -128,57 +128,50 @@ break;
             </tr>
             <tr>
             	<?php 
-				$total_employees = Employees::model()->countByAttributes(array('employee_department_id'=>$_REQUEST['id'],'is_deleted'=>0));
+				$department = EmployeeDepartments::model()->findByAttributes(array('id'=>$employee->employee_department_id));
 				?>
-                <td><b>Total Employees</b></td>
+                <td><b>Department</b></td>
                 <td>:</td>
-                <td colspan="4"><?php echo $total_employees; ?></td>
+                <td colspan="4"><?php echo $department->name; ?></td>
             </tr>
            
         </table>
     </div>
     <!-- END Department details -->
-<table width="100%" cellspacing="0" cellpadding="0" class="attendance_table">
-<tr style="background:#dfdfdf;">
-    <td><?php echo Yii::t('attendance','Name');?></td>
-    <?php
-    for($i=1;$i<=$num;$i++)
-    {
-        echo '<td>'.getweek($i,$_REQUEST['mon'],$_REQUEST['year']).'<span>'.$i.'</span></td>';
-    }
-    ?>
-</tr>
-<?php //$posts=Students::model()->findAll("batch_id=:x", array(':x'=>$_REQUEST['id']));
-	$posts=Employees::model()->findAll("employee_department_id=:x AND is_deleted=:y", array(':x'=>$_REQUEST['id'], ':y'=>0));
-$j=0;
-
-foreach($posts as $posts_1)
-{
-	if($j%2==0)
-	$class = 'class="odd"';	
-	else
-	$class = 'class="even"';	
-	
- ?>
-<tr <?php echo $class; ?> >
-    <td class="name"><?php echo $posts_1->first_name; ?></td>
-    <?php
-    for($i=1;$i<=$num;$i++)
-    {
-        echo '<td>';
-$find = EmployeeAttendances::model()->findAll("attendance_date=:x AND employee_id=:y", array(':x'=>$_REQUEST['year'].'-'.$mon_num.'-'.$i,':y'=>$posts_1->id));
-if(count($find)==0)
-{
-echo '';
-}
-else
-echo "<span style='color:#ce0606'><strong>X</strong></span>";
-		
-		echo '</td>';
-    }
-    ?>
-</tr>
-<?php $j++; }?>
-</table>
+ <table width="100%" cellspacing="0" cellpadding="0" class="attendance_table">
+        <tr style="background:#dfdfdf;">
+            <?php
+            for($i=1;$i<=$num;$i++)
+            {
+            echo '<td>'.getweek($i,$mon_num,$curr_year).'<span>'.$i.'</span></td>';
+            }
+            ?>
+        </tr>
+        <?php 
+		$posts=Employees::model()->findByAttributes(array('id'=>$_REQUEST['id']));
+        $class = 'class="even"';
+        ?>
+        <tr <?php echo $class; ?> >
+           <?php /*?> <td class="name"><?php echo $posts->first_name; ?></td><?php */?>
+            <?php
+            for($i=1;$i<=$num;$i++)
+            {
+            echo '<td style="height:10px;">';
+            /*$find = StudentAttentance::model()->findAll("date=:x AND student_id=:y", array(':x'=>$curr_year.$mon_num.'-'.$i,':y'=>$posts->id));*/
+            $find = EmployeeAttendances::model()->findAll("attendance_date=:x AND employee_id=:y", array(':x'=>$_REQUEST['year'].'-'.$mon_num.'-'.$i,':y'=>$posts->id));
+            
+            if(count($find)==0)
+            {
+            echo '';
+            }
+            else
+            echo "<span style='color:#ce0606;font-size:12px;margin-top:5px;'><strong>X</strong></span>";
+            
+            echo '</td>';
+            }
+            ?>
+        </tr>
+    </table>
+    
 <?php } ?>
 </div>

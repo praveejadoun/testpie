@@ -583,6 +583,7 @@ class StudentsController extends RController {
         $pages_1 = new CPagination($total);
         $pages_1->setPageSize(Yii::app()->params['listPerPage']);
         $pages_1->applyLimit($criteria_1);  // the trick is here!
+<<<<<<< HEAD
         $posts_1 = Employees::model()->findAll($criteria_1);
 
 
@@ -683,5 +684,125 @@ class StudentsController extends RController {
         if (!isset($_GET['ajax']))
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('manage'));
     }
+=======
+		$posts_1 = Employees::model()->findAll($criteria_1);
+		
+		 
+		$this->render('search',array('model'=>$model,
+		'list'=>$posts,
+		'posts'=>$posts_1,
+		'pages' => $pages,
+		'item_count'=>$total,
+		'page_size'=>10,)) ;
+		
+		//$stud = Students::model()->findAll('first_name LIKE '.$_POST['char']);
+		//echo count($stud);
+		//exit;
+	//print_r($_POST);	
+	}
+
+	/**
+	 * Performs the AJAX validation.
+	 * @param CModel the model to be validated
+	 */
+	protected function performAjaxValidation($model)
+	{
+		if(isset($_POST['ajax']) && $_POST['ajax']==='students-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+	}
+	
+	public function actionInactive()
+	{
+		$model = Students::model()->findByAttributes(array('id'=>$_REQUEST['sid']));
+		$model->saveAttributes(array('is_active'=>'0'));
+		if($model->uid and $model->uid!=NULL and $model->uid!=0)
+		{
+			$user = User::model()->findByPk($model->uid); // Making student user inactive
+			$user->saveAttributes(array('status'=>'0'));
+		}
+		
+		$guardian = Guardians::model()->findByAttributes(array('ward_id'=>$_REQUEST['sid']));
+		if($guardian->uid and $guardian->uid!=NULL and $guardian->uid!=0){
+			$parent_user = User::model()->findByPk($guardian->uid); // Making parent user inactive
+			$parent_user->saveAttributes(array('status'=>'0'));
+		}
+		
+		
+		
+		$this->redirect(array('/courses/batches/batchstudents','id'=>$_REQUEST['id']));
+	}
+	
+	public function actionActive()
+	{
+		$model = Students::model()->findByAttributes(array('id'=>$_REQUEST['sid']));
+		$model->saveAttributes(array('is_active'=>'1'));
+		if($model->uid and $model->uid!=NULL and $model->uid!=0)
+		{
+			$user = User::model()->findByPk($model->uid); // Making student user active
+			$user->saveAttributes(array('status'=>'1'));
+		}
+		
+		$guardian = Guardians::model()->findByAttributes(array('ward_id'=>$_REQUEST['sid']));
+		if($guardian->uid and $guardian->uid!=NULL and $guardian->uid!=0)
+		{
+			$parent_user = User::model()->findByPk($guardian->uid); // Making parent user active
+			$parent_user->saveAttributes(array('status'=>'1'));
+		}
+		$this->redirect(array('/courses/batches/batchstudents','id'=>$_REQUEST['id']));
+	}
+	
+	public function actionDeletes()
+	{
+		$model = Students::model()->findByAttributes(array('id'=>$_REQUEST['sid']));
+		$model->saveAttributes(array('is_deleted'=>'1'));
+		if($model->uid and $model->uid!=NULL and $model->uid!=0) // Deleting student user
+		{
+			$user = User::model()->findByPk($model->uid);
+			if($user)
+			{
+			$profile = Profile::model()->findByPk($user->id);
+			if($profile)
+			$profile->delete();
+			$user->delete();
+			}
+		}
+		
+		$guardian = Guardians::model()->findByAttributes(array('ward_id'=>$_REQUEST['sid']));
+		if($guardian->uid and $guardian->uid!=NULL and $guardian->uid!=0) //Deleting parent user
+		{
+			$parent_user = User::model()->findByPk($guardian->uid);
+			if($parent_user)
+			{
+			$profile = Profile::model()->findByPk($parent_user->id);
+			if($profile)
+			$profile->delete();
+			$parent_user->delete();
+			}
+		}
+		$examscores = ExamScores::model()->DeleteAllByAttributes(array('student_id'=>$_REQUEST['sid']));
+		$this->redirect(array('/courses/batches/batchstudents','id'=>$_REQUEST['id']));
+	}
+         public function actionDeleteAll()
+	{
+            
+		
+		
+			// we only allow deletion via POST request
+               
+                
+			$this->loadModel()->deleteAll();
+
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if(!isset($_GET['ajax']))
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('manage'));
+		
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
+       
+>>>>>>> fae4bd3ca41ee47ee0f7a2a80c6860c138020745
 
 }

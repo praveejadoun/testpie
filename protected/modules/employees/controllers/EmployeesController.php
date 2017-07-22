@@ -27,7 +27,7 @@ class EmployeesController extends RController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','Create2','update2','Manage','savesearch','DisplaySavedImage','pdf','Address','Contact','Addinfo','Remove'),
+				'actions'=>array('index','view','Create2','update2','Manage','savesearch','DisplaySavedImage','achievements','pdf','Address','Contact','Addinfo','Remove'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -274,90 +274,85 @@ class EmployeesController extends RController
 			'model'=>$this->loadModel($_REQUEST['id']),
 		));
 	}
-                
+         public function actionLog()
+	{
+		$model = new EmployeeLogs;
+		if(isset($_POST['EmployeeLogs']))
+		{
+			$model->attributes=$_POST['EmployeeLogs'];
+                        
+			if($model->save())
+                        {
+				$this->redirect(array('log','id'=>$_REQUEST['id']));
+                        }
+		}
 
-        public function actionAchievments()
-	 {
-		 
-	      $model=new Employees;
-              $model->attributes=$_POST['Employees'];
-              $model =$model->findByAttributes(array('id'=>$_REQUEST['id']));
-	       if(isset($_POST['Employees']))
-                   
+		$this->render('log',array(
+			'model'=>$model,
+		));
+	}       
+
+         public function actionDocuments()
+	{
+		$model = new EmployeeDocument;
+		if(isset($_POST['EmployeeDocument']))
 		{
-               if($model->save())
-               {
-                   $form_data = $_POST['Employees'];
-                                      
-                                              $model->achievement_title = $form_data['achievement_title'];
-                                              $model->achievement_document_name = $form_data['achievement_document_name'];
-                                              $model->achievement_description = $form_data['achievement_description'];
-                                              
-                                             // $contact->ID=$id;
-                                            //$model->name= $form_data['name'];
-                                        $model->save();
-               }
-		$this->redirect('employees/employees/achievments',array(
-			'model'=>$this->loadModel($_REQUEST['id']),
-		));				
-			
-                }
-                
-                 else
-                {
-                $criteria = new CDbCriteria;
-		//$criteria->compare('is_deleted',0);  // normal DB field
-		//$criteria->condition='is_deleted=:is_del';
-		//$criteria->params = array(':is_del'=>0);
-		 
-		
-		if(isset($_REQUEST['Employees']['achievement_title']) and $_REQUEST['Employees']['achievement_title']!=NULL)
-		{
-			$model->name = $_REQUEST['Employees']['achievement_title'];
-			$criteria->condition=$criteria->condition.' and '.'achievement_title = :achievement_title';
-		    $criteria->params[':achievement_title'] = $_REQUEST['Employees']['achievement_title'];
-		}
-		
-		if(isset($_REQUEST['Employees']['achievement_document_name']) and $_REQUEST['Employees']['achievement_document_name']!=NULL)
-		{
-			$model->code = $_REQUEST['Employees']['achievement_document_name'];
-			$criteria->condition=$criteria->condition.' and '.'achievement_document_name = :achievement_document_name';
-		    $criteria->params[':achievement_document_name'] = $_REQUEST['Employees']['achievement_document_name'];
-		}
-		
-		if(isset($_REQUEST['Employees']['achievement_description']) and $_REQUEST['Employees']['achievement_description']!=NULL)
-		{
-			$model->label = $_REQUEST['Employees']['achievement_description'];
-			$criteria->condition=$criteria->condition.' and '.'achievement_description = :achievement_description';
-		    $criteria->params[':achievement_description'] = $_REQUEST['Employees']['achievement_description'];
-		}
-		
+			$model->attributes=$_POST['EmployeeDocument'];
+                        $list = $_POST['EmployeeDocument'];
+                     $model->document_name = $list['document_name'];
+				if($file=CUploadedFile::getInstance($model,'document_data'))
+					 {
+					$model->document_file_name=$file->name;
+					$model->document_content_type=$file->type;
+					$model->document_file_size=$file->size;
+					$model->document_data=file_get_contents($file->tempName);
+					  }
 				
-		
-		
-                
-		
-                $criteria->order = 'achievement_title ASC';
-	        $total = Employees::model()->count($criteria);
-		$pages = new CPagination($total);
-        $pages->setPageSize(Yii::app()->params['listPerPage']);
-        $pages->applyLimit($criteria);  // the trick is here!
-		$posts = Employees::model()->findAll($criteria);
-                
-                $this->render('achievments',array(
-			'model'=>$this->loadModel($_REQUEST['id']),
-		
-                
-		
-		'list'=>$posts,
-		'pages' => $pages,
-		'item_count'=>$total,
-                 'page_size'=>Yii::app()->params['listPerPage'],)) ;
-                
-                 }
-	 }
+				
+                      
+			if($model->save())
+                        {
+				$this->redirect(array('documents','id'=>$_REQUEST['id']));
+                        }
+		}
 
-        
+		$this->render('documents',array(
+			'model'=>$model,
+		));
+		
+	}       
+
+       public function actionAchievements()
+	{
+		$model=new EmployeeAchievements;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['EmployeeAchievements']))
+		{
+			$model->attributes=$_POST['EmployeeAchievements'];
+                        $list = $_POST['EmployeeAchievements'];
+                     if($file=CUploadedFile::getInstance($model,'achievdoc_data'))
+					 {
+					$model->achievdoc_file_name=$file->name;
+					$model->achievdoc_content_type=$file->type;
+					$model->achievdoc_file_size=$file->size;
+					$model->achievdoc_data=file_get_contents($file->tempName);
+					  }
+                      
+			if($model->save())
+                        {
+				$this->redirect(array('achievements','id'=>$_REQUEST['id']));
+                        }
+		}
+
+		$this->render('achievements',array(
+			'model'=>$model,
+		));
+		
+	}
+       
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -762,6 +757,32 @@ class EmployeesController extends RController
 		
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
+        public function actionDelete1($id)
+	{
+		
+			// we only allow deletion via POST request
+			$this->loadModel2($id)->delete();
+
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if(!isset($_GET['ajax']))
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('achievements','id'=>$_REQUEST['employee_id']));
+		
+			
+	}
+        public function loadModel2($id)
+	{
+		$model=EmployeeAchievements::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+       public function actionAttendance()
+	{
+		$model=new Employees;
+		$this->render('attendance',array(
+			'model'=>$this->loadModel($_REQUEST['id']),
+		));
 	}
 }
 

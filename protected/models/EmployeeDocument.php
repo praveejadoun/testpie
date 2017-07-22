@@ -10,9 +10,12 @@
  * @property string $document_file_name
  * @property string $document_content_type
  * @property string $document_data
+ * @property integer $is_deleted
+ * @property integer $is_active
  * @property string $created_at
  * @property string $updated_at
  * @property integer $document_file_size
+
  */
 class EmployeeDocument extends CActiveRecord
 {
@@ -44,14 +47,14 @@ class EmployeeDocument extends CActiveRecord
 		
 		
 		return array(
-			array('employee_id, document_file_size', 'numerical', 'integerOnly'=>true),
+			array('employee_id, document_file_size,is_active,is_deleted', 'numerical', 'integerOnly'=>true),
 			array('document_name, document_file_name, document_content_type', 'length', 'max'=>255),
 			array('created_at, updated_at', 'safe'),
 			array('document_name', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('document_data', 'file', 'types'=>'jpg, gif, png','allowEmpty' => true, 'maxSize' => 5242880),
-			array('id, employee_id, document_name, document_file_name, document_content_type, document_data, created_at, updated_at, document_file_size', 'safe', 'on'=>'search'),
+			array('id, employee_id, document_name, document_file_name, document_content_type, document_data, created_at, updated_at, is_active, is_deleted, document_file_size', 'safe', 'on'=>'search'),
 			
 			
 			//array('photo_data', 'file', 'allowEmpty'=>true, 'types'=>'jpg, jpeg, gif, png')
@@ -83,8 +86,10 @@ class EmployeeDocument extends CActiveRecord
 			'document_file_name' => 'Document File Name',
 			'document_content_type' => 'Document Content Type',
 			'document_data' => 'Document Data',
+                        'is_deleted' => 'Is Deleted',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
+                        'is_active' =>'Is Active',
 			'document_file_size' => 'Document File Size',
 			
                        
@@ -105,10 +110,11 @@ class EmployeeDocument extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('employee_id',$this->employee_id);
 		$criteria->compare('document_name',$this->document_name,true);
-		
+		$criteria->compare('is_active',$this->is_active,true);
 		$criteria->compare('document_file_name',$this->document_file_name,true);
 		$criteria->compare('document_content_type',$this->document_content_type,true);
 		$criteria->compare('document_data',$this->document_data,true);
+                $criteria->compare('is_deleted',$this->is_deleted,true);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);
 		$criteria->compare('document_file_size',$this->document_file_size);

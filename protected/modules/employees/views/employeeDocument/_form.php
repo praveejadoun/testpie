@@ -1,10 +1,4 @@
-<div class="captionWrapper">
-	<ul>
-            <li><h2  ><a href="/sms/index.php?r=employees/employees/update&id=<?php echo $_REQUEST['id']?>">Employee Details</a></h2></li>
-            <li><h2><a href="/sms/index.php?r=employees/employees/update2&id=<?php echo $_REQUEST['id']?>">Employee Contact Details</a></h2></li>
-            <li><h2 class="cur"><a href="#">Employee Documents</a></h2></li>
-    </ul>
-</div>
+
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'employeeDocument-form',
 	'enableAjaxValidation'=>false,
@@ -35,30 +29,7 @@
   <tr>
     <td valign="top" width="45%"><?php echo $form->textField($model,'document_name',array('size'=>32,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'document_name'); ?></td>
-    
-  </tr>	
-  <div class="row">
-		<?php //echo $form->labelEx($model,'course_id'); 
-		?>
-		<?php echo $form->hiddenField($model,'employee_id',array('value'=>$val1)); ?>
-		<?php echo $form->error($model,'employee_id'); ?>
-	</div>
-  <tr>
-    <td></td>
-    <td> </td>
-    <td ><?php 
-	if($model->document_data==NULL)
-	{
-	echo $form->labelEx($model,'upload_Document');
-	}
-	else
-	{
-	echo $form->labelEx($model,'Document');	
-	}
-	
-	 ?>
-		</td>
-    <td>
+     <td>
 	<?php 
 		
 		
@@ -78,8 +49,12 @@
 			else
 			{
 				if(Yii::app()->controller->action->id=='update') {
-					echo CHtml::link(Yii::t('students','Remove'), array('Employees/remove', 'id'=>$model->id),array('confirm'=>'Are you sure?')); 
-					echo '<img class="imgbrder" src="'.$this->createUrl('Employees/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->document_file_name.'" width="100" height="100" />';	
+                                   echo   '<ul  class="sub_act" ><li style="list-style:none;">';
+                                        echo CHtml::link(Yii::t('students','Download'), array('Employeedocument/download', 'id'=>$model->id,'employee_id'=>$model->employee_id),array('confirm'=>'Are you sure?'));
+					echo CHtml::link(Yii::t('students','Remove'), array('Employeedocument/remove', 'id'=>$model->id,'employee_id'=>$model->employee_id),array('confirm'=>'Are you sure?'));
+                                    echo '</li></ul>';
+                                     
+					
 				}
 				else if(Yii::app()->controller->action->id=='create') {
 					echo CHtml::hiddenField('document_file_name',$model->document_file_name);
@@ -94,7 +69,14 @@
 		 ?>
         
         </td>
-  </tr>
+   </tr>
+  <div class="row">
+		<?php //echo $form->labelEx($model,'course_id'); 
+		?>
+		<?php echo $form->hiddenField($model,'employee_id',array('value'=>$val1)); ?>
+		<?php echo $form->error($model,'employee_id'); ?>
+	</div>
+  
 
 </table>
 <div class="row">
@@ -107,9 +89,7 @@
 </div>
 <div class="clear"></div>
 	<div style="padding:0px 0 0 0px; text-align:left">
-	
-		<?php echo CHtml::Button($model->isNewRecord ? 'Add Another' : 'Save',array('class'=>'formbut')); ?>
-			<?php echo CHtml::submitButton($model->isNewRecord ? 'Next Step »' : 'Save',array('class'=>'formbut')); ?>
+            <?php echo CHtml::submitButton($model->isNewRecord ? 'Next Step »' : 'Save',array('class'=>'formbut')); ?>
 
         </div>
 
