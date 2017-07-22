@@ -68,6 +68,10 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                     <?php $j=0; ?>
                     <div id="jobDialog"></div>
                     <div class="contrht_bttns">
+                        <?php
+                        //echo "<pre>";
+                        //print_r($list);exit;
+                        ?>
                         <ul>
                             <li>
 								<?php echo CHtml::ajaxLink('<span>'.Yii::t('students','Save Filter').'</span>',$this->createUrl('Savedsearches/Create'),array(
@@ -884,7 +888,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                          <div class="bttns_addstudent">   
                       <ul>
                         	<li><?php echo CHtml::link(Yii::t('employees','Add Student'), array('create'),array('class'=>'addbttn last')); ?></li>
-                                <li><?php echo CHtml::link(Yii::t('employees','Delete All'),array('deleteall',id=>$list),array('class'=>'addbttn last','confirm'=>'Are you sure you want to delete this?')); ?></li>
+                                <li><?php echo CHtml::link(Yii::t('employees','Delete Student'),array('deletestudents'),array('class'=>'addbttn last','confirm'=>'Are you sure you want to delete this?')); ?></li>
 
                       </ul>
                          </div>
@@ -917,6 +921,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                                                               
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr class="tablebx_topbg">
+                                <td><input type="checkbox" name="checkall" id="checkall" value="all"/></td>
                                 <td><?php echo Yii::t('students','Sl. No.');?></td>	
                                 <td><?php echo Yii::t('students','Student Name');?></td>
                                 <td><?php echo Yii::t('students','Admission No.');?></td>
@@ -941,6 +946,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                             {
 							?>
                                 <tr class=<?php echo $cls;?>>
+                                <td><input type="checkbox" name="chkCid[]" value="<?php echo $list_1->id;?>"/></td>
                                 <td><?php echo $i; ?></td>
                                 <td><?php echo CHtml::link($list_1->first_name.'  '.$list_1->middle_name.'  '.$list_1->last_name,array('view','id'=>$list_1->id)) ?></td>
                                 <td><?php echo $list_1->admission_no ?></td>
