@@ -1,5 +1,4 @@
 <?php
-
 class GuardiansController extends RController
 {
 	/**
@@ -184,7 +183,11 @@ class GuardiansController extends RController
 
 		if(isset($_POST['Guardians']))
 		{
-			
+                        //echo "<pre>";
+			//print_r($_POST);exit;
+                        if(!isset($_POST['Guardians']['batch_id'])){
+                            $_POST['Guardians']['batch_id'] = 0;
+                        }
 			$model->attributes=$_POST['Guardians'];
 			if($model->save())
 			{
@@ -198,7 +201,9 @@ class GuardiansController extends RController
 				{
 					$this->redirect(array('students/view','id'=>$_REQUEST['std']));
 				}
-			}
+                        }else{
+                            echo "Not aved";
+                        }
 		}
 
 		$this->render('update',array(

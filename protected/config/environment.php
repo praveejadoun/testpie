@@ -32,9 +32,9 @@ along with Open-School.  If not, see <http://www.gnu.org/licenses/>.*/
 
 error_reporting(E_ERROR);
 define('ENV', 'production');
-define('BASEURL', 'http://localhost/sms');
+define('BASEURL', 'http://localhost/testpie');
 
 //Database connections
-define('DB_CONNECTION','mysql:host=localhost;port=3306;dbname=sms');
+define('DB_CONNECTION','mysql:host=localhost;port=3306;dbname=openschool');
 define('DB_USER','root');
 define('DB_PWD','');

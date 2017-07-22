@@ -3,6 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/C:/wamp/www/testpie/protected/modules/students/controllers/StudentsController.php</file>
+            <file>file:/C:/wamp/www/testpie/protected/modules/students/views/students/view.php</file>
+            <file>file:/C:/wamp/www/testpie/index.php</file>
+            <file>file:/C:/wamp/www/testpie/protected/modules/students/views/students/manage.php</file>
+=======
             <file>file:/E:/wamp/www/sms/protected/modules/employees/controllers/EmployeeLogsController.php</file>
             <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employeeDocument/update.php</file>
             <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employeeDocument/_form.php</file>
@@ -23,6 +29,7 @@
             <file>file:/E:/wamp/www/sms/protected/modules/courses/controllers/BatchesController.php</file>
             <file>file:/E:/wamp/www/sms/protected/models/EmployeeDocument.php</file>
             <file>file:/E:/wamp/www/sms/protected/modules/employees/views/employees/documents.php</file>
+>>>>>>> fae4bd3ca41ee47ee0f7a2a80c6860c138020745
         </group>
     </open-files>
 </project-private>
