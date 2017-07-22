@@ -784,5 +784,15 @@ class EmployeesController extends RController
 			'model'=>$this->loadModel($_REQUEST['id']),
 		));
 	}
+        public function actionSubjectassociation()
+	{
+		$model = new Employees;
+		/*$this->render('address',array(
+			'model'=>$model,
+		));*/
+		$this->render('subjectassociation',array(
+			'model'=>$this->loadModel($_REQUEST['id']),
+		));
+	}
 }
 
