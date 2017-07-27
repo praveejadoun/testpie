@@ -14,7 +14,7 @@ $model;
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
  
    
-    <td><?php echo $form->labelEx($model,Yii::t('Courses','Course')); ?></td>
+    <td><?php echo $form->labelEx($model,Yii::t('Subjects','Course')); ?></td>
    
      <?php
 		$criteria=new CDbCriteria;
@@ -29,7 +29,16 @@ $model;
     <td><?php echo $form->labelEx($model,Yii::t('subjects','name')); ?></td>
    <td><?php echo $form->textField($model,'name'); ?>
 		<?php echo $form->error($model,'name'); ?></td>
-    
+    <td><?php //echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+        <?php if(Yii::app()->controller->action->id=='create') {?>
+        <?php	echo CHtml::ajaxSubmitButton(Yii::t('job','Save'),CHtml::normalizeUrl(array('subjects/create1','render'=>false)),array('success'=>'js: function(data) { $("#jobDialog1").dialog("close"); window.location.reload();
+                       
+        }'),array('id'=>'closeJobDialog','name'=>'Submit')); ?>
+        <?php } else { 
+            echo CHtml::ajaxSubmitButton(Yii::t('job','Save'),CHtml::normalizeUrl(array('subjects/update','render'=>false)),array('success'=>'js: function(data) { $("#jobDialog").dialog("close"); window.location.reload();
+                       
+        }'),array('id'=>'closeJobDialog','name'=>'Submit')); }?>
+	</td> 
  </tr>
    
  <tr>
@@ -49,7 +58,7 @@ $model;
 
 	<div class="row">
 		<?php //echo $form->labelEx($model,'batch_id'); ?>
-		<?php echo $form->hiddenField($model,'batch_id',array('value'=>$batch_id)); ?>
+		<?php echo $form->hiddenField($model,'batch_id'); ?>
 		<?php echo $form->error($model,'batch_id'); ?>
 	</div>
 
@@ -100,30 +109,7 @@ $model;
 		<?php //echo $form->error($model,'updated_at'); ?>
 	</div>
 
-	<div style="padding:20px 0 0 0px; text-align:left">
-		<?php //echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-         <?php if($id==1)
-		{
-		echo CHtml::ajaxSubmitButton(Yii::t('subjects','Save'),CHtml::normalizeUrl(array('subjects/create1','render'=>false)),array('success'=>'js: function(data) {
-                       $("#jobDialog1").dialog("close");alert("Subject Created");window.location.reload();
-                    }'),array('id'=>'closeJobDialog','name'=>'Submit'));
-		}
-		else
-		{
-			echo CHtml::ajaxSubmitButton(Yii::t('Subjects','Save'),CHtml::normalizeUrl(array('subjects/Addupdate&val1='.$batch_id,'render'=>false)),
-		array('success'=>'js: function(data) {
-									
-											$("#jobDialog1").dialog("close");alert("Subject Updated successfully"); 
-									 		window.location.reload();
-									
-									 
-									 }',),
-		array('id'=>'closeJobDialog','name'=>'Submit')); 
-		}
-		 ?>
-       
-	</div>
-        
+	
 </div>
 </div>
 <?php $this->endWidget(); ?>

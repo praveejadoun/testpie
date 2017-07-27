@@ -70,14 +70,14 @@ $this->breadcrumbs=array(
      <?php
      
              
-                $posts= EmployeesSubjects::model()->findAll("employee_id=:x ", array(':x'=>$_REQUEST['id']));
+                $posts= EmployeesSubjects::model()->findAll("employee_id=:x AND elective_id=:y ", array(':x'=>$_REQUEST['id'],':y'=>'0'));
 			
                 ?>
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                     <tr class="listbxtop_hdng">
                     <td align="center"><?php echo Yii::t('Employees','Name');?></td>
-                    <td align="center" ><?php echo Yii::t('Employees','Course');?></td>
-                    <td align="center"><?php echo Yii::t('Employees','Batch');?></td>
+                    <td align="center" ><?php echo Yii::t('Employees','Batch');?></td>
+                    <td align="center"><?php echo Yii::t('Employees','Course');?></td>
                     </tr>
                     <?php
 				 $i=0;
@@ -88,10 +88,11 @@ $this->breadcrumbs=array(
                     <tr>  
                         <?php $sub = Subjects::model()->findByAttributes(array('id'=>$posts_1->subject_id));?>
                         <td align="center"><?php echo $sub->name ;?></td>
-                         <?php $cou = Courses::model()->findByAttributes(array('id'=>$sub->course_id)) ?> 
-                        <td align="center"><?php echo $cou->course_name;?></td>
                         <?php $batc = Batches::model()->findByAttributes(array('id'=>$sub->batch_id))?>
                         <td align="center"><?php echo $batc->name?></td>
+                         <?php $cou = Courses::model()->findByAttributes(array('id'=>$batc->course_id)) ?> 
+                        <td align="center"><?php echo $cou->course_name;?></td>
+                        
                     </tr>					
                                                               
                    
@@ -111,7 +112,7 @@ $this->breadcrumbs=array(
      <?php
      
              
-                $posts= EmployeesSubjects::model()->findAll("employee_id=:x ", array(':x'=>$_REQUEST['id']));
+                $posts= EmployeesSubjects::model()->findAll("employee_id=:x AND subject_id=:y ", array(':x'=>$_REQUEST['id'],':y'=>'0'));
 				
                 ?>
          
@@ -119,8 +120,8 @@ $this->breadcrumbs=array(
                     <tr class="listbxtop_hdng">
                     <td align="center"><?php echo Yii::t('Employees','Elective Name');?></td>
                      <td align="center"><?php echo Yii::t('Employees','Elective Group');?></td>
-                    <td align="center" ><?php echo Yii::t('Employees','Course');?></td>
-                    <td align="center"><?php echo Yii::t('Employees','Batch');?></td>
+                    <td align="center" ><?php echo Yii::t('Employees','Batch');?></td>
+                    <td align="center"><?php echo Yii::t('Employees','Course');?></td>
                     </tr>
                     <?php
 				 $i=0;
@@ -134,6 +135,9 @@ $this->breadcrumbs=array(
                          <?php $group = ElectiveGroups::model()->findByAttributes(array('id'=>$elect->elective_group_id));?>
                         <td align="center"><?php echo $group->name;?></td>
                          <?php $batc = Batches::model()->findByAttributes(array('id'=>$group->batch_id));?>
+                        <td align="center"><?php echo $batc->name;?></td>
+                        <?php $cou = Courses::model()->findByAttributes(array('id'=>$batc->course_id));?>
+                        <td align="center"><?php echo $cou->course_name; ?></td>
                     </tr>					
                                                               
                    

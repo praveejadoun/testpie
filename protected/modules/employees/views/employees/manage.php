@@ -218,14 +218,15 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <input type="submit" value="Apply" />
 </div>
 </li>
+ <li>
+                                    <div onClick="hide('employeenumber')" style="cursor:pointer;"><?php echo Yii::t('employees','Employee number');?></div>
+                                    <div id="employeenumber" style="display:none;width:202px; padding-top:0px; height:30px" class="drop">
+                                        <div class="droparrow" style="left:10px;"></div>
+                                        <input type="search" placeholder="search" name="employeenumber" value="<?php echo isset($_GET['employeenumber']) ? CHtml::encode($_GET['employeenumber']) : '' ; ?>" />
+                                        <input type="submit" value="Apply" />
+                                    </div>
+                                </li>
 
-<li><div onClick="hide('admissionnumber')" style="cursor:pointer;"><?php echo Yii::t('employees','EmployeeNumber');?></div>
-<div id="admissionnumber" style="display:none; width:210px; padding-top:0px; height:30px" class="drop" >
-<div class="droparrow" style="left:10px;"></div>
-<input type="search" placeholder="search" name="employeenumber" value="<?php echo isset($_GET['employeenumber']) ? CHtml::encode($_GET['employeenumber']) : '' ; ?>" />
-<input type="submit" value="Apply" />
-</div>
-</li>
 
 
 
@@ -421,12 +422,18 @@ echo CHtml::activeDropDownList($model,'status',array('1' => 'Present', '0' => 'F
     <li>Name : <?php echo $_REQUEST['name']?><a href="<?php echo Yii::app()->request->getUrl().'&name='?>"></a></li>
     <?php } ?>
     
+      <?php 
+									if(isset($_REQUEST['employeenumber']) and $_REQUEST['employeenumber']!=NULL)
+                                    { 
+                                    	$j++; 
+									?>
+                                    	<li>Employee Number : <?php echo $_REQUEST['employeenumber']?><a href="<?php echo Yii::app()->request->getUrl().'&employeenumber='?>"></a></li>								
+									<?php 
+									}
+									?>
+                                     <!-- END Admission Number Active Filter -->
     
-    <?php if(isset($_REQUEST['employeenumber']) and $_REQUEST['employeenumber']!=NULL)
-    { 
-	    $j++; ?>
-    <li>Employee Number : <?php echo $_REQUEST['employeenumber']?><a href="<?php echo Yii::app()->request->getUrl().'&employee_number='?>"></a></li>
-    <?php } ?>
+    
     
     
     <?php if(isset($_REQUEST['Employees']['employee_department_id']) and $_REQUEST['Employees']['employee_department_id']!=NULL)
@@ -1042,7 +1049,7 @@ else
 $('body').click(function() {
 	$('#load').hide();
    $('#name').hide();
-   $('#admissionnumber').hide();
+   $('#employeenumber').hide();
    $('#batch').hide();
    $('#cat').hide();
    $('#pos').hide();

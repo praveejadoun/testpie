@@ -163,7 +163,7 @@ class SubjectsController extends RController
                 }
                 if($flag) {
                     Yii::app()->clientScript->scriptMap['jquery.js'] = false;
-                    $this->renderPartial('create1',array('model'=>$model,'id'=>1,'batch_id'=>$_GET['val1']),false,true);
+                    $this->renderPartial('create1',array('model'=>$model),false,true);
                 }
                 
         }
@@ -200,14 +200,14 @@ class SubjectsController extends RController
 	   	if(isset($_POST['Subjects']))
         {   
 			$flag=false;
-			$model=Subjects::model()->findByPk($_GET['val1']);
+			$model=Subjects::model()->findByPk($_REQUEST['id']);
 			$model->attributes=$_POST['Subjects'];
 			
 			$model->save();
 			exit;
 		}
 		if($flag) {
-			$model=Subjects::model()->findByPk($_GET['val1']);
+			$model=Subjects::model()->findByPk($_REQUEST['id']);
 			$settings=UserSettings::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
 			if($settings!=NULL)
 			{	
@@ -216,7 +216,7 @@ class SubjectsController extends RController
 			}
 		
 			Yii::app()->clientScript->scriptMap['jquery.js'] = true;
-			$this->renderPartial('update',array('model'=>$model,'batch_id'=>$_GET['val1']),false,true);
+			$this->renderPartial('update',array('model'=>$model),false,true);
 		}
 	}
 	/**

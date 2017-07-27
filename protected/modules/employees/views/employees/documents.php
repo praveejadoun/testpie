@@ -55,7 +55,8 @@ $this->breadcrumbs=array(
     </table>
         </div>
         </div>
-        <?php foreach($empdoc as $empdoc_1)
+        <?php 
+        foreach($empdoc as $empdoc_1)
 	{ ?>
         <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-top:none;border-bottom: 2px solid #def;height:60px;">
             <tbody>
@@ -76,6 +77,7 @@ $this->breadcrumbs=array(
                     </ul>
                 </td>
                 </tr>
+            </tbody>
         </table>
         <?php } ?>
     </div>

@@ -32,5 +32,5 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
 
 
 
-<?php echo $this->renderPartial('_form', array('model'=>$model,'id'=>$id,'batch_id'=>$_GET['val1'])); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
 <?php $this->endWidget('zii.widgets.jui.CJuiDialog');?>

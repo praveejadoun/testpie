@@ -11,7 +11,7 @@
 	
 
 	<?php echo $form->errorSummary($model); ?>
-<table width="80%" border="0" cellspacing="0" cellpadding="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td><?php echo $form->labelEx($model,Yii::t('employees','code')); ?>
 		</td>
