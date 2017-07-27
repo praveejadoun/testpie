@@ -30,12 +30,17 @@ $model;
    <td><?php echo $form->textField($model,'name'); ?>
 		<?php echo $form->error($model,'name'); ?></td>
     <td><?php //echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-       
-        <?php	echo CHtml::ajaxSubmitButton(Yii::t('job','Save'),CHtml::normalizeUrl(array('subjects/create1','render'=>false)),array('success'=>'js: function(data) { $("#jobDialog1").dialog("close"); window.location.reload();
-                       
-        }'),array('id'=>'closeJobDialog','name'=>'Submit')); ?>
-        
-	</td> 
+        <?php	
+		echo CHtml::ajaxSubmitButton(Yii::t('job','Save'),CHtml::normalizeUrl(array('Subjects/Addupdate','render'=>false)),
+		array('success'=>'js: function(data) {
+									 $("#success_msg").html("Batch updated successfully!");
+									 setTimeout(function() {
+											$("#jobDialog").dialog("close"); 
+									 		window.location.reload();
+									 }, 1000);
+									 
+									 }',),
+		array('id'=>'closeJobDialog','name'=>'Submit')); ?></td>
  </tr>
    
  <tr>

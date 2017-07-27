@@ -113,7 +113,7 @@ $(document).click(function() {
     			<ul>
         			<li><span><?php echo count(Students::model()->findAll("batch_id=:x and is_deleted=:y", array(':x'=>$_REQUEST['id'],':y'=>0))); ?></span><?php echo Yii::t('Batch','Students');?></li>
             		<li><span><?php echo count(Subjects::model()->findAll("batch_id=:x", array(':x'=>$_REQUEST['id']))); ?></span><?php echo Yii::t('Batch','Subjects');?></li>
-            		<li><span><?php //echo count(TimetableEntries::model()->findAll(array('condition'=>'batch_id=:x', 'group'=>'employee_id','params'=>array(':x'=>$_REQUEST['id']))));?></span><?php echo Yii::t('Batch','Employees');?></li>
+            		<li><span><?php echo count(TimetableEntries::model()->findAll(array('condition'=>'batch_id=:x','params'=>array(':x'=>$_REQUEST['id']))));?></span><?php echo Yii::t('Batch','Employees');?></li>
         		</ul>
      		<div class="clear"></div>
    			</div>
@@ -195,7 +195,7 @@ $(document).click(function() {
 		if($sub==NULL)
 		{
 			$subnot='<div class="cbi_red">No Subjects Added</div>';
-			$sublink = CHtml::link(Yii::t('Batch','Add Now'), array('#'),array('id'=>'add_subjects-side'));
+			$sublink = CHtml::link(Yii::t('Batch','Add Now'), array('#'),array('id'=>'add_subjects'));
 			$allgreen=0;
 		}
 		else
@@ -564,6 +564,38 @@ $(document).click(function() {
         return false;
     });//bind
 	
+     
+//CREATE 
+
+    $('#add_subjects ').bind('click', function() {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo Yii::app()->request->baseUrl;?>/index.php?r=courses/subject/returnForm",
+            data:{"batch_id":<?php echo $_GET['id'];?>,"YII_CSRF_TOKEN":"<?php echo Yii::app()->request->csrfToken;?>"},
+                beforeSend : function() {
+                    $("#subjects-grid").addClass("ajax-sending");
+                },
+                complete : function() {
+                    $("#subjects-grid").removeClass("ajax-sending");
+                },
+            success: function(data) {
+                $.fancybox(data,
+                        {    "transitionIn"      : "elastic",
+                            "transitionOut"   : "elastic",
+                            "speedIn"                : 600,
+                            "speedOut"            : 200,
+                            "overlayShow"     : false,
+                            "hideOnContentClick": false,
+                            "afterClose":    function() {
+								window.location.reload();
+								} //onclosed function
+                        });//fancybox
+            } //success
+        });//ajax
+        return false;
+    });//bind
+
+   
     
     
 	</script>

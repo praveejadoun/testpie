@@ -47,10 +47,14 @@ $('.search-form form').submit(function(){
  <div id="success_flash" align="center" style="padding-left:40px;  color:#F00; display:none;"><h4>Selected Subject Deleted Successfully !</h4>
  
    </div>
-    <div class="edit_bttns" style="width:180px; top:5px; right:-9px;">
+    <div class="edit_bttns" style="width:268px; top:5px; right:-9px;">
     <ul>
     <li>
-    <?php echo CHtml::link('<span>'.Yii::t('Subjects','Add Subjects To Batch').'</span>', array('#'),array('id'=>'add_subjects','class'=>'addbttn')) ?>
+    <?php echo CHtml::link('<span>'.Yii::t('Subjects','Add Subjects To Batch').'</span>', array('#'),array('id'=>'add_subjectss','class'=>'addbttn')) ?>
+    
+	</li>
+         <li>
+    <?php echo CHtml::link('<span>'.Yii::t('Subjects','Electives').'</span>', array('/courses/electives','id'=>$_REQUEST['id']),array('class'=>'addbttn')) ?>
     
 	</li>
     <li>
@@ -277,7 +281,7 @@ $(function() {
 
 //CREATE 
 
-    $('#add_subjects ').bind('click', function() {
+    $('#add_subjectss ').bind('click', function() {
         $.ajax({
             type: "POST",
             url: "<?php echo Yii::app()->request->baseUrl;?>/index.php?r=courses/subject/returnForm",

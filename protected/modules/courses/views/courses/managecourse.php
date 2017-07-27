@@ -120,7 +120,7 @@ function rowdelete(id)
          <?php echo CHtml::ajaxLink(Yii::t('Courses','Add Subject'),$this->createUrl('subjects/Addnew'),array(
         'onclick'=>'$("#jobDialog1").dialog("open"); return false;',
         'update'=>'#jobDialog1','type' =>'GET','data' => array( 'val1' =>$posts_1->id ),'dataType' => 'text',),array('id'=>'showJobDialog124'.$posts_1->id,'class'=>'add')); 
-         ?><div id="jobDialog1"></div>
+         ?>
         </li>
         
         <a href="#" id="openbutton<?php echo $posts_1->id;?>" onclick="details('<?php echo $posts_1->id;?>');" class="view"><li class="col5"><span class="dwnbg">&nbsp;</span></li></a>
