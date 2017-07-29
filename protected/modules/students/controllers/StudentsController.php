@@ -105,7 +105,8 @@ class StudentsController extends RController {
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
-
+        //echo "<pre>";
+//print_r($_POST['Students']);exit;
         if (isset($_POST['Students'])) {
 
             $model->attributes = $_POST['Students'];
@@ -122,26 +123,26 @@ class StudentsController extends RController {
                 $model->photo_file_size = $file->size;
                 $model->photo_data = file_get_contents($file->tempName);
             }
-            /* else{
+             else{
               if(isset($_POST['photo_file_name'])){
               $model->photo_file_name=$_POST['photo_file_name'];
               $model->photo_content_type=$_POST['photo_content_type'];
               $model->photo_file_size=$_POST['photo_file_size'];
               $model->photo_data=hex2bin($_POST['photo_data']);
               }
-              } */
+              } 
             //echo $model->photo_data.'----';
-            /* if(isset($_FILES['Students']))
+             if(isset($_FILES['Students']))
               {
-              print_r($_FILES['Students']);
-              exit;
+            //  print_r($_FILES['Students']);
+              //exit;
               $tmpName = $_FILES['Students']['tmp_name'];
               $fp      = fopen($tmpName, 'r');
               $data = fread($fp, filesize($tmpName));
               $data = addslashes($data);
               fclose($fp);
               $model->photo_data = $data;
-              } */
+              } 
             if ($model->save()) {
                 //adding user for current student
                 $user = new User;
@@ -289,7 +290,6 @@ class StudentsController extends RController {
      * By Rajith
      */
     public function actionManage() {
-
         $model = new Students;
         $criteria = new CDbCriteria;
         $criteria->compare('is_deleted', 0);  // normal DB field
@@ -424,6 +424,10 @@ class StudentsController extends RController {
             'pages' => $pages,
             'item_count' => $total,
             'page_size' => Yii::app()->params['listPerPage'],));
+    }
+
+    public function actionDeletestudents(){
+        print_r($_POST);exit;
     }
 
     public function actionIndex() {
@@ -582,8 +586,7 @@ class StudentsController extends RController {
         $tot = Employees::model()->count($criteria_1);
         $pages_1 = new CPagination($total);
         $pages_1->setPageSize(Yii::app()->params['listPerPage']);
-        $pages_1->applyLimit($criteria_1);  // the trick is here!
-<<<<<<< HEAD
+        $pages_1->applyLimit($criteria_1);  
         $posts_1 = Employees::model()->findAll($criteria_1);
 
 
@@ -630,24 +633,42 @@ class StudentsController extends RController {
         $this->redirect(array('/courses/batches/batchstudents', 'id' => $_REQUEST['id']));
     }
 
-    public function actionActive() {
-        $model = Students::model()->findByAttributes(array('id' => $_REQUEST['sid']));
-        $model->saveAttributes(array('is_active' => '1'));
-        if ($model->uid and $model->uid != NULL and $model->uid != 0) {
-            $user = User::model()->findByPk($model->uid); // Making student user active
-            $user->saveAttributes(array('status' => '1'));
+   public function actionDeleteselected() {
+       
+       foreach($_POST['ids'] as $sid){
+        $model = Students::model()->findByAttributes(array('id' => $sid));
+        $model->saveAttributes(array('is_deleted' => '1'));
+        if ($model->uid and $model->uid != NULL and $model->uid != 0) { // Deleting student user
+            $user = User::model()->findByPk($model->uid);
+            if ($user) {
+                $profile = Profile::model()->findByPk($user->id);
+                if ($profile)
+                    $profile->delete();
+                $user->delete();
+            }
         }
 
-        $guardian = Guardians::model()->findByAttributes(array('ward_id' => $_REQUEST['sid']));
-        if ($guardian->uid and $guardian->uid != NULL and $guardian->uid != 0) {
-            $parent_user = User::model()->findByPk($guardian->uid); // Making parent user active
-            $parent_user->saveAttributes(array('status' => '1'));
+        $guardian = Guardians::model()->findByAttributes(array('ward_id' => $sid));
+        if ($guardian->uid and $guardian->uid != NULL and $guardian->uid != 0) { //Deleting parent user
+            $parent_user = User::model()->findByPk($guardian->uid);
+            if ($parent_user) {
+                $profile = Profile::model()->findByPk($parent_user->id);
+                if ($profile)
+                    $profile->delete();
+                $parent_user->delete();
+            }
         }
-        $this->redirect(array('/courses/batches/batchstudents', 'id' => $_REQUEST['id']));
+        $examscores = ExamScores::model()->DeleteAllByAttributes(array('student_id' => $sid));
+        
+       }
+        echo "success";exit;
     }
 
     public function actionDeletes() {
+        
+   
         $model = Students::model()->findByAttributes(array('id' => $_REQUEST['sid']));
+        
         $model->saveAttributes(array('is_deleted' => '1'));
         if ($model->uid and $model->uid != NULL and $model->uid != 0) { // Deleting student user
             $user = User::model()->findByPk($model->uid);
@@ -670,70 +691,16 @@ class StudentsController extends RController {
             }
         }
         $examscores = ExamScores::model()->DeleteAllByAttributes(array('student_id' => $_REQUEST['sid']));
-        $this->redirect(array('/courses/batches/batchstudents', 'id' => $_REQUEST['id']));
+        
+        
+        $this->redirect(array('/students/students/manage'));
     }
 
-    public function actionDeleteAll() {
+   
 
-
-
-// we only allow deletion via POST request
-        $this->loadModel()->deleteAll();
-
-// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-        if (!isset($_GET['ajax']))
-            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('manage'));
-    }
-=======
-		$posts_1 = Employees::model()->findAll($criteria_1);
-		
-		 
-		$this->render('search',array('model'=>$model,
-		'list'=>$posts,
-		'posts'=>$posts_1,
-		'pages' => $pages,
-		'item_count'=>$total,
-		'page_size'=>10,)) ;
-		
-		//$stud = Students::model()->findAll('first_name LIKE '.$_POST['char']);
-		//echo count($stud);
-		//exit;
-	//print_r($_POST);	
-	}
-
-	/**
-	 * Performs the AJAX validation.
-	 * @param CModel the model to be validated
-	 */
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='students-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-	}
 	
-	public function actionInactive()
-	{
-		$model = Students::model()->findByAttributes(array('id'=>$_REQUEST['sid']));
-		$model->saveAttributes(array('is_active'=>'0'));
-		if($model->uid and $model->uid!=NULL and $model->uid!=0)
-		{
-			$user = User::model()->findByPk($model->uid); // Making student user inactive
-			$user->saveAttributes(array('status'=>'0'));
-		}
-		
-		$guardian = Guardians::model()->findByAttributes(array('ward_id'=>$_REQUEST['sid']));
-		if($guardian->uid and $guardian->uid!=NULL and $guardian->uid!=0){
-			$parent_user = User::model()->findByPk($guardian->uid); // Making parent user inactive
-			$parent_user->saveAttributes(array('status'=>'0'));
-		}
-		
-		
-		
-		$this->redirect(array('/courses/batches/batchstudents','id'=>$_REQUEST['id']));
-	}
+	
+	
 	
 	public function actionActive()
 	{
@@ -754,37 +721,6 @@ class StudentsController extends RController {
 		$this->redirect(array('/courses/batches/batchstudents','id'=>$_REQUEST['id']));
 	}
 	
-	public function actionDeletes()
-	{
-		$model = Students::model()->findByAttributes(array('id'=>$_REQUEST['sid']));
-		$model->saveAttributes(array('is_deleted'=>'1'));
-		if($model->uid and $model->uid!=NULL and $model->uid!=0) // Deleting student user
-		{
-			$user = User::model()->findByPk($model->uid);
-			if($user)
-			{
-			$profile = Profile::model()->findByPk($user->id);
-			if($profile)
-			$profile->delete();
-			$user->delete();
-			}
-		}
-		
-		$guardian = Guardians::model()->findByAttributes(array('ward_id'=>$_REQUEST['sid']));
-		if($guardian->uid and $guardian->uid!=NULL and $guardian->uid!=0) //Deleting parent user
-		{
-			$parent_user = User::model()->findByPk($guardian->uid);
-			if($parent_user)
-			{
-			$profile = Profile::model()->findByPk($parent_user->id);
-			if($profile)
-			$profile->delete();
-			$parent_user->delete();
-			}
-		}
-		$examscores = ExamScores::model()->DeleteAllByAttributes(array('student_id'=>$_REQUEST['sid']));
-		$this->redirect(array('/courses/batches/batchstudents','id'=>$_REQUEST['id']));
-	}
          public function actionDeleteAll()
 	{
             
@@ -803,6 +739,5 @@ class StudentsController extends RController {
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
        
->>>>>>> fae4bd3ca41ee47ee0f7a2a80c6860c138020745
 
 }

@@ -965,7 +965,7 @@ else
   
   <?php foreach($list as $list_1)
 	{ ?>
- <tr class=<?php echo $cls;?> id=<?php echo $i;?>>
+ <tr class='<?php echo $cls;?>' id="<?php echo $i;?>">
      <td></td>
     <td><?php echo $i; ?></td>
     <td><?php echo CHtml::link($list_1->first_name.'  '.$list_1->middle_name.'  '.$list_1->last_name,array('view','id'=>$list_1->id)) ?></td>
