@@ -973,8 +973,13 @@ else
   
   <?php foreach($list as $list_1)
 	{ ?>
+<<<<<<< HEAD
+ <tr class='<?php echo $cls;?>' id="<?php echo $i;?>">
+     <td></td>
+=======
  <tr class=<?php echo $cls;?> id=<?php echo $i;?>>
    <td ></td>
+>>>>>>> d41c7979d8887859524be0808b99634a723d7f70
     <td><?php echo $i; ?></td>
     <td><?php echo CHtml::link($list_1->first_name.'  '.$list_1->middle_name.'  '.$list_1->last_name,array('view','id'=>$list_1->id)) ?></td>
     <td><?php echo $list_1->employee_number ?></td>
