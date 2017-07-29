@@ -287,8 +287,9 @@ class ElectivesController extends RController
 						}*/
 			if( $model->save(false)){
                          echo json_encode(array('success'=>true));
-		             }else
+		             }else{
                      echo json_encode(array('success'=>false));
+                             }
                 }
     }
       

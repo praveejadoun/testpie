@@ -14,8 +14,8 @@
 	 ?>
      </li>
     <li class="img_text">
-    	<div style="line-height:9px; margin:20px 0px 5px 0px; font-size:14px"><?php echo ucfirst($employee->first_name).'&nbsp;'.ucfirst($employee->last_name); ?></div>
-        <a style="font-size:12px; color:#C30; padding-top:6px; display:block" href="#"><?php echo $employee->email; ?></a>
+    	<div style="line-height:9px; margin:20px 0px 5px 0px; font-size:14px"><?php echo ucfirst($employee->first_name).'&nbsp;'.ucfirst($employee->last_name);  ?></div>
+        <div style="font-size:12px; color:#C30; padding-top:6px; display:block" ><?php echo $employee->email; ?></div>
     </li>
     </ul>
     </div>

@@ -131,7 +131,7 @@ $(document).click(function() {
                    	<li class="mark"><?php echo CHtml::link(Yii::t('Batch','Mark Attendance<span>for add leave</span>'), array('/courses/studentAttentance','id'=>$_REQUEST['id'])) ?></li>
                                         <li class="addteach"><?php echo CHtml::ajaxLink(Yii::t('Batch','Assign Teacher<span>assign class teacher</span>'),$this->createUrl('batches/addupdate'),array('onclick'=>'$("#jobDialog123").dialog("open"); return false;',
                                                                 'update'=>'#jobDialog123','type' =>'GET','data' => array( 'val1' =>$batch->id,'course_id'=>$batch->course_id ),'dataType' => 'text'),array('id'=>'showJobDialog12'.$batch->id,'class'=>'add'));?><div id="jobDialog123"></div></li>
-				   	<li class="promote"><?php echo CHtml::link(Yii::t('Batch','Promote Batch<span>for promote a batch</span>'), array('batches/promote_popup','id'=>$_REQUEST['id'])) ?></li>
+				   	<!--<li class="promote"><?php //echo CHtml::link(Yii::t('Batch','Promote Batch<span>for promote a batch</span>'), array('batches/promote_popup','id'=>$_REQUEST['id'])) ?></li>-->
                      <?php if($batch->is_active=='1')
 					{?>
                     <li class="deactivate"><?php echo CHtml::link(Yii::t('Batch','Deactivate Batch'), array('batches/deactivate','id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure,Deactivate This Batch ?')) ?></li><?php }

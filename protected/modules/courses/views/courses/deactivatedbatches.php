@@ -58,7 +58,8 @@
        
                  
 		  <tr >
-                        <th align="center"><?php echo Yii::t('Courses','#');?></th>
+                      
+                        <th align="center"><?php echo Yii::t('Courses','S.No');?></th>
                         <th align="center"><?php echo Yii::t('Courses','Course Name');?></th>
 			<th align="center"><?php echo Yii::t('Courses','Batch Name');?></th>
           
@@ -66,13 +67,23 @@
 			<th align="center"><?php echo Yii::t('Courses','End Date');?></th>
 			<th align="center"><?php echo Yii::t('Courses','Actions');?></th>
 		  </tr>
-                  
+               <?php 
+  if(isset($_REQUEST['page']))
+  {
+      $i=($pages->pageSize*$_REQUEST['page'])-9;
+  }
+  else
+  {
+	  $i=1;
+  }
+  
+  ?>    
           <?php 
          
 		  foreach($batch as $batch_1)
 				{ ?>
                   <tr>
-                      <td>		<?php echo $batch_1->id;?></td>
+                      <td>		<?php echo $i;?></td>
                        <td>		<?php echo $batch_1->course_id;?></td>
                         <td>		<?php echo $batch_1->name;?></td>
                        		
@@ -100,7 +111,7 @@
 	{ ?>
    <?php echo CHtml::link(Yii::t('Batch','Activate'), array('batches/activate','id' =>$batch_1->id),array('confirm'=>'Are You Sure You Want To Activate This Batch ?')) ?><?php }?>                         
 	
-                            <?php    } ?> 
+                            <?php   $i++; } ?> 
             
                                         </td>
                   </tr>      

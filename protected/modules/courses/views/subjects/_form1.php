@@ -24,12 +24,29 @@ $model;
     <td><div><?php echo $form->dropDownList($model,'course_id',CHtml::listData(Courses::model()->findAll($criteria),'id','concatened'),array('prompt' =>'select')); ?>
 		<?php echo $form->error($model,'course_id'); ?></div></td>
   
-   
+    <tr><td>&nbsp;</td></tr>
     <tr>
     <td><?php echo $form->labelEx($model,Yii::t('subjects','name')); ?></td>
    <td><?php echo $form->textField($model,'name'); ?>
 		<?php echo $form->error($model,'name'); ?></td>
-    <td><?php //echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+    
+ </tr>
+   <tr><td>&nbsp;</td></tr> 
+ <tr>
+    <td><?php echo $form->labelEx($model,Yii::t('subjects','max_weekly_classes')); ?></td>
+    <td><?php echo $form->textField($model,'max_weekly_classes'); ?>
+		<?php echo $form->error($model,'max_weekly_classes'); ?></td>
+        
+ </tr>
+  <tr><td>&nbsp;</td></tr>
+ <tr>
+    <td><?php echo $form->labelEx($model,Yii::t('subjects','no_exams')); ?></td>
+    <td><?php echo $form->checkBox($model,'no_exams'); ?>
+		<?php echo $form->error($model,'no_exams'); ?></td>
+  </tr>
+   <tr><td>&nbsp;</td></tr>
+   <tr>
+  <td><?php //echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
         <?php	
 		echo CHtml::ajaxSubmitButton(Yii::t('job','Save'),CHtml::normalizeUrl(array('Subjects/Addupdate','render'=>false)),
 		array('success'=>'js: function(data) {
@@ -40,20 +57,7 @@ $model;
 									 }, 1000);
 									 
 									 }',),
-		array('id'=>'closeJobDialog','name'=>'Submit')); ?></td>
- </tr>
-   
- <tr>
-    <td><?php echo $form->labelEx($model,Yii::t('subjects','max_weekly_classes')); ?></td>
-    <td><?php echo $form->textField($model,'max_weekly_classes'); ?>
-		<?php echo $form->error($model,'max_weekly_classes'); ?></td>
-        
- </tr>
- <tr>
-    <td><?php echo $form->labelEx($model,Yii::t('subjects','no_exams')); ?></td>
-    <td><?php echo $form->checkBox($model,'no_exams'); ?>
-		<?php echo $form->error($model,'no_exams'); ?></td>
-  </tr>
+                        array('id'=>'closeJobDialog','name'=>'Submit')); ?></td></tr>
   
 </table>
 

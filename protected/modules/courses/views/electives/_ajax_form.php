@@ -130,8 +130,8 @@ if (!$model->isNewRecord)
     </div>
      <?php      
 		$criteria=new CDbCriteria;
-		$criteria->condition='is_deleted=:is_del';
-		$criteria->params=array(':is_del'=>0);
+		$criteria->condition='batch_id=:is_del';
+		$criteria->params=array(':is_del'=>$_REQUEST['batch_id']);
 		
 	?>
     

@@ -47,7 +47,7 @@
         <td valign="top">
             <div class="cont_right formWrapper">
                   <h1><?php echo Yii::t('courses','Common Subjects');?></h1>  
-                  <div class="formCon">
+                  <div class="formCon" style="padding:0px 0px 12px 0px;">
 
 <div class="formConInner">
                      <?php 
@@ -66,11 +66,11 @@ echo '<div style="float:left; width:380px;"><span style="font-size:14px; font-we
 echo CHtml::dropDownList('id','',$data,array('prompt'=>'Select','onchange'=>'course()','id'=>'cou','options'=>array($sel=>array('selected'=>true)))); 
 echo '</div>';
 echo '&nbsp;&nbsp;'; ?>
- <div class="edit_bttns" style="top:15px; right:410px">
+ <div class="edit_bttns" style="top:8px; right:300px">
      <ul >
       <li><?php echo CHtml::ajaxLink(Yii::t('Courses','Add Subject'),$this->createUrl('subjects/Addnew'),array(
         'onclick'=>'$("#jobDialog1").dialog("open"); return false;',
-        'update'=>'#jobDialog1','type' =>'GET','data' => array( 'val1' =>$_REQUEST['cou'] ),'dataType' => 'text',),array('id'=>'showJobDialog12'.$_REQUEST['cou'],'class'=>'addbttn last')); 
+        'update'=>'#jobDialog1','type' =>'GET','data' => array( 'val1' =>$_REQUEST['cou'] ),'dataType' => 'text',),array('id'=>'showJobDialog12'.$_REQUEST['cou'],'class'=>'addbttn','style'=>'padding:13px 30px 12px 16px;')); 
       
          ?><div id="jobDialog1"></div></li>
      </ul> 
@@ -113,17 +113,27 @@ $emp_sub = Subjects::model()->findAll("course_id=:x AND is_deleted=:y AND is_act
   <div class="tableinnerlist">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
-        
+         <th><?php echo Yii::t('employees');?>S.No</th>
          <th><?php echo Yii::t('employees');?>Subject Name</th>
          <th><?php echo Yii::t('employees');?>Maximum Weekly Classes</th>
          <th><?php echo Yii::t('employees');?>Action</th>
       </tr>
-    
+     <?php 
+  if(isset($_REQUEST['page']))
+  {
+      $i=($pages->pageSize*$_REQUEST['page'])-9;
+  }
+  else
+  {
+	  $i=1;
+  }
+  ?>
    <?php 
    foreach($emp_sub as $emp_sub_1)
    { 
    ?>
      <tr>
+         <td><?php echo $i;?></td>
     <td><?php 
 	 
 	echo $emp_sub_1->name?></td>
@@ -136,15 +146,19 @@ $emp_sub = Subjects::model()->findAll("course_id=:x AND is_deleted=:y AND is_act
 	else{?> <td><?php echo $emp_sub_1-> max_weekly_classes ?></td> <?php }?>
         
         <td> 
-           
-
+            <ul  class="sub_act"  >
+                      <li style="list-style:none;"> 
+                        
            <?php echo CHtml::ajaxLink(Yii::t('Subjects','Edit'),$this->createUrl('subjects/addupdate'),array(
         'onclick'=>'$("#jobDialog").dialog("open"); return false;',
-        'update'=>'#jobDialog','type' =>'GET','data' => array( 'val1' =>$emp_sub_1->id,'course_id'=>$_REQUEST['cou'] ),'dataType' => 'text'),array('id'=>'showJobDialog123'.$emp_sub_1->id,'class'=>'add')); ?>
+        'update'=>'#jobDialog','type' =>'GET','data' => array( 'id' =>$emp_sub_1->id),'dataType' => 'text'),array('id'=>'showJobDialog123'.$emp_sub_1->id,'class'=>'add','class'=>'edit')); ?>
   
   <?php  echo CHtml::link(Yii::t('subjects','Remove'), array('deleterow', 'id'=>$emp_sub_1->id,'cou'=>$_REQUEST['cou'],), array('confirm' => 'Are you sure?','onclick'=>"show()")); ?>
-        </td> </tr>
-    <?php } ?>
+                      </li>
+            </ul>
+                          
+                          </td> </tr>
+    <?php $i++;} ?>
     </table>
    </div>
                  

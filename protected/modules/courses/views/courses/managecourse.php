@@ -146,9 +146,11 @@ function rowdelete(id)
 			<td align="center"><?php echo Yii::t('Courses','End Date');?></td>
 			<td align="center"><?php echo Yii::t('Courses','Actions');?></td>
 		  </tr>
+                   
           <?php 
 		  foreach($batch as $batch_1)
 				{
+                                        
 					echo '<tr id="batchrow'.$batch_1->id.'">';
 					echo '<td style="text-align:left; padding-left:10px; font-weight:bold;">'.CHtml::link($batch_1->name, array('batches/batchstudents','id'=>$batch_1->id)).'</td>';
 					$settings=UserSettings::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
@@ -193,18 +195,30 @@ function rowdelete(id)
 		  <tbody>
           <!--class="cbtablebx_topbg"  class="sub_act"-->
 		  <tr class="pdtab-h">
-			<td align="center"><?php echo Yii::t('Courses','#');?></td>
+			<td align="center"><?php echo Yii::t('Courses','S.No');?></td>
                         <td align="center"><?php echo Yii::t('Courses','Subject Name');?></td>
 			<td align="center"><?php echo Yii::t('Courses','Maximum Weekly Classes');?></td>
 		        <td align="center"><?php echo Yii::t('Courses','Actions');?></td>
 		  </tr>
+                  <?php 
+  if(isset($_REQUEST['page']))
+  {
+      $i=($pages->pageSize*$_REQUEST['page'])-9;
+  }
+  else
+  {
+	  $i=1;
+  }
+  
+  $cls="even";
+  ?>
           <?php 
 		  foreach($subject as $subject_1)
 				{
 					echo '<tr id="batchrow'.$subject_1->id.'">';
-                                        echo '<td style="text-align:left; padding-left:10px; font-weight:bold;">'.$subject_1->id.'</td>';
-					echo '<td style="text-align:left; padding-left:10px; font-weight:bold;">'.$subject_1->name.'</td>';
-                                        echo '<td style="text-align:left; padding-left:10px; font-weight:bold;">'.$subject_1->max_weekly_classes.'</td>';
+                                        echo '<td style="text-align:center;  font-weight:bold;">'.$i.'</td>';
+					echo '<td style="text-align:center;  font-weight:bold;">'.$subject_1->name.'</td>';
+                                        echo '<td style="text-align:center;  font-weight:bold;">'.$subject_1->max_weekly_classes.'</td>';
 					echo '<td align="center"  class="sub_act">';
 					?> 
 					<?php echo CHtml::ajaxLink(Yii::t('Subjects','Edit'),$this->createUrl('subjects/addupdate'),array(
@@ -217,7 +231,7 @@ echo '<div id="jobDialog123"></div>';
  echo '</td>';
                                         echo '</tr>';
 					
-				}
+				$i++;}
 			   ?>
          </tbody>
         </table>

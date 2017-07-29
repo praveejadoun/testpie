@@ -90,7 +90,7 @@ $del_title=Yii::t('admin_subjects', 'Delete Confirmation');
           'columns' => array(
           		
 		'name',
-		'elective_group_id',
+		'elective_group_id' ,
 		
 		
 		
