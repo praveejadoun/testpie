@@ -6,7 +6,15 @@
     
 ));
 ?>
-
+<div class="captionWrapper">
+        <ul>
+            <li><h2 ><?php echo CHtml::link(Yii::t('Employees','Employee Details'),array('employees/update','id'=>$_REQUEST['id']));?></h2></li>
+            <li><h2><?php echo CHtml::link(Yii::t('Employees','Employee Contact Details'),array('employees/update2','id'=>$_REQUEST['id']));?></h2></li>
+           
+            <li><h2 class="cur">Employee Documents</h2></li>
+            
+        </ul>
+	</div>
 
 	<?php if($form->errorSummary($model)){; ?>
 

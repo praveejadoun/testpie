@@ -100,7 +100,7 @@
 <div class="clear"></div>
 	<div style="padding:0px 0 0 0px; text-align:left">
 	
-		<?php echo CHtml::Button($model->isNewRecord ? 'Add Another' : 'Save',array('class'=>'formbut')); ?>
+		<?php //echo CHtml::Button($model->isNewRecord ? 'Add Another' : 'Save',array('class'=>'formbut')); ?>
 			<?php echo CHtml::submitButton($model->isNewRecord ? 'Save' : 'Save',array('class'=>'formbut')); ?>
 
         </div>

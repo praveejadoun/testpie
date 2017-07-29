@@ -218,14 +218,15 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <input type="submit" value="Apply" />
 </div>
 </li>
+ <li>
+                                    <div onClick="hide('employeenumber')" style="cursor:pointer;"><?php echo Yii::t('employees','Employee number');?></div>
+                                    <div id="employeenumber" style="display:none;width:202px; padding-top:0px; height:30px" class="drop">
+                                        <div class="droparrow" style="left:10px;"></div>
+                                        <input type="search" placeholder="search" name="employeenumber" value="<?php echo isset($_GET['employeenumber']) ? CHtml::encode($_GET['employeenumber']) : '' ; ?>" />
+                                        <input type="submit" value="Apply" />
+                                    </div>
+                                </li>
 
-<li><div onClick="hide('admissionnumber')" style="cursor:pointer;"><?php echo Yii::t('employees','EmployeeNumber');?></div>
-<div id="admissionnumber" style="display:none; width:210px; padding-top:0px; height:30px" class="drop" >
-<div class="droparrow" style="left:10px;"></div>
-<input type="search" placeholder="search" name="employeenumber" value="<?php echo isset($_GET['employeenumber']) ? CHtml::encode($_GET['employeenumber']) : '' ; ?>" />
-<input type="submit" value="Apply" />
-</div>
-</li>
 
 
 
@@ -421,12 +422,18 @@ echo CHtml::activeDropDownList($model,'status',array('1' => 'Present', '0' => 'F
     <li>Name : <?php echo $_REQUEST['name']?><a href="<?php echo Yii::app()->request->getUrl().'&name='?>"></a></li>
     <?php } ?>
     
+      <?php 
+									if(isset($_REQUEST['employeenumber']) and $_REQUEST['employeenumber']!=NULL)
+                                    { 
+                                    	$j++; 
+									?>
+                                    	<li>Employee Number : <?php echo $_REQUEST['employeenumber']?><a href="<?php echo Yii::app()->request->getUrl().'&employeenumber='?>"></a></li>								
+									<?php 
+									}
+									?>
+                                     <!-- END Admission Number Active Filter -->
     
-    <?php if(isset($_REQUEST['employeenumber']) and $_REQUEST['employeenumber']!=NULL)
-    { 
-	    $j++; ?>
-    <li>Employee Number : <?php echo $_REQUEST['employeenumber']?><a href="<?php echo Yii::app()->request->getUrl().'&employee_number='?>"></a></li>
-    <?php } ?>
+    
     
     
     <?php if(isset($_REQUEST['Employees']['employee_department_id']) and $_REQUEST['Employees']['employee_department_id']!=NULL)
@@ -918,6 +925,7 @@ else
                             
                         </div>
                     </div>
+    <?php $this->beginWidget('CActiveForm',array('id'=>'checkform')) ?>
     <div class="list_contner">
     
     <div class="clear"></div>
@@ -965,8 +973,13 @@ else
   
   <?php foreach($list as $list_1)
 	{ ?>
+<<<<<<< HEAD
  <tr class='<?php echo $cls;?>' id="<?php echo $i;?>">
      <td></td>
+=======
+ <tr class=<?php echo $cls;?> id=<?php echo $i;?>>
+   <td ></td>
+>>>>>>> d41c7979d8887859524be0808b99634a723d7f70
     <td><?php echo $i; ?></td>
     <td><?php echo CHtml::link($list_1->first_name.'  '.$list_1->middle_name.'  '.$list_1->last_name,array('view','id'=>$list_1->id)) ?></td>
     <td><?php echo $list_1->employee_number ?></td>
@@ -991,6 +1004,7 @@ else
 		echo CHtml::ajaxLink('Delete', array('deletes','id'=>$list_1->id), array('success'=>'rowdelete('.$i.')'),array('confirm'=>'Do you want to delete this employee ?'));
 		//echo CHtml::ajaxLink('Delete', array('deletes'), array('update'=>'#forAjaxRefresh'),array('onclick'=>'js: alert(Do you want to delete Employee ?);'));
 	?></td>
+                            
     <!--<td style="border-right:none;">Task</td>-->
   </tr><?php
   if($cls=="even")
@@ -1025,6 +1039,7 @@ else
     
     
     </div>
+    <?php $this->endWidget(); ?>
     
     
 
@@ -1042,7 +1057,7 @@ else
 $('body').click(function() {
 	$('#load').hide();
    $('#name').hide();
-   $('#admissionnumber').hide();
+   $('#employeenumber').hide();
    $('#batch').hide();
    $('#cat').hide();
    $('#pos').hide();

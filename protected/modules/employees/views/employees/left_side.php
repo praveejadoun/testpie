@@ -37,7 +37,7 @@
 					
 						array('label'=>Yii::t('employees','Add Leave Type').'<span>'.Yii::t('employees','Manage Leave Type').'</span>', 'url'=>array('/employees/employeeLeaveTypes'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->id=='employeeLeaveTypes')),
 		  				 
-                                                array('label'=>Yii::t('employees','Leave Requests ').'<span>'.Yii::t('employees','Manage Leave Requests').'</span>', 'url'=>array('leaves/'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->id=='leaves')),
+                                            /*    array('label'=>Yii::t('employees','Leave Requests ').'<span>'.Yii::t('employees','Manage Leave Requests').'</span>', 'url'=>array('leaves/'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->id=='leaves')),*/
 		  				 
                             
 						  array('label'=>''.'<h1>'.Yii::t('employees','Attendance Management').'</h1>'),

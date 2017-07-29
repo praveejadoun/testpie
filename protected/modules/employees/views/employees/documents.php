@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 	'Employees'=>array('index'),
-	'View',
+	documents,
 );
 
 ?>
@@ -55,7 +55,8 @@ $this->breadcrumbs=array(
     </table>
         </div>
         </div>
-        <?php foreach($empdoc as $empdoc_1)
+        <?php 
+        foreach($empdoc as $empdoc_1)
 	{ ?>
         <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-top:none;border-bottom: 2px solid #def;height:60px;">
             <tbody>
@@ -71,11 +72,13 @@ $this->breadcrumbs=array(
                            <?php echo CHtml::link(Yii::t('Achievements','Edit'),array('employeedocument/update','id'=>$empdoc_1->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
                          
                            <?php echo CHtml::link(Yii::t('Documents','Delete'), array('/employees/employeedocument/delete', 'id'=>$empdoc_1->id,'employee_id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure , Delete ?')) ?>
-                             <?php echo CHtml::link(Yii::t('Achievements','Download'),array('','id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>       
+                             <?php echo CHtml::link(Yii::t('Achievements','Download'),array('','id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>  
+                          <?php //echo CHtml::link(CHtml::encode($model->document_file_name), array('/employees/employeedocument/download', 'id' => $achievements->id),array('class'=>'edit')); ?>
                       </li>
                     </ul>
                 </td>
                 </tr>
+            </tbody>
         </table>
         <?php } ?>
     </div>

@@ -63,7 +63,8 @@ class EmployeeDocumentController extends RController
 	{
       		$model=new EmployeeDocument;
 
-		// Uncomment the following line if AJAX validation is needed
+		// Uncomment the fol
+                // lowing line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 
 		if(isset($_POST['EmployeeDocument']))
@@ -80,7 +81,7 @@ class EmployeeDocumentController extends RController
 				if($file=CUploadedFile::getInstance($model,'document_data'))
 					 {
 					$model->document_file_name=$file->name;
-					$model->document_content_type=$file->type;
+					$model->document_file_type=$file->name;
 					$model->document_file_size=$file->size;
 					$model->document_data=file_get_contents($file->tempName);
 					  }
@@ -88,6 +89,7 @@ class EmployeeDocumentController extends RController
 				
 				if($model->save())
 				{
+                               
 				$this->redirect(array('employees/view','id'=>$_REQUEST['id']));
 				}
 			//}
@@ -109,6 +111,21 @@ class EmployeeDocumentController extends RController
 			header('Content-Disposition: attachment; filename='.$model->photo_file_name);
 			echo $model->photo_data;
 		}
+        public function actionDownload()
+        {
+               $user = EmployeeDocument::model()->findByPk($id);
+                header('Content-Description: File Transfer');
+                header('Content-Type: application/octet-stream');
+                header('Content-Disposition: attachment; filename=MY_FILE_NAME');
+                header('Content-Transfer-Encoding: binary');
+                header('Expires: 0');
+                header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+                header('Pragma: public');
+                header('Content-Length: ' . count($user->document_data));
+                ob_start();
+                echo $user->document_data;
+                
+                }
 	public function actionRemove()
 	{
 		$model = EmployeeDocument::model()->findByAttributes(array('id'=>$_REQUEST['id']));

@@ -8,6 +8,7 @@
  * @property integer $employee_id
  * @property integer $subject_id
  * @property integer $elective_id
+ * @property integer $batch_id
  */
 class EmployeesSubjects extends CActiveRecord
 {
@@ -36,10 +37,10 @@ class EmployeesSubjects extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('employee_id, subject_id, elective_id', 'numerical', 'integerOnly'=>true),
+			array('employee_id, subject_id, elective_id,batch_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, employee_id, subject_id, elective_id', 'safe', 'on'=>'search'),
+			array('id, employee_id, subject_id, elective_id, batch_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -63,7 +64,8 @@ class EmployeesSubjects extends CActiveRecord
 			'id' => 'ID',
 			'employee_id' => 'Employee',
 			'subject_id' => 'Subject',
-                        'elective_id'=>'Elective'
+                        'elective_id'=>'Elective',
+                        'batch_id' => 'Batch'
 		);
 	}
 
@@ -82,6 +84,7 @@ class EmployeesSubjects extends CActiveRecord
 		$criteria->compare('employee_id',$this->employee_id);
 		$criteria->compare('subject_id',$this->subject_id);
                 $criteria->compaare('elective_id'.$this->elective_id);
+                $criteria->compare('batch_id'.$this->batch_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

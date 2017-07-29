@@ -227,7 +227,7 @@ else
 {
 	$sel_3='';
 }
-echo '<div style="float:left; width:380px;"><span style="font-size:14px; font-weight:bold; color:#666;">Course</span>&nbsp;&nbsp;&nbsp;&nbsp;';
+echo '<div style="float:left; width:380px;"><span style="font-size:14px; font-weight:bold; color:#666;">Batch</span>&nbsp;&nbsp;&nbsp;&nbsp;';
 echo CHtml::dropDownList('id','',$elec_batch,array('prompt'=>'Select','onchange'=>'electivebatch()','id'=>'bid','options'=>array($sel_3=>array('selected'=>true)))); 
 echo '</div>';
 echo '<div style="float:left; width:300px;"><span style="font-size:14px; font-weight:bold; color:#666;">Subject</span>&nbsp;&nbsp;'; ?>

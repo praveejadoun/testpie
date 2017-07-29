@@ -91,13 +91,13 @@ $(document).ready(function() {
         <div class="ovrBtm"><?php echo $total ?></div>
     </div>
     <div class="overviewbox ovbox2">
-    	<h1><?php echo Yii::t('employees','<strong>New Admissions</strong>');?></h1>
+    	<h1><?php echo Yii::t('employees','<strong>Recently Hired</strong>');?></h1>
         <div class="ovrBtm"><?php echo count($list) ?></div>
     </div>
-    <div class="overviewbox ovbox3">
-    	<h1><?php echo Yii::t('employees','<strong>Inactive Users</strong>');?></h1>
+  <!--  <div class="overviewbox ovbox3">
+    	<h1><?php //echo Yii::t('employees','<strong>Inactive Users</strong>');?></h1>
         <div class="ovrBtm">0</div>
-    </div>
+    </div>-->
   <div class="clear"></div>
     
 </div>

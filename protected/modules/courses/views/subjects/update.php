@@ -23,6 +23,6 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
 
 
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form1', array('model'=>$model)); ?>
 
 <?php $this->endWidget('zii.widgets.jui.CJuiDialog');?>

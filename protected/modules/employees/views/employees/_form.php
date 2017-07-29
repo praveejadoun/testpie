@@ -33,7 +33,8 @@ else
         <ul>
             <li><h2 class="cur">Employee Details</h2></li>
             <li><h2><?php echo CHtml::link(Yii::t('Employees','Employee Contact Details'), array('employees/update2','id' => $_REQUEST['id'])); ?></h2></li>
-            <li><h2><?php echo CHtml::link(Yii::t('Employees','Employee Documents'), array('employeedocument/create','id' => $_REQUEST['id'])); ?></h2></li>
+                        <li><h2><?php echo CHtml::link(Yii::t('Employees','Employee Documents'),array('employeedocument/create','id'=>$_REQUEST['id']));?></h2></li>
+
            
         </ul>
 	</div>
@@ -140,18 +141,18 @@ else
 <table width="75%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td valign="bottom" style="padding-bottom:3px;"><?php echo $form->labelEx($model,Yii::t('employees','first_name')); ?></td>
-    
+    <td>&nbsp;</td>
     <td valign="bottom" style="padding-bottom:3px;"><?php echo $form->labelEx($model,Yii::t('employees','middle_name')); ?></td>
-   
+   <td>&nbsp;</td>
     <td valign="bottom" style="padding-bottom:3px;"><?php echo $form->labelEx($model,Yii::t('employees','last_name')); ?></td>
   </tr>
   <tr>
     <td valign="top" width="45%"><?php echo $form->textField($model,'first_name',array('size'=>32,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'first_name'); ?></td>
-    
+    <td>&nbsp;</td>
     <td valign="top" width="20%"><?php echo $form->textField($model,'middle_name',array('size'=>10,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'middle_name'); ?></td>
-   
+   <td>&nbsp;</td>
     <td valign="top"><?php echo $form->textField($model,'last_name',array('size'=>30,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'last_name'); ?></td>
   </tr>

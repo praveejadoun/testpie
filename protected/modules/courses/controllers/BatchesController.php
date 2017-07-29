@@ -414,7 +414,20 @@ class BatchesController extends RController
 		}
 	}
         
-       
-        
+       public function actionDynamiccities()
+		{
+		//please enter current controller name because yii send multi dim array 
+			$data=EmployeesSubjects::model()->findAll('subject_id=:sub_id',array(':sub_id'=>(int) $_POST['TimetableEntries']['subject_id']));
+			
+		 	echo CHtml::tag('option', array('value' => ''), CHtml::encode('Select Employee'), true);
+			
+			$data=CHtml::listData($data,'id','employee_id');
+			foreach($data as $value=>$name)
+			{
+				$emp_name = Employees::model()->findByAttributes(array('id'=>$name));
+				echo CHtml::tag('option',array('value'=>$emp_name->id),$emp_name->first_name.' '.$emp_name->last_name,true);
+			}
+		}
+
 	
 }

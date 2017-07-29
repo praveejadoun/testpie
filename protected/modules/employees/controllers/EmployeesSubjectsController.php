@@ -158,6 +158,7 @@ class EmployeesSubjectsController extends RController
 
 	$model->employee_id = $_REQUEST['emp_id'];
 	$model->subject_id = $_REQUEST['sub'];
+        $model->batch_id = $data_1->batch_id;
 	$model->save();
 	$this->redirect(array('create','cou'=>$_REQUEST['cou'],'sub'=>$_REQUEST['sub'],'dept'=>$_REQUEST['dept']));
 		
