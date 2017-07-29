@@ -4,6 +4,12 @@ $this->breadcrumbs=array(
 	'Electives',
 );
 ?>
+<?php $form=$this->beginWidget('CActiveForm', array(
+	'id'=>'timetable-entries-form',
+	'enableAjaxValidation'=>true,
+	//'clientOptions'=>array('validateOnSubmit'=>TRUE),
+
+)); ?>
 <script type="text/javascript">
 function formSubmit()
 {
@@ -62,33 +68,10 @@ Yii::app()->clientScript->registerScript(
     <div class="clear"></div>
     <div class="emp_cntntbx" style="padding-top:10px;">
    
-    <?php if(Yii::app()->user->hasFlash('success')):?>
-    <div class="info" style="background-color:#C30; width:800px; height:30px">
-        <?php echo Yii::app()->user->getFlash('success'); ?>
-    </div>
-    <?php endif; ?>
-         <?php 
+     
+    
 
-$data = CHtml::listData(Courses::model()->findAll("is_deleted 	=:x", array(':x'=>0),array('order'=>'course_name DESC')),'id','course_name');
-if(isset($_REQUEST['cou']))
-{
-	$sel= $_REQUEST['cou'];
-      
-        
-}
-else
-{
-	$sel='';
-}
-echo '<div style="float:left; width:380px;"><span style="font-size:14px; font-weight:bold; color:#666;">Course</span>&nbsp;&nbsp;&nbsp;&nbsp;';
-echo CHtml::dropDownList('id','',$data,array('prompt'=>'Select','onchange'=>'course()','id'=>'cou','options'=>array($sel=>array('selected'=>true)))); 
-echo '</div>';
-
-echo '&nbsp;&nbsp;'; ?>
-
-      
-        
-        
+     
 
    <?php $this->beginWidget('CActiveForm',array('id'=>'checkform')) ?>
       <div class="table_listbx">
@@ -173,7 +156,7 @@ echo '&nbsp;&nbsp;'; ?>
 </tbody></table>
 </div>
 
-
+ <?php $this->endWidget(); ?>  
 <script>
 	//CREATE 
 

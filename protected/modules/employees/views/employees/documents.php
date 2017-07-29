@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 	'Employees'=>array('index'),
-	'View',
+	documents,
 );
 
 ?>
@@ -72,7 +72,8 @@ $this->breadcrumbs=array(
                            <?php echo CHtml::link(Yii::t('Achievements','Edit'),array('employeedocument/update','id'=>$empdoc_1->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
                          
                            <?php echo CHtml::link(Yii::t('Documents','Delete'), array('/employees/employeedocument/delete', 'id'=>$empdoc_1->id,'employee_id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure , Delete ?')) ?>
-                             <?php echo CHtml::link(Yii::t('Achievements','Download'),array('','id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>       
+                             <?php echo CHtml::link(Yii::t('Achievements','Download'),array('','id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>  
+                          <?php //echo CHtml::link(CHtml::encode($model->document_file_name), array('/employees/employeedocument/download', 'id' => $achievements->id),array('class'=>'edit')); ?>
                       </li>
                     </ul>
                 </td>

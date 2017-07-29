@@ -47,7 +47,9 @@
         <td valign="top">
             <div class="cont_right formWrapper">
                   <h1><?php echo Yii::t('courses','Common Subjects');?></h1>  
-              
+                  <div class="formCon">
+
+<div class="formConInner">
                      <?php 
 
 $data = CHtml::listData(Courses::model()->findAll("is_deleted 	=:x", array(':x'=>0),array('order'=>'course_name DESC')),'id','course_name');
@@ -64,15 +66,17 @@ echo '<div style="float:left; width:380px;"><span style="font-size:14px; font-we
 echo CHtml::dropDownList('id','',$data,array('prompt'=>'Select','onchange'=>'course()','id'=>'cou','options'=>array($sel=>array('selected'=>true)))); 
 echo '</div>';
 echo '&nbsp;&nbsp;'; ?>
- <div class="contrht_bttns" >
-     <ul style="margin:99px 400px 0px 0px;padding:8px 10px 8px 10px;">
+ <div class="edit_bttns" style="top:15px; right:410px">
+     <ul >
       <li><?php echo CHtml::ajaxLink(Yii::t('Courses','Add Subject'),$this->createUrl('subjects/Addnew'),array(
         'onclick'=>'$("#jobDialog1").dialog("open"); return false;',
-        'update'=>'#jobDialog1','type' =>'GET','data' => array( 'val1' =>$_REQUEST['cou'] ),'dataType' => 'text',),array('id'=>'showJobDialog12'.$_REQUEST['cou'],'class'=>'add')); 
+        'update'=>'#jobDialog1','type' =>'GET','data' => array( 'val1' =>$_REQUEST['cou'] ),'dataType' => 'text',),array('id'=>'showJobDialog12'.$_REQUEST['cou'],'class'=>'addbttn last')); 
       
          ?><div id="jobDialog1"></div></li>
      </ul> 
- </div>                    
+ </div> 
+     </div>
+            </div>
 <?php 
 $data_1= array();
 if(isset($_REQUEST['cou']))
@@ -139,11 +143,12 @@ $emp_sub = Subjects::model()->findAll("course_id=:x AND is_deleted=:y AND is_act
         'update'=>'#jobDialog','type' =>'GET','data' => array( 'val1' =>$emp_sub_1->id,'course_id'=>$_REQUEST['cou'] ),'dataType' => 'text'),array('id'=>'showJobDialog123'.$emp_sub_1->id,'class'=>'add')); ?>
   
   <?php  echo CHtml::link(Yii::t('subjects','Remove'), array('deleterow', 'id'=>$emp_sub_1->id,'cou'=>$_REQUEST['cou'],), array('confirm' => 'Are you sure?','onclick'=>"show()")); ?>
-     </tr>
+        </td> </tr>
     <?php } ?>
     </table>
    </div>
-                  </div>
+                 
+            </div>
     <?php
 	
 	}?>

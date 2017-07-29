@@ -925,6 +925,7 @@ else
                             
                         </div>
                     </div>
+    <?php $this->beginWidget('CActiveForm',array('id'=>'checkform')) ?>
     <div class="list_contner">
     
     <div class="clear"></div>
@@ -973,7 +974,7 @@ else
   <?php foreach($list as $list_1)
 	{ ?>
  <tr class=<?php echo $cls;?> id=<?php echo $i;?>>
-     <td></td>
+   <td ></td>
     <td><?php echo $i; ?></td>
     <td><?php echo CHtml::link($list_1->first_name.'  '.$list_1->middle_name.'  '.$list_1->last_name,array('view','id'=>$list_1->id)) ?></td>
     <td><?php echo $list_1->employee_number ?></td>
@@ -998,6 +999,7 @@ else
 		echo CHtml::ajaxLink('Delete', array('deletes','id'=>$list_1->id), array('success'=>'rowdelete('.$i.')'),array('confirm'=>'Do you want to delete this employee ?'));
 		//echo CHtml::ajaxLink('Delete', array('deletes'), array('update'=>'#forAjaxRefresh'),array('onclick'=>'js: alert(Do you want to delete Employee ?);'));
 	?></td>
+                            
     <!--<td style="border-right:none;">Task</td>-->
   </tr><?php
   if($cls=="even")
@@ -1032,6 +1034,7 @@ else
     
     
     </div>
+    <?php $this->endWidget(); ?>
     
     
 
