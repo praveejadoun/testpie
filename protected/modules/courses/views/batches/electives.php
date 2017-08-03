@@ -4,12 +4,7 @@ $this->breadcrumbs=array(
 	'Electives',
 );
 ?>
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'timetable-entries-form',
-	'enableAjaxValidation'=>true,
-	//'clientOptions'=>array('validateOnSubmit'=>TRUE),
 
-)); ?>
 <script type="text/javascript">
 function formSubmit()
 {
@@ -68,13 +63,16 @@ Yii::app()->clientScript->registerScript(
     <div class="clear"></div>
     <div class="emp_cntntbx" style="padding-top:10px;">
    
-     
+        <h1>Elective</h1>
+        
+     <?php echo $this->renderPartial('_formelect',array('model'=>$model)); ?>
     
+           
 
      
 
    <?php $this->beginWidget('CActiveForm',array('id'=>'checkform')) ?>
-      <div class="table_listbx">
+        <div class="table_listbx" style="top:45px;">
     
      <?php
                 if(isset($_REQUEST['id']))
@@ -155,8 +153,7 @@ Yii::app()->clientScript->registerScript(
   </tr>
 </tbody></table>
 </div>
-
- <?php $this->endWidget(); ?>  
+ 
 <script>
 	//CREATE 
 

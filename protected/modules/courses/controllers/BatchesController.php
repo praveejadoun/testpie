@@ -27,7 +27,7 @@ class BatchesController extends RController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','manage','Batchstudents','Addnew','settings','Addupdate','remove','promote','deactivate','activate'),
+				'actions'=>array('index','view','manage','Batchstudents','Addnew','settings','Addupdate','remove','promote','deactivate','activate','loadconstituencies'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -132,8 +132,22 @@ class BatchesController extends RController
 	}
         public function actionElectives() 
 	{                                    
-		 
-		 $this->render('electives'); 
+		 $model=new StudentSubjects();
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['StudentSubjects']))
+		{
+			$model->attributes=$_POST['StudentSubjects'];
+			if($model->save())
+			$this->redirect(array('view','id'=>$model->id));
+		}
+
+		$this->render('electives',array(
+			'model'=>$model,
+		));
+		  
 	}
 	public function actionManage() 
 	{                                    
@@ -430,4 +444,47 @@ class BatchesController extends RController
 		}
 
 	
+
+public function actiongetstreets()
+    {
+        $data = Electives::model()->findAll('id=:id', array(':elective_group_id'=>(int)$_POST['testtbl[city]']));
+        $data = CHtml::listData($data, 'id', 'name');
+        foreach($data AS $value=>$name)
+        {
+            echo CHtml::tag('option',
+                   array('value'=>$value), CHtml::encode($name),true);
+        }
+    }
+    public function actionLoadconstituencies()
+        { 
+        $model = new Studentsubjects();
+            $countyid = $_POST['id'];
+            $data= Electives::model()->findAll('id=:id',array(':id'=> $countyid));
+
+            $data=CHtml::listData($data,'id','name');
+            
+            foreach($data as $value=>$name)  
+            {
+                echo CHtml::tag('option', array('value'=>$value),CHtml::encode($name),true);
+            }
+        }
+        
+        public function actionCreate1()
+	{
+		$model=new StudentSubjects();
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['StudentSubjects']))
+		{
+			$model->attributes=$_POST['StudentSubjects'];
+			if($model->save())
+			$this->redirect(array('view','id'=>$model->id));
+		}
+
+		$this->render('create1',array(
+			'model'=>$model,
+		));
+	}
 }

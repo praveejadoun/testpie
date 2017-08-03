@@ -794,5 +794,35 @@ class EmployeesController extends RController
 			'model'=>$this->loadModel($_REQUEST['id']),
 		));
 	}
+        public function actionDeleteselected() {
+       
+       foreach($_POST['ids'] as $sid){
+        $model = Employees::model()->findByAttributes(array('id' => $sid));
+        $model->saveAttributes(array('is_deleted' => '1'));
+        if ($model->uid and $model->uid != NULL and $model->uid != 0) { // Deleting student user
+            $user = User::model()->findByPk($model->uid);
+            if ($user) {
+                $profile = Profile::model()->findByPk($user->id);
+                if ($profile)
+                    $profile->delete();
+                $user->delete();
+            }
+        }
+
+       /* $guardian = Guardians::model()->findByAttributes(array('ward_id' => $sid));
+        if ($guardian->uid and $guardian->uid != NULL and $guardian->uid != 0) { //Deleting parent user
+            $parent_user = User::model()->findByPk($guardian->uid);
+            if ($parent_user) {
+                $profile = Profile::model()->findByPk($parent_user->id);
+                if ($profile)
+                    $profile->delete();
+                $parent_user->delete();
+            }
+        }
+        $examscores = ExamScores::model()->DeleteAllByAttributes(array('student_id' => $sid));*/
+        
+       }
+        echo "success";exit;
+    }
 }
 

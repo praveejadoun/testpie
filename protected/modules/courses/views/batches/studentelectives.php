@@ -87,8 +87,9 @@ Yii::app()->clientScript->registerScript(
                     <td ><?php echo Yii::t('Batch','Sl no.');?></td>
                     <td ><?php echo Yii::t('Batch','Student Name');?></td>
                     <td ><?php echo Yii::t('Batch','Admission Number');?></td>
-                    <td ><?php echo Yii::t('Batch','Gender');?></td>
-                    <td ><?php echo Yii::t('Batch','Actions');?></td>
+                    <td ><?php echo Yii::t('Batch','Elective Group');?></td>
+                     <td ><?php echo Yii::t('Batch','Elective');?></td>
+                    <td ><?php echo Yii::t('Batch','Action');?></td>
                     </tr>
                         <?php
 						$i=0;

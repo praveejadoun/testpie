@@ -914,7 +914,7 @@ else
                          <div class="bttns_addstudent">   
                       <ul>
                         	<li><?php echo CHtml::link(Yii::t('employees','Add Employee'), array('create'),array('class'=>'addbttn last')); ?></li>
-                                <li><?php echo CHtml::link(Yii::t('employees','Delete All'),array('deleteall',id=>$list),array('class'=>'addbttn last','confirm'=>'Are you sure you want to delete this?')); ?></li>
+                                <li><a class="addbttn last" href="javascript:void(0)" id="delete_student">Delete Employee</a></li>
 
                       </ul>
                          </div>
@@ -948,7 +948,7 @@ else
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
     
   <tr class="tablebx_topbg">
-      <td></td>
+       <td><input type="checkbox" name="checkall" id="checkall" value="all"/></td>
     <td><?php echo Yii::t('employees','Sl. No.');?></td>	
     <td><?php echo Yii::t('employees','Employee Name');?></td>
     <td><?php echo Yii::t('employees','Employee No.');?></td>
@@ -973,13 +973,9 @@ else
   
   <?php foreach($list as $list_1)
 	{ ?>
-<<<<<<< HEAD
  <tr class='<?php echo $cls;?>' id="<?php echo $i;?>">
-     <td></td>
-=======
- <tr class=<?php echo $cls;?> id=<?php echo $i;?>>
-   <td ></td>
->>>>>>> d41c7979d8887859524be0808b99634a723d7f70
+      <td><input type="checkbox" class="chk" name="chkCid[]" value="<?php echo $list_1->id; ?>"/></td>
+
     <td><?php echo $i; ?></td>
     <td><?php echo CHtml::link($list_1->first_name.'  '.$list_1->middle_name.'  '.$list_1->last_name,array('view','id'=>$list_1->id)) ?></td>
     <td><?php echo $list_1->employee_number ?></td>
@@ -1089,4 +1085,45 @@ function rowdelete(id)
 {
 	 $("#"+id).fadeOut("slow");
 }
+
+
+ $("#checkall").click(function(){
+        if($(this).is(':checked')){
+        $(".chk").attr("checked","checked");
+    }else{
+        $(".chk").attr("checked",false);
+    }
+        
+    });
+    
+    $(document).ready(function () {
+        $("#delete_student").click(function () {
+            if ($(".chk:checked").length == 0) {
+                alert("Please select student to delete");
+                return false;
+            } else {
+                //alert($(".chk:checked").length);
+
+                var delIds = $(".chk:checked").map(function () {
+                    return $(this).val();
+                }).toArray();
+                //console.log(delIds);
+
+                if (confirm("Are you sure you want to delete selected student(s)?")) {
+                    $.post("/sms/index.php?r=employees/employees/deleteselected", {"ids": delIds}, function (retVal) {
+                        if(retVal=="success"){
+                            //alert("Students deleted successfully");
+                            window.location.reload();
+                        }else{
+                            alert("Students could not be deleted");
+                        }
+                       
+                    });
+                }
+
+
+            }
+
+        });
+    });
 </script>

@@ -11,7 +11,7 @@ $this->breadcrumbs=array(
   <tr>
     <td width="247" valign="top">
      <?php $this->renderPartial('/employees/left_side');?>
-    
+   <?php $employee=Employees::model()->findByAttributes(array('id'=>$_REQUEST['id']));?>
     </td>
     <td valign="top">
     <div class="cont_right formWrapper">
@@ -25,8 +25,8 @@ $this->breadcrumbs=array(
     </div>
     
     </div>-->
-    <?php $employee= EmployeeDocument::model()?>
-    <h1><?php echo Yii::t('employeedocument','Enrolment : ');?><?php echo $model->first_name; ?></h1>
+    
+    <h1><?php echo Yii::t('employeedocument','Enrolment : ');?><?php echo $employee->first_name; ?></h1>
     <?php echo $this->renderPartial('_form', array('model'=>$model,'val1'=>$_GET['id'])); ?>
 
     </div>
