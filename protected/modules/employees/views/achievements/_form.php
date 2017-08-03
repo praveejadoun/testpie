@@ -83,9 +83,11 @@
 			{
 				if(Yii::app()->controller->action->id=='update') {
                                    echo   '<ul  class="sub_act" ><li style="list-style:none;">';
-                                        echo CHtml::link(Yii::t('students','Download'), array('achievements/download', 'id'=>$model->id,'employee_id'=>$model->employee_id),array('confirm'=>'Are you sure?'));
+                                        echo CHtml::link(Yii::t('students','Download'), array('achievements/downloadImage', 'id'=>$model->id,'employee_id'=>$model->employee_id),array('confirm'=>'Are you sure?'));
 					echo CHtml::link(Yii::t('students','Remove'), array('achievements/remove', 'id'=>$model->id,'employee_id'=>$model->employee_id),array('confirm'=>'Are you sure?'));
-                                    echo '</li></ul>';
+                                    //  echo '<img class="imgbrder" src="'.$this->createUrl('achievements/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->achievdoc_file_name.'" width="100" height="100" />';	
+                                       echo '<img class="imgbrder" src="'.$this->createUrl('achievements/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->achievdoc_file_name.'" width="100" height="100" />';	
+                                        echo '</li></ul>';
                                      
 					
 				}
@@ -94,7 +96,7 @@
 					echo CHtml::hiddenField('achievdoc_content_type',$model->achievdoc_content_type);
 					echo CHtml::hiddenField('achievdoc_file_size',$model->achievdoc_file_size);
 					echo CHtml::hiddenField('achievdoc_data',bin2hex($model->achievdoc_data));
-					echo '<img class="imgbrder" src="'.$this->createUrl('Employees/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->achievdoc_file_name.'" width="100" height="100" />';
+					echo '<img class="imgbrder" src="'.$this->createUrl('achievements/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->achievdoc_file_name.'" width="100" height="100" />';
 				}
 			}
 		}

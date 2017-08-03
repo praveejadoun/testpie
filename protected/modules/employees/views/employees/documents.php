@@ -67,12 +67,12 @@ $this->breadcrumbs=array(
                 <td  align="center" style="padding-left: 100px;">
                     <ul  class="sub_act"  >
                       <li style="list-style:none;">
-                           <?php echo CHtml::link(Yii::t('Achievements','Approved'),array(''/*,'id'=>$empdoc_1->id*/,'id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
-		           <?php echo CHtml::link(Yii::t('Achievements','Disapprove'),array('employeedocument/disapprove','id'=>$empdoc_1->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>	
+                           <?php echo CHtml::link(Yii::t('Achievements','Approved'),array(/*'','id'=>$empdoc_1->id,'id'=>$_REQUEST['id']*/),array('class'=>'edit')); ?>
+		           <?php echo CHtml::link(Yii::t('Achievements','Disapprove'),array('employeedocument/disapprove','id'=>$empdoc_1->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit','confirm'=>'Are You Sure You Want To Disapprove This ?')); ?>	
                            <?php echo CHtml::link(Yii::t('Achievements','Edit'),array('employeedocument/update','id'=>$empdoc_1->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
                          
-                           <?php echo CHtml::link(Yii::t('Documents','Delete'), array('/employees/employeedocument/delete', 'id'=>$empdoc_1->id,'employee_id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure , Delete ?')) ?>
-                             <?php echo CHtml::link(Yii::t('Achievements','Download'),array('','id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>  
+                           <?php echo CHtml::link(Yii::t('Documents','Delete'), array('/employees/employeedocument/delete', 'id'=>$empdoc_1->id,'employee_id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure You Want To Delete This ?')) ?>
+                             <?php echo CHtml::link(Yii::t('Achievements','Download'),array('Employeedocument/downloadImage','id'=>$empdoc_1->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>  
                           <?php //echo CHtml::link(CHtml::encode($model->document_file_name), array('/employees/employeedocument/download', 'id' => $achievements->id),array('class'=>'edit')); ?>
                       </li>
                     </ul>

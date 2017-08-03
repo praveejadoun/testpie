@@ -106,11 +106,21 @@ class EmployeeDocumentController extends RController
 			header('Expires: 0');
 			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 			header('Content-Transfer-Encoding: binary');
-			header('Content-length: '.$model->photo_file_size);
-			header('Content-Type: '.$model->photo_content_type);
-			header('Content-Disposition: attachment; filename='.$model->photo_file_name);
-			echo $model->photo_data;
+			header('Content-length: '.$model->document_file_size);
+			header('Content-Type: '.$model->document_content_type);
+			header('Content-Disposition: attachment; filename='.$model->document_file_name);
+			echo $model->document_data;
 		}
+     public function actionDownloadImage()
+{
+  $model=$this->loadModel($_GET['id']); 
+  $fileDir=Yii::app()->request->baseUrl.'/image/';
+ Yii::app()->request->sendFile(
+        $model->document_file_name,
+        file_get_contents($fileDir . $model->document_file_name),
+        $model->document_data
+);  
+}
         public function actionDownload()
         {
                $user = EmployeeDocument::model()->findByPk($id);
@@ -121,9 +131,9 @@ class EmployeeDocumentController extends RController
                 header('Expires: 0');
                 header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
                 header('Pragma: public');
-                header('Content-Length: ' . count($user->document_data));
+                header('Content-Length: ' . count($user->document_file_size));
                 ob_start();
-                echo $user->document_data;
+                echo $user->document_file_size;
                 
                 }
 	public function actionRemove()

@@ -58,8 +58,9 @@
 			{
 				if(Yii::app()->controller->action->id=='update') {
                                    echo   '<ul  class="sub_act" ><li style="list-style:none;">';
-                                        echo CHtml::link(Yii::t('students','Download'), array('Employeedocument/download', 'id'=>$model->id,'employee_id'=>$model->employee_id),array('confirm'=>'Are you sure?'));
+                                        echo CHtml::link(Yii::t('students','Download'), array('Employeedocument/downloadImage', 'id'=>$model->id,'employee_id'=>$model->employee_id),array('confirm'=>'Are you sure?'));
 					echo CHtml::link(Yii::t('students','Remove'), array('Employeedocument/remove', 'id'=>$model->id,'employee_id'=>$model->employee_id),array('confirm'=>'Are you sure?'));
+                                        echo '<img class="imgbrder" src="'.$this->createUrl('Employeedocument/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->document_file_name.'" width="50" height="50" />';	
                                     echo '</li></ul>';
                                      
 					

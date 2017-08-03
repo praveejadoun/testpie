@@ -31,7 +31,7 @@ window.location= 'index.php?r=employees/employeesSubjects/create&cou='+id_1+'&su
 <div class="formConInner">
     <?php 
 
-$data = CHtml::listData(Courses::model()->findAll("is_deleted 	=:x", array(':x'=>0),array('order'=>'course_name DESC')),'id','course_name');
+$data = CHtml::listData(ElectiveGroups::model()->findAll("batch_id 	=:x", array(':x'=>$_REQUEST['id']),array('order'=>'course_name DESC')),'id','name');
 if(isset($_REQUEST['cou']))
 {
 	$sel= $_REQUEST['cou'];

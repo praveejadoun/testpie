@@ -127,7 +127,17 @@ class AchievementsController extends RController
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
-        public function actionDisplaySavedImage()
+         public function actionDownloadImage()
+            {
+             $model=$this->loadModel($_GET['id']); 
+             $fileDir=Yii::app()->request->baseUrl.'/image/';
+                Yii::app()->request->sendFile(
+             $model->achievdoc_file_name,
+             file_get_contents($fileDir . $model->achievdoc_file_name),
+             $model->achievdoc_data
+                        );  
+            }
+    public function actionDisplaySavedImage()
 		{
 			$model=$this->loadModel($_GET['id']);
 			header('Pragma: public');

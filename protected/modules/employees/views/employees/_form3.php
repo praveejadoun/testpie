@@ -62,8 +62,8 @@
                  <td valign="botttom" ><?php echo $form->textField($model,'achievement_document_name',array('size'=>30,'maxlength'=>255)); ?>
                 <?php echo $form->error($model,'achievement_document_name'); ?> </td>
                 <td>&nbsp;</td>
-                <td>
-                <?php 
+              <td>
+	<?php 
 		
 		
 		if($model->isNewRecord)
@@ -73,17 +73,31 @@
 		}
 		else
 		{
-			if($model->achievdoc_data==NULL)
+			if($model->document_data==NULL)
 			{
 				echo $form->fileField($model,'achievdoc_data'); 
 		        echo $form->error($model,'achievdoc_data'); 
 			}
 			
-			
+			else
+			{
+				if(Yii::app()->controller->action->id=='update') {
+					echo CHtml::link(Yii::t('students','Remove'), array('Achievements/remove', 'id'=>$model->id),array('confirm'=>'Are you sure?')); 
+					echo '<img class="imgbrder" src="'.$this->createUrl('Achievements/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->achievdoc_file_name.'" width="100" height="100" />';	
+				}
+				else if(Yii::app()->controller->action->id=='create') {
+					echo CHtml::hiddenField('achievdoc_file_name',$model->achievdoc_file_name);
+					echo CHtml::hiddenField('achievdoc_content_type',$model->achievdoc_content_type);
+					echo CHtml::hiddenField('achievdoc_file_size',$model->achievdoc_file_size);
+					echo CHtml::hiddenField('achievdoc_data',bin2hex($model->achievdoc_data));
+					echo '<img class="imgbrder" src="'.$this->createUrl('Achievements/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->achievdoc_file_name.'" width="100" height="100" />';
+				}
+			}
 		}
 		
 		 ?>
-                </td>
+        
+        </td>
                  </tr>
             </table>
              <div class="row">
