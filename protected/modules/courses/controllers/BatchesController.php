@@ -132,14 +132,14 @@ class BatchesController extends RController
 	}
         public function actionElectives() 
 	{                                    
-		 $model=new StudentSubjects();
+		 $model=new Electives();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['StudentSubjects']))
+		if(isset($_POST['Electives']))
 		{
-			$model->attributes=$_POST['StudentSubjects'];
+			$model->attributes=$_POST['Electives'];
 			if($model->save())
 			$this->redirect(array('view','id'=>$model->id));
 		}
@@ -487,4 +487,28 @@ public function actiongetstreets()
 			'model'=>$model,
 		));
 	}
+        public function actionLoadcities()
+{
+   $data=Electives::model()->findAll('elective_group_id=:region_id', 
+   array(':region_id'=>(int) $_POST['id']));
+ 
+   $data=CHtml::listData($data,'id','name');
+ 
+   echo "<option value=''>Select City</option>";
+   foreach($data as $value=>$name)
+   echo CHtml::tag('option', array('value'=>$value),CHtml::encode($name),true);
+}
+
+        public function actionDistricts()
+        {
+
+             $electives = Electives::model()->findAll('elective_group_id=:id', array(':id' => (int) $_POST['Batches']['id']));
+          
+             $return = CHtml::listData($electives, 'elective_group_id', 'name');
+             echo "<option value=''>Select City</option>";
+            foreach ($return as $districtId => $name) {
+            echo CHtml::tag('option', array('value' => $districtId), CHtml::encode($name), true);
+            }
+        }
+
 }

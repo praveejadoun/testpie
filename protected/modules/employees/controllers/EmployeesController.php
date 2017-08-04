@@ -27,7 +27,7 @@ class EmployeesController extends RController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','Create2','update2','Manage','savesearch','DisplaySavedImage','achievements','pdf','Address','Contact','Addinfo','Remove'),
+				'actions'=>array('index','view','Create2','update2','Manage','savesearch','DisplaySavedImage','achievements','pdf','Address','Contact','Addinfo','Remove','Subjectassopdf'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -458,6 +458,23 @@ class EmployeesController extends RController
         ////////////////////////////////////////////////////////////////////////////////////
 	}
 
+	public function actionSubjectassopdf()
+    {
+		$employee = EmployeesSubjects::model()->findByAttributes(array('id'=>$_REQUEST['id']));
+		$employee = $employee->employee_id.' '.$employee->subject_id.' Profile.pdf';
+        $html2pdf = Yii::app()->ePdf->HTML2PDF();
+		$html2pdf->WriteHTML($this->renderPartial('print_1', array('model'=>$this->loadModel($_REQUEST['id'])), true));
+        $html2pdf->Output($employee);
+    }
+    public function actionManagepdf()
+    {
+	$employee = Employees::model()->findByAttributes(array('id'=>$_REQUEST['id']));
+		$employee = $employee->first_name.' '.$employee->last_name.' Profile.pdf';	
+        $html2pdf = Yii::app()->ePdf->HTML2PDF();
+		$html2pdf->WriteHTML($this->renderPartial('print_1_1',array(),true));
+                ob_end_clean();
+        $html2pdf->Output($employee);
+    }
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.

@@ -919,7 +919,7 @@ else
                       </ul>
                          </div>
                              <div class="ea_pdf" style="top:0px; right:6px;">
- <?php echo CHtml::link('<img src="images/pdf-but.png">', array('employees/printpdf1'),array('target'=>'_blank')); ?>
+ <?php echo CHtml::link('<img src="images/pdf-but.png">', array('employees/managePdf'),array('target'=>'_blank')); ?>
 	</div>
                     </div> 
                             

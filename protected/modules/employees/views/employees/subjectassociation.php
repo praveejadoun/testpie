@@ -62,7 +62,7 @@ $this->breadcrumbs=array(
   
     <h2>Subject Association</h2>
      <div class="ea_pdf" style="top:160px; right:6px;">
- <?php echo CHtml::link('<img src="images/pdf-but.png">', array('employees/printpdf1'),array('target'=>'_blank')); ?>
+ <?php echo CHtml::link('<img src="images/pdf-but.png">', array('employees/Subjectassopdf','id'=>$_REQUEST['id']),array('target'=>'_blank')); ?>
 	</div>
      </div>
     <h3 style="color:#09c;">SUBJECT</h3>
