@@ -158,6 +158,10 @@ class BatchesController extends RController
 	{      
             $this->render('batchstudents'); 
 	}
+        public function actionWaitinglist() 
+	{      
+            $this->render('Waitinglist'); 
+	}
 	public function actionPromote_popup() 
 	{ 
 	     $this->render('promote_popup'); 

@@ -27,7 +27,7 @@ class EmployeesController extends RController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','Create2','update2','Manage','savesearch','DisplaySavedImage','achievements','pdf','Address','Contact','Addinfo','Remove','Subjectassopdf'),
+				'actions'=>array('index','view','Create2','update2','Manage','savesearch','DisplaySavedImage','achievements','pdf','Address','Contact','Addinfo','Remove','Subjectassopdf','Managepdf'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -306,7 +306,16 @@ class EmployeesController extends RController
 					$model->document_content_type=$file->type;
 					$model->document_file_size=$file->size;
 					$model->document_data=file_get_contents($file->tempName);
-					  }
+					 
+                                        if(!is_dir('uploadedfiles/')){
+				mkdir('uploadedfiles/');
+			}
+			if(!is_dir('uploadedfiles/school_logo/')){
+				mkdir('uploadedfiles/school_logo/');
+			}
+			move_uploaded_file($file->tempName,'uploadedfiles/school_logo/'.$file->name);
+                                        
+                                         }
 				
 				
                       
@@ -320,6 +329,29 @@ class EmployeesController extends RController
 			'model'=>$model,
 		));
 		
+                
+                
+                
+                
+               /*  $model=new EmployeeDocument;  // this is my model related to table
+        if(isset($_POST['EmployeeDocument']))
+        {
+            $rnd = rand(0,9999);  // generate random number between 0-9999
+            $model->attributes=$_POST['EmployeeDocument'];
+ 
+            $uploadedFile=CUploadedFile::getInstance($model,'image');
+            $fileName = "{$rnd}-{$uploadedFile}";  // random number + file name
+            $model->image = $fileName;
+ 
+            if($model->save())
+            {
+                $uploadedFile->saveAs('localhost/sms/index.php?r='.$fileName);  // image will uplode to rootDirectory/banner/
+                $this->redirect(array('documents','id'=>$_REQUEST['id']));
+            }
+        }
+        $this->render('documents',array(
+            'model'=>$model,
+        ));*/
 	}       
 
        public function actionAchievements()
@@ -468,8 +500,9 @@ class EmployeesController extends RController
     }
     public function actionManagepdf()
     {
-	$employee = Employees::model()->findByAttributes(array('id'=>$_REQUEST['id']));
-		$employee = $employee->first_name.' '.$employee->last_name.' Profile.pdf';	
+        
+	$employee = Employees::model()->findAll();
+		$employee = 'empoyee list.pdf';	
         $html2pdf = Yii::app()->ePdf->HTML2PDF();
 		$html2pdf->WriteHTML($this->renderPartial('print_1_1',array(),true));
                 ob_end_clean();

@@ -105,10 +105,10 @@ if(isset($_REQUEST['id']))
 <?php /*?><?php echo CHtml::link('<img src="images/pdf-but.png" border="0" />', array('employeeAttendances/pdf','id'=>$_REQUEST['id']),array('target'=>"_blank")); ?><?php */
 
 if($_REQUEST['mon']&&$_REQUEST['year']){
-  echo CHtml::link('<img src="images/pdf-but.png" border="0">', array('employeeAttendances/pdf','mon'=>$_REQUEST['mon'],'year'=>$_REQUEST['year'],'id'=>$_REQUEST['id']),array('target'=>'_blank')); 
+  echo CHtml::link('<img src="images/pdf-but.png" border="0">', array('employeeAttendances/Deppdf','mon'=>$_REQUEST['mon'],'year'=>$_REQUEST['year'],'id'=>$_REQUEST['id']),array('target'=>'_blank')); 
 	}
 	else{
-		 echo CHtml::link('<img src="images/pdf-but.png" border="0">', array('employeeAttendances/pdf','mon'=>date("m"),'year'=>date("Y"),'id'=>$_REQUEST['id']),array('target'=>'_blank')); 
+		 echo CHtml::link('<img src="images/pdf-but.png" border="0">', array('employeeAttendances/Deppdf','mon'=>date("m"),'year'=>date("Y"),'id'=>$_REQUEST['id']),array('target'=>'_blank')); 
 		
 	}
 ?>

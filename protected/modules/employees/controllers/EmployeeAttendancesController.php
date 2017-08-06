@@ -229,7 +229,18 @@ class EmployeeAttendancesController extends RController
  
 		
 	}
-	
+	 public function actionDeppdf()
+    {
+        $department = EmployeeDepartments::model()->findByAttributes(array('id'=>$_REQUEST['id']));
+		$department = $department->name.' Department Attendance.pdf';
+		
+        # HTML2PDF has very similar syntax
+        $html2pdf = Yii::app()->ePdf->HTML2PDF();
+
+        $html2pdf->WriteHTML($this->renderPartial('attentancepdf_1', array(), true));
+        $html2pdf->Output($department);
+ 
+	}
 	
 	public function actionEditLeave() {
         $model=EmployeeAttendances::model()->findByAttributes(array('id'=>$_REQUEST['id']));

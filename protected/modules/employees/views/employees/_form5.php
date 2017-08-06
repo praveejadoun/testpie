@@ -32,7 +32,7 @@
     <td valign="top" width="45%"><?php echo $form->textField($model,'document_name',array('size'=>32,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'document_name'); ?></td>
     <td>
-	<?php 
+	<?php
 		
 		
 		if($model->isNewRecord)
@@ -67,7 +67,18 @@
 		 ?>
         
         </td>
-    
+    <!--<td>
+       <div class="row">
+        <?php// echo $form->labelEx($model,'image'); ?>
+        <?php// echo CHtml::activeFileField($model, 'image'); ?>  
+        <?php// echo $form->error($model,'image'); ?>
+</div>
+<?php //if($model->isNewRecord!='1'){ ?>
+<div class="row">
+     <?php// echo CHtml::image(Yii::app()->request->baseUrl.'/banner/'.$model->image,"image",array("width"=>200)); ?>  
+</div> 
+<?php// } ?>    
+    </td>-->
   </tr>	
   <div class="row">
 		<?php //echo $form->labelEx($model,'course_id'); 

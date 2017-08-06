@@ -14,7 +14,8 @@
  * @property integer $is_active
  * @property string $created_at
  * @property string $updated_at
- * @property integer $document_file_size
+ * @property integer $document_file_size\
+ * @property string $image
 
  */
 class EmployeeDocument extends CActiveRecord
@@ -49,8 +50,10 @@ class EmployeeDocument extends CActiveRecord
 		return array(
 			array('employee_id, document_file_size,is_active,is_deleted', 'numerical', 'integerOnly'=>true),
 			array('document_name, document_file_name, document_content_type', 'length', 'max'=>255),
+                    array(' image', 'length', 'max'=>255, 'on'=>'insert,update'),
 			array('created_at, updated_at', 'safe'),
 			array('document_name', 'required'),
+                    array('image', 'file','types'=>'jpg, gif, png', 'allowEmpty'=>true, 'on'=>'update'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('document_data', 'file', 'types'=>'jpg, gif, png','allowEmpty' => true, 'maxSize' => 5242880),
@@ -91,7 +94,7 @@ class EmployeeDocument extends CActiveRecord
 			'updated_at' => 'Updated At',
                         'is_active' =>'Is Active',
 			'document_file_size' => 'Document File Size',
-			
+			'image' => 'Image',
                        
 		);
 	}
@@ -118,7 +121,7 @@ class EmployeeDocument extends CActiveRecord
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);
 		$criteria->compare('document_file_size',$this->document_file_size);
-		
+		$criteria->compare('image',$this->image);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

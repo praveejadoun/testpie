@@ -40,18 +40,18 @@ $this->breadcrumbs=array(
     
     <div class="setbx_con">
     	<div class="setbx" style="width:100%">
-    	<div class="setbx_top" style="width:100%">
-    	<h1><?php echo Yii::t('Batch','General Settings');?></h1>
-    	</div>
-    	<div class="setbx_bot" >
+    <!--	<div class="setbx_top" style="width:100%">
+    	<h1><?php //echo Yii::t('Batch','General Settings');?></h1>
+    	</div>-->
+    	<!--<div class="setbx_bot" >
     		<ul>
     			<?php /*?><li><a class="icon1" href="#">Add Batch Admins<span>Admins &amp; Class Teachers</span></a></li>
     			<li><a class="icon2" href="#">Add New Event<span>Admins &amp; Class Teachers</span></a></li><?php */?>
     			<li>
-                <?php echo CHtml::link(Yii::t('Batch','Promote Batch'.'<span>'.'Admins &amp; Class Teachers'.'</span>'), array('batches/promote','id'=>$_REQUEST['id']),array('id'=>'add_exam-groups','class'=>'icon3')) ?></li>
+                <?php// echo CHtml::link(Yii::t('Batch','Promote Batch'.'<span>'.'Admins &amp; Class Teachers'.'</span>'), array('batches/promote','id'=>$_REQUEST['id']),array('id'=>'add_exam-groups','class'=>'icon3')) ?></li>
                 <?php /*?><li><a class="icon4" href="#">Copy Batch Settings<span>Admins &amp; Class Teachers</span></a></li><?php */?>
     		</ul>
-    	</div>
+    	</div>-->
     	<div class="clear"></div>
     	</div>
     <div class="clear"></div>

@@ -224,10 +224,10 @@ foreach($posts as $posts_1)
 <?php
 
 	if($_REQUEST['mon']&&$_REQUEST['year']){
-  echo CHtml::link('<img src="images/pdf-but.png" border="0">', array('/attendance','mon'=>$_REQUEST['mon'],'year'=>$_REQUEST['year'],'id'=>$_REQUEST['id'])); 
+  echo CHtml::link('<img src="images/pdf-but.png" border="0">', array('studentattentance/pdf','mon'=>$_REQUEST['mon'],'year'=>$_REQUEST['year'],'id'=>$_REQUEST['id'])); 
 	}
 	else{
-		 echo CHtml::link('<img src="images/pdf-but.png" border="0">', array('/attendance','mon'=>date("m"),'year'=>date("Y"),'id'=>$_REQUEST['id'])); 
+		 echo CHtml::link('<img src="images/pdf-but.png" border="0">', array('studentattentance/pdf','mon'=>date("m"),'year'=>date("Y"),'id'=>$_REQUEST['id'])); 
 		
 	}
 ?>

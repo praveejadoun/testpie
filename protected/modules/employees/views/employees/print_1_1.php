@@ -110,33 +110,61 @@ td.subhdng_nrmal
 
 	
     <span align="center"><h4>Teachers List</h4></span><br/>
-  <?php if($list)
+  <?php 
+  $list=Employees::model()->findAll();
+  if($list)
 	{?>
     <table style="border-collapse:collapse;width:1000px;">
       
          <tr >
-            <td style="border: 1px solid #dddddd;padding: 8px;width:15%;text-align: center"><?php echo Yii::t('employees','<strong>Sl.No</strong>');?></td>
-             <td style="border: 1px solid #dddddd;padding: 8px;text-align: center;width:15%;"><?php echo Yii::t('employees','<strong>Employee Name</strong>');?></td>
-             <td style="border: 1px solid #dddddd;padding: 8px;text-align: center;width:15%;"><?php echo Yii::t('employees','<strong>Employee No</strong>');?></td>
-             <td style="border: 1px solid #dddddd;padding: 8px;text-align: center;width:15%;"><?php echo Yii::t('employees','<strong>Department</strong>');?></td>
-             <td style="border: 1px solid #dddddd;padding: 8px;text-align: center;width:15%;"><?php echo Yii::t('employees','<strong>Gender</strong>');?></td>
+            <td style="border: 1px solid #dddddd;padding: 8px;width:13.5%;text-align: center"><?php echo Yii::t('employees','<strong>Sl.No</strong>');?></td>
+             <td style="border: 1px solid #dddddd;padding: 8px;text-align: center;width:13.5%;"><?php echo Yii::t('employees','<strong>Employee Name</strong>');?></td>
+             <td style="border: 1px solid #dddddd;padding: 8px;text-align: center;width:13.5%;"><?php echo Yii::t('employees','<strong>Employee No</strong>');?></td>
+             <td style="border: 1px solid #dddddd;padding: 8px;text-align: center;width:13.5%;"><?php echo Yii::t('employees','<strong>Department</strong>');?></td>
+             <td style="border: 1px solid #dddddd;padding: 8px;text-align: center;width:13.5%;"><?php echo Yii::t('employees','<strong>Gender</strong>');?></td>
 
         </tr>
+        <?php 
+        
+         if(isset($_REQUEST['page']))
+          {
+      $i=($pages->pageSize*$_REQUEST['page'])-9;
+         }
+        else
+            {
+	  $i=1;
+            }
+  
+        
+        
+        ?>
         <?php foreach($list as $list_1)
 	{ ?>
         <tr>
          
-             <td style="border: 1px solid #dddddd;padding: 8px;width:15%;text-align: center"> 
+             <td style="border: 1px solid #dddddd;padding: 8px;width:13.5%;text-align: center"> 
                  <?php 
-               echo $list_1->employee_number ?>
+               echo $i;
                  ?>
              </td>
-             <td style="border: 1px solid #dddddd;padding: 8px;width:15%;text-align: center"> <?php ?></td>	
-	     <td style="border: 1px solid #dddddd;padding: 8px;width:15%;text-align: center"> <?php ?></td>		
-               <td style="border: 1px solid #dddddd;padding: 8px;width:15%;text-align: center"> <?php ?></td>	
-                 <td style="border: 1px solid #dddddd;padding: 8px;width:15%;text-align: center"> <?php ?></td>	
+             <td style="border: 1px solid #dddddd;padding: 8px;width:13.5%;text-align: center"> <?php echo $list_1->first_name.' '.$list_1->middle_name.' '.$list_1->last_name;?></td>	
+	     <td style="border: 1px solid #dddddd;padding: 8px;width:13.5%;text-align: center"> <?php echo $list_1->employee_number;?></td>		
+             <?php $batc = EmployeeDepartments::model()->findByAttributes(array('id'=>$list_1->employee_department_id));
+             if($batc!=NULL)
+                {?> 
+                <td style="border: 1px solid #dddddd;padding: 8px;width:13.5%;text-align: center"> <?php echo $batc->name; ?></td>
+                <?php }else { ?> <td style="border: 1px solid #dddddd;padding: 8px;width:13.5%;text-align: center">-</td><?php } ?>
+                	     
+                 <td style="border: 1px solid #dddddd;padding: 8px;width:13.5%;text-align: center">  <?php if($list_1->gender=='M')
+	{
+		echo 'Male';
+	}
+	elseif($list_1->gender=='F')
+	{
+		echo 'Female';
+	}?></td>	
         </tr>
-                            <?php } ?>
+                            <?php $i++; } ?>
     </table>
     
         <?php }?>  
