@@ -15,27 +15,53 @@ $this->breadcrumbs=array(
       <tr>
         <td valign="top" width="75%">
 		<div style="padding:20px; position:relative;">
-			
+		<h1>Attendance Management</h1>	
             <div class="edit_bttns" style="width:350px; top:30px; right:-15px;">
             	<ul>
-                 
-                 
+                    <li >
+                        <?php if(Yii::app()->controller->action->id == 'index') {?>
+                      <?php  $rurl = explode('index.php?r=',Yii::app()->request->getUrl());
+                       
+			$rurl = explode('&id=',$rurl[1]); 
+			echo CHtml::ajaxLink('Student Attendance',array('/site/explorer2','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'addbttn','style'=>'padding:8px 31px 6px 0px;;margin:0px 0px 0px 10px;')); ?>
+                        
+                        <?php 
+			}else
+			{
+				echo CHtml::ajaxLink('Change Batch',array('/site/explorer','widget'=>'2','rurl'=>'courses/batches/batchstudents'),array('update'=>'#explorer_handler'),array('id'=>'explorer_change'));
+			}?>
+                        
+                      </li> 
+                        
+                    <li><a class="addbttn" href="#"><span>Teacher Attendance</span></a></li>
                  </ul>
            </div> 
-            
-				<div class="promo_bx">
-                	
-               	  <div class="promo_txtbx">
-                   	<h1>Community Edition is feature-limited.</h1>
-					<p>Buy our premium version to get this feature and manage your institution more efficiently.</p>
-                    <a href="http://www.tryopenschool.com/index.php?r=attendance" target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/try_bttn.png" width="75" height="38" /></a>
-                  </div> 
-                    <div class="o-s_logo" style="width:200px;"> <a href="http://open-school.org" target="_blank"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/o-s_promo_logo.png" width="232" height="92" /></a> </div>   
+            <div class="yellow_bx yb_attendance">
+                	<div class="y_bx_head">
+                    	Before recording the Attendance, make sure you follow the following instructions                    </div>
+                	<div class="y_bx_list timetable_list">
+                    	<h1>Set Weekdays</h1>
+                        <p>
+                        Set the weekdays, where the specific Batch has classes, You can use the school default or custom weekdays.						</p>
+                    </div>
+                    <div class="y_bx_list timetable_list">
+                    	<h1>Set Class Timings</h1>
+                        <p>
+                        Create class timings for each Batch Enter each period start time and end time,Add break timings etc.						</p>
+                    </div>
+                    <div class="y_bx_list timetable_list">
+                    	<h1>Subjects and Subject Allocation</h1>
+                        <p>
+                        Add existing subjects to the Batch or create a new subject. Associate each subject with the teacher.						</p>
+                    </div>
+                    <div class="y_bx_list timetable_list">
+                    	<h1>Create Timetable</h1>
+                        <p>Assigning each timing/period from the dropdown.</p>
+                    </div>
     			</div>
+				
                 
-                <div class="fourth_ad"><a href="http://open-school.org/contact.php" target="_blank"><img src="http://tryopenschool.com/images/o-s_ad_img.png" width="960" height="115" /></a></div>
-		
-		</div>
+                
 		</td>
        </tr>
      </table>

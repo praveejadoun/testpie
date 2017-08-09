@@ -548,7 +548,7 @@ else
                               
                               <?php }else{ ?>
                               
-                            <td><?php echo CHtml::link(ucfirst($list_1->first_name).'  '.ucfirst($list_1->middle_name).'  '.ucfirst($list_1->last_name),array('students/students/view','id'=>$list_1->id)) ?></td>
+                            <td><?php echo CHtml::link(ucfirst($list_1->first_name).'  '.ucfirst($list_1->middle_name).'  '.ucfirst($list_1->last_name),array('students/students/attentance','id'=>$list_1->id)) ?></td>
 							
 							<?php } ?>
                             

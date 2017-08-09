@@ -48,7 +48,7 @@ $model;
    <tr>
   <td><?php //echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
         <?php	
-		echo CHtml::ajaxSubmitButton(Yii::t('job','Save'),CHtml::normalizeUrl(array('Subjects/Addupdate','render'=>false)),
+		echo CHtml::ajaxSubmitButton(Yii::t('job','Save'),CHtml::normalizeUrl(array('Subjects/Addupdate','render'=>false,'class'=>formbut)),
 		array('success'=>'js: function(data) {
 									 $("#success_msg").html("Batch updated successfully!");
 									 setTimeout(function() {

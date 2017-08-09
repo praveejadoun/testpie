@@ -310,10 +310,10 @@ class EmployeesController extends RController
                                         if(!is_dir('uploadedfiles/')){
 				mkdir('uploadedfiles/');
 			}
-			if(!is_dir('uploadedfiles/school_logo/')){
-				mkdir('uploadedfiles/school_logo/');
+			if(!is_dir('uploadedfiles/employee_documents/')){
+				mkdir('uploadedfiles/employee_documents/');
 			}
-			move_uploaded_file($file->tempName,'uploadedfiles/school_logo/'.$file->name);
+			move_uploaded_file($file->tempName,'uploadedfiles/employee_documents/'.$file->name);
                                         
                                          }
 				
@@ -357,6 +357,7 @@ class EmployeesController extends RController
        public function actionAchievements()
 	{
 		$model=new EmployeeAchievements;
+                
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -371,7 +372,16 @@ class EmployeesController extends RController
 					$model->achievdoc_content_type=$file->type;
 					$model->achievdoc_file_size=$file->size;
 					$model->achievdoc_data=file_get_contents($file->tempName);
-					  }
+					 
+                                         
+                                        if(!is_dir('uploadedfiles/')){
+				mkdir('uploadedfiles/');
+			}
+			if(!is_dir('uploadedfiles/employee_achievements/')){
+				mkdir('uploadedfiles/employee_achievements/');
+                        }            
+                          move_uploaded_file($file->tempName,'uploadedfiles/employee_achievements/'.$file->name);              
+                                         }
                       
 			if($model->save())
                         {

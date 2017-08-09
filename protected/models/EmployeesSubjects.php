@@ -93,7 +93,7 @@ class EmployeesSubjects extends CActiveRecord
 	public function Employeenotassigned($id,$sub)
 	{
 		    $results=array();
-			$emp=Employees::model()->findAllByAttributes(array('employee_department_id'=>$id));
+			$emp=Employees::model()->findAllByAttributes(array('employee_department_id'=>$id,'is_deleted'=>0));
 			if($emp!=NULL)
 			{
 				$i=0;
@@ -113,7 +113,7 @@ class EmployeesSubjects extends CActiveRecord
         public function Employeenotassignedelective($id,$elect)
 	{
 		    $results=array();
-			$emp=Employees::model()->findAllByAttributes(array('employee_department_id'=>$id));
+			$emp=Employees::model()->findAllByAttributes(array('employee_department_id'=>$id,'is_deleted'=>0));
 			if($emp!=NULL)
 			{
 				$i=0;

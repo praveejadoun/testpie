@@ -104,7 +104,19 @@ class AchievementsController extends RController
 					$model->achievdoc_content_type=$file->type;
 					$model->achievdoc_file_size=$file->size;
 					$model->achievdoc_data=file_get_contents($file->tempName);
-					  }
+					 
+                                         if(!is_dir('uploadedfiles/')){
+				mkdir('uploadedfiles/');
+			}
+			if(!is_dir('uploadedfiles/employee_achievements/')){
+				mkdir('uploadedfiles/employee_achievements/');
+                        }            
+                          move_uploaded_file($file->tempName,'uploadedfiles/employee_achievements/'.$file->name);
+                                        
+                                        
+                                        
+                                        
+                                         }
 			if($model->save())
 				$this->redirect(array('employees/achievements','id'=>$_REQUEST['employee_id']));
 		}

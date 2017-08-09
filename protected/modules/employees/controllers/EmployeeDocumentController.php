@@ -174,7 +174,16 @@ class EmployeeDocumentController extends RController
 					$model->document_content_type=$file->type;
 					$model->document_file_size=$file->size;
 					$model->document_data=file_get_contents($file->tempName);
-					  }
+					
+                                         if(!is_dir('uploadedfiles/')){
+				mkdir('uploadedfiles/');
+			}
+			if(!is_dir('uploadedfiles/employee_documents/')){
+				mkdir('uploadedfiles/employee_documents/');
+                        }            
+                          move_uploaded_file($file->tempName,'uploadedfiles/employee_documents/'.$file->name);
+                                        
+                                         }
 			if($model->save())
 				$this->redirect(array('employees/documents','id'=>$_REQUEST['employee_id']));
 		}

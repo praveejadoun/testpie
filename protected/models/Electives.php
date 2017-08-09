@@ -42,7 +42,7 @@ class Electives extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('elective_group_id,max_weekly_classes,is_deleted', 'numerical', 'integerOnly'=>true),
-                        array('name, code, max_weekly_classes,batch_id','required'),
+                        array('name, code, max_weekly_classes,batch_id, elective_group_id','required'),
 			array('created_at, updated_at', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

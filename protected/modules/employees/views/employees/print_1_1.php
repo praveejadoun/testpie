@@ -111,7 +111,7 @@ td.subhdng_nrmal
 	
     <span align="center"><h4>Teachers List</h4></span><br/>
   <?php 
-  $list=Employees::model()->findAll();
+  $list=Employees::model()->findAll("is_deleted=:x",array(':x'=>0));
   if($list)
 	{?>
     <table style="border-collapse:collapse;width:1000px;">
