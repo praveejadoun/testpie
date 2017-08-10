@@ -56,20 +56,7 @@ $this->breadcrumbs=array(
     <div class="attndwise-head">
     <h3>Day Wise Attendance</h3>
     </div>
-    <div class="box-one"style="margin-top:17px;">
-        <div class="subwise-blk box-one-lft-rght">
-                                                                    <ul>
-                                                                    <li>
-                                                                    	<a class="sub-attnd-daily active-attnd" href="/index.php?r=attendance/studentAttentance/index&amp;id=36">Daily</a> 
-                                                                    </li>
-                                                                    <li>
-                                                                    	<a class="sub-attnd-weekly" href="/index.php?r=attendance/studentAttentance/monthlyAttendance&amp;id=36">Monthly</a> 
-                                                                    </li>
-                                                                    
-                                                                    
-                                                                    </ul>
-                                                                </div>
-    </div>
+    
 
 <div class="formConInner">
     
@@ -119,14 +106,13 @@ $model = new EmployeeAttendances;
 
 	if(!isset($_REQUEST['mon']))
 	{
-                //$dat = date('d');
+                $dat = date('d');
 		$mon = date('F');
 		$mon_num = date('n');
 		$curr_year = date('Y');
 	}
 	else
 	{
-               /// $dat = $model->getdate($_REQUEST['dat']);
 		$mon = $model->getMonthname($_REQUEST['mon']);
 		//$mon = EmployeeAttendances::model()->getMonthname($_REQUEST['mon']);
 		$mon_num = $_REQUEST['mon'];
@@ -169,10 +155,10 @@ if($mon_num=='12')
  
 	<div align="center" class="atnd_tnav" style="top:30px">
 	<?php 
-	echo CHtml::link('<div class="atnd_arow_l"><img src="images/atnd_arrow-l.png" width="7" border="0"  height="13" /></div>', array('index', 'mon'=>date("m",strtotime($curr_year."-".$mon_num."-01 -1 months")),'year'=>date("Y",strtotime($curr_year."-".$mon_num."-01 -1 months")),'id'=>$_REQUEST['id'])); 
-	 echo $dat.'&nbsp;&nbsp;&nbsp; '.$mon.'&nbsp;&nbsp;&nbsp; '.$curr_year; 
+	echo CHtml::link('<div class="atnd_arow_l"><img src="images/atnd_arrow-l.png" width="7" border="0"  height="13" /></div>', array('monthlyattendance', 'mon'=>date("m",strtotime($curr_year."-".$mon_num."-01 -1 months")),'year'=>date("Y",strtotime($curr_year."-".$mon_num."-01 -1 months")),'id'=>$_REQUEST['id'])); 
+	 echo$mon.'&nbsp;&nbsp;&nbsp; '.$curr_year; 
 	 
-	 echo CHtml::link('<div class="atnd_arow_r"><img src="images/atnd_arrow.png" width="7" border="0"  height="13" /></div>', array('index', 'mon'=>date("m",strtotime($curr_year."-".$mon_num."-01 +1 months")),'year'=>date("Y",strtotime($curr_year."-".$mon_num."-01 +1 months")),'id'=>$_REQUEST['id']));?></div>
+	 echo CHtml::link('<div class="atnd_arow_r"><img src="images/atnd_arrow.png" width="7" border="0"  height="13" /></div>', array('monthlyattendance', 'mon'=>date("m",strtotime($curr_year."-".$mon_num."-01 +1 months")),'year'=>date("Y",strtotime($curr_year."-".$mon_num."-01 +1 months")),'id'=>$_REQUEST['id']));?></div>
 <br /><br />
 <div class="atnd_Con" style="margin:25px 0px 0px -16px;">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -185,7 +171,7 @@ if($mon_num=='12')
     }
     ?>
 </tr>
-<?php $posts=Students::model()->findAll("batch_id=:x AND is_active=:y AND is_deleted=:z", array(':x'=>$_REQUEST['id'],':y'=>1,'z'=>0));
+<?php $posts=Students::model()->findAll("batch_id=:x AND is_active=:y AND is_deleted=:z", array(':x'=>$_REQUEST['id'],':y'=>1,':z'=>0));
 $j=0;
 foreach($posts as $posts_1)
 {
@@ -241,10 +227,10 @@ foreach($posts as $posts_1)
 <?php
 
 	if($_REQUEST['mon']&&$_REQUEST['year']){
-  echo CHtml::link('<img src="images/pdf-but.png" border="0">', array('studentattentance/pdf','mon'=>$_REQUEST['mon'],'year'=>$_REQUEST['year'],'id'=>$_REQUEST['id']),array('target'=>'_blank')); 
+  echo CHtml::link('<img src="images/pdf-but.png" border="0">', array('studentattentance/pdf','mon'=>$_REQUEST['mon'],'year'=>$_REQUEST['year'],'id'=>$_REQUEST['id']),array('target'=>'blank')); 
 	}
 	else{
-		 echo CHtml::link('<img src="images/pdf-but.png" border="0">', array('studentattentance/pdf','mon'=>date("m"),'year'=>date("Y"),'id'=>$_REQUEST['id']),array('target'=>'_blank')); 
+		 echo CHtml::link('<img src="images/pdf-but.png" border="0">', array('studentattentance/pdf','mon'=>date("m"),'year'=>date("Y"),'id'=>$_REQUEST['id']),array('target'=>'blank')); 
 		
 	}
 ?>

@@ -88,12 +88,12 @@ $(document).click(function() {
 			$rurl = explode('index.php?r=',Yii::app()->request->getUrl());
                        
 			$rurl = explode('&id=',$rurl[1]); 
-			echo CHtml::ajaxLink('Change Batch',array('/site/explorer','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'sb_but','style'=>'top:-40px; right:40px;')); ?>
-           
+			echo CHtml::ajaxLink('Change Batch',array('/site/explorer','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'sb_but','style'=>'top:-40px; right:40px;')); 
+                        echo CHtml::link('Teacher Attendance',array('/attendance/teachersubjectattendance'),array('class'=>'sb_but','style'=>'top:-40px; right:170px;'));?>
 <?php 
 			}else
 			{
-				echo CHtml::ajaxLink('Change Batch',array('/site/explorer','widget'=>'2','rurl'=>'courses/batches/batchstudents'),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'sb_but','style'=>'top:-40px; right:40px;'));
+				echo CHtml::link('Teacher Attendance',array('/attendance/teachersubjectattendance'),array('class'=>'sb_but','style'=>'top:-40px; right:40px;'));
 			}?>
             
             <?php echo CHtml::link('<span>close</span>',array('/courses'),array('class'=>'sb_but_close','style'=>'top:-40px; right:0px;'));?>
@@ -109,9 +109,9 @@ $(document).click(function() {
             </ul>
         </div>
         <div class="cb_right">
-        	<div class="status_bx">
+        	<div class="status_bx" style="margin-left:150px;">
     			<ul>
-        			<li><span><?php echo count(Students::model()->findAll("batch_id=:x and is_deleted=:y", array(':x'=>$_REQUEST['id'],':y'=>0))); ?></span><?php echo Yii::t('Batch','Students');?></li>
+        			<li><span><?php echo count(Students::model()->findAll("batch_id=:x and is_active=:y and is_deleted=:z", array(':x'=>$_REQUEST['id'],':y'=>1,':z'=>0))); ?></span><?php echo Yii::t('Batch','Students');?></li>
             		<li><span><?php echo count(Subjects::model()->findAll("batch_id=:x", array(':x'=>$_REQUEST['id']))); ?></span><?php echo Yii::t('Batch','Subjects');?></li>
             		<li><span><?php echo count(TimetableEntries::model()->findAll(array('condition'=>'batch_id=:x','params'=>array(':x'=>$_REQUEST['id']))));?></span><?php echo Yii::t('Batch','Employees');?></li>
         		</ul>
