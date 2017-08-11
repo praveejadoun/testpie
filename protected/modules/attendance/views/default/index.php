@@ -23,7 +23,7 @@ $this->breadcrumbs=array(
                       <?php  $rurl = explode('index.php?r=',Yii::app()->request->getUrl());
                        
 			$rurl = explode('&id=',$rurl[1]); 
-			echo CHtml::ajaxLink('Student Attendance',array('/site/explorer2','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'addbttn','style'=>'padding:8px 31px 6px 0px;;margin:0px 0px 0px 10px;')); ?>
+			echo CHtml::ajaxLink('Student Attendance',array('/site/explorer2','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'addbttn','style'=>'padding:8px 7px 6px 0px;;margin:0px 0px 0px 50px;')); ?>
                         
                         <?php 
 			}else
@@ -33,7 +33,7 @@ $this->breadcrumbs=array(
                         
                       </li> 
                         
-                    <li><a class="addbttn" href="#"><span>Teacher Attendance</span></a></li>
+                    <li><a><?php echo CHtml::link('Teacher Attendance',array('teacherSubjectAttendance/create'),array('class'=>'addbttn','style'=>'padding:8px 3px 6px 0px;;margin:0px 0px 0px 10px;'))?></a></li>
                  </ul>
            </div> 
             <div class="yellow_bx yb_attendance">

@@ -94,7 +94,21 @@ break;
 }
 }
 ?>
-<div class="ea_droplist" style="top:30px">
+<div class="ea_droplist" style="top:20px">
+     <div class="box-one"style="margin-top:0px;">
+        <div class="subwise-blk box-one-lft-rght">
+                                                                    <ul>
+                                                                    <li>
+                                                                    	<a ><?php echo CHtml::link('Daily',array('index','id'=>$_REQUEST['id']),array('class'=>'sub-attnd-weekly'));?></a> 
+                                                                                                                                       
+                                                                        <a ><?php echo CHtml::link('Monthly',array('monthlyattendance','id'=>$_REQUEST['id']),array('class'=>'sub-attnd-daily active-attnd'));?></a> 
+
+                                                                    </li>
+                                                                    
+                                                                    
+                                                                    </ul>
+                                                                </div>
+    </div>
 <?php
 $subjects=Subjects::model()->findAll("batch_id=:x", array(':x'=>$_REQUEST['id']));
 
