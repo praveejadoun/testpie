@@ -101,18 +101,18 @@ class ApplicantsController extends RController {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        $model = new Students;
+        $model = new Applicants;
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
         //echo "<pre>";
 //print_r($_POST['Students']);exit;
-        if (isset($_POST['Students'])) {
+        if (isset($_POST['Applicants'])) {
 
-            $model->attributes = $_POST['Students'];
-            $list = $_POST['Students'];
-            if ($model->admission_date)
-                $model->admission_date = date('Y-m-d', strtotime($model->admission_date));
+            $model->attributes = $_POST['applicants'];
+            $list = $_POST['Applicants'];
+            if ($model->registration_date)
+                $model->registration_date = date('Y-m-d', strtotime($model->registration_date));
             if ($model->date_of_birth)
                 $model->date_of_birth = date('Y-m-d', strtotime($model->date_of_birth));
             //$model->photo_data=CUploadedFile::getInstance($model,'photo_data');
@@ -132,11 +132,11 @@ class ApplicantsController extends RController {
               }
               } 
             //echo $model->photo_data.'----';
-             if(isset($_FILES['Students']))
+             if(isset($_FILES['Applicants']))
               {
             //  print_r($_FILES['Students']);
               //exit;
-              $tmpName = $_FILES['Students']['tmp_name'];
+              $tmpName = $_FILES['Applicants']['tmp_name'];
               $fp      = fopen($tmpName, 'r');
               $data = fread($fp, filesize($tmpName));
               $data = addslashes($data);
@@ -203,7 +203,7 @@ class ApplicantsController extends RController {
                     }
                 }
 
-                $this->redirect(array('guardians/create', 'id' => $model->id));
+                $this->redirect(array('manage'));
             }
         }
 

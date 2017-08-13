@@ -783,7 +783,7 @@ $this->breadcrumbs = array(
                             <div style="float:left;">
                                 <div class="bttns_addstudent">   
                                     <ul>
-                                        <li><?php //echo CHtml::link(Yii::t('employees', 'Add Student'), array('create'), array('class' => 'addbttn last')); ?></li>
+                                        <li><?php echo CHtml::link(Yii::t('employees', 'Add Applicant'), array('create'), array('class' => 'addbttn last')); ?></li>
 
                                         <li><a class="addbttn last" href="javascript:void(0)" id="delete_student">Delete Applicant</a></li>
 

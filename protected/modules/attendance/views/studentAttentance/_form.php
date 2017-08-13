@@ -22,10 +22,16 @@
 		<?php echo $form->error($model,'date'); ?>
 	</div>
 
+        <div class="row">
+           <?php echo $form->dropDownList($model,'status',array('Yes'=>'Yes','No'=>'No')); ?>
+            <?php ?>
+        </div>
+        
+        
 	<div class="row">
 		<?php echo $form->labelEx($model,Yii::t('Attendance','reason')); ?>
-		<?php echo $form->textField($model,'reason',array('size'=>60,'maxlength'=>120)); ?>
-		<?php echo $form->error($model,'reason'); ?>
+            <?php echo $form->textField($model,'reason',array('size'=>60,'maxlength'=>120)); ?>
+            <?php echo $form->error($model,'reason'); ?>
 	</div>
 
 	<div class="row buttons">

@@ -6,17 +6,17 @@ if(Yii::app()->controller->action->id=='create')
 	$adm_no_1 = '';
 	if($config->config_value==1)
 	{
-		$adm_no	= Students::model()->findAll(array('order' => 'id DESC','limit' => 1));
+		$adm_no	= Applicants::model()->findAll(array('order' => 'id DESC','limit' => 1));
 		$adm_no_1=$adm_no[0]['id']+1;
 	}
 	?>
 	<div class="captionWrapper">
         <ul>
-            <li><h2 class="cur">Student Details</h2></li>
-            <li><h2>Parent Details</h2></li>
+            <li><h2 class="cur">Applicant Details</h2></li>
+           <!-- <li><h2>Parent Details</h2></li>
             <li><h2>Emergency Contact</h2></li>
             <li><h2>Previous Details</h2></li>
-            <li class="last"><h2>Student Profile</h2></li>
+            <li class="last"><h2>Student Profile</h2></li>-->
         </ul>
 	</div>
 <?php  
@@ -49,15 +49,15 @@ else
         <div class="formConInner"  style="padding:5px;">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                    <td align="right"><?php echo $form->labelEx($model,Yii::t('students','admission_no')); ?></td>
+                    <td align="right"><?php echo $form->labelEx($model,Yii::t('students','registration_no')); ?></td>
                     <td style="padding-left:8px;">
-						<?php echo $form->textField($model,'admission_no',array('size'=>20,'maxlength'=>255,'value'=>$adm_no_1,'disabled'=>true,)); 
-                        echo $form->hiddenField($model,'admission_no',array('value'=>$adm_no_1)); ?>
-                        <?php echo $form->error($model,'admission_no'); ?>
+						<?php echo $form->textField($model,'registration_no',array('size'=>20,'maxlength'=>255,'value'=>$adm_no_1,'disabled'=>true,)); 
+                        echo $form->hiddenField($model,'registration_no',array('value'=>$adm_no_1)); ?>
+                        <?php echo $form->error($model,'registration_no'); ?>
                     </td>
                     <!--<td><input name="" type="checkbox"  value="" /></td>
                     <td><input name="" type="text" style="width:40px;" /></td>-->
-                    <td align="right"><?php echo $form->labelEx($model,Yii::t('students','admission_date')); ?></td>
+                    <td align="right"><?php echo $form->labelEx($model,Yii::t('students','registration_date')); ?></td>
                     <td style="padding-left:8px;">
 						<?php //echo $form->textField($model,'admission_date');
                         $settings=UserSettings::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
@@ -70,7 +70,7 @@ else
                         $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                         //'name'=>'Students[admission_date]',
                         'model'=>$model,
-                        'attribute'=>'admission_date',
+                        'attribute'=>'registration_date',
                         // additional javascript options for the date picker plugin
                         'options'=>array(
                         'showAnim'=>'fold',
@@ -84,7 +84,7 @@ else
                         ),
                         ));
                         ?>
-                        <?php echo $form->error($model,'admission_date'); ?>
+                        <?php echo $form->error($model,'registration_date'); ?>
                     </td>
                 </tr>
             </table>
@@ -210,7 +210,7 @@ else
                         <?php echo $form->dropDownList($model,'nationality_id',CHtml::listData(Countries::model()->findAll(),'id','name'),array(
                         'style'=>'width:140px;','empty'=>'Select Nationality'
                         )); ?>
-                        <?php echo $form->error($model,'nationality_id'); ?>
+                        <?php //echo $form->error($model,'nationality_id'); ?>
                     </td>
                 </tr>
                 <tr>
@@ -257,13 +257,13 @@ else
                 </tr>
                 <tr>
                     <td valign="top"><?php echo $form->textField($model,'address_line1',array('size'=>25,'maxlength'=>255)); ?>
-                    <?php echo $form->error($model,'address_line1'); ?></td>
+                    <?php //echo $form->error($model,'address_line1'); ?></td>
                     <td>&nbsp;</td>
                     <td valign="top"><?php echo $form->textField($model,'address_line2',array('size'=>25,'maxlength'=>255)); ?>
-                    <?php echo $form->error($model,'address_line2'); ?></td>
+                    <?php //echo $form->error($model,'address_line2'); ?></td>
                     <td>&nbsp;</td>
                     <td valign="top"><?php echo $form->textField($model,'city',array('size'=>25,'maxlength'=>255)); ?>
-                    <?php echo $form->error($model,'city'); ?></td>
+                    <?php //echo $form->error($model,'city'); ?></td>
                 </tr>
                 <tr>
                 	<td colspan="5">&nbsp;</td>
@@ -278,12 +278,12 @@ else
                 <tr>
                     <td valign="top">
 						<?php echo $form->textField($model,'state',array('size'=>25,'maxlength'=>255)); ?>
-                        <?php echo $form->error($model,'state'); ?>
+                        <?php //echo $form->error($model,'state'); ?>
                     </td>
                     <td>&nbsp;</td>
                     <td valign="top">
 						<?php echo $form->textField($model,'pin_code',array('size'=>15,'maxlength'=>255)); ?>
-                        <?php echo $form->error($model,'pin_code'); ?>
+                        <?php //echo $form->error($model,'pin_code'); ?>
                     </td>
                     <td>&nbsp;</td>
                     <td valign="top">
@@ -291,7 +291,7 @@ else
                         <?php echo $form->dropDownList($model,'country_id',CHtml::listData(Countries::model()->findAll(),'id','name'),array(
                         'style'=>'width:140px;','empty'=>'Select Country'
                         )); ?>
-                        <?php echo $form->error($model,'country_id'); ?>
+                        <?php //echo $form->error($model,'country_id'); ?>
                     </td>
                 </tr>
                 <tr>
@@ -462,7 +462,7 @@ else
     </div><!-- form -->
     <div class="clear"></div>
     <div style="padding:0px 0 0 0px; text-align:left">
-    	<?php echo CHtml::submitButton($model->isNewRecord ? 'Parent Details »' : 'Save',array('class'=>'formbut')); ?>
+    	<?php echo CHtml::submitButton($model->isNewRecord ? 'Save' : 'Save',array('class'=>'formbut')); ?>
         <input type="button" name="back" value="Back" onclick="javascript:history.back();" class="formbut" style="float:right;"/>
     </div>
 <?php $this->endWidget(); ?>
