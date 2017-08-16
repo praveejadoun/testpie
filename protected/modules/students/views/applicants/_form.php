@@ -30,7 +30,7 @@ else
 ?>
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-'id'=>'students-form',
+'id'=>'applicants-form',
 'enableAjaxValidation'=>false,
 'htmlOptions'=>array('enctype'=>'multipart/form-data'),
 )); ?>

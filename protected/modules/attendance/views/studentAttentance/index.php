@@ -120,14 +120,14 @@ $model = new EmployeeAttendances;
 
 	if(!isset($_REQUEST['mon']))
 	{
-                //$dat = date('d');
+              //  $dat = date('d');
 		$mon = date('F');
 		$mon_num = date('n');
 		$curr_year = date('Y');
 	}
 	else
 	{
-               /// $dat = $model->getdate($_REQUEST['dat']);
+               // $dat = $model->getdate($_REQUEST['dat']);
 		$mon = $model->getMonthname($_REQUEST['mon']);
 		//$mon = EmployeeAttendances::model()->getMonthname($_REQUEST['mon']);
 		$mon_num = $_REQUEST['mon'];

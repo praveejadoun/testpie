@@ -30,7 +30,7 @@ window.location= 'index.php?r=employees/employeesSubjects/create&cou='+id_1+'&su
 
 <div class="formConInner">
     <?php 
-
+/*
 $data = CHtml::listData(EmployeeDepartments::model()->findAll(),'id','name');
 if(isset($_REQUEST['dep']))
 {
@@ -66,7 +66,35 @@ echo CHtml::dropDownList('emp','',$data_1,array('prompt'=>'Select','onchange'=>'
  
 echo '<br/></div></div>';
 
- ?>
+ */?>
+    <?php 
+
+$data = CHtml::listData(Courses::model()->findAll(array('order'=>'course_name DESC')),'id','course_name');
+
+echo 'Course:';
+echo CHtml::dropDownList('cid','',$data,
+array('prompt'=>'Select','style'=>'width:190px;',
+'ajax' => array(
+'type'=>'POST',
+'url'=>CController::createUrl('/students/students/batch'),
+'update'=>'#batch_id',
+'data'=>'js:$(this).serialize()',
+
+))); 
+
+echo 'Batch:';
+
+$data1 = CHtml::listData(Batches::model()->findAll(array('order'=>'name DESC')),'id','name');
+echo CHtml::activeDropDownList($model,'batch_id',$data1,array('prompt'=>'Select','id'=>'batch_id')); ?>
+ <?php  echo CHtml::ajaxButton("Apply",CController::createUrl('/site/manage'), array(
+																									'data' => 'js:$("#search-form").serialize()',
+																									'update' => '#student_panel_handler',
+																									'type'=>'GET',
+																									
+																								     ),array('id'=>'student-batch-but'));?>
+   
+    
+    
 </div>
 </div>
 <?php 

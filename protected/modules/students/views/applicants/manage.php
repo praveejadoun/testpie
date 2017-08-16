@@ -268,9 +268,9 @@ $this->breadcrumbs = array(
                                             <?php echo CHtml::activeDropDownList($model, 'admissionrange', array('1' => 'less than', '2' => 'equal to', '3' => 'greater than'), array('prompt' => 'Option')); ?>
                                             <?php
                                             $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                                'name' => 'Students[admission_date]',
+                                                'name' => 'Students[registration_date]',
                                                 'model' => $model,
-                                                'value' => $model->admission_date,
+                                                'value' => $model->registration_date,
                                                 'options' => array(
                                                     'showAnim' => 'fold',
                                                     'dateFormat' => $date,
@@ -425,7 +425,7 @@ $this->breadcrumbs = array(
                                         <!-- Admission Date Active Filter -->
                                         <?php
                                         if (isset($_REQUEST['Students']['admissionrange']) and $_REQUEST['Students']['admissionrange'] != NULL) {
-                                            if (isset($_REQUEST['Students']['admission_date']) and $_REQUEST['Students']['admission_date'] != NULL) {
+                                            if (isset($_REQUEST['Students']['registration_date']) and $_REQUEST['Students']['registration_date'] != NULL) {
                                                 $j++;
                                                 if ($_REQUEST['Students']['admissionrange'] == '1') {
                                                     $admissionrange = 'less than';
@@ -437,15 +437,15 @@ $this->breadcrumbs = array(
                                                     $admissionrange = 'greater than';
                                                 }
                                                 ?>
-                                                <li>Admission Date : <?php echo $admissionrange . ' : ' . $_REQUEST['Students']['admission_date'] ?><a href="<?php echo Yii::app()->request->getUrl() . '&Students[admission_date]=' ?>"></a></li>
+                                                <li>Admission Date : <?php echo $admissionrange . ' : ' . $_REQUEST['Students']['registration_date'] ?><a href="<?php echo Yii::app()->request->getUrl() . '&Students[registration_date]=' ?>"></a></li>
                                                 <?php
                                             }
                                         } elseif (isset($_REQUEST['Students']['admissionrange']) and $_REQUEST['Students']['admissionrange'] == NULL) {
-                                            if (isset($_REQUEST['Students']['admission_date']) and $_REQUEST['Students']['admission_date'] != NULL) {
+                                            if (isset($_REQUEST['Students']['registration_date']) and $_REQUEST['Students']['registration_date'] != NULL) {
                                                 $j++;
                                                 $admissionrange = 'equal to';
                                                 ?>
-                                                <li>Admission Date : <?php echo $admissionrange . ' : ' . $_REQUEST['Students']['admission_date'] ?><a href="<?php echo Yii::app()->request->getUrl() . '&Students[admission_date]=' ?>"></a></li>
+                                                <li>Admission Date : <?php echo $admissionrange . ' : ' . $_REQUEST['Students']['registration_date'] ?><a href="<?php echo Yii::app()->request->getUrl() . '&Students[registration_date]=' ?>"></a></li>
                                                 <?php
                                             }
                                         }
@@ -781,11 +781,11 @@ $this->breadcrumbs = array(
                         <div class="clear"></div>
                         <div style="display: inline-block;margin-bottom: 14px;margin-top: 14px; width: 100%;">
                             <div style="float:left;">
-                                <div class="bttns_addstudent">   
+                                <div class="contrht_bttns" style="margin: 61px 122px 0px 0px;padding: 0px 401px 0px 0px;">
                                     <ul>
-                                        <li><?php echo CHtml::link(Yii::t('employees', 'Add Applicant'), array('create'), array('class' => 'addbttn last')); ?></li>
+                                        <li><?php echo CHtml::link(Yii::t('employees', 'Add Applicant'), array('create') ); ?></li>
 
-                                        <li><a class="addbttn last" href="javascript:void(0)" id="delete_student">Delete Applicant</a></li>
+                                        <li><a href="javascript:void(0)" id="delete_student">Delete Applicant</a></li>
 
 
 
@@ -826,6 +826,7 @@ $this->breadcrumbs = array(
                                         <td><?php echo Yii::t('students', 'Registration No.'); ?></td>
                                         <td><?php echo Yii::t('students', 'Course/Batch'); ?></td>
                                         <td><?php echo Yii::t('students', 'Gender'); ?></td>
+                                         <td><?php echo Yii::t('students', 'Status'); ?></td>
                                         <td style="border-right:none;"><?php echo Yii::t('students','Actions');?></td>
                                     </tr>
                                     <?php
@@ -844,7 +845,7 @@ $this->breadcrumbs = array(
                                             <td><input type="checkbox" class="chk" name="chkCid[]" value="<?php echo $list_1->id; ?>"/></td>
 <!--                                            <td><?php echo $i; ?></td>-->
                                             <td><?php echo CHtml::link($list_1->first_name . '  ' . $list_1->middle_name . '  ' . $list_1->last_name, array('view', 'id' => $list_1->id)) ?></td>
-                                            <td><?php echo $list_1->admission_no ?></td>
+                                            <td><?php echo $list_1->registration_no ?></td>
                                             <?php
                                             $batc = Batches::model()->findByAttributes(array('id' => $list_1->batch_id));
                                             if ($batc != NULL) {
@@ -869,7 +870,7 @@ $this->breadcrumbs = array(
                                                 ?>
                                             </td>
 
-                <!--<td style="border-right:none;">Task</td>-->
+                <td class="select_status"><?php echo CHtml::enumDropDownList( $model,'status' ); ?></td>
                                             <td>
                                                 <a href="index.php?r=students/applicants/update&id=<?php echo $list_1->id?>">Edit</a>
                                                 <a rel="<?php echo $list_1->id?>" href="javascript:void(0)" class="deleteStudent">Delete</a>
@@ -950,11 +951,18 @@ $this->breadcrumbs = array(
     });
     
     $(".deleteStudent").click(function(){
-         if (confirm("Are you sure you want to delete the student?")) {
+         if (confirm("Are you sure you want to delete the applicant?")) {
         sid = $(this).attr("rel");
-        self.location = "index.php?r=students/students/deletes&sid="+sid;
+        self.location = "index.php?r=students/applicants/deletes&sid="+sid;
     }
     });
+    $(".select_status").change(function(){
+        if(confirm("Are you sure you want to change the status?"))
+        {
+          sid = $(this).attr("rel");
+        self.location = "index.php?r=students/applicants/manage";  
+        }
+    })
     
     $("#checkall").click(function(){
         if($(this).is(':checked')){
@@ -968,7 +976,7 @@ $this->breadcrumbs = array(
     $(document).ready(function () {
         $("#delete_student").click(function () {
             if ($(".chk:checked").length == 0) {
-                alert("Please select student to delete");
+                alert("Please select applicant to delete");
                 return false;
             } else {
                 //alert($(".chk:checked").length);
@@ -978,13 +986,13 @@ $this->breadcrumbs = array(
                 }).toArray();
                 //console.log(delIds);
 
-                if (confirm("Are you sure you want to delete selected student(s)?")) {
-                    $.post("/sms/index.php?r=students/students/deleteselected", {"ids": delIds}, function (retVal) {
+                if (confirm("Are you sure you want to delete selected applicant(s)?")) {
+                    $.post("/sms/index.php?r=students/applicants/deleteselected", {"ids": delIds}, function (retVal) {
                         if(retVal=="success"){
                             //alert("Students deleted successfully");
                             window.location.reload();
                         }else{
-                            alert("Students could not be deleted");
+                            alert("Applicants could not be deleted");
                         }
                        
                     });

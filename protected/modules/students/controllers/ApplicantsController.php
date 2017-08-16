@@ -109,15 +109,16 @@ class ApplicantsController extends RController {
 //print_r($_POST['Students']);exit;
         if (isset($_POST['Applicants'])) {
 
-            $model->attributes = $_POST['applicants'];
+            $model->attributes = $_POST['Applicants'];
             $list = $_POST['Applicants'];
             if ($model->registration_date)
                 $model->registration_date = date('Y-m-d', strtotime($model->registration_date));
             if ($model->date_of_birth)
                 $model->date_of_birth = date('Y-m-d', strtotime($model->date_of_birth));
             //$model->photo_data=CUploadedFile::getInstance($model,'photo_data');
-
-            if ($file = CUploadedFile::getInstance($model, 'photo_data')) {
+            if($model->save())
+				$this->redirect(array('manage'));
+           /* if ($file = CUploadedFile::getInstance($model, 'photo_data')) {
                 $model->photo_file_name = $file->name;
                 $model->photo_content_type = $file->type;
                 $model->photo_file_size = $file->size;
@@ -204,7 +205,7 @@ class ApplicantsController extends RController {
                 }
 
                 $this->redirect(array('manage'));
-            }
+            }*/
         }
 
         $this->render('create', array(
@@ -221,18 +222,18 @@ class ApplicantsController extends RController {
         $model = $this->loadModel($id);
         $settings = UserSettings::model()->findByAttributes(array('user_id' => Yii::app()->user->id));
         if ($settings != NULL) {
-            $date1 = date($settings->displaydate, strtotime($model->admission_date));
+            $date1 = date($settings->displaydate, strtotime($model->registration_date));
             $date2 = date($settings->displaydate, strtotime($model->date_of_birth));
         }
-        $model->admission_date = $date1;
+        $model->registration_date = $date1;
         $model->date_of_birth = $date2;
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['Students'])) {
-            $model->attributes = $_POST['Students'];
-            if ($model->admission_date)
-                $model->admission_date = date('Y-m-d', strtotime($model->admission_date));
+        if (isset($_POST['Applicants'])) {
+            $model->attributes = $_POST['Applicants'];
+            if ($model->registration_date)
+                $model->registration_date = date('Y-m-d', strtotime($model->registration_date));
             if ($model->date_of_birth)
                 $model->date_of_birth = date('Y-m-d', strtotime($model->date_of_birth));
             if ($file = CUploadedFile::getInstance($model, 'photo_data')) {
@@ -242,7 +243,7 @@ class ApplicantsController extends RController {
                 $model->photo_data = file_get_contents($file->tempName);
             }
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+                $this->redirect(array('manage'));
         }
 
         $this->render('update', array(
@@ -290,7 +291,7 @@ class ApplicantsController extends RController {
      * By Rajith
      */
     public function actionManage() {
-        $model = new Students;
+        $model = new Applicants;
         $criteria = new CDbCriteria;
         $criteria->compare('is_deleted', 0);  // normal DB field
         $criteria->condition = 'is_deleted=:is_del';
@@ -314,9 +315,9 @@ class ApplicantsController extends RController {
             }
         }
 
-        if (isset($_REQUEST['admissionnumber']) and $_REQUEST['admissionnumber'] != NULL) {
-            $criteria->condition = $criteria->condition . ' and ' . 'admission_no LIKE :admissionnumber';
-            $criteria->params[':admissionnumber'] = $_REQUEST['admissionnumber'] . '%';
+        if (isset($_REQUEST['registration_no']) and $_REQUEST['registration_no'] != NULL) {
+            $criteria->condition = $criteria->condition . ' and ' . 'registration_no LIKE :registration_no';
+            $criteria->params[':registration_no'] = $_REQUEST['registration_no'] . '%';
         }
 
         if (isset($_REQUEST['Students']['batch_id']) and $_REQUEST['Students']['batch_id'] != NULL) {
@@ -377,29 +378,29 @@ class ApplicantsController extends RController {
         if (isset($_REQUEST['Students']['admissionrange']) and $_REQUEST['Students']['admissionrange'] != NULL) {
 
             $model->admissionrange = $_REQUEST['Students']['admissionrange'];
-            if (isset($_REQUEST['Students']['admission_date']) and $_REQUEST['Students']['admission_date'] != NULL) {
+            if (isset($_REQUEST['Students']['registration_date']) and $_REQUEST['Students']['registration_date'] != NULL) {
                 if ($_REQUEST['Students']['admissionrange'] == '2') {
-                    $model->admission_date = $_REQUEST['Students']['admission_date'];
-                    $criteria->condition = $criteria->condition . ' and ' . 'admission_date = :admission_date';
-                    $criteria->params[':admission_date'] = date('Y-m-d', strtotime($_REQUEST['Students']['admission_date']));
+                    $model->registration_date = $_REQUEST['Students']['registration_date'];
+                    $criteria->condition = $criteria->condition . ' and ' . 'registration_date = :registration_date';
+                    $criteria->params[':registration_date'] = date('Y-m-d', strtotime($_REQUEST['Students']['registration_date']));
                 }
                 if ($_REQUEST['Students']['admissionrange'] == '1') {
 
-                    $model->admission_date = $_REQUEST['Students']['admission_date'];
-                    $criteria->condition = $criteria->condition . ' and ' . 'admission_date < :admission_date';
-                    $criteria->params[':admission_date'] = date('Y-m-d', strtotime($_REQUEST['Students']['admission_date']));
+                    $model->registration_date = $_REQUEST['Students']['registration_date'];
+                    $criteria->condition = $criteria->condition . ' and ' . 'registration_date < :registration_date';
+                    $criteria->params[':registration_date'] = date('Y-m-d', strtotime($_REQUEST['Students']['registration_date']));
                 }
                 if ($_REQUEST['Students']['admissionrange'] == '3') {
-                    $model->admission_date = $_REQUEST['Students']['admission_date'];
-                    $criteria->condition = $criteria->condition . ' and ' . 'admission_date > :admission_date';
-                    $criteria->params[':admission_date'] = date('Y-m-d', strtotime($_REQUEST['Students']['admission_date']));
+                    $model->registration_date = $_REQUEST['Students']['registration_date'];
+                    $criteria->condition = $criteria->condition . ' and ' . 'registration_date > :registration_date';
+                    $criteria->params[':registration_date'] = date('Y-m-d', strtotime($_REQUEST['Students']['registration_date']));
                 }
             }
         } elseif (isset($_REQUEST['Students']['admissionrange']) and $_REQUEST['Students']['admissionrange'] == NULL) {
-            if (isset($_REQUEST['Students']['admission_date']) and $_REQUEST['Students']['admission_date'] != NULL) {
-                $model->admission_date = $_REQUEST['Students']['admission_date'];
-                $criteria->condition = $criteria->condition . ' and ' . 'admission_date = :admission_date';
-                $criteria->params[':admission_date'] = date('Y-m-d', strtotime($_REQUEST['Students']['admission_date']));
+            if (isset($_REQUEST['Students']['registration_date']) and $_REQUEST['Students']['registration_date'] != NULL) {
+                $model->registration_date = $_REQUEST['Students']['registration_date'];
+                $criteria->condition = $criteria->condition . ' and ' . 'registration_date = :registration_date';
+                $criteria->params[':registration_date'] = date('Y-m-d', strtotime($_REQUEST['Students']['registration_date']));
             }
         }
 
@@ -412,11 +413,11 @@ class ApplicantsController extends RController {
 
         $criteria->order = 'first_name ASC';
 
-        $total = Students::model()->count($criteria);
+        $total = Applicants::model()->count($criteria);
         $pages = new CPagination($total);
         $pages->setPageSize(Yii::app()->params['listPerPage']);
         $pages->applyLimit($criteria);  // the trick is here!
-        $posts = Students::model()->findAll($criteria);
+        $posts = Applicants::model()->findAll($criteria);
 
 
         $this->render('manage', array('model' => $model,
@@ -559,7 +560,7 @@ class ApplicantsController extends RController {
      * @param integer the ID of the model to be loaded
      */
     public function loadModel($id) {
-        $model = Students::model()->findByPk($id);
+        $model = Applicants::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
