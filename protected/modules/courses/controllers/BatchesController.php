@@ -27,7 +27,7 @@ class BatchesController extends RController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','manage','Batchstudents','Addnew','settings','Addupdate','remove','promote','deactivate','activate','loadconstituencies'),
+				'actions'=>array('index','view','manage','Batchstudents','Addnew','settings','Addupdate','remove','promote','deactivate','activate','loadconstituencies','assign'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -149,6 +149,16 @@ class BatchesController extends RController
 		));
 		  
 	}
+        public function actionAssign()
+	{
+	$model = new StudentSubjects;
+	$model->student_id = $_REQUEST['id'];
+	$model->subject_id = $_REQUEST['sub'];
+        $model->batch_id = $data_1->batch_id;
+	$model->save();
+	$this->redirect(array('electives','eg'=>$_REQUEST['eg'],'sub'=>$_REQUEST['sub']));
+	}
+        
 	public function actionManage() 
 	{                                    
 		 

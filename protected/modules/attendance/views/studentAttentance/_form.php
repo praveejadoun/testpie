@@ -22,10 +22,12 @@
 		<?php echo $form->error($model,'date'); ?>
 	</div>
 
-        <div class="row">
-           <?php echo $form->dropDownList($model,'status',array('Yes'=>'Yes','No'=>'No')); ?>
-            <?php ?>
-        </div>
+       <div class="row">
+		<?php echo $form->labelEx($model,Yii::t('Attendance','student leave type')); ?>
+		<?php //echo $form->textField($model,'student_leave_type_id'); ?>
+        <?php echo $form->dropDownList($model,'student_leave_type_id',CHtml::listData(Studentleavetype::model()->findAll(), 'id', 'name'),array('empty'=>'Select Type')); ?>
+		<?php echo $form->error($model,'student_leave_type_id'); ?>
+	</div>
         
         
 	<div class="row">

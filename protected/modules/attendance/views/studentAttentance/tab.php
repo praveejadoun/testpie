@@ -96,7 +96,7 @@ $(document).click(function() {
 				echo CHtml::link('Teacher Attendance',array('/attendance/teachersubjectattendance'),array('class'=>'sb_but','style'=>'top:-40px; right:40px;'));
 			}?>
             
-            <?php echo CHtml::link('<span>close</span>',array('/courses'),array('class'=>'sb_but_close','style'=>'top:-40px; right:0px;'));?>
+            <?php echo CHtml::link('<span>close</span>',array('/attendance'),array('class'=>'sb_but_close','style'=>'top:-40px; right:0px;'));?>
    
     	<div class="cb_left">
         	<ul>

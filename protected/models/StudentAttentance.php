@@ -8,7 +8,7 @@
  * @property integer $student_id
  * @property integer $date
  * @property string $reason
- * @property string $status
+ * @property string $student_leave_type_id
  */
 class StudentAttentance extends CActiveRecord
 {
@@ -37,14 +37,14 @@ class StudentAttentance extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('student_id, date, status', 'required'),
+			array('student_id, date, student_leave_type_id', 'required'),
 			array('student_id', 'numerical', 'integerOnly'=>true),
 			array('reason', 'length', 'max'=>120),
 			//array('reason', 'required'),
 			array('date', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, student_id, date, reason,status', 'safe', 'on'=>'search'),
+			array('id, student_id, date, reason,student_leave_type_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,7 +69,7 @@ class StudentAttentance extends CActiveRecord
 			'student_id' => 'Student',
 			'date' => 'Date',
 			'reason' => 'Reason',
-                        'status' => 'status'
+                        'student_leave_type_id' => 'Student Leave Type'
 		);
 	}
 
@@ -88,7 +88,7 @@ class StudentAttentance extends CActiveRecord
 		$criteria->compare('student_id',$this->student_id);
 		$criteria->compare('date',$this->date);
 		$criteria->compare('reason',$this->reason,true);
-                $criteria->compare('status',$this->status,true);
+                $criteria->compare('student_leave_type_id',$this->student_leave_type_id,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

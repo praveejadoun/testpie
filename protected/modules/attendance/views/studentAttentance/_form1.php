@@ -21,12 +21,20 @@
 		<?php echo $form->error($model,'date'); ?>
 	</div>
     
+        <div class="row">
+		<?php echo $form->labelEx($model,Yii::t('Attendance','student leave type')); ?>
+		<?php //echo $form->textField($model,'student_leave_type_id'); ?>
+        <?php echo $form->dropDownList($model,'student_leave_type_id',CHtml::listData(Studentleavetype::model()->findAll(), 'id', 'name'),array('empty'=>'Select Type')); ?>
+		<?php echo $form->error($model,'student_leave_type_id'); ?>
+	</div>
+        
 
 	<div class="row">
 		<?php echo $form->labelEx($model,Yii::t('Attendance','reason')); ?>
 		<?php echo $form->textField($model,'reason',array('size'=>60,'maxlength'=>120)); ?>
 		<?php echo $form->error($model,'reason'); ?>
 	</div>
+    
 	<br /><br />
 	<div class="row buttons">
 		<?php //echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>

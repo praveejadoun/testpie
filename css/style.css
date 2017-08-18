@@ -2956,7 +2956,7 @@ ul.yiiPager li.last a{border:1px solid #e7ecee;}
 .atnd_Con tr.even{background-color:#fbfbfb}*/
 .today{background-color:#fdcb43 !important; color:#FFF !important;}
 .today span{color:#fff !important}
-.atnd_Con td a.at_abs{display:block; background:#FFF; padding:10px 0px; text-indent:-999999px;}
+.atnd_Con td a.at_abs{display:block; background:url(../images/tick.png) no-repeat center; padding:10px 0px; text-indent:-999999px;}
 .atnd_Con td a.at_abs:hover{background:#FEFBE7}
 span.abs{display:block; background:url(../images/abs_cross.png) no-repeat center; width:20px; height:30px; margin:0 auto;}
 /*left accordion*/
