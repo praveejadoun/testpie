@@ -33,7 +33,7 @@ $this->breadcrumbs=array(
                         
                       </li> 
                         
-                    <li><a><?php echo CHtml::link('Teacher Attendance',array('teacherSubjectAttendance/create'),array('class'=>'addbttn','style'=>'padding:8px 3px 6px 0px;;margin:0px 0px 0px 10px;'))?></a></li>
+                    <li><a><?php echo CHtml::link('Teacher Attendance',array('employeeAttendances/'),array('class'=>'addbttn','style'=>'padding:8px 3px 6px 0px;;margin:0px 0px 0px 10px;'))?></a></li>
                  </ul>
            </div> 
             <div class="yellow_bx yb_attendance">
