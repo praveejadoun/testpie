@@ -11,7 +11,7 @@
  * @property string $first_name
  * @property string $middle_name
  * @property string $last_name
- * @property integer $batch_id
+ * @property integer $course_id
  * @property string $date_of_birth
  * @property string $gender
  * @property string $blood_group
@@ -59,7 +59,7 @@ class Applicants extends CActiveRecord
 	
 	public $status;
 	public $dobrange;
-	public $admissionrange;
+	public $registrationrange;
 	public $task_type;
 
 	/**
@@ -78,7 +78,7 @@ class Applicants extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('registration_no, parent_id, batch_id, nationality_id, student_category_id, country_id, immediate_contact_id, is_sms_enabled, is_active, is_deleted, has_paid_fees, photo_file_size, pin_code, phone1, phone2, user_id, uid', 'numerical', 'integerOnly'=>true),
+			array('registration_no, parent_id, course_id, nationality_id, student_category_id, country_id, immediate_contact_id, is_sms_enabled, is_active, is_deleted, has_paid_fees, photo_file_size, pin_code, phone1, phone2, user_id, uid', 'numerical', 'integerOnly'=>true),
 			array(' registration_date, first_name, last_name, gender, date_of_birth, phone1, email', 'required',),
 			array('registration_no','unique'),
 			array('email','check'),
@@ -97,7 +97,7 @@ class Applicants extends CActiveRecord
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('photo_data', 'file', 'types'=>'jpg, gif, png', 'allowEmpty' => true),
-			array('id, registration_no, parent_id, class_roll_no, registration_date, first_name, middle_name, last_name, batch_id, date_of_birth, gender, blood_group, birth_place, nationality_id, language, religion, student_category_id, address_line1, address_line2, city, state, pin_code, country_id, phone1, phone2, email, immediate_contact_id, is_sms_enabled, photo_file_name, photo_content_type, photo_data, status_description, is_active, is_deleted, created_at, updated_at, has_paid_fees, photo_file_size, user_id,academic_year,status', 'safe', 'on'=>'search'),
+			array('id, registration_no, parent_id, class_roll_no, registration_date, first_name, middle_name, last_name, course_id, date_of_birth, gender, blood_group, birth_place, nationality_id, language, religion, student_category_id, address_line1, address_line2, city, state, pin_code, country_id, phone1, phone2, email, immediate_contact_id, is_sms_enabled, photo_file_name, photo_content_type, photo_data, status_description, is_active, is_deleted, created_at, updated_at, has_paid_fees, photo_file_size, user_id,academic_year,status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -138,7 +138,7 @@ class Applicants extends CActiveRecord
 			'first_name' => 'First Name',
 			'middle_name' => 'Middle Name',
 			'last_name' => 'Last Name',
-			'batch_id' => 'Batch',
+			'course_id' => 'Batch',
 			'date_of_birth' => 'Date Of Birth',
 			'gender' => 'Gender',
 			'blood_group' => 'Blood Group',
@@ -193,7 +193,7 @@ class Applicants extends CActiveRecord
 		$criteria->compare('first_name',$this->first_name,true);
 		$criteria->compare('middle_name',$this->middle_name,true);
 		$criteria->compare('last_name',$this->last_name,true);
-		$criteria->compare('batch_id',$this->batch_id);
+		$criteria->compare('course_id',$this->course_id);
 		$criteria->compare('date_of_birth',$this->date_of_birth,true);
 		$criteria->compare('gender',$this->gender,true);
 		$criteria->compare('blood_group',$this->blood_group,true);

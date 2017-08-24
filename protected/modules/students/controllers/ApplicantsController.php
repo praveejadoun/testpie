@@ -25,7 +25,7 @@ class ApplicantsController extends RController {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'manage', 'Website', 'savesearch', 'events', 'attentance', 'Assesments', 'DisplaySavedImage', 'Fees', 'Payfees', 'Pdf', 'Printpdf', 'Remove', 'Search', 'inactive', 'active', 'deletes'),
+                'actions' => array('index', 'view', 'manage', 'Website', 'savesearch', 'events', 'attentance', 'Assesments', 'DisplaySavedImage', 'Fees', 'Payfees', 'Pdf', 'Printpdf', 'Remove', 'Search', 'inactive', 'active', 'deletes','Managepdf'),
                 'users' => array('@'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -75,6 +75,17 @@ class ApplicantsController extends RController {
         $html2pdf->Output($student);
 
         ////////////////////////////////////////////////////////////////////////////////////
+    }
+    
+     public function actionManagepdf()
+    {
+        
+	 $applicant = Applicants::model()->findAll();
+		 $applicant = 'applicant list.pdf';	
+        $html2pdf = Yii::app()->ePdf->HTML2PDF();
+		$html2pdf->WriteHTML($this->renderPartial('print_1_1',array(),true));
+                ob_end_clean();
+        $html2pdf->Output( $applicant);
     }
 
     public function actionDisplaySavedImage() {
@@ -192,7 +203,7 @@ class ApplicantsController extends RController {
                     UserModule::sendMail($model->email, UserModule::t("You are registered from {site_name}", array('{site_name}' => Yii::app()->name)), UserModule::t("Please login to your account with your email id as username and password {password}", array('{password}' => $password)));
                 }
                 // for saving in fee table
-                $fee_collection = FinanceFeeCollections::model()->findAll('batch_id=:x', array(':x' => $model->batch_id));
+                $fee_collection = FinanceFeeCollections::model()->findAll('course_id=:x', array(':x' => $model->batch_id));
 
                 if ($fee_collection != NULL) {
                     for ($i = 0; $i < count($fee_collection); $i++) {
@@ -288,7 +299,7 @@ class ApplicantsController extends RController {
 
     /**
      * Performs the Advance search.
-     * By Rajith
+     * By Sunil
      */
     public function actionManage() {
         $model = new Applicants;
@@ -315,99 +326,99 @@ class ApplicantsController extends RController {
             }
         }
 
-        if (isset($_REQUEST['registration_no']) and $_REQUEST['registration_no'] != NULL) {
-            $criteria->condition = $criteria->condition . ' and ' . 'registration_no LIKE :registration_no';
-            $criteria->params[':registration_no'] = $_REQUEST['registration_no'] . '%';
+        if (isset($_REQUEST['registrationnumber']) and $_REQUEST['registrationnumber'] != NULL) {
+            $criteria->condition = $criteria->condition . ' and ' . 'registration_no LIKE :registrationnumber';
+            $criteria->params[':registrationnumber'] = $_REQUEST['registrationnumber'] . '%';
         }
 
-        if (isset($_REQUEST['Students']['batch_id']) and $_REQUEST['Students']['batch_id'] != NULL) {
-            $model->batch_id = $_REQUEST['Students']['batch_id'];
-            $criteria->condition = $criteria->condition . ' and ' . 'batch_id = :batch_id';
-            $criteria->params[':batch_id'] = $_REQUEST['Students']['batch_id'];
+        if (isset($_REQUEST['Applicants']['course_id']) and $_REQUEST['Applicants']['course_id'] != NULL) {
+            $model->course_id = $_REQUEST['Applicants']['course_id'];
+            $criteria->condition = $criteria->condition . ' and ' . 'course_id = :course_id';
+            $criteria->params[':course_id'] = $_REQUEST['Applicants']['course_id'];
         }
 
-        if (isset($_REQUEST['Students']['gender']) and $_REQUEST['Students']['gender'] != NULL) {
-            $model->gender = $_REQUEST['Students']['gender'];
+        if (isset($_REQUEST['Applicants']['gender']) and $_REQUEST['Applicants']['gender'] != NULL) {
+            $model->gender = $_REQUEST['Applicants']['gender'];
             $criteria->condition = $criteria->condition . ' and ' . 'gender = :gender';
-            $criteria->params[':gender'] = $_REQUEST['Students']['gender'];
+            $criteria->params[':gender'] = $_REQUEST['Applicants']['gender'];
         }
 
-        if (isset($_REQUEST['Students']['blood_group']) and $_REQUEST['Students']['blood_group'] != NULL) {
-            $model->blood_group = $_REQUEST['Students']['blood_group'];
+        if (isset($_REQUEST['Applicants']['blood_group']) and $_REQUEST['Applicants']['blood_group'] != NULL) {
+            $model->blood_group = $_REQUEST['Applicants']['blood_group'];
             $criteria->condition = $criteria->condition . ' and ' . 'blood_group = :blood_group';
-            $criteria->params[':blood_group'] = $_REQUEST['Students']['blood_group'];
+            $criteria->params[':blood_group'] = $_REQUEST['Applicants']['blood_group'];
         }
 
-        if (isset($_REQUEST['Students']['nationality_id']) and $_REQUEST['Students']['nationality_id'] != NULL) {
-            $model->nationality_id = $_REQUEST['Students']['nationality_id'];
+        if (isset($_REQUEST['Applicants']['nationality_id']) and $_REQUEST['Applicants']['nationality_id'] != NULL) {
+            $model->nationality_id = $_REQUEST['Applicants']['nationality_id'];
             $criteria->condition = $criteria->condition . ' and ' . 'nationality_id = :nationality_id';
-            $criteria->params[':nationality_id'] = $_REQUEST['Students']['nationality_id'];
+            $criteria->params[':nationality_id'] = $_REQUEST['Applicants']['nationality_id'];
         }
 
 
-        if (isset($_REQUEST['Students']['dobrange']) and $_REQUEST['Students']['dobrange'] != NULL) {
+        if (isset($_REQUEST['Applicants']['dobrange']) and $_REQUEST['Applicants']['dobrange'] != NULL) {
 
-            $model->dobrange = $_REQUEST['Students']['dobrange'];
-            if (isset($_REQUEST['Students']['date_of_birth']) and $_REQUEST['Students']['date_of_birth'] != NULL) {
-                if ($_REQUEST['Students']['dobrange'] == '2') {
-                    $model->date_of_birth = $_REQUEST['Students']['date_of_birth'];
+            $model->dobrange = $_REQUEST['Applicants']['dobrange'];
+            if (isset($_REQUEST['Applicants']['date_of_birth']) and $_REQUEST['Applicants']['date_of_birth'] != NULL) {
+                if ($_REQUEST['Applicants']['dobrange'] == '2') {
+                    $model->date_of_birth = $_REQUEST['Applicants']['date_of_birth'];
                     $criteria->condition = $criteria->condition . ' and ' . 'date_of_birth = :date_of_birth';
-                    $criteria->params[':date_of_birth'] = date('Y-m-d', strtotime($_REQUEST['Students']['date_of_birth']));
+                    $criteria->params[':date_of_birth'] = date('Y-m-d', strtotime($_REQUEST['Applicants']['date_of_birth']));
                 }
-                if ($_REQUEST['Students']['dobrange'] == '1') {
+                if ($_REQUEST['Applicants']['dobrange'] == '1') {
 
-                    $model->date_of_birth = $_REQUEST['Students']['date_of_birth'];
+                    $model->date_of_birth = $_REQUEST['Applicants']['date_of_birth'];
                     $criteria->condition = $criteria->condition . ' and ' . 'date_of_birth < :date_of_birth';
-                    $criteria->params[':date_of_birth'] = date('Y-m-d', strtotime($_REQUEST['Students']['date_of_birth']));
+                    $criteria->params[':date_of_birth'] = date('Y-m-d', strtotime($_REQUEST['Applicants']['date_of_birth']));
                 }
-                if ($_REQUEST['Students']['dobrange'] == '3') {
-                    $model->date_of_birth = $_REQUEST['Students']['date_of_birth'];
+                if ($_REQUEST['Applicants']['dobrange'] == '3') {
+                    $model->date_of_birth = $_REQUEST['Applicants']['date_of_birth'];
                     $criteria->condition = $criteria->condition . ' and ' . 'date_of_birth > :date_of_birth';
-                    $criteria->params[':date_of_birth'] = date('Y-m-d', strtotime($_REQUEST['Students']['date_of_birth']));
+                    $criteria->params[':date_of_birth'] = date('Y-m-d', strtotime($_REQUEST['Applicants']['date_of_birth']));
                 }
             }
-        } elseif (isset($_REQUEST['Students']['dobrange']) and $_REQUEST['Students']['dobrange'] == NULL) {
-            if (isset($_REQUEST['Students']['date_of_birth']) and $_REQUEST['Students']['date_of_birth'] != NULL) {
-                $model->date_of_birth = $_REQUEST['Students']['date_of_birth'];
+        } elseif (isset($_REQUEST['Applicants']['dobrange']) and $_REQUEST['Applicants']['dobrange'] == NULL) {
+            if (isset($_REQUEST['Applicants']['date_of_birth']) and $_REQUEST['Applicants']['date_of_birth'] != NULL) {
+                $model->date_of_birth = $_REQUEST['Applicants']['date_of_birth'];
                 $criteria->condition = $criteria->condition . ' and ' . 'date_of_birth = :date_of_birth';
-                $criteria->params[':date_of_birth'] = date('Y-m-d', strtotime($_REQUEST['Students']['date_of_birth']));
+                $criteria->params[':date_of_birth'] = date('Y-m-d', strtotime($_REQUEST['Applicants']['date_of_birth']));
             }
         }
 
 
-        if (isset($_REQUEST['Students']['admissionrange']) and $_REQUEST['Students']['admissionrange'] != NULL) {
+        if (isset($_REQUEST['Applicants']['registrationrange']) and $_REQUEST['Applicants']['registrationrange'] != NULL) {
 
-            $model->admissionrange = $_REQUEST['Students']['admissionrange'];
-            if (isset($_REQUEST['Students']['registration_date']) and $_REQUEST['Students']['registration_date'] != NULL) {
-                if ($_REQUEST['Students']['admissionrange'] == '2') {
-                    $model->registration_date = $_REQUEST['Students']['registration_date'];
+            $model->registrationrange = $_REQUEST['Applicants']['registrationrange'];
+            if (isset($_REQUEST['Applicants']['registration_date']) and $_REQUEST['Applicants']['registration_date'] != NULL) {
+                if ($_REQUEST['Applicants']['registrationrange'] == '2') {
+                    $model->registration_date = $_REQUEST['Applicants']['registration_date'];
                     $criteria->condition = $criteria->condition . ' and ' . 'registration_date = :registration_date';
-                    $criteria->params[':registration_date'] = date('Y-m-d', strtotime($_REQUEST['Students']['registration_date']));
+                    $criteria->params[':registration_date'] = date('Y-m-d', strtotime($_REQUEST['Applicants']['registration_date']));
                 }
-                if ($_REQUEST['Students']['admissionrange'] == '1') {
+                if ($_REQUEST['Applicants']['registrationrange'] == '1') {
 
-                    $model->registration_date = $_REQUEST['Students']['registration_date'];
+                    $model->registration_date = $_REQUEST['Applicants']['registration_date'];
                     $criteria->condition = $criteria->condition . ' and ' . 'registration_date < :registration_date';
-                    $criteria->params[':registration_date'] = date('Y-m-d', strtotime($_REQUEST['Students']['registration_date']));
+                    $criteria->params[':registration_date'] = date('Y-m-d', strtotime($_REQUEST['Applicants']['registration_date']));
                 }
-                if ($_REQUEST['Students']['admissionrange'] == '3') {
-                    $model->registration_date = $_REQUEST['Students']['registration_date'];
+                if ($_REQUEST['Applicants']['registrationrange'] == '3') {
+                    $model->registration_date = $_REQUEST['Applicants']['registration_date'];
                     $criteria->condition = $criteria->condition . ' and ' . 'registration_date > :registration_date';
-                    $criteria->params[':registration_date'] = date('Y-m-d', strtotime($_REQUEST['Students']['registration_date']));
+                    $criteria->params[':registration_date'] = date('Y-m-d', strtotime($_REQUEST['Applicants']['registration_date']));
                 }
             }
-        } elseif (isset($_REQUEST['Students']['admissionrange']) and $_REQUEST['Students']['admissionrange'] == NULL) {
-            if (isset($_REQUEST['Students']['registration_date']) and $_REQUEST['Students']['registration_date'] != NULL) {
-                $model->registration_date = $_REQUEST['Students']['registration_date'];
+        } elseif (isset($_REQUEST['Applicants']['registrationrange']) and $_REQUEST['Applicants']['registrationrange'] == NULL) {
+            if (isset($_REQUEST['Applicants']['registration_date']) and $_REQUEST['Applicants']['registration_date'] != NULL) {
+                $model->registration_date = $_REQUEST['Applicants']['registration_date'];
                 $criteria->condition = $criteria->condition . ' and ' . 'registration_date = :registration_date';
-                $criteria->params[':registration_date'] = date('Y-m-d', strtotime($_REQUEST['Students']['registration_date']));
+                $criteria->params[':registration_date'] = date('Y-m-d', strtotime($_REQUEST['Applicants']['registration_date']));
             }
         }
 
-        if (isset($_REQUEST['Students']['status']) and $_REQUEST['Students']['status'] != NULL) {
-            $model->status = $_REQUEST['Students']['status'];
-            $criteria->condition = $criteria->condition . ' and ' . 'is_active = :status';
-            $criteria->params[':status'] = $_REQUEST['Students']['status'];
+        if (isset($_REQUEST['Applicants']['status']) and $_REQUEST['Applicants']['status'] != NULL) {
+            $model->status = $_REQUEST['Applicants']['status'];
+            $criteria->condition = $criteria->condition . ' and ' . 'status = :status';
+            $criteria->params[':status'] = $_REQUEST['Applicants']['status'];
         }
 
 
@@ -427,9 +438,7 @@ class ApplicantsController extends RController {
             'page_size' => Yii::app()->params['listPerPage'],));
     }
 
-    public function actionDeletestudents(){
-        print_r($_POST);exit;
-    }
+    
 
     public function actionIndex() {
         $criteria = new CDbCriteria;
@@ -633,6 +642,19 @@ class ApplicantsController extends RController {
 
         $this->redirect(array('/courses/batches/batchstudents', 'id' => $_REQUEST['id']));
     }
+    
+     public function actionChangestatus() {
+         //Add Security
+        if(!empty($_GET['sid']) && !empty($_GET['aid'])){
+        $model = Applicants::model()->findByAttributes(array('id' => $_GET['aid']));
+        $change_status = $_GET['sid'];
+        $model->saveAttributes(array('status' => $change_status));
+        $this->redirect(array('/students/applicants/manage'));
+        }else{
+            //Message here
+        $this->redirect(array('/students/applicants/manage'));
+        }
+    }
 
    public function actionDeleteselected() {
        
@@ -668,9 +690,9 @@ class ApplicantsController extends RController {
     public function actionDeletes() {
         
    
-        $model = Students::model()->findByAttributes(array('id' => $_REQUEST['sid']));
+        $model = Applicants::model()->findByAttributes(array('id' => $_REQUEST['sid']));
         
-        $model->saveAttributes(array('is_deleted' => '1'));
+        $model->saveAttributes(array('is_deleted' => 1));
         if ($model->uid and $model->uid != NULL and $model->uid != 0) { // Deleting student user
             $user = User::model()->findByPk($model->uid);
             if ($user) {
@@ -694,7 +716,7 @@ class ApplicantsController extends RController {
         $examscores = ExamScores::model()->DeleteAllByAttributes(array('student_id' => $_REQUEST['sid']));
         
         
-        $this->redirect(array('/students/students/manage'));
+        $this->redirect(array('/students/applicants/manage'));
     }
 
    

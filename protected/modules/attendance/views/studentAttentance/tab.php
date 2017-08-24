@@ -89,7 +89,7 @@ $(document).click(function() {
                        
 			$rurl = explode('&id=',$rurl[1]); 
 			echo CHtml::ajaxLink('Change Batch',array('/site/explorer','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'sb_but','style'=>'top:-40px; right:40px;')); 
-                        echo CHtml::link('Teacher Attendance',array('/attendance/employeeAttendance'),array('class'=>'sb_but','style'=>'top:-40px; right:170px;'));?>
+                        echo CHtml::link('Teacher Attendance',array('/attendance/employeeAttendances'),array('class'=>'sb_but','style'=>'top:-40px; right:170px;'));?>
 <?php 
 			}else
 			{

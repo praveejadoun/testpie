@@ -792,7 +792,7 @@ $this->breadcrumbs = array(
                                     </ul>
                                 </div>
                                 <div class="ea_pdf" style="top:0px; right:6px;">
-                                    <?php echo CHtml::link('<img src="images/pdf-but.png">', array('employees/printpdf1'), array('target' => '_blank')); ?>
+                                    <?php echo CHtml::link('<img src="images/pdf-but.png">', array('students/managepdf'), array('target' => '_blank')); ?>
                                 </div>
                             </div> 
 
@@ -979,7 +979,7 @@ $this->breadcrumbs = array(
                 //console.log(delIds);
 
                 if (confirm("Are you sure you want to delete selected student(s)?")) {
-                    $.post("/testpie/index.php?r=students/students/deleteselected", {"ids": delIds}, function (retVal) {
+                    $.post("/sms/index.php?r=students/students/deleteselected", {"ids": delIds}, function (retVal) {
                         if(retVal=="success"){
                             //alert("Students deleted successfully");
                             window.location.reload();

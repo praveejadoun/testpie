@@ -25,7 +25,7 @@ class StudentsController extends RController {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'manage', 'Website', 'savesearch', 'events', 'attentance', 'Assesments', 'DisplaySavedImage', 'Fees', 'Payfees', 'Pdf', 'Printpdf', 'Remove', 'Search', 'inactive', 'active', 'deletes'),
+                'actions' => array('index', 'view', 'manage', 'Website', 'savesearch', 'events', 'attentance', 'Assesments', 'DisplaySavedImage', 'Fees', 'Payfees', 'Pdf', 'Printpdf', 'Remove', 'Search', 'inactive', 'active', 'deletes','Managepdf'),
                 'users' => array('@'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -75,6 +75,16 @@ class StudentsController extends RController {
         $html2pdf->Output($student);
 
         ////////////////////////////////////////////////////////////////////////////////////
+    }
+       public function actionManagepdf()
+    {
+        
+	 $student = Students::model()->findAll();
+		 $student = 'student list.pdf';	
+        $html2pdf = Yii::app()->ePdf->HTML2PDF();
+		$html2pdf->WriteHTML($this->renderPartial('print_1_1',array(),true));
+                ob_end_clean();
+        $html2pdf->Output( $student);
     }
 
     public function actionDisplaySavedImage() {

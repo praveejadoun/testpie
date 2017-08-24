@@ -151,36 +151,37 @@ $this->breadcrumbs = array(
                                     </li>
                                     <!-- End Name Filter -->
 
-                                    <!-- Admission Number Filter -->
+                                    <!-- Registration Number Filter -->
                                     <li>
-                                        <div onClick="hide('admissionnumber')" style="cursor:pointer;"><?php echo Yii::t('students', 'Registration number'); ?></div>
-                                        <div id="admissionnumber" style="display:none;width:202px; padding-top:0px; height:30px" class="drop">
+                                        <div onClick="hide('registrationnumber')" style="cursor:pointer;"><?php echo Yii::t('students', 'Registration number'); ?></div>
+                                        <div id="registrationnumber" style="display:none;width:202px; padding-top:0px; height:30px" class="drop">
                                             <div class="droparrow" style="left:10px;"></div>
-                                            <input type="search" placeholder="search" name="admissionnumber" value="<?php echo isset($_GET['admissionnumber']) ? CHtml::encode($_GET['admissionnumber']) : ''; ?>" />
+                                            <input type="search" placeholder="search" name="registrationnumber" value="<?php echo isset($_GET['registrationnumber']) ? CHtml::encode($_GET['registrationnumber']) : ''; ?>" />
                                             <input type="submit" value="Apply" />
                                         </div>
                                     </li>
-                                    <!-- End Admission Number Filter -->
+                                    <!-- End Registration Number Filter -->
 
                                     <!-- Batch Filter -->
                                     <li>
-                                        <div onClick="hide('batch')" style="cursor:pointer;"><?php echo Yii::t('students', 'Batch'); ?></div>
-                                        <div id="batch" style="display:none; color:#000; width:406px; height:30px; padding-left:10px; padding-top:0px; left:-200px" class="drop">
+                                        <div onClick="hide('batch')" style="cursor:pointer;"><?php echo Yii::t('Applicants', 'Course'); ?></div>
+                                        <div id="batch" style="display:none; color:#000; width:220px; height:30px; padding-left:10px; padding-top:0px; left:-200px" class="drop">
                                             <div class="droparrow" style="left:210px;"></div>
                                             <?php
-                                            $data = CHtml::listData(Courses::model()->findAll('is_deleted=:x', array(':x' => '0'), array('order' => 'course_name DESC')), 'id', 'course_name');
+                                           /* $data = CHtml::listData(Courses::model()->findAll('is_deleted=:x', array(':x' => '0'), array('order' => 'course_name DESC')), 'id', 'course_name');
                                             echo Yii::t('students', 'Course');
                                             echo CHtml::dropDownList('cid', '', $data, array('prompt' => 'Select',
                                                 'ajax' => array(
                                                     'type' => 'POST',
                                                     'url' => CController::createUrl('Students/batch'),
-                                                    'update' => '#batch_id',
+                                                    'update' => '#course_id',
                                                     'data' => 'js:$(this).serialize()'
                                             )));
                                             echo '&nbsp;&nbsp;&nbsp;';
-                                            echo Yii::t('students', 'Batch');
-                                            $data1 = CHtml::listData(Batches::model()->findAll('is_active=:x AND is_deleted=:y', array(':x' => '1', ':y' => 0), array('order' => 'name DESC')), 'id', 'name');
-                                            echo CHtml::activeDropDownList($model, 'batch_id', $data1, array('prompt' => 'Select', 'id' => 'batch_id'));
+                                            echo Yii::t('students', 'Course');
+                                            $data1 = CHtml::listData(Courses::model()->findAll('is_deleted=:y', array(':y' => 0), array('order' => 'name DESC')), 'id', 'course_name');
+                                            echo CHtml::activeDropDownList($model, 'course_id', $data1, array('prompt' => 'Select', 'id' => 'course_id'));*/
+                                            echo CHtml::activeDropDownList($model, 'course_id', CHtml::listData(Courses::model()->findAll('is_deleted=:y', array(':y' => 0), array('order' => 'name DESC')), 'id', 'course_name'), array('prompt' => 'Select')); 
                                             ?>
                                             <input type="submit" value="Apply" />
                                         </div>
@@ -189,7 +190,7 @@ $this->breadcrumbs = array(
 
                                     <!-- Gender Filter -->
                                     <li>
-                                        <div onClick="hide('gender')" style="cursor:pointer;"><?php echo Yii::t('students', 'Gender'); ?></div>
+                                        <div onClick="hide('gender')" style="cursor:pointer;"><?php echo Yii::t('Applicants', 'Gender'); ?></div>
                                         <div id="gender" style="display:none; width:191px; padding-top:0px; height:30px" class="drop">
                                             <div class="droparrow" style="left:10px;"></div>
                                             <?php
@@ -202,7 +203,7 @@ $this->breadcrumbs = array(
 
                                     <!-- Blood Group Filter -->
                                     <li>
-                                        <div onClick="hide('bloodgroup')" style="cursor:pointer;"><?php echo Yii::t('students', 'Blood Group'); ?></div>
+                                        <div onClick="hide('bloodgroup')" style="cursor:pointer;"><?php echo Yii::t('Applicants', 'Blood Group'); ?></div>
                                         <div id="bloodgroup" style="display:none;width:191px; padding-top:0px; height:30px" class="drop" >
                                             <div class="droparrow" style="left:10px;"></div>
                                             <?php
@@ -215,7 +216,7 @@ $this->breadcrumbs = array(
 
                                     <!-- Nationality Filter -->
                                     <li>
-                                        <div onClick="hide('nationality')" style="cursor:pointer;"><?php echo Yii::t('students', 'Country'); ?></div>
+                                        <div onClick="hide('nationality')" style="cursor:pointer;"><?php echo Yii::t('Applicants', 'Country'); ?></div>
                                         <div id="nationality" style="display:none;width:191px; padding-top:0px; left:-180px; height:30px;" class="drop">
                                             <div class="droparrow" style="left:189px;"></div>
                                             <?php echo CHtml::activeDropDownList($model, 'nationality_id', CHtml::listData(Countries::model()->findAll(), 'id', 'name'), array('prompt' => 'Select')); ?>
@@ -233,13 +234,13 @@ $this->breadcrumbs = array(
                                         $date = 'dd-mm-yy';
                                     ?>
                                     <li>
-                                        <div onClick="hide('dob')" style="cursor:pointer;"><?php echo Yii::t('students', 'Date Of Birth'); ?></div>
+                                        <div onClick="hide('dob')" style="cursor:pointer;"><?php echo Yii::t('Applicants', 'Date Of Birth'); ?></div>
                                         <div id="dob" style="display:none; width:340px; left:-250px; height:30px; padding-top:0px;" class="drop">
                                             <div class="droparrow" style=" left:280px"></div>
                                             <?php echo CHtml::activeDropDownList($model, 'dobrange', array('1' => 'less than', '2' => 'equal to', '3' => 'greater than'), array('prompt' => 'Option')); ?>                            
                                             <?php
                                             $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                                'name' => 'Students[date_of_birth]',
+                                                'name' => 'Applicants[date_of_birth]',
                                                 'model' => $model,
                                                 'value' => $model->date_of_birth,
                                                 'options' => array(
@@ -260,15 +261,15 @@ $this->breadcrumbs = array(
                                     </li>
                                     <!-- END Date of Birth Filter -->
 
-                                    <!-- Admission Date Filter -->
+                                    <!-- Registration Date Filter -->
                                     <li>
-                                        <div onClick="hide('admission')" style="cursor:pointer;"><?php echo Yii::t('students', 'Admission Date'); ?></div>
-                                        <div id="admission" style="display:none;width:340px; left:-190px;  height:30px; padding-top:0px;" class="drop">
+                                        <div onClick="hide('registration')" style="cursor:pointer;"><?php echo Yii::t('Applicants', 'Registration Date'); ?></div>
+                                        <div id="registration" style="display:none;width:340px; left:-190px;  height:30px; padding-top:0px;" class="drop">
                                             <div class="droparrow" style=" left:200px"></div>
-                                            <?php echo CHtml::activeDropDownList($model, 'admissionrange', array('1' => 'less than', '2' => 'equal to', '3' => 'greater than'), array('prompt' => 'Option')); ?>
+                                            <?php echo CHtml::activeDropDownList($model, 'registrationrange', array('1' => 'less than', '2' => 'equal to', '3' => 'greater than'), array('prompt' => 'Option')); ?>
                                             <?php
                                             $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                                'name' => 'Students[registration_date]',
+                                                'name' => 'Applicants[registration_date]',
                                                 'model' => $model,
                                                 'value' => $model->registration_date,
                                                 'options' => array(
@@ -287,15 +288,15 @@ $this->breadcrumbs = array(
                                             <input type="submit" value="Apply" />
                                         </div>
                                     </li>
-                                    <!-- END Admission Date Filter -->
+                                    <!-- END Registration Date Filter -->
 
                                     <!-- Status Filter -->
                                     <li>
-                                        <div onClick="hide('status')" style="cursor:pointer;"><?php echo Yii::t('students', 'Status'); ?></div>
+                                        <div onClick="hide('status')" style="cursor:pointer;"><?php echo Yii::t('Applicants', 'Status'); ?></div>
                                         <div id="status" style="display:none; width:191px; min-height:30px; left:-120px; padding-top:0px;" class="drop">
                                             <div class="droparrow"  style="left:140px"></div>
                                             <?php
-                                            echo CHtml::activeDropDownList($model, 'status', array('1' => 'Present', '0' => 'Former'), array('selected' => 'selected', 'prompt' => 'All'));
+                                            echo CHtml::activeDropDownList($model, 'status', array('1' => 'Pending', '2' => 'Approved', '3' => 'Rejected', '4' => 'Waiting List'), array('selected' => 'selected', 'prompt' => 'All'));
                                             ?>
                                             <input type="submit" value="Apply" />
                                         </div>
@@ -328,24 +329,24 @@ $this->breadcrumbs = array(
                                         ?>
                                         <!-- END Name Active Filter -->
 
-                                        <!-- Admission Number Active Filter -->
+                                        <!-- Registration Number Active Filter -->
                                         <?php
-                                        if (isset($_REQUEST['admissionnumber']) and $_REQUEST['admissionnumber'] != NULL) {
+                                        if (isset($_REQUEST['registrationnumber']) and $_REQUEST['registrationnumber'] != NULL) {
                                             $j++;
                                             ?>
-                                            <li>Admission number : <?php echo $_REQUEST['admissionnumber'] ?><a href="<?php echo Yii::app()->request->getUrl() . '&admissionnumber=' ?>"></a></li>								
+                                            <li>Registration number : <?php echo $_REQUEST['registrationnumber'] ?><a href="<?php echo Yii::app()->request->getUrl() . '&registrationnumber=' ?>"></a></li>								
                                             <?php
                                         }
                                         ?>
-                                        <!-- END Admission Number Active Filter -->
+                                        <!-- END Registration Number Active Filter -->
 
 
                                         <!-- Batch Active Filter -->
                                         <?php
-                                        if (isset($_REQUEST['Students']['batch_id']) and $_REQUEST['Students']['batch_id'] != NULL) {
+                                        if (isset($_REQUEST['Applicants']['course_id']) and $_REQUEST['Applicants']['course_id'] != NULL) {
                                             $j++;
                                             ?>
-                                            <li>Batch : <?php echo Batches::model()->findByAttributes(array('id' => $_REQUEST['Students']['batch_id']))->name ?><a href="<?php echo Yii::app()->request->getUrl() . '&Students[batch_id]=' ?>"></a></li>
+                                        <li>Course : <?php echo Courses::model()->findByAttributes(array('id' => $_REQUEST['Applicants']['course_id']))->course_name ?><a href="<?php echo Yii::app()->request->getUrl() . '&Applicants[course_id]=' ?>"></a></li>
                                             <?php
                                         }
                                         ?>
@@ -354,14 +355,14 @@ $this->breadcrumbs = array(
 
                                         <!-- Gender Active Filter -->
                                         <?php
-                                        if (isset($_REQUEST['Students']['gender']) and $_REQUEST['Students']['gender'] != NULL) {
+                                        if (isset($_REQUEST['Applicants']['gender']) and $_REQUEST['Applicants']['gender'] != NULL) {
                                             $j++;
-                                            if ($_REQUEST['Students']['gender'] == 'M')
+                                            if ($_REQUEST['Applicants']['gender'] == 'M')
                                                 $gen = 'Male';
                                             else
                                                 $gen = 'Female';
                                             ?>
-                                            <li>Gender : <?php echo $gen ?><a href="<?php echo Yii::app()->request->getUrl() . '&Students[gender]=' ?>"></a></li>
+                                            <li>Gender : <?php echo $gen ?><a href="<?php echo Yii::app()->request->getUrl() . '&Applicants[gender]=' ?>"></a></li>
                                             <?php
                                         }
                                         ?>
@@ -370,10 +371,10 @@ $this->breadcrumbs = array(
 
                                         <!-- Blood Group Active Filter -->
                                         <?php
-                                        if (isset($_REQUEST['Students']['blood_group']) and $_REQUEST['Students']['blood_group'] != NULL) {
+                                        if (isset($_REQUEST['Applicants']['blood_group']) and $_REQUEST['Applicants']['blood_group'] != NULL) {
                                             $j++;
                                             ?>
-                                            <li>Blood Group : <?php echo $_REQUEST['Students']['blood_group'] ?><a href="<?php echo Yii::app()->request->getUrl() . '&Students[blood_group]=' ?>"></a></li>
+                                            <li>Blood Group : <?php echo $_REQUEST['Applicants']['blood_group'] ?><a href="<?php echo Yii::app()->request->getUrl() . '&Applicants[blood_group]=' ?>"></a></li>
                                             <?php
                                         }
                                         ?>
@@ -381,10 +382,10 @@ $this->breadcrumbs = array(
 
                                         <!-- Nationality Active Filter -->
                                         <?php
-                                        if (isset($_REQUEST['Students']['nationality_id']) and $_REQUEST['Students']['nationality_id'] != NULL) {
+                                        if (isset($_REQUEST['Applicants']['nationality_id']) and $_REQUEST['Applicants']['nationality_id'] != NULL) {
                                             $j++;
                                             ?>
-                                            <li>Country : <?php echo Countries::model()->findByAttributes(array('id' => $_REQUEST['Students']['nationality_id']))->name ?><a href="<?php echo Yii::app()->request->getUrl() . '&Students[nationality_id]=' ?>"></a></li>
+                                            <li>Country : <?php echo Countries::model()->findByAttributes(array('id' => $_REQUEST['Applicants']['nationality_id']))->name ?><a href="<?php echo Yii::app()->request->getUrl() . '&Applicants[nationality_id]=' ?>"></a></li>
                                             <?php
                                         }
                                         ?>
@@ -393,28 +394,28 @@ $this->breadcrumbs = array(
 
                                         <!-- Date of Birth Active Filter -->
                                         <?php
-                                        if (isset($_REQUEST['Students']['dobrange']) and $_REQUEST['Students']['dobrange'] != NULL) {
-                                            if (isset($_REQUEST['Students']['date_of_birth']) and $_REQUEST['Students']['date_of_birth'] != NULL) {
+                                        if (isset($_REQUEST['Applicants']['dobrange']) and $_REQUEST['Applicants']['dobrange'] != NULL) {
+                                            if (isset($_REQUEST['Applicants']['date_of_birth']) and $_REQUEST['Applicants']['date_of_birth'] != NULL) {
                                                 $j++;
-                                                if ($_REQUEST['Students']['dobrange'] == '1') {
+                                                if ($_REQUEST['Applicants']['dobrange'] == '1') {
                                                     $range = 'less than';
                                                 }
-                                                if ($_REQUEST['Students']['dobrange'] == '2') {
+                                                if ($_REQUEST['Applicants']['dobrange'] == '2') {
                                                     $range = 'equal to';
                                                 }
-                                                if ($_REQUEST['Students']['dobrange'] == '3') {
+                                                if ($_REQUEST['Applicants']['dobrange'] == '3') {
                                                     $range = 'greater than';
                                                 }
                                                 ?>
-                                                <li>Date Of Birth : <?php echo $range . ' : ' . $_REQUEST['Students']['date_of_birth'] ?><a href="<?php echo Yii::app()->request->getUrl() . '&Students[date_of_birth]=' ?>"></a></li>
+                                                <li>Date Of Birth : <?php echo $range . ' : ' . $_REQUEST['Applicants']['date_of_birth'] ?><a href="<?php echo Yii::app()->request->getUrl() . '&Applicants[date_of_birth]=' ?>"></a></li>
                                                 <?php
                                             }
-                                        } elseif (isset($_REQUEST['Students']['dobrange']) and $_REQUEST['Students']['dobrange'] == NULL) {
-                                            if (isset($_REQUEST['Students']['date_of_birth']) and $_REQUEST['Students']['date_of_birth'] != NULL) {
+                                        } elseif (isset($_REQUEST['Applicants']['dobrange']) and $_REQUEST['Applicants']['dobrange'] == NULL) {
+                                            if (isset($_REQUEST['Applicants']['date_of_birth']) and $_REQUEST['Applicants']['date_of_birth'] != NULL) {
                                                 $j++;
                                                 $range = 'equal to';
                                                 ?>
-                                                <li>Date Of Birth : <?php echo $range . ' : ' . $_REQUEST['Students']['date_of_birth'] ?><a href="<?php echo Yii::app()->request->getUrl() . '&Students[date_of_birth]=' ?>"></a></li>
+                                                <li>Date Of Birth : <?php echo $range . ' : ' . $_REQUEST['Applicants']['date_of_birth'] ?><a href="<?php echo Yii::app()->request->getUrl() . '&Applicants[date_of_birth]=' ?>"></a></li>
                                                 <?php
                                             }
                                         }
@@ -422,54 +423,58 @@ $this->breadcrumbs = array(
                                         <!-- END Date of Birth Active Filter -->
 
 
-                                        <!-- Admission Date Active Filter -->
+                                        <!-- Registration Date Active Filter -->
                                         <?php
-                                        if (isset($_REQUEST['Students']['admissionrange']) and $_REQUEST['Students']['admissionrange'] != NULL) {
-                                            if (isset($_REQUEST['Students']['registration_date']) and $_REQUEST['Students']['registration_date'] != NULL) {
+                                        if (isset($_REQUEST['Applicants']['registrationrange']) and $_REQUEST['Applicants']['registrationrange'] != NULL) {
+                                            if (isset($_REQUEST['Applicants']['registration_date']) and $_REQUEST['Applicants']['registration_date'] != NULL) {
                                                 $j++;
-                                                if ($_REQUEST['Students']['admissionrange'] == '1') {
-                                                    $admissionrange = 'less than';
+                                                if ($_REQUEST['Applicants']['registrationrange'] == '1') {
+                                                    $registrationrange = 'less than';
                                                 }
-                                                if ($_REQUEST['Students']['admissionrange'] == '2') {
-                                                    $admissionrange = 'equal to';
+                                                if ($_REQUEST['Applicants']['registrationrange'] == '2') {
+                                                    $registrationrange = 'equal to';
                                                 }
-                                                if ($_REQUEST['Students']['admissionrange'] == '3') {
-                                                    $admissionrange = 'greater than';
+                                                if ($_REQUEST['Applicants']['registrationrange'] == '3') {
+                                                    $registrationrange = 'greater than';
                                                 }
                                                 ?>
-                                                <li>Admission Date : <?php echo $admissionrange . ' : ' . $_REQUEST['Students']['registration_date'] ?><a href="<?php echo Yii::app()->request->getUrl() . '&Students[registration_date]=' ?>"></a></li>
+                                                <li>Registration Date : <?php echo $registrationrange . ' : ' . $_REQUEST['Applicants']['registration_date'] ?><a href="<?php echo Yii::app()->request->getUrl() . '&Applicants[registration_date]=' ?>"></a></li>
                                                 <?php
                                             }
-                                        } elseif (isset($_REQUEST['Students']['admissionrange']) and $_REQUEST['Students']['admissionrange'] == NULL) {
-                                            if (isset($_REQUEST['Students']['registration_date']) and $_REQUEST['Students']['registration_date'] != NULL) {
+                                        } elseif (isset($_REQUEST['Applicants']['registrationrange']) and $_REQUEST['Applicants']['registrationrange'] == NULL) {
+                                            if (isset($_REQUEST['Applicants']['registration_date']) and $_REQUEST['Applicants']['registration_date'] != NULL) {
                                                 $j++;
-                                                $admissionrange = 'equal to';
+                                                $registrationrange = 'equal to';
                                                 ?>
-                                                <li>Admission Date : <?php echo $admissionrange . ' : ' . $_REQUEST['Students']['registration_date'] ?><a href="<?php echo Yii::app()->request->getUrl() . '&Students[registration_date]=' ?>"></a></li>
+                                                <li>Registration Date : <?php echo $registrationrange . ' : ' . $_REQUEST['Applicants']['registration_date'] ?><a href="<?php echo Yii::app()->request->getUrl() . '&Applicants[registration_date]=' ?>"></a></li>
                                                 <?php
                                             }
                                         }
                                         ?> 
-                                        <!-- END Admission Date Active Filter -->
+                                        <!-- END Registration Date Active Filter -->
 
                                         <!-- Status Active Filter -->
                                         <?php
-                                        if (isset($_REQUEST['Students']['status']) and $_REQUEST['Students']['status'] != NULL) {
+                                        if (isset($_REQUEST['Applicants']['status']) and $_REQUEST['Applicants']['status'] != NULL) {
                                             $j++;
-                                            if ($_REQUEST['Students']['status'] == '1') {
-                                                $status = 'Present';
-                                            } else {
-                                                $status = 'Former';
+                                            if ($_REQUEST['Applicants']['status'] == '1') {
+                                                $status = 'Pending';
+                                            } elseif($_REQUEST['Applicants']['status'] == '2') {
+                                                $status = 'Approved';
+                                            } elseif($_REQUEST['Applicants']['status'] == '3') {
+                                                $status = 'Rejected';
+                                            }elseif($_REQUEST['Applicants']['status'] == '4') {
+                                                $status = 'Waiting List';
                                             }
                                             ?>
-                                            <li>Status : <?php echo $status ?><a href="<?php echo Yii::app()->request->getUrl() . '&Students[status]=' ?>"></a></li>
+                                            <li>Status : <?php echo $status ?><a href="<?php echo Yii::app()->request->getUrl() . '&Applicants[status]=' ?>"></a></li>
                                             <?php
                                         }
                                         ?> 
-                                        <!-- END Admission Date Active Filter -->
+                                        <!-- END Registration Date Active Filter -->
                                         <?php
                                         if ($j == 0) {
-                                            echo '<div style="padding-top:4px; font-size:11px;">' . Yii::t('students', '<i>No Active Filters</i>') . '</div>';
+                                            echo '<div style="padding-top:4px; font-size:11px;">' . Yii::t('Applicants', '<i>No Active Filters</i>') . '</div>';
                                         }
                                         ?> 
 
@@ -497,7 +502,7 @@ $this->breadcrumbs = array(
                                     echo '<li>';
                                 }
                                 ?>
-                                <?php echo CHtml::link(Yii::t('students', 'All'), Yii::app()->request->getUrl() . '&val=', array('class' => 'vtip')); ?>                            
+                                <?php echo CHtml::link(Yii::t('Applicants', 'All'), Yii::app()->request->getUrl() . '&val=', array('class' => 'vtip')); ?>                            
                                 </li>
 
 
@@ -783,7 +788,7 @@ $this->breadcrumbs = array(
                             <div style="float:left;">
                                 <div class="contrht_bttns" style="margin: 61px 122px 0px 0px;padding: 0px 401px 0px 0px;">
                                     <ul>
-                                        <li><?php echo CHtml::link(Yii::t('employees', 'Add Applicant'), array('create') ); ?></li>
+                                        <li><?php echo CHtml::link(Yii::t('employees', 'Add Applicant'), array('create')); ?></li>
 
                                         <li><a href="javascript:void(0)" id="delete_student">Delete Applicant</a></li>
 
@@ -792,7 +797,7 @@ $this->breadcrumbs = array(
                                     </ul>
                                 </div>
                                 <div class="ea_pdf" style="top:0px; right:6px;">
-                                    <?php echo CHtml::link('<img src="images/pdf-but.png">', array('employees/printpdf1'), array('target' => '_blank')); ?>
+                                    <?php echo CHtml::link('<img src="images/pdf-but.png">', array('applicants/managepdf'), array('target' => '_blank')); ?>
                                 </div>
                             </div> 
 
@@ -818,16 +823,16 @@ $this->breadcrumbs = array(
                                     ?>
                                 </div> <!-- End div class="pagecon" --> 
 
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" id="mytable">
                                     <tr class="tablebx_topbg">
                                         <td><input type="checkbox" name="checkall" id="checkall" value="all"/></td>
-<!--                                        <td><?php echo Yii::t('students', 'Sl. No.'); ?></td>	-->
+    <!--                                        <td><?php echo Yii::t('students', 'Sl. No.'); ?></td>	-->
                                         <td><?php echo Yii::t('students', 'Applicant Name'); ?></td>
                                         <td><?php echo Yii::t('students', 'Registration No.'); ?></td>
-                                        <td><?php echo Yii::t('students', 'Course/Batch'); ?></td>
+                                        <td><?php echo Yii::t('students', 'Course'); ?></td>
                                         <td><?php echo Yii::t('students', 'Gender'); ?></td>
-                                         <td><?php echo Yii::t('students', 'Status'); ?></td>
-                                        <td style="border-right:none;"><?php echo Yii::t('students','Actions');?></td>
+                                        <td><?php echo Yii::t('students', 'Status'); ?></td>
+                                        <td style="border-right:none;"><?php echo Yii::t('students', 'Actions'); ?></td>
                                     </tr>
                                     <?php
                                     if (isset($_REQUEST['page'])) {
@@ -843,15 +848,15 @@ $this->breadcrumbs = array(
                                         ?>
                                         <tr class=<?php echo $cls; ?>>
                                             <td><input type="checkbox" class="chk" name="chkCid[]" value="<?php echo $list_1->id; ?>"/></td>
-<!--                                            <td><?php echo $i; ?></td>-->
+        <!--                                            <td><?php echo $i; ?></td>-->
                                             <td><?php echo CHtml::link($list_1->first_name . '  ' . $list_1->middle_name . '  ' . $list_1->last_name, array('view', 'id' => $list_1->id)) ?></td>
                                             <td><?php echo $list_1->registration_no ?></td>
                                             <?php
-                                            $batc = Batches::model()->findByAttributes(array('id' => $list_1->batch_id));
-                                            if ($batc != NULL) {
-                                                $cours = Courses::model()->findByAttributes(array('id' => $batc->course_id));
+                                          
+                                                $cours = Courses::model()->findByAttributes(array('id' => $list_1->course_id));
+                                                 if ($cours != NULL) {
                                                 ?>
-                                                <td><?php echo $cours->course_name . ' / ' . $batc->name; ?></td> 
+                                                <td><?php echo $cours->course_name ; ?></td> 
                                                 <?php
                                             } else {
                                                 ?> 
@@ -870,11 +875,20 @@ $this->breadcrumbs = array(
                                                 ?>
                                             </td>
 
-                <td class="select_status"><?php echo CHtml::enumDropDownList( $model,'status' ); ?></td>
                                             <td>
-                                                <a href="index.php?r=students/applicants/update&id=<?php echo $list_1->id?>">Edit</a>
-                                                <a rel="<?php echo $list_1->id?>" href="javascript:void(0)" class="deleteStudent">Delete</a>
-                                               </td>
+                                                
+                                                <select name="Applicants[status]" class="Applicants_status" rel="<?php echo $list_1->id ?>">
+                                                    <option value="1"<?php echo ($list_1->status==1)?' selected="selected"':''?>>Pending</option>
+                                                    <option value="2"<?php echo ($list_1->status==2)?' selected="selected"':''?>>Approved</option>
+                                                    <option value="3"<?php echo ($list_1->status==3)?' selected="selected"':''?>>Rejected</option>
+                                                    <option value="4"<?php echo ($list_1->status==4)?' selected="selected"':''?>>Waiting List</option>
+                                                </select>
+                                            </td>
+                                         
+                                      <td>
+                                                <a href="index.php?r=students/applicants/update&id=<?php //echo $list_1->id ?>">Edit</a>
+                                                <a rel="<?php //echo $list_1->id ?>" href="javascript:void(0)" class="deleteStudent">Delete</a>
+                                            </td>
                                         </tr>
                                         <?php
                                         if ($cls == "even") {
@@ -921,7 +935,7 @@ $this->breadcrumbs = array(
     $('body').click(function () {
         $('#osload').hide();
         $('#name').hide();
-        $('#admissionnumber').hide();
+        $('#registrationnumber').hide();
         $('#batch').hide();
         $('#cat').hide();
         $('#pos').hide();
@@ -936,7 +950,7 @@ $this->breadcrumbs = array(
         }
         if ($("#admdatetxt").val().length <= 0)
         {
-            $('#admission').hide();
+            $('#registration').hide();
         }
         $('#status').hide();
 
@@ -949,30 +963,32 @@ $this->breadcrumbs = array(
     $('.load_filter').click(function (event) {
         event.stopPropagation();
     });
-    
-    $(".deleteStudent").click(function(){
-         if (confirm("Are you sure you want to delete the applicant?")) {
-        sid = $(this).attr("rel");
-        self.location = "index.php?r=students/applicants/deletes&sid="+sid;
-    }
+
+    $(".deleteStudent").click(function () {
+        if (confirm("Are you sure you want to delete the applicant?")) {
+            sid = $(this).attr("rel");
+            self.location = "index.php?r=students/applicants/deletes&sid=" + sid;
+        }
     });
-    $(".select_status").change(function(){
-        if(confirm("Are you sure you want to change the status?"))
+
+    $('.Applicants_status').change(function () {
+        if (confirm("Are you sure you want to change the status?"))
         {
-          sid = $(this).attr("rel");
-        self.location = "index.php?r=students/applicants/manage";  
+            sid = $(this).val();
+            aid = $(this).attr('rel');
+            self.location = "index.php?r=students/applicants/changestatus&aid=" +aid+"&sid="+sid;
         }
     })
-    
-    $("#checkall").click(function(){
-        if($(this).is(':checked')){
-        $(".chk").attr("checked","checked");
-    }else{
-        $(".chk").attr("checked",false);
-    }
-        
+
+    $("#checkall").click(function () {
+        if ($(this).is(':checked')) {
+            $(".chk").attr("checked", "checked");
+        } else {
+            $(".chk").attr("checked", false);
+        }
+
     });
-    
+
     $(document).ready(function () {
         $("#delete_student").click(function () {
             if ($(".chk:checked").length == 0) {
@@ -988,13 +1004,13 @@ $this->breadcrumbs = array(
 
                 if (confirm("Are you sure you want to delete selected applicant(s)?")) {
                     $.post("/sms/index.php?r=students/applicants/deleteselected", {"ids": delIds}, function (retVal) {
-                        if(retVal=="success"){
+                        if (retVal == "success") {
                             //alert("Students deleted successfully");
                             window.location.reload();
-                        }else{
+                        } else {
                             alert("Applicants could not be deleted");
                         }
-                       
+
                     });
                 }
 

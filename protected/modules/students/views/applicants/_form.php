@@ -119,7 +119,7 @@ else
                 <td>&nbsp;</td>
                 </tr>
                 <tr>
-                <td valign="bottom"><?php echo $form->labelEx($model,Yii::t('students','batch_id')); ?></td>
+                <td valign="bottom"><?php echo $form->labelEx($model,Yii::t('students','course')); ?></td>
                 <td>&nbsp;</td>
                 <td valign="bottom"><?php echo $form->labelEx($model,Yii::t('students','date_of_birth')); ?></td>
                 <td>&nbsp;</td>
@@ -128,29 +128,29 @@ else
                 <tr>
                     <td valign="top">
 						<?php   
-                        $models = Batches::model()->findAll("is_deleted=:x", array(':x'=>'0'));
+                        $models = Courses::model()->findAll("is_deleted=:x", array(':x'=>'0'));
                         $data = array();
                         foreach ($models as $model_1)
                         {
                             //$posts=Batches::model()->findByPk($model_1->id);
-                            $data[$model_1->id] = $model_1->course123->course_name.'-'.$model_1->name;
+                            $data[$model_1->id] =$model_1->course_name;
                         }
                         ?>
                         <?php 
                         if(isset($_REQUEST['bid']) and $_REQUEST['bid']!=NULL)
                         {
-                            echo $form->dropDownList($model,'batch_id',$data,array('options' => array($_REQUEST['bid']=>array('selected'=>true)),
+                            echo $form->dropDownList($model,'course_id',$data,array('options' => array($_REQUEST['bid']=>array('selected'=>true)),
                             'style'=>'width:170px;','empty'=>'Select Batch'
                             )); 
                         }
                         else
                         {
-                            echo $form->dropDownList($model,'batch_id',$data,array(
+                            echo $form->dropDownList($model,'course_id',$data,array(
                             'style'=>'width:170px;','empty'=>'Select Batch'
                             )); 
                         }
                         ?>
-                        <?php echo $form->error($model,'batch_id'); ?>
+                        <?php echo $form->error($model,'course_id'); ?>
                     </td>
                     <td>&nbsp;</td>
                     <td style="padding-left:2px;" valign="top">
