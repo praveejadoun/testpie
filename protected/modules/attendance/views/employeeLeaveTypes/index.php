@@ -55,13 +55,15 @@ $this->breadcrumbs=array(
 	<?php /*?><?php echo $form->errorSummary($model); ?><?php */?>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
+       <td><?php echo $form->labelEx($model,Yii::t('employees','code'),array('style'=>'float:left')); ?></td>
+    <td><?php echo $form->textField($model,'code',array('size'=>30,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'code'); ?></td>
+      
     <td><?php echo $form->labelEx($model,Yii::t('employees','name'),array('style'=>'float:left')); ?></td>
     <td><?php echo $form->textField($model,'name',array('size'=>30,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'name'); ?></td>
   
-    <td><?php echo $form->labelEx($model,Yii::t('employees','code'),array('style'=>'float:left')); ?></td>
-    <td><?php echo $form->textField($model,'code',array('size'=>30,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'code'); ?></td>
+   
   </tr>
   <tr>
   	<td>&nbsp;</td>
@@ -110,7 +112,10 @@ $this->breadcrumbs=array(
 <div class="tableinnerlist">
 <table width="100%" cellpadding="0" cellspacing="0">
 <tr class="pdtab-h">
-	<td style="text-align:left;">Leave Type</td>
+	<td style="text-align:center;">Leave Type</td>
+     <td>Max Leave Count</td>
+      <td>Status</td>
+         <td>Carry Forward</td>
     <td>Edit</td>
     <td>Delete</td>
 </tr>
@@ -120,8 +125,11 @@ $this->breadcrumbs=array(
 $active=EmployeeLeaveTypes::model()->findAll("status=:x", array(':x'=>1));
 foreach($active as $active_1)
 {
-   echo '<tr><td style="padding-left:10px; text-align:left;">'.$active_1->name.'</td>';	
-   echo '<td>'.CHtml::link(Yii::t('employees','Edit'), array('update', 'id'=>$active_1->id)).'</td>';
+   echo '<tr><td style="padding-left:10px; text-align:center;">'.$active_1->name.'</td>';	
+   echo '<td style="padding-left:10px; text-align:center;">'.$active_1->max_leave_count.'</td>';?>
+   <td style="padding-left:10px; text-align:center;"><?php if($active_1->status==1){echo 'Active';}else{echo 'InActive';}?></td>	
+  <td style="padding-left:10px; text-align:center;"><?php if($active_1->carry_forward==0){echo 'No';}else{echo 'Yes';}?></td>	
+  <?php echo '<td>'.CHtml::link(Yii::t('employees','Edit'), array('update', 'id'=>$active_1->id)).'</td>';
     echo '<td>'.CHtml::link(Yii::t('employees','Delete'), array('delete', 'id'=>$active_1->id),array('confirm'=>Yii::t('employees','Are you Sure?'))).'</td></tr>';
 }
 ?>
@@ -132,7 +140,10 @@ foreach($active as $active_1)
 <div class="tableinnerlist">
 <table width="100%" cellpadding="0" cellspacing="0">
 <tr class="pdtab-h">
-	<td style="text-align:left;">Leave Type</td>
+	<td style="text-align:center;">Leave Type</td>
+     <td>Max Leave Count</td>
+      <td>Status</td>
+         <td>Carry Forward</td>   
     <td>Edit</td>
     <td>Delete</td>
 </tr>
@@ -141,8 +152,11 @@ foreach($active as $active_1)
 $inactive=EmployeeLeaveTypes::model()->findAll("status=:x", array(':x'=>2));
 foreach($inactive as $inactive_1)
 {
-   echo '<tr><td style="padding-left:10px; text-align:left;">'.$inactive_1->name.'</td>';	
-   echo '<td>'.CHtml::link(Yii::t('employees','Edit'), array('update', 'id'=>$inactive_1->id)).'</td>';
+      echo '<tr><td style="padding-left:10px; text-align:center;">'.$inactive_1->name.'</td>';	
+   echo '<td style="padding-left:10px; text-align:center;">'.$inactive_1->max_leave_count.'</td>';?>
+   <td style="padding-left:10px; text-align:center;"><?php if($inactive_1->status==1){echo 'Active';}else{echo 'InActive';}?></td>	
+  <td style="padding-left:10px; text-align:center;"><?php if($inactive_1->carry_forward==0){echo 'No';}else{echo 'Yes';}?></td>	
+<?php   echo '<td>'.CHtml::link(Yii::t('employees','Edit'), array('update', 'id'=>$inactive_1->id)).'</td>';
     echo '<td>'.CHtml::link(Yii::t('employees','Delete'), array('delete', 'id'=>$inactive_1->id),array('confirm'=>Yii::t('employees','Are you Sure?'))).'</td></tr>';
 }
 ?>

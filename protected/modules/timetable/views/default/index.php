@@ -41,64 +41,47 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td valign="top" width="75%">
-                    <div class="cont_right formWrapper" style="padding:3px 0px;">
-                        
-                        <div class="news_cntnr">
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/latest_news_bnnr.png" width="720" height="130" />
-                        <div class="latest_news_bx">
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/app_ftr_img.png" width="705" height="132" />
-                        <div class="latest_news_cntnt">
-                        	<div class="latest_news_app_bx"></div>
-                        	<h1>Latest News</h1>
-                            
-                          
-                               <?php if(isset($result) and sizeof($result) > 0)
-							{
-							
-							foreach($result as $news)
-							{
-								?>
-                           
-                           
-                            
-                         
-                        	<div class="latest_news_cntntbx">
-                            <div>
-                            	<div class="latest_news_cntntbx_date"><?php echo date('d M Y',strtotime($news['date'])) ; ?></div>
-                            	<div class="latest_news_cntntbx_brdr"></div>
-                            
-                            <div class="clear"></div>
-                            </div>
-                            
-                            <div class="latest_news_cntntbx_cntnt"><?php echo $news['news'] ; ?> </div>
-                            </div>
-                            
-                            <?php }}
-							else
-							{ ?>
-                            
-                            <div class="latest_news_cntntbx">
-                            
-                            <div class="latest_news_cntntbx_cntnt">
-                            <div class="no_news_icon_bx">
-                            	 <div class="no_news_icon">
-                              	Nothing Found !!
-                            </div>
-                            </div>
-                            
-                            </div>
-                            <div class="clear"></div>
-                            </div>
-                            
-                            
-                            <?php } ?>
-                            
-                        
-                        </div>
-						
-                        </div>
-                         </div>
-                      </div>
+                <div class="cont_right formWrapper">
+			<h1>Timetable Management</h1>
+            <div class="status_box">
+           		 <div class="sb_icon"></div>
+           		 No Course / Batch Selected                 
+                         <a <?php
+			
+			$rurl = explode('index.php?r=',Yii::app()->request->getUrl());
+                       
+			$rurl = explode('&id=',$rurl[1]); 
+                        echo CHtml::ajaxLink('Select Batch',array('/site/explorer','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'sb_but')); ?>></a>
+           
+            </div>
+            <div class="edit_bttns" style="width:175px; top:15px;">
+    			<ul>
+    				    				
+    			</ul>
+    		<div class="clear"></div>
+    		</div>
+				<div class="yellow_bx yb_timetable">
+                	<div class="y_bx_head">
+                    	Before creating the time table make sure you follow the following instructions                    </div>
+                	<div class="y_bx_list timetable_list">
+                    	<h1>Set Weekdays</h1>
+                        <p>Set the weekdays, where the specific Batch has classes, You can use the school default or custom weekdays.</p>
+                    </div>
+                    <div class="y_bx_list timetable_list">
+                    	<h1>Set Class Timings</h1>
+                        <p>Create class timings for each Batch Enter each period start time and end time,Add break timings etc.</p>
+                    </div>
+                    <div class="y_bx_list timetable_list">
+                    	<h1>Subjects &amp; Subject Allocation</h1>
+                        <p>Add existing subjects to the Batch or create a new subject. Associate each subject with the teacher.</p>
+                    </div>
+                    <div class="y_bx_list timetable_list">
+                    	<h1>Create Timetable</h1>
+                        <p>Assigning each timing/period from the dropdown.</p>
+                    </div>
+    			</div>
+		<div class="clear"></div>
+		</div>
                     </td>
                 </tr>
             </table>
