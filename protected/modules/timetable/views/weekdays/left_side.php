@@ -14,6 +14,7 @@
                 <input type="button" class="sbut" name="">
                 <div class="clear"></div>
   </div>-->    <h1><?php echo Yii::t('room','VIEW TIMETABLE');?></h1>   
+              
                     <?php
 			function t($message, $category = 'cms', $params = array(), $source = null, $language = null) 
 {
@@ -37,14 +38,14 @@
                             
                             
 						   array('label'=>''.'<h1>'.Yii::t('timetable','MANAGE TIMETABLE').'</h1>'), 
-					
-						array('label'=>Yii::t('timetable','Set Timetable').'<span>'.Yii::t('timetable','Timetable For The Batch').'</span>', 'url'=>array('weekdays/fulltimetable'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->action->id=='timetable' and (Yii::app()->controller->action->id!='fulltimetable')? true : false), 'itemOptions'=>array('id'=>'menu_1')
+                                      
+						array('label'=>Yii::t('timetable','Set Timetable').'<span>'.Yii::t('timetable','Timetable For The Batch').'</span>', 'url'=>array('weekdays/timetable','id'=>$_REQUEST['id']),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->action->id=='timetable' and (Yii::app()->controller->action->id!='fulltimetable')? true : false), 'itemOptions'=>array('id'=>'menu_1')
                                                     ),
-		  				array('label'=>Yii::t('timetable','Set Weekdays').'<span>'.Yii::t('timetable','Weekdays For The Batch').'</span>', 'url'=>array('weekdays/fulltimetable'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->id=='' and (Yii::app()->controller->action->id!='fulltimetable')? true : false), 'itemOptions'=>array('id'=>'menu_1')
+		  				array('label'=>Yii::t('timetable','Set Weekdays').'<span>'.Yii::t('timetable','Weekdays For The Batch').'</span>', 'url'=>array('weekdays/','id'=>$_REQUEST['id']),'linkOptions'=>array('class'=>'abook_ico'),'active'=>(Yii::app()->controller->id=='weekdays' and (Yii::app()->controller->action->id=='index' )), 'itemOptions'=>array('id'=>'menu_1')
                                                      ),
-                                                array('label'=>Yii::t('timetable','Set Class Timing').'<span>'.Yii::t('timetable','Class Timing For The Batch').'</span>', 'url'=>array('weekdays/fulltimetable'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->id=='' and (Yii::app()->controller->action->id!='fulltimetable')? true : false), 'itemOptions'=>array('id'=>'menu_1')
+                                                array('label'=>Yii::t('timetable','Set Class Timing').'<span>'.Yii::t('timetable','Class Timing For The Batch').'</span>', 'url'=>array('classTiming/','id'=>$_REQUEST['id']),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->id=='classTiming' and (Yii::app()->controller->action->id=='index' )), 'itemOptions'=>array('id'=>'menu_1')
                                                     ),
-                                                array('label'=>Yii::t('timetable','Set Default Weekdays').'<span>'.Yii::t('timetable','Default Weekdays For The Institution').'</span>', 'url'=>array('type/index'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->id=='type' and (Yii::app()->controller->action->id=='index')? true : false), 'itemOptions'=>array('id'=>'menu_1')
+                                                array('label'=>Yii::t('timetable','Set Default Weekdays').'<span>'.Yii::t('timetable','Default Weekdays For The Institution').'</span>', 'url'=>array('weekdays/'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->id=='weekdays' and (Yii::app()->controller->action->id=='index')), 'itemOptions'=>array('id'=>'menu_1')
                                                     ),
                             
 						 

@@ -1,191 +1,528 @@
-<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
+<!--<script language="javascript">
+function getid()
+{
+var id= document.getElementById('drop').value;
+window.location = "index.php?r=weekdays/index&id="+id;
+}
+</script>-->
+
 <?php
 $this->breadcrumbs=array(
-	$this->module->id,
+	'Weekdays',
 );
 ?>
-<?php if($list!=NULL)
-{?>
-<?php
-//$sub = Employees::model()->findAll("is_deleted=:x", array(':x'=>0));
 
-$data = '';
-
-	$empy = EmployeeDepartments::model()->findAll();
-	foreach($empy as $empy_1)
-	{
-		$emp_number=Employees::model()->findAll("employee_department_id=:x", array(':x'=>$empy_1->id));
-	$data .='{name:"'.$empy_1->name.'",
-			y:'.count($emp_number).',
-			sliced: true,
-			selected: true,},';
-	}
-
-
-
-//echo $data;
-?>
-<script type="text/javascript">
-var chart;
-$(document).ready(function() {
-	chart = new Highcharts.Chart({
-		chart: {
-			renderTo: 'container',
-			plotBackgroundColor: null,
-			plotBorderWidth: null,
-			plotShadow: false
-		},
-		title: {
-			text: 'Employee Strength'
-		},
-		tooltip: {
-			formatter: function() {
-				return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage*100)/100 +' %';
-			}
-		},
-		credits: {
-			enabled: false
-		},
-		plotOptions: {
-			pie: {
-				allowPointSelect: true,
-				cursor: 'pointer',
-				borderWidth:0,
-				shadow:0,
-				dataLabels: {
-					enabled: true,
-					color: '#969698',
-					connectorColor: '#d8d8d8',
-					formatter: function() {
-						return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage*100)/100 +' %';
-					}
-				}
-			}
-		},
-		
-		series: [{
-			type: 'pie',
-			name: 'Employee Strenght',
-			data: [
-				<?php echo $data; ?>
-				]
-		}]
-	});
-});
-</script>
+  <?php if(isset($_REQUEST['id']) and $_REQUEST['id']!=NULL) {?>
+ 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="247" valign="top">
-    
-    <?php $this->renderPartial('/room/left_side');?>
-    
-    </td>
+   <td width="247" valign="top" id="port-left">
+        	<?php $this->renderPartial('/weekdays/left_side');?>
+        </td>
+          
     <td valign="top">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td valign="top" width="75%"><div style="padding-left:20px;">
-<h1><?php echo Yii::t('employees','Employees Dashboard');?></h1>
-<div class="overview">
-	<div class="overviewbox ovbox1">
-    	<h1><?php echo Yii::t('employees','<strong>Total Employees</strong>');?></h1>
-        <div class="ovrBtm"><?php echo $total ?></div>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>  
+               <td valign="top" width="75%">
+   <div style="padding:20px;">
+    <!--<div class="searchbx_area">
+    <div class="searchbx_cntnt">
+    	<ul>
+        <li><a href="#"><img src="images/search_icon.png" width="46" height="43" /></a></li>
+        <li><input class="textfieldcntnt"  name="" type="text" /></li>
+        </ul>
     </div>
-    <div class="overviewbox ovbox2">
-    	<h1><?php echo Yii::t('employees','<strong>New Admissions</strong>');?></h1>
-        <div class="ovrBtm"><?php echo count($list) ?></div>
-    </div>
-    <div class="overviewbox ovbox3">
-    	<h1><?php echo Yii::t('employees','<strong>Inactive Users</strong>');?></h1>
-        <div class="ovrBtm">0</div>
-    </div>
-  <div class="clear"></div>
     
-</div>
-<div class="clear"></div>
-  <div style="margin-top:20px; width:90%" id="container"></div>
-  <div class="pdtab_Con" style="width:97%">
-                <div style="font-size:13px; padding:5px 0px"><?php echo Yii::t('employees','<strong>Recent Employee Admissions</strong>');?></div>
-                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                  <tbody>
-                    <tr class="pdtab-h">
-                      <td align="center" height="18"><?php echo Yii::t('employees','Date');?></td>
-                      <td align="center"><?php echo Yii::t('employees','Employee Name');?></td>
-                      <td align="center"><?php echo Yii::t('employees','Employee No:');?></td>
-                      <td align="center"><?php echo Yii::t('employees','Department');?></td>
-                      <td align="center"><?php echo Yii::t('employees','Position');?></td>
-                      
-                    </tr>
-                  </tbody>
-                  <?php foreach($list as $list_1)
-	              { ?>
-                    <tbody>
-                    <tr>
-                    <td align="center"><?php 
-											$settings=UserSettings::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
-								if($settings!=NULL)
-								{	
-									$date1=date($settings->displaydate,strtotime($list_1->joining_date));
-									echo $date1;
-		
-								}
-								else
-								echo $list_1->joining_date;
-					 ?>&nbsp;</td>
-                    <td align="center"><?php echo CHtml::link($list_1->first_name.'  '.$list_1->middle_name.'  '.$list_1->last_name,array('view','id'=>$list_1->id)) ?>&nbsp;</td>
-                    <td align="center"><?php echo $list_1->employee_number; ?></td>
-					<?php  $dept = EmployeeDepartments::model()->findByAttributes(array('id'=>$list_1->employee_department_id)); ?>
-                    <td align="center"><?php if($dept!=NULL){echo $dept->name; }else{ echo '-';}?> </td>
-                    <?php  $pos = EmployeePositions::model()->findByAttributes(array('id'=>$list_1->employee_position_id)); ?>
-                    <td align="center"><?php if($pos!=NULL){echo $pos->name; }else{ echo '-';}?> </td>
-                    
-                  </tr>
-                     
-               </tbody>
-               <?php
-               } ?>
-                               
-               </table>
-              </div>
- 	</div></td>
+    </div>-->
+    
+    
         
-      </tr>
-    </table>
+    <!--<div class="edit_bttns">
+    <ul>
+    <li>
+    <a class=" edit last" href="#">Edit</a>    </li>
+    </ul>
+    </div>-->
+   
+    
+    <div class="clear"></div>
+    <div class="emp_right_contner">
+    <div class="emp_tabwrapper">
+    
+        
+    <div class="clear"></div>
+    <div class="formCon">
+        <div class="formConInner">
+    <div class="emp_cntntbx" style="padding-top:10px;min-height: 360px;">
+    <div class="c_subbutCon" align="right" >
+    <div class="edit_bttns" style="width:110px; top:0px;">
+    <ul>
+    <li>
+    <?php echo CHtml::link('<span>'.Yii::t('weekdays','Time Table').'</span>', array('weekdays/timetable','id'=>$_REQUEST['id']),array('class'=>'addbttn last'));?>
+    </li>
+   
+    </ul>
+    <div class="clear"></div>
+    </div>
+    </div>
+<div >
+
+<div style="padding-top:10px; font-size:14px; font-weight:bold;">
+<h3>Week Days</h3>
+<?php
+    Yii::app()->clientScript->registerScript(
+       'myHideEffect',
+       '$(".flash-success").animate({opacity: 1.0}, 3000).fadeOut("slow");',
+       CClientScript::POS_READY
+    );
+?>
+ 
+<?php if(Yii::app()->user->hasFlash('notification')):?>
+    <div class="flash-success">
+        <?php echo Yii::app()->user->getFlash('notification'); ?>
+    </div>
+<?php endif; ?>
+
+<?php   
+
+$models = Batches::model()->findAll("is_deleted=:x", array(':x'=>'0'));
+				$data = array();
+				$data['NULL'] = 'common';
+				foreach ($models as $model_1)
+				{
+					$posts=Batches::model()->findByPk($model_1->id);
+					$data[$model_1->id] = $model_1->name;
+				}
+	?>
+     <div >
+    <!--<h3>Set Weekdays For :&nbsp;-->
+<?php
+//echo CHtml::dropDownList('mydropdownlist','mydropdownlist',$data,array('onchange'=>'getid();','id'=>'drop','options'=>array($_REQUEST['id']=>array('selected'=>true))));
+                 ?> <!--</h3>-->
+ <?php $form=$this->beginWidget('CActiveForm', array('id'=>'courses-form','enableAjaxValidation'=>false,)); ?>
+      <?php
+	 
+	  if($_REQUEST['id']!='NULL')
+	  {
+		  
+		  $batch = $model->findAll("batch_id=:x", array(':x'=>$_REQUEST['id']));
+		
+		  if(count($batch)==0)
+		  {
+			 $batch = $model->findAll("batch_id IS NULL");
+		  }
+		  ?>
+          <div >
+         <table width="100%" cellpadding="0" cellspacing="0">
+         <tr>
+           <td width="4%"><?php
+			  if($batch[0]['weekday']==1)
+			  echo $form->checkBox($model,'sunday',array('value'=>'1','checked'=>'checked','class'=>'styled'));
+			  else
+			   echo $form->checkBox($model,'sunday',array('value'=>'1','class'=>'styled')); ?></td>
+             <td width="85%" align="left"><?php echo Yii::t('weekdays','Sunday');?></td>
+             <td width="11%">
+              
+             </td>
+         </tr>
+         <tr>
+         	<td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+         </tr>
+         <tr>
+           <td><?php
+			 if($batch[1]['weekday']==2)
+			   echo $form->checkBox($model,'monday',array('value'=>'2','checked'=>'checked','class'=>'styled'));
+			 else
+			  echo $form->checkBox($model,'monday',array('value'=>'2','class'=>'styled')); ?></td>
+             <td align="left"><?php echo Yii::t('weekdays','Monday');?></td>
+             <td></td>
+         </tr>
+         <tr>
+         	<td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+         </tr>
+         <tr>
+           <td><?php
+			  if($batch[2]['weekday']==3)
+			  echo $form->checkBox($model,'tuesday',array('value'=>'3','checked'=>'checked','class'=>'styled')); 
+			  else
+			   echo $form->checkBox($model,'tuesday',array('value'=>'3','class'=>'styled')); 
+			  ?></td>
+             <td align="left"><?php echo Yii::t('weekdays','Tuesday');?></td>
+             <td></td>
+         </tr>
+         <tr>
+         	<td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+         </tr>
+         <tr>
+           <td><?php
+			 if($batch[3]['weekday']==4)
+			  echo $form->checkBox($model,'wednesday',array('value'=>'4','checked'=>'checked','class'=>'styled'));
+			  else
+			  echo $form->checkBox($model,'wednesday',array('value'=>'4','class'=>'styled'));
+			   ?></td>
+             <td align="left"><?php echo Yii::t('weekdays','Wednesday');?></td>
+             <td></td>
+         </tr>
+         <tr>
+         	<td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+         </tr>
+         <tr>
+           <td><?php
+			  if($batch[4]['weekday']==5)
+			  echo $form->checkBox($model,'thursday',array('value'=>'5','checked'=>'checked','class'=>'styled'));
+			  else
+			  echo $form->checkBox($model,'thursday',array('value'=>'5','class'=>'styled'));
+			   ?></td>
+             <td align="left"><?php echo Yii::t('weekdays','Thursday');?></td>
+             <td></td>
+         </tr>
+         <tr>
+         	<td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+         </tr>
+         <tr>
+           <td><?php
+			  if($batch[5]['weekday']==6)
+			  echo $form->checkBox($model,'friday',array('value'=>'6','checked'=>'checked','class'=>'styled'));
+			  else
+			   echo $form->checkBox($model,'friday',array('value'=>'6','class'=>'styled'));
+			   ?></td>
+             <td align="left"><?php echo Yii::t('weekdays','Friday');?></td>
+             <td></td>
+         </tr>
+         <tr>
+         	<td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+         </tr>
+         <tr>
+           <td><?php
+			  if($batch[6]['weekday']==7)
+			  echo $form->checkBox($model,'saturday',array('value'=>'7','checked'=>'checked','class'=>'styled'));
+			  else
+			  echo $form->checkBox($model,'saturday',array('value'=>'7','class'=>'styled'));
+				 ?></td>
+             <td align="left"><?php echo Yii::t('weekdays','Saturday');?></td>
+             <td></td>
+         </tr>
+         </table>
+         </div>
+         </div><br />
+      <?php    
+	  }
+	  ?> 
+      <!-- Default one -->
+       <?php
+	  if($_REQUEST['id']=='NULL')
+	  {
+		  
+		  $batch = $model->findAll("batch_id IS NULL");
+		  ?>
+          <div  style="color:#000; font-size:14px;">
+        
+         <table width="100%" cellspacing="0" cellpadding="0">
+         <tr>
+           <td width="4%"><?php
+			  if($batch[0]['weekday']==1)
+			  echo $form->checkBox($model,'sunday',array('value'=>'1','checked'=>'checked','class'=>'styled'));
+			  else
+			   echo $form->checkBox($model,'sunday',array('value'=>'1','class'=>'styled')); ?></td>
+             <td width="85%"><?php echo Yii::t('weekdays','Sunday');?></td>
+             <td width="11%">&nbsp;</td>
+         </tr>
+         <tr>
+           <td><?php
+			 if($batch[1]['weekday']==2)
+			   echo $form->checkBox($model,'monday',array('value'=>'2','checked'=>'checked','class'=>'styled'));
+			 else
+			  echo $form->checkBox($model,'monday',array('value'=>'2','class'=>'styled')); ?></td>
+             <td><?php echo Yii::t('weekdays','Monday');?></td>
+             <td>&nbsp;</td>
+         </tr>
+         <tr>
+           <td><?php
+			  if($batch[2]['weekday']==3)
+			  echo $form->checkBox($model,'tuesday',array('value'=>'3','checked'=>'checked','class'=>'styled')); 
+			  else
+			   echo $form->checkBox($model,'tuesday',array('value'=>'3','class'=>'styled')); 
+			  ?></td>
+             <td><?php echo Yii::t('weekdays','Tuesday');?></td>
+             <td>&nbsp;</td>
+         </tr>
+         <tr>
+           <td><?php
+			 if($batch[3]['weekday']==4)
+			  echo $form->checkBox($model,'wednesday',array('value'=>'4','checked'=>'checked','class'=>'styled'));
+			  else
+			  echo $form->checkBox($model,'wednesday',array('value'=>'4','class'=>'styled'));
+			   ?></td>
+             <td><?php echo Yii::t('weekdays','Wednesday');?></td>
+             <td>&nbsp;</td>
+         </tr>
+         <tr>
+           <td><?php
+			  if($batch[4]['weekday']==5)
+			  echo $form->checkBox($model,'thursday',array('value'=>'5','checked'=>'checked','class'=>'styled'));
+			  else
+			  echo $form->checkBox($model,'thursday',array('value'=>'5','class'=>'styled'));
+			   ?></td>
+             <td><?php echo Yii::t('weekdays','Thursday');?></td>
+             <td>&nbsp;</td>
+         </tr>
+         <tr>
+           <td><?php
+			  if($batch[5]['weekday']==6)
+			  echo $form->checkBox($model,'friday',array('value'=>'6','checked'=>'checked','class'=>'styled'));
+			  else
+			   echo $form->checkBox($model,'friday',array('value'=>'6','class'=>'styled'));
+			   ?></td>
+             <td><?php echo Yii::t('weekdays','Friday');?></td>
+             <td>&nbsp;</td>
+         </tr>
+         <tr>
+           <td><?php
+			  if($batch[6]['weekday']==7)
+			  echo $form->checkBox($model,'saturday',array('value'=>'7','checked'=>'checked','class'=>'styled'));
+			  else
+			  echo $form->checkBox($model,'saturday',array('value'=>'7','class'=>'styled'));
+				 ?></td>
+             <td><?php echo Yii::t('weekdays','Saturday');?></td>
+             <td>&nbsp;</td>
+         </tr>
+         </table>
+         
+         </div><br/>
+      <?php    
+	  }
+	  ?> 
+         <br/>
+      <?php echo CHtml::submitButton($model->isNewRecord ? 'Save' : 'Save',array('class'=>'formbut')); ?>          
+   <?php $this->endWidget(); ?>              
+</div>
+</div>
+</div>
+</div>
+</div>
+ </div></div>   
+</div></div>
+</td>
+</tr>
+</table>
     </td>
   </tr>
 </table>
-<br />
-<br />
-<br />
-<?php }
-else
+<?php } else
 { ?>
-
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="247" valign="top">
     
-    <?php $this->renderPartial('/room/left_side');?>
+  
+   
+   <?php 
+		 $this->renderPartial('/weekdays/left_side');
+	
+	?>
     
     </td>
     <td valign="top">
-    <div style="padding:20px 20px">
-<div class="yellow_bx" style="background-image:none;width:680px;padding-bottom:45px;">
-                
-                	<div class="y_bx_head" style="width:650px;">
-                    	It appears that this is the first time that you are using this Open-School Setup. For any new installation we recommend that you configure the following:
-                    </div>
-                    <div class="y_bx_list" style="width:650px;">
-                    	<h1><?php echo CHtml::link(Yii::t('employees','Create New Employee'),array('create')) ?></h1>
-                        <p>Before Creating Employees, make sure you created <?php echo CHtml::link(Yii::t('employees','Employee Categories'),array('employeeCategories/create')) ?>, <?php echo CHtml::link('Employee Departments',array('employeeDepartments/create')) ?><br/> and <?php echo CHtml::link('Employee Positions',array('employeePositions/create')) ?>.</p>
-                    </div>
-                    
-                </div>
+    <div class="cont_right formWrapper">
+    <!--<div class="searchbx_area">
+    <div class="searchbx_cntnt">
+    	<ul>
+        <li><a href="#"><img src="images/search_icon.png" width="46" height="43" /></a></li>
+        <li><input class="textfieldcntnt"  name="" type="text" /></li>
+        </ul>
+    </div>
+    
+    </div>-->
+    
+    
+        
+    <!--<div class="edit_bttns">
+    <ul>
+    <li>
+    <a class=" edit last" href="#">Edit</a>    </li>
+    </ul>
+    </div>-->
+    
+    
+    <div class="clear"></div>
+    <div class="emp_right_contner">
+    <div class="emp_tabwrapper">
+    
+        
+    <div class="clear"></div>
+    <div class="emp_cntntbx" style="padding-top:10px;">
+    
+<div class="formCon">
 
-                </div>
-    
-    
+<div class="formConInner" style="padding-top:10px; font-size:14px; font-weight:bold;">
+<h3>Week Days</h3>
+<?php
+    Yii::app()->clientScript->registerScript(
+       'myHideEffect',
+       '$(".flash-success").animate({opacity: 1.0}, 3000).fadeOut("slow");',
+       CClientScript::POS_READY
+    );
+?>
+ 
+<?php if(Yii::app()->user->hasFlash('notification')):?>
+    <div class="flash-success">
+        <?php echo Yii::app()->user->getFlash('notification'); ?>
+    </div>
+<?php endif; ?>
+
+<?php   
+
+$models = Batches::model()->findAll("is_deleted=:x", array(':x'=>'0'));
+				$data = array();
+				$data['NULL'] = 'common';
+				foreach ($models as $model_1)
+				{
+					$posts=Batches::model()->findByPk($model_1->id);
+					$data[$model_1->id] = $model_1->name;
+				}
+	?>
+     <div class="bbtb">
+    <!--<h3>Set Weekdays For :&nbsp;-->
+<?php
+//echo CHtml::dropDownList('mydropdownlist','mydropdownlist',$data,array('onchange'=>'getid();','id'=>'drop','options'=>array($_REQUEST['id']=>array('selected'=>true))));
+                 ?> <!--</h3>-->
+ <?php $form=$this->beginWidget('CActiveForm', array('id'=>'courses-form','enableAjaxValidation'=>false,)); ?>
+      
+      <!-- Default one -->
+       <?php
+	  
+		  
+		  $batch = $model->findAll("batch_id IS NULL");
+		  ?>
+          <div class="bbtb" style="color:#000; font-size:14px;">
+        
+         <table width="100%" cellspacing="0" cellpadding="0">
+         <tr>
+           <td width="4%"><?php
+			  if($batch[0]['weekday']==1)
+			  echo $form->checkBox($model,'sunday',array('value'=>'1','checked'=>'checked','class'=>'styled'));
+			  else
+			   echo $form->checkBox($model,'sunday',array('value'=>'1','class'=>'styled')); ?></td>
+             <td width="85%"><?php echo Yii::t('weekdays','Sunday');?></td>
+             <td width="11%">&nbsp;</td>
+         </tr>
+         <tr>
+         	<td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+         </tr>
+         <tr>
+           <td><?php
+			 if($batch[1]['weekday']==2)
+			   echo $form->checkBox($model,'monday',array('value'=>'2','checked'=>'checked','class'=>'styled'));
+			 else
+			  echo $form->checkBox($model,'monday',array('value'=>'2','class'=>'styled')); ?></td>
+             <td><?php echo Yii::t('weekdays','Monday');?></td>
+             <td>&nbsp;</td>
+         </tr>
+          <tr>
+         	<td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+         </tr>
+         <tr>
+           <td><?php
+			  if($batch[2]['weekday']==3)
+			  echo $form->checkBox($model,'tuesday',array('value'=>'3','checked'=>'checked','class'=>'styled')); 
+			  else
+			   echo $form->checkBox($model,'tuesday',array('value'=>'3','class'=>'styled')); 
+			  ?></td>
+             <td><?php echo Yii::t('weekdays','Tuesday');?></td>
+             <td>&nbsp;</td>
+         </tr>
+          <tr>
+         	<td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+         </tr>
+         <tr>
+           <td><?php
+			 if($batch[3]['weekday']==4)
+			  echo $form->checkBox($model,'wednesday',array('value'=>'4','checked'=>'checked','class'=>'styled'));
+			  else
+			  echo $form->checkBox($model,'wednesday',array('value'=>'4','class'=>'styled'));
+			   ?></td>
+             <td><?php echo Yii::t('weekdays','Wednesday');?></td>
+             <td>&nbsp;</td>
+         </tr>
+          <tr>
+         	<td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+         </tr>
+         <tr>
+           <td><?php
+			  if($batch[4]['weekday']==5)
+			  echo $form->checkBox($model,'thursday',array('value'=>'5','checked'=>'checked','class'=>'styled'));
+			  else
+			  echo $form->checkBox($model,'thursday',array('value'=>'5','class'=>'styled'));
+			   ?></td>
+             <td><?php echo Yii::t('weekdays','Thursday');?></td>
+             <td>&nbsp;</td>
+         </tr>
+          <tr>
+         	<td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+         </tr>
+         <tr>
+           <td><?php
+			  if($batch[5]['weekday']==6)
+			  echo $form->checkBox($model,'friday',array('value'=>'6','checked'=>'checked','class'=>'styled'));
+			  else
+			   echo $form->checkBox($model,'friday',array('value'=>'6','class'=>'styled'));
+			   ?></td>
+             <td><?php echo Yii::t('weekdays','Friday');?></td>
+             <td>&nbsp;</td>
+         </tr>
+          <tr>
+         	<td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+         </tr>
+         <tr>
+           <td><?php
+			  if($batch[6]['weekday']==7)
+			  echo $form->checkBox($model,'saturday',array('value'=>'7','checked'=>'checked','class'=>'styled'));
+			  else
+			  echo $form->checkBox($model,'saturday',array('value'=>'7','class'=>'styled'));
+				 ?></td>
+             <td><?php echo Yii::t('weekdays','Saturday');?></td>
+             <td>&nbsp;</td>
+         </tr>
+         </table>
+         
+         </div><br />
+      
+      <?php echo CHtml::submitButton($model->isNewRecord ? 'Save' : 'Save',array('class'=>'formbut')); ?>          
+   <?php $this->endWidget(); ?>              
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div>
     </td>
   </tr>
 </table>
 
-<?php } ?>
+
+<?php }
+?>
