@@ -35,7 +35,7 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
         <td width="247" valign="top" id="port-left">
-        	<?php $this->renderPartial('/weekdays/left_side');?>
+        	<?php $this->renderPartial('left_side');?>
         </td>
         <td valign="top">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -51,7 +51,7 @@
 			$rurl = explode('index.php?r=',Yii::app()->request->getUrl());
                        
 			$rurl = explode('&id=',$rurl[1]); 
-                        echo CHtml::ajaxLink('Select Batch',array('/site/explorer','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'sb_but')); ?>></a>
+                        echo CHtml::ajaxLink('Select Batch',array('/site/explorer_1','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'sb_but')); ?>></a>
            
             </div>
             <div class="edit_bttns" style="width:175px; top:15px;">

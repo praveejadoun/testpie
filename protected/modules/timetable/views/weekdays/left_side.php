@@ -14,8 +14,7 @@
                 <input type="button" class="sbut" name="">
                 <div class="clear"></div>
   </div>-->    <h1><?php echo Yii::t('room','VIEW TIMETABLE');?></h1>   
-              
-                    <?php
+                <?php
 			function t($message, $category = 'cms', $params = array(), $source = null, $language = null) 
 {
     return $message;
@@ -34,6 +33,7 @@
 					       ),
                                         array('label'=>''.Yii::t('timetable','View Teachers Timetable').'<span>'.Yii::t('timetable','View Teacher Wise Timetable').'</span>',  'url'=>array('teacherstimetable/index'),'linkOptions'=>array('class'=>'sl_ico' ),'active'=> (Yii::app()->controller->id=='teacherstimetable' and (Yii::app()->controller->action->id=='index') ? true : false), 'itemOptions'=>array('id'=>'menu_1') 
 					       ),
+                                        array(CHtml::ajaxLink('Select Batch',array('/site/explorer','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'sb_but'))),
                                        
                             
                             

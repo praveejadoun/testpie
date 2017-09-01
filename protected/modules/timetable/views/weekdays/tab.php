@@ -88,7 +88,7 @@ $(document).click(function() {
 			$rurl = explode('index.php?r=',Yii::app()->request->getUrl());
                        
 			$rurl = explode('&id=',$rurl[1]); 
-			echo CHtml::ajaxLink('Change Batch',array('/site/explorer','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'sb_but','style'=>'top:13px; right:60px;')); ?>
+			echo CHtml::ajaxLink('Change Batch',array('/site/explorer_1','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'sb_but','style'=>'top:13px; right:60px;')); ?>
            
 <?php 
 			}else

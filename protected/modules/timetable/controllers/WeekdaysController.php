@@ -219,6 +219,11 @@ class WeekdaysController extends RController
 			'model'=>$model,
 		));
 	}
+        public function actionFulltimetable()
+        {
+         $this->render('fulltimetable');  
+        
+        }
 	public function actionExportpdf()
 	{
 		$model=new Weekdays;

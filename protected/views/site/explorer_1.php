@@ -279,7 +279,7 @@ $('#user_div a').live('click', function(event){
 		{ ?>
 		<div class="panel">
         
-        <?php  $this->renderPartial('batch_panel',array()) ; ?>
+        <?php  $this->renderPartial('batch_panel_1',array()) ; ?>
 			
 		</div>
         <?php } ?>

@@ -103,7 +103,7 @@ function rowdelete(id)
 					echo '<tr id="batchrow'.$batch_1->id.'">';
 					if(isset($_REQUEST['widget']) and isset($_REQUEST['rurl']) and $_REQUEST['rurl']!=NULL)
                     {
-					echo '<td style="text-align:left; padding-left:10px; font-weight:bold;">'.CHtml::link($batch_1->name, array('attendance/studentAttentance','id'=>$batch_1->id)).'</td>';
+					echo '<td style="text-align:left; padding-left:10px; font-weight:bold;">'.CHtml::link($batch_1->name, array('courses/batches/batchstudents','id'=>$batch_1->id)).'</td>';
 					
 					
 					}

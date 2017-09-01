@@ -54,12 +54,12 @@ $(document).click(function() {
 					
         			});
 </script>
-<?php if(isset($_REQUEST['id']))
+<?php if(isset($_REQUEST['bat']))
 {?>
- <h1>Manage Batch</h1>
+
  
  
- <?php    $batch=Batches::model()->findByAttributes(array('id'=>$_REQUEST['id'])); 
+ <?php    $batch=Batches::model()->findByAttributes(array('id'=>$_REQUEST['bat'])); 
 
           if($batch!=NULL)
 		   {
@@ -78,51 +78,36 @@ $(document).click(function() {
            }?>
           
           
-	<div class="c_batch_tbar" style="padding:0px; margin:0px;">
-    <?php if((Yii::app()->controller->id=='batches' and (Yii::app()->controller->action->id=='batchstudents' or Yii::app()->controller->action->id=='settings')) or (Yii::app()->controller->id=='subject' and Yii::app()->controller->action->id=='index') or (Yii::app()->controller->id=='weekdays' and (Yii::app()->controller->action->id=='timetable' or Yii::app()->controller->action->id=='index')) or (Yii::app()->controller->id=='classTiming' and Yii::app()->controller->action->id=='index') or (Yii::app()->controller->id=='studentAttentance' and Yii::app()->controller->action->id=='index') or (Yii::app()->controller->id=='gradingLevels' and Yii::app()->controller->action->id=='index') or (Yii::app()->controller->id=='exam' and Yii::app()->controller->action->id=='index'))
-			{
-				?>
-            
-            <?php
-			
-			$rurl = explode('index.php?r=',Yii::app()->request->getUrl());
-                       
-			$rurl = explode('&id=',$rurl[1]); 
-			echo CHtml::ajaxLink('Change Batch',array('/site/attendanceexplorer','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'sb_but','style'=>'top:-40px; right:40px;')); 
-                        echo CHtml::link('Teacher Attendance',array('/attendance/employeeAttendances'),array('class'=>'sb_but','style'=>'top:-40px; right:170px;'));?>
-<?php 
-			}else
-			{
-				echo CHtml::link('Teacher Attendance',array('/attendance/teachersubjectattendance'),array('class'=>'sb_but','style'=>'top:-40px; right:40px;'));
-			}?>
-            
-            <?php echo CHtml::link('<span>close</span>',array('/attendance'),array('class'=>'sb_but_close','style'=>'top:-40px; right:0px;'));?>
+	<div class="c_batch_tbar" style="padding:0px; margin:0px;width:710px;">
    
-    	<div class="cb_left">
+    	<div class="cb_left" >
         	<ul>
-            	<li><strong>Course / Batch:</strong> <?php echo $coursename; ?> / <?php echo $batchname; ?></li>
-                <li><strong><?php echo Yii::t('Batch','Class Teacher : '); ?></strong> <?php $employee=Employees::model()->findByAttributes(array('id'=>$batch->employee_id));
+                    <li><strong>Course :</strong> <?php echo $coursename; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <strong>Batch :</strong> <?php echo $batchname; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <strong><?php echo Yii::t('Batch','Class Teacher : '); ?></strong> <?php $employee=Employees::model()->findByAttributes(array('id'=>$batch->employee_id));
 		    if($employee!=NULL)
 		    {
 			   echo ucfirst($employee->first_name).' '.ucfirst($employee->middle_name).' '.ucfirst($employee->last_name);
 		    }?></li>
+                
             </ul>
         </div>
-        <div class="cb_right">
-        	<div class="status_bx" style="margin-left:150px;">
+      <!--  <div class="cb_right">
+        	<div class="status_bx">
     			<ul>
-        			<li><span><?php echo count(Students::model()->findAll("batch_id=:x and is_active=:y and is_deleted=:z", array(':x'=>$_REQUEST['id'],':y'=>1,':z'=>0))); ?></span><?php echo Yii::t('Batch','Students');?></li>
-            		<li><span><?php echo count(Subjects::model()->findAll("batch_id=:x", array(':x'=>$_REQUEST['id']))); ?></span><?php echo Yii::t('Batch','Subjects');?></li>
-            		<li><span><?php echo count(TimetableEntries::model()->findAll(array('condition'=>'batch_id=:x','params'=>array(':x'=>$_REQUEST['id']))));?></span><?php echo Yii::t('Batch','Employees');?></li>
+        			<li><span><?php //echo count(Students::model()->findAll("batch_id=:x and is_deleted=:y", array(':x'=>$_REQUEST['id'],':y'=>0))); ?></span><?php echo Yii::t('Batch','Students');?></li>
+            		<li><span><?php //echo count(Subjects::model()->findAll("batch_id=:x", array(':x'=>$_REQUEST['id']))); ?></span><?php echo Yii::t('Batch','Subjects');?></li>
+            		<li><span><?php //echo count(TimetableEntries::model()->findAll(array('condition'=>'batch_id=:x','params'=>array(':x'=>$_REQUEST['id']))));?></span><?php echo Yii::t('Batch','Employees');?></li>
         		</ul>
      		<div class="clear"></div>
    			</div>
             
-        </div>
-      
+        </div>-->
+       
     	<div class="clear"></div>
     </div>
   
+    </div>
     <?php 
 		   }?>
 		   <div id="subjects-grid-side"></div>

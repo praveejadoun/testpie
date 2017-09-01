@@ -137,7 +137,13 @@ class SiteController extends RController
 		
 	 }
 	 
-	 
+	 public function actionAttendanceexplorer()
+	{
+		if(Yii::app()->request->isAjaxRequest)
+		 {
+			 $this->renderPartial('attendanceexplorer',array(),false,true);
+		 }
+	}
 	public function actionExplorer()
 	{
 		if(Yii::app()->request->isAjaxRequest)
@@ -150,6 +156,13 @@ class SiteController extends RController
 		if(Yii::app()->request->isAjaxRequest)
 		 {
 			 $this->renderPartial('explorer2',array(),false,true);
+		 }
+	}
+        public function actionExplorer_1()
+	{
+		if(Yii::app()->request->isAjaxRequest)
+		 {
+			 $this->renderPartial('explorer_1',array(),false,true);
 		 }
 	}
 	public function actionManage()

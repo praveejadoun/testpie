@@ -1,410 +1,548 @@
-<!--<div class="captionWrapper">
-	<ul>
-    	<li><h2  class="cur">Employee Details</h2></li>
-        <li><h2>Employee Contact Details</h2></li>
-    </ul>
-</div>-->
+
+
+<script language="javascript">
+function course()
+{
+var id = document.getElementById('cou').value;
+window.location= 'index.php?r=timetable/weekdays/fulltimetable&cou='+id;	
+}
+function batch()
+{
+var id_1 = document.getElementById('cou').value;
+var id = document.getElementById('bat').value;
+window.location= 'index.php?r=timetable/weekdays/fulltimetable&cou='+id_1+'&bat='+id;	
+}
+function departme()
+{
+var id_1 = document.getElementById('cou').value;
+var id = document.getElementById('sub').value;
+var dep = document.getElementById('depart').value;
+window.location= 'index.php?r=employees/employeesSubjects/create&cou='+id_1+'&sub='+id+'&dept='+dep;		
+}
+</script>
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'employees-form',
+	'id'=>'employees-subjects-form',
 	'enableAjaxValidation'=>false,
-	'htmlOptions'=>array('enctype'=>'multipart/form-data'),
 )); ?>
-
-	<?php if($form->errorSummary($model)){; ?>
-    
-    <div class="errorSummary">Input Error<br />
-    <span>Please fix the following error(s).</span>
-    </div>
-    
-    <?php } ?>
-    
-<p class="note">Fields with <span class="required">*</span> are required.</p>
-<div class="formCon" style="background:#fcf1d4; width:100%; border:0px #fac94a solid; color:#000;background:url(images/yellow-pattern.png); width:100%; border:0p ">
-
-<div class="formConInner" style="padding:5px;">
-	<table width="100%" border="0" cellspacing="0" cellpadding="0">
- <!-- <tr>
-    <td>
-	<?php
-		$emp_id_1= '';
-	 if(Yii::app()->controller->action->id=='searchroom')
-			{
-			$emp_id	= Employees::model()->findAll(array('order' => 'id DESC','limit' => 1));
-			$emp_id_1='E'.($emp_id[0]['id']+1);
-			}
-			else
-			{
-				$emp_id	= Employees::model()->findByAttributes(array('id' => $_REQUEST['id']));
-				$emp_id_1=$emp_id->employee_number;
-			}
-			?>
-	<?php echo $form->labelEx($model,Yii::t('employees','employee_number')); ?></td>
-    <td><?php echo $form->textField($model,'employee_number',array('size'=>20,'maxlength'=>255,'value'=>$emp_id_1)); ?>
-		<?php echo $form->error($model,'employee_number'); ?></td>
-    
-    <td><?php echo $form->labelEx($model,Yii::t('employees','joining_date')); ?></td>
-    <td><?php 
-			$settings=UserSettings::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
-	if($settings!=NULL)
-	{
-		$date=$settings->dateformat;
-		
-		
-	}
-	else
-	$date = 'dd-mm-yy';	
-	//echo $form->textField($model,'joining_date',array('size'=>30,'maxlength'=>255));
-				$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-							//'name'=>'Employees[joining_date]',
-							'attribute'=>'joining_date',
-							'model'=>$model,
-							
-							// additional javascript options for the date picker plugin
-							'options'=>array(
-								'showAnim'=>'fold',
-								'dateFormat'=>$date,
-								'changeMonth'=> true,
-									'changeYear'=>true,
-									'yearRange'=>'1970:'
-							),
-							'htmlOptions'=>array(
-								//'style'=>'height:20px;'
-								//'value' => date('m-d-y'),
-							),
-						))
-	
-	 ?>
-		<?php echo $form->error($model,'joining_date'); ?></td>
-   
-  </tr>
-  </table>
-</div>
-</div>
-<div class="formCon" >
-
-<div class="formConInner">
-
-<h3>General Details</h3>
-<table width="75%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td valign="bottom" style="padding-bottom:3px;"><?php echo $form->labelEx($model,Yii::t('employees','first_name')); ?></td>
-    
-    <td valign="bottom" style="padding-bottom:3px;"><?php echo $form->labelEx($model,Yii::t('employees','middle_name')); ?></td>
-   
-    <td valign="bottom" style="padding-bottom:3px;"><?php echo $form->labelEx($model,Yii::t('employees','last_name')); ?></td>
-  </tr>
-  <tr>
-    <td valign="top" width="45%"><?php echo $form->textField($model,'first_name',array('size'=>32,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'first_name'); ?></td>
-    
-    <td valign="top" width="20%"><?php echo $form->textField($model,'middle_name',array('size'=>10,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'middle_name'); ?></td>
-   
-    <td valign="top"><?php echo $form->textField($model,'last_name',array('size'=>30,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'last_name'); ?></td>
-  </tr>
-  <tr>
-  	<td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-</table>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
- 
-  <tr>
-    <td valign="middle"><?php echo $form->labelEx($model,Yii::t('employees','gender')); ?></td>
-    <td><?php //echo $form->textField($model,'gender',array('size'=>30,'maxlength'=>255)); ?>
-     <?php echo $form->dropDownList($model,'gender',array('M' => 'Male', 'F' => 'Female'),array('empty' =>'Select Gender')); ?>
-		<?php echo $form->error($model,'gender'); ?></td>
-        <td >&nbsp;</td>
-    <td valign="middle"><?php echo $form->labelEx($model,Yii::t('employees','date_of_birth')); ?></td>
-    <td><?php //echo $form->textField($model,'date_of_birth',array('size'=>30,'maxlength'=>255));
-					$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-							//'name'=>'Employees[date_of_birth]',
-							'attribute'=>'date_of_birth',
-							'model'=>$model,
-							// additional javascript options for the date picker plugin
-							'options'=>array(
-								'showAnim'=>'fold',
-								'dateFormat'=>$date,
-								'changeMonth'=> true,
-									'changeYear'=>true,
-									'yearRange'=>'1950:2050'
-							),
-							'htmlOptions'=>array(
-								'style' => 'width:100px;',
-							),
-						))
-	 ?>
-		<?php echo $form->error($model,'date_of_birth'); ?></td>
-    <td >&nbsp;</td>
-  </tr>
-  <tr>
-  	<td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td valign="middle"><?php echo $form->labelEx($model,Yii::t('employees','employee_department_id')); ?></td>
-    <td><?php echo $form->dropDownList($model,'employee_department_id',CHtml::listData(EmployeeDepartments::model()->findAll(),'id','name'),array('empty' => 'Select Department')); ?>
-		<?php echo $form->error($model,'employee_department_id'); ?></td>
-    <td valign="middle">&nbsp;</td>
-    <td valign="middle"><?php echo $form->labelEx($model,Yii::t('employees','employee_position_id')); ?></td>
-    <?php $criteria2 = new CDbCriteria;
-		$criteria2->compare('status',1); ?>
-    <td valign="middle"><?php echo $form->dropDownList($model,'employee_position_id',CHtml::listData(EmployeePositions::model()->findAll($criteria2),'id','name'),array('empty' => 'Select Position')); ?>
-		<?php echo $form->error($model,'employee_position_id'); ?></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td valign="middle"><?php echo $form->labelEx($model,Yii::t('employees','employee_category_id')); ?></td>
-    <?php $criteria1 = new CDbCriteria;
-		$criteria1->compare('status',1); ?>
-    <td><?php echo $form->dropDownList($model,'employee_category_id',CHtml::listData(EmployeeCategories::model()->findAll($criteria1),'id','name'),array('empty' => 'Select Category')); ?>
-		<?php echo $form->error($model,'employee_category_id'); ?></td>
-    <td valign="middle">&nbsp;</td>
-    <td><?php echo $form->labelEx($model,Yii::t('employees','employee_grade_id')); ?></td>
-    <?php $criteria = new CDbCriteria;
-		$criteria->compare('status',1); ?>
-    <td valign="middle"><?php echo $form->dropDownList($model,'employee_grade_id',CHtml::listData(EmployeeGrades::model()->findAll($criteria),'id','name'),array('empty' => 'Select Grade')); ?>
-		<?php echo $form->error($model,'employee_grade_id'); ?></td>
-  </tr>
-   <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td valign="middle"><?php echo $form->labelEx($model,Yii::t('employees','job_title')); ?></td>
-    <td><?php echo $form->textField($model,'job_title',array('size'=>15,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'job_title'); ?></td>
-    <td valign="middle">&nbsp;</td>
-    <td><?php echo $form->labelEx($model,Yii::t('employees','qualification')); ?></td>
-    <td valign="middle"><?php echo $form->textField($model,'qualification',array('size'=>15,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'qualification'); ?></td>
-  </tr>
-   <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-   <tr>
-    <td valign="bottom"><?php echo $form->labelEx($model,Yii::t('employees','status')); ?></td>
-    <td><?php echo $form->textField($model,'status',array('size'=>15,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'status'); ?></td>
-    <td valign="bottom">&nbsp;</td>
-    <td><?php echo $form->labelEx($model,Yii::t('employees','total_experience'),array('style'=>'float:left')); ?>&nbsp;<span class="required">*</span></td>
-    <td valign="bottom"><?php echo $form->dropDownList($model,'experience_year',array('0'=>0,'1'=>1,'2'=>2,'3'=>3,'4'=>4,'5'=>5
-																			  ,'6'=>6,'7'=>7,'8'=>8,'9'=>9,'10'=>10,'11'=>11
-																			  ,'12'=>12,'13'=>13,'14'=>14,'15'=>15,'16'=>16,'17'=>17
-																			  ,'18'=>18,'19'=>19,'20'=>20),array('id'=>'experience_year','onchange'=>'star()','empty' => 'Years')); ?>
-		<?php echo $form->error($model,'experience_year'); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <?php echo $form->dropDownList($model,'experience_month',array('0'=>0,'1'=>1,'2'=>2,'3'=>3,'4'=>4,'5'=>5,
-																				'6'=>6,'7'=>7,'8'=>8,'9'=>9,'10'=>10,'11'=>11,),array('id'=>'experience_month','onchange'=>'star2()','empty' => 'Months')); ?>
-		<?php echo $form->error($model,'experience_month'); ?></td>
-  </tr>
-  
-   <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  
-  <tr>
-    <td valign="middle" style="padding-bottom:3px;"><?php echo $form->labelEx($model,Yii::t('employees','experience_detail'),array('style'=>'float:left;')); ?>&nbsp;<span id="required" class="required" style="visibility:hidden; display:inline">*</span></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td colspan="5" valign="top"><?php echo $form->textArea($model,'experience_detail',array('rows'=>6, 'cols'=>48)); ?>
-		<?php echo $form->error($model,'experience_detail'); ?></td>
-  
-  </tr>
-</table>
-
-</div>
-</div>
-
 <div class="formCon">
 
 <div class="formConInner">
-<h3><?php echo Yii::t('employees','Personal Details');?></h3>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td valign="middle"><?php echo $form->labelEx($model,Yii::t('employees','marital_status')); ?></td>
-    <td><?php echo $form->dropDownList($model,'marital_status',array('Single'=>'Single','Married'=>'Married','Divorced'=>'Divorced')); ?>
-		<?php echo $form->error($model,'marital_status'); ?></td>
-    <td valign="middle">&nbsp;</td>
-    <td valign="middle"><?php echo $form->labelEx($model,Yii::t('employees','children_count')); ?></td>
-    <td valign="middle"><?php echo $form->textField($model,'children_count',array('size'=>15,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'children_count'); ?></td>
-  </tr>
-    <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td valign="middle"><?php echo $form->labelEx($model,Yii::t('employees','father_name')); ?></td>
-    <td valign="middle"><?php echo $form->textField($model,'father_name',array('size'=>15,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'father_name'); ?></td>
-    <td valign="middle">&nbsp;</td>
-    <td valign="middle"><?php echo $form->labelEx($model,Yii::t('employees','mother_name')); ?></td>
-    <td valign="middle"><?php echo $form->textField($model,'mother_name',array('size'=>15,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'mother_name'); ?></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td valign="middle"><?php echo $form->labelEx($model,Yii::t('employees','husband_name')); ?></td>
-    <td valign="middle"><?php echo $form->textField($model,'husband_name',array('size'=>15,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'husband_name'); ?></td>
-    <td valign="bottom">&nbsp;</td>
-    <td valign="middle"><?php echo $form->labelEx($model,Yii::t('employees','blood_group')); ?></td>
-    <td valign="middle"><?php echo $form->dropDownList($model,'blood_group',array('A+' => 'A+', 'A-' => 'A-', 'B+' => 'B+', 'B-' => 'B-', 'O+' => 'O+', 'O-' => 'O-', 'AB+-' => 'AB+', 'AB-' => 'AB-'),
-									array('empty' => 'Unknown')); ?>
-		<?php echo $form->error($model,'blood_group'); ?></td>
-  </tr>
- 
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td valign="middle"><?php echo $form->labelEx($model,Yii::t('employees','nationality_id')); ?></td>
-    <td valign="middle"><?php echo $form->dropDownList($model,'nationality_id',CHtml::listData(Countries::model()->findAll(),'id','name'),array(
-									'style'=>'width:140px;','empty'=>'Select Nationality'
-								)); ?>
-		<?php echo $form->error($model,'nationality_id'); ?></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  
-</table>
-</div>
-</div>
-<div class="formCon" style=" background:#EDF1D1; border:0px #c4da9b solid; color:#393; background:#EDF1D1 url(images/green-bg.png); border:0px #c4da9b solid; color:#393;  ">
 
-<div class="formConInner" style="padding:10px;">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <?php 
+
+$data = CHtml::listData(Courses::model()->findAll("is_deleted 	=:x", array(':x'=>0),array('order'=>'course_name DESC')),'id','course_name');
+if(isset($_REQUEST['cou']))
+{
+	$sel= $_REQUEST['cou'];
+}
+else
+{
+	$sel='';
+}
+echo '<div style="float:left; width:380px;"><span style="font-size:14px; font-weight:bold; color:#666;">Course</span>&nbsp;&nbsp;&nbsp;&nbsp;';
+echo CHtml::dropDownList('id','',$data,array('prompt'=>'Select','onchange'=>'course()','id'=>'cou','options'=>array($sel=>array('selected'=>true)))); 
+echo '</div>';
+echo '<div style="float:left; width:300px;"><span style="font-size:14px; font-weight:bold; color:#666;">Subject</span>&nbsp;&nbsp;'; ?>
+
+
+<?php 
+$batches= array();
+if(isset($_REQUEST['cou']))
+{
+	$batches = CHtml::listData(Batches::model()->findAll("course_id=:x and is_deleted=:y", array(':x'=>$_REQUEST['cou'],':y'=>0),array('order'=>'name DESC')),'id','name');
 	
-  <tr>
-    <td></td>
-    <td> </td>
-    <td><?php 
-	if($model->photo_data==NULL)
+	/*$data_1=Subjects::model()->findAll(array('join' => 'JOIN batches ON batch_id = batches.id','condition'=>'batches.course_id=:id', 
+                  'params'=>array(':id'=>(int) $_REQUEST['cou'])));*/
+	///$data_1 = CHtml::listData(Subjects::model()->findAll(array('join' => 'JOIN batches ON batch_id = batches.id','condition'=>'batches.course_id=:id', 
+                 // 'params'=>array(':id'=>(int) $_REQUEST['cou']))),'id','batchname');			  
+				  
+	 
+}
+if(isset($_REQUEST['bat']))
+{
+ $sel_1 = $_REQUEST['bat'];	
+}
+else
+{
+	$sel_1 ='';
+}
+echo CHtml::dropDownList('bat','',$batches,array('prompt'=>'Select','onchange'=>'course()','id'=>'bat','onchange'=>'batch()','options'=>array($sel_1=>array('selected'=>true)))); 
+ 
+echo '<br/></div><div class="clear"></div>';
+
+  
+ ?>
+</div>
+</div>
+<?php /*
+if(isset($_REQUEST['bat']))
+{
+	
+$employee = $model->Employeenotassigned($_REQUEST['dept'],$_REQUEST['sub']);
+		
+if(count($employee)!=0)
+	{?>
+    <h3><?php echo Yii::t('employees','Assign New:');?></h3>
+      <div class="tableinnerlist">
+     <table width="80%" cellpadding="0" cellspacing="0">
+     <tr>
+         <th><?php echo Yii::t('employees','Employee Name');?></th>
+         <th><?php echo Yii::t('employees','Action');?></th>
+      </tr>
+
+    <?php   
+	foreach($employee as $employee_1)
 	{
-	echo $form->labelEx($model,'upload_photo');
+		echo '<tr>';
+	    echo '<td>'.$employee_1['first_name'].'  '.$employee_1['middle_name'].'  '.$employee_1['last_name'].'</td>';
+		echo '<td>'.CHtml::link(Yii::t('employees','Assign'), array('employeesSubjects/Assign', 'emp_id'=>$employee_1['id'],'sub'=>$_REQUEST['sub'],'cou'=>$_REQUEST['cou'],'dept'=>$_REQUEST['dept']), array('confirm' => 'Are you sure?')).'</td>'; 	
+		echo '</tr>';
 	}
+	?>
+    </table>
+    </div>
+    <?php }
 	else
 	{
-	echo $form->labelEx($model,'Photo');	
+		echo '<br> <br>'.Yii::t('employees','<i>Nothing Found.</i>').'<br> <br>';
 	}
 	
-	 ?>
-		</td>
-    <td>
-	<?php 
-		
-		
-		if($model->isNewRecord)
-		{
-			echo $form->fileField($model,'photo_data'); 
-		    echo $form->error($model,'photo_data'); 
-		}
-		else
-		{
-			if($model->photo_data==NULL)
-			{
-				echo $form->fileField($model,'photo_data'); 
-		        echo $form->error($model,'photo_data'); 
-			}
-			
-			else
-			{
-				if(Yii::app()->controller->action->id=='update') {
-					echo CHtml::link(Yii::t('students','Remove'), array('Employees/remove', 'id'=>$model->id),array('confirm'=>'Are you sure?')); 
-					echo '<img class="imgbrder" src="'.$this->createUrl('Employees/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->photo_file_name.'" width="100" height="100" />';	
-				}
-				else if(Yii::app()->controller->action->id=='searchroom') {
-					echo CHtml::hiddenField('photo_file_name',$model->photo_file_name);
-					echo CHtml::hiddenField('photo_content_type',$model->photo_content_type);
-					echo CHtml::hiddenField('photo_file_size',$model->photo_file_size);
-					echo CHtml::hiddenField('photo_data',bin2hex($model->photo_data));
-					echo '<img class="imgbrder" src="'.$this->createUrl('Employees/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->photo_file_name.'" width="100" height="100" />';
-				}
-			}
-		}
-		
-		 ?>
+	
+
+
+}
+*/
+?>
+
+  <div class="emp_right_contner">
+    <div class="emp_tabwrapper">   
+    <?php $this->renderPartial('/weekdays/tab_1');?>
         
-        </td>
-  </tr>
+   
+<?php
+ 
+	if(isset($_REQUEST['bat']) and $_REQUEST['bat']!=NULL)
+	{ ?>
+             <div class="ea_pdf" style="top:196px; left:20px;">
+                                    <?php echo CHtml::link('<img src="images/pdf-but.png">', array('Weekdays/pdf','id'=>$_REQUEST['bat']), array('target' => '_blank')); ?>
+                                </div><br/><br/><br/>
+	<?php $times=Batches::model()->findAll("id=:x", array(':x'=>$_REQUEST['bat']));
+	
+	
+	$weekdays=Weekdays::model()->findAll("batch_id=:x", array(':x'=>$_REQUEST['bat']));
+	
+	if(count($weekdays)==0)
+	$weekdays=Weekdays::model()->findAll("batch_id IS NULL");
+	?> <br /><br />
+    <?php   $timing = ClassTimings::model()->findAll("batch_id=:x", array(':x'=>$_REQUEST['bat']));
+	  		$count_timing = count($timing);
+			if($timing!=NULL)
+			{
+	?>
+<div class="timetable" style="margin-top:10px;">
+<table border="0" align="center" width="100%" id="table" cellspacing="0">
+    <tbody><tr>
+	
+      <td class="loader">&nbsp;
+        
+        </td><!--timetable_td_tl -->
+      <td class="td-blank"></td>
+      <?php 
+	 
+			foreach($timing as $timing_1)
+			{
+				 $settings=UserSettings::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
+								if($settings!=NULL)
+								{	
+									$time1=date($settings->timeformat,strtotime($timing_1->start_time));
+									$time2=date($settings->timeformat,strtotime($timing_1->end_time));
+									
+		
+								}
+			echo '<td class="td"><div class="top">'.$time1.' - '.$time2.'</div></td>';	
+			//echo '<td class="td"><div class="top">'.$timing_1->start_time.' - '.$timing_1->end_time.'</div></td>';	
+			}
+	   ?>
+        
+      
+    </tr> <!-- timetable_tr -->
+    <tr class="blank">
+      <td></td>
+      <td></td>
+		  <?php
+          for($i=0;$i<$count_timing;$i++)
+          {
+            echo '<td></td>';  
+          }
+          ?>
+    </tr>
+    <?php if($weekdays[0]['weekday']!=0)
+	{ ?>
+    <tr>
+        <td class="td"><div class="name"><?php echo Yii::t('weekdays','SUN');?></div></td>
+        <td class="td-blank"></td>
+         <?php
+			  for($i=0;$i<$count_timing;$i++)
+			  {
+				echo '<td class="td">
+					<div  onclick="" style="position: relative; ">
+					
+					  <div class="tt-subject">
+						<div class="subject">'; ?>
+			<?php
+$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$_REQUEST['bat'],'weekday_id'=>$weekdays[0]['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
+				if(count($set)==0)
+				{
+					$is_break = ClassTimings::model()->findByAttributes(array('id'=>$timing[$i]['id'],'is_break'=>1));
+					if($is_break==NULL)
+					{	
+						echo 	CHtml::ajaxLink(Yii::t('job','Assign'),$this->createUrl('TimetableEntries/settime'),array(
+        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays[0]['weekday'].'").dialog("open"); return false;',
+        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays[0]['weekday'],'type' =>'GET','data'=>array('batch_id'=>$_REQUEST['bat'],'weekday_id'=>$weekdays[0]['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
+        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays[0]['weekday'])) ;
+					}
+					else
+					{
+						echo Yii::t('weekdays','Break');
+					}		
+					
+				}
+				else
+				{
+				$time_sub = Subjects::model()->findByAttributes(array('id'=>$set->subject_id));
+				if($time_sub!=NULL){echo $time_sub->name.'<br>';}
+				$time_emp = Employees::model()->findByAttributes(array('id'=>$set->employee_id));
+				if($time_emp!=NULL){echo '<div class="employee">'.$time_emp->first_name.'</div>';}
+				echo CHtml::link('',array('timetableEntries/remove','id'=>$set->id,'batch_id'=>$_REQUEST['bat']),array('confirm'=>'Are you sure?','class'=>'delete'));
+				}
+		 ?>
+					<?php echo 	'</div>
+						
+					  </div>
+					</div>
+					<div id="jobDialog'.$timing[$i]['id'].$weekdays[0]['weekday'].'"></div>
+				  </td>';  
+			  }
+			  ?>
+        
+          
+        
+      </tr>
+      <?php } 
+	  if($weekdays[1]['weekday']!=0)
+	  { ?>
+      <tr>
+        <td class="td"><div class="name"><?php echo Yii::t('weekdays','MON');?></div></td>
+        <td class="td-blank"></td>
+        	 <?php
+			  for($i=0;$i<$count_timing;$i++)
+			  {
+				echo ' <td class="td">
+						<div  onclick="" style="position: relative; ">
+						  <div class="tt-subject">
+							<div class="subject">';
+		$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$_REQUEST['bat'],'weekday_id'=>$weekdays[1]['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
+				if(count($set)==0)
+				{
+					$is_break = ClassTimings::model()->findByAttributes(array('id'=>$timing[$i]['id'],'is_break'=>1));
+					if($is_break==NULL)
+					{	
+						echo CHtml::ajaxLink(Yii::t('job','Assign'),$this->createUrl('TimetableEntries/settime'),array(
+        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays[1]['weekday'].'").dialog("open"); return false;',
+        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays[1]['weekday'],'type' =>'GET','data'=>array('batch_id'=>$_REQUEST['bat'],'weekday_id'=>$weekdays[1]['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
+        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays[1]['weekday'])) ;
+					}
+					else
+					{
+						echo Yii::t('weekdays','Break');
+					}			
+					
+				}
+				else
+				{
+				$time_sub = Subjects::model()->findByAttributes(array('id'=>$set->subject_id));
+				
+				$time_emp = Employees::model()->findByAttributes(array('id'=>$set->employee_id));
+				
+				if($time_sub!=NULL){echo $time_sub->name.'<br>';}
+				if($time_emp!=NULL){echo '<div class="employee">'.$time_emp->first_name.'</div>';}
+				echo CHtml::link('',array('timetableEntries/remove','id'=>$set->id,'batch_id'=>$_REQUEST['bat']),array('confirm'=>'Are you sure?','class'=>'delete'));
+				}
 
-</table>
-<div class="row">
-		<?php //echo $form->labelEx($model,'photo_file_size'); ?>
-		<?php echo $form->hiddenField($model,'photo_file_size'); ?>
-		<?php echo $form->error($model,'photo_file_size'); ?>
-	</div>
+						echo '</div>
+						  </div>
+						</div>
+						<div id="jobDialog'.$timing[$i]['id'].$weekdays[1]['weekday'].'"></div>
+					  </td>';  
+			 }
+			?>
+          <!--timetable_td -->
+        
+      </tr><!--timetable_tr -->
+      <?php } 
+	  if($weekdays[2]['weekday']!=0)
+	  {
+	  ?>
+          <tr>
+        <td class="td"><div class="name"><?php echo Yii::t('weekdays','TUE');?></div></td>
+        <td class="td-blank"></td>
+         <?php
+			  for($i=0;$i<$count_timing;$i++)
+			  {
+				echo ' <td class="td">
+						<div  onclick="" style="position: relative; ">
+						  <div class="tt-subject">
+							<div class="subject">';
+							$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$_REQUEST['bat'],'weekday_id'=>$weekdays[2]['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
+				if(count($set)==0)
+				{
+					$is_break = ClassTimings::model()->findByAttributes(array('id'=>$timing[$i]['id'],'is_break'=>1));
+					if($is_break==NULL)
+					{	
+						echo CHtml::ajaxLink(Yii::t('job','Assign'),$this->createUrl('TimetableEntries/settime'),array(
+        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays[2]['weekday'].'").dialog("open"); return false;',
+        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays[2]['weekday'],'type' =>'GET','data'=>array('batch_id'=>$_REQUEST['bat'],'weekday_id'=>$weekdays[2]['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
+        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays[2]['weekday'])) ;
+					}
+					else
+					{
+						echo Yii::t('weekdays','Break');
+					}				
+					
+				}
+				else
+				{
+				$time_sub = Subjects::model()->findByAttributes(array('id'=>$set->subject_id));
+				if($time_sub!=NULL){echo $time_sub->name.'<br>';}
+				$time_emp = Employees::model()->findByAttributes(array('id'=>$set->employee_id));
+				if($time_emp!=NULL){echo '<div class="employee">'.$time_emp->first_name.'</div>';}
+				echo CHtml::link('',array('timetableEntries/remove','id'=>$set->id,'batch_id'=>$_REQUEST['bat']),array('confirm'=>'Are you sure?','class'=>'delete'));
+				}
 
+							
+						echo	'</div>
+							
+						  </div>
+						</div>
+						<div id="jobDialog'.$timing[$i]['id'].$weekdays[2]['weekday'].'"></div>
+					  </td>';  
+			 }
+			?><!--timetable_td -->
+        
+      </tr><!--timetable_tr -->
+      <?php }
+	  if($weekdays[3]['weekday']!=0)
+	  { ?>
+          <tr>
+        <td class="td"><div class="name"><?php echo Yii::t('weekdays','WED');?></div></td>
+        <td class="td-blank"></td>
+         <?php
+			  for($i=0;$i<$count_timing;$i++)
+			  {
+				echo ' <td class="td">
+						<div  onclick="" style="position: relative; ">
+						  <div class="tt-subject">
+							<div class="subject">';
+							$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$_REQUEST['bat'],'weekday_id'=>$weekdays[3]['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
+				if(count($set)==0)
+				{
+					$is_break = ClassTimings::model()->findByAttributes(array('id'=>$timing[$i]['id'],'is_break'=>1));
+					if($is_break==NULL)
+					{	
+						echo CHtml::ajaxLink(Yii::t('job','Assign'),$this->createUrl('TimetableEntries/settime'),array(
+        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays[3]['weekday'].'").dialog("open"); return false;',
+        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays[3]['weekday'],'type' =>'GET','data'=>array('batch_id'=>$_REQUEST['bat'],'weekday_id'=>$weekdays[3]['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
+        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays[3]['weekday'])) ;
+					}
+					else
+					{
+						echo Yii::t('weekdays','Break');
+					}			
+					
+				}
+				else
+				{
+				$time_sub = Subjects::model()->findByAttributes(array('id'=>$set->subject_id));
+				if($time_sub!=NULL){echo $time_sub->name.'<br>';}
+				$time_emp = Employees::model()->findByAttributes(array('id'=>$set->employee_id));
+				if($time_emp!=NULL){echo '<div class="employee">'.$time_emp->first_name.'</div>';}
+				echo CHtml::link('',array('timetableEntries/remove','id'=>$set->id,'batch_id'=>$_REQUEST['bat']),array('confirm'=>'Are you sure?','class'=>'delete'));	
+				}
+							echo '</div>
+							
+						  </div>
+						</div>
+						<div id="jobDialog'.$timing[$i]['id'].$weekdays[3]['weekday'].'"></div>
+					  </td>';  
+			 }
+			?><!--timetable_td -->
+        
+      </tr><!--timetable_tr -->
+      <?php }
+	  if($weekdays[4]['weekday']!=0)
+	  {  ?>
+          <tr>
+        <td class="td"><div class="name"><?php echo Yii::t('weekdays','THU');?></div></td>
+        <td class="td-blank"></td>
+          <?php
+			  for($i=0;$i<$count_timing;$i++)
+			  {
+				echo ' <td class="td">
+						<div  onclick="" style="position: relative; ">
+						  <div class="tt-subject">
+							<div class="subject">';
+				$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$_REQUEST['bat'],'weekday_id'=>$weekdays[4]['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
+				if(count($set)==0)
+				{	
+					$is_break = ClassTimings::model()->findByAttributes(array('id'=>$timing[$i]['id'],'is_break'=>1));
+					if($is_break==NULL)
+					{	
+						echo CHtml::ajaxLink(Yii::t('job','Assign'),$this->createUrl('TimetableEntries/settime'),array(
+        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays[4]['weekday'].'").dialog("open"); return false;',
+        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays[4]['weekday'],'type' =>'GET','data'=>array('batch_id'=>$_REQUEST['bat'],'weekday_id'=>$weekdays[4]['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
+        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays[4]['weekday'])) ;
+					}
+					else
+					{
+						echo Yii::t('weekdays','Break');
+					}			
+					
+				}
+				else
+				{
+				$time_sub = Subjects::model()->findByAttributes(array('id'=>$set->subject_id));
+				if($time_sub!=NULL){echo $time_sub->name.'<br>';}
+				$time_emp = Employees::model()->findByAttributes(array('id'=>$set->employee_id));
+				if($time_emp!=NULL){echo '<div class="employee">'.$time_emp->first_name.'</div>';}
+				echo CHtml::link('',array('timetableEntries/remove','id'=>$set->id,'batch_id'=>$_REQUEST['bat']),array('confirm'=>'Are you sure?','class'=>'delete'));
+				}
+							
+						echo '</div>
+							
+						  </div>
+						</div>
+						<div id="jobDialog'.$timing[$i]['id'].$weekdays[4]['weekday'].'"></div>
+					  </td>';  
+			 }
+			?><!--timetable_td -->
+        
+      </tr><!--timetable_tr -->
+      <?php }
+	  if($weekdays[5]['weekday']!=0)
+	  { ?>
+	  
+          <tr>
+        <td class="td"><div class="name"><?php echo Yii::t('weekdays','FRI');?></div></td>
+        <td class="td-blank"></td>
+         <?php
+			  for($i=0;$i<$count_timing;$i++)
+			  {
+				echo ' <td class="td">
+						<div  onclick="" style="position: relative; ">
+						  <div class="tt-subject">
+							<div class="subject">';
+				$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$_REQUEST['bat'],'weekday_id'=>$weekdays[5]['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
+				if(count($set)==0)
+				{
+					$is_break = ClassTimings::model()->findByAttributes(array('id'=>$timing[$i]['id'],'is_break'=>1));
+					if($is_break==NULL)
+					{	
+						echo CHtml::ajaxLink(Yii::t('job','Assign'),$this->createUrl('TimetableEntries/settime'),array(
+        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays[5]['weekday'].'").dialog("open"); return false;',
+        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays[5]['weekday'],'type' =>'GET','data'=>array('batch_id'=>$_REQUEST['bat'],'weekday_id'=>$weekdays[5]['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
+        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays[5]['weekday'])) ;
+					}
+					else
+					{
+						echo Yii::t('weekdays','Break');
+					}				
+					
+				}
+				else
+				{
+				$time_sub = Subjects::model()->findByAttributes(array('id'=>$set->subject_id));
+				if($time_sub!=NULL){echo $time_sub->name.'<br>';}
+				$time_emp = Employees::model()->findByAttributes(array('id'=>$set->employee_id));
+				if($time_emp!=NULL){echo '<div class="employee">'.$time_emp->first_name.'</div>';}
+				echo CHtml::link('',array('timetableEntries/remove','id'=>$set->id,'batch_id'=>$_REQUEST['bat']),array('confirm'=>'Are you sure?','class'=>'delete'));
+				}
+							echo '</div>
+							
+						  </div>
+						</div>
+						<div id="jobDialog'.$timing[$i]['id'].$weekdays[5]['weekday'].'"></div>
+					  </td>';  
+			 }
+			?><!--timetable_td -->
+        
+      </tr><!--timetable_tr -->
+      <?php } 
+	  if($weekdays[6]['weekday']!=0)
+	  { ?>
+      <tr>
+        <td class="td"><div class="name"><?php echo Yii::t('weekdays','SAT');?></div></td>
+        <td class="td-blank"></td>
+          <?php
+			  for($i=0;$i<$count_timing;$i++)
+			  {
+				echo ' <td class="td">
+						<div  onclick="" style="position: relative; ">
+						  <div class="tt-subject">
+							<div class="subject">';
+							$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$_REQUEST['bat'],'weekday_id'=>$weekdays[6]['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
+				if(count($set)==0)
+				{
+					$is_break = ClassTimings::model()->findByAttributes(array('id'=>$timing[$i]['id'],'is_break'=>1));
+					if($is_break==NULL)
+					{	
+						echo CHtml::ajaxLink(Yii::t('job','Assign'),$this->createUrl('TimetableEntries/settime'),array(
+        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays[6]['weekday'].'").dialog("open"); return false;',
+        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays[6]['weekday'],'type' =>'GET','data'=>array('batch_id'=>$_REQUEST['bat'],'weekday_id'=>$weekdays[6]['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
+        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays[6]['weekday'])) ;
+					}
+					else
+					{
+						echo Yii::t('weekdays','Break');
+					}			
+					
+				}
+				else
+				{
+				$time_sub = Subjects::model()->findByAttributes(array('id'=>$set->subject_id));
+				if($time_sub!=NULL){echo $time_sub->name.'<br>';}
+				$time_emp = Employees::model()->findByAttributes(array('id'=>$set->employee_id));
+				if($time_emp!=NULL){echo '<div class="employee">'.$time_emp->first_name.'</div>';}
+				echo CHtml::link('',array('timetableEntries/remove','id'=>$set->id,'batch_id'=>$_REQUEST['bat']),array('confirm'=>'Are you sure?','class'=>'delete'));
+				}
+							echo '</div>
+							
+						  </div>
+						</div>
+						<div id="jobDialog'.$timing[$i]['id'].$weekdays[6]['weekday'].'"></div>
+					  </td>';  
+			 }
+			?><!--timetable_td -->
+        
+      </tr>
+    <?php } ?>
+  </tbody></table>
+  </div>
+</div><?php }
+     else
+	 {
+		 echo '<i>'.Yii::t('weekdays','No Class Timings').'</i>';
+        }}?>
+      
+    
+  </div>
 </div>
-</div>
-<div class="clear"></div>
-	<div style="padding:0px 0 0 0px; text-align:left">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Next Step »' : 'Save',array('class'=>'formbut')); ?>
-	</div>
 
 
-</div>-->
-</div><!-- form -->
 <?php $this->endWidget(); ?>
-<script type="text/javascript">
-	function star(){
-		var year = '';
-		var year_val = '';
-		year = document.getElementById('experience_year');
-		year_val = year.options[year.selectedIndex].value;
-		if(year_val!='' && year_val!=0){
-			//alert(year_val);
-			document.getElementById('required').style.visibility='visible';
-		}
-	}
-	function star2(){
-		var mnth = '';
-		var mnth_val = '';
-		mnth = document.getElementById('experience_month');
-		mnth_val = mnth.options[mnth.selectedIndex].value;
-		if(mnth_val!='' && mnth_val!=0){
-			//alert(year_val);
-			document.getElementById('required').style.visibility='visible';
-		}
-	}
+<script>
+function show()
+{
+	$("#success").css("display","block").animate({opacity: 1.0}, 3000).fadeOut("slow")
+}
+
 </script>
