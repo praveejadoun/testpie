@@ -1,40 +1,3 @@
-<?php 
-if(Yii::app()->controller->action->id=='create') 
-{
-         if(!empty($_REQUEST['aid'])){
-                $model = Applicants::model()->findByAttributes(array('id' => $_REQUEST['aid'])); 
-                //echo "<pre>";
-                //print_r($model);exit;
-         }
-	$config=Configurations::model()->findByPk(7);
-	$adm_no='';
-	$adm_no_1 = '';
-	if($config->config_value==1)
-	{
-           
-		$adm_no	= Students::model()->findAll(array('order' => 'id DESC','limit' => 1));
-		$adm_no_1=$adm_no[0]['id']+1;
-	}
-        //$adm_no	= Applicants::model()->findByAttributes(array('id' => $_REQUEST['aid']));
-	?>
-	<div class="captionWrapper">
-        <ul>
-            <li><h2 class="cur">Student Details</h2></li>
-            <li><h2>Parent Details</h2></li>
-            <li><h2>Emergency Contact</h2></li>
-            <li><h2>Previous Details</h2></li>
-            <li class="last"><h2>Student Profile</h2></li>
-        </ul>
-	</div>
-<?php  
-}
-else
-{
-	echo '<br><br>';
-	$adm_no	= Students::model()->findByAttributes(array('id' => $_REQUEST['id']));
-	$adm_no_1 = $adm_no->admission_no;
-}
-?>
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 'id'=>'students-form',
@@ -56,8 +19,7 @@ else
         <div class="formConInner"  style="padding:5px;">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                    <td align="right">
-                        <?php echo $form->labelEx($model,Yii::t('students','admission_no')); ?></td>
+                    <td align="right"><?php echo $form->labelEx($model,Yii::t('students','admission_no')); ?></td>
                     <td style="padding-left:8px;">
 						<?php echo $form->textField($model,'admission_no',array('size'=>20,'maxlength'=>255,'value'=>$adm_no_1,'disabled'=>true,)); 
                         echo $form->hiddenField($model,'admission_no',array('value'=>$adm_no_1)); ?>

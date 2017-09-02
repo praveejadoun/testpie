@@ -1,10 +1,10 @@
 
 
 <script language="javascript">
-function course()
+function department()
 {
-var id = document.getElementById('cou').value;
-window.location= 'index.php?r=timetable/weekdays/fulltimetable&cou='+id;	
+var id = document.getElementById('dep').value;
+window.location= 'index.php?r=timetable/teacherstimetable/index&dep='+id;	
 }
 function batch()
 {
@@ -30,7 +30,7 @@ window.location= 'index.php?r=employees/employeesSubjects/create&cou='+id_1+'&su
 
     <?php 
 
-$data = CHtml::listData(Courses::model()->findAll("is_deleted 	=:x", array(':x'=>0),array('order'=>'course_name DESC')),'id','course_name');
+$data = CHtml::listData(EmployeeDepartments::model()->findAll("status 	=:x", array(':x'=>1),array('order'=>'name DESC')),'id','name');
 if(isset($_REQUEST['cou']))
 {
 	$sel= $_REQUEST['cou'];
@@ -39,10 +39,10 @@ else
 {
 	$sel='';
 }
-echo '<div style="float:left; width:413px;"><span style="font-size:14px; font-weight:bold; color:#666;margin:0px 30px 0px 74px;">Select Course</span>&nbsp;&nbsp;&nbsp;&nbsp;';
+echo '<div style="float:left; width:413px;"><span style="font-size:14px; font-weight:bold; color:#666;margin:0px 30px 0px 74px;">Select Department</span>&nbsp;&nbsp;&nbsp;&nbsp;';
 echo CHtml::dropDownList('id','',$data,array('prompt'=>'Select','onchange'=>'course()','id'=>'cou','options'=>array($sel=>array('selected'=>true)))); 
 echo '</div><br/><br/><br/>';
-echo '<div style="float:left; width:350px;"><span style="font-size:14px; font-weight:bold; color:#666;margin:0px 42px 0px 75px;">Select Batch</span>&nbsp;&nbsp;'; ?>
+echo '<div style="float:left; width:350px;"><span style="font-size:14px; font-weight:bold; color:#666;margin:0px 42px 0px 75px;">Batch</span>&nbsp;&nbsp;'; ?>
 
 
 <?php 

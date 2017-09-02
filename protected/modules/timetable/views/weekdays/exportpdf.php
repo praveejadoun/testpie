@@ -108,6 +108,7 @@ $this->breadcrumbs=array(
         </table>
     </div>
     <!-- END Course details -->
+   
      <?php    
 	$times=Batches::model()->findAll("id=:x", array(':x'=>$_REQUEST['id']));
 	$weekdays=Weekdays::model()->findAll("batch_id=:x", array(':x'=>$_REQUEST['id']));
@@ -394,7 +395,7 @@ $this->breadcrumbs=array(
      else
 	 {
 	?>
-		
+	
    <div style="border:#CCC 1px; width:700px; padding:10px 10px; background:#E1EAEF;">
         <?php echo Yii::t('timetable','<i>No Class Timings is set for this batch</i>'); ?>
    </div>      

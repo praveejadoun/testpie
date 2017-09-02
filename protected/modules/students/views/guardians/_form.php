@@ -253,7 +253,7 @@ if(Yii::app()->user->hasFlash('errorMessage')): ?>
 		<?php //echo $form->labelEx($model,'created_at'); ?>
          <?php  if(Yii::app()->controller->action->id == 'create')
 		{
-		 echo $form->hiddenField($model,'created_at',array('value'=>date('d-m-Y')));
+		 echo $form->hiddenField($model,'created_at',array('value'=>date('Y-m-d')));
 		}
 		else
 		{
@@ -265,7 +265,7 @@ if(Yii::app()->user->hasFlash('errorMessage')): ?>
 
 	<div class="row">
 		<?php //echo $form->labelEx($model,'updated_at'); ?>
-		<?php echo $form->hiddenField($model,'updated_at',array('value'=>date('d-m-Y'))); ?>
+		<?php echo $form->hiddenField($model,'updated_at',array('value'=>date('Y-m-d'))); ?>
 		<?php echo $form->error($model,'updated_at'); ?>
 	</div>
 

@@ -649,6 +649,11 @@ class ApplicantsController extends RController {
         $model = Applicants::model()->findByAttributes(array('id' => $_GET['aid']));
         $change_status = $_GET['sid'];
         $model->saveAttributes(array('status' => $change_status));
+        //$ap=Applicants::model()->findByAttributes(array('id'=>$_GET['aid'],'status'=>2));
+        if($model->status==2)
+        {
+           $this->redirect(array('/students/students/create','aid'=>$_GET['aid'])); 
+        }
         $this->redirect(array('/students/applicants/manage'));
         }else{
             //Message here

@@ -877,7 +877,7 @@ $this->breadcrumbs = array(
 
                                             <td>
                                                 
-                                                <select name="Applicants[status]" class="Applicants_status" rel="<?php echo $list_1->id ?>">
+                                                <select name="Applicants[status]" class="Applicants_status" rel="<?php echo $list_1->id ?>"<?php echo ($list_1->status==2)?' disabled="true"':''?>>
                                                     <option value="1"<?php echo ($list_1->status==1)?' selected="selected"':''?>>Pending</option>
                                                     <option value="2"<?php echo ($list_1->status==2)?' selected="selected"':''?>>Approved</option>
                                                     <option value="3"<?php echo ($list_1->status==3)?' selected="selected"':''?>>Rejected</option>
@@ -972,10 +972,12 @@ $this->breadcrumbs = array(
     });
 
     $('.Applicants_status').change(function () {
-        if (confirm("Are you sure you want to change the status?"))
-        {
+        
             sid = $(this).val();
             aid = $(this).attr('rel');
+            const msg = (sid==2)?'ghgfds':'Are you sure you want to change the status?';
+        if (confirm(msg))
+        {
             self.location = "index.php?r=students/applicants/changestatus&aid=" +aid+"&sid="+sid;
         }
     })

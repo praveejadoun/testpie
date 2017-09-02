@@ -25,7 +25,7 @@ class StudentsController extends RController {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'manage', 'Website', 'savesearch', 'events', 'attentance', 'Assesments', 'DisplaySavedImage', 'Fees', 'Payfees', 'Pdf', 'Printpdf', 'Remove', 'Search', 'inactive', 'active', 'deletes','Managepdf'),
+                'actions' => array('index', 'view', 'manage', 'Website', 'savesearch', 'events', 'attentance', 'Assesments', 'DisplaySavedImage', 'Fees', 'Payfees', 'Pdf', 'Printpdf', 'Remove', 'Search', 'inactive', 'active', 'deletes','Managepdf','create1'),
                 'users' => array('@'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -117,8 +117,10 @@ class StudentsController extends RController {
         // $this->performAjaxValidation($model);
         //echo "<pre>";
 //print_r($_POST['Students']);exit;
+             
         if (isset($_POST['Students'])) {
-
+            
+            
             $model->attributes = $_POST['Students'];
             $list = $_POST['Students'];
             if ($model->admission_date)
@@ -229,6 +231,8 @@ class StudentsController extends RController {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
+        //echo "<pre>";
+        //print_r($model->first_name);exit;
         $settings = UserSettings::model()->findByAttributes(array('user_id' => Yii::app()->user->id));
         if ($settings != NULL) {
             $date1 = date($settings->displaydate, strtotime($model->admission_date));
@@ -574,6 +578,12 @@ class StudentsController extends RController {
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
     }
+     public function loadModel1($aid) {
+        $model = Applicants::model()->findByPk($aid);
+        if ($model === null)
+            throw new CHttpException(404, 'The requested page does not exist.');
+        return $model;
+    }
 
     public function actionSearch() {
 
@@ -748,6 +758,19 @@ class StudentsController extends RController {
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
+        public function actioncreate_1($aid)
+        {
+            $model = $this->loadModel1($aid);
+            $model = new students;
+            if(isset($_REQUEST['aid']))
+            {
+              $app=applicants::model()->findByAttributes(array('id'=>$_REQUEST['aid'])); 
+              //$this->redirect(array('create_1'));
+            }
+            $this->render('create_1', array(
+            'model' => $model,
+        ));
+        }
        
 
 }

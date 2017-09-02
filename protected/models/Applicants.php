@@ -8,10 +8,12 @@
  * @property string $registration_no
  * @property string $class_roll_no
  * @property string $registration_date
+ * @property string $admission_date
  * @property string $first_name
  * @property string $middle_name
  * @property string $last_name
  * @property integer $course_id
+ * @property integer $batch_id
  * @property string $date_of_birth
  * @property string $gender
  * @property string $blood_group
@@ -83,7 +85,7 @@ class Applicants extends CActiveRecord
 			array('registration_no','unique'),
 			array('email','check'),
 			array('registration_no, class_roll_no, first_name, middle_name, last_name, gender, blood_group, birth_place, language, religion, address_line1, address_line2, city, state, email, photo_file_name, photo_content_type, status_description,academic_year,status', 'length', 'max'=>255),
-			array('registration_date, date_of_birth, created_at, updated_at', 'safe'),			
+			array('registration_date,admission_date,batch_id,date_of_birth, created_at, updated_at', 'safe'),			
 			array('email','email'),
 			array(
 				'date_of_birth',
@@ -135,10 +137,12 @@ class Applicants extends CActiveRecord
 			'registration_no' => 'Registration No',
 			'class_roll_no' => 'Class Roll No',
 			'registration_date' => 'Registration Date',
+                        'admission_date' => 'Admission Date',
 			'first_name' => 'First Name',
 			'middle_name' => 'Middle Name',
 			'last_name' => 'Last Name',
-			'course_id' => 'Batch',
+			'course_id' => 'Course',
+                        'batch_id'=>'Batch',
 			'date_of_birth' => 'Date Of Birth',
 			'gender' => 'Gender',
 			'blood_group' => 'Blood Group',
