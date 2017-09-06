@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Timetable'=>array('default/index'),
+	'Timetable'=>array('/timetable'),
 	'Weekdays',
 );
 
@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="247" valign="top">
-     <?php $this->renderPartial('/weekdays/left_side');?>
+     <?php $this->renderPartial('left_side');?>
     
     </td>
     <td valign="top">

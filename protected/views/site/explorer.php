@@ -202,7 +202,7 @@ $('#user_div a').live('click', function(event){
 
         </ul>
         </div>
-        <div class="sd_left_comm_logo"></div>
+        
     </div>
     <div class="sd_right">
     	<!-- Coda Sliders-->

@@ -27,7 +27,7 @@ class WeekdaysController extends RController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','Timetable','Addnew','Publish','Exportpdf','pdf'),
+				'actions'=>array('index','view','Timetable','Addnew','Publish','Exportpdf','pdf','default'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -168,6 +168,52 @@ class WeekdaysController extends RController
 			
 		}
 		$this->render('index',array(
+			'model'=>$model,
+		));
+	}
+        public function actionDefault()
+	{
+		/*$dataProvider=new CActiveDataProvider('Weekdays');
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+		));*/
+		$model=new Weekdays;
+		if(isset($_POST['Weekdays']))
+		{
+	
+			$weekdays = array('sunday','monday','tuesday','wednesday','thursday','friday','saturday');
+			if((isset($_REQUEST['id']) and $_REQUEST['id']=='NULL') or !isset($_REQUEST['id']))
+			$batch = $model->findAll("batch_id IS NULL");
+			else
+			$batch = $model->findAll("batch_id=:x", array(':x'=>$_REQUEST['id']));
+			foreach ($batch as $child)
+				{
+					$child->delete();
+				}
+			$i=0;
+			for($j=0;$j<count($_POST['Weekdays']);$j++)
+			{
+				$weekday = new Weekdays;
+				
+				if((isset($_REQUEST['id']) and $_REQUEST['id']=='NULL') or !isset($_REQUEST['id']))
+				{
+					$weekday->weekday = $_POST['Weekdays'][$weekdays[$i]];
+					$weekday->save();
+				
+				}
+				else
+				{
+					$weekday->weekday = $_POST['Weekdays'][$weekdays[$i]];
+					$weekday->batch_id = $_REQUEST['id'];
+					$weekday->save();
+				
+				}
+				$i++;
+			}
+			 Yii::app()->user->setFlash('notification','Data Saved');
+			
+		}
+		$this->render('default',array(
 			'model'=>$model,
 		));
 	}

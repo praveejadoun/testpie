@@ -14,64 +14,109 @@
                 <input type="button" class="sbut" name="">
                 <div class="clear"></div>
   </div>-->    <h1><?php echo Yii::t('room','VIEW TIMETABLE');?></h1>   
-                <?php
-			function t($message, $category = 'cms', $params = array(), $source = null, $language = null) 
-{
-    return $message;
-}
+               <ul>
+		            <li>
+                              
+                                 <?php
+			
+                                    $rurl = explode('index.php?r=',Yii::app()->request->getUrl());
+                                    $rurl = explode('&id=',$rurl[1]); 
+                                    echo CHtml::ajaxLink('View Timetable<span>View Batch wise Timetable</span>',array('/site/explorer','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'lbook_ico')); ?>
+                             
+                                <?php if(Yii::app()->controller->action->id=='fulltimetable'){?>
+                                 <li class="list_active">       <?php echo CHtml::link('View full timetable<span>View Full Timetable</span>',array('weekdays/fulltimetable'),array('class'=>'sl_ico')); ?>
+                            </li> 
+                                <?php } else { ?>
+                            <li>       <?php echo CHtml::link('View full timetable<span>View Full Timetable</span>',array('weekdays/fulltimetable'),array('class'=>'sl_ico')); ?>
+                            </li> 
+                                <?php } ?>
+                            <?php if(Yii::app()->controller->action->id=='index' and Yii::app()->controller->id=='teacherstimetable'){?>
+                            <li class="list_active">    <?php echo CHtml::link('View Teachers timetable<span>View Teacher Wise Timetable</span>',array('teacherstimetable/index'),array('class'=>'sl_ico')); ?>
+                            </li>
+                          <?php } else { ?>
+                            <li>    <?php echo CHtml::link('View Teachers timetable<span>View Teacher Wise Timetable</span>',array('teacherstimetable/index'),array('class'=>'sl_ico')); ?>
+                            </li>
+                          <?php } ?>
+			            
+        <h1>Manage Timetable</h1>
+                
+       
+                        <li> <?php
+			if(!empty($_REQUEST['id'])){
+                            if(Yii::app()->controller->action->id=='timetable'){?>
+                            
+                <li class="list_active">
+                      <?php echo CHtml::link('Set Timetable<span>Timetable for the batch</span>',array('/timetable/weekdays/timetable','id'=>$_REQUEST['id']),array('class'=>'sl_ico')); ?>
 
-			$this->widget('zii.widgets.CMenu',array(
-			'encodeLabel'=>false,
-			'activateItems'=>true,
-			'activeCssClass'=>'list_active',
-			'items'=>array(
-					array('label'=>''.Yii::t('tiimetable','View Timetable').'<span>'.Yii::t('hostel','View Batch Wise Timetable').'</span>', 'url'=>array('type/manage') ,'linkOptions'=>array('class'=>'lbook_ico'),
-                                   'active'=> (Yii::app()->controller->id=='type' and (Yii::app()->controller->action->id=='manage') ? true : false),
-					    ),  
-						                
-					array('label'=>''.Yii::t('timetable','View Full Timetable').'<span>'.Yii::t('timetable','View Full Timetable').'</span>',  'url'=>array('weekdays/fulltimetable'),'linkOptions'=>array('class'=>'sl_ico' ),'active'=> (Yii::app()->controller->id=='weekdays' and (Yii::app()->controller->action->id=='fulltimetable')), 'itemOptions'=>array('id'=>'menu_1') 
-					       ),
-                                        array('label'=>''.Yii::t('timetable','View Teachers Timetable').'<span>'.Yii::t('timetable','View Teacher Wise Timetable').'</span>',  'url'=>array('teacherstimetable/index'),'linkOptions'=>array('class'=>'sl_ico' ),'active'=> (Yii::app()->controller->id=='teacherstimetable' and (Yii::app()->controller->action->id=='index') ? true : false), 'itemOptions'=>array('id'=>'menu_1') 
-					       ),
-                                        array(CHtml::ajaxLink('Select Batch',array('/site/explorer','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'sb_but'))),
-                                       
-                            
-                            
-						   array('label'=>''.'<h1>'.Yii::t('timetable','MANAGE TIMETABLE').'</h1>'), 
-                                      
-						array('label'=>Yii::t('timetable','Set Timetable').'<span>'.Yii::t('timetable','Timetable For The Batch').'</span>', 'url'=>array('weekdays/timetable','id'=>$_REQUEST['id']),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->action->id=='timetable' and (Yii::app()->controller->action->id!='fulltimetable')? true : false), 'itemOptions'=>array('id'=>'menu_1')
-                                                    ),
-		  				array('label'=>Yii::t('timetable','Set Weekdays').'<span>'.Yii::t('timetable','Weekdays For The Batch').'</span>', 'url'=>array('weekdays/','id'=>$_REQUEST['id']),'linkOptions'=>array('class'=>'abook_ico'),'active'=>(Yii::app()->controller->id=='weekdays' and (Yii::app()->controller->action->id=='index' )), 'itemOptions'=>array('id'=>'menu_1')
-                                                     ),
-                                                array('label'=>Yii::t('timetable','Set Class Timing').'<span>'.Yii::t('timetable','Class Timing For The Batch').'</span>', 'url'=>array('classTiming/','id'=>$_REQUEST['id']),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->id=='classTiming' and (Yii::app()->controller->action->id=='index' )), 'itemOptions'=>array('id'=>'menu_1')
-                                                    ),
-                                                array('label'=>Yii::t('timetable','Set Default Weekdays').'<span>'.Yii::t('timetable','Default Weekdays For The Institution').'</span>', 'url'=>array('weekdays/'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->id=='weekdays' and (Yii::app()->controller->action->id=='index')), 'itemOptions'=>array('id'=>'menu_1')
-                                                    ),
-                            
-						 
-					
-					
-				),
-			)); ?>
+                </li>
+                            <?php } else { ?>
+                <li class="">
+                      <?php echo CHtml::link('Set Timetable<span>Timetable for the batch</span>',array('/timetable/weekdays/timetable','id'=>$_REQUEST['id']),array('class'=>'sl_ico')); ?>
+
+                </li>
+                            <?php } ?>
+			
+                <li>     <?php  }else{
+                    $rurl = explode('index.php?r=',Yii::app()->request->getUrl());
+                       
+			$rurl = explode('&id=',$rurl[1]); 
+                        echo CHtml::ajaxLink('Set Timetable<span>Timetable for the batch</span>',array('/site/explorer','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'abook_ico')); 
+                }
+                    ?>
+                </li>
+               <li>  
+                    <?php if(!empty($_REQUEST['id'])){
+                        if(Yii::app()->controller->action->id=='index' and Yii::app()->controller->id=='weekdays'){?>
+                    <li class="list_active">
+                      <?php echo CHtml::link('Set Weekdays<span>Weekdays for the batch</span>',array('weekdays/','id'=>$_REQUEST['id']),array('class'=>'sl_ico')); ?>
+
+                </li>
+                        <?php } else { ?>
+                 <li class="">
+                      <?php echo CHtml::link('Set Weekdays<span>Weekdays for the batch</span>',array('weekdays/','id'=>$_REQUEST['id']),array('class'=>'sl_ico')); ?>
+
+                </li>
+                        <?php } ?>
+                
+                <li>    <?php
+                    }else{
+			$rurl = explode('index.php?r=',Yii::app()->request->getUrl());
+                       
+			$rurl = explode('&id=',$rurl[1]); 
+                    echo CHtml::ajaxLink('Set Weekdays<span>Weekdays for the batch</span>',array('/site/explorer','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'abook_ico'));} ?>
+                  
+                </li></li>
+               <li>
+               <?php if(!empty($_REQUEST['id'])){
+                   if(Yii::app()->controller->action->id=='index' and Yii::app()->controller->id=='classtiming'){
+               
+                ?>
+                <li class="list_active">
+                      <?php echo CHtml::link('Set Class Timing<span>Class Timing for the batch</span>',array('classtiming/','id'=>$_REQUEST['id']),array('class'=>'sl_ico')); ?>
+
+                </li>
+                   <?php } else { ?>
+                 <li class="">
+                      <?php echo CHtml::link('Set Class Timing<span>Class Timing for the batch</span>',array('classtiming/','id'=>$_REQUEST['id']),array('class'=>'sl_ico')); ?>
+
+                </li>
+                   <?php } ?> 
+               <?php } else { ?>
+                <li>   <?php
+			
+			$rurl = explode('index.php?r=',Yii::app()->request->getUrl());
+                       
+			$rurl = explode('&id=',$rurl[1]); 
+               echo CHtml::ajaxLink('Set Class Timing<span>Class Timing For The Batch</span>',array('/site/explorer','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'abook_ico')); }?>
+                </li></li>  
+              <?php if(Yii::app()->controller->action->id=='default' and Yii::app()->controller->id=='weekdays' ){?>
+               <li class="list_active">           <?php echo CHtml::link('Set Default Weekdays<span>Default Weekdays For The Institution</span>',array('/timetable/weekdays/default'),array('class'=>'set_dw_ico'));?>
+                </li>
+              <?php } else {?>
+                <li class="">           <?php echo CHtml::link('Set Default Weekdays<span>Default Weekdays For The Institution</span>',array('/timetable/weekdays/default'),array('class'=>'set_dw_ico'));?>
+                </li>
+              <?php } ?>
+                </ul>
 		
 		</div>
-        <script type="text/javascript">
-
-	$(document).ready(function () {
-            //Hide the second level menu
-            $('#othleft-sidebar ul li ul').hide();            
-            //Show the second level menu if an item inside it active
-            $('li.list_active').parent("ul").show();
-            
-            $('#othleft-sidebar').children('ul').children('li').children('a').click(function () {                    
-                
-                 if($(this).parent().children('ul').length>0){                  
-                    $(this).parent().children('ul').toggle();    
-                 }
-                 
-            });
-          
-            
-        });
-
-    </script>
+        

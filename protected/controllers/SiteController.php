@@ -165,6 +165,13 @@ class SiteController extends RController
 			 $this->renderPartial('explorer_1',array(),false,true);
 		 }
 	}
+         public function actionExplorer_2()
+	{
+		if(Yii::app()->request->isAjaxRequest)
+		 {
+			 $this->renderPartial('explorer_2',array(),false,true);
+		 }
+	}
 	public function actionManage()
 	 {
 		 if(Yii::app()->request->isAjaxRequest)

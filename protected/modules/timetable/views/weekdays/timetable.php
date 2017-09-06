@@ -7,8 +7,8 @@ window.location = "index.php?r=weekdays/timetable&id="+id;
 </script>-->
 <?php
 $this->breadcrumbs=array(
-	'Weekdays'=>array('index'),
-	'TimeTable',
+	'Timetable'=>array('/timetable'),
+	'Weekdays',
 );
 ?>
 

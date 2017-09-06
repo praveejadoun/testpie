@@ -2,7 +2,7 @@
 
 <?php
  $this->breadcrumbs=array(
-	 'Hostel','Dashboard'
+	 'Timetable'
 );
 ?>
 
@@ -46,12 +46,12 @@
             <div class="status_box">
            		 <div class="sb_icon"></div>
            		 No Course / Batch Selected                 
-                         <a <?php
+                         <a> <?php
 			
 			$rurl = explode('index.php?r=',Yii::app()->request->getUrl());
                        
 			$rurl = explode('&id=',$rurl[1]); 
-                        echo CHtml::ajaxLink('Select Batch',array('/site/explorer_1','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'sb_but')); ?>></a>
+                        echo CHtml::ajaxLink('Select Batch',array('/site/explorer_1','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'sb_but')); ?></a>
            
             </div>
             <div class="edit_bttns" style="width:175px; top:15px;">

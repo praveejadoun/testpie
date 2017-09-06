@@ -80,9 +80,9 @@ $(document).click(function() {
           
 	<div class="c_batch_tbar" style="padding:0px; margin:0px;width:710px;">
    
-    	<div class="cb_left" >
+    	<div class="cb_left" style="width:710px;" >
         	<ul>
-                    <li><strong>Course :</strong> <?php echo $coursename; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <li style="padding:10px 10px;"><strong>Course :</strong> <?php echo $coursename; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <strong>Batch :</strong> <?php echo $batchname; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <strong><?php echo Yii::t('Batch','Class Teacher : '); ?></strong> <?php $employee=Employees::model()->findByAttributes(array('id'=>$batch->employee_id));
 		    if($employee!=NULL)

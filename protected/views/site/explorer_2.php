@@ -202,7 +202,7 @@ $('#user_div a').live('click', function(event){
 
         </ul>
         </div>
-    
+        
     </div>
     <div class="sd_right">
     	<!-- Coda Sliders-->
@@ -279,7 +279,7 @@ $('#user_div a').live('click', function(event){
 		{ ?>
 		<div class="panel">
         
-        <?php  $this->renderPartial('batch_panel_1',array()) ; ?>
+        <?php  $this->renderPartial('batch_panel_3',array()) ; ?>
 			
 		</div>
         <?php } ?>

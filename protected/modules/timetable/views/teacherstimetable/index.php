@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Timetable'=>array('default/index'),
-	'Weekdays',
+	'Timetable'=>array('/timetable'),
+	'Teachers Timetable',
 );
 
 

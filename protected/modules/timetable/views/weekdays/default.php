@@ -1,3 +1,11 @@
+<?php
+$this->breadcrumbs=array(
+        'Timetable'=>array('/timetable'),
+	'System Default Weekdays',
+);
+?>
+
+
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="247" valign="top">
@@ -43,7 +51,7 @@
 <div class="formCon">
 
 <div class="formConInner" style="padding-top:10px; font-size:14px; font-weight:bold;">
-<h3>Week Days</h3>
+<h3>System Default Week Days</h3>
 <?php
     Yii::app()->clientScript->registerScript(
        'myHideEffect',

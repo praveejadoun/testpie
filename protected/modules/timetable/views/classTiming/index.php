@@ -12,6 +12,7 @@
  */
 ?><?php
  $this->breadcrumbs=array(
+         'Timetable'=>array('/timetable'),
 	 'Manage Class Timings'
 );
 ?>

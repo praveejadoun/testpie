@@ -111,7 +111,7 @@ function rowdelete(id)
                     }
 					else
 					{
-					echo '<td style="text-align:left; padding-left:10px; font-weight:bold;">'.CHtml::link($batch_1->name, array('courses/batches/batchstudents','id'=>$batch_1->id)).'</td>';
+					echo '<td style="text-align:left; padding-left:10px; font-weight:bold;">'.CHtml::link($batch_1->name, array('timetable/weekdays/timetable','id'=>$batch_1->id)).'</td>';
 					
 						
 					}
