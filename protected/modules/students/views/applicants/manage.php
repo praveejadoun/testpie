@@ -886,7 +886,7 @@ $this->breadcrumbs = array(
                                             </td>
                                          
                                       <td>
-                                                <a href="index.php?r=students/applicants/update&id=<?php //echo $list_1->id ?>">Edit</a>
+                                                <a href="index.php?r=students/applicants/update&id=<?php echo $list_1->id ?>">Edit</a>
                                                 <a rel="<?php //echo $list_1->id ?>" href="javascript:void(0)" class="deleteStudent">Delete</a>
                                             </td>
                                         </tr>
@@ -975,7 +975,7 @@ $this->breadcrumbs = array(
         
             sid = $(this).val();
             aid = $(this).attr('rel');
-            const msg = (sid==2)?'ghgfds':'Are you sure you want to change the status?';
+            const msg = (sid==2)?'Approved Application Cannot Be Revarted Back . Are You Sure ?':'Are you sure you want to change the status?';
         if (confirm(msg))
         {
             self.location = "index.php?r=students/applicants/changestatus&aid=" +aid+"&sid="+sid;

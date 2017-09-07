@@ -120,209 +120,264 @@ if(count($employee)!=0)
       <?php
  
 	if(isset($_REQUEST['tea']) and $_REQUEST['tea']!=NULL)
-	{ ?>
+	{  
+        $weekday= TimetableEntries::model()->findAll('employee_id=:x',array(':x'=>$_REQUEST['tea']));
+        ?>
         <div class="pdtab_Con" style="text-align:center">
-       <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-bordered mb30">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-bordered mb30">
                     <tbody>
-                        <?php 
-                               $weekday= TimetableEntries::model()->findAll('employee_id=:x',array(':x'=>$_REQUEST['tea']));?>
-                               
-                    	                       			  <tr>
-                                    	<td colspan="4">
-											<strong>SUNDAY</strong>                                 		</td>
-                                     </tr>
-                            <tr class="pdtab-h">
-                                      
-                                        <td style="text-align:center"><strong>Class Timing</strong></td>
-                                        <td style="text-align:center"><strong>Course</strong></td>
-                                        <td align="center"><strong>Batch Name</strong></td>
-                                        <td align="center"><strong>Subject</strong></td>
-                                        
-                         	</tr>
-                        
-                                 <?php
-                                foreach($weekday as $weekday_1){
-                                 $classtiming= ClassTimings::model()->findAll('id=:x',array(':x'=>$weekday_1->class_timing_id));
-                                 if($weekday_1->weekday_id==1){?>
-                                   ech
-                                 <tr id="timetablerow4">
-                                     <td style="text-align:center;"><?php echo $classtiming->start_time; ?></td>
-                                     <td>Science/Engineering</td>
-                                     <td>Electrical Engineering</td>
-                                     <td><?php echo $weekday_1->subject_id; ?></td>
-                                 </tr>
-                               <?php }  else { ?>
-                                  
-                                 <tr><td colspan="4"><i>No Timetable is set for this Teacher!</i></td></tr> 
-                                <?php } }?>
-                                 <tr>
-                                    	<td colspan="4">
-											<strong>MONDAY</strong>                                 		</td>
-                                     </tr>
-                            <tr class="pdtab-h">
-                                      
-                                        <td style="text-align:center"><strong>Class Timing</strong></td>
-                                        <td style="text-align:center"><strong>Course</strong></td>
-                                        <td align="center"><strong>Batch Name</strong></td>
-                                        <td align="center"><strong>Subject</strong></td>
-                                        
-                         	</tr>
-                        
-                                 
-                                 <?php
-                                $weekday1= TimetableEntries::model()->findAll('employee_id=:x',array(':x'=>$_REQUEST['tea']));
-                                  foreach($weekday1 as $weekday1_1){
-                                 $batch1 = Batches::model()->findAll('id=:x',array(':x'=>$weekday1_1->batch_id));
-                                 $subject1= Subjects::model()->findAll('id=:x',array(':x'=>$weekday1_1->subject_id));
-                                $classtiming1= ClassTimings::model()->findAll('id=:x',array(':x'=>$weekday1_1->class_timing_id));
-
-                                 if($weekday1_1->weekday_id==2){?>	
-                                  
-                                 <tr id="timetablerow4">
-                                     <td style="text-align:center;"><?php foreach($classtiming1 as $classtiming1_1){ echo $classtiming1_1->start_time.'-' .$classtiming1_1->end_time;} ?></td>
-                                     <td>Science/Engineering</td>
-                                     <td><?php foreach($batch1 as $batch1_1){ echo $batch1_1->name;} ?></td>
-                                     <td><?php foreach($subject1 as $subject1_1){ echo $subject1_1->name;}?></td>
-                                 </tr>
-                                     <?php }else {?>
-                                  <tr><td colspan="4"><i>No Timetable is set for this Teacher!</i></td></tr> 
-                                  <?php }} ?>
-                                  <tr>
-                                    	<td colspan="4">
-											<strong>TUESDAY</strong>                                 		</td>
-                                     </tr>
-                            <tr class="pdtab-h">
-                                      
-                                        <td style="text-align:center"><strong>Class Timing</strong></td>
-                                        <td style="text-align:center"><strong>Course</strong></td>
-                                        <td align="center"><strong>Batch Name</strong></td>
-                                        <td align="center"><strong>Subject</strong></td>
-                                        
-                         	</tr>
-                         <?php
-                                $weekday2= TimetableEntries::model()->findAll('employee_id=:x',array(':x'=>$_REQUEST['tea']));
-                                  foreach($weekday2 as $weekday2_1){
-                                 $batch2 = Batches::model()->findAll('id=:x',array(':x'=>$weekday2_1->batch_id));
-                                 $subject2= Subjects::model()->findAll('id=:x',array(':x'=>$weekday2_1->subject_id));
-                                $classtiming2= ClassTimings::model()->findAll('id=:x',array(':x'=>$weekday2_1->class_timing_id));
-                              
-                                 if($weekday2_1->weekday_id==3){ ?>
-                                 <tr id="timetablerow4">
-                                     <td style="text-align:center;"><?php foreach($classtiming2 as $classtiming2_1){ echo $classtiming2_1->start_time.'-' .$classtiming2_1->end_time;} ?></td>
-                                     <td>Science/Engineering</td>
-                                     <td><?php foreach($batch2 as $batch2_1){ echo $batch2_1->name;} ?></td>
-                                     <td><?php foreach($subject2 as $subject2_1){ echo $subject2_1->name;}?></td>
-                                 </tr>
-                                     <?php }else {?>
-                                  <tr><td colspan="4"><i>No Timetable is set for this Teacher!</i></td></tr> 
-                                  <?php }} ?>
-                                 
-                                 	
-                                <tr>
-                                    	<td colspan="4">
-											<strong>WEDNESDAY</strong>                                 		</td>
-                                     </tr>
-                            <tr class="pdtab-h">
-                                      
-                                        <td style="text-align:center"><strong>Class Timing</strong></td>
-                                        <td style="text-align:center"><strong>Course</strong></td>
-                                        <td align="center"><strong>Batch Name</strong></td>
-                                        <td align="center"><strong>Subject</strong></td>
-                                        
-                         	</tr>
-                         <?php
-                                $weekday3= TimetableEntries::model()->findAll('employee_id=:x',array(':x'=>$_REQUEST['tea']));
-                                  foreach($weekday3 as $weekday3_1){
-                                 $batch3 = Batches::model()->findAll('id=:x',array(':x'=>$weekday3_1->batch_id));
-                                 $subject3= Subjects::model()->findAll('id=:x',array(':x'=>$weekday3_1->subject_id));
-                                $classtiming3= ClassTimings::model()->findAll('id=:x',array(':x'=>$weekday3_1->class_timing_id));
-
-                                 if($weekday3_1->weekday_id==4){?>	
-                                  
-                                 <tr id="timetablerow4">
-                                     <td style="text-align:center;"><?php foreach($classtiming3 as $classtiming3_1){ echo $classtiming3_1->start_time.'-' .$classtiming3_1->end_time;} ?></td>
-                                     <td>Science/Engineering</td>
-                                     <td><?php foreach($batch3 as $batch3_1){ echo $batch3_1->name;} ?></td>
-                                     <td><?php foreach($subject3 as $subject3_1){ echo $subject3_1->name;}?></td>
-                                 </tr>
-                                     <?php }else {?>
-                                  <tr><td colspan="4"><i>No Timetable is set for this Teacher!</i></td></tr> 
-                                  <?php }} ?>
-                                 
-                                 	
-                                    <tr>
-                                    	<td colspan="4">
-											<strong>THURSDAY</strong>                                 		</td>
-                                     </tr>
-                            <tr class="pdtab-h">
-                                      
-                                        <td style="text-align:center"><strong>Class Timing</strong></td>
-                                        <td style="text-align:center"><strong>Course</strong></td>
-                                        <td align="center"><strong>Batch Name</strong></td>
-                                        <td align="center"><strong>Subject</strong></td>
-                                        
-                         	</tr>
-                        
-                                  <?php
-                                $weekday4= TimetableEntries::model()->findAll('employee_id=:x',array(':x'=>$_REQUEST['tea']));
-                                  foreach($weekday4 as $weekday4_1){
-                                 $batch4 = Batches::model()->findAll('id=:x',array(':x'=>$weekday4_1->batch_id));
-                                 $subject4= Subjects::model()->findAll('id=:x',array(':x'=>$weekday4_1->subject_id));
-                                $classtiming4= ClassTimings::model()->findAll('id=:x',array(':x'=>$weekday4_1->class_timing_id));
-
-                                 if($weekday4_1->weekday_id==5){?>	
-                                  
-                                 <tr id="timetablerow4">
-                                     <td style="text-align:center;"><?php foreach($classtiming4 as $classtiming4_1){ echo $classtiming4_1->start_time.'-' .$classtiming4_1->end_time;} ?></td>
-                                     <td>Science/Engineering</td>
-                                     <td><?php foreach($batch4 as $batch4_1){ echo $batch4_1->name;} ?></td>
-                                     <td><?php foreach($subject4 as $subject4_1){ echo $subject4_1->name;}?></td>
-                                 </tr>
-                                     <?php }else {?>
-                                  <tr><td colspan="4"><i>No Timetable is set for this Teacher!</i></td></tr> 
-                                  <?php }} ?>
-                                 	
-                                <tr>
-                                    	<td colspan="4">
-											<strong>FRIDAY</strong>                                 		</td>
-                                     </tr>
-                            <tr class="pdtab-h">
-                                      
-                                        <td style="text-align:center"><strong>Class Timing</strong></td>
-                                        <td style="text-align:center"><strong>Course</strong></td>
-                                        <td align="center"><strong>Batch Name</strong></td>
-                                        <td align="center"><strong>Subject</strong></td>
-                                        
-                         	</tr>
-                         <?php
-                                $weekday5= TimetableEntries::model()->findAll('employee_id=:x',array(':x'=>$_REQUEST['tea']));
-                                  foreach($weekday5 as $weekday5_1){
-                                 $batch5 = Batches::model()->findAll('id=:x',array(':x'=>$weekday5_1->batch_id));
-                                 $subject5= Subjects::model()->findAll('id=:x',array(':x'=>$weekday5_1->subject_id));
-                                $classtiming5= ClassTimings::model()->findAll('id=:x',array(':x'=>$weekday5_1->class_timing_id));
-
-                                 if($weekday5_1->weekday_id==6){?>	
-                                  
-                                 <tr id="timetablerow4">
-                                     <td style="text-align:center;"><?php foreach($classtiming5 as $classtiming5_1){ echo $classtiming5_1->start_time.'-' .$classtiming5_1->end_time;} ?></td>
-                                     <td>Science/Engineering</td>
-                                     <td><?php foreach($batch5 as $batch5_1){ echo $batch5_1->name;} ?></td>
-                                     <td><?php foreach($subject5 as $subject5_1){ echo $subject2_1->name;}?></td>
-                                 </tr>
-                                     <?php }else {?>
-                                  <tr><td colspan="4"><i>No Timetable is set for this Teacher!</i></td></tr> 
-                                  <?php }} ?>
-                                 
-                                 	
-                                  
-                                                    
+                        <!-- Sunday Start-->
+                        <tr>
+                            <td colspan="4">
+                                <strong>Sunday</strong>
+                            </td>
+                        </tr>
                       
-                               
-                             
-					</tbody>
-				</table>                                            
-      	
-	</div>
+                        <tr class="pdtab-h">
+                            <td style="text-align:center;">ClassTiming</td>
+                            <td style="text-align:center;">Course</td>
+                            <td style="text-align:center;">Batch Name</td>
+                            <td style="text-align:center;">Subject</td>
+                        </tr>
+                         <?php 
+                        foreach($weekday as $weekday_1){
+                        $classtiming= ClassTimings::model()->findAll('id=:x',array(':x'=>$weekday_1->class_timing_id));
+                        $batch=Batches::model()->findAll('id=:x',array(':x'=>$weekday_1->batch_id));
+                        $subject=Subjects::model()->findAll('id=:x',array(':x'=>$weekday_1->subject_id));
+                        foreach($classtiming as $classtiming_1){
+                            if($weekday_1->weekday_id==1){
+                                echo '<tr>';
+                                echo '<td>'.$classtiming_1->start_time.'-'.$classtiming_1->end_time.'</td>';
+                                foreach($batch as $batch_1){
+                                echo '<td>'.$batch_1->name.'</td>';
+                                 $course=Courses::model()->findAll('id=:x',array(':x'=>$batch_1->course_id));
+                                 foreach($course as $course_1){
+                                echo '<td>'.$course_1->course_name.'</td>';
+                                foreach($subject as $subject_1){
+                                echo '<td>'.$subject_1->name.'</td>';    
+                                echo '</tr>';
+                                
+                            }}}}
+                           
+                        }} ?>
+                       
+                      
+                        <!-- Sunday End -->
+                        
+                        <!-- Monday Start -->
+                         <tr>
+                            <td colspan="4">
+                                <strong>Monday</strong>
+                            </td>
+                        </tr>
+                        <tr class="pdtab-h">
+                            <td style="text-align:center;">ClassTiming</td>
+                            <td style="text-align:center;">Batch Name</td>
+                            <td style="text-align:center;">Course</td>
+                            <td style="text-align:center;">Subject</td>
+                        </tr>
+                        <?php 
+                        foreach($weekday as $weekday_1){
+                        $classtiming= ClassTimings::model()->findAll('id=:x',array(':x'=>$weekday_1->class_timing_id));
+                        $batch=Batches::model()->findAll('id=:x',array(':x'=>$weekday_1->batch_id));
+                        $subject=Subjects::model()->findAll('id=:x',array(':x'=>$weekday_1->subject_id));
+                        foreach($classtiming as $classtiming_1){
+                            if($weekday_1->weekday_id==2){
+                                echo '<tr>';
+                                echo '<td>'.$classtiming_1->start_time.'-'.$classtiming_1->end_time.'</td>';
+                                foreach($batch as $batch_1){
+                                echo '<td>'.$batch_1->name.'</td>';
+                                 $course=Courses::model()->findAll('id=:x',array(':x'=>$batch_1->course_id));
+                                 foreach($course as $course_1){
+                                echo '<td>'.$course_1->course_name.'</td>';
+                                foreach($subject as $subject_1){
+                                echo '<td>'.$subject_1->name.'</td>';    
+                                echo '</tr>';
+                                
+                            }}}}
+                           
+                        }} ?>
+                      
+                        <!-- Monday End-->
+                        
+                        <!-- Tuesday Start-->
+                         <tr>
+                            <td colspan="4">
+                                <strong>Tuesday</strong>
+                            </td>
+                        </tr>
+                        <tr class="pdtab-h">
+                            <td style="text-align:center;">ClassTiming</td>
+                            <td style="text-align:center;">Course</td>
+                            <td style="text-align:center;">Batch Name</td>
+                            <td style="text-align:center;">Subject</td>
+                        </tr>
+                         <?php 
+                        foreach($weekday as $weekday_1){
+                        $classtiming= ClassTimings::model()->findAll('id=:x',array(':x'=>$weekday_1->class_timing_id));
+                        $batch=Batches::model()->findAll('id=:x',array(':x'=>$weekday_1->batch_id));
+                        $subject=Subjects::model()->findAll('id=:x',array(':x'=>$weekday_1->subject_id));
+                        foreach($classtiming as $classtiming_1){
+                            if($weekday_1->weekday_id==3){
+                                echo '<tr>';
+                                echo '<td>'.$classtiming_1->start_time.'-'.$classtiming_1->end_time.'</td>';
+                                foreach($batch as $batch_1){
+                                echo '<td>'.$batch_1->name.'</td>';
+                                 $course=Courses::model()->findAll('id=:x',array(':x'=>$batch_1->course_id));
+                                 foreach($course as $course_1){
+                                echo '<td>'.$course_1->course_name.'</td>';
+                                foreach($subject as $subject_1){
+                                echo '<td>'.$subject_1->name.'</td>';    
+                                echo '</tr>';
+                                
+                            }}}}
+                           
+                        }} ?>
+                        <!-- Tuesday End -->
+                        
+                        <!-- Wednesday Start-->
+                         <tr>
+                            <td colspan="4">
+                                <strong>Wednesday</strong>
+                            </td>
+                        </tr>
+                        <tr class="pdtab-h">
+                            <td style="text-align:center;">ClassTiming</td>
+                            <td style="text-align:center;">Course</td>
+                            <td style="text-align:center;">Batch Name</td>
+                            <td style="text-align:center;">Subject</td>
+                        </tr>
+                         <?php 
+                        foreach($weekday as $weekday_1){
+                        $classtiming= ClassTimings::model()->findAll('id=:x',array(':x'=>$weekday_1->class_timing_id));
+                        $batch=Batches::model()->findAll('id=:x',array(':x'=>$weekday_1->batch_id));
+                        $subject=Subjects::model()->findAll('id=:x',array(':x'=>$weekday_1->subject_id));
+                        foreach($classtiming as $classtiming_1){
+                            if($weekday_1->weekday_id==4){
+                                echo '<tr>';
+                                echo '<td>'.$classtiming_1->start_time.'-'.$classtiming_1->end_time.'</td>';
+                                foreach($batch as $batch_1){
+                                echo '<td>'.$batch_1->name.'</td>';
+                                 $course=Courses::model()->findAll('id=:x',array(':x'=>$batch_1->course_id));
+                                 foreach($course as $course_1){
+                                echo '<td>'.$course_1->course_name.'</td>';
+                                foreach($subject as $subject_1){
+                                echo '<td>'.$subject_1->name.'</td>';    
+                                echo '</tr>';
+                                
+                            }}}}
+                           
+                        }} ?>
+                        <!-- Wednesday End -->
+                        
+                         <!-- Thursday Start-->
+                         <tr>
+                            <td colspan="4">
+                                <strong>Thursday</strong>
+                            </td>
+                        </tr>
+                        <tr class="pdtab-h">
+                            <td style="text-align:center;">ClassTiming</td>
+                            <td style="text-align:center;">Course</td>
+                            <td style="text-align:center;">Batch Name</td>
+                            <td style="text-align:center;">Subject</td>
+                        </tr>
+                        <?php 
+                        foreach($weekday as $weekday_1){
+                        $classtiming= ClassTimings::model()->findAll('id=:x',array(':x'=>$weekday_1->class_timing_id));
+                        $batch=Batches::model()->findAll('id=:x',array(':x'=>$weekday_1->batch_id));
+                        $subject=Subjects::model()->findAll('id=:x',array(':x'=>$weekday_1->subject_id));
+                        foreach($classtiming as $classtiming_1){
+                            if($weekday_1->weekday_id==5){
+                                echo '<tr>';
+                                echo '<td>'.$classtiming_1->start_time.'-'.$classtiming_1->end_time.'</td>';
+                                foreach($batch as $batch_1){
+                                echo '<td>'.$batch_1->name.'</td>';
+                                 $course=Courses::model()->findAll('id=:x',array(':x'=>$batch_1->course_id));
+                                 foreach($course as $course_1){
+                                echo '<td>'.$course_1->course_name.'</td>';
+                                foreach($subject as $subject_1){
+                                echo '<td>'.$subject_1->name.'</td>';    
+                                echo '</tr>';
+                                
+                            }}}}
+                           
+                        }} ?>
+                        <!-- Thursday End -->
+                        
+                         <!-- Friday Start-->
+                         <tr>
+                            <td colspan="4">
+                                <strong>Friday</strong>
+                            </td>
+                        </tr>
+                        <tr class="pdtab-h">
+                            <td style="text-align:center;">ClassTiming</td>
+                            <td style="text-align:center;">Course</td>
+                            <td style="text-align:center;">Batch Name</td>
+                            <td style="text-align:center;">Subject</td>
+                        </tr>
+                         <?php 
+                        foreach($weekday as $weekday_1){
+                        $classtiming= ClassTimings::model()->findAll('id=:x',array(':x'=>$weekday_1->class_timing_id));
+                        $batch=Batches::model()->findAll('id=:x',array(':x'=>$weekday_1->batch_id));
+                        $subject=Subjects::model()->findAll('id=:x',array(':x'=>$weekday_1->subject_id));
+                        foreach($classtiming as $classtiming_1){
+                            if($weekday_1->weekday_id==6){
+                                echo '<tr>';
+                                echo '<td>'.$classtiming_1->start_time.'-'.$classtiming_1->end_time.'</td>';
+                                foreach($batch as $batch_1){
+                                echo '<td>'.$batch_1->name.'</td>';
+                                 $course=Courses::model()->findAll('id=:x',array(':x'=>$batch_1->course_id));
+                                 foreach($course as $course_1){
+                                echo '<td>'.$course_1->course_name.'</td>';
+                                foreach($subject as $subject_1){
+                                echo '<td>'.$subject_1->name.'</td>';    
+                                echo '</tr>';
+                                
+                            }}}}
+                           
+                        }} ?>
+                        <!-- Friday End -->
+                        
+                         <!-- Saturday Start-->
+                         <tr>
+                            <td colspan="4">
+                                <strong>Saturday</strong>
+                            </td>
+                        </tr>
+                        <tr class="pdtab-h">
+                            <td style="text-align:center;">ClassTiming</td>
+                            <td style="text-align:center;">Course</td>
+                            <td style="text-align:center;">Batch Name</td>
+                            <td style="text-align:center;">Subject</td>
+                        </tr>
+                        <?php 
+                        foreach($weekday as $weekday_1){
+                        $classtiming= ClassTimings::model()->findAll('id=:x',array(':x'=>$weekday_1->class_timing_id));
+                        $batch=Batches::model()->findAll('id=:x',array(':x'=>$weekday_1->batch_id));
+                        $subject=Subjects::model()->findAll('id=:x',array(':x'=>$weekday_1->subject_id));
+                        foreach($classtiming as $classtiming_1){
+                            if($weekday_1->weekday_id==7){
+                                echo '<tr>';
+                                echo '<td>'.$classtiming_1->start_time.'-'.$classtiming_1->end_time.'</td>';
+                                foreach($batch as $batch_1){
+                                echo '<td>'.$batch_1->name.'</td>';
+                                 $course=Courses::model()->findAll('id=:x',array(':x'=>$batch_1->course_id));
+                                 foreach($course as $course_1){
+                                echo '<td>'.$course_1->course_name.'</td>';
+                                foreach($subject as $subject_1){
+                                echo '<td>'.$subject_1->name.'</td>';    
+                                echo '</tr>';
+                                
+                            }}}}
+                           
+                        }} ?>
+                        <!-- Saturday End -->
+                    </tbody>
+          </table>
+            
+        </div>
         <?php } ?>
   </div>
 </div>

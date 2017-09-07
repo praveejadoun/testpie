@@ -23,7 +23,7 @@ if(Yii::app()->controller->action->id=='create')
 }
 else
 {
-	echo '<br><br>';
+	//echo '<br><br>';
 	$adm_no	= Students::model()->findByAttributes(array('id' => $_REQUEST['id']));
 	$adm_no_1 = $adm_no->admission_no;
 }
@@ -146,7 +146,7 @@ else
                         else
                         {
                             echo $form->dropDownList($model,'course_id',$data,array(
-                            'style'=>'width:170px;','empty'=>'Select Batch'
+                            'style'=>'width:170px;','empty'=>'Select Course'
                             )); 
                         }
                         ?>

@@ -14,8 +14,8 @@ $this->breadcrumbs=array(
 	border-left:1px #CCC solid;
 	padding:10px 10px 10px 10px;
 	border-bottom:1px #CCC solid;
-	width:auto;
-	min-width:30px;
+	width:10px;
+	min-width:10px;
 	font-size:11px;
 	text-align:center;
 }
