@@ -209,18 +209,18 @@ $(".navigationbtm_wrapper_outer").show();
       <div class="navigation_wrapper">
       	<div class="nav">
         	<ul id="sortable1" class="connectedSortable">
-                <li>
+             <!--   <li>
                  <?php 
-				if(Yii::app()->controller->module->id=='dashboard')
+				/*if(Yii::app()->controller->module->id=='dashboard')
 				{
 				    echo CHtml::link(Yii::t('app','Dashboard'), array('/dashboard'),array('class'=>'ic14 active'));
 				}
 				else
 				{
 					echo CHtml::link(Yii::t('app','Dashboard'), array('/dashboard'),array('class'=>'ic14'));
-				}
+				}*/
 				?>
-                </li>    
+                </li>   --> 
                 
             	<li>
                  <?php
@@ -229,22 +229,22 @@ $(".navigationbtm_wrapper_outer").show();
                                      
 				 if(Yii::app()->controller->module->id=='mailbox'||Yii::app()->controller->module->id=='' ||Yii::app()->controller->module->id=='cal')
 				 {
-				 echo CHtml::link(Yii::t('app','Home'), array('/default'),array('class'=>'ic1 active'));
+				 echo CHtml::link(Yii::t('app','Dashboard'), array('/default'),array('class'=>'ic1 active'));
 				 }else{
-					 echo CHtml::link(Yii::t('app','Home'), array('/default'),array('class'=>'ic1'));
+					 echo CHtml::link(Yii::t('app','Dashboard'), array('/default'),array('class'=>'ic1'));
 				 }
 				 }else if(Yii::app()->controller->id=='default')
 				 {
-					  echo CHtml::link(Yii::t('app','Home'), array('/default'),array('class'=>'ic1 active'));
+					  echo CHtml::link(Yii::t('app','Dashboard'), array('/default'),array('class'=>'ic1 active'));
 				 }else
 				 {
-					 echo CHtml::link(Yii::t('app','Home'), array('/default'),array('class'=>'ic1'));
+					 echo CHtml::link(Yii::t('app','Dashboard'), array('/default'),array('class'=>'ic1'));
 				 }
 				 ?>
                 </li>
                 <li>
                 <?php 
-				if(Yii::app()->controller->id=='students' || Yii::app()->controller->id =='guardians'|| Yii::app()->controller->id =='studentCategories' || Yii::app()->controller->id =='studentCategory')
+                if(isset(Yii::app()->controller->module->id) and Yii::app()->controller->module->id=='students')
 				{
 				    echo CHtml::link(Yii::t('app','Students'), array('/students'),array('class'=>'ic2 active'));
 				}
@@ -330,6 +330,18 @@ $(".navigationbtm_wrapper_outer").show();
 				?>
                 </li>
                
+              <li>
+                 <?php 
+				if(isset(Yii::app()->controller->module->id) and Yii::app()->controller->module->id=='transport')
+				{
+				    echo CHtml::link(Yii::t('app','Transport'), array('/transport'),array('class'=>'ic17 active'));
+				}
+				else
+				{
+					echo CHtml::link(Yii::t('app','Transport'), array('/transport'),array('class'=>'ic17'));
+				}
+				?>
+                </li>
                
                 <li>
                  <?php 
@@ -372,18 +384,7 @@ $(".navigationbtm_wrapper_outer").show();
 				}
 				?>
                 </li>
-                  <li>
-                 <?php 
-				if(isset(Yii::app()->controller->module->id) and Yii::app()->controller->module->id=='transport')
-				{
-				    echo CHtml::link(Yii::t('app','Transport'), array('/transport'),array('class'=>'ic17 active'));
-				}
-				else
-				{
-					echo CHtml::link(Yii::t('app','Transport'), array('/transport'),array('class'=>'ic17'));
-				}
-				?>
-                </li>
+                 
                 <li>
 				<?php 
 				
