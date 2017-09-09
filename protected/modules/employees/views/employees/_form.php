@@ -285,7 +285,7 @@ else
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td colspan="5" valign="top"><?php echo $form->textArea($model,'experience_detail',array('rows'=>6, 'cols'=>48)); ?>
+    <td colspan="5" valign="top" ><?php echo $form->textArea($model,'experience_detail',array('rows'=>6, 'cols'=>48)); ?>
 		<?php echo $form->error($model,'experience_detail'); ?></td>
   
   </tr>

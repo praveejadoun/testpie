@@ -198,186 +198,18 @@ class AcademicYearsController extends RController
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionCreate()
-	{
-		$model=new Configurations;
-		 $logo = new Logo;
-		$err_flag = 0;
-		// Uncomment the following line if AJAX validation is needed
-		//$this->performAjaxValidation($model);
-			//exit;
-		if(isset($_POST['submit']))
-		{
-			
-			$posts_1=Configurations::model()->findByAttributes(array('id'=>1));
-			$posts_1->config_value = $_POST['collegename'];
-			$posts_1->save();
-			
-			$posts_2=Configurations::model()->findByAttributes(array('id'=>2));
-			$posts_2->config_value = $_POST['address'];
-			$posts_2->save();
-			
-			$posts_3=Configurations::model()->findByAttributes(array('id'=>3));
-			$posts_3->config_value = $_POST['phone'];
-			$posts_3->save();
-			
-			$posts_4=Configurations::model()->findByAttributes(array('id'=>4));
-			$posts_4->config_value = $_POST['attentance'];
-			$posts_4->save();
-			
-			$posts_5=Configurations::model()->findByAttributes(array('id'=>13));
-			$posts_5->config_value = $_POST['startyear'];
-			$posts_5->save();
-			
-			$posts_6=Configurations::model()->findByAttributes(array('id'=>14));
-			$posts_6->config_value = $_POST['endyear'];
-			$posts_6->save();
-			
-			/*$posts_7=Configurations::model()->findByAttributes(array('id'=>14));
-			$posts_7->config_value = $_POST['currency'];
-			$posts_7->save();*/
-			
-			$posts_8=Configurations::model()->findByAttributes(array('id'=>5));
-			$posts_8->config_value = $_POST['currency'];
-			$posts_8->save();
-			
-			$posts_9=Configurations::model()->findByAttributes(array('id'=>6));
-			$posts_9->config_value = $_POST['language'];
-			$posts_9->save();
-			
-			/*$posts_10=Configurations::model()->findByAttributes(array('id'=>6));
-			$posts_10->config_value = $_POST['logo'];
-			$posts_10->save();*/
-			if($file=CUploadedFile::getInstance($logo,'uploadedFile'))
-       		 {
-				$logo = new Logo;
-				$logo->photo_file_name=$file->name;
-				$logo->photo_content_type=$file->type;
-				$logo->photo_file_size=$file->size;
-				$logo->photo_data=file_get_contents($file->tempName);
-				if(!is_dir('uploadedfiles/')){
-					mkdir('uploadedfiles/');
-				}
-				if(!is_dir('uploadedfiles/school_logo/')){
-					mkdir('uploadedfiles/school_logo/');
-				}
-				move_uploaded_file($file->tempName,'uploadedfiles/school_logo/'.$file->name);
-				
-				$file->saveAs($_SERVER['DOCUMENT_ROOT'].Yii::app()->request->baseUrl.'uploadedfiles/school_logo/'.$file->name);  // image
-				
-				//$logo->save();
-				if($logo->save()){
-				}
-				else{
-					$err_flag = 1;
-				}
-				
-				$posts_10=Configurations::model()->findByAttributes(array('id'=>18));
-				$posts_10->config_value = Yii::app()->db->getLastInsertId();
-				$posts_10->save();
-			 }
-			if(isset($_POST['dateformat']) && (isset($_POST['timeformat'])) && isset($_POST['timezone'])&& isset($_POST['language']))
-			 {
-				 
-				 $settings=UserSettings::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
-				 $date='';
-				 if($settings!=NULL)
-				 {
-				 $settings->user_id=Yii::app()->user->id;
-				 $settings->dateformat=$_POST['dateformat'];
-					
-				 					if($_POST['dateformat']=='m/d/yy')
-									$settings->displaydate='m/d/Y';
-									else if($_POST['dateformat']=='M d.yy')
-									$settings->displaydate='M d.Y';
-									else if($_POST['dateformat']=='D, M d.yy')
-									$settings->displaydate='D, M d.Y';
-									else if($_POST['dateformat']=='d M yy')
-									$settings->displaydate='d M Y';
-									else if($_POST['dateformat']=='yy/m/d')
-									$settings->displaydate='Y/m/d';
-								
-				    $settings->timeformat=$_POST['timeformat'];
-				    $settings->timezone=$_POST['timezone'];
-				     $settings->language=$_POST['language'];
-				 }
-				 else
-				 {
-					  $settings = new UserSettings;
-					  $settings->user_id=Yii::app()->user->id;
-				 	  $settings->dateformat=$_POST['dateformat'];
-					  if($_POST['dateformat']=='m/d/yy')
-									$settings->displaydate='m/d/Y';
-									else if($_POST['dateformat']=='M d.yy')
-									$settings->displaydate='M d.Y';
-									else if($_POST['dateformat']=='D, M d.yy')
-									$settings->displaydate='D, M d.Y';
-									else if($_POST['dateformat']=='d M yy')
-									$settings->displaydate='d M Y';
-									else if($_POST['dateformat']=='yy/m/d')
-									$settings->displaydate='Y/m/d';
-					 
-				 	  $settings->timeformat=$_POST['timeformat'];
-				      $settings->timezone=$_POST['timezone'];
-				      $settings->language=$_POST['language'];
-				 }
-				 $settings->save();
-			 }
-			$posts_11=Configurations::model()->findByAttributes(array('id'=>12));
-			$posts_11->config_value = $_POST['network'];
-			$posts_11->save();
-			
-			$posts_12=Configurations::model()->findByAttributes(array('id'=>7));
-			$posts_12->config_value = $_POST['admission_number'];
-			$posts_12->save();
-			
-			$posts_13=Configurations::model()->findByAttributes(array('id'=>8));
-			$posts_13->config_value = $_POST['employee_number'];
-			$posts_13->save();
-			
-			//$model->attributes=$_POST['Configurations'];
-			//if($model->save())
-			if($err_flag==0){
-				Yii::app()->user->setFlash('errorMessage',UserModule::t("Configurations saved successfully!"));
-				$this->redirect(array('create'));
-			}
-		}
-		$this->render('create',array(
-			'model'=>$model,'logo'=>$logo,
-		));
-			}
-	public function actionDisplaySavedImage()
-		{
-			//$model=$this->loadModel($_GET['id']);
-		 	$model=Logo::model()->findByPk($_GET['id']);
-			header('Pragma: public');
-			header('Expires: 0');
-			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-			header('Content-Transfer-Encoding: binary');
-			header('Content-length: '.$model->photo_file_size);
-			header('Content-Type: '.$model->photo_content_type);
-			header('Content-Disposition: attachment; filename='.$model->photo_file_name);
-				echo  $model->photo_data;
-		}
-		
-		public function actionDisplayLogoImage()
-		{
-		 	$model=Logo::model()->findByPk($_GET['id']);
-			echo '<img src="uploadedfiles/school_logo/'.$model->photo_file_name.'" alt="'.$model->photo_file_name.'" class="imgbrder" width="119" />';
-		}
-		
-		
-	public function actionRemove()
-	{
-		
-		$posts_1=Logo::model()->findByAttributes(array('id'=>$_REQUEST['id']));
-		$logo_path='uploadedfiles/school_logo/'.$posts_1->photo_file_name;
-		if(file_exists($logo_path)){
-			unlink($logo_path);
-		}
-		$posts_1->delete();
-		$this->redirect(array('create'));
-	}
-
+        {
+            $model = new AcademicYears;
+            
+            if(isset($_POST['AcademicYears']))
+            {
+              $model->attributes=$_POST['AcademicYears'];
+              if($model()->save())
+                  $this->redirect(array('admin'));
+              
+            }
+          $this->render('create',array('model'=>$model,));  
+        }
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -498,7 +330,10 @@ class AcademicYearsController extends RController
 	 */
 	public function actionAdmin()
 	{
-		
+		$model=new AcademicYears('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['AcademicYears']))
+			$model->attributes=$_GET['AcademicYears'];
 		$this->render('admin',array(
 			'model'=>$model,
 		));
