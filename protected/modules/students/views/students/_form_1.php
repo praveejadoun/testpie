@@ -1,3 +1,29 @@
+<?php 
+  if(!empty($_GET['aid'])){
+                $model = Applicants::model()->findByAttributes(array('id' => $_GET['aid'])); 
+                //echo "<pre>";
+                //print_r($model);exit;
+         }?>
+<?php $config=Configurations::model()->findByPk(7);
+	$adm_no='';
+	$adm_no_1 = '';
+	if($config->config_value==1)
+	{
+           
+		$adm_no	= Students::model()->findAll(array('order' => 'id DESC','limit' => 1));
+		$adm_no_1=$adm_no[0]['id']+1;
+         } 
+        //$adm_no	= Applicants::model()->findByAttributes(array('id' => $_REQUEST['aid']));
+	?>
+	<div class="captionWrapper">
+        <ul>
+            <li><h2 class="cur">Student Details</h2></li>
+            <li><h2>Parent Details</h2></li>
+            <li><h2>Emergency Contact</h2></li>
+            <li><h2>Previous Details</h2></li>
+            <li class="last"><h2>Student Profile</h2></li>
+        </ul>
+	</div>
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 'id'=>'students-form',
@@ -432,7 +458,7 @@
     </div><!-- form -->
     <div class="clear"></div>
     <div style="padding:0px 0 0 0px; text-align:left">
-    	<?php echo CHtml::submitButton($model->isNewRecord ? 'Parent Details »' : 'Save',array('class'=>'formbut')); ?>
+    	<?php echo CHtml::submitButton('Parent Details »' ,array('class'=>'formbut')); ?>
         <input type="button" name="back" value="Back" onclick="javascript:history.back();" class="formbut" style="float:right;"/>
     </div>
 <?php $this->endWidget(); ?>

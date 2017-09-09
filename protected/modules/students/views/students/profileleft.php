@@ -5,15 +5,15 @@
      <?php
 	 $student=Students::model()->findByAttributes(array('id'=>$_REQUEST['id']));
 	 if($student->photo_file_name){ 
-    	echo '<img  src="'.$this->createUrl('DisplaySavedImage&id='.$student->primaryKey).'" alt="'.$student->photo_file_name.'"  />';
+    	echo '<img  src="'.$this->createUrl('DisplaySavedImage&id='.$student->primaryKey).'" alt="'.$student->photo_file_name.'"width="170" height="140"   />';
 	 }
 	 elseif($student->gender == 'M')
 	 {
-		echo '<img  src="images/s_prof_m_image.png" alt='.$student->first_name.' />'; 
+		echo '<img  src="images/s_prof_m_image.png" alt='.$student->first_name.'width="170" height="140" />'; 
 	 }
 	 elseif($student->gender == 'F')
 	 {
-		echo '<img  src="images/s_prof_fe_image.png" alt='.$student->first_name.' />';  
+		echo '<img  src="images/s_prof_fe_image.png" alt='.$student->first_name.'width="170" height="140" />';  
 	 }
 	 ?>
    </li>

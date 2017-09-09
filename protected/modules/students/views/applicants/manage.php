@@ -10,7 +10,62 @@ $this->breadcrumbs = array(
     'Manage',
 );
 ?>
-
+<script>
+$(document).ready(function() {
+$(".action_but").click(function(){
+	                $(".ns_drop").hide();
+					$(".s_no_but").removeClass("ns_drop_hand");
+	            
+				if ($("#"+this.id+'a').is(':hidden')){
+					$('.gridact_drop').hide();
+					$("#"+this.id+'a').show();
+					}
+            	else{
+                	$("#"+this.id+'a').hide();
+					}
+            return false;
+       			 });
+				  $("#"+this.id+'a').click(function(e) {
+            		e.stopPropagation();
+        			});
+        		
+});
+$(document).click(function() {
+					
+            		$('.gridact_drop').hide();
+					});
+</script>
+<script>
+$(document).ready(function() {
+$(".s_no_but").click(function(){
+	                $('.gridact_drop').hide();
+	            
+            	if ($("#"+this.id+'l').is(':hidden')){
+					$('.ns_drop').hide();
+				    $(".s_no_but").removeClass("ns_drop_hand");	
+                	$("#"+this.id+'l').show();
+					$("#"+this.id).addClass("ns_drop_hand");
+					$(".gridact_drop").hide();
+					
+				}
+            	else{
+                	$("#"+this.id+'l').hide();
+					$("#"+this.id).removeClass("ns_drop_hand");
+            	}
+            return false;
+       			 });
+				  $("#"+this.id+'l').click(function(e) {
+            		e.stopPropagation();
+        			});
+        		
+});
+$(document).click(function() {
+					
+            		$('.ns_drop').hide();
+					$(".s_no_but").removeClass("ns_drop_hand");
+					
+        			});
+</script>
 <script language="javascript">
     function details(id)
     {
@@ -786,7 +841,17 @@ $this->breadcrumbs = array(
                         <div class="clear"></div>
                         <div style="display: inline-block;margin-bottom: 14px;margin-top: 14px; width: 100%;">
                             <div style="float:left;">
-                                <div class="contrht_bttns" style="margin: 61px 122px 0px 0px;padding: 0px 401px 0px 0px;">
+                                <div class="box-one">
+                            <div class="bttns_addstudent-n">
+                                <ul>
+                                    <li><?php echo CHtml::link(Yii::t('applicants','Add Applicant'),array('create'),array('class'=>'formbut-n')) ?></li>
+                                     
+                                        <li> <a class="formbut-n" href="javascript:void(0)" id="delete_student">Delete Applicant</a>  </li> 
+                                       
+                                </ul>
+                            </div>
+                        </div>
+                               <!-- <div class="contrht_bttns" style="margin: 61px 122px 0px 0px;padding: 0px 401px 0px 0px;">
                                     <ul>
                                         <li><?php echo CHtml::link(Yii::t('employees', 'Add Applicant'), array('create')); ?></li>
 
@@ -795,7 +860,7 @@ $this->breadcrumbs = array(
 
 
                                     </ul>
-                                </div>
+                                </div>-->
                                 <div class="ea_pdf" style="top:0px; right:6px;">
                                     <?php echo CHtml::link('<img src="images/pdf-but.png">', array('applicants/managepdf'), array('target' => '_blank')); ?>
                                 </div>
@@ -803,6 +868,7 @@ $this->breadcrumbs = array(
 
                         </div>
                     </div>
+                    
                     <div class="list_contner">
                         <div class="clear"></div>
                         <?php
@@ -849,7 +915,7 @@ $this->breadcrumbs = array(
                                         <tr class=<?php echo $cls; ?>>
                                             <td><input type="checkbox" class="chk" name="chkCid[]" value="<?php echo $list_1->id; ?>"/></td>
         <!--                                            <td><?php echo $i; ?></td>-->
-                                            <td><?php echo CHtml::link($list_1->first_name . '  ' . $list_1->middle_name . '  ' . $list_1->last_name, array('view', 'id' => $list_1->id)) ?></td>
+                                            <td style="text-align:left;"><?php echo CHtml::link($list_1->first_name . '  ' . $list_1->middle_name . '  ' . $list_1->last_name, array('view', 'id' => $list_1->id)) ?></td>
                                             <td><?php echo $list_1->registration_no ?></td>
                                             <?php
                                           
@@ -884,11 +950,28 @@ $this->breadcrumbs = array(
                                                     <option value="4"<?php echo ($list_1->status==4)?' selected="selected"':''?>>Waiting List</option>
                                                 </select>
                                             </td>
-                                         
-                                      <td>
+                                            <?php if($list_1->status==2){?>
+                                              <td>
+                                                <?php echo '-'; ?>
+                                            </td>
+                                        <?php } else { ?>
+                                              <td align="center" class="act"><div style="position:relative"><span class="action_but" id="<?php echo $list_1->id ?>"></span>
+                                            <div class="gridact_drop" id="<?php echo $list_1->id ?>a">
+                                                <div class="gridact_arrow"></div>
+                                                    <ul>
+                                                        <!--<li><a href="#" class="grview">View</a></li>-->
+                                                        <li><a href="index.php?r=students/applicants/update&id=<?php echo $list_1->id ?>" class="gredit">Edit</a></li>
+                                                        <li><a href="<?php echo $list_1->id ?>" class="grdel">Delete</a></li>
+                                                    </ul>
+                                            </div>
+                                            </div>
+                                            </td>
+                                          
+                                            <?php } ?>
+                                     <!-- <td>
                                                 <a href="index.php?r=students/applicants/update&id=<?php echo $list_1->id ?>">Edit</a>
                                                 <a rel="<?php //echo $list_1->id ?>" href="javascript:void(0)" class="deleteStudent">Delete</a>
-                                            </td>
+                                            </td>-->
                                         </tr>
                                         <?php
                                         if ($cls == "even") {
@@ -916,6 +999,14 @@ $this->breadcrumbs = array(
                                 </div> <!-- END div class="pagecon" 2 -->
                                 <div class="clear"></div>
                             </div> <!-- END div class="tablebx" -->
+                            <?php
+                            //Strings for the delete confirmation dialog.
+                            $del_con = Yii::t('students', 'Are you sure you want to delete this student category?');
+                            $del_title=Yii::t('students', 'Delete Confirmation');
+                            $del=Yii::t('students', 'Delete');
+                            $cancel=Yii::t('students', 'Cancel');
+                            ?>
+  
                             <?php
                         } else {
                             echo '<div class="listhdg" align="center">' . Yii::t('students', 'Nothing Found!!') . '</div>';
@@ -1022,3 +1113,77 @@ $this->breadcrumbs = array(
         });
     });
 </script>
+<script>
+  $(function() {
+      
+      $. bind_crud= function(){
+    
+   
+
+
+// DELETE
+
+    var deletes = new Array();
+    var dialogs = new Array();
+    $('.grdel').each(function(index) {
+        var id = $(this).attr('href');
+        deletes[id] = function() {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo Yii::app()->request->baseUrl;?>/index.php?r=students/applicants/ajax_delete",
+                data:{"sid":id,"YII_CSRF_TOKEN":"<?php echo Yii::app()->request->csrfToken;?>"},
+                    beforeSend : function() {
+                    $("#student-categories-grid").addClass("ajax-sending");
+                },
+                complete : function() {
+                    $("#student-categories-grid").removeClass("ajax-sending");
+                },
+                success: function(data) {window.location.reload();
+                    var res = jQuery.parseJSON(data);
+                     var page=$("li.selected  > a").text();
+                    $.fn.yiiGridView.update('student-categories-grid', {url:'<?php echo Yii::app()->request->getUrl()?>',data:{"StudentCategories_page":page}});
+                }//success
+            });//ajax
+        };//end of deletes
+
+        dialogs[id] =
+                        $('<div style="text-align:center;"></div>')
+                        .html('<p style="color:#000000"><?php echo $del_con;?></p>')
+                       .dialog(
+                        {
+                            autoOpen: false,
+                            title: '<?php echo  $del_title; ?>',
+                            modal:true,
+                            resizable:false,
+                            buttons: [
+                                {
+                                    text: "<?php echo  $del; ?>",
+                                    click: function() {
+                                                                      deletes[id]();
+                                                                      $(this).dialog("close");
+																	 $("#success_flash").css("display","block").animate({opacity: 1.0}, 3000).fadeOut("slow");
+                                                                      }
+                                },
+                                {
+                                   text: "<?php echo $cancel; ?>",
+                                   click: function() {
+                                                                     $(this).dialog("close");
+                                                                     }
+                                }
+                            ]
+                        }
+                );
+
+        $(this).bind('click', function() {
+                                                                      dialogs[id].dialog('open');
+                                                                       // prevent the default action, e.g., following a link
+                                                                      return false;
+                                                                     });
+    });//each end
+
+        }//bind_crud end
+
+   //apply   $. bind_crud();
+  $. bind_crud();
+  })
+    </script>

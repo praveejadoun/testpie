@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'applicants':
  * @property integer $id
  * @property string $registration_no
+ * * @property string $admission_no
  * @property string $class_roll_no
  * @property string $registration_date
  * @property string $admission_date

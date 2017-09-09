@@ -60,7 +60,9 @@ $(document).ready(function() {
     			<li><?php echo CHtml::link(Yii::t('settings','School Setup<span>School Name,Logo..</span>'), array('/configurations/create'),array('class'=>'icon19')) ?></li>
                 <li><?php echo CHtml::link(Yii::t('settings','News &amp; Events<span>Create/View Events</span>'), array('/cal'),array('class'=>'icon20')) ?></li>
                  <li><?php echo CHtml::link(Yii::t('settings','Translation<span>Language Translation</span>'), array('/translate/'),array('class'=>'icon20')) ?></li>
-    			<?php /*?><li><a href="#" class="icon21">Authorization Manager<span>Admins &amp; Class Teachers</span></a></li>
+                 <li><?php echo CHtml::link(Yii::t('settings','Academic Year<span>Set Up</span>'), array('/academicYears/admin'),array('class'=>'icon20')) ?></li>
+	
+                     <?php /*?><li><a href="#" class="icon21">Authorization Manager<span>Admins &amp; Class Teachers</span></a></li>
                 <li><a href="#" class="icon22">Backup Manager<span>Admins &amp; Class Teachers</span></a></li>
                 <li><a href="#" class="icon23">Modules &amp; Plugins<span>Admins &amp; Class Teachers</span></a></li>
                 <li><a href="#" class="icon24">Languages<span>Admins &amp; Class Teachers</span></a></li>

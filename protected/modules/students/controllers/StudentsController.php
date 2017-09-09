@@ -115,14 +115,24 @@ class StudentsController extends RController {
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
-        //echo "<pre>";
-//print_r($_POST['Students']);exit;
+       
+       
              
-        if (isset($_POST['Students'])) {
+        if (isset($_POST['Students']) || isset($_POST['Applicants'])) {
+//            
+//            echo "<pre>";
+//            print_r($_POST);exit;
+
+            if(!empty($_POST['Students'])){
+                $model->attributes = $_POST['Students'];
+                $list = $_POST['Students'];
+            }else{
+                $model->attributes = $_POST['Applicants'];
+                $list = $_POST['Applicants'];
+            }
             
             
-            $model->attributes = $_POST['Students'];
-            $list = $_POST['Students'];
+            
             if ($model->admission_date)
                 $model->admission_date = date('Y-m-d', strtotime($model->admission_date));
             if ($model->date_of_birth)
@@ -142,13 +152,17 @@ class StudentsController extends RController {
               $model->photo_file_size=$_POST['photo_file_size'];
               $model->photo_data=hex2bin($_POST['photo_data']);
               }
-              } 
+            } 
             //echo $model->photo_data.'----';
-             if(isset($_FILES['Students']))
+             if(isset($_FILES['Students']) || isset($_FILES['Applicants']))
               {
             //  print_r($_FILES['Students']);
               //exit;
+              if(!empty($_FILES['Students']['tmp_name'])){
               $tmpName = $_FILES['Students']['tmp_name'];
+              }else{
+                  $tmpName = $_FILES['Applicants']['tmp_name'];
+              }
               $fp      = fopen($tmpName, 'r');
               $data = fread($fp, filesize($tmpName));
               $data = addslashes($data);
@@ -758,19 +772,21 @@ class StudentsController extends RController {
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
-        public function actioncreate_1($aid)
+        public function actioncreate_1()
         {
-            $model = $this->loadModel1($aid);
-            $model = new students;
-            if(isset($_REQUEST['aid']))
-            {
-              $app=applicants::model()->findByAttributes(array('id'=>$_REQUEST['aid'])); 
-              //$this->redirect(array('create_1'));
-            }
-            $this->render('create_1', array(
-            'model' => $model,
-        ));
+           $model = new Students;
+      
         }
-       
+       public function actionAjax_delete(){
+                 $id=$_POST['sid'];
+                 $deleted=$this->loadModel($id);
+                if ($deleted->saveAttributes(array('is_deleted' => '1')) ){
+               echo json_encode (array('success'=>true));
+               exit;
+                }else{
+                  echo json_encode (array('success'=>false));
+                  exit;
+                           }
+      }
 
 }

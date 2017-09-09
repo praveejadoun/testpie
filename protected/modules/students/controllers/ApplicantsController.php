@@ -664,7 +664,7 @@ class ApplicantsController extends RController {
    public function actionDeleteselected() {
        
        foreach($_POST['ids'] as $sid){
-        $model = Students::model()->findByAttributes(array('id' => $sid));
+        $model = Applicants::model()->findByAttributes(array('id' => $sid));
         $model->saveAttributes(array('is_deleted' => '1'));
         if ($model->uid and $model->uid != NULL and $model->uid != 0) { // Deleting student user
             $user = User::model()->findByPk($model->uid);
@@ -691,6 +691,17 @@ class ApplicantsController extends RController {
        }
         echo "success";exit;
     }
+     public function actionAjax_delete(){
+                 $id=$_POST['sid'];
+                 $deleted=$this->loadModel($id);
+                if ($deleted->saveAttributes(array('is_deleted' => '1')) ){
+               echo json_encode (array('success'=>true));
+               exit;
+                }else{
+                  echo json_encode (array('success'=>false));
+                  exit;
+                           }
+      }
 
     public function actionDeletes() {
         

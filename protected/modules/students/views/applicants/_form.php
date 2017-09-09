@@ -208,7 +208,7 @@ else
                     <td valign="top">
 						<?php //echo $form->textField($model,'nationality_id'); ?>
                         <?php echo $form->dropDownList($model,'nationality_id',CHtml::listData(Countries::model()->findAll(),'id','name'),array(
-                        'style'=>'width:140px;','empty'=>'Select Nationality'
+                        'style'=>'width:140px;'
                         )); ?>
                         <?php //echo $form->error($model,'nationality_id'); ?>
                     </td>
@@ -236,7 +236,7 @@ else
                     <td>&nbsp;</td>
                     <td valign="top">
                         <?php //echo $form->textField($model,'student_category_id'); ?>
-                        <?php echo $form->dropDownList($model,'student_category_id',CHtml::listData(StudentCategories::model()->findAll(),'id','name')); ?>
+                        <?php echo $form->dropDownList($model,'student_category_id',CHtml::listData(StudentCategories::model()->findAll(),'id','name'),array('empty'=>'Select Category')); ?>
                         <?php echo $form->error($model,'student_category_id'); ?>
                     </td>
                 </tr>
@@ -289,7 +289,7 @@ else
                     <td valign="top">
 						<?php //echo $form->textField($model,'country_id'); ?>
                         <?php echo $form->dropDownList($model,'country_id',CHtml::listData(Countries::model()->findAll(),'id','name'),array(
-                        'style'=>'width:140px;','empty'=>'Select Country'
+                        'style'=>'width:140px;'
                         )); ?>
                         <?php //echo $form->error($model,'country_id'); ?>
                     </td>
@@ -324,10 +324,10 @@ else
         </div>
     </div>
     
-    <div class="formCon" style=" background:#EDF1D1 url(images/green-bg.png); border:0px #c4da9b solid; color:#393; ">
+    <!--<div class="formCon" style=" background:#EDF1D1 url(images/green-bg.png); border:0px #c4da9b solid; color:#393; ">
         <div class="formConInner" style="padding:10px 10px;">
             <!--<h3>Image Details</h3>-->
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <!--  <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <?php /*?><tr>
             <td><?php echo $form->labelEx($model,'photo_file_name'); ?></td>
             <td><?php echo $form->hiddenField($model,'photo_file_name',array('size'=>30,'maxlength'=>255)); ?>
@@ -337,18 +337,18 @@ else
             <td><?php echo $form->hiddenField($model,'photo_content_type',array('size'=>30,'maxlength'=>255)); ?>
             <?php echo $form->error($model,'photo_content_type'); ?></td>
             </tr><?php */?>
-            	<tr>
+            	<!--<tr>
                     <td>
                     <?php 
-                    if($model->photo_data==NULL)
+                    /*if($model->photo_data==NULL)
                         echo $form->labelEx($model,Yii::t('students','<strong style="color:#000">Upload Photo</strong>'));
                         else
-                        echo $form->labelEx($model,'Photo'); 
+                        echo $form->labelEx($model,'Photo'); */
                     ?>
                     </td>
                     <td>
                         <?php 
-                        if($model->isNewRecord)
+                       /* if($model->isNewRecord)
                         {
                             echo $form->fileField($model,'photo_data'); 
                             echo $form->error($model,'photo_data'); 
@@ -376,14 +376,15 @@ else
                                     echo '<img class="imgbrder" src="'.$this->createUrl('Students/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->photo_file_name.'" width="100" height="100" />';
                                 }
                             }
-                        }
+                        }*/
                         ?>
                     </td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
             	</tr>
             </table>
-            
+             </div>
+            </div>-->
             <div class="row">
 				<?php //echo $form->labelEx($model,'class_roll_no'); ?>
                 <?php echo $form->hiddenField($model,'class_roll_no',array('size'=>60,'maxlength'=>255)); ?>
@@ -458,10 +459,9 @@ else
                 <?php echo $form->hiddenField($model,'user_id',array('value'=>'1')); ?>
                 <?php echo $form->error($model,'user_id'); ?>
             </div>
-        </div>
-    </div><!-- form -->
+       <!-- form -->
     <div class="clear"></div>
-    <div style="padding:0px 0 0 0px; text-align:left">
+    <div style="padding:0px 0px 0px 0px; text-align:left">
     	<?php echo CHtml::submitButton($model->isNewRecord ? 'Save' : 'Save',array('class'=>'formbut')); ?>
         <input type="button" name="back" value="Back" onclick="javascript:history.back();" class="formbut" style="float:right;"/>
     </div>
