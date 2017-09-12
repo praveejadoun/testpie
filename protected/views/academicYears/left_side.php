@@ -27,7 +27,7 @@
         'activeCssClass' => 'list_active',
         'items' => array(
             array('label' => '' . Yii::t('academicYears', 'Manage Academic Years') . '<span>' . Yii::t('students', 'Manage All Academic Years') . '</span>', 'url' => array('admin'), 'linkOptions' => array('class' => 'lbook_ico'),
-                'active' => ((Yii::app()->controller->id == 'academicYears') && (in_array(Yii::app()->controller->action->id, array('admin')))) ? true : false
+                'active' => ((Yii::app()->controller->id == 'academicYears') && (in_array(Yii::app()->controller->action->id, array('admin','update','view')))) ? true : false
             ),
             array('label' => '' . Yii::t('students', 'Create New Academic Year') . '<span>' . Yii::t('students', 'Add & Update Details') . '</span>', 'url' => array('create'), 'linkOptions' => array('class' => 'sl_ico'), 'active' => ( (Yii::app()->controller->id=='academicYears' and Yii::app()->controller->action->id == 'create')), 'itemOptions' => array('id' => 'menu_1')
             ),

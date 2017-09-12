@@ -11,6 +11,31 @@ $this->breadcrumbs=array(
 
 ?>
 <script>
+$(document).ready(function() {
+$(".action_but").click(function(){
+	                $(".ns_drop").hide();
+					$(".s_no_but").removeClass("ns_drop_hand");
+	            
+				if ($("#"+this.id+'a').is(':hidden')){
+					$('.gridact_drop').hide();
+					$("#"+this.id+'a').show();
+					}
+            	else{
+                	$("#"+this.id+'a').hide();
+					}
+            return false;
+       			 });
+				  $("#"+this.id+'a').click(function(e) {
+            		e.stopPropagation();
+        			});
+        		
+});
+$(document).click(function() {
+					
+            		$('.gridact_drop').hide();
+					});
+</script>
+<script>
 function details(id)
 {
 	//alert("#dropwin"+id);
@@ -995,12 +1020,23 @@ else
 	{
 		echo 'Female';
 	}?></td>
-    <td><?php //echo CHtml::ajaxlink('Delete',array('employees/manage','id'=>$list_1->id),array('confirm'=>'Do you want to delete Employee ?')) 
+      <td align="center" class="act"><div style="position:relative"><span class="action_but" id="<?php echo $list_1->id ?>"></span>
+                                            <div class="gridact_drop" id="<?php echo $list_1->id ?>a">
+                                                <div class="gridact_arrow"></div>
+                                                    <ul>
+                                                        <!--<li><a href="#" class="grview">View</a></li>-->
+                                                        <li><a href="index.php?r=employees/employees/update&id=<?php echo $list_1->id ?>" class="gredit">Edit</a></li>
+                                                        <li><a href="<?php echo $list_1->id ?>" class="grdel">Delete</a></li>
+                                                    </ul>
+                                            </div>
+                                            </div>
+                                            </td>
+  <!--  <td><?php //echo CHtml::ajaxlink('Delete',array('employees/manage','id'=>$list_1->id),array('confirm'=>'Do you want to delete Employee ?')) 
 		//echo CHtml::ajaxLink('Delete', array('deletes','id'=>$list_1->id), array('update'=>'#'.$i),array('confirm'=>'Do you want to delete this employee ?'));
     echo CHtml::link('Edit', array('employees/update','id'=>$list_1->id));?> <span>|</span>	
   <?php  echo CHtml::ajaxLink('Delete', array('deletes','id'=>$list_1->id), array('success'=>'rowdelete('.$i.')'),array('confirm'=>'Do you want to delete this employee ?'));
 		//echo CHtml::ajaxLink('Delete', array('deletes'), array('update'=>'#forAjaxRefresh'),array('onclick'=>'js: alert(Do you want to delete Employee ?);'));
-	?></td>
+	?></td>-->
                             
     <!--<td style="border-right:none;">Task</td>-->
   </tr><?php
@@ -1033,7 +1069,13 @@ else
 	{
 	echo '<div class="listhdg" align="center">'.Yii::t('employees','Nothing Found!!').'</div>';	
 	}?>
-    
+    <?php
+                            //Strings for the delete confirmation dialog.
+                            $del_con = Yii::t('students', 'Are you sure you want to delete this student category?');
+                            $del_title=Yii::t('students', 'Delete Confirmation');
+                            $del=Yii::t('students', 'Delete');
+                            $cancel=Yii::t('students', 'Cancel');
+                            ?>
     
     </div>
     <?php $this->endWidget(); ?>
@@ -1127,3 +1169,77 @@ function rowdelete(id)
         });
     });
 </script>
+<script>
+  $(function() {
+      
+      $. bind_crud= function(){
+    
+   
+
+
+// DELETE
+
+    var deletes = new Array();
+    var dialogs = new Array();
+    $('.grdel').each(function(index) {
+        var id = $(this).attr('href');
+        deletes[id] = function() {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo Yii::app()->request->baseUrl;?>/index.php?r=employees/employees/ajax_delete",
+                data:{"sid":id,"YII_CSRF_TOKEN":"<?php echo Yii::app()->request->csrfToken;?>"},
+                    beforeSend : function() {
+                    $("#student-categories-grid").addClass("ajax-sending");
+                },
+                complete : function() {
+                    $("#student-categories-grid").removeClass("ajax-sending");
+                },
+                success: function(data) {window.location.reload();
+                    var res = jQuery.parseJSON(data);
+                     var page=$("li.selected  > a").text();
+                    $.fn.yiiGridView.update('student-categories-grid', {url:'<?php echo Yii::app()->request->getUrl()?>',data:{"StudentCategories_page":page}});
+                }//success
+            });//ajax
+        };//end of deletes
+
+        dialogs[id] =
+                        $('<div style="text-align:center;"></div>')
+                        .html('<p style="color:#000000"><?php echo $del_con;?></p>')
+                       .dialog(
+                        {
+                            autoOpen: false,
+                            title: '<?php echo  $del_title; ?>',
+                            modal:true,
+                            resizable:false,
+                            buttons: [
+                                {
+                                    text: "<?php echo  $del; ?>",
+                                    click: function() {
+                                                                      deletes[id]();
+                                                                      $(this).dialog("close");
+																	 $("#success_flash").css("display","block").animate({opacity: 1.0}, 3000).fadeOut("slow");
+                                                                      }
+                                },
+                                {
+                                   text: "<?php echo $cancel; ?>",
+                                   click: function() {
+                                                                     $(this).dialog("close");
+                                                                     }
+                                }
+                            ]
+                        }
+                );
+
+        $(this).bind('click', function() {
+                                                                      dialogs[id].dialog('open');
+                                                                       // prevent the default action, e.g., following a link
+                                                                      return false;
+                                                                     });
+    });//each end
+
+        }//bind_crud end
+
+   //apply   $. bind_crud();
+  $. bind_crud();
+  })
+    </script>

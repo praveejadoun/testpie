@@ -200,14 +200,27 @@ class AcademicYearsController extends RController
 	public function actionCreate()
         {
             $model = new AcademicYears;
-            
+          //$ay= AcademicYears::model()->findByAttributes(array('name'=>$_POST['AcademicYears']->name));
+        
             if(isset($_POST['AcademicYears']))
             {
+                  //if($ay!=$_POST['AcademicYears']->name){
+            //  echo"<pre>"; print_r($_POST);exit;
               $model->attributes=$_POST['AcademicYears'];
-              if($model()->save())
+              if ($model->start_date)
+                $model->start_date = date('Y-m-d', strtotime($model->start_date));
+              if ($model->end_date)
+                $model->end_date = date('Y-m-d', strtotime($model->end_date));
+              if($model->save())
+                   Yii::app()->user->setFlash('notification','Created Successfully');
                   $this->redirect(array('admin'));
               
-            }
+          /* }
+          else {
+              echo"sunil";
+                  }*/
+         
+          }
           $this->render('create',array('model'=>$model,));  
         }
 	/**
@@ -222,71 +235,12 @@ class AcademicYearsController extends RController
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['submit']))
+		if(isset($_POST['AcademicYears']))
 		{
-			
-			$posts_1=Configurations::model()->findByAttributes(array('id'=>1));
-			$posts_1->config_value = $_POST['collegename'];
-			$posts_1->save();
-			
-			$posts_2=Configurations::model()->findByAttributes(array('id'=>2));
-			$posts_2->config_value = $_POST['address'];
-			$posts_2->save();
-			
-			$posts_3=Configurations::model()->findByAttributes(array('id'=>3));
-			$posts_3->config_value = $_POST['phone'];
-			$posts_3->save();
-			
-			$posts_4=Configurations::model()->findByAttributes(array('id'=>4));
-			$posts_4->config_value = $_POST['attentance'];
-			$posts_4->save();
-			
-			$posts_5=Configurations::model()->findByAttributes(array('id'=>13));
-			$posts_5->config_value = $_POST['startyear'];
-			$posts_5->save();
-			
-			$posts_6=Configurations::model()->findByAttributes(array('id'=>14));
-			$posts_6->config_value = $_POST['endyear'];
-			$posts_6->save();
-			
-			$posts_7=Configurations::model()->findByAttributes(array('id'=>14));
-			$posts_7->config_value = $_POST['currency'];
-			$posts_7->save();
-			
-			$posts_8=Configurations::model()->findByAttributes(array('id'=>5));
-			$posts_8->config_value = $_POST['currency'];
-			$posts_8->save();
-			
-			$posts_9=Configurations::model()->findByAttributes(array('id'=>6));
-			$posts_9->config_value = $_POST['language'];
-			$posts_9->save();
-			
-			if($file=CUploadedFile::getInstance($model,'logo'))
-       		 {
-				 
-				 $logo = new Logo;
-            $logo->photo_file_name=$file->name;
-            $logo->photo_content_type=$file->type;
-            $logo->photo_file_size=$file->size;
-            $logo->photo_data=file_get_contents($file->tempName);
-      		 $logo->save();
-			$posts_10=Configurations::model()->findByAttributes(array('id'=>18));
-			$posts_10->config_value = Yii::app()->db->getLastInsertId();;
-			$posts_10->save();
-			 }
-			
-			$posts_11=Configurations::model()->findByAttributes(array('id'=>12));
-			$posts_11->config_value = $_POST['network'];
-			$posts_11->save();
-			
-			$posts_12=Configurations::model()->findByAttributes(array('id'=>7));
-			$posts_12->config_value = $_POST['admission_number'];
-			$posts_12->save();
-			
-			$posts_13=Configurations::model()->findByAttributes(array('id'=>8));
-			$posts_13->config_value = $_POST['employee_number'];
-			$posts_13->save();
-				$this->redirect(array('create'));
+			$model->attributes=$_POST['AcademicYears'];
+			if($model->save())
+				Yii::app()->user->setFlash('notification','Data Updated Successfully');
+				$this->redirect(array('admin'));
 		}
 
 		$this->render('update',array(
@@ -305,9 +259,10 @@ class AcademicYearsController extends RController
 		{
 			// we only allow deletion via POST request
 			$this->loadModel($id)->delete();
-
+                       
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
+                            
 				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 		}
 		else
@@ -346,7 +301,7 @@ class AcademicYearsController extends RController
 	 */
 	public function loadModel($id)
 	{
-		$model=Configurations::model()->findByPk($id);
+		$model= AcademicYears::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

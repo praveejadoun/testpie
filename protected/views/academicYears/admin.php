@@ -63,25 +63,32 @@ $('.search-form form').submit(function(){
                 'dataProvider' => $model->search(),
                 'filter' => $model,
                 'pager' => array('cssFile' => Yii::app()->baseUrl.'/css/formstyle.css', 'header' => ''),
-                'cssFile' => Yii::app()->baseUrl . '/css/formstyle.css',
+               'cssFile' => Yii::app()->baseUrl . '/css/formstyle.css',
+                 
                 'columns' => array(
                 /* 'id', */
                 'name',
-//                'start_date',
-                array(
+               //'start_date',
+                    //'end_date',
+                    //'description',
+                     array(
                 'name' => 'start_date',
-                'value' => '$model->start_date',
-                'filter' => false,
+                'value' => '$data->start_date',
+                'filter' =>true,
                 ),
-                array('name'=>'end_date',
-                       'value'=>'$model->end_date',
-                       'filter'=>false,),
-                array('name'=>'description',
-                       'value'=>'$model->description',
-                        'filter'=>false
-                    ),
+                    array('name' => 'end_date',
+                            'value' => '$data->end_date',
+                              'filter' =>true),
+                    array('name' => 'description',
+                            'value' => '$data->description',
+                            'filter' =>true
+                                ),
+                  array('name'=> 'status',
+                        'value'=>'$data->status',
+                        'filter'=>true),
                 array(
                 'class' => 'CButtonColumn',
+                  
                 'template' => '{view}{update}{delete}',
                 ),
                 ),

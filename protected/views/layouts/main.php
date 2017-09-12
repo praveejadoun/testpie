@@ -345,7 +345,7 @@ $(".navigationbtm_wrapper_outer").show();
                
                 <li>
                  <?php 
-				if(Yii::app()->controller->id=='configurations' or Yii::app()->controller->id=='subjects' or Yii::app()->controller->id=='subjectName' or Yii::app()->controller->id=='user' or in_array(Yii::app()->controller->id,array('admin','profile','profileField')) or Yii::app()->controller->id=='edit')
+				if(Yii::app()->controller->id=='configurations' or Yii::app()->controller->id=='subjects' or Yii::app()->controller->id=='subjectName' or Yii::app()->controller->id=='user' or in_array(Yii::app()->controller->id,array('admin','profile','profileField')) or Yii::app()->controller->id=='edit' or Yii::app()->controller->id=='academicYears')
 				{
 				    echo CHtml::link(Yii::t('app','Settings'), array('/configurations/'),array('class'=>'ic8 active'));
 				}

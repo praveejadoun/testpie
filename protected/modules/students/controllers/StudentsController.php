@@ -119,9 +119,9 @@ class StudentsController extends RController {
        
              
         if (isset($_POST['Students']) || isset($_POST['Applicants'])) {
-//            
-//            echo "<pre>";
-//            print_r($_POST);exit;
+            
+  //        echo "<pre>";
+     //      print_r($_POST);exit;
 
             if(!empty($_POST['Students'])){
                 $model->attributes = $_POST['Students'];

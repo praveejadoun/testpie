@@ -2,7 +2,11 @@
 <div class="formCon">
 
 <div class="formConInner">
+    <?php if(Yii::app()->controller->action->id=='create'){?>
     <h3>Enter the details of the upcoming academic year</h3>
+    <?php } else { ?>
+    <h3>Update the details of this academic year</h3>
+    <?php } ?>
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'academic-years-form',
 	'enableAjaxValidation'=>false,
@@ -15,46 +19,37 @@
      <tr> <td>&nbsp;</td></tr>
   <tr>
     <td><?php echo $form->labelEx($model,Yii::t('academicYears','name')); ?></td>
-    <td><?php echo $form->labelEx($model,Yii::t('academicYears','Start Date')); ?></td>
-    <td><?php echo $form->labelEx($model,Yii::t('academicYears','End Date')); ?></td>
+    <td><?php echo $form->labelEx($model,Yii::t('academicYears','start_date')); ?></td>
+    <td><?php echo $form->labelEx($model,Yii::t('academicYears','end_date')); ?></td>
 
   </tr>
   <tr>
     <td><?php echo $form->textField($model,'name',array('size'=>20,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'name'); ?></td>
     
-     <td><?php 
-			$settings=UserSettings::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
-	if($settings!=NULL)
-	{
-		$date=$settings->dateformat;
-		
-		
-	}
-	else
-	$date = 'dd-mm-yy';	
-	//echo $form->textField($model,'joining_date',array('size'=>30,'maxlength'=>255));
-				$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-							//'name'=>'Employees[joining_date]',
-							'attribute'=>'start_date',
-							'model'=>$model,
-							
-							// additional javascript options for the date picker plugin
-							'options'=>array(
-								'showAnim'=>'fold',
-								'dateFormat'=>$date,
-								'changeMonth'=> true,
+     <td><div>
+    <?php
+			
+			$date = 'dd-mm-yy';	
+   				
+						$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+								//'name'=>'Students[admission_date]',
+								'model'=>$model,
+								'attribute'=>'start_date',
+								// additional javascript options for the date picker plugin
+								'options'=>array(
+									'showAnim'=>'fold',
+									'dateFormat'=>$date,
+									'changeMonth'=> true,
 									'changeYear'=>true,
-									'yearRange'=>'1970:'
-							),
-							'htmlOptions'=>array(
-								//'style'=>'height:20px;'
-								//'value' => date('m-d-y'),
-							),
-						))
-	
-	 ?>
-		<?php echo $form->error($model,'start_date'); ?></td>
+									'yearRange'=>'1900:2030'
+								),
+								'htmlOptions'=>array(
+									'style'=>'height:20px;'
+								),
+							));
+    ?>
+		<?php echo $form->error($model,'start_date'); ?></div></td>
     
     <td><?php 
 			$settings=UserSettings::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
@@ -78,7 +73,7 @@
 								'dateFormat'=>$date,
 								'changeMonth'=> true,
 									'changeYear'=>true,
-									'yearRange'=>'1970:'
+									'yearRange'=>'1970:2030'
 							),
 							'htmlOptions'=>array(
 								//'style'=>'height:20px;'
@@ -92,7 +87,7 @@
   <tr> <td>&nbsp;</td></tr>
    
   <tr>
-       <td><?php echo $form->labelEx($model,Yii::t('academicYears','Description')); ?></td>
+       <td><?php echo $form->labelEx($model,Yii::t('academicYears','description')); ?></td>
   </tr>
   <tr>
  
@@ -100,15 +95,15 @@
 		<?php echo $form->error($model,'description'); ?></td>
     
   </tr>
-</table>
+  <tr> <td>&nbsp;</td></tr>
 
-
-	<div class="row">
-		<?php //echo $form->labelEx($model,'status'); ?>
-		<?php echo $form->hiddenField($model,'status',array('value'=>1)); ?>
+<tr>
+	
+    <td>	<?php echo $form->labelEx($model,Yii::t('academicYears','status')); ?></td></tr>
+<tr><td>	<?php echo $form->dropdownlist($model,'status',array('Active'=>'Active','InActive'=>'InActive'),array('style'=>'width:100% !important;')); ?>
 		<?php echo $form->error($model,'status'); ?>
-	</div>
-
+    </td></tr>	
+</table>
 	<div style="padding-top:20px;">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'formbut')); ?>
 	</div>

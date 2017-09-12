@@ -20,6 +20,8 @@ a:hover{text-decoration:none;}
 	width:98%;
 	min-height:300px;
 }
+
+
 .cbut{
 	padding:5px 10px;
 	margin:0px;
@@ -6375,4 +6377,7 @@ background:url(../images/act_arrow.png) no-repeat center;
 	width:14px;
 	height:8px;
 	background:url(../images/gridact_arrow.png) no-repeat;
+}
+#AcademicYears_status{
+    width:100% !important;
 }

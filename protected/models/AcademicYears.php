@@ -9,7 +9,7 @@
  * @property string $description
  * @property string $start_date
  * @property string $end_date
- * @property integer $is_active
+ * @property integer $status
  * @property integer $is_deleted
  * @property string $created_at
  * @property string $updated_at
@@ -42,14 +42,14 @@ class AcademicYears extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id,is_active, is_deleted', 'numerical', 'integerOnly'=>true),
-			array(' description,name', 'length', 'max'=>25),
-			array(' end_date,created_at,updated_at', 'safe'),
+			array('user_id, is_deleted', 'numerical', 'integerOnly'=>true),
+			array(' status ,description,name', 'length', 'max'=>25),
+			array(' start_date,end_date', 'safe'),
 			// The following rule is used by search().
-			array('end_date,description', 'required'),
+			array('name,start_date,end_date,description', 'required'),
 			array('name','CRegularExpressionValidator', 'pattern'=>'/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/','message'=>"{attribute} should not contain any special character(s)."),
 			// Please remove those attributes that should not be searched.
-			array('id, name, description,end_date, is_active, is_deleted, ', 'safe', 'on'=>'search'),
+			array('id, name, description,start_date,end_date, status, is_deleted, ', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -77,7 +77,7 @@ class AcademicYears extends CActiveRecord
 			'description' => 'Description',
                         'start_date' => 'Start Date',
 			'end_date' => 'End Date',
-			'is_active' => 'Is Active',
+			'status' => 'Status',
 			'is_deleted' => 'Is Deleted',
                         'created_at' => 'Craeted At',
                         'updated_at' => 'Updated At',
@@ -99,14 +99,14 @@ class AcademicYears extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
                 $criteria->compare('name',$this->name,true);
-		$criteria->compare('description',$this->description);
-                $criteria->compare('start_date',$this->start_date);
-		$criteria->compare('end_date',$this->end_date);
-		$criteria->compare('is_active',$this->is_active);
-		$criteria->compare('is_deleted',$this->is_deleted);
-		$criteria->compare('created_at',$this->created_at);
-                $criteria->compare('updated_at',$this->updated_at);
-                $criteria->compare('user_id',$this->user_id);
+		$criteria->compare('description',$this->description,true);
+                $criteria->compare('start_date',$this->start_date,true);
+		$criteria->compare('end_date',$this->end_date,true);
+		$criteria->compare('status',$this->status,true);
+		$criteria->compare('is_deleted',$this->is_deleted,true);
+		$criteria->compare('created_at',$this->created_at,true);
+                $criteria->compare('updated_at',$this->updated_at,true);
+                $criteria->compare('user_id',$this->user_id,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
