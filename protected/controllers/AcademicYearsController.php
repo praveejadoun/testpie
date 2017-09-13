@@ -255,19 +255,50 @@ class AcademicYearsController extends RController
 	 */
 	public function actionDelete($id)
 	{
-		if(Yii::app()->request->isPostRequest)
+             try{   $this->loadModel($id)->delete();
+                 if(!isset($_GET['ajax']))
+                    Yii::app()->user->setFlash('notification','Normal - Deleted Successfully');
+            else
+                //Yii::app()->user->setFlash('notification','Normal - Deleted Successfully');
+
+            echo "<div class='flash-success'> Deleted Successfully</div>";
+                }
+                catch(CDbException $e){
+                if(!isset($_GET['ajax']))
+                 Yii::app()->user->setFlash('notification','Normal - error message');
+             else
+                echo "<div class='flash-error'>Ajax - error message</div>"; //for ajax
+                }
+ 
+            // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+            if(!isset($_GET['ajax']))
+                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));  
+        }         
+           /*  $result = $this->loadModel($id)->delete();
+        if ($result)
+            Yii::app()->user->setFlash('notification', 'Data was deleted');
+        else
+            Yii::app()->user->setFlash('notification', 'Error was occurred');
+
+        if (Yii::app()->request->getIsAjaxRequest())
+        {
+            echo Yii::app()->user->getFlash('notification');
+        } else {
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array(admin));
+        }*/
+		/*if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
 			$this->loadModel($id)->delete();
                        
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
-                            
+                             Yii::app()->user->setFlash('notification','Created Successfully');
 				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	}
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');*/
+	
 
 	/**
 	 * Lists all models.

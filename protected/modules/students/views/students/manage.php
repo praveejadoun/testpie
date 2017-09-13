@@ -12,6 +12,37 @@ $this->breadcrumbs = array(
 ?>
 <script>
 $(document).ready(function() {
+$(".s_no_but").click(function(){
+	                $('.gridact_drop').hide();
+	            
+            	if ($("#"+this.id+'l').is(':hidden')){
+					$('.ns_drop').hide();
+				    $(".s_no_but").removeClass("ns_drop_hand");	
+                	$("#"+this.id+'l').show();
+					$("#"+this.id).addClass("ns_drop_hand");
+					$(".gridact_drop").hide();
+					
+				}
+            	else{
+                	$("#"+this.id+'l').hide();
+					$("#"+this.id).removeClass("ns_drop_hand");
+            	}
+            return false;
+       			 });
+				  $("#"+this.id+'l').click(function(e) {
+            		e.stopPropagation();
+        			});
+        		
+});
+$(document).click(function() {
+					
+            		$('.ns_drop').hide();
+					$(".s_no_but").removeClass("ns_drop_hand");
+					
+        			});
+</script>
+<script>
+$(document).ready(function() {
 $(".action_but").click(function(){
 	                $(".ns_drop").hide();
 					$(".s_no_but").removeClass("ns_drop_hand");

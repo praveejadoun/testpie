@@ -936,13 +936,23 @@ else
                         <div class="clear"></div>
                         <div style="display: inline-block;margin-bottom: 14px;margin-top: 14px; width: 100%;">
                         <div style="float:left;">
-                         <div class="bttns_addstudent">   
+                        <!-- <div class="bttns_addstudent">   
                       <ul>
                         	<li><?php echo CHtml::link(Yii::t('employees','Add Employee'), array('create'),array('class'=>'addbttn last')); ?></li>
                                 <li><a class="addbttn last" href="javascript:void(0)" id="delete_student">Delete Employee</a></li>
 
                       </ul>
-                         </div>
+                         </div>-->
+                          <div class="box-one">
+                            <div class="bttns_addstudent-n">
+                                <ul>
+                                    <li><?php echo CHtml::link(Yii::t('employees','Add Employee'),array('create'),array('class'=>'formbut-n')) ?></li>
+                                     
+                                        <li> <a class="formbut-n" href="javascript:void(0)" id="delete_student">Delete Employee</a>  </li> 
+                                       
+                                </ul>
+                            </div>
+                        </div>
                              <div class="ea_pdf" style="top:0px; right:6px;">
  <?php echo CHtml::link('<img src="images/pdf-but.png">', array('employees/managePdf'),array('target'=>'_blank')); ?>
 	</div>

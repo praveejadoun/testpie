@@ -41,13 +41,13 @@ $('.search-form form').submit(function(){
                         'myHideEffect', '$(".flash-success").animate({opacity: 1.0}, 3000).fadeOut("slow");', CClientScript::POS_READY
                 );
                 ?>
-
+                <div id="statusMsg">    
                 <?php if (Yii::app()->user->hasFlash('notification')): ?>
                     <div class="flash-success" style="color:#F00; padding-left:150px; font-size:12px">
                     <?php echo Yii::app()->user->getFlash('notification'); ?>
                     </div>
                     <?php endif; ?>
-
+                </div>
                 <?php //echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
                 <div class="search-form" style="display:none">
                 <?php
@@ -88,7 +88,7 @@ $('.search-form form').submit(function(){
                         'filter'=>true),
                 array(
                 'class' => 'CButtonColumn',
-                  
+                 'afterDelete'=>'function(link,notification,data){ if(notification) $("#statusMsg").html(data); }',  
                 'template' => '{view}{update}{delete}',
                 ),
                 ),

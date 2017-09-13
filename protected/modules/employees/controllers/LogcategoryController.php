@@ -277,4 +277,15 @@ class LogcategoryController extends RController
 	}			  
 	
 	}
+          public function actionAjax_delete(){
+                 $id=$_POST['id'];
+                 $deleted=$this->loadModel($id);
+                if ($deleted->saveAttributes(array('is_deleted' => '1')) ){
+               echo json_encode (array('success'=>true));
+               exit;
+                }else{
+                  echo json_encode (array('success'=>false));
+                  exit;
+                           }
+      }
 }
