@@ -20,6 +20,19 @@ $this->breadcrumbs=array(
      <li><?php echo CHtml::link(Yii::t('employees','<span>Employees</span>'), array('employees/manage'),array('class'=>'edit last')); ?><!--<a class=" edit last" href="">Edit</a>--></li>
     </ul>
     </div>
+<?php
+	$achievement = EmployeeAchievements::model()->findAll("employee_id=:x", array(':x'=>$_REQUEST['id']));
+	?>
+       <?php
+                Yii::app()->clientScript->registerScript(
+                        'myHideEffect', '$(".flash-success").animate({opacity: 1.0}, 3000).fadeOut("slow");', CClientScript::POS_READY
+                );
+                ?>
+    <?php if(Yii::app()->user->hasFlash('success')):?>
+                    <div class="flash-success" style="color:#F00; padding-left:150px; font-size:15px">
+                        <?php echo Yii::app()->user->getFlash('success'); ?>
+                    </div>
+                    <?php endif; ?>
     
     <div class="emp_right_contner" style="min-height: 200px;" >
     <div class="emp_tabwrapper">
@@ -38,9 +51,7 @@ $this->breadcrumbs=array(
     </div>
     <div class="clear"></div>
     
-    <?php
-	$achievement = EmployeeAchievements::model()->findAll("employee_id=:x", array(':x'=>$_REQUEST['id']));
-	?>
+    
         <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #b9c7d0;">
             <tbody>
             <tr>
@@ -48,6 +59,7 @@ $this->breadcrumbs=array(
             </tr>
             </tbody>
             </table>
+     
     <div class="tableinnerlist"> 
         
     <table width="100%" cellpadding="0" cellspacing="0">
@@ -69,8 +81,8 @@ $this->breadcrumbs=array(
 			echo '<td>'.$achievements->achievement_description.'</td>';
 			echo '<td>'.$achievements->achievement_document_name.'</td>';
 			echo '<td align="center"  class="sub_act">'; ?> 
-					 <?php echo CHtml::link(Yii::t('Achievements','Edit'),array('achievements/update','id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
-		 <?php echo CHtml::link(Yii::t('Achievements','Delete'), array('/employees/achievements/delete', 'id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure You Want To Delete This ?')) ?>
+					 <?php echo CHtml::link(Yii::t('Achievements','Edit'),array('employeeachievements/update','id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
+		 <?php echo CHtml::link(Yii::t('Achievements','Delete'), array('employeeachievements/delete', 'id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure You Want To Delete This ?')) ?>
 		 <?php echo CHtml::link(Yii::t('Achievements','Download'),array('achievements/downloadImage','id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>	
                  <?php //echo CHtml::link(Yii::t('Achievements','View'),array('','id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
  <?php echo'</td></tr>';?>

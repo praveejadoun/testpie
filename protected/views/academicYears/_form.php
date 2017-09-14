@@ -102,8 +102,26 @@
     <td>	<?php echo $form->labelEx($model,Yii::t('academicYears','status')); ?></td></tr>
 <tr><td>	<?php echo $form->dropdownlist($model,'status',array('Active'=>'Active','InActive'=>'InActive'),array('style'=>'width:100% !important;')); ?>
 		<?php echo $form->error($model,'status'); ?>
-    </td></tr>	
+    </td></tr>
 </table>
+    <div class="row">
+      <?php     if(Yii::app()->controller->action->id == 'create')
+	{
+		 echo $form->hiddenField($model,'created_at',array('value'=>date('Y-m-d'))); 
+	}
+	else
+	{
+		 echo $form->hiddenField($model,'created_at'); 
+	}
+		 ?>
+		<?php echo $form->error($model,'created_at'); ?>
+    </div>
+        <div class="row">
+		<?php //echo $form->labelEx($model,'updated_at'); ?>
+		<?php echo $form->hiddenField($model,'updated_at',array('value'=>date('Y-m-d'))); ?>
+		<?php echo $form->error($model,'updated_at'); ?>
+	</div>
+
 	<div style="padding-top:20px;">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'formbut')); ?>
 	</div>

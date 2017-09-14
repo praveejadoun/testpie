@@ -960,6 +960,9 @@ else
                             
                         </div>
                     </div>
+    <div id="success_flash" align="center" style=" color:#F00; display:none;"><h4>Selected employee Deleted Successfully !</h4>
+ 
+   </div>
     <?php $this->beginWidget('CActiveForm',array('id'=>'checkform')) ?>
     <div class="list_contner">
     
@@ -1227,7 +1230,7 @@ function rowdelete(id)
                                     click: function() {
                                                                       deletes[id]();
                                                                       $(this).dialog("close");
-																	 $("#success_flash").css("display","block").animate({opacity: 1.0}, 3000).fadeOut("slow");
+																	 $("#success_flash").css("display","block").animate({opacity: 3.0}, 3000).fadeOut("slow");
                                                                       }
                                 },
                                 {

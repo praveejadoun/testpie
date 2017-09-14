@@ -283,6 +283,7 @@ class EmployeesController extends RController
                         
 			if($model->save())
                         {
+                            Yii::app()->user->setFlash('success','Log Created Successfully');
 				$this->redirect(array('log','id'=>$_REQUEST['id']));
                         }
 		}
@@ -321,6 +322,7 @@ class EmployeesController extends RController
                       
 			if($model->save())
                         {
+                               Yii::app()->user->setFlash('success','Document Created Successfully');
 				$this->redirect(array('documents','id'=>$_REQUEST['id']));
                         }
 		}
@@ -385,6 +387,7 @@ class EmployeesController extends RController
                       
 			if($model->save())
                         {
+                            Yii::app()->user->setFlash('success','Achievement Created Successfully');
 				$this->redirect(array('achievements','id'=>$_REQUEST['id']));
                         }
 		}

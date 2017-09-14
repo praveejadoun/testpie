@@ -128,6 +128,7 @@ class ApplicantsController extends RController {
                 $model->date_of_birth = date('Y-m-d', strtotime($model->date_of_birth));
             //$model->photo_data=CUploadedFile::getInstance($model,'photo_data');
             if($model->save())
+                Yii::app()->user->setFlash('success','Applicant Created Successfully');
 				$this->redirect(array('manage'));
            /* if ($file = CUploadedFile::getInstance($model, 'photo_data')) {
                 $model->photo_file_name = $file->name;
@@ -254,6 +255,7 @@ class ApplicantsController extends RController {
                 $model->photo_data = file_get_contents($file->tempName);
             }
             if ($model->save())
+                Yii::app()->user->setFlash('success','Applicant Updated Successfully');
                 $this->redirect(array('manage'));
         }
 

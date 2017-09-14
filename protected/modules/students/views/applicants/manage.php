@@ -868,7 +868,19 @@ $(document).click(function() {
 
                         </div>
                     </div>
-                    
+                    <div id="success_flash" align="center" style=" color:#F00; display:none;"><h4>Selected applicant Deleted Successfully !</h4>
+ 
+   </div>
+                    <?php
+                Yii::app()->clientScript->registerScript(
+                        'myHideEffect', '$(".flash-success").animate({opacity: 1.0}, 3000).fadeOut("slow");', CClientScript::POS_READY
+                );
+                ?>
+                    <?php if(Yii::app()->user->hasFlash('success')):?>
+                    <div class="flash-success" style="color:#F00; padding-left:150px; font-size:15px">
+                        <?php echo Yii::app()->user->getFlash('success'); ?>
+                    </div>
+                    <?php endif; ?>
                     <div class="list_contner">
                         <div class="clear"></div>
                         <?php
@@ -1161,7 +1173,7 @@ $(document).click(function() {
                                     click: function() {
                                                                       deletes[id]();
                                                                       $(this).dialog("close");
-																	 $("#success_flash").css("display","block").animate({opacity: 1.0}, 3000).fadeOut("slow");
+																	 $("#success_flash").css("display","block").animate({opacity: 3.0}, 3000).fadeOut("slow");
                                                                       }
                                 },
                                 {

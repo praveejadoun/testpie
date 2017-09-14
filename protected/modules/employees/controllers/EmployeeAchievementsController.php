@@ -1,6 +1,6 @@
 <?php
 
-class AchievementsController extends RController
+class EmployeeAchievementsController extends RController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -118,6 +118,7 @@ class AchievementsController extends RController
                                         
                                          }
 			if($model->save())
+                              Yii::app()->user->setFlash('success','Achievement Updated Successfully');
 				$this->redirect(array('employees/achievements','id'=>$_REQUEST['employee_id']));
 		}
 
@@ -147,10 +148,12 @@ class AchievementsController extends RController
              $model->achievdoc_file_name,
              file_get_contents($fileDir . $model->achievdoc_file_name),
              $model->achievdoc_data
-                        );  
+                        ); 
+               
             }
     public function actionDisplaySavedImage()
 		{
+                        
 			$model=$this->loadModel($_GET['id']);
 			header('Pragma: public');
 			header('Expires: 0');
@@ -159,12 +162,14 @@ class AchievementsController extends RController
 			header('Content-length: '.$model->achievdoc_file_size);
 			header('Content-Type: '.$model->achievdoc_content_type);
 			header('Content-Disposition: attachment; filename='.$model->achievdoc_file_name);
-			echo $model->achievdoc_data;
+                        ob_clean();
+			echo $model->achievdoc_data;	
 		}
        public function actionDelete()
 	{
 		$model = EmployeeAchievements::model()->findByAttributes(array('id'=>$_REQUEST['id']));
-		$model->delete();	
+		$model->delete();
+                Yii::app()->user->setFlash('success','Achievement Deleted Successfully');
 		$this->redirect(array('employees/achievements','id'=>$_REQUEST['employee_id']));
         }	
 }

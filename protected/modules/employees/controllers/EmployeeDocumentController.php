@@ -147,7 +147,7 @@ class EmployeeDocumentController extends RController
                 header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
                 header('Pragma: public');
                 header('Content-Length: ' . count($user->document_file_size));
-                ob_start();
+                ob_clean();
                 echo $user->document_file_size;
                 
                 }
@@ -155,6 +155,7 @@ class EmployeeDocumentController extends RController
 	{
 		$model = EmployeeDocument::model()->findByAttributes(array('id'=>$_REQUEST['id']));
 		$model->saveAttributes(array('document_file_name'=>'','document_data'=>''));
+                Yii::app()->user->setFlash('success','Document Attatchment Removed Successfully');
 		$this->redirect(array('update','id'=>$_REQUEST['id'],'employee_id'=>$_REQUEST['employee_id']));
 	}
 	
@@ -185,6 +186,7 @@ class EmployeeDocumentController extends RController
                                         
                                          }
 			if($model->save())
+                             Yii::app()->user->setFlash('success','Document Updated Successfully');
 				$this->redirect(array('employees/documents','id'=>$_REQUEST['employee_id']));
 		}
 
@@ -260,13 +262,15 @@ class EmployeeDocumentController extends RController
 		
 		$model = EmployeeDocument::model()->findByAttributes(array('id'=>$_REQUEST['id']));
 		$model->saveAttributes(array('is_active'=>'0'));
+                 Yii::app()->user->setFlash('success','Document Disapproved Successfully');
 		$this->redirect(array('employees/documents','id'=>$_REQUEST['employee_id']));
 		
 	}
         public function actionDelete()
 	{
 		$model = EmployeeDocument::model()->findByAttributes(array('id'=>$_REQUEST['id']));
-		$model->delete();	
+		$model->delete();
+                 Yii::app()->user->setFlash('success','Document Deleted Successfully');
 		$this->redirect(array('employees/documents','id'=>$_REQUEST['employee_id']));
         }	
 }

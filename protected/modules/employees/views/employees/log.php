@@ -20,7 +20,16 @@ $this->breadcrumbs=array(
      <li><?php echo CHtml::link(Yii::t('employees','<span>Employees</span>'), array('employees/manage'),array('class'=>'edit last')); ?><!--<a class=" edit last" href="">Edit</a>--></li>
     </ul>
     </div>
-    
+     <?php
+                Yii::app()->clientScript->registerScript(
+                        'myHideEffect', '$(".flash-success").animate({opacity: 1.0}, 3000).fadeOut("slow");', CClientScript::POS_READY
+                );
+                ?>
+    <?php if(Yii::app()->user->hasFlash('success')):?>
+                    <div class="flash-success" style="color:#F00; padding-left:150px; font-size:15px">
+                        <?php echo Yii::app()->user->getFlash('success'); ?>
+                    </div>
+                    <?php endif; ?>
     <div class="emp_right_contner" style="min-height: 200px;" >
     <div class="emp_tabwrapper">
     <div class="emp_tab_nav">

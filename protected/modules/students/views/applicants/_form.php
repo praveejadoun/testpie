@@ -462,7 +462,7 @@ else
        <!-- form -->
     <div class="clear"></div>
     <div style="padding:0px 0px 0px 0px; text-align:left">
-    	<?php echo CHtml::submitButton($model->isNewRecord ? 'Save' : 'Save',array('class'=>'formbut')); ?>
+    	<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'formbut')); ?>
         <input type="button" name="back" value="Back" onclick="javascript:history.back();" class="formbut" style="float:right;"/>
     </div>
 <?php $this->endWidget(); ?>

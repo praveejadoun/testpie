@@ -304,6 +304,7 @@ class StudentsController extends RController {
                 $model->photo_data = file_get_contents($file->tempName);
             }
             if ($model->save())
+                
                 $this->redirect(array('view', 'id' => $model->id));
         }
 

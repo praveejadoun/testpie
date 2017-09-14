@@ -81,12 +81,14 @@
 			
 			else
 			{
+                             
 				if(Yii::app()->controller->action->id=='update') {
                                    echo   '<ul  class="sub_act" ><li style="list-style:none;">';
-                                        echo CHtml::link(Yii::t('students','Download'), array('achievements/downloadImage', 'id'=>$model->id,'employee_id'=>$model->employee_id),array('confirm'=>'Are you sure?'));
-					echo CHtml::link(Yii::t('students','Remove'), array('achievements/remove', 'id'=>$model->id,'employee_id'=>$model->employee_id),array('confirm'=>'Are you sure?'));
+                                        echo CHtml::link(Yii::t('students','Download'), array('Employeeachievements/downloadImage', 'id'=>$model->id,'employee_id'=>$model->employee_id),array('confirm'=>'Are you sure?'));
+					echo CHtml::link(Yii::t('students','Remove'), array('Employeeachievements/remove', 'id'=>$model->id,'employee_id'=>$model->employee_id),array('confirm'=>'Are you sure?'));
                                     //  echo '<img class="imgbrder" src="'.$this->createUrl('achievements/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->achievdoc_file_name.'" width="100" height="100" />';	
-                                       echo '<img class="imgbrder" src="'.$this->createUrl('achievements/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->achievdoc_file_name.'" width="100" height="100" />';	
+                                       echo '<img class="imgbrder" src="'.$this->createUrl('Employeeachievements/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->achievdoc_file_name.'" width="50" height="50" />';	
+                                       // echo '<img class="imgbrder" src="/sms/index.php?r=employees/Employeeachievements/DisplaySavedImage&id=73" alt="ec6.jpg" width="50" height="50">';
                                         echo '</li></ul>';
                                      
 					

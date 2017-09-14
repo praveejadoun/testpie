@@ -855,6 +855,10 @@ $(document).click(function() {
 
                         </div>
                     </div>
+                    <div id="success_flash" align="center" style=" color:#F00; display:none;"><h4>Selected student Deleted Successfully !</h4>
+ 
+   </div>
+                    
                     <div class="list_contner">
                         <div class="clear"></div>
                         <?php
@@ -1120,7 +1124,7 @@ $(document).click(function() {
                                     click: function() {
                                                                       deletes[id]();
                                                                       $(this).dialog("close");
-																	 $("#success_flash").css("display","block").animate({opacity: 1.0}, 3000).fadeOut("slow");
+																	 $("#success_flash").css("display","block").animate({opacity: 3.0}, 3000).fadeOut("slow");
                                                                       }
                                 },
                                 {

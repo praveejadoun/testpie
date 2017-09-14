@@ -54,7 +54,7 @@ $(document).click(function() {
    </div>
                          
                 <!-- <div class="tableinnerlist" style="padding:35px 0px 0px 0px">-->
-                    
+                     <div id="employee-categories-grid">
                            <div class="grid_table_con">
                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
 		  <tbody>
@@ -85,7 +85,7 @@ $(document).click(function() {
                                                     <ul>
                                                         <!--<li><a href="#" class="grview">View</a></li>-->
                                                         <li><a href="index.php?r=employees/logcategory/update&id=<?php echo $logcategory_1->id ?>" class="gredit">Edit</a></li>
-                                                        <li><a href="<?php echo $logcategory_1->id ?>" class="grdel">Delete</a></li>
+                                                        <li><a href="<?php echo $logcategory_1->id ?>" class="grde">Delete</a></li>
                                                     </ul>
                                             </div>
                                             </div>
@@ -120,16 +120,16 @@ $(document).click(function() {
      <?php } ?>
                    <?php
                             //Strings for the delete confirmation dialog.
-                            $del_con = Yii::t('students', 'Are you sure you want to delete this student category?');
-                            $del_title=Yii::t('students', 'Delete Confirmation');
-                            $del=Yii::t('students', 'Delete');
-                            $cancel=Yii::t('students', 'Cancel');
+                            $del_con = Yii::t('logcategory', 'Are you sure you want to delete this student category?');
+                            $del_title=Yii::t('logcategory', 'Delete Confirmation');
+                            $del=Yii::t('logcategory', 'Delete');
+                            $cancel=Yii::t('logcategory', 'Cancel');
                             ?>
          </tbody>
         </table>
 
                            </div>
-                      
+                    </div>
                       </div>
                     </td>
                 </tr>
@@ -150,7 +150,7 @@ $(document).click(function() {
 
     var deletes = new Array();
     var dialogs = new Array();
-    $('.grdel').each(function(index) {
+    $('.grde').each(function(index) {
         var id = $(this).attr('href');
         deletes[id] = function() {
             $.ajax({
