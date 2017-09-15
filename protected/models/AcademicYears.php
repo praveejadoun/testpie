@@ -44,12 +44,12 @@ class AcademicYears extends CActiveRecord
 		return array(
 			array('user_id, is_deleted', 'numerical', 'integerOnly'=>true),
 			array(' status ,description,name', 'length', 'max'=>25),
-			array(' start_date,end_date', 'safe'),
+			array(' start_date,end_date,created_at,updated_at', 'safe'),
 			// The following rule is used by search().
 			array('name,start_date,end_date,description', 'required'),
-			array('name','CRegularExpressionValidator', 'pattern'=>'/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/','message'=>"{attribute} should not contain any special character(s)."),
+			array('name','CRegularExpressionValidator', 'pattern'=>'/^[A-Za-z0-9 _ -]*[A-Za-z0-9][A-Za-z0-9 _ -]*$/','message'=>"{attribute} should not contain any special character(s) except _- "),
 			// Please remove those attributes that should not be searched.
-			array('id, name, description,start_date,end_date, status, is_deleted, ', 'safe', 'on'=>'search'),
+			array('id, name, description,start_date,end_date, status, is_deleted,created_at,updated_at ', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -79,7 +79,7 @@ class AcademicYears extends CActiveRecord
 			'end_date' => 'End Date',
 			'status' => 'Status',
 			'is_deleted' => 'Is Deleted',
-                        'created_at' => 'Craeted At',
+                        'created_at' => 'Created At',
                         'updated_at' => 'Updated At',
                         'User_id' => 'User Id',
                        

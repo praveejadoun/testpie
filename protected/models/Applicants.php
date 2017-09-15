@@ -46,7 +46,7 @@
  * @property integer $photo_file_size
  * @property integer $user_id
  * @property integer $parent_id
- * @property string $academic_year
+ * @property string $academicyear_id
  * @property string $status 
  */
 class Applicants extends CActiveRecord
@@ -81,12 +81,12 @@ class Applicants extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('registration_no, parent_id, course_id, nationality_id, student_category_id, country_id, immediate_contact_id, is_sms_enabled, is_active, is_deleted, has_paid_fees, photo_file_size, pin_code, phone1, phone2, user_id, uid', 'numerical', 'integerOnly'=>true),
+			array('academicyear_id,registration_no, parent_id, course_id, nationality_id, student_category_id, country_id, immediate_contact_id, is_sms_enabled, is_active, is_deleted, has_paid_fees, photo_file_size, pin_code, phone1, phone2, user_id, uid', 'numerical', 'integerOnly'=>true),
 			array(' registration_date, first_name, last_name, gender, date_of_birth, phone1, email', 'required',),
 			array('registration_no','unique'),
 			array('email','check'),
-			array('registration_no, class_roll_no, first_name, middle_name, last_name, gender, blood_group, birth_place, language, religion, address_line1, address_line2, city, state, email, photo_file_name, photo_content_type, status_description,academic_year,status', 'length', 'max'=>255),
-			array('registration_date,admission_date,batch_id,date_of_birth, created_at, updated_at', 'safe'),			
+			array('registration_no, class_roll_no, first_name, middle_name, last_name, gender, blood_group, birth_place, language, religion, address_line1, address_line2, city, state, email, photo_file_name, photo_content_type, status_description,status', 'length', 'max'=>255),
+			array('academicyear_id,registration_date,admission_date,batch_id,date_of_birth, created_at, updated_at', 'safe'),			
 			array('email','email'),
 			array(
 				'date_of_birth',
@@ -100,7 +100,7 @@ class Applicants extends CActiveRecord
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('photo_data', 'file', 'types'=>'jpg, gif, png', 'allowEmpty' => true),
-			array('id, registration_no, parent_id, class_roll_no, registration_date, first_name, middle_name, last_name, course_id, date_of_birth, gender, blood_group, birth_place, nationality_id, language, religion, student_category_id, address_line1, address_line2, city, state, pin_code, country_id, phone1, phone2, email, immediate_contact_id, is_sms_enabled, photo_file_name, photo_content_type, photo_data, status_description, is_active, is_deleted, created_at, updated_at, has_paid_fees, photo_file_size, user_id,academic_year,status', 'safe', 'on'=>'search'),
+			array('id, registration_no, parent_id, class_roll_no, registration_date, first_name, middle_name, last_name, course_id, date_of_birth, gender, blood_group, birth_place, nationality_id, language, religion, student_category_id, address_line1, address_line2, city, state, pin_code, country_id, phone1, phone2, email, immediate_contact_id, is_sms_enabled, photo_file_name, photo_content_type, photo_data, status_description, is_active, is_deleted, created_at, updated_at, has_paid_fees, photo_file_size, user_id,academicyear_id,status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -175,7 +175,7 @@ class Applicants extends CActiveRecord
 			'photo_file_size' => 'Photo File Size',
 			'user_id' => 'User',
                         'parent_id' => 'Parent',
-                        'academic_year' => 'Academic Year',
+                        'academicyear_id' => 'Academic Year',
                         'status' => 'Status'
 		);
 	}
@@ -230,7 +230,7 @@ class Applicants extends CActiveRecord
 		$criteria->compare('photo_file_size',$this->photo_file_size);
 		$criteria->compare('user_id',$this->user_id);
                 $criteria->compare('parent_id',$this->parent_id);
-                $critearia->compare('academic_year',$this->academic_year);
+                $critearia->compare('academicyear_id',$this->academicyear_id);
                 $criteria->compare('status',$this->status);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

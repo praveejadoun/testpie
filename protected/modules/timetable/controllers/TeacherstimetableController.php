@@ -371,11 +371,15 @@ class TeacherstimetableController extends RController
 	
 	public function actionPdf()
     {
-		$employee = Employees::model()->findByAttributes(array('id'=>$_REQUEST['id']));
-		$employee = $employee->first_name.' '.$employee->last_name.' Profile.pdf';
+        
+		$emp_name = Employees::model()->findByAttributes(array('id'=>$_REQUEST['tea']));
+		$emp_name = $emp_name->name.' Class Timetable.pdf';
+		
+        # HTML2PDF has very similar syntax
         $html2pdf = Yii::app()->ePdf->HTML2PDF();
-		$html2pdf->WriteHTML($this->renderPartial('print', array('model'=>$this->loadModel($_REQUEST['id'])), true));
-        $html2pdf->Output($employee);
+
+        $html2pdf->WriteHTML($this->renderPartial('exportpdf', array(), true));
+        $html2pdf->Output($emp_name);
  
         ////////////////////////////////////////////////////////////////////////////////////
 	}

@@ -211,9 +211,9 @@ class AcademicYearsController extends RController
                 $model->start_date = date('Y-m-d', strtotime($model->start_date));
               if ($model->end_date)
                 $model->end_date = date('Y-m-d', strtotime($model->end_date));
-              if($model->save())
+              if($model->save()){
                    Yii::app()->user->setFlash('notification','Created Successfully');
-                  $this->redirect(array('admin'));
+              $this->redirect(array('admin'));}
               
           /* }
           else {

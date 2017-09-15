@@ -39,10 +39,10 @@ else
 {
 	$sel='';
 }
-echo '<div style="float:left; width:413px;"><span style="font-size:14px; font-weight:bold; color:#666;margin:0px 30px 0px 74px;">Select Department</span>&nbsp;&nbsp;&nbsp;&nbsp;';
-echo CHtml::dropDownList('id','',$data,array('prompt'=>'Select Department','onchange'=>'department()','id'=>'dep','style'=>'height:auto;width:auto;','options'=>array($sel=>array('selected'=>true)))); 
+echo '<div style="float:left; width:430px;"><span style="font-size:14px; font-weight:bold; color:#666;margin:0px 30px 0px 74px;">Select Department</span>&nbsp;&nbsp;&nbsp;&nbsp;';
+echo CHtml::dropDownList('id','',$data,array('prompt'=>'Select Department','onchange'=>'department()','id'=>'dep','style'=>'height:auto;width:180px !important;','options'=>array($sel=>array('selected'=>true)))); 
 echo '</div><br/><br/><br/>';
-echo '<div style="float:left; width:350px;"><span style="font-size:14px; font-weight:bold; color:#666;margin:0px 42px 0px 75px;">Select Teacher</span>&nbsp;&nbsp;'; ?>
+echo '<div style="float:left; width:430px;"><span style="font-size:14px; font-weight:bold; color:#666;margin:0px 52px 0px 75px;">Select Teacher</span>&nbsp;&nbsp;&nbsp;&nbsp;'; ?>
 
 
 <?php 
@@ -66,7 +66,7 @@ else
 {
 	$sel_1 ='';
 }
-echo CHtml::dropDownList('tea','',$employees,array('prompt'=>'Select','onchange'=>'department()','id'=>'tea','onchange'=>'teacher()','options'=>array($sel_1=>array('selected'=>true)))); 
+echo CHtml::dropDownList('tea','',$employees,array('prompt'=>'Select Teacher','onchange'=>'department()','id'=>'tea','onchange'=>'teacher()','style'=>'width:180px !important;','options'=>array($sel_1=>array('selected'=>true)))); 
  
 echo '<br/></div><div class="clear"></div>';
 
@@ -113,9 +113,10 @@ if(count($employee)!=0)
 }
 */
 ?>
-
+    
   <div class="emp_right_contner">
     <div class="emp_tabwrapper">   
+       
     <?php //$this->renderPartial('/weekdays/tab_1');?>
       <?php
  
@@ -123,6 +124,9 @@ if(count($employee)!=0)
 	{  
         $weekday= TimetableEntries::model()->findAll('employee_id=:x',array(':x'=>$_REQUEST['tea']));
         ?>
+         <div class="ea_pdf" style="top:172px; left:20px;">
+                                    <?php echo CHtml::link('<img src="images/pdf-but.png">', array('teacherstimetable/pdf','id'=>$_REQUEST['tea']), array('target' => '_blank')); ?>
+                                </div>
         <div class="pdtab_Con" style="text-align:center">
           <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-bordered mb30">
                     <tbody>

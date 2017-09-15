@@ -98,6 +98,20 @@ if ($form->errorSummary($model)) {
                     <?php echo $form->error($model, 'admission_date'); ?>
                 </td>
             </tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td align="right"><?php echo $form->labelEx($model, Yii::t('students', 'academicyear_id')); ?> </td>
+                <td style="padding-left:8px;">
+                 <?php
+                    echo $form->dropDownList($model, 'academicyear_id', CHtml::listData(AcademicYears::model()->findAll("is_deleted=:x AND status=:y", array(':x'=>0,':y'=>'Active')), 'id', 'name'), array(
+                        'style' => 'width:152px !important;', 'empty' => 'Select Academic Year'
+                    ));
+                    ?>
+                    <?php echo $form->error($model, 'academicyear_id'); ?>
+                
+                    
+                </td>
+            </tr>
         </table>
     </div>
 </div>

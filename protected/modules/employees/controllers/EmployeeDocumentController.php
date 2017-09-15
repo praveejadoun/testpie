@@ -81,7 +81,7 @@ class EmployeeDocumentController extends RController
 				if($file=CUploadedFile::getInstance($model,'document_data'))
 					 {
 					$model->document_file_name=$file->name;
-					$model->document_file_type=$file->name;
+					//$model->document_file_type=$file->name;
 					$model->document_file_size=$file->size;
 					$model->document_data=file_get_contents($file->tempName);
 					  }

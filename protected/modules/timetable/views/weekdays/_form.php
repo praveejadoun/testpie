@@ -40,9 +40,9 @@ else
 	$sel='';
 }
 echo '<div style="float:left; width:413px;"><span style="font-size:14px; font-weight:bold; color:#666;margin:0px 30px 0px 74px;">Select Course</span>&nbsp;&nbsp;&nbsp;&nbsp;';
-echo CHtml::dropDownList('id','',$data,array('prompt'=>'Select','onchange'=>'course()','id'=>'cou','options'=>array($sel=>array('selected'=>true)))); 
+echo CHtml::dropDownList('id','',$data,array('prompt'=>'Select Course','onchange'=>'course()','id'=>'cou','style'=>'width:170px !important;','options'=>array($sel=>array('selected'=>true)))); 
 echo '</div><br/><br/><br/>';
-echo '<div style="float:left; width:350px;"><span style="font-size:14px; font-weight:bold; color:#666;margin:0px 42px 0px 75px;">Select Batch</span>&nbsp;&nbsp;'; ?>
+echo '<div style="float:left; width:413px;"><span style="font-size:14px; font-weight:bold; color:#666;margin:0px 42px 0px 75px;">Select Batch</span>&nbsp;&nbsp;'; ?>
 
 
 <?php 
@@ -66,7 +66,7 @@ else
 {
 	$sel_1 ='';
 }
-echo CHtml::dropDownList('bat','',$batches,array('prompt'=>'Select','onchange'=>'course()','id'=>'bat','onchange'=>'batch()','options'=>array($sel_1=>array('selected'=>true)))); 
+echo CHtml::dropDownList('bat','',$batches,array('prompt'=>'Select Batch','onchange'=>'course()','id'=>'bat','onchange'=>'batch()','style'=>'width:170px !important;','options'=>array($sel_1=>array('selected'=>true)))); 
  
 echo '<br/></div><div class="clear"></div>';
 
