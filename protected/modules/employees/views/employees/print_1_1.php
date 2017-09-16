@@ -116,7 +116,7 @@ td.subhdng_nrmal
 	{?>
     <table style="border-collapse:collapse;width:1000px;">
       
-         <tr >
+         <tr style="background-color:#E1EAEF;">
             <td style="border: 1px solid #dddddd;padding: 8px;width:13.5%;text-align: center"><?php echo Yii::t('employees','<strong>Sl.No</strong>');?></td>
              <td style="border: 1px solid #dddddd;padding: 8px;text-align: center;width:13.5%;"><?php echo Yii::t('employees','<strong>Employee Name</strong>');?></td>
              <td style="border: 1px solid #dddddd;padding: 8px;text-align: center;width:13.5%;"><?php echo Yii::t('employees','<strong>Employee No</strong>');?></td>

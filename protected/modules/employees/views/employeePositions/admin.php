@@ -35,7 +35,19 @@ $('.search-form form').submit(function(){
     <li><?php echo CHtml::link(Yii::t('employees','<span>Add Position</span>'), array('create'),array('class'=>'addbttn last ')); ?></li>
     </ul>
     </div>
-
+  <?php
+    Yii::app()->clientScript->registerScript(
+       'myHideEffect',
+       '$(".flash-success").animate({opacity: 1.0}, 3000).fadeOut("slow");',
+       CClientScript::POS_READY
+    );
+?>
+ 
+<?php if(Yii::app()->user->hasFlash('notification')):?>
+    <div class="flash-success" style="color:#F00; padding-left:150px; font-size:15px">
+        <?php echo Yii::app()->user->getFlash('notification'); ?>
+    </div>
+<?php endif; ?>
 <?php //echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(

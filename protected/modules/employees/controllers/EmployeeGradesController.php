@@ -70,7 +70,11 @@ class EmployeeGradesController extends RController
 		{
 			$model->attributes=$_POST['EmployeeGrades'];
 			if($model->save())
-				$this->redirect(array('admin'));
+                        {
+                            Yii::app()->user->setFlash('notification','Employee Grade Created Successfully');
+                            $this->redirect(array('admin'));
+                        }
+				
 		}
 
 		$this->render('create',array(
@@ -94,7 +98,11 @@ class EmployeeGradesController extends RController
 		{
 			$model->attributes=$_POST['EmployeeGrades'];
 			if($model->save())
-				$this->redirect(array('admin'));
+                        {
+                            Yii::app()->user->setFlash('notification','Employee Grade Updated Successfully');
+                            $this->redirect(array('admin'));
+                        }
+				
 		}
 
 		$this->render('update',array(
@@ -112,6 +120,7 @@ class EmployeeGradesController extends RController
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
+               
 			$this->loadModel($id)->delete();
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser

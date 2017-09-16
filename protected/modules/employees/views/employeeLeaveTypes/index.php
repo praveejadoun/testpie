@@ -85,6 +85,8 @@ $this->breadcrumbs=array(
 <table width="100%" cellpadding="0" cellspacing="0">
 <tr class="pdtab-h">
 	<td style="text-align:left;">Leave Type</td>
+        <td>Status</td>
+        <td>Carry Forward</td>
     <td>Edit</td>
     <td>Delete</td>
 </tr>
@@ -95,6 +97,14 @@ $active=EmployeeLeaveTypes::model()->findAll("status=:x", array(':x'=>1));
 foreach($active as $active_1)
 {
    echo '<tr><td style="padding-left:10px; text-align:left;">'.$active_1->name.'</td>';	
+   if($active_1->status=='1'){
+   echo '<td style="padding-left:10px;text-align:center;">'.Active.'</td>';}
+   if($active_1->carry_forward=='1'){
+   echo '<td style="padding-left:10px;text-align:center;">'.Yes.'</td>';
+   
+   }elseif($active_1->carry_forward=='0'){
+     echo '<td style="padding-left:10px;text-align:center;">'.No.'</td>';  
+   }
    echo '<td>'.CHtml::link(Yii::t('employees','Edit'), array('update', 'id'=>$active_1->id)).'</td>';
     echo '<td>'.CHtml::link(Yii::t('employees','Delete'), array('delete', 'id'=>$active_1->id),array('confirm'=>Yii::t('employees','Are you Sure?'))).'</td></tr>';
 }
@@ -107,6 +117,8 @@ foreach($active as $active_1)
 <table width="100%" cellpadding="0" cellspacing="0">
 <tr class="pdtab-h">
 	<td style="text-align:left;">Leave Type</td>
+        <td>Status</td>
+        <td>Carry Forward</td>
     <td>Edit</td>
     <td>Delete</td>
 </tr>
@@ -115,7 +127,15 @@ foreach($active as $active_1)
 $inactive=EmployeeLeaveTypes::model()->findAll("status=:x", array(':x'=>2));
 foreach($inactive as $inactive_1)
 {
-   echo '<tr><td style="padding-left:10px; text-align:left;">'.$inactive_1->name.'</td>';	
+   echo '<tr><td style="padding-left:10px; text-align:left;">'.$inactive_1->name.'</td>';
+   if($inactive_1->status=='2'){
+   echo '<td style="padding-left:10px;text-align:center;">'.InActive.'</td>';}
+   if($inactive_1->carry_forward=='1'){
+   echo '<td style="padding-left:10px;text-align:center;">'.Yes.'</td>';
+   
+   }elseif($inactive_1->carry_forward=='0'){
+     echo '<td style="padding-left:10px;text-align:center;">'.No.'</td>';  
+   }
    echo '<td>'.CHtml::link(Yii::t('employees','Edit'), array('update', 'id'=>$inactive_1->id)).'</td>';
     echo '<td>'.CHtml::link(Yii::t('employees','Delete'), array('delete', 'id'=>$inactive_1->id),array('confirm'=>Yii::t('employees','Are you Sure?'))).'</td></tr>';
 }

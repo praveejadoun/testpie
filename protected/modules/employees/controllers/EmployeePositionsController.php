@@ -70,7 +70,10 @@ class EmployeePositionsController extends RController
 		{
 			$model->attributes=$_POST['EmployeePositions'];
 			if($model->save())
+                        {
+                                Yii::app()->user->setFlash('notification','New Employee Position Created Successfully');
 				$this->redirect(array('admin'));
+                        }
 		}
 
 		$this->render('create',array(
@@ -93,8 +96,11 @@ class EmployeePositionsController extends RController
 		if(isset($_POST['EmployeePositions']))
 		{
 			$model->attributes=$_POST['EmployeePositions'];
-			if($model->save())
-				$this->redirect(array('admin'));
+			if($model->save()){
+                            Yii::app()->user->setFlash('notification','Employee Position updated successfully');
+                            $this->redirect(array('admin'));
+                        }
+				
 		}
 
 		$this->render('update',array(

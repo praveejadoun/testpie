@@ -198,7 +198,7 @@ break;
             $find = StudentAttentance::model()->findAll("date=:x AND student_id=:y", array(':x'=>$_REQUEST['year'].'-'.$mon_num.'-'.$i,':y'=>$student->id));
             if(count($find)==0)
             {
-            echo '';
+            echo  "<span style='color:#ce0606'><strong>P</strong></span>";
             }
             else
             echo "<span style='color:#ce0606'><strong>X</strong></span>";
