@@ -25,82 +25,24 @@ $data = '';
 
 //echo $data;
 ?>
-<script type="text/javascript">
-var chart;
-$(document).ready(function() {
-	chart = new Highcharts.Chart({
-		chart: {
-			renderTo: 'container',
-			plotBackgroundColor: null,
-			plotBorderWidth: null,
-			plotShadow: false
-		},
-		title: {
-			text: 'Employee Strength'
-		},
-		tooltip: {
-			formatter: function() {
-				return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage*100)/100 +' %';
-			}
-		},
-		credits: {
-			enabled: false
-		},
-		plotOptions: {
-			pie: {
-				allowPointSelect: true,
-				cursor: 'pointer',
-				borderWidth:0,
-				shadow:0,
-				dataLabels: {
-					enabled: true,
-					color: '#969698',
-					connectorColor: '#d8d8d8',
-					formatter: function() {
-						return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage*100)/100 +' %';
-					}
-				}
-			}
-		},
-		
-		series: [{
-			type: 'pie',
-			name: 'Employee Strenght',
-			data: [
-				<?php echo $data; ?>
-				]
-		}]
-	});
-});
-</script>
+
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="247" valign="top">
     
-    <?php $this->renderPartial('/room/left_side');?>
+    <?php $this->renderPartial('/default/left_side');?>
     
     </td>
     <td valign="top">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td valign="top" width="75%"><div style="padding-left:20px;">
-<h1><?php echo Yii::t('employees','Employees Dashboard');?></h1>
-<div class="overview">
-	<div class="overviewbox ovbox1">
-    	<h1><?php echo Yii::t('employees','<strong>Total Employees</strong>');?></h1>
-        <div class="ovrBtm"><?php echo $total ?></div>
-    </div>
-    <div class="overviewbox ovbox2">
-    	<h1><?php echo Yii::t('employees','<strong>New Admissions</strong>');?></h1>
-        <div class="ovrBtm"><?php echo count($list) ?></div>
-    </div>
-    <div class="overviewbox ovbox3">
-    	<h1><?php echo Yii::t('employees','<strong>Inactive Users</strong>');?></h1>
-        <div class="ovrBtm">0</div>
-    </div>
-  <div class="clear"></div>
-    
-</div>
+<h1><?php echo Yii::t('examination','Exams List');?></h1>
+ <div class="edit_bttns" style="top:213px; right:20px;">
+                    <ul>
+                        <li> <?php echo CHtml::link(Yii::t('employees', '<span>Add New Exam</span>'), array('create'), array('class' => 'addbttn last ')); ?></li>
+                    </ul>
+                </div>
 <div class="clear"></div>
   <div style="margin-top:20px; width:90%" id="container"></div>
   <div class="pdtab_Con" style="width:97%">

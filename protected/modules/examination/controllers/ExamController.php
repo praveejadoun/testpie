@@ -27,7 +27,7 @@ class ExamController extends RController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','Create2','update2','gradebook','savesearch','DisplaySavedImage','pdf','Address','Contact','Addinfo','Remove'),
+				'actions'=>array('index','view','Create2','update2','gradebook','savesearch','DisplaySavedImage','pdf','Address','Contact','Addinfo','Remove','create'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -667,4 +667,20 @@ class ExamController extends RController
 		echo $val;
 		
 	}
+        public function actionCreate()
+        {
+             $model=new examination;
+             if(isset($_POST['Examination']))
+		{
+                 $model->attributes=$_POST['Examination'];
+                  if ($model->start_time)
+                $model->start_time = date('Y-m-d', strtotime($model->start_time));
+              if ($model->end_time)
+                $model->end_time = date('Y-m-d', strtotime($model->end_time));
+              if($model->save()){
+                   //Yii::app()->user->setFlash('notification','Created Successfully');
+              $this->redirect(array('index'));}
+             }
+            $this->render('create',array('model'=>$model));
+        }
 }
