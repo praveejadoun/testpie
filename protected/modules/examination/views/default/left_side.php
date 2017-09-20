@@ -25,8 +25,8 @@
 			'activateItems'=>true,
 			'activeCssClass'=>'list_active',
 			'items'=>array(
-					array('label'=>''.Yii::t('examination','Dashboard').'<span>'.Yii::t('examination','Examination Dashboard').'</span>', 'url'=>array('room/manage') ,'linkOptions'=>array('class'=>'lbook_ico'),
-                                   'active'=> (Yii::app()->controller->id=='room' and (Yii::app()->controller->action->id=='manage') ? true : false),
+					array('label'=>''.Yii::t('examination','Dashboard').'<span>'.Yii::t('examination','Examination Dashboard').'</span>', 'url'=>array('dashboard/') ,'linkOptions'=>array('class'=>'lbook_ico'),
+                                   'active'=> (Yii::app()->controller->id=='Dashboard' and (Yii::app()->controller->action->id=='index') ? true : false),
 					    ),  
 						                
 					array('label'=>''.Yii::t('examination','Exams').'<span>'.Yii::t('examination','Examination List').'</span>',  'url'=>array('exam/'),'linkOptions'=>array('class'=>'sl_ico' ),'active'=> (Yii::app()->controller->id=='exam' and (Yii::app()->controller->action->id=='index' or Yii::app()->controller->action->id=='create')), 'itemOptions'=>array('id'=>'menu_1') 

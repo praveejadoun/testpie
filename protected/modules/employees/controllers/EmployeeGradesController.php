@@ -71,8 +71,12 @@ class EmployeeGradesController extends RController
 			$model->attributes=$_POST['EmployeeGrades'];
 			if($model->save())
                         {
-                            Yii::app()->user->setFlash('notification','Employee Grade Created Successfully');
-                            $this->redirect(array('admin'));
+                            echo "<script type='text/javascript'>alert('Employee Grade Created Successfully');</script>";
+				
+                            echo '<script>window.location.href = "'.Yii::app()->getHomeUrl().'?r=employees/employeeGrades/admin"</script>';
+                             
+                            //Yii::app()->user->setFlash('notification','Employee Grade Created Successfully');
+                            //$this->redirect(array('admin'));
                         }
 				
 		}
@@ -99,8 +103,12 @@ class EmployeeGradesController extends RController
 			$model->attributes=$_POST['EmployeeGrades'];
 			if($model->save())
                         {
-                            Yii::app()->user->setFlash('notification','Employee Grade Updated Successfully');
-                            $this->redirect(array('admin'));
+                            echo "<script type='text/javascript'>alert('Employee Grade Updated Successfully');</script>";
+				
+                            echo '<script>window.location.href = "'.Yii::app()->getHomeUrl().'?r=employees/employeeGrades/admin"</script>';
+                             
+                            //Yii::app()->user->setFlash('notification','Employee Grade Updated Successfully');
+                            //$this->redirect(array('admin'));
                         }
 				
 		}

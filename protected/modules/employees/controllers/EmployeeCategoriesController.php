@@ -70,7 +70,10 @@ class EmployeeCategoriesController extends RController
 		{
 			$model->attributes=$_POST['EmployeeCategories'];
 			if($model->save())
-				$this->redirect(array('admin'));
+                            echo "<script type='text/javascript'>alert('Employee Category Created Successfully');</script>";
+                            echo '<script>window.location.href = "'.Yii::app()->getHomeUrl().'?r=employees/employeeCategories/admin"</script>';
+
+				//$this->redirect(array('admin'));
 		}
 
 		$this->render('create',array(
@@ -86,16 +89,20 @@ class EmployeeCategoriesController extends RController
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
+                
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['EmployeeCategories']))
 		{
+                     
 			$model->attributes=$_POST['EmployeeCategories'];
 			if($model->save())
-				Yii::app()->user->setFlash('notification','Data Updated Successfully');
-				$this->redirect(array('admin'));
+				//Yii::app()->user->setFlash('notification','Data Updated Successfully');
+                               echo "<script type='text/javascript'>alert('Employee Category Updated Successfully');</script>";
+				//$this->redirect(array('admin'));
+                               echo '<script>window.location.href = "'.Yii::app()->getHomeUrl().'?r=employees/employeeCategories/admin"</script>';
+                               // exit;
 		}
 
 		$this->render('update',array(

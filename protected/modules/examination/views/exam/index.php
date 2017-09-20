@@ -45,48 +45,73 @@ $data = '';
                 </div>
 <div class="clear"></div>
   <div style="margin-top:20px; width:90%" id="container"></div>
-  <div class="pdtab_Con" style="width:97%">
-                <div style="font-size:13px; padding:5px 0px"><?php echo Yii::t('employees','<strong>Recent Employee Admissions</strong>');?></div>
+  <div class="pdtab_Con" style="width:97%;padding:0px 0px 0px 0px;">
+                <div style="font-size:13px; padding:5px 0px"><?php echo Yii::t('examination','<strong>Recent Employee Admissions</strong>');?></div>
+                
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                  <tbody>
+                  <tbody> 
                     <tr class="pdtab-h">
-                      <td align="center" height="18"><?php echo Yii::t('employees','Date');?></td>
-                      <td align="center"><?php echo Yii::t('employees','Employee Name');?></td>
-                      <td align="center"><?php echo Yii::t('employees','Employee No:');?></td>
-                      <td align="center"><?php echo Yii::t('employees','Department');?></td>
-                      <td align="center"><?php echo Yii::t('employees','Position');?></td>
-                      
+                    
+                      <td align="center" height="18" style="padding:5px 44px;"><?php echo Yii::t('examination','Sl.No');?></td>
+                      <td align="center"style="padding:5px 44px;"><?php echo Yii::t('examination','Name');?></td>
+                      <td align="center" style="padding:5px 44px;"><?php echo Yii::t('examination','Course');?></td>
+                      <td align="center" style="padding:5px 44px;"><?php echo Yii::t('examination','Batch');?></td>
+                      <td align="center" style="padding:5px 44px;"><?php echo Yii::t('examination','Status');?></td>
+                     
                     </tr>
                   </tbody>
+                   <?php
+                                    if (isset($_REQUEST['page'])) {
+                                      
+                                        $i = ($pages->pageSize*$_REQUEST['page'])-9;
+                                    } else {
+                                        $i = 1;
+                                    }
+                                    $cls = "even";
+                                    ?>
                   <?php foreach($list as $list_1)
 	              { ?>
                     <tbody>
                     <tr>
-                    <td align="center"><?php 
-											$settings=UserSettings::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
-								if($settings!=NULL)
-								{	
-									$date1=date($settings->displaydate,strtotime($list_1->joining_date));
-									echo $date1;
-		
-								}
-								else
-								echo $list_1->joining_date;
-					 ?>&nbsp;</td>
-                    <td align="center"><?php echo CHtml::link($list_1->first_name.'  '.$list_1->middle_name.'  '.$list_1->last_name,array('view','id'=>$list_1->id)) ?>&nbsp;</td>
-                    <td align="center"><?php echo $list_1->employee_number; ?></td>
-					<?php  $dept = EmployeeDepartments::model()->findByAttributes(array('id'=>$list_1->employee_department_id)); ?>
-                    <td align="center"><?php if($dept!=NULL){echo $dept->name; }else{ echo '-';}?> </td>
-                    <?php  $pos = EmployeePositions::model()->findByAttributes(array('id'=>$list_1->employee_position_id)); ?>
-                    <td align="center"><?php if($pos!=NULL){echo $pos->name; }else{ echo '-';}?> </td>
+                    <td align="center" style="padding:5px 44px;"><?php echo $i; ?></td>
+                    <td align="center" style="padding:5px 44px;"><?php echo CHtml::link($list_1->name,array('view','id'=>$list_1->id)) ?>&nbsp;</td>
+                    <td align="center" style="padding:5px 44px;"><?php echo $list_1->course_id; ?></td>
+					<?php  //$dept = EmployeeDepartments::model()->findByAttributes(array('id'=>$list_1->employee_department_id)); ?>
+                    <!--<td align="center"><?php // if($dept!=NULL){echo $dept->name; }else{ echo '-';}?> </td>-->
+                    <td align="center" style="padding:5px 44px;"> <?php echo $list_1->batch_id?></td>
+                    <?php //  $pos = EmployeePositions::model()->findByAttributes(array('id'=>$list_1->employee_position_id)); ?>
+                    <!--<td align="center"><?php // if($pos!=NULL){echo $pos->name; }else{ echo '-';}?> </td>-->
+                   <td style="padding:5px 44px;">
+                                                
+                            <select name="Applicants[status]" class="Applicants_status" rel="<?php echo $list_1->id ?>"<?php // echo ($list_1->status==2)?' disabled="true"':''?>>
+                                <option value="1"<?php echo ($list_1->status==1)?' selected="selected"':''?>>Default</option>
+                                <option value="2"<?php echo ($list_1->status==2)?' selected="selected"':''?>>Open</option>
+                                <option value="3"<?php echo ($list_1->status==3)?' selected="selected"':''?>>Closed</option>
+                                <option value="4"<?php echo ($list_1->status==4)?' selected="selected"':''?>>Result Published</option>
+                            </select>
+                    </td>
                     
                   </tr>
                      
                </tbody>
                <?php
-               } ?>
-                               
-               </table>
+               $i++;} ?>
+                           
+               </table>    
+                 <div class="pagecon">
+                                    <?php
+                                    $this->widget('CLinkPager', array(
+                                        'currentPage' => $pages->getCurrentPage(),
+                                        'itemCount' => $item_count,
+                                        'pageSize' => $page_size,
+                                        'maxButtonCount' => 5,
+                                        //'nextPageLabel'=>'My text >',
+                                        'header' => '',
+                                        'htmlOptions' => array('class' => 'pages'),
+                                    ));
+                                    ?>
+                                </div> <!-- END div class="pagecon" 2 -->
+                                <div class="clear"></div>
               </div>
  	</div></td>
         
@@ -106,7 +131,7 @@ else
   <tr>
     <td width="247" valign="top">
     
-    <?php $this->renderPartial('/room/left_side');?>
+    <?php $this->renderPartial('/default/left_side');?>
     
     </td>
     <td valign="top">
@@ -117,8 +142,8 @@ else
                     	It appears that this is the first time that you are using this Open-School Setup. For any new installation we recommend that you configure the following:
                     </div>
                     <div class="y_bx_list" style="width:650px;">
-                    	<h1><?php echo CHtml::link(Yii::t('employees','Create New Employee'),array('create')) ?></h1>
-                        <p>Before Creating Employees, make sure you created <?php echo CHtml::link(Yii::t('employees','Employee Categories'),array('employeeCategories/create')) ?>, <?php echo CHtml::link('Employee Departments',array('employeeDepartments/create')) ?><br/> and <?php echo CHtml::link('Employee Positions',array('employeePositions/create')) ?>.</p>
+                    	<h1><?php echo CHtml::link(Yii::t('employees','Create New Exam'),array('create')) ?></h1>
+                        <!--<p>Before Creating Employees, make sure you created <?php // echo CHtml::link(Yii::t('employees','Employee Categories'),array('employeeCategories/create')) ?>, <?php // echo CHtml::link('Employee Departments',array('employeeDepartments/create')) ?><br/> and <?php // echo CHtml::link('Employee Positions',array('employeePositions/create')) ?>.</p>-->
                     </div>
                     
                 </div>
@@ -131,3 +156,15 @@ else
 </table>
 
 <?php } ?>
+<script>
+     $('.Applicants_status').change(function () {
+        
+            sid = $(this).val();
+            aid = $(this).attr('rel');
+            const msg = (sid==2)?'Approved Application Cannot Be Revarted Back . Are You Sure ?':'Are you sure you want to change the status?';
+        if (confirm(msg))
+        {
+            self.location = "index.php?r=examination/exam/changestatus&aid=" +aid+"&sid="+sid;
+        }
+    })
+    </script>

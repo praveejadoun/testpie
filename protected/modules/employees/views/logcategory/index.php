@@ -85,7 +85,7 @@ $(document).click(function() {
                                                     <ul>
                                                         <!--<li><a href="#" class="grview">View</a></li>-->
                                                         <li><a href="index.php?r=employees/logcategory/update&id=<?php echo $logcategory_1->id ?>" class="gredit">Edit</a></li>
-                                                        <li><a href="<?php echo $logcategory_1->id ?>" class="grde">Delete</a></li>
+                                                        <li><a href="<?php echo $logcategory_1->id ?>" class="grdel">Delete</a></li>
                                                     </ul>
                                             </div>
                                             </div>
@@ -150,7 +150,7 @@ $(document).click(function() {
 
     var deletes = new Array();
     var dialogs = new Array();
-    $('.grde').each(function(index) {
+    $('.grdel').each(function(index) {
         var id = $(this).attr('href');
         deletes[id] = function() {
             $.ajax({

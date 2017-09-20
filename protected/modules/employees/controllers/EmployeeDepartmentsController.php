@@ -70,7 +70,11 @@ class EmployeeDepartmentsController extends RController
 		{
 			$model->attributes=$_POST['EmployeeDepartments'];
 			if($model->save())
-				$this->redirect(array('admin'));
+                            echo "<script type='text/javascript'>alert('Employee Department Created Successfully');</script>";
+				
+                            echo '<script>window.location.href = "'.Yii::app()->getHomeUrl().'?r=employees/employeeDepartments/admin"</script>';
+                               
+				//$this->redirect(array('admin'));
 		}
 
 		$this->render('create',array(
@@ -94,8 +98,12 @@ class EmployeeDepartmentsController extends RController
 		{
 			$model->attributes=$_POST['EmployeeDepartments'];
 			if($model->save())
-			Yii::app()->user->setFlash('notification','Data Updated Successfully');
-				$this->redirect(array('admin'));
+			//Yii::app()->user->setFlash('notification','Data Updated Successfully');
+                        echo "<script type='text/javascript'>alert('Employee Department Updated Successfully');</script>";
+				
+                        echo '<script>window.location.href = "'.Yii::app()->getHomeUrl().'?r=employees/employeeDepartments/admin"</script>';
+                               
+				//$this->redirect(array('admin'));
 		}
 
 		$this->render('update',array(

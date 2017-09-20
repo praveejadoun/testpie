@@ -70,7 +70,11 @@ class LogcategoryController extends RController
 		{
 			$model->attributes=$_POST['EmployeeLogCategory'];
 			if($model->save())
-				$this->redirect(array('index'));
+                            echo "<script type='text/javascript'>alert('Employee Log Created Successfully');</script>";
+				
+                            echo '<script>window.location.href = "'.Yii::app()->getHomeUrl().'?r=employees/logcategory/index"</script>';
+                             
+				//$this->redirect(array('index'));
 		}
 
 		$this->render('create',array(
@@ -127,7 +131,11 @@ class LogcategoryController extends RController
 		{
 			$model->attributes=$_POST['EmployeeLogCategory'];
 			if($model->save())
-				$this->redirect(array('index'));
+                            echo "<script type='text/javascript'>alert('Employee Log Updated Successfully');</script>";
+				
+                            echo '<script>window.location.href = "'.Yii::app()->getHomeUrl().'?r=employees/logcategory/index"</script>';
+                             
+				//$this->redirect(array('index'));
 		}
 
 		$this->render('update',array(

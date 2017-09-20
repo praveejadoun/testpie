@@ -30,12 +30,29 @@
     <td><?php echo $form->textField($model,'name',array('size'=>20,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'name'); ?></td>
     <td>
-        <?php echo $form->textfield($model,'course_id',array('size'=>20,'maxlength'=>255));
-              echo $form->error($model,'course_id'); ?>
+        <?php echo $form->textField($model,'course_id',array('size'=>20,'maxlength'=>255)); ?>
+      <?php
+      /*                                   
+  echo $form->dropDownList($model,'course_id', 
+  CHtml::listData(Courses::model()->findAll(), 'id', 'course_name'),
+  array(
+    'prompt'=>'Select Country',
+    'ajax' => array(
+    'type'=>'POST', 
+    'url'=>Yii::app()->createUrl('examination/exam/loadstates'), //  get states list
+    'update'=>'#batch_id', // add the state dropdown id
+  'data'=>array('course_id'=>'js:this.value'),
+  ))); */
+?>  
+
+             <?php echo $form->error($model,'course_id'); ?>
     </td>
      <td>
-        <?php echo $form->textfield($model,'batch_id',array('size'=>20,'maxlength'=>255));
-              echo $form->error($model,'batch_id'); ?>
+          <?php // echo $form->dropDownList($model,'batch_id',array(),array('empty'=>'-choose city-'));  ?>
+         <?php echo $form->textField($model,'batch_id',array('size'=>20,'maxlength'=>255)); ?>
+
+
+            <?php  echo $form->error($model,'batch_id'); ?>
     </td>
     
   </tr>
@@ -48,8 +65,17 @@
   </tr>
   <tr>
      <td><div>
+            <?php Yii::import('zii.widgets.CJuiDateTimePicker.CJuiDateTimePicker');
+    $this->widget('CJuiDateTimePicker',array(
+        'model'=>$model, //Model object
+        'attribute'=>'start_time', //attribute name
+        'language'=>'en-GB',
+                'mode'=>'datetime' //use "time","date" or "datetime" (default)
+        //'options'=>array(), // jquery plugin options
+    ));
+?>
     <?php
-			
+		/*	
 			$date = 'dd-mm-yy';	
    				
 						$this->widget('zii.widgets.jui.CJuiDatePicker', array(
@@ -69,7 +95,7 @@
 								),
 							));
     ?>
-		<?php echo $form->error($model,'start_time'); ?></div></td>
+		<?php echo $form->error($model,'start_time');*/ ?></div></td>
     
     <td><?php 
 			$settings=UserSettings::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
@@ -80,7 +106,7 @@
 		
 	}
 	else
-	$date = 'dd-mm-yy';	
+	/*$date = 'dd-mm-yy';	
 	//echo $form->textField($model,'joining_date',array('size'=>30,'maxlength'=>255));
 				$this->widget('zii.widgets.jui.CJuiDatePicker', array(
 							//'name'=>'Employees[joining_date]',
@@ -99,9 +125,22 @@
 								//'style'=>'height:20px;'
 								//'value' => date('m-d-y'),
 							),
-						))
+						))*/
 	
 	 ?>
+         <?php Yii::import('zii.widgets.CJuiDateTimePicker.CJuiDateTimePicker');
+    $this->widget('CJuiDateTimePicker',array(
+        'model'=>$model, //Model object
+        'attribute'=>'end_time', //attribute name
+        'language'=>'en-GB',
+                'mode'=>'datetime', //use "time","date" or "datetime" (default)
+        //'options'=>array('showSecond'=>true), // jquery plugin options
+        'options'=>array (
+                        //'timeFormat'=>strtolower(Yii::app()->locale->timeFormat),
+                        'showSecond'=>false,
+                    ),  
+    ));
+?>
 		<?php echo $form->error($model,'end_time'); ?></td> 
     
     <td><?php echo $form->textfield($model,'duration',array('size'=>20,'maxlength'=>255));

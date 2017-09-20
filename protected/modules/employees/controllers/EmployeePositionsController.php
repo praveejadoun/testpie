@@ -71,8 +71,12 @@ class EmployeePositionsController extends RController
 			$model->attributes=$_POST['EmployeePositions'];
 			if($model->save())
                         {
-                                Yii::app()->user->setFlash('notification','New Employee Position Created Successfully');
-				$this->redirect(array('admin'));
+                            echo "<script type='text/javascript'>alert('Employee Position Created Successfully');</script>";
+				
+                            echo '<script>window.location.href = "'.Yii::app()->getHomeUrl().'?r=employees/employeePositions/admin"</script>';
+                               
+                                //Yii::app()->user->setFlash('notification','New Employee Position Created Successfully');
+				//$this->redirect(array('admin'));
                         }
 		}
 
@@ -97,8 +101,12 @@ class EmployeePositionsController extends RController
 		{
 			$model->attributes=$_POST['EmployeePositions'];
 			if($model->save()){
-                            Yii::app()->user->setFlash('notification','Employee Position updated successfully');
-                            $this->redirect(array('admin'));
+                             echo "<script type='text/javascript'>alert('Employee Position Updated Successfully');</script>";
+				
+                            echo '<script>window.location.href = "'.Yii::app()->getHomeUrl().'?r=employees/employeePositions/admin"</script>';
+                             
+                            //Yii::app()->user->setFlash('notification','Employee Position updated successfully');
+                            //$this->redirect(array('admin'));
                         }
 				
 		}

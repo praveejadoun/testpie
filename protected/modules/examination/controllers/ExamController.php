@@ -31,7 +31,7 @@ class ExamController extends RController
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('messinfo','update','batch','add'),
+				'actions'=>array('messinfo','update','batch','add','loadstates'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -405,7 +405,25 @@ class ExamController extends RController
 	 */
 	public function actionIndex()
 	{
+             
+		$model=new Examination;
 		$criteria = new CDbCriteria;
+		$criteria->compare('is_deleted',0);
+                
+                $total = Examination::model()->count($criteria);
+		$pages = new CPagination($total);
+                $pages->setPageSize(Yii::app()->params['listPerPage']);
+                $pages->applyLimit($criteria);  // the trick is here!
+		$posts = Examination::model()->findAll($criteria);
+		
+		 
+		$this->render('index',array('model'=>$model,
+		'list'=>$posts,
+		'pages' => $pages,
+		'item_count'=>$total,
+		'page_size'=>Yii::app()->params['listPerPage'],)) ;
+                
+		/*$criteria = new CDbCriteria;
 		$criteria->compare('is_deleted',0);
 		$total = Employees::model()->count($criteria);
 		$criteria->order = 'id DESC';
@@ -415,7 +433,7 @@ class ExamController extends RController
 		
 		$this->render('index',array(
 			'total'=>$total,'list'=>$posts
-		));
+		));*/
 	}
 
 	/**
@@ -452,7 +470,7 @@ class ExamController extends RController
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='employees-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='examination-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
@@ -670,6 +688,16 @@ class ExamController extends RController
         public function actionCreate()
         {
              $model=new examination;
+             //echo"<pre>";
+             //print_r($_POST['Examination']); 
+//             $originalDate = "29/09/2017 10:20";
+//             echo$newDate = date("Y-m-d H:i", strtotime($originalDate));
+             
+             
+             
+//            echo date('Y-m-d', strtotime('23/04/2017'));
+
+//           exit;
              if(isset($_POST['Examination']))
 		{
                  $model->attributes=$_POST['Examination'];
@@ -683,4 +711,38 @@ class ExamController extends RController
              }
             $this->render('create',array('model'=>$model));
         }
+        
+       public function actionLoadstates()
+        {
+             $data= Batches::model()->findAll('course_id=:course_id', 
+             array(':course_id'=>(int) $_POST['course_id']));
+  
+             $data=CHtml::listData($data,'id','name');
+  
+             echo "<option value=''>Select City</option>";
+             foreach($data as $value=>$name)
+             echo CHtml::tag('option', array('value'=>$value),CHtml::encode($name),true);
+        }
+        
+         public function actionChangestatus() {
+         //Add Security
+        if(!empty($_GET['sid']) && !empty($_GET['aid'])){
+        $model = Examination::model()->findByAttributes(array('id' => $_GET['aid']));
+        $change_status = $_GET['sid'];
+        $model->saveAttributes(array('status' => $change_status));
+        //$ap=Applicants::model()->findByAttributes(array('id'=>$_GET['aid'],'status'=>2));
+        /*if($model->status==2)
+        {
+           $this->redirect(array('/students/students/create','aid'=>$_GET['aid'])); 
+        }*/
+        $this->redirect(array('/examination/exam'));
+        }else{
+            //Message here
+        $this->redirect(array('/students/applicants/manage'));
+        }
+    }
+
+
+      
+
 }
