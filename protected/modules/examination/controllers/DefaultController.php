@@ -25,4 +25,11 @@ class DefaultController extends RController
 	{
 		$this->render('index');
 	}
+         public function actionExplorer_3()
+	{
+		if(Yii::app()->request->isAjaxRequest)
+		 {
+			 $this->renderPartial('explorer_3',array(),false,true);
+		 }
+	}
 }

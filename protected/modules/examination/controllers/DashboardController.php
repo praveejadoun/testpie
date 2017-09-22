@@ -1,7 +1,7 @@
 <?php
 class DashboardController extends RController
 {
-     public $layout='//layouts/column2';
+     
     
 	public function filters()
 	{
@@ -34,5 +34,6 @@ class DashboardController extends RController
 			'total'=>$total,'list'=>$posts
 		));
 	}
+        
 }
 ?>

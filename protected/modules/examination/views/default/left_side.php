@@ -14,46 +14,31 @@
                 <input type="button" class="sbut" name="">
                 <div class="clear"></div>
   </div>-->    <h1><?php echo Yii::t('examination','EXAMINATION');?></h1>   
-                    <?php
-			function t($message, $category = 'cms', $params = array(), $source = null, $language = null) 
-{
-    return $message;
-}
+               <ul>
+		            <li>
+                               <?php echo CHtml::link('Dashboard<span>Examination Dashboard</span>',array('dashboard/'),array('class'=>'sl_ico')); ?>
+                                
+                               <?php echo CHtml::link('Exams<span>Examination List</span>',array('exam/'),array('class'=>'sl_ico')); ?>
+                            </li>
+                    
+			            
+        <h1>EXAM MANAGEMENT</h1>
+                <li>
+                   
+                        <?php
+			
+			$rurl = explode('index.php?r=',Yii::app()->request->getUrl());
+                       
+			$rurl = explode('&id=',$rurl[1]); 
+                        echo CHtml::ajaxLink('Select Course/Batch<span>Select Batch And Exam</span>',array('explorer_3','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'abook_ico')); ?>
+                        
+                    
+                        <?php echo CHtml::link('Default Grading Levels<span>Set Default Grading Level</span>',array(''),array('class'=>'sl_ico')); ?>
 
-			$this->widget('zii.widgets.CMenu',array(
-			'encodeLabel'=>false,
-			'activateItems'=>true,
-			'activeCssClass'=>'list_active',
-			'items'=>array(
-					array('label'=>''.Yii::t('examination','Dashboard').'<span>'.Yii::t('examination','Examination Dashboard').'</span>', 'url'=>array('dashboard/') ,'linkOptions'=>array('class'=>'lbook_ico'),
-                                   'active'=> (Yii::app()->controller->id=='Dashboard' and (Yii::app()->controller->action->id=='index') ? true : false),
-					    ),  
-						                
-					array('label'=>''.Yii::t('examination','Exams').'<span>'.Yii::t('examination','Examination List').'</span>',  'url'=>array('exam/'),'linkOptions'=>array('class'=>'sl_ico' ),'active'=> (Yii::app()->controller->id=='exam' and (Yii::app()->controller->action->id=='index' or Yii::app()->controller->action->id=='create')), 'itemOptions'=>array('id'=>'menu_1') 
-					       ),
-                                        /*array('label'=>''.Yii::t('examination','Default Grading Levels').'<span>'.Yii::t('examination','Set Default Grading Level').'</span>',  'url'=>array('gradinglevels/manage'),'linkOptions'=>array('class'=>'sl_ico' ),'active'=> (Yii::app()->controller->id=='gradinglevels' and (Yii::app()->controller->action->id=='manage') ? true : false), 'itemOptions'=>array('id'=>'menu_1') 
-					       ),*/
-                                        
-                            
-                            
-						   array('label'=>''.'<h1>'.Yii::t('examination','EXAM RESULTS').'</h1>'), 
-					
-						array('label'=>Yii::t('examination','Results').'<span>'.Yii::t('examination','Search Default Exam Results').'</span>', 'url'=>array('result/index'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->id=='result' and (Yii::app()->controller->action->id=='index')), 'itemOptions'=>array('id'=>'menu_1')
-                                                    ),
-		  				
-						  array('label'=>''.'<h1>'.Yii::t('examination','GRADE BOOK').'</h1>'),
-					
-						array('label'=>Yii::t('examination','Grade Book').'<span>'.Yii::t('examination','View Default Exam Grade Book').'</span>', 'url'=>array('exam/gradebook'),'active'=>(Yii::app()->controller->id=='exam' and (Yii::app()->controller->action->id=='gradebook')), 'itemOptions'=>array('id'=>'menu_1'),'linkOptions'=>array('class'=>'ar_ico')
-                                                    ),
-                                                
-                            
-						 
-						
-					    
-					
-					
-				),
-			)); ?>
+                     
+               </li>
+                
+                </ul>
 		
 		</div>
         <script type="text/javascript">

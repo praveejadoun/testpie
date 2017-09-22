@@ -77,7 +77,7 @@ $(document).ready(function() {
   <tr>
     <td width="247" valign="top">
     
-    <?php $this->renderPartial('/default/left_side');?>
+    <?php $this->renderPartial('left_side');?>
     
     </td>
     <td valign="top">
@@ -85,14 +85,14 @@ $(document).ready(function() {
       <tr>
         <td valign="top" width="75%"><div style="padding-left:20px;">
 <h1><?php echo Yii::t('examination','Examination');?></h1>
-<div class="overview">
-	<div class="overviewbox ovbox1">
+<div class="overview" >
+	<div class="overviewbox ovbox1" style="width:216px;">
     	<h1><?php echo Yii::t('examination','<strong>Total Exams</strong>');?></h1>
         <div class="ovrBtm"><?php echo $total ?></div>
     </div>
-    <div class="overviewbox ovbox2">
+    <div class="overviewbox ovbox2"style="left:245px;width:216px;">
     	<h1><?php echo Yii::t('examination','<strong>Result Published Exams</strong>');?></h1>
-        <div class="ovrBtm"><?php echo count($list) ?></div>
+        <div class="ovrBtm"><?php $qwe= Examination::model()->findAll('is_deleted=:x AND status=:y',array(':x'=>0,':y'=>4));echo count($qwe);?></div>
     </div>
   <!--  <div class="overviewbox ovbox3">
     	<h1><?php //echo Yii::t('employees','<strong>Inactive Users</strong>');?></h1>
