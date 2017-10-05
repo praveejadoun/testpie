@@ -116,6 +116,7 @@ public function   init() {
 		for($i=1;$i<7;$i++)
 		{
 		$model=GradingLevels::model()->findByPk($i);
+//                echo"<pre>";print_r($model);exit;
 		$model->batch_id=$_REQUEST['id'];
 		$new = new GradingLevels;
 		$new->attributes = $model->attributes ;

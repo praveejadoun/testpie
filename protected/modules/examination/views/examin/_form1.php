@@ -16,13 +16,13 @@
     <td><?php echo $form->labelEx($model,Yii::t('exams','start_time')); ?></td>
     <td><?php //echo $form->textField($model,'start_time'); ?>
      <?php   $settings=UserSettings::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
-			if($settings!=NULL)
-			{
-				$date=$settings->dateformat;
-		
-			}
-			else
-	$date = 'dd-mm-yy';	
+//			if($settings!=NULL)
+//			{
+//				$date=$settings->dateformat;
+//		
+//			}
+//			else
+	$date = 'yy-mm-dd';	
 		$this->widget('application.extensions.timepicker.timepicker', array(
 		'model' => $model,
 

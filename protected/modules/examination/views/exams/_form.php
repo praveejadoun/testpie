@@ -70,8 +70,10 @@
         'model'=>$model, //Model object
         'attribute'=>'start_time', //attribute name
         'language'=>'en-GB',
-                'mode'=>'datetime' //use "time","date" or "datetime" (default)
-        //'options'=>array(), // jquery plugin options
+        'mode'=>'datetime', //use "time","date" or "datetime" (default)
+       //'dateFormat' => 'dd.mm.yy',
+       //'timeFormat' => '',//'hh:mm tt' default
+        'options'=>array('dateFormat' => 'yy-mm-dd','timeFormat'=>'hh:mm:ss',), // jquery plugin options
     ));
 ?>
     <?php
@@ -135,10 +137,8 @@
         'language'=>'en-GB',
                 'mode'=>'datetime', //use "time","date" or "datetime" (default)
         //'options'=>array('showSecond'=>true), // jquery plugin options
-        'options'=>array (
-                        //'timeFormat'=>strtolower(Yii::app()->locale->timeFormat),
-                        'showSecond'=>false,
-                    ),  
+        'options'=>array('dateFormat' => 'yy-mm-dd','timeFormat'=>'hh:mm:ss',),
+       
     ));
 ?>
 		<?php echo $form->error($model,'end_time'); ?></td> 

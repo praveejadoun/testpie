@@ -111,4 +111,13 @@ class GradingLevels extends CActiveRecord
         }
         return $data;
     }
+    
+//    	public function getNull() {
+//        $codes = self::model()->findAll();
+//        $data = array (); // data to be returned
+//        foreach ($codes as $c) {
+//            $data[$c->id] = $c->id;
+//        }
+//        return $data;
+//    }
 }

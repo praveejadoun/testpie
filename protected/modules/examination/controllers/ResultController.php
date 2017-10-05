@@ -27,7 +27,7 @@ class ResultController extends RController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','Create2','update2','Manage','savesearch','DisplaySavedImage','pdf','Address','Contact','Addinfo','Remove'),
+				'actions'=>array('index','view','Create2','update2','Manage','savesearch','DisplaySavedImage','pdf','Address','Contact','Addinfo','Remove','Dynamiccities','Dynamicstates','Dynamiccountry','Search'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -405,7 +405,24 @@ class ResultController extends RController
 	 */
 	public function actionIndex()
 	{
+            $model=new ExamScores;
 		$criteria = new CDbCriteria;
+		$criteria->compare('exam_id',5);
+               
+                $total = ExamScores::model()->count($criteria); 
+		$pages = new CPagination($total);
+                $pages->setPageSize(Yii::app()->params['listPerPage']);
+                $pages->applyLimit($criteria);  // the trick is here!
+		$posts = ExamScores::model()->findAll($criteria);
+		
+		 
+		$this->render('index',array('model'=>$model,
+		'list'=>$posts,
+		'pages' => $pages,
+		'item_count'=>$total,
+		'page_size'=>Yii::app()->params['listPerPage'],)) ;
+                
+		/*$criteria = new CDbCriteria;
 		$criteria->compare('is_deleted',0);
 		$total = Employees::model()->count($criteria);
 		$criteria->order = 'id DESC';
@@ -415,7 +432,7 @@ class ResultController extends RController
 		
 		$this->render('index',array(
 			'total'=>$total,'list'=>$posts
-		));
+		));*/
 	}
 
 	/**
@@ -666,5 +683,61 @@ class ResultController extends RController
 		$model->saveAttributes(array('is_deleted'=>'1'));
 		echo $val;
 		
+	}
+        public function actionDynamiccities()
+        {
+    $data=Batches::model()->findAll('course_id=:course_id', 
+                  array(':course_id'=>(int) $_POST['course_id']));
+ 
+    $data=CHtml::listData($data,'id','name');
+     echo CHtml::tag('option',
+                   array('value'=>''),CHtml::encode('select'),true);
+    foreach($data as $value=>$name)
+        
+    {
+        echo CHtml::tag('option',
+                   array('value'=>$value),CHtml::encode($name),true);
+    }
+    }
+    
+     public function actionDynamicstates()
+        {
+    $data= ExamGroups::model()->findAll('batch_id=:batch_id', 
+                  array(':batch_id'=>(int) $_POST['batch_id']));
+ 
+    $data=CHtml::listData($data,'id','name');
+    echo CHtml::tag('option',
+                   array('value'=>''),CHtml::encode('select'),true);
+    foreach($data as $value=>$name)
+    {
+        echo CHtml::tag('option',
+                   array('value'=>$value),CHtml::encode($name),true);
+    }
+    }
+    
+     public function actionDynamiccountry()
+        {
+    $data= Exams::model()->findAll('exam_group_id=:exam_group_id', 
+                  array(':exam_group_id'=>(int) $_POST['exam_group_id']));
+ 
+    $data=CHtml::listData($data,'id','subject_id');
+    echo CHtml::tag('option',
+                   array('value'=>''),CHtml::encode('select'),true);
+    foreach($data as $value=>$name)
+    {
+        echo CHtml::tag('option',
+                   array('value'=>$value),CHtml::encode($name),true);
+    }
+    }
+    public function actionSearch()
+    {
+     
+    }
+     public function actionExplorer()
+	{
+		if(Yii::app()->request->isAjaxRequest)
+		 {
+			 $this->renderPartial('explorer',array(),false,true);
+		 }
 	}
 }

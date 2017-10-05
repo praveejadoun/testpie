@@ -135,12 +135,12 @@ class ExaminController extends RController
 	public function actionUpdate($sid)
 	{
 		$model=$this->loadModel($sid);
-		$settings=UserSettings::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
-		if($settings!=NULL)
-			{	
-				$model->start_time=date($settings->displaydate.$settings->timeformat,strtotime($model->start_time));
-				$model->end_time=date($settings->displaydate.$settings->timeformat,strtotime($model->end_time));
-			}
+//		$settings=UserSettings::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
+//		if($settings!=NULL)
+//			{	
+//				$model->start_time=date($settings->displaydate.$settings->timeformat,strtotime($model->start_time));
+//				$model->end_time=date($settings->displaydate.$settings->timeformat,strtotime($model->end_time));
+//			}
 			
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -148,8 +148,8 @@ class ExaminController extends RController
 		if(isset($_POST['Exams']))
 		{
 			$model->attributes=$_POST['Exams'];
-                        /*$model->start_time = "2017-4-1 9:30";
-			$model->end_time = "2017-4-3 9:30";*/
+                        $model->start_time = $_POST['Exams']['start_time'][0];
+			$model->end_time = $_POST['Exams']['end_time'][0];
 			if($model->save())
 				$this->redirect(array('examin/create','id'=>$_REQUEST['id'],'exam_group_id'=>$_REQUEST['exam_group_id']));
 		}

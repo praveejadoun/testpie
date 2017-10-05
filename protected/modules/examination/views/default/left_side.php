@@ -32,12 +32,30 @@
 			$rurl = explode('&id=',$rurl[1]); 
                         echo CHtml::ajaxLink('Select Course/Batch<span>Select Batch And Exam</span>',array('explorer_3','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'abook_ico')); ?>
                         
-                    
-                        <?php echo CHtml::link('Default Grading Levels<span>Set Default Grading Level</span>',array(''),array('class'=>'sl_ico')); ?>
+                    <?php   if(Yii::app()->controller->id=='gradingLevels'and Yii::app()->controller->action->id=='index'){ ?>       
+                <li class="list_active">       
+                        <?php echo CHtml::link('Default Grading Levels<span>Set Default Grading Level</span>',array('gradingLevels/'),array('class'=>'sl_ico')); ?>
 
-                     
+                </li> 
+              <?php } else { ?>
+                <li>
+                        <?php echo CHtml::link('Default Grading Levels<span>Set Default Grading Level</span>',array('gradingLevels/'),array('class'=>'sl_ico')); ?>
+   
+                </li>
+              <?php } ?>
                </li>
-                
+               <h1>Exam Results</h1>
+               <?php if(Yii::app()->controller->id=='result' and Yii::app()->controller->action->id=='index'){?>
+               <li class="list_active">
+                    <?php echo CHtml::link('Results<span>Search Default Exam Results</span>',array('result/'),array('class'=>'sl_ico')); ?>
+ 
+               </li>
+               <?php } else { ?>
+               <li>
+                    <?php echo CHtml::link('Results<span>Search Default Exam Results</span>',array('result/'),array('class'=>'sl_ico')); ?>
+ 
+               </li>
+               <?php } ?>
                 </ul>
 		
 		</div>

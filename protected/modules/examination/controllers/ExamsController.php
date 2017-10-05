@@ -701,10 +701,7 @@ class ExamsController extends RController
              if(isset($_POST['Examination']))
 		{
                  $model->attributes=$_POST['Examination'];
-                  if ($model->start_time)
-                $model->start_time = date('Y-m-d', strtotime($model->start_time));
-              if ($model->end_time)
-                $model->end_time = date('Y-m-d', strtotime($model->end_time));
+                 
               if($model->save()){
                    //Yii::app()->user->setFlash('notification','Created Successfully');
               $this->redirect(array('index'));}
