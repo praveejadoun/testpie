@@ -77,7 +77,7 @@ $(document).ready(function() {
   <tr>
     <td width="247" valign="top">
     
-    <?php $this->renderPartial('left_side');?>
+    <?php $this->renderPartial('/default/left_side');?>
     
     </td>
     <td valign="top">

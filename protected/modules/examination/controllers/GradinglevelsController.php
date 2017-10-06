@@ -82,7 +82,7 @@ public function   init() {
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','returnForm','ajax_delete'),
+				'actions'=>array('index','returnForm','ajax_delete','list'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -195,7 +195,7 @@ public function   init() {
 
 		$model=new GradingLevels('search');
 		$model->unsetAttributes();  // clear any default values
-                //$model->getNull();
+//                $model->getNull();
 		if(isset($_GET['id']))
 			$model->batch_id=$_GET['id'];
               
@@ -203,6 +203,11 @@ public function   init() {
 		$this->render('index',array('model'=>$model));
 		
 	}
+        public function actionList(){
+            $model=new GradingLevels('search');
+//            $model= GradingLevels::model()->findAllByAttributes(array('batch_id'=>NULL));
+         $this->render('list',array('model'=>$model));   
+        }
 
 
         public function actionAjax_Update(){

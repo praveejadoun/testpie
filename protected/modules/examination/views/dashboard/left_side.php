@@ -15,13 +15,28 @@
                 <div class="clear"></div>
   </div>-->    <h1><?php echo Yii::t('examination','EXAMINATION');?></h1>   
                <ul>
-		            <li>
-                               <?php echo CHtml::link('Dashboard<span>Examination Dashboard</span>',array('dashboard/'),array('class'=>'sl_ico')); ?>
-                                
-                               <?php echo CHtml::link('Exams<span>Examination List</span>',array('exam/'),array('class'=>'sl_ico')); ?>
+                                   <?php   if(Yii::app()->controller->id=='dashboard'and Yii::app()->controller->action->id=='index' ){ ?>       
+                                <li class="list_active">    
+		            
+                                   <?php echo CHtml::link('Dashboard<span>Examination Dashboard</span>',array('dashboard/'),array('class'=>'sl_ico')); ?>
+                            </li> 
+                            <?php } else { ?>
+                            <li>
+                                <?php echo CHtml::link('Dashboard<span>Examination Dashboard</span>',array('dashboard/'),array('class'=>'sl_ico')); ?>
+  
                             </li>
-                    
-			            
+                            <?php } ?>
+                             <?php   if(Yii::app()->controller->id=='exams'and Yii::app()->controller->action->id=='index' ||  Yii::app()->controller->action->id=='create' ){ ?>       
+                                <li class="list_active">    
+		            
+                               <?php echo CHtml::link('Exams<span>Examination List</span>',array('exams/'),array('class'=>'sl_ico')); ?>
+                            </li>
+                             <?php } else { ?>
+                            <li>
+                                <?php echo CHtml::link('Exams<span>Examination List</span>',array('exams/'),array('class'=>'sl_ico')); ?>
+
+                            </li>  
+                             <?php } ?>
         <h1>EXAM MANAGEMENT</h1>
                 <li>
                    
@@ -32,7 +47,7 @@
 			$rurl = explode('&id=',$rurl[1]); 
                         echo CHtml::ajaxLink('Select Course/Batch<span>Select Batch And Exam</span>',array('default/explorer_3','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'abook_ico')); ?>
               
-                <?php   if(Yii::app()->controller->id=='gradingLevels'and Yii::app()->controller->action->id=='index'){ ?>       
+                <?php   if(Yii::app()->controller->id=='gradingLevels'and Yii::app()->controller->action->id=='index' ||  Yii::app()->controller->action->id=='list'){ ?>       
                 <li class="list_active">       
                         <?php echo CHtml::link('Default Grading Levels<span>Set Default Grading Level</span>',array('gradingLevels/'),array('class'=>'sl_ico')); ?>
 

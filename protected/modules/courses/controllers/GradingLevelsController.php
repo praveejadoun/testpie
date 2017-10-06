@@ -113,7 +113,7 @@ public function   init() {
 			$check1->delete();
 		}
 		
-		for($i=1;$i<7;$i++)
+		for($i=1;$i<5;$i++)
 		{
 		$model=GradingLevels::model()->findByPk($i);
 //                echo"<pre>";print_r($model);exit;

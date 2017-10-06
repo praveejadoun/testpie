@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="247" valign="top">
-     <?php $this->renderPartial('/dashboard/left_side');?>
+     <?php $this->renderPartial('/default/left_side');?>
     
     </td>
     <td valign="top">
@@ -28,7 +28,7 @@ $this->breadcrumbs=array(
     <h1><?php echo Yii::t('examination','Create New Exam');?></h1>
     <div class="edit_bttns" style="top:15px; right:20px;">
                     <ul>
-                        <li> <?php echo CHtml::link(Yii::t('examination', '<span>Back</span>'), array('exam/'), array('class' => 'addbttn last ')); ?></li>
+                        <li> <?php echo CHtml::link(Yii::t('examination', '<span>Back</span>'), array('exams/'), array('class' => 'addbttn last ')); ?></li>
                     </ul>
                 </div>
     <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -15,7 +15,7 @@ class DefaultController extends RController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index'),
+				'actions'=>array('index','explorer_3'),
 				'users'=>array('*'),
 			),
 		);

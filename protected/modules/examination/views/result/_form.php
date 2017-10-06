@@ -331,17 +331,32 @@ if(isset($_REQUEST['subj']))
                     <tr>
                         
                         <!--<td align="center" style="padding:0px 0px;"><?php ?></td>-->
+                        
                     <?php $examscores = ExamScores::model()->findAll("exam_id=:x",array(':x'=>$exams_1->id));?>
-                    <td align="center" style="padding:0px 0px;"><?php   foreach($examscores as $examscores_1){ $student = Students::model()->findAll("id=:x",array(':x'=>$examscores_1->student_id)); foreach($student as $student_1){ echo $student_1->first_name; }  ?></td>
-                   <?php $examgroup = ExamGroups::model()->findAll("id=:x",array(':x'=>$_REQUEST['exm']));?>
+                        
+                    <td align="center" style="padding:0px 0px;">
+                        <?php   foreach($examscores as $examscores_1){ 
+                            $student = Students::model()->findAll("id=:x",array(':x'=>$examscores_1->student_id)); 
+                            foreach($student as $student_1){ echo $student_1->first_name; }  ?></td>
+                   
+                        <?php $examgroup = ExamGroups::model()->findAll("id=:x",array(':x'=>$_REQUEST['exm']));?>
+                    
                     <td align="center" style="padding:0px 0px;"><?php foreach($examgroup as $examgroup_1){ echo $examgroup_1->name; ?></td>
-                  <?php $subject = Subjects::model()->findAll("id=:x",array(':x'=>$exams_1->subject_id));?>
+                 
+                    <?php $subject = Subjects::model()->findAll("id=:x",array(':x'=>$exams_1->subject_id));?>
+                    
                     <td align="center" style="padding:0px 0px;"><?php foreach($subject as $subject_1) { echo $subject_1->name;  ?></td>
+                    
                    <?php $course = Courses::model()->findAll("id=:x",array(':x'=>$_REQUEST['cou']));?>  
+                    
                     <td align="center" style="padding:0px 0px;"><?php foreach($course as $course_1) { echo $course_1->course_name;  ?></td>
-                    <?php $batch = Batches::model()->findAll("id=:x",array(':x'=>$_REQUEST['sub']));?>   
+                    
+                    <?php $batch = Batches::model()->findAll("id=:x",array(':x'=>$_REQUEST['sub']));?>  
+                    
                     <td align="center" style="padding:0px 0px;"><?php foreach($batch as $batch_1) { echo $batch_1->name;?></td>
+                    
                     <td align="center" style="padding:0px 0px;"><?php  echo $examscores_1->marks; ?></td>
+                    
 					<?php  //$dept = EmployeeDepartments::model()->findByAttributes(array('id'=>$list_1->employee_department_id)); ?>
                     <!--<td align="center"><?php // if($dept!=NULL){echo $dept->name; }else{ echo '-';}?> </td>-->
                     <td align="center" style="padding:0px 0px;"> <?php // echo $list_1->batch_id?></td>
