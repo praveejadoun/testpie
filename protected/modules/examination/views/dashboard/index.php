@@ -92,7 +92,7 @@ $(document).ready(function() {
     </div>
     <div class="overviewbox ovbox2"style="left:245px;width:216px;">
     	<h1><?php echo Yii::t('examination','<strong>Result Published Exams</strong>');?></h1>
-        <div class="ovrBtm"><?php $qwe= Examination::model()->findAll('is_deleted=:x AND status=:y',array(':x'=>0,':y'=>4));echo count($qwe);?></div>
+        <div class="ovrBtm"><?php $eg= ExamGroups::model()->findAll('result_published=:x',array(':x'=>1));echo count($eg);?></div>
     </div>
   <!--  <div class="overviewbox ovbox3">
     	<h1><?php //echo Yii::t('employees','<strong>Inactive Users</strong>');?></h1>
@@ -108,11 +108,14 @@ $(document).ready(function() {
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tbody>
                     <tr class="pdtab-h">
-                      <td align="center" height="18"><?php echo Yii::t('examination','Sl.No');?></td>
+                      <!--<td align="center" height="18"><?php // echo Yii::t('examination','Sl.No');?></td>-->
                       <td align="center"><?php echo Yii::t('examination','Name');?></td>
-                      <td align="center"><?php echo Yii::t('examination','Course');?></td>
                       <td align="center"><?php echo Yii::t('examination','Batch');?></td>
-                      <td align="center"><?php echo Yii::t('examination','Status');?></td>
+                      <td align="center"><?php echo Yii::t('examination','Course');?></td>
+                      <td align="center"><?php echo Yii::t('examination','Exam Type');?></td>
+                      <td align="center"><?php echo Yii::t('examination','Is Published');?></td>
+                      <td align="center"><?php echo Yii::t('examination','Result Published');?></td>
+                      <td align="center"><?php echo Yii::t('examination','Exam Date');?></td>
                       
                     </tr>
                   </tbody>
@@ -129,35 +132,21 @@ $(document).ready(function() {
 	              { ?>
                     <tbody>
                     <tr>
-                    <td align="center"><?php echo $i; ?></td>
+                    <!--<td align="center"><?php // echo $i; ?></td>-->
                     <td align="center"><?php echo CHtml::link($list_1->name) ?>&nbsp;</td>
-                    
-					<?php  $cou = Courses::model()->findByAttributes(array('id'=>$list_1->course_id)); ?>
-                    <td align="center"><?php  if($cou!=NULL){echo $cou->course_name; }else{ echo '-';}?> </td>
                     <?php  $bat = Batches::model()->findByAttributes(array('id'=>$list_1->batch_id)); ?>
                     <td align="center"><?php if($bat!=NULL){echo $bat->name; }else{ echo '-';}?> </td>
-                    <td align="center">
-                         <?php if($list_1->status=='1')
-                        {
-                        echo 'Default';
-                        }elseif($list_1->status=='2')
-                        {
-                        echo 'Open';   
-                        }elseif($list_1->status=='3')
-                        {
-                        echo 'Closed';
-                        }elseif($list_1->status=='4')
-                        {
-                        echo 'Result Published';
-                        }
-                        ?>
-                    </td>
-                    
+                    <?php  $cou = Courses::model()->findByAttributes(array('id'=>$bat->course_id)); ?>
+                    <td align="center"><?php  if($cou!=NULL){echo $cou->course_name; }else{ echo '-';}?> </td>
+                    <td align="center"><?php echo $list_1->exam_type?></td>
+                    <td align="center"><?php  $ispublish = $list_1->is_published;if($ispublish!='0'){ echo "Yes";} else { echo "No"; }?></td>
+                    <td align="center"><?php $resultpublish = $list_1->result_published;if($resultpublish!='0'){ echo "Yes";} else { echo "No"; }?></td>
+                    <td align="center"><?php echo $list_1->exam_date?></td>
                   </tr>
                      
                </tbody>
                <?php
-               } ?>
+               } $i++; ?>
                                
                </table>
               </div>

@@ -84,7 +84,15 @@ class ExamScoresController extends RController
 					
 				$model->exam_id = $list['exam_id']; 
 				$model->student_id = $list['student_id'][$i];
-				$model->marks = $list['marks'][$i];
+                                if(($list['marks'][$i]) > ($exam->maximum_marks) )
+                                {
+                                  $model->marks = 0;
+                                }
+                                else
+                                {
+                                    $model->marks = $list['marks'][$i];
+                                }
+				//$model->marks = $list['marks'][$i];
 				$model->remarks = $list['remarks'][$i];
 				$model->grading_level_id = $list['grading_level_id'];
 				if(($list['marks'][$i])< ($exam->minimum_marks)) 

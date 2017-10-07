@@ -732,7 +732,7 @@ class ExamsController extends RController
         {
            $this->redirect(array('/students/students/create','aid'=>$_GET['aid'])); 
         }*/
-        $this->redirect(array('/examination/exam'));
+        $this->redirect(array('/examination/exams'));
         }else{
             //Message here
         $this->redirect(array('/students/applicants/manage'));

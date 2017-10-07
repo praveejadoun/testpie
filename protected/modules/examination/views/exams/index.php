@@ -164,7 +164,7 @@ else
             const msg = (sid==2)?'Approved Application Cannot Be Revarted Back . Are You Sure ?':'Are you sure you want to change the status?';
         if (confirm(msg))
         {
-            self.location = "index.php?r=examination/exam/changestatus&aid=" +aid+"&sid="+sid;
+            self.location = "index.php?r=examination/exams/changestatus&aid=" +aid+"&sid="+sid;
         }
     })
     </script>

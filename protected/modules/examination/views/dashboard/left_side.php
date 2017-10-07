@@ -13,9 +13,10 @@
              	<input type="text" value="Search" class="lsearch_bar_left" name="">
                 <input type="button" class="sbut" name="">
                 <div class="clear"></div>
-  </div>-->    <h1><?php echo Yii::t('examination','EXAMINATION');?></h1>   
-               <ul>
-                                   <?php   if(Yii::app()->controller->id=='dashboard'and Yii::app()->controller->action->id=='index' ){ ?>       
+  </div>-->    
+             <!--<h1><?php // echo Yii::t('examination','EXAMINATION');?></h1>-->   
+               <!--<ul>-->
+                                   <?php   /*if(Yii::app()->controller->id=='dashboard'and Yii::app()->controller->action->id=='index' ){ ?>       
                                 <li class="list_active">    
 		            
                                    <?php echo CHtml::link('Dashboard<span>Examination Dashboard</span>',array('dashboard/'),array('class'=>'sl_ico')); ?>
@@ -36,17 +37,42 @@
                                 <?php echo CHtml::link('Exams<span>Examination List</span>',array('exams/'),array('class'=>'sl_ico')); ?>
 
                             </li>  
-                             <?php } ?>
+                             <?php } */?>
+               <!--</ul>-->
         <h1>EXAM MANAGEMENT</h1>
+        <ul>
+            <?php   if((Yii::app()->controller->id=='dashboard' || Yii::app()->controller->id=='default')  and Yii::app()->controller->action->id=='index') { ?>       
+                                <li class="list_active">    
+		            
+                                   <?php echo CHtml::link('Dashboard<span>Examination Dashboard</span>',array('dashboard/'),array('class'=>'sl_ico')); ?>
+                            </li> 
+                            <?php } else { ?>
+                            <li>
+                                <?php echo CHtml::link('Dashboard<span>Examination Dashboard</span>',array('dashboard/'),array('class'=>'sl_ico')); ?>
+  
+                            </li>
+                            <?php } ?>
                 <li>
-                   
+                <li class="list_active"> 
+                    <?php   if((Yii::app()->controller->id=='exam'and Yii::app()->controller->action->id=='index') || (Yii::app()->controller->id=='examin' and (in_array(Yii::app()->controller->action->id,array('create','update')))) || (Yii::app()->controller->id=='examScores' and (in_array(Yii::app()->controller->action->id,array('create','update'))))){ ?>       
+
                         <?php
 			
 			$rurl = explode('index.php?r=',Yii::app()->request->getUrl());
                        
 			$rurl = explode('&id=',$rurl[1]); 
                         echo CHtml::ajaxLink('Select Course/Batch<span>Select Batch And Exam</span>',array('default/explorer_3','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'abook_ico')); ?>
-              
+                </li>
+                    <?php } else { ?>
+                <li>
+                    <?php
+			
+			$rurl = explode('index.php?r=',Yii::app()->request->getUrl());
+                       
+			$rurl = explode('&id=',$rurl[1]); 
+                        echo CHtml::ajaxLink('Select Course/Batch<span>Select Batch And Exam</span>',array('default/explorer_3','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'abook_ico')); ?>
+                </li>
+                    <?php } ?>
                 <?php   if(Yii::app()->controller->id=='gradingLevels'and Yii::app()->controller->action->id=='index' ||  Yii::app()->controller->action->id=='list'){ ?>       
                 <li class="list_active">       
                         <?php echo CHtml::link('Default Grading Levels<span>Set Default Grading Level</span>',array('gradingLevels/'),array('class'=>'sl_ico')); ?>
@@ -60,6 +86,19 @@
               <?php } ?>
                </li>
                 
+                <h1>Exam Results</h1>
+               <?php if(Yii::app()->controller->id=='result' and Yii::app()->controller->action->id=='index'){?>
+               <li class="list_active">
+                    <?php echo CHtml::link('Results<span>Search Default Exam Results</span>',array('result/'),array('class'=>'sl_ico')); ?>
+ 
+               </li>
+               <?php } else { ?>
+               <li>
+                    <?php echo CHtml::link('Results<span>Search Default Exam Results</span>',array('result/'),array('class'=>'sl_ico')); ?>
+ 
+               </li>
+               <?php } ?>
+               
                 </ul>
 		
 		</div>

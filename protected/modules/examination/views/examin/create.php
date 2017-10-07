@@ -71,7 +71,17 @@ $this->breadcrumbs=array(
   <div class="box-one">
                             <div class="bttns_addstudent-n">
                                 <ul style="margin: 0px 0px 13px 555px;">
-                                    <li><?php echo CHtml::link(Yii::t('employees','change Batch'),array('create'),array('class'=>'formbut-n')) ?></li>
+                                    <li>
+                                        <?php
+			
+			$rurl = explode('index.php?r=',Yii::app()->request->getUrl());
+                       
+			$rurl = explode('&id=',$rurl[1]); 
+                        echo CHtml::ajaxLink('change Batch',array('default/explorer_3','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'formbut-n')); ?>
+                         
+                                        
+                                        <?php // echo CHtml::link(Yii::t('employees','change Batch'),array('create'),array('class'=>'formbut-n')) ?>
+                                    </li>
                                      
                                        
                                 </ul>

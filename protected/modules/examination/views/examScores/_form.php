@@ -54,7 +54,7 @@ if(isset($_REQUEST['id']))
 		
 
 	
-		<td><?php echo $form->textField($model,'marks[]',array('size'=>7,'maxlength'=>3,'id'=>$posts_1->id)); ?></td>
+		<td><?php echo $form->textField($model,'marks[]',array('size'=>7,'maxlength'=>3,'id'=>$posts_1->id)); ?><?php echo $form->error($model,'marks[]'); ?></td>
         
         <td><?php echo $form->textField($model,'remarks[]',array('size'=>30,'maxlength'=>255,'id'=>$posts_1->id)); ?></td>
         

@@ -22,12 +22,13 @@ class DashboardController extends RController
         
 	public function actionIndex()
 	{
+         
 		$criteria = new CDbCriteria;
-		$criteria->compare('is_deleted',0);
-		$total = Examination::model()->count($criteria);
+		//$criteria->compare('is_deleted',0);
+		$total = ExamGroups::model()->count($criteria);
 		$criteria->order = 'id DESC';
 		$criteria->limit = '10';
-		$posts = Examination::model()->findAll($criteria);
+		$posts = ExamGroups::model()->findAll($criteria);
 		
 		
 		$this->render('index',array(

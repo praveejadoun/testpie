@@ -284,11 +284,11 @@ $(".navigationbtm_wrapper_outer").show();
                  <?php 
 				if(isset(Yii::app()->controller->module->id) and Yii::app()->controller->module->id=='examination')
 				{
-				    echo CHtml::link(Yii::t('app','Examination'), array('/examination'),array('class'=>'ic12 active'));
+				    echo CHtml::link(Yii::t('app','Examination'), array('/examination/'),array('class'=>'ic12 active'));
 				}
 				else
 				{
-					echo CHtml::link(Yii::t('app','Examination'), array('/examination'),array('class'=>'ic12'));
+					echo CHtml::link(Yii::t('app','Examination'), array('/examination/'),array('class'=>'ic12'));
 				}
 				?>
                 </li>

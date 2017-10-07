@@ -46,10 +46,18 @@ $this->breadcrumbs=array(
         <br/><br/>  <br/>
     <div class="clear"></div>
    
+    
       <div class="box-one">
                             <div class="bttns_addstudent-n">
                                 <ul style="margin: 0px 0px -37px 600px;">
-                                    <li>   <input type="button" name="back" value="Back" onclick="javascript:history.back();" class="formbut-n" /></li>
+                                    <li> 
+                                        <?php $es = Exams::model()->findAll('id=:x',array(':x'=>$_REQUEST['examid']));foreach($es as $es_1){}?>
+                                        
+                                          <?php echo CHtml::link(Yii::t('employees','Back'),array('examin/create','exam_group_id'=>$es_1->exam_group_id,'id'=>$_REQUEST['id']),array('class'=>'formbut-n')) ?>
+                                     
+                                        
+                                        
+                                        <!--<input type="button" name="back" value="Back" onclick="javascript:history.back();" class="formbut-n" /></li>-->
                                   
                                        
                                 </ul>
@@ -63,8 +71,8 @@ $this->breadcrumbs=array(
          <div class="tablebx"> 
 	<table width="100%" cellspacing="0p" cellpadding="0" border="0">
     	<tr class="tablebx_topbg">
-            <td>Course</td>
             <td>Batch</td>
+            <td>Course</td>
             <td>Exam</td>
         </tr> 
         <?php $bat=Batches::model()->findAll('is_deleted=:x AND id=:y',array(':x'=>0,':y'=>$_REQUEST['id'])); ?>
@@ -72,8 +80,8 @@ $this->breadcrumbs=array(
             <td style="padding:8px 0px;"><?php foreach($bat as $batch){echo $batch->name;}?></td>
             <?php $cou= Courses::model()->findAll('is_deleted=:x AND id=:y',array(':x'=>0,':y'=>$batch->course_id));?>
             <td style="padding:8px 0px;"><?php foreach($cou as $course){echo $course->course_name;}?></td>
-           <?php $es= ExamGroups::model()->findAll('id=:x',array(':x'=>$_REQUEST['examid']));?>
-            <td><?php foreach($es as $es_1){echo $es_1->name;}?></td>
+           <?php $exam= Exams::model()->findAll('id=:x',array(':x'=>$_REQUEST['examid']));?>
+            <td><?php foreach($exam as $exam_1){ $eg= ExamGroups::model()->findAll('id=:x',array(':x'=>$exam_1->exam_group_id));}foreach($eg as $eg_1){ echo $eg_1->name;}?></td>
         </tr>
       
     </table>
@@ -81,7 +89,17 @@ $this->breadcrumbs=array(
   <div class="box-one">
                             <div class="bttns_addstudent-n">
                                 <ul style="margin: 0px 0px 13px 555px;">
-                                    <li><?php echo CHtml::link(Yii::t('employees','change Batch'),array('create'),array('class'=>'formbut-n')) ?></li>
+                                    <li>
+                                        <?php
+			
+			$rurl = explode('index.php?r=',Yii::app()->request->getUrl());
+                       
+			$rurl = explode('&id=',$rurl[1]); 
+                        echo CHtml::ajaxLink('change Batch',array('default/explorer_3','widget'=>'2','rurl'=>$rurl[0]),array('update'=>'#explorer_handler'),array('id'=>'explorer_change','class'=>'formbut-n')); ?>
+                         
+                                        
+                                        <?php // echo CHtml::link(Yii::t('employees','change Batch'),array('create'),array('class'=>'formbut-n')) ?>
+                                    </li>
                                      
                                        
                                 </ul>

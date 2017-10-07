@@ -141,14 +141,15 @@
             <?php echo $form->labelEx($model,Yii::t('Exam','exam_date'),array('style'=>'color:#4F4E4E')); ?>
             <?php 
 			$settings=UserSettings::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
-	if($settings!=NULL)
+	/*if($settings!=NULL)
 	{
 		$date=$settings->dateformat;
 		if (!$model->isNewRecord)
 			{
-				$model->exam_date=date($settings->displaydate,strtotime($model->exam_date));
+				$model->exam_date=date($settings->displaydate);
 			}
-	}
+	}*/
+        $date='yy-mm-dd';
 				$this->widget('zii.widgets.jui.CJuiDatePicker', array(
 								//'name'=>'Students[admission_date]',
 								'model'=>$model,

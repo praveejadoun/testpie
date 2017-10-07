@@ -23,7 +23,18 @@ class DefaultController extends RController
 	
 	public function actionIndex()
 	{
-		$this->render('index');
+         
+		$criteria = new CDbCriteria;
+		//$criteria->compare('is_deleted',0);
+		$total = ExamGroups::model()->count($criteria);
+		$criteria->order = 'id DESC';
+		$criteria->limit = '10';
+		$posts = ExamGroups::model()->findAll($criteria);
+		
+		
+		$this->render('index',array(
+			'total'=>$total,'list'=>$posts
+		));
 	}
          public function actionExplorer_3()
 	{
