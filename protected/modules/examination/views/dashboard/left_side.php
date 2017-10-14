@@ -75,7 +75,7 @@
                     <?php } ?>
                 <?php   if(Yii::app()->controller->id=='gradingLevels'and Yii::app()->controller->action->id=='index' ||  Yii::app()->controller->action->id=='list'){ ?>       
                 <li class="list_active">       
-                        <?php echo CHtml::link('Default Grading Levels<span>Set Default Grading Level</span>',array('gradingLevels/'),array('class'=>'sl_ico')); ?>
+                        <?php echo CHtml::link('Default Grading Levels<span>Set Default Grading Level</span>',array('gradingLevels/list'),array('class'=>'sl_ico')); ?>
 
                 </li> 
               <?php } else { ?>

@@ -151,7 +151,7 @@ $(document).click(function() {
                                                         echo CHtml::link($data1->name, $data1->url, array('class' => 'vtip'));
                                                         echo '</span>';
                                                         echo '<span>';
-                                                        echo CHtml::link('<img src="images/cross.png" border="0" />', array('/savedsearches/deletestudent', 'user_id' => Yii::app()->User->id, 'sid' => $data1->id), array('confirm' => 'Are you sure you want to delete this?'));
+                                                        echo CHtml::link('<img src="images/cross.png" border="0" />', array('/savedsearches/deleteapplicant', 'user_id' => Yii::app()->User->id, 'sid' => $data1->id), array('confirm' => 'Are you sure you want to delete this?'));
                                                         echo '</span>';
                                                     }
                                                 } else {

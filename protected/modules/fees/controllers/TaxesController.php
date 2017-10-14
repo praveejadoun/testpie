@@ -26,12 +26,9 @@ class TaxesController extends RController
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','Assign','Deleterow'),
-				'users'=>array('*'),
-			),
+			
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','subject','current','remove','employee'),
+				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -44,33 +41,23 @@ class TaxesController extends RController
 		);
 	}
 
-	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
-	 */
-	public function actionView($id)
-	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
-	}
-
+	
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionCreate()
 	{
-		$model=new EmployeesSubjects;
+		$model=new Taxes;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['EmployeesSubjects']))
+		if(isset($_POST['Taxes']))
 		{
-			$model->attributes=$_POST['EmployeesSubjects'];
+			$model->attributes=$_POST['Taxes'];
 			if($model->save())
-			$this->redirect(array('view','id'=>$model->id));
+			$this->redirect(array('admin'));
 		}
 
 		$this->render('create',array(
@@ -90,27 +77,18 @@ class TaxesController extends RController
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['EmployeesSubjects']))
+		if(isset($_POST['Taxes']))
 		{
-			$model->attributes=$_POST['EmployeesSubjects'];
+			$model->attributes=$_POST['Taxes'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('admin'));
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
 		));
 	}
-	public function actionDeleterow()
-	{
-
-		$postRecord = EmployeesSubjects::model()->findByPk($_REQUEST['id']);
-		$postRecord->delete();
-		 Yii::app()->user->setFlash('notification','Data Saved Successfully');
-		$this->redirect(array('create','cou'=>$_REQUEST['cou'],'sub'=>$_REQUEST['sub'],'dept'=>$_REQUEST['dept']));
-		
-	}
-
+	
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
@@ -132,35 +110,14 @@ class TaxesController extends RController
 	}
 
 	/**
-	 * Lists all models.
-	 */
-	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('EmployeesSubjects');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}
-	public function actionAssign()
-	{
-	$model = new EmployeesSubjects;
-
-	$model->employee_id = $_REQUEST['emp_id'];
-	$model->subject_id = $_REQUEST['sub'];
-	$model->save();
-	$this->redirect(array('create','cou'=>$_REQUEST['cou'],'sub'=>$_REQUEST['sub'],'dept'=>$_REQUEST['dept']));
-		
-	}
-
-	/**
 	 * Manages all models.
 	 */
 	public function actionAdmin()
 	{
-		$model=new EmployeesSubjects('search');
+		$model=new Taxes('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['EmployeesSubjects']))
-			$model->attributes=$_GET['EmployeesSubjects'];
+		if(isset($_GET['Taxes']))
+			$model->attributes=$_GET['Taxes'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -174,7 +131,7 @@ class TaxesController extends RController
 	 */
 	public function loadModel($id)
 	{
-		$model=EmployeesSubjects::model()->findByPk($id);
+		$model= Taxes::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -186,56 +143,12 @@ class TaxesController extends RController
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='employees-subjects-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='taxes-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}
 	
-	public function actionSubject()
-	{
-		$data=Subjects::model()->findAll(array('join' => 'JOIN batches ON batch_id = batches.id','condition'=>'batches.course_id=:id', 
-                  'params'=>array(':id'=>(int) $_POST['id'])));
- 
-         $data=CHtml::listData($data,'id','name');
-		  foreach($data as $value=>$name)
-		  {
-			  echo CHtml::tag('option',
-						 array('value'=>$value),CHtml::encode($name),true);
-		  }
-	}
 	
-	public function actionEmployee()
-	{
-		$data=Employees::model()->findAll(array('order'=>'first_name DESC','condition'=>'employee_department_id=:id', 
-                  'params'=>array(':id'=>(int) $_POST['did'])));
- 
-         $data=CHtml::listData($data,'id','first_name');
-		  foreach($data as $value=>$name)
-		  {
-			  echo CHtml::tag('option',
-						 array('value'=>$value),CHtml::encode($name),true);
-		  }
-	}
-	
-	public function actionCurrent()
-	{
-		if(isset($_POST['EmployeesSubjects']['subject_id']))
-		{
-		$this->renderPartial('assign',array('subject_id' =>$_POST['EmployeesSubjects']['subject_id']));	
-		}
-		 else
-		 {
-			 echo 'remove';
-		 }
-		 
-	}
-	
-	public function actionRemove()
-	{
-		EmployeesSubjects::model()->findByAttributes(array('subject_id'=>$_REQUEST['subject_id'],'employee_id'=>$_REQUEST['employee_id']))->delete();
-		$this->redirect(Yii::app()->createUrl('EmployeesSubjects/create'));
-		 
-	}
 }

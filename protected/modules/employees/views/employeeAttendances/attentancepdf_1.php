@@ -169,10 +169,10 @@ foreach($posts as $posts_1)
 $find = EmployeeAttendances::model()->findAll("attendance_date=:x AND employee_id=:y", array(':x'=>$_REQUEST['year'].'-'.$mon_num.'-'.$i,':y'=>$posts_1->id));
 if(count($find)==0)
 {
-echo "<span style='color:#6fc20e'><strong>P</strong></span>";
+echo "<span style='color:#6fc20e;font-size:12px;margin-top:5px;'><strong>P</strong></span>";
 }
 else
-echo "<span style='color:#ce0606'><strong>X</strong></span>";
+echo "<span style='color:#ce0606;font-size:12px;margin-top:5px;'><strong>X</strong></span>";
 		
 		echo '</td>';
     }

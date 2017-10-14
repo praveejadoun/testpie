@@ -112,6 +112,7 @@ Yii::app()->clientScript->registerScript(
 								  {
 									  echo 'Female';
 								  }?></td>
+                                                                <td></td>
 								<td >
 								<div style="position:absolute;">
 								<div  id="<?php echo $i; ?>" class="act_but"><?php echo Yii::t('Batch','Actions');?></div>

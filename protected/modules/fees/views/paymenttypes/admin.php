@@ -1,67 +1,89 @@
 <?php
 $this->breadcrumbs=array(
-	'Fees'=>array('index'),
+	'Fees'=>array('/fees'),
+//	$model->id=>array('view','id'=>$model->id),
 	'Payment Types',
 );
-
-/*$this->menu=array(
-	array('label'=>'List EmployeeAttendances', 'url'=>array('index')),
-	array('label'=>'Create EmployeeAttendances', 'url'=>array('create')),
-);
-
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('employee-attendances-grid', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-");*/
 ?>
-
-<!--<h1>Manage Employee Attendances</h1>
-
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
-
-<?php //echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
-
-
-</div><!-- search-form -->
-
-<?php /*$this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'employee-attendances-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'id',
-		'attendance_date',
-		'employee_id',
-		'employee_leave_type_id',
-		'reason',
-		'is_half_day',
-		array(
-			'class'=>'CButtonColumn',
-		),
-	),
-));*/ ?>
-
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="247" valign="top">
+      <td width="247" valign="top">
     
-    <?php $this->renderPartial('/employees/left_side');?>
+    <?php $this->renderPartial('/default/left_side');?>
     
     </td>
-    
-    <!--<div class="cont_right formWrapper" id="demo-->
-    <?php $this->renderPartial('_search',array('model'=>$model,)); ?>
+    <td valign="top">
+<div class="cont_right formWrapper">
+     <h1><?php echo Yii::t('paymenttypes','Payment Types');?></h1>
+      <div class="box-one">
+                            <div class="bttns_addstudent-n">
+                                <ul style="margin: 0px 0px -37px 625px;">
+                                    <li><?php echo CHtml::link(Yii::t('paymenttypes','Create'),array('create'),array('class'=>'formbut-n')) ?></li>
+                                     
+                                       
+                                </ul>
+                            </div>
+                        </div>
+ <?php $this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>'taxes-grid',
+	'dataProvider'=>$model->search(),
+	'pager'=>array('cssFile'=>Yii::app()->baseUrl.'/css/formstyle.css'),
+ 	'cssFile' => Yii::app()->baseUrl . '/css/formstyle.css',
+	'columns'=>array(
+		
+		
+		/*array(
+		    'header'=>'Student Name',
+			'value'=>array($model,'studentname'),
+			'name'=> 'firstname',
+            'sortable'=>true,
+
+		
+		),*/
+		'type',
+		'status',
+		/*array(
+			'header'=>'Grades',
+			'value'=>array($model,'getgradinglevel'),
+			'name'=> 'grading_level_id',
+		)*/
+		
+                'created_at',
+		//'is_failed',
+		/*
+		'grading_level_id',
+		array(
+		    'name'=>'subject_id',
+			'value'=>array($model,'subjectname')
+		
+		),
+		'minimum_marks',
+		'grading_level_id',
+		'weightage',
+		'event_id',
+		'created_at',
+		'updated_at',
+		*/
+		array(
+			'class'=>'CButtonColumn',
+			/*'buttons' => array(
+                                                     
+														'update' => array(
+                                                        'label' => 'update', // text label of the button
+														
+                                                        'url'=>'Yii::app()->createUrl("/examination/examScores/update", array("sid"=>$data->id,"id"=>$_REQUEST["id"]))', // a PHP expression for generating the URL of the button
+                                                      
+                                                        ),
+														
+                                                    ),*/
+													'template'=>'{update} {delete}',
+													'afterDelete'=>'function(){window.location.reload();}'
+													
+		),
+		
+	),
+)); ?>
+</div>
+    </td>
   </tr>
 </table>

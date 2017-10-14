@@ -33,7 +33,7 @@ else
         <ul>
             <li><h2><?php echo CHtml::link(Yii::t('Employees','Employee Details'),array('employees/update','id'=>$_REQUEST['id']));?></h2></li>
             <li><h2 class="cur">Employee Contact Details</h2></li>
-            <li><h2><?php echo CHtml::link(Yii::t('Employees','Employee Documents'),array('employeedocument/create','id'=>$_REQUEST['id']));?></h2></li>
+            <li><h2><?php // echo CHtml::link(Yii::t('Employees','Employee Documents'),array('employeedocument/create','id'=>$_REQUEST['id']));?></h2></li>
         </ul>
 	</div>
 <?php

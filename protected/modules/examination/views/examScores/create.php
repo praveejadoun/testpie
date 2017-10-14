@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Exam Scores'=>array('/courses'),
-	'Create',
+	'Exams'=>array('/examination'),
+	'Exam Scores',
 );
 ?>
 

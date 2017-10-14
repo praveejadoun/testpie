@@ -12,7 +12,8 @@
  */
 ?><?php
 $this->breadcrumbs=array(
-	'Exam'=>array('/courses'),
+	'Examination'=>array('/examination'),
+        'Exam',
 	$model->name,
 );
 ?>

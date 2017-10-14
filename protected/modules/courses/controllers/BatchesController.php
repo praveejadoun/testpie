@@ -151,12 +151,29 @@ class BatchesController extends RController
 	}
         public function actionAssign()
 	{
+        $check = StudentSubjects::model()->findAllByAttributes(array('student_id'=>$_REQUEST['sid'],'subject_id'=>$_REQUEST['sub']));
+        $count=count($check);
+        if($count == 1)
+        {   
+//            echo "sunil";exit;
+            Yii::app()->user->setFlash('notification','Elective  is already assigned');
+            
+                               
+             
+        }
+        else
+        {
+        
 	$model = new StudentSubjects;
-	$model->student_id = $_REQUEST['id'];
+        $data_1=Electives::model()->findByAttributes(array('elective_group_id'=>$_REQUEST['eg']));
+	$model->student_id = $_REQUEST['sid'];
 	$model->subject_id = $_REQUEST['sub'];
         $model->batch_id = $data_1->batch_id;
 	$model->save();
-	$this->redirect(array('electives','eg'=>$_REQUEST['eg'],'sub'=>$_REQUEST['sub']));
+        }
+//         Yii::app()->request->urlReferrer;
+        
+	$this->redirect(array('electives','id'=>$_REQUEST['id']));
 	}
         
 	public function actionManage() 

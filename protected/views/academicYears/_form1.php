@@ -30,7 +30,7 @@
      <td><div>
     <?php
 			
-			$date = 'dd-mm-yy';	
+			$date = 'yy-mm-dd';	
    				
 						$this->widget('zii.widgets.jui.CJuiDatePicker', array(
 								//'name'=>'Students[admission_date]',
@@ -60,7 +60,7 @@
 		
 	}
 	else*/
-	$date = 'dd-mm-yy';	
+	$date = 'yy-mm-dd';	
 	//echo $form->textField($model,'joining_date',array('size'=>30,'maxlength'=>255));
 				$this->widget('zii.widgets.jui.CJuiDatePicker', array(
 							//'name'=>'Employees[joining_date]',

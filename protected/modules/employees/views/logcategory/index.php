@@ -84,8 +84,13 @@ $(document).click(function() {
                                                 <div class="gridact_arrow"></div>
                                                     <ul>
                                                         <!--<li><a href="#" class="grview">View</a></li>-->
-                                                        <li><a href="index.php?r=employees/logcategory/update&id=<?php echo $logcategory_1->id ?>" class="gredit">Edit</a></li>
-                                                        <li><a href="<?php echo $logcategory_1->id ?>" class="grdel">Delete</a></li>
+                                                        <li><a href="index.php?r=employees/logcategory/update&id=<?php echo $logcategory_1->id;?>" class="gredit">Edit</a></li>
+                                                       
+                                                        <li><a> <?php 
+                                         echo CHtml::link(Yii::t(
+  'Logcategory','Delete'), array('delete', 'id' =>$logcategory_1->id,'class'=>'grdel'),array('confirm'=>"Are you sure You Want To Delete this LogCategory?")); ?>
+                                                            </a> <li>
+                                                        <!--<li><a href="<?php // echo $logcategory_1->id ?>" class="grdel">Delete</a></li>-->
                                                     </ul>
                                             </div>
                                             </div>
@@ -113,11 +118,7 @@ $(document).click(function() {
                   <?php    } ?>
                   
                   
-                   <?php }else { 
-                   echo '<br><div style="padding-top:10px;margin-top:-15px;">'.'<i>'.Yii::t('Batch','No Results Found').'</i></div>'; ?>  
-                            
-                            
-     <?php } ?>
+                   <?php }?>
                    <?php
                             //Strings for the delete confirmation dialog.
                             $del_con = Yii::t('logcategory', 'Are you sure you want to delete this student category?');
@@ -137,36 +138,28 @@ $(document).click(function() {
         </td>
     </tr>
 </table>
-
 <script type="text/javascript">
-  $(function() {
-      
+    $(function() {
       $. bind_crud= function(){
-    
-   
-
-
-// DELETE
-
-    var deletes = new Array();
+      var deletes = new Array();
     var dialogs = new Array();
     $('.grdel').each(function(index) {
         var id = $(this).attr('href');
         deletes[id] = function() {
             $.ajax({
                 type: "POST",
-                url: "<?php echo Yii::app()->request->baseUrl;?>/index.php?r=employees/logcategory/ajax_delete",
+                url: "<?php echo Yii::app()->request->baseUrl;?>/index.php?r=students/studentCategory/ajax_delete",
                 data:{"id":id,"YII_CSRF_TOKEN":"<?php echo Yii::app()->request->csrfToken;?>"},
                     beforeSend : function() {
-                    $("#employee-categories-grid").addClass("ajax-sending");
+                    $("#student-categories-grid").addClass("ajax-sending");
                 },
                 complete : function() {
-                    $("#employee-categories-grid").removeClass("ajax-sending");
+                    $("#student-categories-grid").removeClass("ajax-sending");
                 },
                 success: function(data) {window.location.reload();
                     var res = jQuery.parseJSON(data);
                      var page=$("li.selected  > a").text();
-                    $.fn.yiiGridView.update('employee-categories-grid', {url:'<?php echo Yii::app()->request->getUrl()?>',data:{"EmployeeCategories_page":page}});
+                    $.fn.yiiGridView.update('student-categories-grid', {url:'<?php echo Yii::app()->request->getUrl()?>',data:{"StudentCategories_page":page}});
                 }//success
             });//ajax
         };//end of deletes
@@ -211,4 +204,5 @@ $(document).click(function() {
    //apply   $. bind_crud();
   $. bind_crud();
   })
+
     </script>

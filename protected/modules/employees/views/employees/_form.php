@@ -33,7 +33,7 @@ else
         <ul>
             <li><h2 class="cur">Employee Details</h2></li>
             <li><h2><?php echo CHtml::link(Yii::t('Employees','Employee Contact Details'), array('employees/update2','id' => $_REQUEST['id'])); ?></h2></li>
-                        <li><h2><?php echo CHtml::link(Yii::t('Employees','Employee Documents'),array('employeedocument/create','id'=>$_REQUEST['id']));?></h2></li>
+                        <li><h2><?php // echo CHtml::link(Yii::t('Employees','Employee Documents'),array('employeedocument/create','id'=>$_REQUEST['id']));?></h2></li>
 
            
         </ul>
@@ -92,7 +92,8 @@ else
                         
 			?>
 	<?php echo $form->labelEx($model,Yii::t('employees','employee_number')); ?></td>
-    <td><?php echo $form->textField($model,'employee_number',array('size'=>20,'maxlength'=>255,'value'=>$emp_id_1)); ?>
+    <td><?php echo $form->textField($model,'employee_number',array('size'=>20,'maxlength'=>255,'value'=>$emp_id_1,'disabled' => true)); 
+        echo $form->hiddenField($model, 'employee_number', array('value' => $emp_id_1));?>
 		<?php echo $form->error($model,'employee_number'); ?></td>
     
     <td><?php echo $form->labelEx($model,Yii::t('employees','joining_date')); ?></td>

@@ -66,7 +66,8 @@ $('.search-form form').submit(function(){
 		'name',
 		array(
 		    'name'=>'employee_category_id',
-			'value'=>array($model,'categoryname')
+			'value'=>'EmployeeCategories::model()->findByAttributes(array("id"=>$data->employee_category_id))->name',/*array($model,'categoryname')*/
+                       'filter'=>false
 		
 		),
 		/*'status',*/

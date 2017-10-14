@@ -1,6 +1,6 @@
 <?php
 
-class SavedsearchesController extends RController
+class PaymenttypesController extends RController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -26,10 +26,7 @@ class SavedsearchesController extends RController
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','Addnew','deleteall'),
-				'users'=>array('*'),
-			),
+			
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
 				'users'=>array('@'),
@@ -44,82 +41,31 @@ class SavedsearchesController extends RController
 		);
 	}
 
-	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
-	 */
-	public function actionView($id)
-	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
-	}
+	
 
-	public function actionDeletestudent()
-   {
-	
-	Savedsearches::model()->deleteAllByAttributes(array('user_id'=>$_REQUEST['user_id'],'id'=>$_REQUEST['sid']));
-	$this->redirect(array('/students/students/manage'));
-   }
-   public function actionDeleteapplicant()
-   {
-	
-	Savedsearches::model()->deleteAllByAttributes(array('user_id'=>$_REQUEST['user_id'],'id'=>$_REQUEST['sid']));
-	$this->redirect(array('/students/applicants/manage'));
-   }
-
-	public function actionDeleteemp()
-   {
-	
-	
-	Savedsearches::model()->deleteAllByAttributes(array('user_id'=>$_REQUEST['user_id'],'id'=>$_REQUEST['sid']));
-	$this->redirect(array('/employees/employees/manage'));
-   }
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	 
-	 
-	public function actionAddnew() {
-                $model=new Savedsearches;
-        // Ajax Validation enabled
-        $this->performAjaxValidation($model);
-        // Flag to know if we will render the form or try to add 
-        // new jon.
-		
-                $flag=true;
-	   	if(isset($_POST['Submit']))
-        {       $flag=false;
-            
-              
-                }
-                if($flag) {
-                    Yii::app()->clientScript->scriptMap['jquery.js'] = false;
-                    $this->renderPartial('create',array('model'=>$model,'url'=>$_GET['val1'],'type'=>$_GET['type']),false,true);
-                }
-        }
-		
-		
 	public function actionCreate()
 	{
-		$model=new Savedsearches;
-		
-		// Uncomment the following line if AJAX validation is needed
-		$this->performAjaxValidation($model);
+		$model=new PaymentTypes;
 
-		if(isset($_POST['Savedsearches']))
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['PaymentTypes']))
 		{
-			$model->attributes=$_POST['Savedsearches'];
+			$model->attributes=$_POST['PaymentTypes'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('admin'));
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
 		));
 	}
-
+	
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -132,11 +78,11 @@ class SavedsearchesController extends RController
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Savedsearches']))
+		if(isset($_POST['PaymentTypes']))
 		{
-			$model->attributes=$_POST['Savedsearches'];
+			$model->attributes=$_POST['PaymentTypes'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('admin'));
 		}
 
 		$this->render('update',array(
@@ -164,26 +110,17 @@ class SavedsearchesController extends RController
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 
-	/**
-	 * Lists all models.
-	 */
-	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('Savedsearches');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}
+	
 
 	/**
 	 * Manages all models.
 	 */
 	public function actionAdmin()
 	{
-		$model=new Savedsearches('search');
+		$model=new PaymentTypes('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Savedsearches']))
-			$model->attributes=$_GET['Savedsearches'];
+		if(isset($_GET['PaymentTypes']))
+			$model->attributes=$_GET['PaymentTypes'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -197,7 +134,7 @@ class SavedsearchesController extends RController
 	 */
 	public function loadModel($id)
 	{
-		$model=Savedsearches::model()->findByPk($id);
+		$model= PaymentTypes::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -209,10 +146,13 @@ class SavedsearchesController extends RController
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='savedsearches-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='employee-attendances-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}
+	
+	
+	
 }

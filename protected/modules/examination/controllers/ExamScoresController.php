@@ -130,9 +130,25 @@ class ExamScoresController extends RController
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
+                $exam=Exams::model()->findByAttributes(array('id'=>$_REQUEST['examid']));
 		if(isset($_POST['ExamScores']))
 		{
+                        if(($_POST['ExamScores']['marks']) > ($exam->maximum_marks) )
+                                {
+                                  $model->marks = 0;
+                                }
+                                else
+                                {
+                                    $model->marks = $_POST['ExamScores']['marks'];
+                                }
+                        if(($_POST['ExamScores']['marks']) < ($exam->minimum_marks)) 
+                        {
+                        $model->is_failed = 1;
+                        }
+                        else
+                        {
+                        $model->is_failed = '';
+                        }
 			$model->attributes=$_POST['ExamScores'];
 			if($model->save())
 				$this->redirect(array('examScores/create','id'=>$_REQUEST['id'],'examid'=>$_REQUEST['examid']));

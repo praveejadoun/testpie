@@ -110,7 +110,19 @@ $posts = Students::model()->findAll("batch_id=:x and is_deleted=:y and is_active
 	else
 	{*/
 	?>
-    
+   <?php
+                Yii::app()->clientScript->registerScript(
+                        'myHideEffect', '$(".flash-success").animate({opacity: 1.0}, 3000).fadeOut("slow");', CClientScript::POS_READY
+                );
+                ?>
+                <div id="statusMsg">    
+                <?php if (Yii::app()->user->hasFlash('notification')): ?>
+                    
+                    <div class="flash-success" style="color:#F00; padding-left:150px; font-size:12px">
+                    <?php echo Yii::app()->user->getFlash('notification'); ?>
+                    </div>
+                    <?php endif; ?>
+                </div>  
    <!-- <div class="clear"></div>
   <h3><?php echo Yii::t('employees','Currently Assigned:');?></h3>
   <div id="success" style="color:#F00; display:none;">Details Removed Successfully</div>-->
@@ -138,7 +150,7 @@ $posts = Students::model()->findAll("batch_id=:x and is_deleted=:y and is_active
     
 		<td><?php echo $posts_1->admission_no; ?></td> 
 	
-    <td><?php echo CHtml::link(Yii::t('students','Assign'), array('batches/Assign', 'id'=>$posts_1->id,'sub'=>$_REQUEST['sub'],'eg'=>$_REQUEST['eg']), array('confirm' => 'Are you sure?')); ?></td>
+    <td><?php echo CHtml::link(Yii::t('students','Assign'), array('batches/Assign','id'=>$_REQUEST['id'], 'sid'=>$posts_1->id,'sub'=>$_REQUEST['sub'],'eg'=>$_REQUEST['eg']), array('confirm' => 'Are you sure?')); ?></td>
                
            
      </tr>

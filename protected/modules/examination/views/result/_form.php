@@ -46,7 +46,7 @@ $form = $this->beginWidget('CActiveForm', array(
         ));
 ?>
 
-<div class="formCon" style="margin: 0px 0px 50px 0px">
+<div class="formCon" style="margin: 0px 0px 0px 0px">
 
     <div class="formConInner" style="padding: 20px 15px;">
 
@@ -59,14 +59,14 @@ $form = $this->beginWidget('CActiveForm', array(
         }
         echo '<div style=""><span style="font-size:14px; font-weight:bold; color:#666;">Choose Search Option</span>&nbsp;&nbsp;&nbsp;&nbsp;';
         echo CHtml::dropDownList('id', '', $data, array('prompt' => 'Select', 'onchange' => 'course()', 'id' => 'search', 'options' => array($sel => array('selected' => true))));
-        echo '</div>';
+        echo '</div><br/>';
 //echo '<div style="float:left; width:300px;"><span style="font-size:14px; font-weight:bold; color:#666;">Subject</span>&nbsp;&nbsp;'; 
         ?>
 
 
         <?php
         if ($_REQUEST['search'] == 2) {
-            echo '<br><span style="font-size:14px; font-weight:bold; color:#666;">Students</span>&nbsp;&nbsp;';
+            echo '<span style="font-size:14px; font-weight:bold; color:#666;padding: 0px 100px 0px 0px;">Students</span>&nbsp;&nbsp;';
 
             $data_1 = array();
             if (isset($_REQUEST['search'])) {
@@ -140,7 +140,7 @@ $form = $this->beginWidget('CActiveForm', array(
                         <td>Status</td>
                         <td>Remarks</td>
                     </tr> 
-            <?php foreach ($ex as $ex_1) {
+            <?php /*foreach ($ex as $ex_1) {
                 
                 //Get subject name from subject id
                 //get score , status , remarks 
@@ -156,13 +156,13 @@ $form = $this->beginWidget('CActiveForm', array(
 
                 <?php
             }
-            ?>
+            */?>
 
-                    <tr>
-            <?php $Examscore = ExamScores::model()->findAll('student_id=:x ', array(':x' => $_REQUEST['stud'])) ?>
+                   <tr>
+            <?php $Examscore = ExamScores::model()->findAll('student_id=:x ', array(':x' => $_REQUEST['stud'])); ?>
                         <?php
                         foreach ($Examscore as $Examscore_1) {
-                            $exam = Exams::model()->findAll('id=:x', array(':x' => $Examscore_1->exam_id));
+                            $exam = Exams::model()->findAll('id=:x AND exam_group_id=:y', array(':x' => $Examscore_1->exam_id,':y' => $eg_1->id ));
                             ?>
                             <?php
                             foreach ($exam as $exam_1) {
@@ -173,7 +173,7 @@ $form = $this->beginWidget('CActiveForm', array(
                         echo $subject_1->name; ?></td>
                                     <td style="padding:8px 0px;"><?php echo $Examscore_1->marks; ?></td>
 
-                                    <td style="padding:8px 0px;"></td>
+                                    <td style="padding:8px 0px;"><?php if($Examscore_1->is_failed == '1'){ echo "Failed";}else{ echo "Passed";}?></td>
 
                                     <td style="padding:8px 0px;"><?php echo $Examscore_1->remarks; ?></td>
 
@@ -259,10 +259,10 @@ if ($_REQUEST['search'] == 1) {
     } else {
         $sel = '';
     }
-    echo '<div style="float:left; width:380px;"><span style="font-size:14px; font-weight:bold; color:#666;">Course</span>&nbsp;&nbsp;&nbsp;&nbsp;';
+    echo '<div style="float:left; width:380px;"><span style="font-size:14px; font-weight:bold; color:#666;padding: 0px 105px 0px 0px;">Course</span>&nbsp;&nbsp;&nbsp;&nbsp;';
     echo CHtml::dropDownList('id', '', $data, array('prompt' => 'Select', 'onchange' => 'sunil()', 'id' => 'cou', 'options' => array($sel => array('selected' => true))));
-    echo '</div>';
-    echo '<div style="float:left; width:300px;"><span style="font-size:14px; font-weight:bold; color:#666;">Batch</span>&nbsp;&nbsp;';
+    echo '</div><div class="clear"></div><br/>';
+    echo '<div style="float:left; width:380px;"><span style="font-size:14px; font-weight:bold; color:#666;padding: 0px 120px 0px 0px;">Batch</span>&nbsp;&nbsp;';
     ?>
 
 
@@ -284,8 +284,8 @@ if ($_REQUEST['search'] == 1) {
     }
     echo CHtml::dropDownList('sub', '', $batches, array('prompt' => 'Select', 'onchange' => 'sunil()', 'id' => 'sub', 'onchange' => 'kumar()', 'options' => array($sel_1 => array('selected' => true))));
 
-    echo '<br/></div><div class="clear"></div>';
-    echo '<div style="float:left; width:380px;"><span style="font-size:14px; font-weight:bold; color:#666;">Exam Name</span>&nbsp;&nbsp;&nbsp;&nbsp;';
+    echo '<br/></div><div class="clear"></div><br/>';
+    echo '<div style="float:left; width:380px;"><span style="font-size:14px; font-weight:bold; color:#666;padding: 0px 73px 0px 0px;">Exam Name</span>&nbsp;&nbsp;&nbsp;&nbsp;';
     ?>
 
     <?php
@@ -305,8 +305,8 @@ if ($_REQUEST['search'] == 1) {
     }
     echo CHtml::dropDownList('exm', '', $data_2, array('prompt' => 'Select', 'onchange' => 'sunil()', 'id' => 'exm', 'onchange' => 'kumar()', 'onchange' => 'vanam()', 'options' => array($sel_1 => array('selected' => true))));
 
-    echo '</div>';
-    echo '<div style="float:left; width:300px;"><span style="font-size:14px; font-weight:bold; color:#666;">Subject</span>&nbsp;&nbsp;';
+    echo '</div><div class="clear"></div><br/>';
+    echo '<div style="float:left; width:300px;"><span style="font-size:14px; font-weight:bold; color:#666;padding: 0px 105px 0px 0px;">Subject</span>&nbsp;&nbsp;';
     ?>
     <?php
     $data_3 = array();
@@ -326,7 +326,8 @@ if ($_REQUEST['search'] == 1) {
 
     echo '<br/></div><div class="clear"></div>';
     ?>
-
+</div>
+</div>
 
     <?php
     if (isset($_REQUEST['subj'])) {
@@ -338,7 +339,7 @@ if ($_REQUEST['search'] == 1) {
             ?>
 
 
-            <div class="pdtab_Con" style="width:97%;padding:0px 0px 0px 0px;">
+            <div class="pdtab_Con" style="width:97%;padding:25px 0px 0px 0px;">
                 <div style="font-size:13px; padding:5px 0px"><?php echo Yii::t('examination', '<strong>Recent Employee Admissions</strong>'); ?></div>
 
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -407,7 +408,7 @@ if ($_REQUEST['search'] == 1) {
 
                                                         <?php //$dept = EmployeeDepartments::model()->findByAttributes(array('id'=>$list_1->employee_department_id)); ?>
                                     <!--<td align="center"><?php // if($dept!=NULL){echo $dept->name; }else{ echo '-';} ?> </td>-->
-                                                    <td align="center" style="padding:0px 0px;"> <?php // echo $list_1->batch_id?></td>
+                                                    <td align="center" style="padding:0px 0px;"><?php if($examscores_1->is_failed == '1'){ echo "Failed";}else{ echo "Passed";}?></td>
                                     <?php //  $pos = EmployeePositions::model()->findByAttributes(array('id'=>$list_1->employee_position_id));  ?>
                                                     <!--<td align="center"><?php // if($pos!=NULL){echo $pos->name; }else{ echo '-';} ?> </td>-->
                                                    <!--<td style="padding:5px 44px;">-->

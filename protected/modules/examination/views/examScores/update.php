@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Exam Scores'=>array('/courses'),
-	$model->id=>array('view','id'=>$model->id),
+	'Exam Scores'=>array('/examination'),
+//	$model->id=>array('view','id'=>$model->id),
 	'Update',
 );
 ?>

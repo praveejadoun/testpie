@@ -59,20 +59,19 @@ $this->breadcrumbs=array(
     </ul>
     </div>
     </div>
-  
+  <?php
+  $posts= EmployeesSubjects::model()->findAll("employee_id=:x AND elective_id=:y ", array(':x'=>$_REQUEST['id'],':y'=>'0'));
+  ?>
     <h2>Subject Association</h2>
+    <?php if($posts!=NULL){ ?>
      <div class="ea_pdf" style="top:160px; right:6px;">
  <?php echo CHtml::link('<img src="images/pdf-but.png">', array('employees/Subjectassopdf','id'=>$_REQUEST['id']),array('target'=>'_blank')); ?>
 	</div>
+    <?php } ?>
      </div>
     <h3 style="color:#09c;">SUBJECT</h3>
      <div class="table_listbx">
-     <?php
      
-             
-                $posts= EmployeesSubjects::model()->findAll("employee_id=:x AND elective_id=:y ", array(':x'=>$_REQUEST['id'],':y'=>'0'));
-			
-                ?>
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                     <tr class="listbxtop_hdng">
                     <td align="center"><?php echo Yii::t('Employees','Name');?></td>
@@ -80,6 +79,7 @@ $this->breadcrumbs=array(
                     <td align="center"><?php echo Yii::t('Employees','Course');?></td>
                     </tr>
                     <?php
+                    if($posts!=NULL){
 				 $i=0;
 								$i++;		
                         foreach($posts as $posts_1)
@@ -97,9 +97,17 @@ $this->breadcrumbs=array(
                                                               
                    
 								
-                            <?php } ?>
+                    <?php } ?>
+                     </table>
+                        <?php }else { ?>
+         <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                        <td >Subject(s) Not Assigned</td>
+                    </tr>
+         </table>
+                        <?php }?>
                             
-                    </table>
+                   
               
     
     
@@ -124,6 +132,7 @@ $this->breadcrumbs=array(
                     <td align="center"><?php echo Yii::t('Employees','Course');?></td>
                     </tr>
                     <?php
+                    if($posts!=NULL){
 				 $i=0;
 								$i++;		
                         foreach($posts as $posts_1)
@@ -142,8 +151,17 @@ $this->breadcrumbs=array(
                                                               
                    
 								
-                            <?php } ?>
+                    <?php } ?>
+                    
                     </table>
+                       <?php     }else{ ?>
+         <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                     <tr>
+                        <td >Elective(s) Not Assigned</td>
+                    </tr>
+         </table>
+                    <?php } ?>
+                    
               
     
     

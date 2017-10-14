@@ -122,7 +122,7 @@ public function   init() {
 		$new->save();
 		
 		}
-		$this->redirect(array('/courses/gradingLevels','id'=>$_REQUEST['id']));
+		$this->redirect(array('/examination/gradingLevels','id'=>$_REQUEST['id']));
 	}
 
 	/**

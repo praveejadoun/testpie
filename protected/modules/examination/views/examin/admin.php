@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Exams'=>array('/courses'),
+	'Exams'=>array('/examination'),
 	'Manage',
 );
 

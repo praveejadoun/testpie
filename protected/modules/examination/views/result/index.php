@@ -1,7 +1,7 @@
 <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
 <?php
 $this->breadcrumbs=array(
-	'Examination'=>array('default/index'),
+	'Examination'=>array('/examination'),
         'Result',
 );
 ?>

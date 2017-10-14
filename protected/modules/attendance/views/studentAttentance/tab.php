@@ -56,7 +56,7 @@ $(document).click(function() {
 </script>
 <?php if(isset($_REQUEST['id']))
 {?>
- <h1>Manage Batch</h1>
+ <h1>Manage Attendance</h1>
  
  
  <?php    $batch=Batches::model()->findByAttributes(array('id'=>$_REQUEST['id'])); 

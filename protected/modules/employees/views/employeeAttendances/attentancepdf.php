@@ -162,7 +162,7 @@ break;
             
             if(count($find)==0)
             {
-            echo '';
+            echo "<span style='color:#6fc20e;font-size:12px;margin-top:5px;'><strong>P</strong></span>";
             }
             else
             echo "<span style='color:#ce0606;font-size:12px;margin-top:5px;'><strong>X</strong></span>";
