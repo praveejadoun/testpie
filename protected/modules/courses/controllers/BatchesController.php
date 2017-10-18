@@ -27,7 +27,7 @@ class BatchesController extends RController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','manage','Batchstudents','Addnew','settings','Addupdate','remove','promote','deactivate','activate','loadconstituencies','assign'),
+				'actions'=>array('index','view','manage','Batchstudents','Addnew','settings','Addupdate','remove','promote','deactivate','activate','loadconstituencies','assign','approve'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -151,6 +151,7 @@ class BatchesController extends RController
 	}
         public function actionAssign()
 	{
+            if(($_REQUEST['sub'] and $_REQUEST['eg'])!=NULL){
         $check = StudentSubjects::model()->findAllByAttributes(array('student_id'=>$_REQUEST['sid'],'subject_id'=>$_REQUEST['sub']));
         $count=count($check);
         if($count == 1)
@@ -170,12 +171,18 @@ class BatchesController extends RController
 	$model->subject_id = $_REQUEST['sub'];
         $model->batch_id = $data_1->batch_id;
 	$model->save();
+         Yii::app()->user->setFlash('notification','Elective  is Successfully assigned');
         }
 //         Yii::app()->request->urlReferrer;
         
-	$this->redirect(array('electives','id'=>$_REQUEST['id']));
+	
 	}
-        
+ else {
+              Yii::app()->user->setFlash('notification','Please select elective group and subject');
+
+ }
+ $this->redirect(array('electives','id'=>$_REQUEST['id']));
+        }
 	public function actionManage() 
 	{                                    
 		 
@@ -541,5 +548,33 @@ public function actiongetstreets()
             echo CHtml::tag('option', array('value' => $districtId), CHtml::encode($name), true);
             }
         }
+         public function actionDeleterowelective()
+	{
+
+		$postRecord = StudentSubjects::model()->findByPk($_GET['sid']);
+               
+		$postRecord->delete();
+//		 Yii::app()->user->setFlash('notification','Data Saved Successfully');
+		$this->redirect(array('studentelectives','id'=>$_REQUEST['id']));
+		
+	}
+        
+         public function actionApprove() {
+         //Add Security
+        if(!empty($_GET['aid'])){
+        $model = Applicants::model()->findByAttributes(array('id' => $_GET['aid']));
+//        $change_status = $_GET['sid'];
+        $model->saveAttributes(array('status' => 2));
+        //$ap=Applicants::model()->findByAttributes(array('id'=>$_GET['aid'],'status'=>2));
+        if($model->status==2)
+        {
+           $this->redirect(array('/students/students/create','aid'=>$_GET['aid'])); 
+        }
+        $this->redirect(array('/students/applicants/manage'));
+        }else{
+            //Message here
+        $this->redirect(array('/students/applicants/manage'));
+        }
+    }
 
 }

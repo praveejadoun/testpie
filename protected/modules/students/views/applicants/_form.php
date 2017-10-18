@@ -142,8 +142,30 @@ else
                 <td valign="bottom"><?php echo $form->labelEx($model,Yii::t('students','gender')); ?></td>
                 </tr>
                 <tr>
-                    <td valign="top">
-						<?php   
+                     <td valign="top">
+<?php
+$models = Batches::model()->findAll("is_deleted=:x", array(':x' => '0'));
+$data = array();
+foreach ($models as $model_1) {
+    //$posts=Batches::model()->findByPk($model_1->id);
+    $data[$model_1->id] = $model_1->course123->course_name . '-' . $model_1->name;
+}
+?>
+                    <?php
+                    if (isset($_REQUEST['bid']) and $_REQUEST['bid'] != NULL) {
+                        echo $form->dropDownList($model, 'batch_id', $data, array('options' => array($_REQUEST['bid'] => array('selected' => true)),
+                            'style' => 'width:170px;', 'empty' => 'Select Batch'
+                        ));
+                    } else {
+                        echo $form->dropDownList($model, 'batch_id', $data, array(
+                            'style' => 'width:170px;', 'empty' => 'Select Batch'
+                        ));
+                    }
+                    ?>
+                    <?php echo $form->error($model, 'batch_id'); ?>
+                </td>
+                    <!--<td valign="top">
+						<?php /*  
                         $models = Courses::model()->findAll("is_deleted=:x", array(':x'=>'0'));
                         $data = array();
                         foreach ($models as $model_1)
@@ -166,8 +188,8 @@ else
                             )); 
                         }
                         ?>
-                        <?php echo $form->error($model,'course_id'); ?>
-                    </td>
+                        <?php echo $form->error($model,'course_id'); */?>
+                    </td>-->
                     <td>&nbsp;</td>
                     <td style="padding-left:2px;" valign="top">
 						<?php //echo $form->textField($model,'date_of_birth');

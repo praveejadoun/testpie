@@ -55,8 +55,69 @@ Yii::app()->clientScript->registerScript(
     
     <div class="clear"></div>
     <div class="emp_cntntbx" style="padding-top:10px;">
-              <?php  echo '<br><div class="notifications nt_red" style="padding-top:10px">'.'<i>'.Yii::t('Batch','Registered students with waiting status will display here').'</i></div>'; ?>
-  
+              <?php //  echo '<br><div class="notifications nt_red" style="padding-top:10px">'.'<i>'.Yii::t('Batch','Registered students with waiting status will display here').'</i></div>'; ?>
+  <div class="table_listbx">
+     <?php
+                if(isset($_REQUEST['id']))
+                {
+                $posts= Applicants::model()->findAll("batch_id=:x and status=:y ", array(':x'=>$_REQUEST['id'],':y'=> 4));
+		 if($posts!=NULL)
+				{
+                        		
+                ?>
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tr class="listbxtop_hdng">
+                    <td ><?php echo Yii::t('Batch','Sl no.');?></td>
+                    <td ><?php echo Yii::t('Batch','Student Name');?></td>
+                    
+                    <td ><?php echo Yii::t('Batch','Action');?></td>
+                    </tr>
+                        <?php
+                        
+                       
+						$i=0;
+                            foreach($posts as $posts_1)
+                            {
+								$i++;
+								echo '<tr>';
+								echo '<td>'.$i.'</td>';
+//                                                                $stud= Students::model()->findAll("id=:x",array(':x'=>$posts_1->student_id));
+//                                                                foreach($stud as $stud_1){
+                                echo '<td>'.CHtml::link(ucfirst( $posts_1->first_name).' '.ucfirst( $posts_1->middle_name).' '.ucfirst( $posts_1->last_name), array('/students/students/view', 'id'=> $posts_1->id)).'</td>';
+								?>
+								<td >
+								<div style="position:absolute;">
+								<div  id="<?php echo $i; ?>" class="act_but"><?php echo Yii::t('Batch','Actions');?></div>
+								<div class="act_drop" id="<?php echo $i.'x'; ?>">
+									<div class="but_bg_outer"></div><div class="but_bg"><div  id="<?php echo $i; ?>" class="act_but_hover"><?php echo Yii::t('Batch','Actions');?></div></div>
+									<ul>
+										<!--<li class="add"><?php // echo CHtml::link(Yii::t('Batch','Add Leave').'<span>'.Yii::t('Batch','for add leave').'</span>', array('#'),array('class'=>'addevnt','name' => $posts_1->id)) ?></li>-->
+										<li class="delete"><?php echo CHtml::link(Yii::t('Batch','Approve').'<span>'.Yii::t('Batch','make applicant approve').'</span>', array('Approve','aid'=>$posts_1->id),array('confirm'=>'Are You Sure , Make Inactive ?')) ?></li>
+                                        <!--<li class="edit"><a href="#">Edit Leave<span>for add leave</span></a></li>
+										<li class="delete"><a href="#">Delete Leave<span>for add leave</span></a></li>
+										<li class="add"><a href="#">Add Fees<span>for add leave</span></a></li>
+										<li class="add"><a href="#">Add Report<span>for add leave</span></a></li>-->
+									</ul>
+								</div>
+                                <div class="clear"></div>
+                                <div id="<?php echo $posts_1->id ?>"></div>
+								</div>
+								</td>
+                            <?php }
+                            ?>
+                    </table>
+                <?php    	
+                }
+				else
+				{
+					echo '<br><div class="notifications nt_red" style="padding-top:10px">'.'<i>'.Yii::t('Batch','No Waiting List Students are avaulable for this batch !').'</i></div>'; 
+									
+				}
+				
+				}
+                ?>
+    
+    
  </div>
     </div>
     

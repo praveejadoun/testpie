@@ -112,13 +112,13 @@ $posts = Students::model()->findAll("batch_id=:x and is_deleted=:y and is_active
 	?>
    <?php
                 Yii::app()->clientScript->registerScript(
-                        'myHideEffect', '$(".flash-success").animate({opacity: 1.0}, 3000).fadeOut("slow");', CClientScript::POS_READY
+                        'myHideEffect', '$(".flash-success").animate({opacity: 2.0}, 3000).fadeOut("slow");', CClientScript::POS_READY
                 );
                 ?>
                 <div id="statusMsg">    
                 <?php if (Yii::app()->user->hasFlash('notification')): ?>
                     
-                    <div class="flash-success" style="color:#F00; padding-left:150px; font-size:12px">
+                    <div class="flash-success" style="color:white; padding-left:150px; font-size:14px;border: 2px #999999 solid;margin: 0px 10px 10px 10px;background:#eb7378; ">
                     <?php echo Yii::app()->user->getFlash('notification'); ?>
                     </div>
                     <?php endif; ?>

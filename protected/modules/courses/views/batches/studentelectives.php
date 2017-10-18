@@ -78,7 +78,7 @@ Yii::app()->clientScript->registerScript(
      <?php
                 if(isset($_REQUEST['id']))
                 {
-                $posts=Students::model()->findAll("batch_id=:x and is_deleted=:y and is_active=:z", array(':x'=>$_REQUEST['id'],':y'=>'0',':z'=>'1'));
+                $posts= StudentSubjects::model()->findAll("batch_id=:x ", array(':x'=>$_REQUEST['id']));
 		 if($posts!=NULL)
 				{
                         		
@@ -88,8 +88,8 @@ Yii::app()->clientScript->registerScript(
                     <td ><?php echo Yii::t('Batch','Sl no.');?></td>
                     <td ><?php echo Yii::t('Batch','Student Name');?></td>
                     <td ><?php echo Yii::t('Batch','Admission Number');?></td>
-                    <td ><?php echo Yii::t('Batch','Elective Group');?></td>
-                     <td ><?php echo Yii::t('Batch','Elective');?></td>
+                    <td ><?php echo Yii::t('Batch','Elective');?></td>
+                     <td ><?php echo Yii::t('Batch','Elective Group');?></td>
                     <td ><?php echo Yii::t('Batch','Action');?></td>
                     </tr>
                         <?php
@@ -100,27 +100,25 @@ Yii::app()->clientScript->registerScript(
                             {
 								$i++;
 								echo '<tr>';
-								echo '<td>'.$i.'</td>';	
-                                echo '<td>'.CHtml::link(ucfirst($posts_1->first_name).' '.ucfirst($posts_1->middle_name).' '.ucfirst($posts_1->last_name), array('/students/students/view', 'id'=>$posts_1->id)).'</td>';
-								echo '<td>'.$posts_1->admission_no.'</td>';?>
-								<td><?php
-								  if($posts_1->gender=='M')
-								  {
-									  echo 'Male';
-								  }
-								  elseif($posts_1->gender=='F')
-								  {
-									  echo 'Female';
-								  }?></td>
-                                                                <td></td>
+								echo '<td>'.$i.'</td>';
+                                                                $stud= Students::model()->findAll("id=:x",array(':x'=>$posts_1->student_id));
+                                                                foreach($stud as $stud_1){
+                                echo '<td>'.CHtml::link(ucfirst( $stud_1->first_name).' '.ucfirst( $stud_1->middle_name).' '.ucfirst( $stud_1->last_name), array('/students/students/view', 'id'=> $stud_1->id)).'</td>';
+								echo '<td>'.$stud_1->admission_no.'</td>';?>
+                                                                <?php $elective= Electives::model()->findAll("id=:x",array(':x'=>$posts_1->subject_id));
+                                                                foreach($elective as $elective_1){?>
+                                                                <td><?php echo $elective_1->name;}?></td>
+                                                                <?php $eg= ElectiveGroups::model()->findAll("id=:x",array(':x'=>$elective_1->elective_group_id));
+                                                                foreach($eg as $eg_1){?>
+                                                                <td><?php echo $eg_1->name;}?></td>
 								<td >
 								<div style="position:absolute;">
 								<div  id="<?php echo $i; ?>" class="act_but"><?php echo Yii::t('Batch','Actions');?></div>
 								<div class="act_drop" id="<?php echo $i.'x'; ?>">
 									<div class="but_bg_outer"></div><div class="but_bg"><div  id="<?php echo $i; ?>" class="act_but_hover"><?php echo Yii::t('Batch','Actions');?></div></div>
 									<ul>
-										<li class="add"><?php echo CHtml::link(Yii::t('Batch','Add Leave').'<span>'.Yii::t('Batch','for add leave').'</span>', array('#'),array('class'=>'addevnt','name' => $posts_1->id)) ?></li>
-										<li class="delete"><?php echo CHtml::link(Yii::t('Batch','Make Inactive').'<span>'.Yii::t('Batch','make students inactive').'</span>', array('/students/students/inactive', 'sid'=>$posts_1->id,'id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure , Make Inactive ?')) ?></li>
+										<!--<li class="add"><?php // echo CHtml::link(Yii::t('Batch','Add Leave').'<span>'.Yii::t('Batch','for add leave').'</span>', array('#'),array('class'=>'addevnt','name' => $posts_1->id)) ?></li>-->
+										<li class="delete"><?php echo CHtml::link(Yii::t('Batch','Remove').'<span>'.Yii::t('Batch','make student remove').'</span>', array('Deleterowelective', 'sid'=>$posts_1->id,'id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure , Make Inactive ?')) ?></li>
                                         <!--<li class="edit"><a href="#">Edit Leave<span>for add leave</span></a></li>
 										<li class="delete"><a href="#">Delete Leave<span>for add leave</span></a></li>
 										<li class="add"><a href="#">Add Fees<span>for add leave</span></a></li>
@@ -131,7 +129,7 @@ Yii::app()->clientScript->registerScript(
                                 <div id="<?php echo $posts_1->id ?>"></div>
 								</div>
 								</td>
-                            <?php }
+                            <?php }}
                             ?>
                     </table>
                 <?php    	
