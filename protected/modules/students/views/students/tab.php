@@ -72,6 +72,34 @@
 			  }
 	    ?>
 		</li>
+                
+                <li> 
+		
+        <?php     
+	          if(Yii::app()->controller->action->id=='document')
+	          {
+		      echo CHtml::link(Yii::t('students','document'), array('document', 'id'=>$_REQUEST['id']),array('class'=>'active'));
+			  }
+			  else
+			  {
+	          echo CHtml::link(Yii::t('students','document'), array('document', 'id'=>$_REQUEST['id']));
+			  }
+	    ?>
+		</li>
+                
+                 <li> 
+		
+        <?php     
+	          if(Yii::app()->controller->action->id=='electives')
+	          {
+		      echo CHtml::link(Yii::t('students','electives'), array('electives', 'id'=>$_REQUEST['id']),array('class'=>'active'));
+			  }
+			  else
+			  {
+	          echo CHtml::link(Yii::t('students','electives'), array('electives', 'id'=>$_REQUEST['id']));
+			  }
+	    ?>
+		</li>
     <?php /*?><li><a href="#">Additional Notes</a></li><?php */?>
     </ul>
     </div>

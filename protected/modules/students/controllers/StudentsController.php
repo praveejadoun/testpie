@@ -59,7 +59,7 @@ class StudentsController extends RController {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'manage', 'Website', 'savesearch', 'events', 'attentance', 'Assesments', 'DisplaySavedImage', 'Fees', 'Payfees', 'Pdf', 'Printpdf', 'Remove', 'Search', 'inactive', 'active', 'deletes','Managepdf','create1','courses'),
+                'actions' => array('index', 'view', 'manage', 'Website', 'savesearch', 'events', 'attentance', 'Assesments', 'DisplaySavedImage', 'Fees', 'Payfees', 'Pdf', 'Printpdf', 'Remove', 'Search', 'inactive', 'active', 'deletes','Managepdf','create1','courses','document'),
                 'users' => array('@'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -316,6 +316,13 @@ class StudentsController extends RController {
     public function actionAssesments() {
         $model = new Students;
         $this->render('assesments', array(
+            'model' => $this->loadModel($_REQUEST['id']),
+        ));
+    }
+    
+      public function actionElectives() {
+        $model = new Students;
+        $this->render('electives', array(
             'model' => $this->loadModel($_REQUEST['id']),
         ));
     }
@@ -827,6 +834,46 @@ class StudentsController extends RController {
       public function actionCourses()
       {
           $this->render('courses', array(
+            'model' => $model,
+        )); 
+      }
+      
+       public function actionDocument()
+      {
+           
+		$model = new StudentDocument;
+		if(isset($_POST['StudentDocument']))
+		{
+			$model->attributes=$_POST['StudentDocument'];
+                        $list = $_POST['StudentDocument'];
+                     $model->document_name = $list['document_name'];
+				if($file=CUploadedFile::getInstance($model,'document_data'))
+					 {
+					$model->document_file_name=$file->name;
+					$model->document_content_type=$file->type;
+					$model->document_file_size=$file->size;
+					$model->document_data=file_get_contents($file->tempName);
+					 
+                                        if(!is_dir('uploadedfiles/')){
+				mkdir('uploadedfiles/');
+			}
+			if(!is_dir('uploadedfiles/employee_documents/')){
+				mkdir('uploadedfiles/employee_documents/');
+			}
+			move_uploaded_file($file->tempName,'uploadedfiles/employee_documents/'.$file->name);
+                                        
+                                         }
+				
+				
+                      
+			if($model->save())
+                        {
+                               Yii::app()->user->setFlash('success','Document Created Successfully');
+				$this->redirect(array('document','id'=>$_REQUEST['id']));
+                        }
+		}
+           
+          $this->render('document', array(
             'model' => $model,
         )); 
       }
