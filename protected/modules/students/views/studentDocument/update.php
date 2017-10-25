@@ -39,10 +39,11 @@ $this->breadcrumbs=array(
     <li><?php echo CHtml::link(Yii::t('students','Assesments'), array('students/assesments', 'id'=>$_REQUEST['student_id'])); ?></li>
     <li><?php echo CHtml::link(Yii::t('students','Attendance'), array('students/attentance', 'id'=>$_REQUEST['student_id'])); ?></li>
     <li><?php echo CHtml::link(Yii::t('students','Fees'), array('students/fees', 'id'=>$_REQUEST['student_id'])); ?></li>
-    <li><?php echo CHtml::link(Yii::t('students','Courses'), array('students/courses', 'id'=>$_REQUEST['student_id'])); ?></li>
+    <!--<li><?php echo CHtml::link(Yii::t('students','Courses'), array('students/courses', 'id'=>$_REQUEST['student_id'])); ?></li>-->
     <li><?php echo CHtml::link(Yii::t('students','Documents'), array('students/document', 'id'=>$_REQUEST['student_id']),array('class'=>'active')); ?></li>
-    <!--<li><?php // echo CHtml::link(Yii::t('students','Achievments'), array('employees/achievements', 'id'=>$_REQUEST['employee_id'])); ?></li>-->
-    <!--<li><?php // echo CHtml::link(Yii::t('students','Log'), array('employees/log', 'id'=>$_REQUEST['employee_id'])); ?></li>-->
+    <li><?php echo CHtml::link(Yii::t('students','Electives'), array('students/electives', 'id'=>$_REQUEST['student_id'])); ?></li>
+    <li><?php echo CHtml::link(Yii::t('students','Achievments'), array('students/achievements', 'id'=>$_REQUEST['student_id'])); ?></li>
+    <li><?php echo CHtml::link(Yii::t('students','Log'), array('students/log', 'id'=>$_REQUEST['student_id'])); ?></li>
     </ul>
     </div>
     <div class="clear"></div>

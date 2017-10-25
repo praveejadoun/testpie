@@ -56,17 +56,17 @@ $this->breadcrumbs=array(
 			echo '<tr>';
 //			$exm=Exams::model()->findByAttributes(array('id'=>$exams->exam_id));
 //			$group=ExamGroups::model()->findByAttributes(array('id'=>$exm->exam_group_id));
-			echo '<td>'.$exams->id.'</td>';
-			$sub=Subjects::model()->findByAttributes(array('id'=>$exams->subject_id));
-                        foreach($sub as $sub_1){
-			echo '<td>'.$sub_1->name.'</td>';
-			
+//			
+			$elective = Electives::model()->findByAttributes(array('id'=>$exams->subject_id));
+                        echo '<td>'.$elective->name.'</td>';
+			echo '<td>'.CHtml::link(Yii::t('students','Remove'), array('deleterow','id'=>$exams->id,'sid'=>$_REQUEST['id']), array('confirm' => 'Are you sure?')).'</td>';
+                    
 			echo '</tr>';
-                }}
+                }
 	}
 	else{
 		echo '<tr>';
-			echo '<td colspan="4"> No Exam Details Available!</td>';
+			echo '<td colspan="4"> No Electives Asiigned!</td>';
 		echo '<tr>';
 		
 	}

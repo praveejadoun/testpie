@@ -59,19 +59,19 @@
 		</li>
                 
                 
-                 <li> 
+                 <!--<li> 
 		
         <?php     
-	          if(Yii::app()->controller->action->id=='courses')
+	          /*if(Yii::app()->controller->action->id=='courses')
 	          {
 		      echo CHtml::link(Yii::t('students','Courses'), array('courses', 'id'=>$_REQUEST['id']),array('class'=>'active'));
 			  }
 			  else
 			  {
 	          echo CHtml::link(Yii::t('students','Courses'), array('courses', 'id'=>$_REQUEST['id']));
-			  }
+			  }*/
 	    ?>
-		</li>
+		</li>-->
                 
                 <li> 
 		
@@ -97,6 +97,34 @@
 			  else
 			  {
 	          echo CHtml::link(Yii::t('students','electives'), array('electives', 'id'=>$_REQUEST['id']));
+			  }
+	    ?>
+		</li>
+                
+                 <li> 
+		
+        <?php     
+	          if(Yii::app()->controller->action->id=='achievements')
+	          {
+		      echo CHtml::link(Yii::t('students','achievements'), array('achievements', 'id'=>$_REQUEST['id']),array('class'=>'active'));
+			  }
+			  else
+			  {
+	          echo CHtml::link(Yii::t('students','achievements'), array('achievements', 'id'=>$_REQUEST['id']));
+			  }
+	    ?>
+		</li>
+                
+                <li> 
+		
+        <?php     
+	          if(Yii::app()->controller->action->id=='log')
+	          {
+		      echo CHtml::link(Yii::t('students','log'), array('log', 'id'=>$_REQUEST['id']),array('class'=>'active'));
+			  }
+			  else
+			  {
+	          echo CHtml::link(Yii::t('students','log'), array('log', 'id'=>$_REQUEST['id']));
 			  }
 	    ?>
 		</li>

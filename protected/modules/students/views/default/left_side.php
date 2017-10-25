@@ -33,7 +33,10 @@
             ),
            /* array('label' => '' . Yii::t('students', 'Student Field Settings') . '<span>' . Yii::t('students', 'Add Additional Field') . '</span>', 'url' => array('formFields/list'), 'active' => ((Yii::app()->controller->id == 'settings') && (in_array(Yii::app()->controller->action->id, array('update', 'list',  'index'))) ? true : false), 'linkOptions' => array('id' => 'menu_2', 'class' => 'mg_ico')),*/
             array('label' => Yii::t('students', 'Manage Student Category') . '<span>' . Yii::t('students', 'Manage Students Category' . '</span>'), 'url' => array('/students/studentCategory'), 'linkOptions' => array('class' => 'sm_ico'), 'active' => (Yii::app()->controller->id == 'studentCategory'),),
-             array('label' => '' . t('<h1>Registrations</h1>')), 
+             
+            array('label' => Yii::t('students', 'Manage Log Category') . '<span>' . Yii::t('students', 'Manage Students Log Category' . '</span>'), 'url' => array('/students/logcategory'), 'linkOptions' => array('class' => 'sm_ico'), 'active' => (Yii::app()->controller->id == 'logcategory'),),
+
+            array('label' => '' . t('<h1>Registrations</h1>')), 
                   
             array('label' => '' . Yii::t('students', 'Applicants') . '<span>' . Yii::t('students', 'All Applicant Status') . '</span>',  'url' => array('applicants/manage'), 'linkOptions' => array('class' => 'lbook_ico'),
                 'active' => ((Yii::app()->controller->id == 'applicants') && (in_array(Yii::app()->controller->action->id, array('manage')))) ? true : false),
@@ -43,6 +46,10 @@
             array('label' => '' . t('<h1>Manage Guardians</h1>')),
             array('label' => '' . Yii::t('students', 'List Guardians') . '<span>' . Yii::t('students', 'All Guardians Details') . '</span>', 'url' => array('guardians/admin'), 'active' => ((Yii::app()->controller->id == 'guardians') && (in_array(Yii::app()->controller->action->id, array('update', 'view', 'admin', 'index'))) ? true : false), 'linkOptions' => array('id' => 'menu_2', 'class' => 'lbook_ico')),
          
+            array('label' => '' . t('<h1>Student Leave Management</h1>')),
+            array('label' => '' . Yii::t('students', 'Add Leave Type') . '<span>' . Yii::t('students', 'Manage Leave Type') . '</span>', 'url' => array('studentleavetypes/'), 'active' => ((Yii::app()->controller->id == 'studentleavetypes') && (in_array(Yii::app()->controller->action->id, array('update', 'view', 'admin', 'index'))) ? true : false), 'linkOptions' => array('id' => 'menu_2', 'class' => 'abook_ico')),
+         
+            
         ),
     ));
     

@@ -59,7 +59,7 @@ class StudentsController extends RController {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'manage', 'Website', 'savesearch', 'events', 'attentance', 'Assesments', 'DisplaySavedImage', 'Fees', 'Payfees', 'Pdf', 'Printpdf', 'Remove', 'Search', 'inactive', 'active', 'deletes','Managepdf','create1','courses','document'),
+                'actions' => array('index', 'view', 'manage', 'Website', 'savesearch', 'events', 'attentance', 'Assesments', 'DisplaySavedImage', 'Fees', 'Payfees', 'Pdf', 'Printpdf', 'Remove', 'Search', 'inactive', 'active', 'deletes','Managepdf','create1','courses','document','electives','deleterow','achievements'),
                 'users' => array('@'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -326,6 +326,15 @@ class StudentsController extends RController {
             'model' => $this->loadModel($_REQUEST['id']),
         ));
     }
+    
+    public function actionDeleterow(){
+     
+		$postRecord = StudentSubjects::model()->findByPk($_REQUEST['id']);
+		$postRecord->delete();
+		 Yii::app()->user->setFlash('notification','Data Saved Successfully');
+		$this->redirect(array('electives','id'=>$_REQUEST['sid']));
+		   
+    }
 
     public function actionAttentance() {
         $model = new Students;
@@ -334,6 +343,8 @@ class StudentsController extends RController {
         ));
     }
 
+     
+    
     /**
      * Deletes a particular model.
      * If deletion is successful, the browser will be redirected to the 'admin' page.
@@ -877,5 +888,61 @@ class StudentsController extends RController {
             'model' => $model,
         )); 
       }
+      
+       public function actionAchievements() {
+           
+        $model = new StudentAchievements;
+        
+        if(isset($_POST['StudentAchievements']))
+		{
+			$model->attributes=$_POST['StudentAchievements'];
+                        $list = $_POST['StudentAchievements'];
+                     if($file=CUploadedFile::getInstance($model,'achievdoc_data'))
+					 {
+					$model->achievdoc_file_name=$file->name;
+					$model->achievdoc_content_type=$file->type;
+					$model->achievdoc_file_size=$file->size;
+					$model->achievdoc_data=file_get_contents($file->tempName);
+					 
+                                         
+                                        if(!is_dir('uploadedfiles/')){
+				mkdir('uploadedfiles/');
+			}
+			if(!is_dir('uploadedfiles/student_achievements/')){
+				mkdir('uploadedfiles/student_achievements/');
+                        }            
+                          move_uploaded_file($file->tempName,'uploadedfiles/student_achievements/'.$file->name);              
+                                         }
+                      
+			if($model->save())
+                        {
+                            Yii::app()->user->setFlash('success','Achievement Created Successfully');
+				$this->redirect(array('achievements','id'=>$_REQUEST['id']));
+                        }
+		}
 
+		$this->render('achievements',array(
+			'model'=>$model,
+		));
+    }
+
+    
+     public function actionLog()
+	{
+		$model = new StudentLogs;
+		if(isset($_POST['StudentLogs']))
+		{
+			$model->attributes=$_POST['StudentLogs'];
+                        
+			if($model->save())
+                        {
+                            Yii::app()->user->setFlash('success','Log Created Successfully');
+				$this->redirect(array('log','id'=>$_REQUEST['id']));
+                        }
+		}
+
+		$this->render('log',array(
+			'model'=>$model,
+		));
+	}     
 }

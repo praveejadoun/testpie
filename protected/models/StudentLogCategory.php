@@ -1,20 +1,20 @@
 <?php
 
 /**
- * This is the model class for table "student_attentance".
+ * This is the model class for table "student_logcategory".
  *
- * The followings are the available columns in table 'student_attentance':
+ * The followings are the available columns in table 'student_logcategory':
  * @property integer $id
- * @property integer $student_id
- * @property integer $date
- * @property string $reason
- * @property string $student_leave_type_id
+ * @property string $name
+ * @property integer $is_deleted
+ * @property string $created_at
+ * @property string $updated_at
  */
-class StudentAttentance extends CActiveRecord
+class StudentLogCategory extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return StudentAttentance the static model class
+	 * @return Courses the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -26,7 +26,7 @@ class StudentAttentance extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'student_attentance';
+		return 'student_logcategory';
 	}
 
 	/**
@@ -37,14 +37,14 @@ class StudentAttentance extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('student_id, date, student_leave_type_id,reason', 'required'),
-			array('student_id', 'numerical', 'integerOnly'=>true),
-			array('reason', 'length', 'max'=>120),
-			//array('reason', 'required'),
-			array('date', 'safe'),
+			//array('is_deleted', 'numerical', 'integerOnly'=>true),
+			array('name', 'length', 'max'=>255),
+			array('created_at, updated_at', 'safe'),
+			array('name', 'required'),
+                    
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, student_id, date, reason,student_leave_type_id', 'safe', 'on'=>'search'),
+			array('id, name, is_deleted, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,6 +56,10 @@ class StudentAttentance extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+		
+         'courses'=>array(self::HAS_ONE, 'Courses', 'id'),
+		 
+		 'batches'=>array(self::HAS_MANY, 'Batches', 'course_id'),
 		);
 	}
 
@@ -66,10 +70,11 @@ class StudentAttentance extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'student_id' => 'Student',
-			'date' => 'Date',
-			'reason' => 'Reason',
-                        'student_leave_type_id' => 'Student Leave Type'
+			'name' => 'Name',
+                    
+			'is_deleted' => 'Is Deleted',
+			'created_at' => 'Created At',
+			'updated_at' => 'Updated At',
 		);
 	}
 
@@ -85,13 +90,22 @@ class StudentAttentance extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('student_id',$this->student_id);
-		$criteria->compare('date',$this->date);
-		$criteria->compare('reason',$this->reason,true);
-                $criteria->compare('student_leave_type_id',$this->student_leave_type_id,true);
+		$criteria->compare('name',$this->name,true);
+               
+		$criteria->compare('is_deleted',0);
+		$criteria->compare('created_at',$this->created_at,true);
+		$criteria->compare('updated_at',$this->updated_at,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
+        public function getConcatened()
+	{
+			return $this->name;
+	}
+
+	
 }
+?>
+

@@ -9,7 +9,8 @@
  * @property string $code
  * @property string $label
  * @property string $colorcode
- * @property string $status
+ * @property integer $status
+ * @property integer $exclude_attentance
  * @property string $created_at
  * @property string $updated_at
  */
@@ -43,11 +44,12 @@ class Studentleavetype extends CActiveRecord
 		// will receive user inputs.
 		 return array(
 			array('name, code, label ,colorcode','length','max'=>255),
-                        array('name, code, label ,colorcode' , 'required'),
+                     array('status, exclude_attentance', 'numerical', 'integerOnly'=>true),
+                        array('name, code, label ,colorcode,status' , 'required'),
 			array(' created_at, updated_at', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array(' name, code, label, colorcode ','safe',  'on'=>'search'),
+			array(' name, code, label, colorcode,status,exclude_attentance','safe',  'on'=>'search'),
 		); 
 	}
 
@@ -87,7 +89,8 @@ class Studentleavetype extends CActiveRecord
 			'code' => 'Code',
 			'label' => 'Label',
 			'colorcode' => 'Color Code',
-                        //'status' => 'Status',
+                        'status' => 'Status',
+                        'exclude_attentance' => 'Exclude in Attendance % calculation',
                         'created_at' => 'Created At',
                         'updated_at' => 'Updated At',
 			 		); 
@@ -108,6 +111,8 @@ class Studentleavetype extends CActiveRecord
 		$criteria->compare('code',$this->code,true);
 		$criteria->compare('label',$this->label,true);
 		$criteria->compare('colorcode',$this->colorcode,true);
+                $criteria->compare('status',$this->status);
+                $criteria->compare('exclude_attentance',$this->exclude_attentance);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);
 
