@@ -1,16 +1,17 @@
 
 
 <script language="javascript">
+    var str = '<?php echo $_REQUEST['id'];?>';
 function course()
 {
 var id = document.getElementById('eg').value;
-window.location= 'index.php?r=courses/batches/electives&id=26&eg='+id;	
+window.location= 'index.php?r=courses/batches/electives&id='+str+'&eg='+id;	
 }
 function batch()
 {
 var id_1 = document.getElementById('eg').value;
 var id = document.getElementById('sub').value;
-window.location= 'index.php?r=courses/batches/electives&id=26&eg='+id_1+'&sub='+id;	
+window.location= 'index.php?r=courses/batches/electives&id='+str+'&eg='+id_1+'&sub='+id;	
 }
 function departme()
 {

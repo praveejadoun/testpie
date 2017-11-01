@@ -12,6 +12,7 @@
  * @property integer $student_category_id
  * @property string $admission_no
  * @property integer $student_id
+ * @property integer $tax_id
  * @property integer $is_deleted
  * @property string $created_at
  * @property string $updated_at
@@ -43,7 +44,7 @@ class FinanceFeeParticulars extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('finance_fee_category_id, student_category_id, student_id, is_deleted', 'numerical', 'integerOnly'=>true),
+			array('finance_fee_category_id, student_category_id, student_id, tax_id, is_deleted', 'numerical', 'integerOnly'=>true),
 			array('amount', 'match', 'pattern'=>'/([1-9][0-9]*?)(\.[0-9]{2})?/'),
 			array('name, admission_no', 'length', 'max'=>25),
 			array('amount', 'length', 'max'=>15),
@@ -52,7 +53,7 @@ class FinanceFeeParticulars extends CActiveRecord
 			array('name','CRegularExpressionValidator', 'pattern'=>'/^[A-Za-z_ ]+$/','message'=>"{attribute} should contain only letters."),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, description, amount, finance_fee_category_id, student_category_id, admission_no, student_id, is_deleted, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, name, description, amount, finance_fee_category_id, student_category_id, admission_no, student_id, tax_id, is_deleted, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -81,6 +82,7 @@ class FinanceFeeParticulars extends CActiveRecord
 			'student_category_id' => 'Student Category',
 			'admission_no' => 'Admission No',
 			'student_id' => 'Student',
+                        'tax_id' => 'Tax',
 			'is_deleted' => 'Is Deleted',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
@@ -106,6 +108,7 @@ class FinanceFeeParticulars extends CActiveRecord
 		$criteria->compare('student_category_id',$this->student_category_id);
 		$criteria->compare('admission_no',$this->admission_no,true);
 		$criteria->compare('student_id',$this->student_id);
+                $criteria->compare('tax_id',$this->tax_id);
 		$criteria->compare('is_deleted',$this->is_deleted);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);

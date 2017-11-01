@@ -931,10 +931,13 @@ $(document).click(function() {
                                             <td><?php echo $list_1->registration_no ?></td>
                                             <?php
                                           
-                                                $cours = Courses::model()->findByAttributes(array('id' => $list_1->course_id));
-                                                 if ($cours != NULL) {
+                                                $batch = Batches::model()->findByAttributes(array('id' => $list_1->batch_id));
+                                                
+                                                 if ($batch != NULL) {
+                                                     $cours = Courses::model()->findAll("id=:x",array(':x'=>$batch->course_id));
                                                 ?>
-                                                <td><?php echo $cours->course_name ; ?></td> 
+                                           
+                                                <td><?php foreach($cours as $cours_1){ echo  $cours_1->course_name ; }?></td> 
                                                 <?php
                                             } else {
                                                 ?> 
@@ -1082,6 +1085,10 @@ $(document).click(function() {
         if (confirm(msg))
         {
             self.location = "index.php?r=students/applicants/changestatus&aid=" +aid+"&sid="+sid;
+        }
+        else
+        {
+            self.location = "index.php?r=students/applicants/manage";
         }
     })
 

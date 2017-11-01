@@ -127,9 +127,11 @@ class ApplicantsController extends RController {
             if ($model->date_of_birth)
                 $model->date_of_birth = date('Y-m-d', strtotime($model->date_of_birth));
             //$model->photo_data=CUploadedFile::getInstance($model,'photo_data');
-            if($model->save())
+//            echo "<pre/>";print_r($model);exit;
+            if($model->save()){
                 Yii::app()->user->setFlash('success','Applicant Created Successfully');
 				$this->redirect(array('manage'));
+                            }
            /* if ($file = CUploadedFile::getInstance($model, 'photo_data')) {
                 $model->photo_file_name = $file->name;
                 $model->photo_content_type = $file->type;
@@ -424,7 +426,7 @@ class ApplicantsController extends RController {
         }
 
 
-        $criteria->order = 'first_name ASC';
+        $criteria->order = 'id DESC';
 
         $total = Applicants::model()->count($criteria);
         $pages = new CPagination($total);

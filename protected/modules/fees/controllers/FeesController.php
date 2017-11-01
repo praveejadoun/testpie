@@ -71,6 +71,8 @@ class FeesController extends RController
 			
 			$ffc->attributes=$_POST;
 			$list = $_POST;
+                        echo "<pre>";
+                        print_r($list);exit;
 
 
 			
@@ -86,24 +88,41 @@ class FeesController extends RController
 				{
                                   
 				$listFeeParticulars = $list['FeeParticulars'];
+//                                  echo "<pre/>";
+//                                   print_r($listFeeParticulars);
+//                                   exit;
                                 $particular_names = $listFeeParticulars['name'];
                                 $particular_descriptions = $listFeeParticulars['description'];
-				$particular_taxs = $listFeeParticulars['tax'];
+				$particular_taxs = $listFeeParticulars['tax_id'];
 				$particular_discount_values = $listFeeParticulars['discount_value'];
 				$particular_discount_types = $listFeeParticulars['discount_type'];
-
+                                $particular_category = $listFeeParticulars['student_category_id'];
 
 				  
                                   foreach($particular_names as $particular_key=>$particular_name){
                                     $ffp = new FinanceFeeParticulars; 
                                     $ffp->name = $particular_name;
                                     $ffp->description = $particular_descriptions[$particular_key];
-				    //$ffp->tax = $particular_taxs[$particular_key];//Other variable also will go here
+				    $ffp->tax_id = $particular_taxs[$particular_key];//Other variable also will go here
 				    $ffp->amount = $particular_discount_values[$particular_key];
 				    $ffp->finance_fee_category_id = $ffc->id;
+                                    $ffp->student_category_id = $particular_category[$particular_key];
 				    $ffp->created_at = date('Y-m-d H:i:s');
                                     $ffp->updated_at = date('Y-m-d H:i:s');
+//                                   echo "<pre/>";
+//                                   print_r($ffp);
+//                                   exit;
 				    $ffp->save();
+                                    
+                                    //$particular_id = $ffp->id
+                                    
+                                    //Save access for this particular if given
+                                    
+                                    //Get access array using $particular_key
+                                    //Loop throug it to save into aceess table
+                                    
+                                    
+                                    
                                 
                                   }
 echo "Check DB";
@@ -658,4 +677,24 @@ print_r($_GET);exit;
 		echo $val;
 		
 	}
+        
+          public function actionDynamiccities()
+        {
+//              echo "<pre/>";
+//              print_r($_POST);
+//              exit;
+              
+    $data=Batches::model()->findAll('course_id=:course_id', 
+                  array('course_id'=>(int) $_POST['course_id']));
+ 
+    $data=CHtml::listData($data,'id','name');
+     echo CHtml::tag('option',
+                   array('value'=>''),CHtml::encode('select'),true);
+    foreach($data as $value=>$name)
+        
+    {
+        echo CHtml::tag('option',
+                   array('value'=>$value),CHtml::encode($name),true);
+    }
+    }
 }

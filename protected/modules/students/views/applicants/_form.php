@@ -82,7 +82,8 @@ else
                         'defaultDate'=>$model->registration_date,
                         ),
                         'htmlOptions'=>array(
-                        'style'=>'height:16px;'
+                        'style'=>'height:16px;',
+                        'value'=>date("Y-m-d")
                         ),
                         ));
                         ?>
