@@ -257,8 +257,10 @@ class ApplicantsController extends RController {
                 $model->photo_data = file_get_contents($file->tempName);
             }
             if ($model->save())
+            {
                 Yii::app()->user->setFlash('success','Applicant Updated Successfully');
                 $this->redirect(array('manage'));
+            }
         }
 
         $this->render('update', array(

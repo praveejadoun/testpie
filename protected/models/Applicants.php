@@ -81,24 +81,36 @@ class Applicants extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('academicyear_id,registration_no, parent_id, course_id, nationality_id, student_category_id, country_id, immediate_contact_id, is_sms_enabled, is_active, is_deleted, has_paid_fees, photo_file_size, pin_code, phone1, phone2, user_id, uid', 'numerical', 'integerOnly'=>true),
+			array('academicyear_id,registration_no, parent_id, course_id, nationality_id, student_category_id, country_id, immediate_contact_id, is_sms_enabled, is_active, is_deleted, has_paid_fees, photo_file_size,pin_code,  phone1, phone2, user_id, uid', 'numerical', 'integerOnly'=>true),
 			array(' academicyear_id, registration_date, first_name, last_name, gender, date_of_birth, phone1, email', 'required',),
 			array('registration_no','unique'),
 			array('email','check'),
 			array('registration_no, class_roll_no, first_name, middle_name, last_name, gender, blood_group, birth_place, language, religion, address_line1, address_line2, city, state, email, photo_file_name, photo_content_type, status_description,status', 'length', 'max'=>255),
 			array('academicyear_id,date_of_birth,registration_date,admission_date,batch_id,date_of_birth, created_at, updated_at', 'safe'),			
 			array('email','email'),
-//			array(
-//				'date_of_birth'
-////				'compare',
-////				'compareAttribute'=>'created_at',
-////				'operator'=>'<', 
-////				'allowEmpty'=>false , 
-////				'message'=>'{attribute} must be less than "{compareValue}".'
-//			  ),
+                        array('phone1,phone2','length','min'=>10,'max'=>10),
+			array(
+				'date_of_birth',
+				'compare',
+				'compareAttribute'=>'created_at',
+				'operator'=>'<', 
+				'allowEmpty'=>false , 
+				'message'=>'{attribute} must be less than "{compareValue}".'
+			  ),
+                     array('state', 'match','pattern' => '/^[a-zA-Z\s]+$/','message' => 'state can only contain word characters'),
+                     array('first_name,middle_name,last_name', 'match','pattern' => '/^[a-zA-Z\s]+$/','message' => 'It can only contain alphabets,space'),
+                     array('language', 'match','pattern' => '/^[a-zA-Z,]+$/','message' => 'Language can only contain alphabets,comma'),
+                     array('religion', 'match','pattern' => '/^[a-zA-Z]+$/','message' => 'Religion can only contain alphabets'),
+                     array('birth_place', 'match','pattern' => '/^[a-zA-Z,\s]+$/','message' => 'Birth place can only contain alphabets,comma,space'),
+                     array('city', 'match','pattern' => '/^[a-zA-Z,\s]+$/','message' => 'City can only contain alphabets,comma,space'),
+                     array('pin_code', 'match','pattern' => '/^([1-9])([0-9]){5}$/','message' => 'PinCode must contain 6 characters'),
+                     array('phone1,phone2', 'match','pattern' => '/^([7-9])([0-9]){9}$/','message' => 'Phone number must start b/w 7-9'),
 
-			// The following rule is used by search().
+                    
+                        // The following rule is used by search().
 			// Please remove those attributes that should not be searched.
+//                        array('phone1','number','min'=>10,'max'=>10),
+//                        array('phone1','match','pattern'=>'^[789]\d{9}$'),
 			array('photo_data', 'file', 'types'=>'jpg, gif, png', 'allowEmpty' => true),
 			array('id, registration_no, parent_id, class_roll_no, registration_date, first_name, middle_name, last_name, course_id, date_of_birth, gender, blood_group, birth_place, nationality_id, language, religion, student_category_id, address_line1, address_line2, city, state, pin_code, country_id, phone1, phone2, email, immediate_contact_id, is_sms_enabled, photo_file_name, photo_content_type, photo_data, status_description, is_active, is_deleted, created_at, updated_at, has_paid_fees, photo_file_size, user_id,academicyear_id,status', 'safe', 'on'=>'search'),
 		);

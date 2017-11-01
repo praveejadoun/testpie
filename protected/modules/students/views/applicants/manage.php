@@ -877,7 +877,9 @@ $(document).click(function() {
                 );
                 ?>
                     <?php if(Yii::app()->user->hasFlash('success')):?>
-                    <div class="flash-success" style="color:#F00; padding-left:150px; font-size:15px">
+                    <div class="flash-success" style="color:white; padding:8px; font-size:14px;border: 1px #999999 solid;background:rgb(35, 161, 16);border-radius: 4px;">
+
+                    <!--<div class="flash-success" style="color:#F00; padding-left:150px; font-size:15px">-->
                         <?php echo Yii::app()->user->getFlash('success'); ?>
                     </div>
                     <?php endif; ?>
@@ -887,19 +889,19 @@ $(document).click(function() {
                         if ($list) {
                             ?>
                             <div class="tablebx">  
-                                <div class="pagecon">
+<!--                                <div class="pagecon">
                                     <?php
-                                    $this->widget('CLinkPager', array(
-                                        'currentPage' => $pages->getCurrentPage(),
-                                        'itemCount' => $item_count,
-                                        'pageSize' => $page_size,
-                                        'maxButtonCount' => 5,
-                                        //'nextPageLabel'=>'My text >',
-                                        'header' => '',
-                                        'htmlOptions' => array('class' => 'pages'),
-                                    ));
+//                                    $this->widget('CLinkPager', array(
+//                                        'currentPage' => $pages->getCurrentPage(),
+//                                        'itemCount' => $item_count,
+//                                        'pageSize' => $page_size,
+//                                        'maxButtonCount' => 5,
+//                                        //'nextPageLabel'=>'My text >',
+//                                        'header' => '',
+//                                        'htmlOptions' => array('class' => 'pages'),
+//                                    ));
                                     ?>
-                                </div> <!-- End div class="pagecon" --> 
+                                </div>  End div class="pagecon"  -->
 
                                 <table width="100%" border="0" cellspacing="0" cellpadding="0" id="mytable">
                                     <tr class="tablebx_topbg">

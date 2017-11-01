@@ -78,12 +78,14 @@ else
                         'changeMonth'=> true,
                         'changeYear'=>true,
                         'yearRange'=>'1900:',
-                        'dateFormat'=>'dd-mm-yy',
+//                        'dateFormat'=>'dd-mm-yy',
                         'defaultDate'=>$model->registration_date,
                         ),
                         'htmlOptions'=>array(
                         'style'=>'height:16px;',
-                        'value'=>date("Y-m-d")
+                        'value'=>date("M d.Y"),
+                        'readonly'=>'readonly'
+                        
                         ),
                         ));
                         ?>
@@ -207,7 +209,8 @@ foreach ($models as $model_1) {
                         'yearRange'=>'1900:'
                         ),
                         'htmlOptions'=>array(
-                        'style'=>'width:92px;'
+                        'style'=>'width:92px;',
+                        'readonly'=>'readonly'
                         ),
                         ));
                         ?>
@@ -249,7 +252,7 @@ foreach ($models as $model_1) {
                         <?php echo $form->dropDownList($model,'nationality_id',CHtml::listData(Countries::model()->findAll(),'id','name'),array(
                         'style'=>'width:140px;'
                         )); ?>
-                        <?php //echo $form->error($model,'nationality_id'); ?>
+                        <?php echo $form->error($model,'nationality_id'); ?>
                     </td>
                 </tr>
                 <tr>
@@ -296,13 +299,13 @@ foreach ($models as $model_1) {
                 </tr>
                 <tr>
                     <td valign="top"><?php echo $form->textField($model,'address_line1',array('size'=>25,'maxlength'=>255)); ?>
-                    <?php //echo $form->error($model,'address_line1'); ?></td>
+                    <?php echo $form->error($model,'address_line1'); ?></td>
                     <td>&nbsp;</td>
                     <td valign="top"><?php echo $form->textField($model,'address_line2',array('size'=>25,'maxlength'=>255)); ?>
-                    <?php //echo $form->error($model,'address_line2'); ?></td>
+                    <?php echo $form->error($model,'address_line2'); ?></td>
                     <td>&nbsp;</td>
                     <td valign="top"><?php echo $form->textField($model,'city',array('size'=>25,'maxlength'=>255)); ?>
-                    <?php //echo $form->error($model,'city'); ?></td>
+                    <?php echo $form->error($model,'city'); ?></td>
                 </tr>
                 <tr>
                 	<td colspan="5">&nbsp;</td>
@@ -317,12 +320,12 @@ foreach ($models as $model_1) {
                 <tr>
                     <td valign="top">
 						<?php echo $form->textField($model,'state',array('size'=>25,'maxlength'=>255)); ?>
-                        <?php //echo $form->error($model,'state'); ?>
+                        <?php echo $form->error($model,'state'); ?>
                     </td>
                     <td>&nbsp;</td>
                     <td valign="top">
 						<?php echo $form->textField($model,'pin_code',array('size'=>15,'maxlength'=>255)); ?>
-                        <?php //echo $form->error($model,'pin_code'); ?>
+                        <?php echo $form->error($model,'pin_code'); ?>
                     </td>
                     <td>&nbsp;</td>
                     <td valign="top">
@@ -330,7 +333,7 @@ foreach ($models as $model_1) {
                         <?php echo $form->dropDownList($model,'country_id',CHtml::listData(Countries::model()->findAll(),'id','name'),array(
                         'style'=>'width:140px;'
                         )); ?>
-                        <?php //echo $form->error($model,'country_id'); ?>
+                        <?php echo $form->error($model,'country_id'); ?>
                     </td>
                 </tr>
                 <tr>
