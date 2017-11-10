@@ -122,8 +122,9 @@ else
 									'yearRange'=>'1970:'
 							),
 							'htmlOptions'=>array(
+                                                                'readonly'=>'readonly',
 								//'style'=>'height:20px;'
-								//'value' => date('m-d-y'),
+								'value'=>date("M d.Y")
 							),
 						))
 	
@@ -183,7 +184,7 @@ else
 								'dateFormat'=>$date,
 								'changeMonth'=> true,
 									'changeYear'=>true,
-									'yearRange'=>'1950:2050'
+									'yearRange'=>'1950:'
 							),
 							'htmlOptions'=>array(
 								'style' => 'width:100px;',

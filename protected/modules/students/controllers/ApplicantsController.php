@@ -658,9 +658,31 @@ class ApplicantsController extends RController {
         //$ap=Applicants::model()->findByAttributes(array('id'=>$_GET['aid'],'status'=>2));
         if($model->status==2)
         {
-           $this->redirect(array('/students/students/create','aid'=>$_GET['aid'])); 
+           
+            $student = new Students;
+            
+            $adm_no = Students::model()->findAll(array('order' => 'id DESC', 'limit' => 1));
+            $adm_no_1 = $adm_no[0]['id'] + 1;
+             if (isset($model)) {
+                 
+            if(!empty($model)){
+                 $student->attributes = $model->attributes;
+                 $student->admission_no = $adm_no_1;
+                 $student->admission_date = date('Y-m-d');
+                 $student->created_at = date('Y-m-d');
+                 $student->updated_at = date('Y-m-d');
+                 if($student->save()){
+//                     echo "<pre/>";print_r($student);exit;
+                    $this->redirect(array('/students/applicants/manage')); 
+                 }
+//               echo "<pre/>";print_r($student->attributes);exit;  
+            }
+                 
+             }
+//            $this->redirect(array('/students/applicants/manage'));
+//           $this->redirect(array('/students/students/create','aid'=>$_GET['aid'])); 
         }
-        $this->redirect(array('/students/applicants/manage'));
+//        $this->redirect(array('/students/applicants/manage'));
         }else{
             //Message here
         $this->redirect(array('/students/applicants/manage'));

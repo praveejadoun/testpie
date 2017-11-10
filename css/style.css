@@ -6381,3 +6381,21 @@ background:url(../images/act_arrow.png) no-repeat center;
 #AcademicYears_status{
     width:100% !important;
 }
+.white_bx {
+    border: 1px solid #c5ced9;
+    padding: 15px;
+    background-color: #fff;
+    margin-bottom: 20px;
+    width: 91%;
+    position: relative;
+}
+.triangle-up {
+    position: absolute;
+    top: -11px;
+    left: 29px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #c5ced9;
+}

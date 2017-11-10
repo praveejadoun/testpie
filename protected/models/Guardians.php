@@ -60,9 +60,14 @@ class Guardians extends CActiveRecord
 			array('first_name, last_name, relation,mobile_phone,email', 'required'),
 			array('email','check'),
 			array('email', 'email'),
+                        array('mobile_phone','length','min'=>10,'max'=>10),
 			array('dob, created_at, updated_at', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
+                        array('first_name,last_name', 'match','pattern' => '/^[a-zA-Z\s]+$/','message' => 'It can only contain alphabets,space'),
+                        array('mobile_phone', 'match','pattern' => '/^([7-9])([0-9]){9}$/','message' => 'Phone number must start b/w 7-9'),
+//                        array('office_phone1', 'match','pattern' => '/^[0-9]{3,5}[-][0-9]{6,8}$/','message' => 'Phone number must start b/w 7-9'),
+
 			array('id, ward_id, first_name, last_name, relation, email, office_phone1, office_phone2, mobile_phone, office_address_line1, office_address_line2, city, state, country_id, dob, occupation, income, education, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}

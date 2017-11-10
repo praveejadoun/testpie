@@ -929,7 +929,7 @@ $(document).click(function() {
                                         <tr class=<?php echo $cls; ?>>
                                             <td><input type="checkbox" class="chk" name="chkCid[]" value="<?php echo $list_1->id; ?>"/></td>
         <!--                                            <td><?php echo $i; ?></td>-->
-                                            <td style="text-align:left;"><?php echo CHtml::link($list_1->first_name . '  ' . $list_1->middle_name . '  ' . $list_1->last_name, array('view', 'id' => $list_1->id)) ?></td>
+                                            <td style="text-align:left;"><?php echo $list_1->first_name . '  ' . $list_1->middle_name . '  ' . $list_1->last_name ?></td>
                                             <td><?php echo $list_1->registration_no ?></td>
                                             <?php
                                           

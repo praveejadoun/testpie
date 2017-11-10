@@ -196,13 +196,18 @@ break;
             {
             echo '<td>';
             $find = StudentAttentance::model()->findAll("date=:x AND student_id=:y", array(':x'=>$_REQUEST['year'].'-'.$mon_num.'-'.$i,':y'=>$student->id));
-            if(count($find)==0)
+                        if(count($find)==0)
             {
-            echo '';
-            }
-            else
+             $comDt = date('Y-m-d',strtotime($_REQUEST['year']."-".$mon_num."-".$i));
+                 if( $comDt <= date('Y-m-d') && boolval($student->admission_date <= $comDt)){
+            echo "<span style='color:#6fc20e;font-size:12px;margin-top:5px;'><strong>P</strong></span>";
+            }else{
+         echo "<b title='N/A'>-</b>";
+    }
+      }
+else{
             echo "<span style='color:#ce0606'><strong>X</strong></span>";
-            
+            }
             echo '</td>';
             }
             ?>

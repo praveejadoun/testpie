@@ -184,8 +184,18 @@ foreach($posts as $posts_1)
     for($i=1;$i<=$num;$i++)
     {
         echo '<td><span  id="td'.$i.$posts_1->id.'">';
+         
+        $comDt = date('Y-m-d',strtotime($curr_year."-".$mon_num."-".$i));
+        
+        if( $comDt <= date('Y-m-d') && boolval($posts_1->admission_date <= $comDt)){
+
 		echo  $this->renderPartial('ajax',array('day'=>$i,'month'=>$mon_num,'year'=>$curr_year,'emp_id'=>$posts_1->id));
-		/*echo CHtml::ajaxLink(Yii::t('job','ll'),$this->createUrl('EmployeeAttendances/addnew'),array(
+	}else{
+            echo "<b title='N/A'>-</b>";
+        }	
+                
+                
+                /*echo CHtml::ajaxLink(Yii::t('job','ll'),$this->createUrl('EmployeeAttendances/addnew'),array(
         'onclick'=>'$("#jobDialog").dialog("open"); return false;',
         'update'=>'#jobDialog','type' =>'GET','data'=>array('day' =>$i,'month'=>$mon_num,'year'=>'2012','emp_id'=>$posts_1->id),
         ),array('id'=>'showJobDialog'));

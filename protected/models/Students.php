@@ -78,7 +78,7 @@ class Students extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('admission_no, parent_id, batch_id, nationality_id, student_category_id, country_id, immediate_contact_id, is_sms_enabled, is_active, is_deleted, has_paid_fees, photo_file_size, pin_code, phone1, phone2, user_id, uid,academicyear_id', 'numerical', 'integerOnly'=>true),
-			array('academicyear_id, admission_date, first_name, last_name, gender, date_of_birth, address_line1, address_line2, city, state, pin_code, country_id, phone1, email,nationality_id', 'required',),
+			array('academicyear_id, admission_date, first_name, last_name, gender, date_of_birth,  phone1, email,nationality_id', 'required',),
 			array('admission_no','unique'),
 			array('email','check'),
 			array('admission_no, class_roll_no, first_name, middle_name, last_name, gender, blood_group, birth_place, language, religion, address_line1, address_line2, city, state, email, photo_file_name, photo_content_type, status_description', 'length', 'max'=>255),

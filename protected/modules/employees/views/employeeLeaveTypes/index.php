@@ -85,6 +85,7 @@ $this->breadcrumbs=array(
 <table width="100%" cellpadding="0" cellspacing="0">
 <tr class="pdtab-h">
 	<td style="text-align:left;">Leave Type</td>
+        <td>Max.Leave Count</td>
         <td>Status</td>
         <td>Carry Forward</td>
     <td>Edit</td>
@@ -96,7 +97,8 @@ $this->breadcrumbs=array(
 $active=EmployeeLeaveTypes::model()->findAll("status=:x", array(':x'=>1));
 foreach($active as $active_1)
 {
-   echo '<tr><td style="padding-left:10px; text-align:left;">'.$active_1->name.'</td>';	
+   echo '<tr><td style="padding-left:10px; text-align:left;">'.$active_1->name.'</td>';
+   echo '<td style="padding-left:10px; text-align:center;">'.$active_1->max_leave_count.'</td>';
    if($active_1->status=='1'){
    echo '<td style="padding-left:10px;text-align:center;">'.Active.'</td>';}
    if($active_1->carry_forward=='1'){
@@ -117,6 +119,7 @@ foreach($active as $active_1)
 <table width="100%" cellpadding="0" cellspacing="0">
 <tr class="pdtab-h">
 	<td style="text-align:left;">Leave Type</td>
+        <td>Max.Leave Count</td>
         <td>Status</td>
         <td>Carry Forward</td>
     <td>Edit</td>
@@ -127,7 +130,9 @@ foreach($active as $active_1)
 $inactive=EmployeeLeaveTypes::model()->findAll("status=:x", array(':x'=>2));
 foreach($inactive as $inactive_1)
 {
-   echo '<tr><td style="padding-left:10px; text-align:left;">'.$inactive_1->name.'</td>';
+   echo '<tr><td style="padding-left:8px; text-align:left;">'.$inactive_1->name.'</td>';
+   echo '<td style="padding-left:10px; text-align:center;">'.$inactive_1->max_leave_count.'</td>';
+   
    if($inactive_1->status=='2'){
    echo '<td style="padding-left:10px;text-align:center;">'.InActive.'</td>';}
    if($inactive_1->carry_forward=='1'){

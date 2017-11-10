@@ -1,23 +1,20 @@
 <?php
 
 /**
- * This is the model class for table "finance_fee_particulars".
+ * This is the model class for table "finance_fee_particular_accesses".
  *
- * The followings are the available columns in table 'finance_fee_particulars':
+ * The followings are the available columns in table 'finance_fee_particular_accesses':
  * @property integer $id
- * @property string $name
- * @property string $description
- * @property string $amount
- * @property integer $finance_fee_category_id
+ * @property string $access_type
+ * @property integer $course_id
+ * @property integer $batch_id
+ * @property integer $finance_fee_particular_id
  * @property integer $student_category_id
- * @property string $admission_no
- * @property integer $student_id
- * @property integer $tax_id
- * @property integer $is_deleted
+ * @property string $amount
  * @property string $created_at
  * @property string $updated_at
  */
-class FinanceFeeParticulars extends CActiveRecord
+class FinanceFeeParticularAccess extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -33,7 +30,7 @@ class FinanceFeeParticulars extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'finance_fee_particulars';
+		return 'finance_fee_particular_accesses';
 	}
 
 	/**
@@ -43,18 +40,18 @@ class FinanceFeeParticulars extends CActiveRecord
 	{
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
-		return array(
-			array('finance_fee_category_id, student_category_id, student_id, tax_id, is_deleted', 'numerical', 'integerOnly'=>true),
-			array('amount', 'match', 'pattern'=>'/([1-9][0-9]*?)(\.[0-9]{2})?/'),
-			array('name, admission_no', 'length', 'max'=>25),
-			array('amount', 'length', 'max'=>15),
-			array('description, created_at, updated_at', 'safe'),
-			array('name, amount','required'),
-//			array('name','CRegularExpressionValidator', 'pattern'=>'/^[A-Za-z_ ]+$/','message'=>"{attribute} should contain only letters."),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, name, description, amount, finance_fee_category_id, student_category_id, admission_no, student_id, tax_id, is_deleted, created_at, updated_at', 'safe', 'on'=>'search'),
-		);
+//		return array(
+//			array('finance_fee_particular_id, student_category_id,course_id,batch_id', 'numerical', 'integerOnly'=>true),
+//			array('amount', 'match', 'pattern'=>'/([1-9][0-9]*?)(\.[0-9]{2})?/'),
+//			array('access_type', 'length', 'max'=>25),
+//			array('amount', 'length', 'max'=>15),
+//			array(' created_at, updated_at', 'safe'),
+////			array('name, amount','required'),
+////			array('name','CRegularExpressionValidator', 'pattern'=>'/^[A-Za-z_ ]+$/','message'=>"{attribute} should contain only letters."),
+//			// The following rule is used by search().
+//			// Please remove those attributes that should not be searched.
+//			array('id, access_type, amount, finance_fee_particular_id, student_category_id,course_id,batch_id,created_at, updated_at', 'safe', 'on'=>'search'),
+//		);
 	}
 
 	/**
@@ -75,15 +72,12 @@ class FinanceFeeParticulars extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
-			'description' => 'Description',
+                        'access_type' => 'Access Type',
+			'course_id' => 'Course',
+			'batch_id' => 'Batch',
 			'amount' => 'Amount',
-			'finance_fee_category_id' => 'Finance Fee Category',
+			'finance_fee_particular_id' => 'Finance Fee Particular',
 			'student_category_id' => 'Student Category',
-			'admission_no' => 'Admission No',
-			'student_id' => 'Student',
-                        'tax_id' => 'Tax',
-			'is_deleted' => 'Is Deleted',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
 		);
@@ -101,15 +95,12 @@ class FinanceFeeParticulars extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('name',$this->name,true);
-		$criteria->compare('description',$this->description,true);
+		$criteria->compare('access_type',$this->access_type,true);
+		$criteria->compare('course_id',$this->course_id,true);
+                $criteria->compare('batch_id',$this->batch_id,true);
 		$criteria->compare('amount',$this->amount,true);
-		$criteria->compare('finance_fee_category_id',$this->finance_fee_category_id);
+		$criteria->compare('finance_fee_particular_id',$this->finance_fee_particular_id);
 		$criteria->compare('student_category_id',$this->student_category_id);
-		$criteria->compare('admission_no',$this->admission_no,true);
-		$criteria->compare('student_id',$this->student_id);
-                $criteria->compare('tax_id',$this->tax_id);
-		$criteria->compare('is_deleted',$this->is_deleted);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);
 

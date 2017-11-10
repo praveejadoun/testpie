@@ -68,7 +68,7 @@ class EmployeesController extends RController
 
 		if(isset($_POST['Employees']))
 		{
-			
+//			echo "<pre/>";print_r($_POST['Employees']);exit;
 			$model->attributes=$_POST['Employees'];
 			$list = $_POST['Employees'];
 			
@@ -784,7 +784,7 @@ class EmployeesController extends RController
 		    $criteria->params[':status'] = $_REQUEST['Employees']['status'];
 		}
 		
-		$criteria->order = 'first_name ASC';
+		$criteria->order = 'id DESC';
 		
 		$total = Employees::model()->count($criteria);
 		$pages = new CPagination($total);

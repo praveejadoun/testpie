@@ -491,7 +491,7 @@ class StudentsController extends RController {
         }
 
 
-        $criteria->order = 'first_name ASC';
+        $criteria->order = 'id DESC';
 
         $total = Students::model()->count($criteria);
         $pages = new CPagination($total);

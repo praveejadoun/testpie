@@ -1,6 +1,6 @@
 <?php
 if (Yii::app()->controller->action->id == 'create') {
-    
+   
     if (!empty($_REQUEST['aid'])) {
         $model = Applicants::model()->findByAttributes(array('id' => $_REQUEST['aid']));
         $model->isNewRecord = 1;

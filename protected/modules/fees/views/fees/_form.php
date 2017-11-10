@@ -186,9 +186,9 @@ $form = $this->beginWidget('CActiveForm', array(
                                                                                </select>-->
                                                                             </td>
                                                                             <td>
-<?php
-echo CHtml::dropDownList('FeeParticularAccess[0][student_category_id][]', $mymodel, CHtml::listData(StudentCategories::model()->findAll(), 'id', 'name'), array('empty' => 'Select Category','class'=>'particular-access-studentcategory'));
-?>
+                                                                            <?php
+                                                                            echo CHtml::dropDownList('FeeParticularAccess[0][student_category_id][]', $mymodel, CHtml::listData(StudentCategories::model()->findAll(), 'id', 'name'), array('empty' => 'Select Category','class'=>'particular-access-studentcategory'));
+                                                                            ?>
                                                                                 <!--<select style="width:120px !important;" name="FeeParticularAccess[][student_category_id][]">
                                                                                   <option value="">All Categories</option>
                                                                                   <option value="1">General</option>
@@ -294,7 +294,7 @@ echo CHtml::dropDownList('FeeParticularAccess[0][student_category_id][]', $mymod
                  var batname = "FeeParticularAccess[" + temp + "][batch][]";
                 clonedParticularBox.find(".particular-access-batch").attr('name', batname);
                 
-                 var scname = "FeeParticularAccess[" + temp + "][studentcategory][]";
+                 var scname = "FeeParticularAccess[" + temp + "][student_category_id][]";
                 clonedParticularBox.find(".particular-access-studentcategory").attr('name', scname);
                 
                 var amtname = "FeeParticularAccess[" + temp + "][amount][]";
@@ -347,7 +347,7 @@ echo CHtml::dropDownList('FeeParticularAccess[0][student_category_id][]', $mymod
              var newname = "FeeParticularAccess[" + dataRow + "][batch][]";
             clonedBox.find(".particular-access-batch").attr('name', newname);
             
-            var newname = "FeeParticularAccess[" + dataRow + "][studentcategory][]";
+            var newname = "FeeParticularAccess[" + dataRow + "][student_category_id][]";
             clonedBox.find(".particular-access-studentcategory").attr('name', newname);
             
             var newmname = "FeeParticularAccess["+dataRow+"][amount][]";

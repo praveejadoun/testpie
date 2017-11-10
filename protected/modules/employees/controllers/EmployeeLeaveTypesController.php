@@ -27,7 +27,7 @@ class EmployeeLeaveTypesController extends RController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','manage'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -180,4 +180,11 @@ class EmployeeLeaveTypesController extends RController
 			Yii::app()->end();
 		}
 	}
+        
+        public function actionManage()
+        {
+            $this->render('manage',array(
+			'model'=>$model,
+		));
+        }
 }

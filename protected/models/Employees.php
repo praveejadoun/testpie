@@ -114,7 +114,9 @@ class Employees extends CActiveRecord
 			array('id, employee_category_id, employee_number, joining_date, first_name, middle_name, last_name, gender, job_title, employee_position_id, employee_department_id, reporting_manager_id, employee_grade_id, qualification, experience_detail, experience_year, experience_month, status, status_description, date_of_birth, marital_status, children_count, father_name, mother_name, husband_name, blood_group, nationality_id, home_address_line1, home_address_line2, home_city, home_state, home_country_id, home_pin_code, office_address_line1, office_address_line2, office_city, office_state, office_country_id, office_pin_code, office_phone1, office_phone2, mobile_phone, home_phone, email, fax, photo_file_name, photo_content_type, photo_data, created_at, updated_at, photo_file_size, user_id', 'safe', 'on'=>'search'),
 			
 			array('email','email'),
-			array('experience_detail', 'exp_details_validation', 'on' => 'hasExperience'),
+//			array('experience_detail', 'exp_details_validation', 'on' => 'hasExperience'),
+                        array('first_name,middle_name,last_name,father_name, mother_name, husband_name', 'match','pattern' => '/^[a-zA-Z\s]+$/','message' => 'It can only contain alphabets,space'),
+                        
 			//array('photo_data', 'file', 'allowEmpty'=>true, 'types'=>'jpg, jpeg, gif, png')
 
 

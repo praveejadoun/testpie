@@ -54,8 +54,11 @@ if(Yii::app()->user->hasFlash('errorMessage')): ?>
     <td><?php echo $form->textField($model,'last_name',array('size'=>15,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'last_name'); ?></td>
     <td>&nbsp;</td>
-    <td><?php echo $form->textField($model,'relation',array('size'=>25,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'relation'); ?></td>
+    <td><?php echo $form->dropDownList($model, 'relation', array('Father' => 'Father', 'Mother' => 'Mother' , 'Others' => 'Others'), array('empty' => 'Select Relation')); ?>
+    
+    </td>
+<!--    <td><?php echo $form->textField($model,'relation',array('size'=>25,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'relation'); ?></td>-->
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -290,16 +293,21 @@ else
 		<?php 
 		
 			//echo 'hi';
-			echo CHtml::submitButton($model->isNewRecord ? 'Emergency Contact »' : 'Save',array('class'=>'formbut')); 
-		
+			echo CHtml::submitButton($model->isNewRecord ? 'Save and Go to Emergency Contact »' : 'Save',array('class'=>'formbut')); 
+//                        echo CHtml::link(Yii::t('employees','Go TO View'),array('students/view','id'=>$_REQUEST['id']),array('class'=>'formbut-n','style'=>'float:right'));
 		?>
 </div>
 <div id="existing_guardian" style="padding:0px 0 0 0px; text-align:left; <?php echo $display_existing; ?>">
 		<?php 
 		
 			//echo $guardian_id;
-			echo CHtml::submitButton('Emergency Contact »',array('submit' =>CController::createUrl('/students/guardians/update',array('id'=>$guardian_id,'sid'=>$_REQUEST['id'])),'class'=>'formbut')); 
-		?>
+			echo CHtml::submitButton('Save and Go to Emergency Contact »',array('submit' =>CController::createUrl('/students/guardians/update',array('id'=>$guardian_id,'sid'=>$_REQUEST['id'])),'class'=>'formbut')); 
+//                       echo CHtml::link(Yii::t('employees','Go TO View'),array('students/view','id'=>$_REQUEST['id']),array('class'=>'formbut-n','style'=>'float:right'));
+                ?>
+</div>
+<div >
+    <?php // echo CHtml::link(Yii::t('employees','Back'),array('exam/','id'=>$_REQUEST['id']),array('class'=>'formbut-n')) ?>
+    <?php // echo CHtml::button('back',array('class'=>'formbut'))?>
 </div>
 
 <?php $this->endWidget(); ?>

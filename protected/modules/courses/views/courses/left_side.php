@@ -67,8 +67,8 @@
 						array('label'=>Yii::t('Courses','Create Courses').'<span>'.Yii::t('Courses','Add New Course Details').'</span>', 'url'=>array('courses/create'),
 							'active'=> ((Yii::app()->controller->id=='courses') && (in_array(Yii::app()->controller->action->id,array('update','admin','index','create'))) ? true : false),'linkOptions'=>array('class'=>'abook_ico' )                                                                                           
 						      ),
-                                                array('label'=>''.Yii::t('Courses','Previous Year Courses').'<span>'.Yii::t('Courses','All Courses and Batch Details').'</span>',  'url'=>array('courses/allcourses'),'active'=> ((Yii::app()->controller->id=='courses') && (in_array(Yii::app()->controller->action->id,array('allcourses'))) ? true : false), 'linkOptions'=>array('class'=>'gs_ico' ), 'itemOptions'=>array('id'=>'menu_1') 
-					       ),
+//                                                array('label'=>''.Yii::t('Courses','Previous Year Courses').'<span>'.Yii::t('Courses','All Courses and Batch Details').'</span>',  'url'=>array('courses/allcourses'),'active'=> ((Yii::app()->controller->id=='courses') && (in_array(Yii::app()->controller->action->id,array('allcourses'))) ? true : false), 'linkOptions'=>array('class'=>'gs_ico' ), 'itemOptions'=>array('id'=>'menu_1') 
+//					       ),
 						  
                                                 array('label'=>''.Yii::t('Courses','Deactivated Batch').'<span>'.Yii::t('Courses','Deactivated Batch Details').'</span>',  'url'=>array('courses/deactivatedbatches'),'active'=> ((Yii::app()->controller->id=='courses') && (in_array(Yii::app()->controller->action->id,array('deactivatedbatches'))) ? true : false), 'linkOptions'=>array('class'=>'gs_ico' ), 'itemOptions'=>array('id'=>'menu_1') 
 					       ),

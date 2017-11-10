@@ -26,7 +26,7 @@
 			'activeCssClass'=>'list_active',
 			'items'=>array(
 					array('label'=>''.Yii::t('employees','List Employees').'<span>'.Yii::t('employees','All Employee Details').'</span>', 'url'=>array('employees/manage') ,'linkOptions'=>array('class'=>'lbook_ico'),
-                                   'active'=> (Yii::app()->controller->action->id=='manage')
+                                   'active'=> (Yii::app()->controller->id=='employees' and Yii::app()->controller->action->id=='manage')
 					    ),  
 						                
 					array('label'=>''.Yii::t('employees','Create Employee').'<span>'.Yii::t('employees','Add New Employee Details').'</span>',  'url'=>array('employees/create'),'linkOptions'=>array('class'=>'sl_ico' ),'active'=> (Yii::app()->controller->id=='employees' and (Yii::app()->controller->action->id=='create' or Yii::app()->controller->action->id=='create2')), 'itemOptions'=>array('id'=>'menu_1') 
@@ -35,7 +35,8 @@
 					       ),
 						   array('label'=>''.'<h1>'.Yii::t('employees','Employee Leave Management').'</h1>'), 
 					
-						array('label'=>Yii::t('employees','Add Leave Type').'<span>'.Yii::t('employees','Manage Leave Type').'</span>', 'url'=>array('/employees/employeeLeaveTypes'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->id=='employeeLeaveTypes')),
+						array('label'=>Yii::t('employees','Add Leave Type').'<span>'.Yii::t('employees','Manage Leave Type').'</span>', 'url'=>array('/employees/employeeLeaveTypes'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->id=='employeeLeaveTypes' and (Yii::app()->controller->action->id=='index,update'))),
+						array('label'=>Yii::t('employees','Manage Leave Types').'<span>'.Yii::t('employees','Manage Leave Type').'</span>', 'url'=>array('/employees/employeeLeaveTypes/manage'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> ((Yii::app()->controller->id=='employeeLeaveTypes') and (Yii::app()->controller->action->id=='manage'))),
 		  				 
                                             /*    array('label'=>Yii::t('employees','Leave Requests ').'<span>'.Yii::t('employees','Manage Leave Requests').'</span>', 'url'=>array('leaves/'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->id=='leaves')),*/
 		  				 

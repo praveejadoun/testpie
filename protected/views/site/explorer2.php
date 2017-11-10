@@ -177,8 +177,8 @@ $('#user_div a').live('click', function(event){
 	$percent	=	ceil(($setups/8)*100);
 ?>
 
-<div class="site_drrop">
-	<div class="sd_left">
+<div class="site_drrop" style="width:583px;">
+<!--	<div class="sd_left">
    	  <div class="sd_left_loader">
       	<p>Set Up : <span><?php echo $percent.'%'?></span> Setup Completed</p>
         <div class="loader_bg">
@@ -202,8 +202,8 @@ $('#user_div a').live('click', function(event){
 
         </ul>
         </div>
-       <!-- <div class="sd_left_comm_logo"></div>-->
-    </div>
+        <div class="sd_left_comm_logo"></div>
+    </div>-->
     <div class="sd_right">
     	<!-- Coda Sliders-->
         <div class="coda-slider-wrapper">
