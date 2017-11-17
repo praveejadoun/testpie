@@ -53,9 +53,33 @@ $this->breadcrumbs=array(
                         <td align="center"><?php echo CHtml::link($list_1->name,array('view','id'=>$list_1->id)); ?></td>
                         <td align="center"><?php echo $fee = date("M d.Y", strtotime($list_1->created_at)); ?></td>
                         <td align="center">Me</td>
-                        <td align="center">-</td>
-                        <?php $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=>$list_1->id));?>
-                        <td align="center"><?php if($subscription!=null){ echo CHtml::link('Generate Invoice',array('view','id'=>$list_1->id));?><span> | </span><?php echo CHtml::link('Remove',array('remove','id'=>$list_1->id),array('confirm'=>"Are you sure You Want To Remove this FeeCategory?")); ?><?php }else { echo CHtml::link('Create subscription',array('subscription/','id'=>$list_1->id));?> <span> | </span><?php echo CHtml::link('Remove',array('remove1','id'=>$list_1->id),array('confirm'=>"Are you sure You Want To Remove this FeeCategory?")); } ?></td>
+                        <td align="center"><?php if($list_1->is_invoice=='0'){ echo "No";}else{echo "Yes";} ?></td>
+                        <?php
+                        $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=>$list_1->id));
+                        $invoice = FinanceFeeInvoices::model()->findAll("finance_fee_category_id=:x",array(':x'=>$list_1->id));
+                        ?>
+                        <td align="center">
+                            <?php 
+                                if($invoice!=null)
+                                    {
+                                    echo CHtml::link('View Invoice',array('invoices/manage','id'=>$list_1->id));
+                                    }elseif ($subscription!=null) {
+                                       echo CHtml::link('Generate Invoice',array('invoices/generate','id'=>$list_1->id));?>
+                                        <span> | </span>
+                                    <?php 
+                                    echo CHtml::link('Remove',array('remove','id'=>$list_1->id),array('confirm'=>"Are you sure You Want To Remove this FeeCategory?")); 
+                                    }
+                                    else
+                                    {
+                                        echo CHtml::link('Create subscription',array('subscription/','id'=>$list_1->id));
+                                    ?>
+                                    <span> | </span>
+                                    <?php
+                                        echo CHtml::link('Remove',array('remove1','id'=>$list_1->id),array('confirm'=>"Are you sure You Want To Remove this FeeCategory?"));
+                                    }
+                                    ?>
+                        </td>                
+                                   
                     </tr>
                   <?php //  echo CHtml::link(Yii::t(
 //  'Logcategory','Delete'), array('delete', 'id' =>$logcategory_1->id,'class'=>'grdel'),array('confirm'=>"Are you sure You Want To Delete this LogCategory?")); ?>
@@ -64,8 +88,25 @@ $this->breadcrumbs=array(
                 <?php } ?>
 
             </table>
-            <div class="clear"></div>
+             <div class="list_contner" style="margin: 0px 0px 0px 0px;">
+              <div class="pagecon">
+                                    <?php
+                                    $this->widget('CLinkPager', array(
+                                        'currentPage' => $pages->getCurrentPage(),
+                                        'itemCount' => $item_count,
+                                        'pageSize' => $page_size,
+                                        'maxButtonCount' => 5,
+                                        //'nextPageLabel'=>'My text >',
+                                        'header' => '',
+                                        'htmlOptions' => array('class' => 'pages'),
+                                    ));
+                                    ?>
+                                </div>
+                 <div class="clear"></div>
+             </div>
+            
     </div>
+
 </div>
     </td>
    </tr>

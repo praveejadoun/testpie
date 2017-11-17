@@ -15,16 +15,23 @@ class FeesdashboardController extends RController
 	public function actionIndex()
 	{
              $criteria = new CDbCriteria;
-        $criteria->compare('is_deleted', 0);
-        $total = FinanceFeeCategories::model()->count($criteria);
-        $criteria->order = 'id DESC';
-        $criteria->limit = '10';
-        $posts = FinanceFeeCategories::model()->findAll($criteria);
+                $criteria->compare('is_deleted', 0);
+                $total = FinanceFeeCategories::model()->count($criteria);
+                $criteria->order = 'id DESC';
+                $criteria->limit = '10';
+                $pages = new CPagination($total);
+                $pages->setPageSize(Yii::app()->params['listPerPage']);
+                $pages->applyLimit($criteria);  // the trick is here!
+                $posts = FinanceFeeCategories::model()->findAll($criteria);
 
 
-        $this->render('index', array(
-            'total' => $total, 'list' => $posts
-        ));
+                $this->render('index', array(
+                    'total' => $total, 'list' => $posts,
+
+                    'pages' => $pages,
+                    'item_count' => $total,
+                    'page_size' => Yii::app()->params['listPerPage'],
+                ));
 		
 	}
         

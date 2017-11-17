@@ -71,7 +71,7 @@ $this->breadcrumbs=array(
                     
                     </td>-->
                        <?php // } ?>
-                        <td align="center">-</td>
+                       <td ><tr colspan="7"><td >-</td></tr></td>
                        
                     </tr>
                     

@@ -1,23 +1,27 @@
 <?php
 
 /**
- * This is the model class for table "finance_fee_categories".
+ * This is the model class for table "finance_fee_transactions".
  *
- * The followings are the available columns in table 'finance_fee_categories':
+ * The followings are the available columns in table 'finance_fee_transactions':
  * @property integer $id
- * @property string $name
+ * @property string $date
+ * @property integer $payment_type_id
+ * @property string $transaction_id
+ * @property string $invoice_id
  * @property string $description
- * @property integer $batch_id
+ * @property string $amount
+ * @property string $status
  * @property integer $is_deleted
- * @property integer $is_master
  * @property string $created_at
  * @property string $updated_at
  */
-class FinanceFeeCategories extends CActiveRecord
+
+class FinanceFeeTransactions extends CActiveRecord
 {
-	/**
+    /**
 	 * Returns the static model of the specified AR class.
-	 * @return FinanceFeeCategories the static model class
+	 * @return FinanceFeeParticulars the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -29,29 +33,28 @@ class FinanceFeeCategories extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'finance_fee_categories';
+		return 'finance_fee_transactions';
 	}
-
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
+        
+        public function rules()
 	{
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('batch_id, is_deleted, is_master, is_invoice', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>25),
-//			array('name','required'),
-			array('description, created_at, updated_at', 'safe'),
+			array('payment_type_id, is_deleted', 'numerical', 'integerOnly'=>true),
+			array('amount', 'match', 'pattern'=>'/([1-9][0-9]*?)(\.[0-9]{2})?/'),
+			array('amount', 'length', 'max'=>15),
+			array('date, description, created_at, updated_at', 'safe'),
+			array('date, amount','required'),
+                        
 //			array('name','CRegularExpressionValidator', 'pattern'=>'/^[A-Za-z_ ]+$/','message'=>"{attribute} should contain only letters."),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, description, batch_id, is_deleted, is_master, is_invoice,  created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, date, description, amount, payment_type_id, transaction_id, invoice_id, status, is_deleted, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
-
-	/**
+        
+        /**
 	 * @return array relational rules.
 	 */
 	public function relations()
@@ -61,26 +64,29 @@ class FinanceFeeCategories extends CActiveRecord
 		return array(
 		);
 	}
-
-	/**
+        
+        /**
 	 * @return array customized attribute labels (name=>label)
 	 */
 	public function attributeLabels()
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
+			'date' => 'Date',
+                        'payment_type_id' => 'Type',
+                        'transaction_id' => 'Transaction Id',
+                        'invoice_id' => 'Invoice Id',
 			'description' => 'Description',
-			'batch_id' => 'Batch',
+			'amount' => 'Amount',
+                        'status' => 'Status',
 			'is_deleted' => 'Is Deleted',
-			'is_master' => 'Is Master',
-                        'is_invoice' => 'Is Invoice Generated',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
 		);
 	}
 
-	/**
+        
+        /**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
@@ -92,12 +98,14 @@ class FinanceFeeCategories extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('name',$this->name,true);
+		$criteria->compare('date',$this->date,true);
+                $criteria->compare('payment_type_id',$this->payment_type_id);
+                $criteria->compare('transaction_id',$this->transaction_id);
+                $criteria->compare('invoice_id',$this->invoice_id,true);
 		$criteria->compare('description',$this->description,true);
-		$criteria->compare('batch_id',$this->batch_id);
-		$criteria->compare('is_deleted',$this->is_deleted);
-		$criteria->compare('is_master',$this->is_master);
-                $criteria->compare('is_invoice',$this->is_invoice);
+		$criteria->compare('amount',$this->amount,true);
+		$criteria->compare('status',$this->status);
+              	$criteria->compare('is_deleted',$this->is_deleted);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);
 

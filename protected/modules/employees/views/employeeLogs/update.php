@@ -16,7 +16,7 @@ $this->breadcrumbs=array(
 <h1 ><?php foreach($emp as $emp_1){ echo Yii::t('employees','Employee Profile :');?><?php echo $emp_1->first_name.'&nbsp;'.$emp_1->last_name;} ?><br /></h1>
 <div class="edit_bttns">
     <ul>
-    <li><?php echo CHtml::link(Yii::t('employees','<span>Edit</span>'), array('update', 'id'=>$_REQUEST['employee_id']),array('class'=>'edit last')); ?><!--<a class=" edit last" href="">Edit</a>--></li>
+    <li><?php echo CHtml::link(Yii::t('employees','<span>Edit</span>'), array('employees/update', 'id'=>$_REQUEST['employee_id']),array('class'=>'edit last')); ?><!--<a class=" edit last" href="">Edit</a>--></li>
      <li><?php echo CHtml::link(Yii::t('employees','<span>Employees</span>'), array('employees/manage'),array('class'=>'edit last')); ?><!--<a class=" edit last" href="">Edit</a>--></li>
     </ul>
     </div>

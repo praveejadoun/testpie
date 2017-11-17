@@ -17,7 +17,7 @@ $this->breadcrumbs=array(
 
     <div class="edit_bttns">
     <ul>
-    <li><?php echo CHtml::link(Yii::t('students','<span>Edit</span>'), array('update', 'id'=>$_REQUEST['student_id']),array('class'=>'edit last')); ?><!--<a class=" edit last" href="">Edit</a>--></li>
+    <li><?php echo CHtml::link(Yii::t('students','<span>Edit</span>'), array('students/update', 'id'=>$_REQUEST['student_id']),array('class'=>'edit last')); ?><!--<a class=" edit last" href="">Edit</a>--></li>
      <li><?php echo CHtml::link(Yii::t('students','<span>Employees</span>'), array('students/manage'),array('class'=>'edit last')); ?><!--<a class=" edit last" href="">Edit</a>--></li>
     </ul>
     </div>

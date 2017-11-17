@@ -20,8 +20,8 @@ $this->breadcrumbs=array(
     
     <div class="overviewbox ovbox1" style="width: 170px;">
     	<h1><?php echo Yii::t('invoices','<strong>Total Invoices</strong>');?></h1>
-        <?php //  $tot =   Students::model()->countByAttributes(array('is_active'=> 1,'is_deleted'=>0)); ?>
-        <div class="ovrBtm"><?php echo $total ?></div>
+        <?php  $tot = FinanceFeeInvoices::model()->countByAttributes(array('is_deleted'=> 0)); ?>
+        <div class="ovrBtm"><?php echo $tot; ?></div>
     </div>
     <div class="clear"></div>
     
@@ -47,8 +47,7 @@ $this->breadcrumbs=array(
     </div>
     <div class="clear"></div>
 </div>
-
- <div style="margin-top:20px; position:relative;">
+                    <div style="margin-top:20px; position:relative;">
                         <div class="clear"></div>
                         <div style="display: inline-block;margin-bottom: 14px;margin-top: 14px; width: 100%;">
                             <div style="float:left;">
@@ -65,13 +64,12 @@ $this->breadcrumbs=array(
                                 </div>
                             </div>-->
                                 <div class="ea_pdf" style="top:0px; right:6px;">
-                                    <?php echo CHtml::link('<img src="images/pdf-but.png">', array('invoices/indexpdf'), array('target' => '_blank')); ?>
+                                    <?php echo CHtml::link('<img src="images/pdf-but.png">', array('invoices/managepdf','id'=>$_REQUEST['id']), array('target' => '_blank')); ?>
                                 </div>
                             </div> 
 
                         </div>
                     </div>
-
     <div class="pdtab_Con" style="width:100%">
         <!--<div style="font-size:13px; padding:5px 0px"><?php echo Yii::t('invoices','<strong>Fee Categories</strong>');?></div>-->
 
@@ -92,7 +90,7 @@ $this->breadcrumbs=array(
                     <tr>
                         <td align="center"><?php echo $list_1->invoice_id;?></td>
                         <?php $student = Students::model()->findByAttributes(array('id'=>$list_1->student_id));?>
-                        <td align="center"><?php echo CHtml::link($student->first_name . '  ' . $student->middle_name . '  ' . $student->last_name, array('/students/students/view', 'id' => $student->id),array('style'=>'color:#FF6600;'));?></td>
+                        <td align="center"><?php echo $student->first_name.' '.$student->last_name;?></td>
                         <?php $feecategory = FinanceFeeCategories::model()->findByAttributes(array('id'=>$list_1->finance_fee_category_id));?>
                         <td align="center"><?php echo $feecategory->name;?></td>
                         <td align="center"><?php echo $list_1->amount;?></td>
@@ -110,7 +108,7 @@ $this->breadcrumbs=array(
                             }
                             ?>
                         </td>    
-                        <td align="center"><?php echo CHtml::link('View',array('invoices/view','id'=>$list_1->id),array('style'=>'color:#FF6600'));?></td>
+                        <td align="center"><?php echo CHtml::link('View',array('invoices/view','id'=>$list_1->id));?></td>
                         
                     </tr>
                   <?php //  echo CHtml::link(Yii::t(

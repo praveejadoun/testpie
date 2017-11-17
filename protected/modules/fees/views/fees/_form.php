@@ -1,9 +1,9 @@
 <?php
-$form = $this->beginWidget('CActiveForm', array(
-    'id' => 'student-log-form',
-    'enableAjaxValidation' => false,
-    'htmlOptions' => array('enctype' => 'multipart/form-data'),
-        ));
+//$form = $this->beginWidget('CActiveForm', array(
+//    'id' => 'student-log-form',
+//    'enableAjaxValidation' => false,
+//    'htmlOptions' => array('enctype' => 'multipart/form-data'),
+//        ));
 ?> 
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -187,7 +187,7 @@ $form = $this->beginWidget('CActiveForm', array(
                                                                             </td>
                                                                             <td>
                                                                             <?php
-                                                                            echo CHtml::dropDownList('FeeParticularAccess[0][student_category_id][]', $mymodel, CHtml::listData(StudentCategories::model()->findAll(), 'id', 'name'), array('empty' => 'Select Category','class'=>'particular-access-studentcategory'));
+                                                                            echo CHtml::dropDownList('FeeParticularAccess[0][student_category_id][]', $mymodel, CHtml::listData(StudentCategories::model()->findAll(), 'id', 'name'), array('empty' => 'All Category','class'=>'particular-access-studentcategory'));
                                                                             ?>
                                                                                 <!--<select style="width:120px !important;" name="FeeParticularAccess[][student_category_id][]">
                                                                                   <option value="">All Categories</option>
@@ -202,8 +202,7 @@ $form = $this->beginWidget('CActiveForm', array(
                                                                 </td>
                                                                 <td>
                                                                     <div style="position:relative;">
-                                                                        <a href="javascript:void(0);" title="Click to remove access" class="remove-access fees-trash" style="top:-9px; right:-25px;" data-row="0">
-                                                                            <a href="javascript:void(0)" onClick="javascript:closeAccessBox(this)">X</a>
+                                                                        <a href="javascript:void(0);" title="Click to remove access" class="remove-access fees-trash" style="top:-9px; right:-25px;" data-row="0" onClick="javascript:closeAccessBox(this)">X</a>
                                                                         </a>
                                                                     </div>
                                                                 </td>
@@ -263,7 +262,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="clear"></div>
 </div>
 </div>
-<?php $this->endWidget(); ?>
+<?php //$this->endWidget(); ?>
 <script>
     $(document).ready(function () {
 
@@ -335,7 +334,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
     function cloneinnerbox(thisObj) {
         var dataRow = $(thisObj).attr('data-row');
-        alert(dataRow);
+     
         var clonedBox = $(".particular-access").first().clone();
         if (dataRow != 0) {
             var newname = "FeeParticularAccess[" + dataRow + "][access_type][]";

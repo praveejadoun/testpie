@@ -321,11 +321,11 @@ $(".navigationbtm_wrapper_outer").show();
                  <?php 
 				if(isset(Yii::app()->controller->module->id) and Yii::app()->controller->module->id=='fees')
 				{
-				    echo CHtml::link(Yii::t('app','Fees'), array('/fees'),array('class'=>'ic13 active'));
+				    echo CHtml::link(Yii::t('app','Fees'), array('/fees/feesdashboard'),array('class'=>'ic13 active'));
 				}
 				else
 				{
-					echo CHtml::link(Yii::t('app','Fees'), array('/fees'),array('class'=>'ic13'));
+					echo CHtml::link(Yii::t('app','Fees'), array('/fees/feesdashboard'),array('class'=>'ic13'));
 				}
 				?>
                 </li>

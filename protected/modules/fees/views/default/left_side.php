@@ -29,7 +29,7 @@
 						                
 					array('label'=>''.Yii::t('fees','Create Fees').'<span>'.Yii::t('fees','Create Fees').'</span>',  'url'=>array('fees/create'),'linkOptions'=>array('class'=>'sl_ico' ),'active'=> ((Yii::app()->controller->id=='fees' and (Yii::app()->controller->action->id=='create' or Yii::app()->controller->action->id=='create2')) or (Yii::app()->controller->id=='subscription' and Yii::app()->controller->action->id=='index')), 
 					       ),
-                                        array('label'=>Yii::t('fees','Manage Invoices').'<span>'.Yii::t('fees','Manage Generated Invoices').'</span>', 'url'=>array('/fees/invoices'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->id=='employeeLeaveTypes')),
+                                        array('label'=>Yii::t('fees','Manage Invoices').'<span>'.Yii::t('fees','Manage Generated Invoices').'</span>', 'url'=>array('/fees/invoices/'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> ((Yii::app()->controller->id=='invoices') and (Yii::app()->controller->action->id== 'manage' or Yii::app()->controller->action->id== 'view' or Yii::app()->controller->action->id== 'index'))),
 
 						    
 					

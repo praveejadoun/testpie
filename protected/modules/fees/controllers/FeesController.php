@@ -74,6 +74,7 @@ class FeesController extends RController {
             $ffc->description = $list['description'];
             $ffc->is_deleted = 0;
             $ffc->is_master = 1;
+            $ffc->is_invoice = 0;
             $ffc->created_at = date('Y-m-d H:i:s');
             $ffc->updated_at = date('Y-m-d H:i:s');
  
@@ -99,7 +100,7 @@ class FeesController extends RController {
                     $ffp->name = $particular_name;
                     $ffp->description = $particular_descriptions[$particular_key];
                     $ffp->tax_id = $particular_taxs[$particular_key]; //Other variable also will go here
-                    $ffp->amount = $particular_discount_values[$particular_key];
+                    $ffp->amount = floatval($particular_discount_values[$particular_key]);
                     $ffp->finance_fee_category_id = $ffc->id;
                      $ffp->student_category_id = $particular_category[$particular_key];
                     $ffp->created_at = date('Y-m-d H:i:s');

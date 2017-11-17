@@ -1,23 +1,22 @@
 <?php
 
 /**
- * This is the model class for table "finance_fee_particulars".
+ * This is the model class for table "finance_fee_invoices".
  *
- * The followings are the available columns in table 'finance_fee_particulars':
+ * The followings are the available columns in table 'finance_fee_invoices':
  * @property integer $id
- * @property string $name
- * @property string $description
- * @property string $amount
+ * @property string $invoice_id
+ * @property string $student_id
  * @property integer $finance_fee_category_id
- * @property integer $student_category_id
- * @property string $admission_no
- * @property integer $student_id
- * @property integer $tax_id
+ * @property string $amount
+ * @property string $amount_payable
+ * @property string $status
+ * @property string $due_date
  * @property integer $is_deleted
  * @property string $created_at
  * @property string $updated_at
  */
-class FinanceFeeParticulars extends CActiveRecord
+class FinanceFeeInvoices extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -33,7 +32,7 @@ class FinanceFeeParticulars extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'finance_fee_particulars';
+		return 'finance_fee_invoices';
 	}
 
 	/**
@@ -44,16 +43,14 @@ class FinanceFeeParticulars extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('finance_fee_category_id, student_category_id, student_id, tax_id, is_deleted', 'numerical', 'integerOnly'=>true),
+			array('finance_fee_category_id, student_id, is_deleted', 'numerical', 'integerOnly'=>true),
 			array('amount', 'match', 'pattern'=>'/([1-9][0-9]*?)(\.[0-9]{2})?/'),
-			array('name, admission_no', 'length', 'max'=>25),
-			array('amount', 'length', 'max'=>15),
-			array('description, created_at, updated_at', 'safe'),
+			array('created_at, updated_at', 'safe'),
 //			array('name, amount','required'),
 //			array('name','CRegularExpressionValidator', 'pattern'=>'/^[A-Za-z_ ]+$/','message'=>"{attribute} should contain only letters."),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, description, amount, finance_fee_category_id, student_category_id, admission_no, student_id, tax_id, is_deleted, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, invoice_id,amount,amount_payable, finance_fee_category_id, status, student_id, due_date, is_deleted, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -75,14 +72,13 @@ class FinanceFeeParticulars extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
-			'description' => 'Description',
-			'amount' => 'Amount',
+			'invoice_id' => 'Invoice',
 			'finance_fee_category_id' => 'Finance Fee Category',
-			'student_category_id' => 'Student Category',
-			'admission_no' => 'Admission No',
+                        'amount' => 'Amount',
+                        'amount_payable' => 'Amount Payable',
 			'student_id' => 'Student',
-                        'tax_id' => 'Tax',
+                        'status' => 'Status',
+                        'due_date' => 'Due Date',
 			'is_deleted' => 'Is Deleted',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
@@ -101,14 +97,13 @@ class FinanceFeeParticulars extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('name',$this->name,true);
-		$criteria->compare('description',$this->description,true);
-		$criteria->compare('amount',$this->amount,true);
-		$criteria->compare('finance_fee_category_id',$this->finance_fee_category_id);
-		$criteria->compare('student_category_id',$this->student_category_id);
-		$criteria->compare('admission_no',$this->admission_no,true);
+		$criteria->compare('invoice_id',$this->invoice_id,true);
+                $criteria->compare('finance_fee_category_id',$this->finance_fee_category_id);
+                $criteria->compare('amount',$this->amount,true);
+                $criteria->compare('amount_payable',$this->amount_payable,true);
 		$criteria->compare('student_id',$this->student_id);
-                $criteria->compare('tax_id',$this->tax_id);
+                $criteria->compare('status',$this->status);
+                $criteria->compare('due_date',$this->due_date,true);
 		$criteria->compare('is_deleted',$this->is_deleted);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);

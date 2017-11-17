@@ -35,7 +35,7 @@
 					       ),
 						   array('label'=>''.'<h1>'.Yii::t('employees','Employee Leave Management').'</h1>'), 
 					
-						array('label'=>Yii::t('employees','Add Leave Type').'<span>'.Yii::t('employees','Manage Leave Type').'</span>', 'url'=>array('/employees/employeeLeaveTypes'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->id=='employeeLeaveTypes' and (Yii::app()->controller->action->id=='index,update'))),
+						array('label'=>Yii::t('employees','Add Leave Type').'<span>'.Yii::t('employees','Manage Leave Type').'</span>', 'url'=>array('/employees/employeeLeaveTypes'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> ((Yii::app()->controller->id=='employeeLeaveTypes') and (Yii::app()->controller->action->id=='index' or Yii::app()->controller->action->id=='update'))),
 						array('label'=>Yii::t('employees','Manage Leave Types').'<span>'.Yii::t('employees','Manage Leave Type').'</span>', 'url'=>array('/employees/employeeLeaveTypes/manage'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> ((Yii::app()->controller->id=='employeeLeaveTypes') and (Yii::app()->controller->action->id=='manage'))),
 		  				 
                                             /*    array('label'=>Yii::t('employees','Leave Requests ').'<span>'.Yii::t('employees','Manage Leave Requests').'</span>', 'url'=>array('leaves/'),'linkOptions'=>array('class'=>'abook_ico'),'active'=> (Yii::app()->controller->id=='leaves')),*/

@@ -95,6 +95,7 @@ $this->breadcrumbs=array(
 
 <?php
 $active=EmployeeLeaveTypes::model()->findAll("status=:x", array(':x'=>1));
+if($active!=null){
 foreach($active as $active_1)
 {
    echo '<tr><td style="padding-left:10px; text-align:left;">'.$active_1->name.'</td>';
@@ -109,8 +110,10 @@ foreach($active as $active_1)
    }
    echo '<td>'.CHtml::link(Yii::t('employees','Edit'), array('update', 'id'=>$active_1->id)).'</td>';
     echo '<td>'.CHtml::link(Yii::t('employees','Delete'), array('delete', 'id'=>$active_1->id),array('confirm'=>Yii::t('employees','Are you Sure?'))).'</td></tr>';
-}
-?>
+}}
+ else { ?>
+    <tr><td colspan="6">Active Leave types are not available Yet !</td></tr>
+<?php } ?>
 </table>
 </div>
 <br />
@@ -128,6 +131,8 @@ foreach($active as $active_1)
 
 <?php
 $inactive=EmployeeLeaveTypes::model()->findAll("status=:x", array(':x'=>2));
+if($inactive!=null)
+{
 foreach($inactive as $inactive_1)
 {
    echo '<tr><td style="padding-left:8px; text-align:left;">'.$inactive_1->name.'</td>';
@@ -144,7 +149,10 @@ foreach($inactive as $inactive_1)
    echo '<td>'.CHtml::link(Yii::t('employees','Edit'), array('update', 'id'=>$inactive_1->id)).'</td>';
     echo '<td>'.CHtml::link(Yii::t('employees','Delete'), array('delete', 'id'=>$inactive_1->id),array('confirm'=>Yii::t('employees','Are you Sure?'))).'</td></tr>';
 }
-?>
+}
+ else { ?>
+<tr><td colspan="6">InActive Leave types are not available Yet !</td></tr>  
+<?php } ?>
 </table>
 </div>
 
