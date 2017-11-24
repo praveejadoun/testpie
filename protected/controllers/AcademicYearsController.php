@@ -211,7 +211,16 @@ class AcademicYearsController extends RController
                 $model->start_date = date('Y-m-d', strtotime($model->start_date));
               if ($model->end_date)
                 $model->end_date = date('Y-m-d', strtotime($model->end_date));
-              if($model->save()){
+              $model->status = $_POST['AcademicYears']['status'];
+              $status = $model->status;
+             $ay = AcademicYears::model()->findAll("is_deleted=:x",array(':x'=>0));
+             foreach($ay as $ay_1){
+              if($status==0)
+                $ay_1->saveAttributes(array('status'=>1));
+//            else 
+//                $ay_1->saveAttributes(array('status'=>1));
+             }
+                if($model->save()){
                    Yii::app()->user->setFlash('notification','Created Successfully');
               $this->redirect(array('admin'));}
               

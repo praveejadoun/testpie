@@ -7,7 +7,7 @@
  * @property integer $id
  * @property string $start_date
  * @property string $end_date
- * @property integer $checkbox
+ * @property integer $is_divide_fee_by_nos
  * @property integer $subscription_type
  * @property string $due_date
  * @property integer $fee_category_id
@@ -42,11 +42,22 @@ class FinanceFeeSubscription extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('fee_category_id,checkbox,subscription_type, is_deleted', 'numerical', 'integerOnly'=>true),
+			array('fee_category_id,is_divide_fee_by_nos,subscription_type, is_deleted', 'numerical', 'integerOnly'=>true),
 //			array('name', 'length', 'max'=>25),
 			array('start_date, end_date, due_date', 'safe'),
 			array('start_date, end_date, due_date','required'),
+                        array('start_date','checkStartDate'),
+                        array('end_date','checkEndDate'),
                         array(
+                                'end_date',
+				'compare',
+				'compareAttribute'=>'start_date',
+				'operator'=>'>', 
+				'allowEmpty'=>false , 
+				'message'=>'{attribute} must be less than start date.'
+                            ),
+                        array(
+                            
 				'due_date',
 				'compare',
 				'compareAttribute'=>'start_date',
@@ -65,10 +76,42 @@ class FinanceFeeSubscription extends CActiveRecord
 //			array('name','CRegularExpressionValidator', 'pattern'=>'/^[A-Za-z_ ]+$/','message'=>"{attribute} should contain only letters."),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, subscription_type, start_date, end_date, due_date, fee_category_id, checkbox, is_deleted, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, subscription_type, start_date, end_date, due_date, fee_category_id, is_divide_fee_by_nos, is_deleted, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
-
+        
+        
+        public function checkStartDate($attribute,$params)
+        {
+            $ay = AcademicYears::model()->findByAttributes(array('status'=>'0'));
+            $sdate = date($ay->start_date);
+            $edate = date($ay->end_date);
+            $selectedDate = date($this->start_date);
+                    if($selectedDate < $sdate)
+                    {
+                        $this->addError($attribute,'Date should be in between current academic Year' );
+                    }
+                    elseif($selectedDate > $edate)
+                    {
+                        $this->addError($attribute,'Date should be in between current academic' );
+                    }
+        }
+        
+        public function checkEndDate($attribute,$params)
+        {
+             $ay = AcademicYears::model()->findByAttributes(array('status'=>'InActive'));
+            $sdate = date($ay->start_date);
+            $edate = date($ay->end_date);
+            $selectedDate = date($this->end_date);
+                    if($selectedDate < $sdate)
+                    {
+                        $this->addError($attribute,'Date should be greater than academic Year' );
+                    }
+                    elseif($selectedDate > $edate)
+                    {
+                        $this->addError($attribute,'Date should be less than academic Year' );
+                    }
+        }
 	/**
 	 * @return array relational rules.
 	 */
@@ -88,7 +131,7 @@ class FinanceFeeSubscription extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'subscription_type' => 'Subscription Type',
-                        'checkbox' => 'Divide the fee amount by number of subscriptions',
+                        'is_divide_fee_by_nos' => 'Divide the fee amount by number of subscriptions',
 			'start_date' => 'Start Date',
 			'end_date' => 'End Date',
 			'due_date' => 'Due Date',
@@ -113,7 +156,7 @@ class FinanceFeeSubscription extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('subscription_type',$this->subscription_type,true);
-                $criteria->compare('checkbox',$this->checkbox,true);
+                $criteria->compare('is_divide_fee_by_nos',$this->is_divide_fee_by_nos,true);
 		$criteria->compare('start_date',$this->start_date,true);
 		$criteria->compare('end_date',$this->end_date,true);
 		$criteria->compare('due_date',$this->due_date,true);
@@ -126,5 +169,6 @@ class FinanceFeeSubscription extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+       
 }
 

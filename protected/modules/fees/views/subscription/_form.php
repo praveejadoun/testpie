@@ -63,9 +63,9 @@
       <td>&nbsp;</td>
   </tr>
   <tr>
-      <td><?php echo $form->checkBox($model,'checkbox',array('value' => '1', 'uncheckValue'=>'0')); ?>
-		<?php echo $form->error($model,'checkbox'); ?></td>
-      <td><?php echo $form->labelEx($model,Yii::t('subscription','checkbox')); ?></td>
+      <td><?php echo $form->checkBox($model,'is_divide_fee_by_nos',array('value' => '1', 'uncheckValue'=>'0')); ?>
+		<?php echo $form->error($model,'is_divide_fee_by_nos'); ?></td>
+      <td><?php echo $form->labelEx($model,Yii::t('subscription','is_divide_fee_by_nos')); ?></td>
   </tr>
   <tr>
       <td>&nbsp;</td>

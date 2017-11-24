@@ -16,6 +16,35 @@ $this->breadcrumbs=array(
     <td valign="top" width="75%">
 <div class="cont_right formWrapper">
 <h1><?php echo Yii::t('feesdashboard','Fees Dashboard');?></h1>
+
+
+ <?php
+                Yii::app()->clientScript->registerScript(
+                        'myHideEffect', '$(".flash-success").animate({opacity: 1.0}, 3000).fadeOut("slow");', CClientScript::POS_READY
+                );
+                ?>
+                    <?php if(Yii::app()->user->hasFlash('error')):?>
+                    <div class="flash-success" style="color:white; padding:8px; font-size:14px;border: 1px #999999 solid;background:rgb(255,0,0);border-radius: 4px;">
+
+                    <!--<div class="flash-success" style="color:#F00; padding-left:150px; font-size:15px">-->
+                        <?php echo Yii::app()->user->getFlash('error'); ?>
+                    </div>
+                    <?php endif; ?>
+            
+             <?php
+                Yii::app()->clientScript->registerScript(
+                        'myHideEffect', '$(".flash-success").animate({opacity: 1.0}, 3000).fadeOut("slow");', CClientScript::POS_READY
+                );
+                ?>
+                    <?php if(Yii::app()->user->hasFlash('success')):?>
+                    <div class="flash-success" style="color:white; padding:8px; font-size:14px;border: 1px #999999 solid;background:rgb(35, 161, 16);border-radius: 4px;">
+
+                    <!--<div class="flash-success" style="color:#F00; padding-left:150px; font-size:15px">-->
+                        <?php echo Yii::app()->user->getFlash('success'); ?>
+                    </div>
+                    <?php endif; ?>
+
+
 <div class="overview" >
     
     <div class="overviewbox ovbox1" style="width: 193px;">
@@ -27,8 +56,8 @@ $this->breadcrumbs=array(
     
      <div class="overviewbox ovbox2" style="width: 215px;">
     	<h1><?php echo Yii::t('feesdashboard','<strong>Invoices Generated For</strong>');?></h1>
-        <?php //  $tot =   Students::model()->countByAttributes(array('is_active'=> 1,'is_deleted'=>0)); ?>
-        <div class="ovrBtm"><?php echo $total ?></div>
+        <?php   $tot =   FinanceFeeCategories::model()->countByAttributes(array('is_invoice'=> 1,'is_deleted'=>0)); ?>
+        <div class="ovrBtm"><?php echo $tot; ?></div>
     </div>
     <div class="clear"></div>
 
@@ -47,10 +76,11 @@ $this->breadcrumbs=array(
                     <td align="center"><?php echo Yii::t('feesdashboard','Actions');?></td>
                     </tr>
                 </tbody>
+                
                 <?php foreach($list as $list_1) { ?>
                 <tbody>
                     <tr>
-                        <td align="center"><?php echo CHtml::link($list_1->name,array('view','id'=>$list_1->id)); ?></td>
+                        <td align="center"><?php echo CHtml::link($list_1->name,array('view','id'=>$list_1->id),array('style'=>'color:#FF6600')); ?></td>
                         <td align="center"><?php echo $fee = date("M d.Y", strtotime($list_1->created_at)); ?></td>
                         <td align="center">Me</td>
                         <td align="center"><?php if($list_1->is_invoice=='0'){ echo "No";}else{echo "Yes";} ?></td>
@@ -62,20 +92,20 @@ $this->breadcrumbs=array(
                             <?php 
                                 if($invoice!=null)
                                     {
-                                    echo CHtml::link('View Invoice',array('invoices/manage','id'=>$list_1->id));
+                                    echo CHtml::link('View Invoice',array('invoices/manage','id'=>$list_1->id),array('style'=>'color:#FF6600'));
                                     }elseif ($subscription!=null) {
-                                       echo CHtml::link('Generate Invoice',array('invoices/generate','id'=>$list_1->id));?>
+                                       echo CHtml::link('Generate Invoice',array('invoices/generate','id'=>$list_1->id),array('style'=>'color:#FF6600','confirm'=>"Are you sure you want to Generate Invoice"));?>
                                         <span> | </span>
                                     <?php 
-                                    echo CHtml::link('Remove',array('remove','id'=>$list_1->id),array('confirm'=>"Are you sure You Want To Remove this FeeCategory?")); 
+                                    echo CHtml::link('Remove',array('remove','id'=>$list_1->id),array('style'=>'color:#FF6600','confirm'=>"Are you sure You Want To Remove this FeeCategory?\n\n Note : It will Remove Particulars,Access")); 
                                     }
                                     else
                                     {
-                                        echo CHtml::link('Create subscription',array('subscription/','id'=>$list_1->id));
+                                        echo CHtml::link('Create subscription',array('subscription/','id'=>$list_1->id),array('style'=>'color:#FF6600','confirm'=>"Are you sure you want to Create Subscription"));
                                     ?>
                                     <span> | </span>
                                     <?php
-                                        echo CHtml::link('Remove',array('remove1','id'=>$list_1->id),array('confirm'=>"Are you sure You Want To Remove this FeeCategory?"));
+                                        echo CHtml::link('Remove',array('remove1','id'=>$list_1->id),array('style'=>'color:#FF6600','confirm'=>"Are you sure You Want To Remove this FeeCategory?\n\n Note : It will Remove Particulars,Access"));
                                     }
                                     ?>
                         </td>                

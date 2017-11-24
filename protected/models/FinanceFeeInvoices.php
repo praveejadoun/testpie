@@ -12,6 +12,7 @@
  * @property string $amount_payable
  * @property string $status
  * @property string $due_date
+ * @property string $last_payment_date
  * @property integer $is_deleted
  * @property string $created_at
  * @property string $updated_at
@@ -50,7 +51,7 @@ class FinanceFeeInvoices extends CActiveRecord
 //			array('name','CRegularExpressionValidator', 'pattern'=>'/^[A-Za-z_ ]+$/','message'=>"{attribute} should contain only letters."),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, invoice_id,amount,amount_payable, finance_fee_category_id, status, student_id, due_date, is_deleted, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, invoice_id,amount,amount_payable, finance_fee_category_id, status, student_id, due_date, last_payment_date, is_deleted, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -79,6 +80,7 @@ class FinanceFeeInvoices extends CActiveRecord
 			'student_id' => 'Student',
                         'status' => 'Status',
                         'due_date' => 'Due Date',
+                        'last_payment_date' =>'Last Payment Date',
 			'is_deleted' => 'Is Deleted',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
@@ -104,6 +106,7 @@ class FinanceFeeInvoices extends CActiveRecord
 		$criteria->compare('student_id',$this->student_id);
                 $criteria->compare('status',$this->status);
                 $criteria->compare('due_date',$this->due_date,true);
+                $criteria->compare('last_payment_date',$this->last_payment_date,true);
 		$criteria->compare('is_deleted',$this->is_deleted);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);
@@ -142,4 +145,5 @@ class FinanceFeeInvoices extends CActiveRecord
 			return '-';
 		}
 	}
+
 }

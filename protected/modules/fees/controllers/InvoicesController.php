@@ -25,7 +25,7 @@ class InvoicesController extends RController {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'generate', 'manage', 'edit','managepdf','indexpdf','remove'),
+                'actions' => array('index', 'view', 'generate', 'manage', 'edit','managepdf','indexpdf','remove','Invoicepdf'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -44,25 +44,133 @@ class InvoicesController extends RController {
 
     public function actionGenerate() {
         
-   
+                    $len=10;
+                    $string = "";
+                    $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                    for($i=0;$i<$len;$i++)
+                    $string.=substr($chars,rand(0,strlen($chars)),1);
+                    
+//                    $a=rand(00000000, 99999999);
+//                    echo  $string;
+//                    echo  $a;
+//                    exit;
         // $this->render('generate');
         $feesCategoryId = $_GET['id'];
-
+        $feesCategory = FinanceFeeCategories::model()->findByAttributes(array('id'=>$feesCategoryId));
+       
         $feeparticulars = FinanceFeeParticulars::model()->findAll("finance_fee_category_id=:x", array(':x' => $feesCategoryId));
-        echo "<pre>";
+        //echo "<pre>";
         //print_r($feeparticulars);exit;
         $dataArray = array();
+        $pd = array();
+        $parttax = array();
         foreach ($feeparticulars as $particular) {
             $particularId = $particular->id;
+            $pd[] = $particular->amount;
+            $tax = $particular->tax_id;
+            $taxes = Taxes::model()->findByAttributes(array("id"=>$tax));
+            $parttax[] = $taxes->value;
             $feeaccess = FinanceFeeParticularAccess::model()->findAll("finance_fee_particular_id=:x", array(':x' => $particularId));
+             $invoiceAmount =array();
             foreach ($feeaccess as $feeaccess_1) {
                 $accessType = $feeaccess_1->access_type;
                 $courseId = $feeaccess_1->course_id;
                 $batchId = $feeaccess_1->batch_id;
                 $studentCategoryId = $feeaccess_1->student_category_id;
-                $invoiceAmount = $feeaccess_1->amount;
-                $payableAmount = $feeaccess_1->amount;
+                $invoiceAmount[]=$feeaccess_1->amount;
+//                $invoiceAmount = $feeaccess_1->amount;
+//                $payableAmount = $feeaccess_1->amount;
+        } 
+//         echo "<pre/>";
+//            print_r($invoiceAmount);
+//            
+        $subtotal = array_sum($invoiceAmount);
+        
+//        echo "<pre/>";
+//            print_r($subtotal);
+           
+        
+//            echo $pd;
+        
+        $dataArray[]= $subtotal;
+       
+        }
+            
+//         echo "<pre/>";
+//          print_r ($pd);
+//        
+//         echo "<pre/>";
+//          print_r ($parttax);
+          
+         foreach($pd as $key=>$val){
+            
+            
+            
+            $pd[$key] = ($val /100);
+        }
+        
+        foreach($parttax as $key=>$val){
+            
+            
+            
+            $parttax[$key] = ($val /100);
+        }
+        $mixed_array = array();
+        
+                        foreach($dataArray as $key => $price){
+                    $mixed_array[] = array(
+                        'value' => $price,
+                        'discount' => $pd[$key]*$price,
+                        'tax' => $parttax[$key]*$price,
+                        'total' => ($price)-($pd[$key]*$price)+($parttax[$key]*$price)
+                    );
 
+                }
+//
+//            echo "<pre/>";
+//                       print_r($mixed_array);
+                      
+                        $taxsum = array_column($mixed_array, 'tax');
+                       $sum = array_column($mixed_array, 'total');
+                        $total = array_sum($sum);
+//           print_r($taxsum);
+//               print_r($sum);          
+//            print_r($total);
+//             exit;
+//         foreach($dataArray as $keys=>$value){
+//          
+//             $dataArray[$keys] = $value;
+//           
+//            
+////            $pd[$key] = ($val /100)*($value);
+//        }  
+//         echo "<pre/>";
+//            print_r($dataArray);
+//        foreach($pd as $key=>$val){
+//            
+//            echo "<pre/>";
+//            print_r($val);
+//            
+//            $pd[$key] = ($val /100)*($value);
+//        }
+//        
+//            echo "<pre/>";
+//            print_r($pd);
+//            exit;
+//            
+//            $a= $pd[0]/100;
+//            $b= $subtotal;
+//            $d = $a*$b;
+//            echo $a ;
+            
+//            $total = array_sum($dataArray);
+//             echo "<pre/>";
+//            print_r($subtotal);
+//            echo "<pre/>";
+//            print_r($total);
+//          
+//            
+//            exit;
                 //Using these 4 data fetch students list for whom invoice need to be generate
 
                 if ($studentCategoryId != "" && $batchId != "") {
@@ -71,9 +179,10 @@ class InvoicesController extends RController {
 
                     foreach ($students as $student) {
                         
-                        $row = array("batch_id" => $batchId,"fee_particular_id" => $particularId, "fee_access_id" => $feeaccess_1->id, "student_category_id" => $feeaccess_1->student_category_id, "student_batch_id" => $batchId, "student_id" => $student->id, "student_course_id" => $courseId, "invoice_amount" => $invoiceAmount, "amount_payable" => $payableAmount, "finance_fee_category_id" => $_REQUEST['id']);
+                        $row = array("batch_id" => $batchId,"fee_particular_id" => $particularId, "fee_access_id" => $feeaccess_1->id, "student_category_id" => $feeaccess_1->student_category_id, "student_batch_id" => $batchId, "student_id" => $student->id, "student_course_id" => $courseId, "invoice_amount" => $total, "amount_payable" => $total, "finance_fee_category_id" => $_REQUEST['id']);
                     $invoice = new FinanceFeeInvoices;
-                    $invoice->invoice_id = 85;
+                     $a=rand(00000000, 99999999);
+                    $invoice->invoice_id = $a;
                     $invoice->finance_fee_category_id = $row['finance_fee_category_id'];
                     $invoice->amount = $row['invoice_amount'];
                     $invoice->amount_payable = $row['amount_payable'];
@@ -93,6 +202,8 @@ class InvoicesController extends RController {
                    
                         
                     }
+                    $feesCategory->saveAttributes(array("is_invoice"=>1));
+                    Yii::app()->user->setFlash('success','Invoice Generated Successfully !');
                     $this->redirect(array('/fees/invoices/manage', 'id' =>$_REQUEST['id']));
                     
                 } else {
@@ -109,11 +220,13 @@ class InvoicesController extends RController {
                 //Generate invoice id
                 //save into invoice table
                 //redirect to manage invoice page
-            }
-        }
-        print_r($dataArray);
-        exit;
+            
+            
+//        print_r($dataArray);
+//        exit;
         //Get particulars 
+         $this->redirect(array('/fees/invoices/manage', 'id' =>$_REQUEST['id']));
+        $this->render('generate');
     }
 
     public function actionManage()
@@ -165,15 +278,25 @@ class InvoicesController extends RController {
     public function actionView()
     {
         $model = new FinanceFeeTransactions;
+       
         if(!empty($_POST['FinanceFeeTransactions'])){
                 $model->attributes = $_POST['FinanceFeeTransactions'];
                 $transaction = $_POST['FinanceFeeTransactions'];
                  if ($model->date)
                 $model->date = date('Y-m-d', strtotime($model->date));
-                
+                $model->description = $transaction['description'];
                  $invoice = FinanceFeeInvoices::model()->findByAttributes(array('id'=>$_REQUEST['id']));
                  $model->invoice_id = $invoice->invoice_id;
-                 $model->transaction_id = $transaction['transaction_id'];
+                  $b=rand(0000000, 9999999);
+                 $model->transaction_id = $b;
+                
+				if($file=CUploadedFile::getInstance($model,'file_data'))
+					 {
+					$model->file_name=$file->name;
+                                        $model->file_content_type=$file->type;
+					$model->file_size=$file->size;
+					$model->file_data=file_get_contents($file->tempName);
+					  }
                  $model->status = 1;
                  if($model->amount <= $invoice->amount_payable)
                     $model->amount = $transaction['amount'];
@@ -187,10 +310,11 @@ class InvoicesController extends RController {
                      $txaction = $invoice->amount_payable;
                      $amt = $txaction - $txamount;
                      $invoice->saveAttributes(array('amount_payable'=>$amt));
-                      Yii::app()->user->setFlash('success','Successfully Completed Transaction !');
+                     $invoice->saveAttributes(array('last_payment_date'=>$model->date));
                       if($invoice->amount_payable == 0.00){
                       $invoice->saveAttributes(array('status'=>1));
                       } 
+                     Yii::app()->user->setFlash('success','Successfully Completed Transaction !');
                      $this->redirect(array('view', 'id' => $_REQUEST['id']));
                      
                  }
@@ -245,8 +369,20 @@ class InvoicesController extends RController {
                 $invoic->saveAttributes(array('status'=>'0'));
             }
         $model->saveAttributes(array('is_deleted' => '1'));
+        
         $this->redirect(array('view', 'id' => $invoic->id));
         $this->render('remove');
+    }
+    
+    public function actionInvoicepdf()
+    {
+        
+	 $invoice = FinanceFeeInvoices::model()->findAll("id=:x",array(':x'=>$_REQUEST['id']));
+		 $invoice = 'invoice.pdf';	
+        $html2pdf = Yii::app()->ePdf->HTML2PDF();
+		$html2pdf->WriteHTML($this->renderPartial('print_2',array(),true));
+                ob_end_clean();
+        $html2pdf->Output( $invoice);
     }
 }
 

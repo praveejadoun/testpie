@@ -8,7 +8,29 @@
     <td valign="top" width="75%">
         <div class="cont_right formWrapper">
             <h1>Invoice-</h1>
-            
+              <div style="margin-top:20px; position:relative;">
+                        <div class="clear"></div>
+                        <div style="display: inline-block;margin-bottom: 14px;margin-top:0px; width: 100%;">
+                            <div style="float:left;">
+<!--                                <div class="box-one">
+                                <div class="bttns_addstudent-n">   
+                                    <ul>
+                                        <li><?php // echo CHtml::link(Yii::t('employees', 'Add Student'), array('create'), array('class' => 'formbut-n')); ?></li>
+
+                                        <li><a class="formbut-n" href="javascript:void(0)" id="delete_student">Delete Student</a></li>
+
+
+
+                                    </ul>
+                                </div>
+                            </div>-->
+                                <div class="ea_pdf" style="top:0px; right:6px;">
+                                    <?php echo CHtml::link('<img src="images/pdf-but.png">', array('invoices/invoicepdf','id'=>$_REQUEST['id']), array('target' => '_blank')); ?>
+                                </div>
+                            </div> 
+
+                        </div>
+                    </div>
              <?php
                 Yii::app()->clientScript->registerScript(
                         'myHideEffect', '$(".flash-success").animate({opacity: 1.0}, 3000).fadeOut("slow");', CClientScript::POS_READY
@@ -80,7 +102,7 @@
                         </tr>
                         <tr>
                             <td width="25%" style="padding: 8px 5px;"><strong>Last Payment Date</strong></td>
-                            <td style="padding: 8px 5px;"><?php echo "-";?></td>
+                            <td style="padding: 8px 5px;"><?php echo $date = date("d M Y", strtotime($invoice_1->last_payment_date));?></td>
                         </tr>
                         <tr>
                             <td width="25%" style="padding: 8px 5px;"><strong>Status</strong></td>
@@ -123,48 +145,87 @@
                 
                 <tbody>
                    <?php $particular = FinanceFeeParticulars::model()->findAll("finance_fee_category_id=:x",array(':x'=>$feecategory->id));
-                    foreach ($particular as $particular_1){
+                   $subtotal = array();
+                   $particulartotal = array();
+                   $disc = array();
+                   $ta[] = array();
+                   foreach ($particular as $particular_1){
                    ?>
                     <tr>
-                        <td></td>
-                        <td><?php echo $particular_1->name;?></td>
-                        <td><?php echo $particular_1->description;?></td>
+                        <td align="center"></td>
+                        <td align="center"><?php echo $particular_1->name;?></td>
+                        <td align="center"><?php echo $particular_1->description;?></td>
                        
                         <?php 
-                            $access = FinanceFeeParticularAccess::model()->findAll("finance_fee_particular_id=:x",array(':x'=>2));
+                            $access = FinanceFeeParticularAccess::model()->findAll("finance_fee_particular_id=:x",array(':x'=>$particular_1->id));
                             
                        ?>
-              
-                        <td><?php foreach($access as $access_1){ echo $access_1->amount;}?></td>
+             
+                        <td align="center">
+                            <?php 
+                            $total =array();
+                            foreach($access as $access_1){ ?>
+                             <?php
+                             $total[]=$access_1->amount;
+                            // echo "<p>".$access_1->amount."</p>"; ?>
+                           <?php  } echo $data = array_sum($total);?>
+                        </td>
                        
-                         <td><?php echo $particular_1->amount;?></td>
-                         <?php $tax = Taxes::model()->findByAttributes(array('id'=>$particular_1->tax_id));?>
+                       
+                         <td align="center">
+                            <?php   
+                                    echo $discount = $particular_1->amount;
+                                        
+                                   
+                            ?>
+                         </td>
+                         <?php $taxes = Taxes::model()->findByAttributes(array('id'=>$particular_1->tax_id));?>
                         
-                        <td><?php echo $tax->value;?></td>
-                        <td></td>
+                        <td align="center"><?php echo $tax = $taxes->value;?></td>
+                        <td align="center">
+                            <?php 
+//                                if($particular_1->discount_type == 1)
+//                                {
+//                                     $totaldiscount = ($discount/100)*$data;
+//                                }
+//                                else
+//                                {
+//                                    $totaldiscount = $discount;
+//                                }
+                                $totaltax = ($tax/100)*$data;
+                                $totaldiscount = ($discount/100)*$data;
+                                $disc[] = $totaldiscount;
+                                $ta[] = $totaltax;
+                                $sum =  $data - $totaldiscount +  $totaltax;
+                                $total = $sum;
+                                $subtotal[] = $total;
+                                echo $total;
+                                
+                            ?>
+                        </td>
                         
                     </tr>
-                    <?php } ?>
+                    <?php $particulartotal[]=$data;} ?>
                 </tbody>
                  </table>
                 <table cellspacing="0" cellpadding="0" border="0" width="100%">
                    
                 <tbody>
                     <tr>
-                         <td  align="right" width="572px" style="padding-right:10px;"><strong>Sub total</strong></td>
-                        <td></td>
+                         <td  align="right" width="572px" style="padding-right:42px;"><strong>Sub total</strong></td>
+                        <td align="center"> <?php echo  array_sum($particulartotal);?></td>
                     </tr>
                     <tr>
-                         <td  align="right" width="572px" style="padding-right:10px;"><strong>Discount</strong></td>
-                        <td></td>
+                         <td  align="right" width="572px" style="padding-right:42px;"><strong>Discount</strong></td>
+                        <td align="center"><?php echo array_sum($disc);?></td>
                     </tr>
                     <tr>
-                         <td  align="right" width="572px" style="padding-right:10px;"><strong>Tax</strong></td>
-                        <td></td>
+                         <td  align="right" width="572px" style="padding-right:42px;"><strong>Tax</strong></td>
+                        <td align="center"><?php echo array_sum($ta);?></td>
                     </tr>
                     <tr>
-                         <td  align="right" width="572px" style="padding-right:10px;"><strong>Total</strong></td>
-                        <td></td>
+                         <td  align="right" width="572px" style="padding-right:42px;"><strong>Total</strong></td>
+                        <td align="center"><?php echo array_sum($subtotal);?></td>
                     </tr>
                 </tbody>
                 </table>   
@@ -206,13 +267,13 @@
                      ?>
                      <tr>
                          <td align="center" style="width: 20px;"><?php if($transaction_1->is_deleted == '1')echo '<strike>'.$i.'</strike>';else echo $i;?></td>
-                         <td align="center"><?php if($transaction_1->is_deleted == '1')echo '<strike>'.$transaction_1->date.'</strike>';else echo $transaction_1->date;?></td>
+                         <td align="center"><?php if($transaction_1->is_deleted == '1')echo '<strike>'.$date = date("d M Y", strtotime($transaction_1->date)).'</strike>';else echo $date = date("d M Y", strtotime($transaction_1->date));?></td>
                          <?php $types = PaymentTypes::model()->findByAttributes(array('id'=>$transaction_1->payment_type_id));?>
                          <td align="center"><?php if($transaction_1->is_deleted == '1')echo '<strike>'.$types->type.'</strike>';else echo $types->type;?></td>  
                          <td align="center"><?php if($transaction_1->is_deleted == '1')echo '<strike>'.$transaction_1->transaction_id.'</strike>';else echo $transaction_1->transaction_id;?></td>
                          <td align="center"><?php if($transaction_1->is_deleted == '1')echo '<strike>'.$transaction_1->description.'</strike>';else echo $transaction_1->description;?></td>
                          <td align="center"><?php if($transaction_1->is_deleted == '1')echo '<strike>'.$transaction_1->amount.'</strike>';else echo $transaction_1->amount;?></td>
-                         <td align="center">-</td>
+                         <td align="center"><?php if($transaction_1->is_deleted == '1')echo '<strike>'.proof.'</strike>';else echo CHtml::link('Proof',array('downloadimage','id'=>$transaction_1->id),array('style'=>'color:#FF6600'));?></td>
                          <td align="center">
                              <?php 
                                     if($transaction_1->is_deleted == '1'){

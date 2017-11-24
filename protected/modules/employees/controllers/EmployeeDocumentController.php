@@ -114,13 +114,15 @@ class EmployeeDocumentController extends RController
      public function actionDownloadImage()
         {
             $model=$this->loadModel($_GET['id']); 
-            $fileDir=Yii::app()->request->baseUrl.'/uploadedfiles/school_logo/';
+            $fileDir=Yii::app()->request->baseUrl.'/uploadedfiles/employee_documents/';
             Yii::app()->request->sendFile(
             $model->document_file_name,
             file_get_contents($fileDir . $model->document_file_name),
             $model->document_data
                  );  
         }
+        
+           
          public function actionDownloadImage1()
         {
          $model = $this->loadModel($_GET['id']); 

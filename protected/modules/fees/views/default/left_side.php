@@ -25,7 +25,7 @@
 			'activateItems'=>true,
 			'activeCssClass'=>'list_active',
 			'items'=>array(
-					array('label'=>''.Yii::t('fees','Dashboard').'<span>'.Yii::t('fees','Fees Dashboard').'</span>', 'url'=>array('/fees/feesdashboard') ,'linkOptions'=>array('class'=>'lbook_ico'),'active'=> ((Yii::app()->controller->id=='feesdashboard') && (in_array(Yii::app()->controller->action->id,array('index','create')))),'itemOptions'=>array('id'=>'menu_1')),  
+					array('label'=>''.Yii::t('fees','Dashboard').'<span>'.Yii::t('fees','Fees Dashboard').'</span>', 'url'=>array('/fees/feesdashboard') ,'linkOptions'=>array('class'=>'lbook_ico'),'active'=> ((Yii::app()->controller->id=='feesdashboard') && (in_array(Yii::app()->controller->action->id,array('index','create','view')))),'itemOptions'=>array('id'=>'menu_1')),  
 						                
 					array('label'=>''.Yii::t('fees','Create Fees').'<span>'.Yii::t('fees','Create Fees').'</span>',  'url'=>array('fees/create'),'linkOptions'=>array('class'=>'sl_ico' ),'active'=> ((Yii::app()->controller->id=='fees' and (Yii::app()->controller->action->id=='create' or Yii::app()->controller->action->id=='create2')) or (Yii::app()->controller->id=='subscription' and Yii::app()->controller->action->id=='index')), 
 					       ),

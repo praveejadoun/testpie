@@ -100,7 +100,7 @@
 <tr>
 	
     <td>	<?php echo $form->labelEx($model,Yii::t('academicYears','status')); ?></td></tr>
-<tr><td>	<?php echo $form->dropdownlist($model,'status',array('Active'=>'Active','InActive'=>'InActive'),array('style'=>'width:100% !important;')); ?>
+<tr><td>	<?php echo $form->dropdownlist($model,'status',array('0'=>'Active','1'=>'InActive'),array('style'=>'width:100% !important;')); ?>
 		<?php echo $form->error($model,'status'); ?>
     </td></tr>
 </table>

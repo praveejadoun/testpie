@@ -12,11 +12,11 @@
     <div class="formCon">
         <div class="formConInner">
             <p class="note">Fields with <span class="required">*</span> are required.</p>
-             <table width="85%" border="0" cellspacing="0" cellpadding="0">
+             <table width="92%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                 <td valign="bottom" ><?php echo $form->labelEx($model,Yii::t('FinanceFeeTransactions','date <span class="required">*</span>')); ?></td>
                 <td valign="bottom"><?php echo $form->labelEx($model,Yii::t('FinanceFeeTransactions','Payment_type_id <span class="required">*</span>')); ?></td>
-                <td valign="bottom"><?php echo $form->labelEx($model,Yii::t('FinanceFeeTransactions','transaction_id')); ?></td>
+                <!--<td valign="bottom"><?php // echo $form->labelEx($model,Yii::t('FinanceFeeTransactions','transaction_id')); ?></td>-->
                        <td>&nbsp;</td>
                       
                 </tr>
@@ -56,8 +56,8 @@
                 </td>
                  <td valign="bottom"><?php echo $form->dropdownlist($model,'payment_type_id',CHtml::listData(PaymentTypes::model()->findAll(), 'id', 'type'), array('style' => 'width:180px;', 'empty' => 'Select Payment Type')); ?>
                             <?php echo $form->error($model,'payment_type_id'); ?></td>  
-                    <td valign="bottom"><?php echo $form->textField($model,'transaction_id',array('size'=>25,'maxlength'=>255)); ?>
-                            <?php echo $form->error($model,'transaction_id'); ?></td>
+<!--                    <td valign="bottom"><?php // echo $form->textField($model,'transaction_id',array('size'=>25,'maxlength'=>255)); ?>
+                            <?php // echo $form->error($model,'transaction_id'); ?></td>-->
                 </tr>
                  <tr>
                 <td>&nbsp;</td>
@@ -68,10 +68,10 @@
                 </tr>
                 
                 <tr>
-                <td valign="bottom" ><?php echo $form->labelEx($model,Yii::t('FinanceFeeTransactions','description <span class="required">*</span>')); ?></td>
+                <td valign="bottom" ><?php echo $form->labelEx($model,Yii::t('FinanceFeeTransactions','description')); ?></td>
                 <td valign="bottom"><?php echo $form->labelEx($model,Yii::t('FinanceFeeTransactions','amount <span class="required">*</span>')); ?></td>
-<!--                <td valign="bottom"><?php // echo $form->labelEx($model,Yii::t('FinanceFeeTransactions','transaction_id')); ?></td>-->
-                       <td>&nbsp;</td>
+                <!--<td valign="bottom"><?php //  echo $form->labelEx($model,Yii::t('FinanceFeeTransactions','transaction_id')); ?></td>-->
+                       <!--<td>&nbsp;</td>-->
                       
                 </tr>
                 
@@ -90,6 +90,42 @@
                             <?php echo $form->error($model,'amount'); ?></td>  
 <!--                    <td valign="bottom"><?php // echo $form->textField($model,'transaction_id',array('size'=>25,'maxlength'=>255)); ?>
                             <?php // echo $form->error($model,'transaction_id'); ?></td>-->
+                    <td>
+                    <?php
+		
+		
+		if($model->isNewRecord)
+		{
+			echo $form->fileField($model,'file_data'); 
+		    echo $form->error($model,'file_data'); 
+		}
+		else
+		{
+			if($model->document_data==NULL)
+			{
+				echo $form->fileField($model,'file_data'); 
+		        echo $form->error($model,'file_data'); 
+			}
+			
+			else
+			{
+				if(Yii::app()->controller->action->id=='update') {
+					echo CHtml::link(Yii::t('students','Remove'), array('Employees/remove', 'id'=>$model->id),array('confirm'=>'Are you sure?')); 
+					echo '<img class="imgbrder" src="'.$this->createUrl('Employees/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->file_name.'" width="100" height="100" />';	
+				}
+				else if(Yii::app()->controller->action->id=='create') {
+					echo CHtml::hiddenField('file_name',$model->file_name);
+					echo CHtml::hiddenField('file_content_type',$model->file_content_type);
+					echo CHtml::hiddenField('file_size',$model->file_size);
+					echo CHtml::hiddenField('file_data',bin2hex($model->file_data));
+					echo '<img class="imgbrder" src="'.$this->createUrl('Employees/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->file_name.'" width="100" height="100" />';
+				}
+			}
+		}
+		
+		 ?>
+        
+        </td>
                 </tr>
              </table>  
             <div class="row">

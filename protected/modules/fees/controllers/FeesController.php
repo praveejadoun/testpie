@@ -60,7 +60,9 @@ class FeesController extends RController {
         $ffc = new FinanceFeeCategories;
 
         //Uncomment 
-
+        //echo "dfd";
+        //echo "<pre>";
+        //print_r($_SESSION['id']);exit;
         if (!empty($_POST)) {
 //           echo "<pre/>";
 //           print_r($_POST);
@@ -93,21 +95,25 @@ class FeesController extends RController {
                 $particular_discount_values = $listFeeParticulars['discount_value'];
                 $particular_discount_types = $listFeeParticulars['discount_type'];
                 $particular_category = $listFeeParticulars['student_category_id'];
-
+//                 echo "<pre/>";
+//                                   print_r($particular_discount_values);
+//                                   exit;
 
                 foreach ($particular_names as $particular_key => $particular_name) {
                     $ffp = new FinanceFeeParticulars;
                     $ffp->name = $particular_name;
                     $ffp->description = $particular_descriptions[$particular_key];
-                    $ffp->tax_id = $particular_taxs[$particular_key]; //Other variable also will go here
-                    $ffp->amount = floatval($particular_discount_values[$particular_key]);
+                    $ffp->tax_id = !empty($particular_taxs[$particular_key])?$particular_taxs[$particular_key]:0;
+                    $ffp->discount_type = !empty($particular_discount_types[$particular_key])?$particular_discount_types[$particular_key]:0;//Other variable also will go here
+                    $ffp->amount = !empty($particular_discount_values[$particular_key])?$particular_discount_values[$particular_key]:0.00;
                     $ffp->finance_fee_category_id = $ffc->id;
                      $ffp->student_category_id = $particular_category[$particular_key];
                     $ffp->created_at = date('Y-m-d H:i:s');
                     $ffp->updated_at = date('Y-m-d H:i:s');
-
+                  
                     $ffp->save();
-//                    echo ($ffp->id);
+//                     echo "<pre/>";
+//                    print_r ($ffp);
 //                    exit;
 
                     //$particular_id = $ffp->id
@@ -132,7 +138,7 @@ class FeesController extends RController {
                         $particular_amounts = $listFeeParticularAccesses['amount'];
                         $particular_finance_fee_particular_ids = $listFeeParticularAccesses['finance_fee_particular_id'];
 //                        echo "<pre/>";
-//                        print_r($particular_access_types);
+//                        print_r( $particular_amounts);
 //                        exit;
                         foreach ($particular_access_types as $access_key => $particular_access_type) {
                             $fpa = new FinanceFeeParticularAccess;
@@ -144,6 +150,8 @@ class FeesController extends RController {
                             $fpa->finance_fee_particular_id = $ffp->id;
                             $fpa->created_at = date('Y-m-d H:i:s');
                             $fpa->updated_at = date('Y-m-d H:i:s');
+//                             print_r( $fpa);
+                            
                             $fpa->save();
                             
                         
@@ -424,6 +432,7 @@ class FeesController extends RController {
      * Lists all models.
      */
     public function actionIndex() {
+       
         $criteria = new CDbCriteria;
         $criteria->compare('is_deleted', 0);
         $total = Employees::model()->count($criteria);

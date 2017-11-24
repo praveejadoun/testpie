@@ -84,7 +84,7 @@ $('.search-form form').submit(function(){
                             'filter' =>true
                                 ),
                   array('name'=> 'status',
-                        'value'=>'$data->status',
+                        'value'=>'($data->status!= 0)? InActive  : Active ',
                         'filter'=>true),
                 array(
                 'class' => 'CButtonColumn',

@@ -45,12 +45,14 @@ class FeesdashboardController extends RController
             $model->saveAttributes(array("is_deleted"=>'1'));
             $subscription = FinanceFeeSubscription::model()->findByAttributes(array('fee_category_id'=>$_REQUEST['id']));
             $subscription->delete();
+            Yii::app()->user->setFlash('success','Successfully Removed the Fees Category');
             $this->redirect(array('feesdashboard/'));
         }
          public function actionRemove1()
         {
             $model= FinanceFeeCategories::model()->findByAttributes(array('id'=>$_REQUEST['id']));
             $model->saveAttributes(array("is_deleted"=>'1'));
+             Yii::app()->user->setFlash('success','Successfully Removed the Fees Category');
             $this->redirect(array('feesdashboard/'));
         }
 }

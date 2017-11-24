@@ -19,15 +19,25 @@ $this->breadcrumbs=array(
         <div class="formCon">
         <div class="formConInner">
             <?php
-            $feecategory = FinanceFeeCategories::model()->findAll("id=:x",array(':x' => $_REQUEST['id']));
-            foreach( $feecategory as $feecategory_1){
+            $feecategory = FinanceFeeCategories::model()->findByAttributes(array("id"=>$_REQUEST['id']));
+            $subscription = FinanceFeeSubscription::model()->findByAttributes(array("fee_category_id"=>$_REQUEST['id']));
             ?>
-           <div><strong>Fee Category :</strong> <?php echo $feecategory_1->name; ?></div>
+           <div><strong>Fee Category :</strong> <?php echo $feecategory->name; ?></div>
                                     <br />
-           <div><strong>Date Created :</strong> <?php echo $fee = date("M d.Y", strtotime($feecategory_1->created_at)); ?> </div>
+           <div><strong>Date Created :</strong> <?php echo $fee = date("d M Y", strtotime($feecategory->created_at)); ?> </div>
                                     <br />
-           <div><strong>Description :</strong> <?php echo $feecategory_1->description; ?> </div>
-            <?php } ?>
+           <div><strong>Description :</strong> <?php echo $feecategory->description; ?> </div>
+                                     <br />
+                                     
+            <?php 
+                if($subscription!=NULL){
+                ?>                         
+            <div><strong>Start Date :</strong> <?php echo $sd = date("d M Y", strtotime($subscription->start_date)); ?> </div>
+                                     <br />
+            <div><strong>End Date :</strong> <?php echo $ed = date("d M Y", strtotime($subscription->end_date)); ?> </div>
+                                     <br />
+            <div><strong>Due Date :</strong> <?php echo $ed = date("d M Y", strtotime($subscription->due_date)); ?> </div>
+            <?php  }?>
         </div>
         </div>
         <div class="pdtab_Con" style="width:97%">
@@ -45,40 +55,61 @@ $this->breadcrumbs=array(
                     <td align="center"><?php echo Yii::t('feesdashboard','Amount');?></td>
                     </tr>
                 </tbody>
-                <?php $feeParticular = FinanceFeeParticulars::model()->findAll("finance_fee_category_id=:x",array(':x'=> $_REQUEST['id']))?>
-                <?php foreach($feeParticular as $feeParticular_1) { ?>
+                <?php
+                    $i = 1;
+                    $feeParticular = FinanceFeeParticulars::model()->findAll("finance_fee_category_id=:x",array(':x'=> $_REQUEST['id']));
+                    foreach($feeParticular as $feeParticular_1) { ?>
                 <tbody>
                     <tr>
-                        <td align="center">-</td>
-                        <td align="center"><?php  echo $feeParticular_1->name; ?></td>
+                        <td align="center" style="padding: 8px 3px;"><?php echo $i; ?></td>
+                        <td align="center"><?php echo $feeParticular_1->name; ?></td>
                         <td align="center"><?php echo $feeParticular_1->description; ?></td>
-                        <td align="center"><?php echo $feeParticular_1->tax_id; ?></td>
-                        <td align="center"><?php echo $feeParticular_1->amount; ?></td>
-                        <?php
-//                        $particularaccess = FinanceFeeParticularAccess::model()->findAll("finance_fee_particular_id=:x",array(':x'=>$feeParticular_1->id));
-//                        foreach($particularaccess as $particularaccess_1){
+                        <td align="center">
+                            <?php 
+                                $tax = Taxes::model()->findByAttributes(array("id"=>$feeParticular_1->tax_id));
+                                if($tax!=NULL){
+                                echo $tax->value.' '.'%';
+                                }
+                                else {
+                                    echo "-";
+                                }
+                            ?>
+                        </td>
+                        <td align="center">
+                            <?php
+                                if($feeParticular_1->amount==0.00)
+                                    echo "-";
+                                else
+                                    echo $feeParticular_1->amount.' '.'%';
+                                ?>
+                        </td>
+                        <td align="center">
+                               <?php
+                        $particularaccess = FinanceFeeParticularAccess::model()->findAll("finance_fee_particular_id=:x",array(':x'=>$feeParticular_1->id));
+                        foreach($particularaccess as $particularaccess_1){
                         ?>
-                       <td align="center">-</td> 
-                    
-<!--                        <td> 
-                    <tr>
-                          <td align="center">
+                             
+                              <p style="border-bottom: 1px solid #E8ECF1;">
                               <div>course:<?php echo $particularaccess_1->course_id;?></div>
                               <div>Batch:<?php echo $particularaccess_1->batch_id;?></div>
                               <div>Student Category:<?php echo $particularaccess_1->student_category_id;?></div>
+                              </p>
+                             
+                          <?php } ?>
                           </td>
-                    </tr>    
-                    
-                    </td>-->
-                       <?php // } ?>
-                       <td ><tr colspan="7"><td >-</td></tr></td>
+                        <td align="center">
+                            <?php  foreach($particularaccess as $particularaccess_1){ ?>
                        
-                    </tr>
-                    
+                          <p style="border-bottom: 1px solid #E8ECF1;">
+                              <?php echo $particularaccess_1->amount;?>
+                            
+                          </p>
+                          <?php } ?>
+                          
+                        </td>
+                    </tr>   
                 </tbody>
-                
-                <?php } ?>
-
+                <?php $i++;} ?>
             </table>
             <div class="clear"></div>
     </div> 

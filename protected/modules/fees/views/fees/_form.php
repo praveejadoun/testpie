@@ -92,8 +92,9 @@
                                             <table width="94%">
                                                 <tr>
                                                     <td width="20%" valign="top">
-                                                        <input class="FeeParticulars_name particular-name" placeholder="Particular Name" style="width:120px !important;" name="FeeParticulars[name][]" type="text" />
+                                                        <input class="FeeParticulars_name particular-name" placeholder="Particular Name" style="width:120px !important;" name="FeeParticulars[name][]" id="FeeParticulars[name][]" type="text" />
                                                     </td>
+                                                    <div id="warning"></div>
                                                     <td width="35%" valign="top">
                                                         <input class="FeeParticulars_description" placeholder="Particular Description" style="width:200px !important;" name="FeeParticulars[description][]" type="text" />            </td>
                                                     <td width="45%" valign="top">
@@ -330,6 +331,7 @@
             document.getElementById('description').focus();
             return false;
         }
+        
     }
 
     function cloneinnerbox(thisObj) {
@@ -368,4 +370,7 @@
     function closeParBox(thisObj) {
         $(thisObj).closest('.fee-particulars').remove();
     }
+    
+    
+
 </script>

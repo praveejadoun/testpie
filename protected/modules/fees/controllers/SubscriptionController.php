@@ -53,6 +53,7 @@ public function actionIndex() {
                  $model->updated_at = date('Y-m-d H:i:s');
                    
               if($model->save()){
+                  Yii::app()->user->setFlash('success','Subscription Created Successfully !');
                   $this->redirect(array('/fees/feesdashboard'));
 //                  echo "<pre/>";
 //                    print_r($model->save());exit;

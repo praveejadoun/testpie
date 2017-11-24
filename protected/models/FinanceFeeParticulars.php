@@ -45,11 +45,11 @@ class FinanceFeeParticulars extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('finance_fee_category_id, student_category_id, student_id, tax_id, is_deleted', 'numerical', 'integerOnly'=>true),
-			array('amount', 'match', 'pattern'=>'/([1-9][0-9]*?)(\.[0-9]{2})?/'),
+//			array('amount', 'match', 'pattern'=>'/([1-9][0-9]*?)(\.[0-9]{2})?/'),
 			array('name, admission_no', 'length', 'max'=>25),
-			array('amount', 'length', 'max'=>15),
+//			array('amount', 'length', 'max'=>15),
 			array('description, created_at, updated_at', 'safe'),
-//			array('name, amount','required'),
+			array('name','required'),
 //			array('name','CRegularExpressionValidator', 'pattern'=>'/^[A-Za-z_ ]+$/','message'=>"{attribute} should contain only letters."),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

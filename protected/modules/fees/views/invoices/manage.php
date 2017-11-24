@@ -16,6 +16,21 @@ $this->breadcrumbs=array(
     <td valign="top" width="75%">
 <div class="cont_right formWrapper">
 <h1><?php echo Yii::t('invoices','Manage Invoices');?></h1>
+
+           
+             <?php
+                Yii::app()->clientScript->registerScript(
+                        'myHideEffect', '$(".flash-success").animate({opacity: 1.0}, 3000).fadeOut("slow");', CClientScript::POS_READY
+                );
+                ?>
+                    <?php if(Yii::app()->user->hasFlash('success')):?>
+                    <div class="flash-success" style="color:white; padding:8px; font-size:14px;border: 1px #999999 solid;background:rgb(35, 161, 16);border-radius: 4px;">
+
+                    <!--<div class="flash-success" style="color:#F00; padding-left:150px; font-size:15px">-->
+                        <?php echo Yii::app()->user->getFlash('success'); ?>
+                    </div>
+                    <?php endif; ?>
+
 <div class="overview" >
     
     <div class="overviewbox ovbox1" style="width: 170px;">
@@ -108,7 +123,7 @@ $this->breadcrumbs=array(
                             }
                             ?>
                         </td>    
-                        <td align="center"><?php echo CHtml::link('View',array('invoices/view','id'=>$list_1->id));?></td>
+                        <td align="center"><?php echo CHtml::link('View',array('invoices/view','id'=>$list_1->id),array('style'=>'color:#FF6600'));?></td>
                         
                     </tr>
                   <?php //  echo CHtml::link(Yii::t(
