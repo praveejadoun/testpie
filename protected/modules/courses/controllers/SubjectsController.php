@@ -157,7 +157,7 @@ class SubjectsController extends RController
 	   	if(isset($_POST['Submit']))
         {       $flag=false;
             $model->attributes=$_POST['Subjects'];
-            
+         
             $model->save();
               
                 }

@@ -25,7 +25,7 @@ class InvoicesController extends RController {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'generate', 'manage', 'edit','managepdf','indexpdf','remove','Invoicepdf'),
+                'actions' => array('index', 'view', 'generate', 'manage', 'edit','managepdf','indexpdf','remove','Invoicepdf','Transactionpdf'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -381,6 +381,17 @@ class InvoicesController extends RController {
 		 $invoice = 'invoice.pdf';	
         $html2pdf = Yii::app()->ePdf->HTML2PDF();
 		$html2pdf->WriteHTML($this->renderPartial('print_2',array(),true));
+                ob_end_clean();
+        $html2pdf->Output( $invoice);
+    }
+    
+     public function actionTransactionpdf()
+    {
+        
+	 $invoice = FinanceFeeInvoices::model()->findAll("id=:x",array(':x'=>$_REQUEST['id']));
+		 $invoice = 'transaction.pdf';	
+        $html2pdf = Yii::app()->ePdf->HTML2PDF();
+		$html2pdf->WriteHTML($this->renderPartial('print_3',array(),true));
                 ob_end_clean();
         $html2pdf->Output( $invoice);
     }

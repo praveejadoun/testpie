@@ -107,8 +107,8 @@ td.subhdng_nrmal
         </table>
     </div>
     <!-- End Header -->
-    <br/>
-    <br/>
+    <span align="center"><h5>TRANSACTIONS DETAILS</h5></span><br/>
+   
   <table style="border-collapse:collapse;width:1000px;">
                     <tbody>
                         <tr style="height:100px;">
@@ -136,151 +136,20 @@ td.subhdng_nrmal
                             <td style="border-bottom: 1px solid #dddddd;padding: 5px;width:330px;text-align: left">Invoice Amount</td>
                             <td style="border-bottom: 1px solid #dddddd;padding: 5px;width:330px;text-align: left"><?php echo $invoice_1->amount;?></td>
                         </tr>
-                        <tr>
-                            <td style="border-bottom: 1px solid #dddddd;padding: 5px;width:330px;text-align: left">Payment Details</td>
-                            <td style="border-bottom: 1px solid #dddddd;padding: 5px;width:330px;text-align: left"><?php
-                                                            $pd = ($invoice_1->amount) - ($invoice_1->amount_payable);
-                                                            echo $pd;
-                                                            ?></td>
-                        </tr>
+                        
                          <tr>
                             <td style="border-bottom: 1px solid #dddddd;padding: 5px;width:330px;text-align: left">Amount Payable</td>
                             <td style="border-bottom: 1px solid #dddddd;padding: 5px;width:330px;text-align: left"><?php echo $invoice_1->amount_payable;?></td>
                         </tr>
-                        <tr>
-                            <td style="border-bottom: 1px solid #dddddd;padding: 5px;width:330px;text-align: left">Due Date</td>
-                            <td style="border-bottom: 1px solid #dddddd;padding: 5px;width:330px;text-align: left"><?php echo $date = date("d M Y", strtotime($invoice_1->due_date));?></td>
-                        </tr>
-                        <tr>
-                            <td style="border-bottom: 1px solid #dddddd;padding: 5px;width:330px;text-align: left">Last Payment Date</td>
-                            <td style="border-bottom: 1px solid #dddddd;padding: 5px;width:330px;text-align: left"><?php echo $date = date("d M Y", strtotime($invoice_1->last_payment_date));?></td>
-                        </tr>
-                        <tr>
-                            <td style="border-bottom: 1px solid #dddddd;padding: 5px;width:330px;text-align: left"><strong>Status</strong></td>
-                            
-                               <?php $status = $invoice_1->status;
-                                if($status==0){
-                                    echo '<td style="border-bottom: 1px solid #dddddd;padding: 5px;width:330px;text-align: left"><strong>'.Unpaid.'</strong></td>';
-                                }
-                                elseif ($status==1) {
-                                    echo '<td style="border-bottom: 1px solid #dddddd;padding: 5px;width:330px;text-align: left"><strong>'.Paid.'</strong></td>';
-                                   
-                            }
-                            else {
-                                echo '<td style="border-bottom: 1px solid #dddddd;padding: 5px;width:330px;text-align: left"><strong>'.Cancelled.'</strong></td>';
-                               
-                            }
-                            ?>
-                           
-                        </tr>
+                       
+                      
                         
                             <?php } ?>
                     </tbody>
                 </table>    
     <br/>
       <br/>
-    <table cellspacing="0" cellpadding="0" border="0" width="1000px">
-                <tbody>
-                    <tr class="pdtab-h">
-                        <td style="border: 1px solid #dddddd;padding: 5px;width:76px;text-align: center;">#</td>
-                        <td style="border: 1px solid #dddddd;padding: 5px;width:76px;text-align: center;">Particular</td>
-                        <td style="border: 1px solid #dddddd;padding: 5px;width:76px;text-align: center;">Description</td>
-                        <td style="border: 1px solid #dddddd;padding: 5px;width:76px;text-align: center;">Unit Price</td>
-                        <td style="border: 1px solid #dddddd;padding: 5px;width:76px;text-align: center;">Discount</td>
-                        <td style="border: 1px solid #dddddd;padding: 5px;width:76px;text-align: center;">Tax</td>
-                        <td style="border: 1px solid #dddddd;padding: 5px;width:76px;text-align: center;">Amount</td>
-                    </tr>
-                </tbody> 
-               <?php $i=1;?>
-                <tbody>
-                   <?php $particular = FinanceFeeParticulars::model()->findAll("finance_fee_category_id=:x",array(':x'=>$feecategory->id));
-                   $subtotal = array();
-                   $particulartotal = array();
-                   $disc = array();
-                   $ta[] = array();
-                   foreach ($particular as $particular_1){
-                   ?>
-                     
-                    <tr>
-                        <td style="border: 1px solid #dddddd;padding: 5px;width:76px;text-align: center;"><?php echo $i;?></td>
-                        <td style="border: 1px solid #dddddd;padding: 5px;width:76px;text-align: center;"><?php echo $particular_1->name;?></td>
-                        <td style="border: 1px solid #dddddd;padding: 5px;width:76px;text-align: center;"><?php echo $particular_1->description;?></td>
-                       
-                        <?php 
-                            $access = FinanceFeeParticularAccess::model()->findAll("finance_fee_particular_id=:x",array(':x'=>$particular_1->id));
-                            
-                       ?>
-             
-                        <td style="border: 1px solid #dddddd;padding: 5px;width:76px;text-align: center;">
-                            <?php 
-                            $total =array();
-                            foreach($access as $access_1){ ?>
-                             <?php
-                             $total[]=$access_1->amount;
-                            // echo "<p>".$access_1->amount."</p>"; ?>
-                           <?php  } echo $data = array_sum($total);?>
-                        </td>
-                       
-                       
-                         <td style="border: 1px solid #dddddd;padding: 5px;width:76px;text-align: center;">
-                            <?php   
-                                    echo $discount = $particular_1->amount;
-                                        
-                                   
-                            ?>
-                         </td>
-                         <?php $taxes = Taxes::model()->findByAttributes(array('id'=>$particular_1->tax_id));?>
-                        
-                        <td style="border: 1px solid #dddddd;padding: 5px;width:76px;text-align: center;"><?php echo $tax = $taxes->value;?></td>
-                        <td style="border: 1px solid #dddddd;padding: 5px;width:76px;text-align: center;">
-                            <?php 
-//                                if($particular_1->discount_type == 1)
-//                                {
-//                                     $totaldiscount = ($discount/100)*$data;
-//                                }
-//                                else
-//                                {
-//                                    $totaldiscount = $discount;
-//                                }
-                                $totaltax = ($tax/100)*$data;
-                                $totaldiscount = ($discount/100)*$data;
-                                $disc[] = $totaldiscount;
-                                $ta[] = $totaltax;
-                                $sum =  $data - $totaldiscount +  $totaltax;
-                                $total = $sum;
-                                $subtotal[] = $total;
-                                echo $total;
-                                
-                            ?>
-                        </td>
-                        
-                    </tr>
-                    <?php $particulartotal[]=$data;$i++;} ?>
-                </tbody>
-                 </table>
-                <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                   
-                <tbody>
-                    <tr>
-                         <td  style="border: 1px solid #dddddd;padding: 5px;width:576px;text-align: right;"><strong>Sub total</strong></td>
-                        <td style="border: 1px solid #dddddd;padding: 5px;width:76px;text-align: center;"> <?php echo  array_sum($particulartotal);?></td>
-                    </tr>
-                    <tr>
-                         <td  style="border: 1px solid #dddddd;padding: 5px;width:576px;text-align: right;"><strong>Discount</strong></td>
-                        <td style="border: 1px solid #dddddd;padding: 5px;width:76px;text-align: center;"><?php echo array_sum($disc);?></td>
-                    </tr>
-                    <tr>
-                         <td  style="border: 1px solid #dddddd;padding: 5px;width:576px;text-align: right;"><strong>Tax</strong></td>
-                        <td style="border: 1px solid #dddddd;padding: 5px;width:76px;text-align: center;"><?php echo array_sum($ta);?></td>
-                    </tr>
-                    <tr>
-                         <td  style="border: 1px solid #dddddd;padding: 5px;width:576px;text-align: right;"><strong>Total</strong></td>
-                        <td style="border: 1px solid #dddddd;padding: 5px;width:76px;text-align: center;"><?php echo array_sum($subtotal);?></td>
-                    </tr>
-                </tbody>
-                </table>   
-     
-      <h4>Transactions </h4>
+   
     <table cellspacing="0" cellpadding="0" border="0" width="1000px">
                  <tbody>
                      <tr class="pdtab-h">

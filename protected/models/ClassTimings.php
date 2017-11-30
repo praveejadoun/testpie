@@ -42,6 +42,7 @@ class ClassTimings extends CActiveRecord
 			array('name', 'length', 'max'=>255),
 			array('start_time, end_time', 'length', 'max'=>120),
 			array('name, start_time, end_time', 'required'),
+                        array('start_time','checktime'),
 			array('name','CRegularExpressionValidator', 'pattern'=>'/^[A-Za-z0-9_ ]+$/','message'=>"{attribute} should contain only letters."),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -97,4 +98,22 @@ class ClassTimings extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function checktime($attribute,$params)
+        {
+            $time = ClassTimings::model()->findAll("batch_id=:x",array(':x'=>42));
+            foreach($time as $time_1)
+            {
+            $starttime = $time_1->start_time;
+            $endtime = $time_1->end_time;
+            $selctedtime = $this->start_time;
+            if($selectedtime > $starttime )
+            {
+                $this->addError($attribute,'Time already exist !' );
+            }
+            }
+            
+            
+       
+        }
 }

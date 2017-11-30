@@ -149,10 +149,11 @@
                    $particulartotal = array();
                    $disc = array();
                    $ta[] = array();
+                   $i=1;
                    foreach ($particular as $particular_1){
                    ?>
                     <tr>
-                        <td align="center"></td>
+                        <td align="center"><?php echo $i;?></td>
                         <td align="center"><?php echo $particular_1->name;?></td>
                         <td align="center"><?php echo $particular_1->description;?></td>
                        
@@ -181,7 +182,7 @@
                          </td>
                          <?php $taxes = Taxes::model()->findByAttributes(array('id'=>$particular_1->tax_id));?>
                         
-                        <td align="center"><?php echo $tax = $taxes->value;?></td>
+                        <td align="center"><?php if($taxes!=NULL)echo $tax = $taxes->value;else echo "-";?></td>
                         <td align="center">
                             <?php 
 //                                if($particular_1->discount_type == 1)
@@ -205,7 +206,7 @@
                         </td>
                         
                     </tr>
-                    <?php $particulartotal[]=$data;} ?>
+                    <?php $particulartotal[]=$data;$i++;} ?>
                 </tbody>
                  </table>
                 <table cellspacing="0" cellpadding="0" border="0" width="100%">
@@ -229,10 +230,27 @@
                     </tr>
                 </tbody>
                 </table>   
+             
                 <br/>
                 <br/>
             <h1>Transactions</h1>
-            
+            <?php 
+             $transaction = FinanceFeeTransactions::model()->findAll("invoice_id=:x",array(':x'=>$invoice_1->invoice_id));
+            if(!empty($transaction)){
+            ?>
+                          <div style="margin-top:20px; position:relative;">
+                        <div class="clear"></div>
+                        <div style="display: inline-block;margin-bottom: 14px;margin-top:30px; width: 100%;">
+                            <div style="float:left;">
+
+                                <div class="ea_pdf" style="top:0px; right:6px;">
+                                    <?php echo CHtml::link('<img src="images/pdf-but.png">', array('invoices/transactionpdf','id'=>$_REQUEST['id']), array('target' => '_blank')); ?>
+                                </div>
+                            </div> 
+
+                        </div>
+                    </div>
+            <?php } ?>
             <table cellspacing="0" cellpadding="0" border="0" width="100%">
                  <tbody>
                      <tr class="pdtab-h">

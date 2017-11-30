@@ -96,7 +96,7 @@ $this->breadcrumbs=array(
                         <?php $feecategory = FinanceFeeCategories::model()->findByAttributes(array('id'=>$list_1->finance_fee_category_id));?>
                         <td align="center"><?php echo $feecategory->name;?></td>
                         <td align="center"><?php echo $list_1->amount;?></td>
-                        <td align="center">balance</td>
+                        <td align="center"><?php echo $list_1->amount_payable;?></td>
                         <td align="center">
                         <?php $status = $list_1->status;
                                 if($status==0){

@@ -301,7 +301,7 @@ $(function() {
                             "overlayShow"     : false,
                             "hideOnContentClick": false,
                             "afterClose":    function() {
-								window.location.reload();
+							window.location.reload();
 								} //onclosed function
                         });//fancybox
             } //success

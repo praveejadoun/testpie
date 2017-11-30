@@ -13,7 +13,7 @@ class SubscriptionController extends RController {
      */
     public function filters() {
         return array(
-            'rights', // perform access control for CRUD operations
+            'rights',// perform access control for CRUD operations
         );
     }
 

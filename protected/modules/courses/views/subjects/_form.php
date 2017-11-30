@@ -5,6 +5,7 @@
 )); 
 $model;
 ?>
+
 <div class="formCon">
 
 <div class="formConInner">
@@ -40,9 +41,11 @@ $model;
  </tr>
  <tr><td>&nbsp;</td></tr>
  <tr>
-    <td><?php echo $form->labelEx($model,Yii::t('subjects','no_exams')); ?></td>
-    <td><?php echo $form->checkBox($model,'no_exams'); ?>
-		<?php echo $form->error($model,'no_exams'); ?></td>
+     <tr>
+    <td><?php echo $form->labelEx($model,Yii::t('subjects','batch_id')); ?></td>
+    <td><?php echo $form->dropDownList($model,'batch_id',CHtml::listData(Batches::model()->findAll('course_id=:x',array(":x"=>$_REQUEST['val1'])),'id','name'),array('prompt' =>'select Batch')); ?>
+		<?php echo $form->error($model,'batch_id'); ?></td>
+  </tr>
   </tr>
   <tr><td>&nbsp;</td></tr>
   <tr>
@@ -60,8 +63,8 @@ $model;
 
 	<div class="row">
 		<?php //echo $form->labelEx($model,'batch_id'); ?>
-		<?php echo $form->hiddenField($model,'batch_id'); ?>
-		<?php echo $form->error($model,'batch_id'); ?>
+		<?php // echo $form->hiddenField($model,'batch_id'); ?>
+		<?php // echo $form->error($model,'batch_id'); ?>
 	</div>
 
 	<div class="row">
@@ -115,4 +118,3 @@ $model;
 </div>
 </div>
 <?php $this->endWidget(); ?>
- 

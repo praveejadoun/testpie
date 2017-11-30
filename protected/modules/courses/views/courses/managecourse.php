@@ -213,8 +213,10 @@ function rowdelete(id)
   $cls="even";
   ?>
           <?php 
+                 
 		  foreach($subject as $subject_1)
 				{
+                       if($subject_1->batch_id==NULL){
 					echo '<tr id="batchrow'.$subject_1->id.'">';
                                         echo '<td style="text-align:center;  font-weight:bold;">'.$i.'</td>';
 					echo '<td style="text-align:center;  font-weight:bold;">'.$subject_1->name.'</td>';
@@ -231,7 +233,7 @@ echo '<div id="jobDialog123"></div>';
  echo '</td>';
                                         echo '</tr>';
 					
-				$i++;}
+                  $i++;}}
 			   ?>
          </tbody>
         </table>

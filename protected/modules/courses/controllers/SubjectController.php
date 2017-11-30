@@ -148,6 +148,7 @@ public function   init() {
               //Figure out if we are updating a Model or creating a new one.
              if(isset($_POST['update_id']))$model= $this->loadModel($_POST['update_id']);
 			 else $model=new Subjects;
+                        
             //  Comment out the following line if you want to perform ajax validation instead of client validation.
             //  You should also set  'enableAjaxValidation'=>true and
             //  comment  'enableClientValidation'=>true  in CActiveForm instantiation ( _ajax_form  file).
@@ -172,12 +173,14 @@ public function   init() {
 
 		if(isset($_POST['batch_id']) and $_POST['batch_id']==0)
 		{
-			$this->renderPartial('_ajax_form', array('model'=>$model,'batch_id'=>$_POST['batch_id']), false, true);
+                    $this->renderPartial('_ajax_form', array('model'=>$model,'batch_id'=>$_POST['batch_id']), false, true);
 		}
 		else
 		{
         	$this->renderPartial('_ajax_form', array('model'=>$model), false, true);
+                
 		}
+                
       }
 
          public function actionIndex(){
