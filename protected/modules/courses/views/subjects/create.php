@@ -20,7 +20,7 @@ $this->breadcrumbs=array(
 
 <h1><?php echo Yii::t('courses','Create Subject');?></h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model,'id'=>$id,'batch_id'=>$_REQUEST['id'])); ?>
+<?php echo $this->renderPartial('_form2', array('model'=>$model,'id'=>$id,'batch_id'=>$_REQUEST['id'])); ?>
 
  	</div>
     </td>

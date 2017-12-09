@@ -27,7 +27,7 @@ class SubjectsController extends RController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','Addnew','Addnew1'),
+				'actions'=>array('index','view','Addnew','Addnew1','GetCitiesByCountryId'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -68,14 +68,44 @@ class SubjectsController extends RController
 
 		if(isset($_POST['Subjects']))
 		{ 
-			$model->attributes=$_POST['Subjects'];
-			$data=SubjectName::model()->findByAttributes(array('id'=>$model->name));
-			if($data!=NULL)
-			{
-				$model->name=$data->name;
-				$model->code=$data->code;
-				
-			}
+//			$model->attributes=$_POST['Subjects'];
+                          $list = $_POST['Subjects'];
+                          echo "<pre/>";
+                          print_r($list);
+                          exit;
+                           $batch = $list['batch_id'];
+                          
+                $name = $list['name'];
+                $code = $list['code'];
+       
+         $course = $list['course_id'];
+         $mwc = $list['max_weekly_classes'];
+         $eg = $list['elective_group_id'];
+          $del = $list['is_deleted'];
+          foreach ($batch as $particular_key=>$value) {
+               $model->batch_id =  $batch;
+              $model->name = $name[$particular_key];
+              $model->code =  $code[$particular_key];
+              
+                $model->course_id =  $course[$particular_key];
+                 $model->max_weekly_classes =  $mwc[$particular_key];
+                 $model->elective_group_id = $eg[$particular_key];
+                 $model->is_deleted = $del[$particular_key]; 
+                 $model->created_at = date('Y-m-d H:i:s');
+                 $model->updated_at = date('Y-m-d H:i:s');
+                 $model->save();
+                  echo $model->batch_id;
+//          print_r($model);
+//          exit;
+          }
+         
+//			$data=SubjectName::model()->findByAttributes(array('id'=>$model->name));
+//			if($data!=NULL)
+//			{
+//				$model->name=$data->name;
+//				$model->code=$data->code;
+//				
+//			}
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -96,23 +126,27 @@ class SubjectsController extends RController
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
+//                echo "<pre/>";
+//                print_r($_POST['Subjects']);
+//                exit;
 		if(isset($_POST['Subjects']))
 		{
 			$model->attributes=$_POST['Subjects'];
-			$data=SubjectName::model()->findByAttributes(array('id'=>$model->name));
-			if($data!=NULL)
-			{
-				$model->name=$data->name;
-				$model->code=$data->code;
-				
-			}
+                        
+//			$data=SubjectName::model()->findByAttributes(array('id'=>$model->name));
+//			if($data!=NULL)
+//			{
+//				$model->name=$data->name;
+//				$model->code=$data->code;
+//				
+//			}
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
-		            Yii::app()->clientScript->scriptMap['jquery.js'] = false;
-                    $this->renderPartial('update',array('model'=>$model,'id'=>1,'batch_id'=>$_GET['val1']),false,true);
+//		            Yii::app()->clientScript->scriptMap['jquery.js'] = false;
+                $this->render('update',array('model'=>$model));
+//                    $this->renderPartial('update',array('model'=>$model,'id'=>1,'batch_id'=>$_GET['val1']),false,true);
 	}
 
 	/**
@@ -156,11 +190,36 @@ class SubjectsController extends RController
                 $flag=true;
 	   	if(isset($_POST['Submit']))
         {       $flag=false;
-            $model->attributes=$_POST['Subjects'];
+                $list = $_POST['Subjects'];
+                $batch = $list['batch_id'];
+                $name = $list['name'];
+                $code = $list['code'];
+        
+         $course = $list['course_id'];
+         $mwc = $list['max_weekly_classes'];
+         $eg = $list['elective_group_id'];
+          $del = $list['is_deleted'];
+          foreach ($batch as $particular_key=>$value) {
+              $model->batch_id =  $batch;
+              $model->name = $name[$particular_key];
+              $model->code =  $code[$particular_key];
+               
+                $model->course_id =  $course[$particular_key];
+                 $model->max_weekly_classes =  $mwc[$particular_key];
+                 $model->elective_group_id = $eg[$particular_key];
+                 $model->is_deleted = $del[$particular_key]; 
+                 $model->created_at = date('Y-m-d H:i:s');
+                 $model->updated_at = date('Y-m-d H:i:s');
+                 $model->save();
+          }
          
-            $model->save();
+//        $model->attributes=$_POST['Subjects'];
+         
+//            $model->save();
               
                 }
+//                echo "<pre/>";
+//                 print_r($model);exit;
                 if($flag) {
                     Yii::app()->clientScript->scriptMap['jquery.js'] = false;
                     $this->renderPartial('create1',array('model'=>$model),false,true);
@@ -293,4 +352,58 @@ class SubjectsController extends RController
 			
 		}
 		
+     public function actionCreate()
+     {
+         $model = new Subjects;
+         //$subject->attributes = $_POST;
+         if (isset($_POST['Subjects'])) {
+         $list = $_POST['Subjects'];
+        
+         $batch = $list['batch_id'];
+         $name = $list['name'];
+//         $i=1;
+        
+         foreach ($batch as $batches)
+         {
+             $subject = new Subjects;
+             $subject->batch_id = $batches;
+            
+             $subject->name = $name;
+             $subject->code = NULL;
+             $subject->elective_group_id = NULL;
+             $subject->max_weekly_classes = $list['max_weekly_classes'];
+             $subject->course_id = $list['course_id'];
+             $subject->is_deleted = 0;
+             $subject->is_active = 1;
+             $subject->created_at = date('Y-m-d H:i:s');
+             $subject->updated_at = date('Y-m-d H:i:s');
+             $subject->save();
+                  
+//              echo $i++;
+//             echo     $model->batch_id;
+//             
+//             echo '<br/>';
+//          echo $model->name;
+//           echo '<br/>';
+//          exit;
+           /* $model->batch_id = $batch;
+            $model->name = $list['name'] ;*/
+            
+         }
+          $this->redirect(array('/courses/'));
+         }
+         $this->render('create',array('model'=>$model));
+     }
+                
+       public function actionGetCitiesByCountryId() {
+        $data = Batches::model()->findAll('course_id=:course_id AND is_deleted=:x',
+            array(':course_id'=>(int) $_POST['course_id'],':x'=>0));
+ 
+        $data = CHtml::listData($data, 'id', 'name');
+ 
+       
+        foreach($data as $value => $key) {
+            echo CHtml::tag('option', array('value' => $value), CHtml::encode($key), true);
+        }
+    }          
 }

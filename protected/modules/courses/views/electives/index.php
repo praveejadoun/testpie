@@ -53,9 +53,15 @@ $('.search-form form').submit(function(){
     <li>
     <?php echo CHtml::link('<span>'.Yii::t('Electives','Create Elective Groups').'</span>', array('#'),array('id'=>'add_electivegroup','class'=>'addbttn')) ?>
     </li> 
+    <?php
+        $eg = ElectiveGroups::model()->findByAttributes(array("batch_id"=>$_REQUEST['id']));
+        if($eg!=NULL)
+        {
+    ?>
     <li>
     <?php echo CHtml::link('<span>'.Yii::t('Electives','Create Electives').'</span>', array('#'),array('id'=>'add_electives','class'=>'addbttn')) ?>
     </li>
+        <?php } ?>
     <li>
     <?php echo CHtml::link('<span>'.Yii::t('Electives','Elective Groups').'</span>', array('/courses/electiveGroups','id'=>$_REQUEST['id']),array('class'=>'addbttn'));?>
     </li>
@@ -327,6 +333,7 @@ $(function() {
                     $("#subjects-grid").removeClass("ajax-sending");
                 },
             success: function(data) {
+               
                 $.fancybox(data,
                         {    "transitionIn"      : "elastic",
                             "transitionOut"   : "elastic",

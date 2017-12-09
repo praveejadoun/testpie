@@ -200,6 +200,7 @@ public function   init() {
 		{
            $model=$this->loadModel($_POST['update_id']);
 			$model->attributes=$_POST['Subjects'];
+                        $model->updated_at = date('Y-m-d H:i:s');
 			/*$data=SubjectName::model()->findByAttributes(array('id'=>$model->name));
 						if($data!=NULL)
 						{
@@ -223,7 +224,18 @@ public function   init() {
                        $model=new Subjects;
 					   
                       //set the submitted values
-                        $model->attributes=$_POST['Subjects'];
+//                        $model->attributes=$_POST['Subjects'];
+                       $model->batch_id = $_POST['Subjects']['batch_id'];
+                       $batch  = Batches::model()->findByAttributes(array('id'=>$model->batch_id));
+                       $model->course_id = $batch->course_id;
+                       $model->name = $_POST['Subjects']['name'];
+                       $model->code = $_POST['Subjects']['code'];
+                       $model->no_exams = $_POST['Subjects']['no_exams'];
+                       $model->max_weekly_classes = $_POST['Subjects']['max_weekly_classes'];
+                       $model->elective_group_id = $_POST['Subjects']['elective_group_id'];
+                       $model->is_deleted = $_POST['Subjects']['is_deleted'];
+                       $model->created_at = date('Y-m-d H:i:s');
+                       $model->updated_at = date('Y-m-d H:i:s');
 						
 						/*$data=SubjectName::model()->findByAttributes(array('id'=>$model->name));
 						if($data!=NULL)

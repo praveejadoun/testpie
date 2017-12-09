@@ -47,9 +47,9 @@ class Subjects extends CActiveRecord
 		
 			array('batch_id,course_id, no_exams, max_weekly_classes, elective_group_id, is_deleted,is_active', 'numerical', 'integerOnly'=>true),
 			array('name, code', 'length', 'max'=>255),
-			array(' max_weekly_classes', 'required'),
-			array('name','codes'),
-			//array('created_at, updated_at', 'safe'),
+			array('max_weekly_classes,name','required'),
+			//array('name','codes'),
+			array('created_at, updated_at', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, name, code, batch_id, no_exams, max_weekly_classes, elective_group_id, is_deleted,is_active, created_at, updated_at', 'safe', 'on'=>'search'),
@@ -70,23 +70,23 @@ class Subjects extends CActiveRecord
 	}
 
 	
-	public function codes($attribute,$params)
-	{
-		
-	    $flag=0;
-		$subject=Subjects::model()->findAllByAttributes(array('batch_id'=>$this->batch_id,'is_deleted'=>0));
-		foreach($subject as $subject_1)
-		{
-			if($subject_1->name == $this->name)
-			{
-			$flag=1;
-			}
-		} 
-		if($flag==1)
-		{
-		$this->addError($attribute, 'This subject is already added');
-		}
-	}	
+//	public function codes($attribute,$params)
+//	{
+//		
+//	    $flag=0;
+//		$subject=Subjects::model()->findAllByAttributes(array('batch_id'=>$this->batch_id,'is_deleted'=>0));
+//		foreach($subject as $subject_1)
+//		{
+//			if($subject_1->name == $this->name)
+//			{
+//			$flag=1;
+//			}
+//		} 
+//		if($flag==1)
+//		{
+//		$this->addError($attribute, 'This subject is already added');
+//		}
+//	}	
 	 
 	 /**
 	 * @return array customized attribute labels (name=>label)
@@ -105,8 +105,8 @@ class Subjects extends CActiveRecord
 			'elective_group_id' => 'Elective Group',
 			'is_deleted' => 'Is Deleted',
                         'is_active' => 'Is Active',
-			//'created_at' => 'Created At',
-			//'updated_at' => 'Updated At',
+			'created_at' => 'Created At',
+			'updated_at' => 'Updated At',
 		);
 	}
 
@@ -131,19 +131,19 @@ class Subjects extends CActiveRecord
 		$criteria->compare('elective_group_id',$this->elective_group_id);
 		$criteria->compare('is_deleted',$this->is_deleted);
                 $criteria->compare('is_active',$this->is_active);
-		//$criteria->compare('created_at',$this->created_at,true);
-		//$criteria->compare('updated_at',$this->updated_at,true);
+		$criteria->compare('created_at',$this->created_at,true);
+		$criteria->compare('updated_at',$this->updated_at,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
 	
-	public function getbatchname()
-	{
-		$batches=Batches::model()->findByAttributes(array('id'=>$this->batch_id,'is_deleted'=>0));
-			return $this->name.'('.$batches->name.')';
-	}
+//	public function getbatchname()
+//	{
+//		$batches=Batches::model()->findByAttributes(array('id'=>$this->batch_id,'is_deleted'=>0));
+//			return $this->name.'('.$batches->name.')';
+//	}
 		
 		
 	

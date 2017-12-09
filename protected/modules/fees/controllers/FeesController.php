@@ -148,7 +148,7 @@ class FeesController extends RController {
                             $fpa->student_category_id = !empty($particular_student_category_ids[$access_key])?$particular_student_category_ids[$access_key]:'';
                             $fpa->amount = !empty($particular_amounts[$access_key])?$particular_amounts[$access_key]:0.00;
                             $fpa->finance_fee_particular_id = $ffp->id;
-                            $fpa->created_at = date('Y-m-d H:i:s');
+                            $fpa->created_at = date('Y-m-d H:i:s'); 
                             $fpa->updated_at = date('Y-m-d H:i:s');
 //                             print_r( $fpa);
                             

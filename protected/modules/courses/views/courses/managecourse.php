@@ -97,10 +97,12 @@ function rowdelete(id)
        
 		<?php echo $posts_1->course_name; ?>
 		<?php
+                //$bat = Batches::model()->findByAttributes(array('course_id'=>$posts_1->id,'is_deleted'=>0,'is_active'=>1));
 			$course=Courses::model()->findByAttributes(array('id'=>$posts_1->id,'is_deleted'=>0));
 		   $batch=Batches::model()->findAll("course_id=:x AND is_deleted=:y AND is_active=:z", array(':x'=>$posts_1->id,':y'=>0,':z'=>1));
                    $subject=Subjects::model()->findAll("course_id=:x AND is_deleted=:y AND is_active=:z", array(':x'=>$posts_1->id,':y'=>0,':z'=>1));
-		 ?>
+                                
+                   ?>
         <span><?php echo count($batch); ?> - Batch(es)</span>
         <span><?php echo count($subject); ?> - Subject(es)</span>
         </li>
@@ -116,11 +118,15 @@ function rowdelete(id)
         'onclick'=>'$("#jobDialog").dialog("open"); return false;',
         'update'=>'#jobDialog','type' =>'GET','data' => array( 'val1' =>$posts_1->id ),'dataType' => 'text',),array('id'=>'showJobDialog1'.$posts_1->id,'class'=>'add')); ?>
         <div id="jobDialog"></div></li>
+      
         <li class="col4">
-         <?php echo CHtml::ajaxLink(Yii::t('Courses','Add Subject'),$this->createUrl('subjects/Addnew'),array(
-        'onclick'=>'$("#jobDialog1").dialog("open"); return false;',
-        'update'=>'#jobDialog1','type' =>'GET','data' => array( 'val1' =>$posts_1->id ),'dataType' => 'text',),array('id'=>'showJobDialog124'.$posts_1->id,'class'=>'add')); 
+              <?php if(count($batch)!=0){?>
+         <?php // echo CHtml::ajaxLink(Yii::t('Courses','Add Subject'),$this->createUrl('subjects/create'),array(
+        //'onclick'=>'$("#jobDialog1").dialog("open"); return false;',
+        //'update'=>'#jobDialog1','type' =>'GET','data' => array( 'val1' =>$posts_1->id ),'dataType' => 'text',),array('id'=>'showJobDialog124'.$posts_1->id,'class'=>'add')); 
          ?>
+         <?php echo CHtml::link('Add Subject',array('subjects/create','val1'=>$posts_1->id),array('class'=>'add'));?>  
+            <?php } ?>
         </li>
         
         <a href="#" id="openbutton<?php echo $posts_1->id;?>" onclick="details('<?php echo $posts_1->id;?>');" class="view"><li class="col5"><span class="dwnbg">&nbsp;</span></li></a>
@@ -148,6 +154,7 @@ function rowdelete(id)
 		  </tr>
                    
           <?php 
+            if($batch!=NULL){
 		  foreach($batch as $batch_1)
 				{
                                         
@@ -181,7 +188,11 @@ function rowdelete(id)
  ?> <?php echo '  '.CHtml::link(Yii::t('Courses','Add Student'), array('/students/students/create','bid'=>$batch_1->id)).'<div id="jobDialog123"></div></td>';
  echo '</tr>';
 					
-				}
+            }}
+ else {
+    echo '<tr id="batchrow"><td colspan="5" style="text-align:center;font-weight:bold;">Batches are not available yet !</td></tr>';
+
+ }
 			   ?>
          </tbody>
         </table>
@@ -213,19 +224,21 @@ function rowdelete(id)
   $cls="even";
   ?>
           <?php 
-                 
+                 if($subject!=NULL){
 		  foreach($subject as $subject_1)
 				{
-                       if($subject_1->batch_id==NULL){
+                       if($subject_1->batch_id!=NULL){
 					echo '<tr id="batchrow'.$subject_1->id.'">';
                                         echo '<td style="text-align:center;  font-weight:bold;">'.$i.'</td>';
 					echo '<td style="text-align:center;  font-weight:bold;">'.$subject_1->name.'</td>';
                                         echo '<td style="text-align:center;  font-weight:bold;">'.$subject_1->max_weekly_classes.'</td>';
 					echo '<td align="center"  class="sub_act">';
 					?> 
-					<?php echo CHtml::ajaxLink(Yii::t('Subjects','Edit'),$this->createUrl('subjects/addupdate'),array(
+					<?php 
+                                        echo CHtml::link('Edit',array('subjects/update','id'=>$subject_1->id),array('class'=>'add'));
+                                        /*echo CHtml::ajaxLink(Yii::t('Subjects','Edit'),$this->createUrl('subjects/addupdate'),array(
         'onclick'=>'$("#jobDialog").dialog("open"); return false;',
-        'update'=>'#jobDialog','type' =>'GET','data' => array( 'id'=>$subject_1->id ),'dataType' => 'text'),array('id'=>'showJobDialog123'.$subject_1->id,'class'=>'add')); 
+        'update'=>'#jobDialog','type' =>'GET','data' => array( 'id'=>$subject_1->id ),'dataType' => 'text'),array('id'=>'showJobDialog123'.$subject_1->id,'class'=>'add'));*/
 		 echo ''.CHtml::ajaxLink(
   "Delete",  $this->createUrl('subjects/remove'),  array('success'=>'rowdelete('.$subject_1->id.')','type' =>'GET','data' => array( 'val1' =>$subject_1->id ),'dataType' => 'text'),array('confirm'=>"Are you sure?\n\n Note: All details (students, timetable, fees, exam) related to this batch will be deleted."));
  ?> <?php //echo '  '.CHtml::link(Yii::t('Courses','Add Student'), array('/students/students/create','bid'=>$batch_1->id)).*/'</td>';
@@ -233,7 +246,10 @@ echo '<div id="jobDialog123"></div>';
  echo '</td>';
                                         echo '</tr>';
 					
-                  $i++;}}
+                 $i++;}}}
+            else {
+                echo '<tr id="batchrow"><td colspan="4" style="text-align:center;font-weight:bold;">Subjects are not available yet !</td></tr>';
+            }
 			   ?>
          </tbody>
         </table>
