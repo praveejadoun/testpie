@@ -44,7 +44,7 @@
 		<?php //echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
         <?php 
 		
-		echo CHtml::ajaxSubmitButton(Yii::t('job','Save'),CHtml::normalizeUrl(array('teacherSubjectAttendance/Addnew1','render'=>false)),array('dataType'=>'json','success'=>'js: function(data) {
+		echo CHtml::ajaxSubmitButton(Yii::t('job','Save'),CHtml::normalizeUrl(array('teacherSubjectAttendance/Addnew','render'=>false)),array('dataType'=>'json','success'=>'js: function(data) {
 					if (data.status == "success")
 					{
 						$("#td'.$day.$emp_id.'").text("");

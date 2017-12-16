@@ -148,6 +148,7 @@
                                                                     <table class="defaultApplicable">
                                                                         <tr>
                                                                             <td>
+                                                                                
                                                                                 <?php
                                                                                 echo CHtml::dropDownList('FeeParticularAccess[0][course][]', $mymodel, CHtml::listData(Courses::model()->findAll(), 'id', 'course_name'), array('empty' => 'All Courses', 'class' => 'particular-access-course'));
                                                                                 ?>
@@ -174,7 +175,7 @@
                                                                     
                                                                     <table class="admNoApplicable" style="display:none;">
                                                                         <tr><td>
-                                                                                <input class="FeeParticularAccessadmissionNo" placeholder="Admission Numbers seperated by commas" style="width:300px !important;" name="FeeParticularAccess[0][admission_no][]" type="text" />
+                                                                                <input class="FeeParticularAccessadmissionNo" placeholder="Admission Numbers seperated by commas" style="width:300px !important;" name="FeeParticularAccess[0][admission_numbers][]" type="text" />
                                                                             </td></tr>
                                                                     </table>
                                                                 </td>

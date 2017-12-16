@@ -162,7 +162,7 @@ class TeacherSubjectAttendanceController extends RController
 		}
 	}
         
-        public function actionAddnew1() {
+        public function actionAddnew() {
         $model=new EmployeeSubjectwiseAttendances;
         // Ajax Validation enabled
         $this->performAjaxValidation($model);

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "employee_attendances".
+ * This is the model class for table "employee_subjectwise_attendances".
  *
- * The followings are the available columns in table 'employee_attendances':
+ * The followings are the available columns in table 'employee_subjectwise_attendances':
  * @property integer $id
  * @property string $attendance_date
  * @property integer $batch_id 
@@ -92,8 +92,8 @@ class EmployeeSubjectwiseAttendances extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('attendance_date',$this->attendance_date,true);
-		$criteria->compare('employee_id',$this->batch_id);
-                $criteria->compare('employee_id',$this->class_timing_id);
+		$criteria->compare('batch_id',$this->batch_id);
+                $criteria->compare('class_timing_id',$this->class_timing_id);
                 $criteria->compare('employee_id',$this->employee_id);
 		$criteria->compare('employee_leave_type_id',$this->employee_leave_type_id);
 		$criteria->compare('reason',$this->reason,true);

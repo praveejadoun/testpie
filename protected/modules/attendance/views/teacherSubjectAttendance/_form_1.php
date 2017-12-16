@@ -188,10 +188,12 @@ echo '<br/></div></div>';
                                          {
                                              
                                               echo '<td class="td">'
-                                             .CHtml::ajaxLink(Yii::t('job','Mark Leave'),$this->createUrl('EmployeeAttendances/addnew'),array(
+                                             .$this->renderPartial('ajax',array('day'=>'17','month'=>'12','year'=>'2013','emp_id'=>$_REQUEST['emp']))
+                                                      
+                                                      /*CHtml::ajaxLink(Yii::t('job','Mark Leave'),$this->createUrl('EmployeeAttendances/addnew'),array(
         'onclick'=>'$("#jobDialog").dialog("open"); return false;',
         'update'=>'#jobDialog','type' =>'GET','data'=>array('day' =>'16','month'=>'12','year'=>'2012','emp_id'=>$_REQUEST['emp']),
-        ),array('id'=>'showJobDialog')).'<br><br>'
+        ),array('id'=>'showJobDialog'))*/.'<br><br>'
                                                .date('d M', $d).'<br><br>'
                                               .$subject->name.'<br><br>'.$batch->name.
                                                  '</td>';

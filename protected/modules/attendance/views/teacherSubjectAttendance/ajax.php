@@ -1,16 +1,16 @@
 
 <?php
-$find = EmployeeAttendances::model()->findAll("attendance_date=:x AND employee_id=:y", array(':x'=>$year.'-'.$month.'-'.$day,':y'=>$emp_id));
+$find = EmployeeSubjectwiseAttendances::model()->findAll("attendance_date=:x AND employee_id=:y", array(':x'=>$year.'-'.$month.'-'.$day,':y'=>$emp_id));
 if(count($find)==0)
 {
 	
 	/*
 		Column with no leave marked
 	*/
-echo CHtml::ajaxLink(Yii::t('job','ll'),$this->createUrl('employeeAttendances/Addnew'),array(
-        'onclick'=>'$("#jobDialog'.$day.$emp_id.'").dialog("open"); return false;',
-        'update'=>'#jobDialog123'.$day.$emp_id,'type' =>'GET','data'=>array('day' =>$day,'month'=>$month,'year'=>$year,'emp_id'=>$emp_id),
-        ),array('id'=>'showJobDialog'.$day.$emp_id,'class'=>'at_abs','title'=>'Add leave'));
+echo CHtml::ajaxLink(Yii::t('job','mark leave'),$this->createUrl('teachersubjectattendance/Addnew'),array(
+        'onclick'=>'$("#jobDialog").dialog("open"); return false;',
+        'update'=>'#jobDialog','type' =>'GET','data'=>array('day' =>$day,'month'=>$month,'year'=>$year,'emp_id'=>$emp_id),
+        ),array('id'=>'showJobDialog'));
 		//echo '<div id="jobDialog'.$day.$emp_id.'"></div>';
 }
 else{

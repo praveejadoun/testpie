@@ -136,6 +136,7 @@ class FeesController extends RController {
                         $particular_student_category_ids = $listFeeParticularAccesses
                                 ['student_category_id'];
                         $particular_amounts = $listFeeParticularAccesses['amount'];
+                        $particular_admission_numbers = $listFeeParticularAccesses['admission_numbers'];
                         $particular_finance_fee_particular_ids = $listFeeParticularAccesses['finance_fee_particular_id'];
 //                        echo "<pre/>";
 //                        print_r( $particular_amounts);
@@ -146,12 +147,13 @@ class FeesController extends RController {
                             $fpa->course_id = !empty($particular_courses[$access_key])?$particular_courses[$access_key]:'';
                             $fpa->batch_id = !empty($particular_batches[$access_key])?$particular_batches[$access_key]:'';
                             $fpa->student_category_id = !empty($particular_student_category_ids[$access_key])?$particular_student_category_ids[$access_key]:'';
+                            $fpa->admission_numbers = !empty($particular_admission_numbers[$access_key])?$particular_admission_numbers[$access_key]:'';
                             $fpa->amount = !empty($particular_amounts[$access_key])?$particular_amounts[$access_key]:0.00;
                             $fpa->finance_fee_particular_id = $ffp->id;
                             $fpa->created_at = date('Y-m-d H:i:s'); 
                             $fpa->updated_at = date('Y-m-d H:i:s');
 //                             print_r( $fpa);
-                            
+//                            exit;
                             $fpa->save();
                             
                         

@@ -10,6 +10,7 @@
  * @property integer $batch_id
  * @property integer $finance_fee_particular_id
  * @property integer $student_category_id
+ * @property string $admission_numbers
  * @property string $amount
  * @property string $created_at
  * @property string $updated_at
@@ -76,6 +77,7 @@ class FinanceFeeParticularAccess extends CActiveRecord
 			'course_id' => 'Course',
 			'batch_id' => 'Batch',
 			'amount' => 'Amount',
+                        'admission_numbers' => 'Admission Numbers',
 			'finance_fee_particular_id' => 'Finance Fee Particular',
 			'student_category_id' => 'Student Category',
 			'created_at' => 'Created At',
@@ -99,6 +101,7 @@ class FinanceFeeParticularAccess extends CActiveRecord
 		$criteria->compare('course_id',$this->course_id,true);
                 $criteria->compare('batch_id',$this->batch_id,true);
 		$criteria->compare('amount',$this->amount,true);
+                $criteria->compare('admission_numbers',$this->admission_numbers,true);
 		$criteria->compare('finance_fee_particular_id',$this->finance_fee_particular_id);
 		$criteria->compare('student_category_id',$this->student_category_id);
 		$criteria->compare('created_at',$this->created_at,true);
