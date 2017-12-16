@@ -10,7 +10,7 @@ function employee()
 {
 var id_1 = document.getElementById('dep').value;
 var id = document.getElementById('emp').value;
-window.location= 'index.php?r=attendance/teacherSubjectAttendance/create&cou='+id_1+'&emp='+id;	
+window.location= 'index.php?r=attendance/teacherSubjectAttendance/create&dep='+id_1+'&emp='+id;	
 }
 function departme()
 {
@@ -115,6 +115,7 @@ echo CHtml::activeDropDownList($model,'batch_id',$data1,array('prompt'=>'Select'
 	//$times=Batches::model()->findAll("id=:x", array(':x'=>$_REQUEST['id']));
 	
 	 $te= TimetableEntries::model()->findByAttributes(array('employee_id'=>$_REQUEST['emp']));
+         echo $te->id;
          //echo "<pre>";print_r($te);exit;
 	$weekdays = Weekdays::model()->findByAttributes(array('batch_id'=>$te->batch_id));
 	//$time_sub = Subjects::model()->findByAttributes(array('id'=>$set->subject_id));
@@ -167,7 +168,7 @@ echo CHtml::activeDropDownList($model,'batch_id',$data1,array('prompt'=>'Select'
           }
           ?>
     </tr>
-    <?php if($weekdays[0]['weekday']!=0)
+    <?php if($weekdays['weekday']!=0)
 	{  ?>
     <tr>
         <td class="td"><div class="name"><?php echo Yii::t('weekdays','SUN');?></div></td>
@@ -181,16 +182,16 @@ echo CHtml::activeDropDownList($model,'batch_id',$data1,array('prompt'=>'Select'
 					  <div class="tt-subject">
 						<div class="subject">'; ?>
 			<?php
-$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$te->batch_id,'weekday_id'=>$weekdays[0]['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
+$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$te->batch_id,'weekday_id'=>$weekdays['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
 				if(count($set)==0)
 				{
 					$is_break = ClassTimings::model()->findByAttributes(array('id'=>$timing[$i]['id'],'is_break'=>1));
 					if($is_break==NULL)
 					{	
 						echo 	CHtml::ajaxLink(Yii::t('job','Assign'),$this->createUrl('TimetableEntries/settime'),array(
-        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays[0]['weekday'].'").dialog("open"); return false;',
-        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays[0]['weekday'],'type' =>'GET','data'=>array('batch_id'=>$te->batch_id,'weekday_id'=>$weekdays[0]['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
-        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays[0]['weekday'])) ;
+        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays['weekday'].'").dialog("open"); return false;',
+        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays['weekday'],'type' =>'GET','data'=>array('batch_id'=>$te->batch_id,'weekday_id'=>$weekdays['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
+        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays['weekday'])) ;
 					}
 					else
 					{
@@ -211,7 +212,7 @@ $set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$te->batch
 						
 					  </div>
 					</div>
-					<div id="jobDialog'.$timing[$i]['id'].$weekdays[0]['weekday'].'"></div>
+					<div id="jobDialog'.$timing[$i]['id'].$weekdays['weekday'].'"></div>
 				  </td>';  
 			  }
 			  ?>
@@ -220,7 +221,7 @@ $set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$te->batch
         
       </tr>
       <?php } 
-	  if($weekdays[1]['weekday']!=0)
+	  if($weekdays['weekday']!=0)
 	  { ?>
       <tr>
         <td class="td"><div class="name"><?php echo Yii::t('weekdays','MON');?></div></td>
@@ -232,16 +233,16 @@ $set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$te->batch
 						<div  onclick="" style="position: relative; ">
 						  <div class="tt-subject">
 							<div class="subject">';
-		$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays[1]['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
+		$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
 				if(count($set)==0)
 				{
 					$is_break = ClassTimings::model()->findByAttributes(array('id'=>$timing[$i]['id'],'is_break'=>1));
 					if($is_break==NULL)
 					{	
 						echo CHtml::ajaxLink(Yii::t('job','Assign'),$this->createUrl('TimetableEntries/settime'),array(
-        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays[1]['weekday'].'").dialog("open"); return false;',
-        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays[1]['weekday'],'type' =>'GET','data'=>array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays[1]['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
-        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays[1]['weekday'])) ;
+        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays['weekday'].'").dialog("open"); return false;',
+        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays['weekday'],'type' =>'GET','data'=>array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
+        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays['weekday'])) ;
 					}
 					else
 					{
@@ -263,7 +264,7 @@ $set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$te->batch
 						echo '</div>
 						  </div>
 						</div>
-						<div id="jobDialog'.$timing[$i]['id'].$weekdays[1]['weekday'].'"></div>
+						<div id="jobDialog'.$timing[$i]['id'].$weekdays['weekday'].'"></div>
 					  </td>';  
 			 }
 			?>
@@ -271,7 +272,7 @@ $set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$te->batch
         
       </tr><!--timetable_tr -->
       <?php } 
-	  if($weekdays[2]['weekday']!=0)
+	  if($weekdays['weekday']!=0)
 	  {
 	  ?>
           <tr>
@@ -284,16 +285,16 @@ $set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$te->batch
 						<div  onclick="" style="position: relative; ">
 						  <div class="tt-subject">
 							<div class="subject">';
-							$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays[2]['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
+							$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
 				if(count($set)==0)
 				{
 					$is_break = ClassTimings::model()->findByAttributes(array('id'=>$timing[$i]['id'],'is_break'=>1));
 					if($is_break==NULL)
 					{	
 						echo CHtml::ajaxLink(Yii::t('job','Assign'),$this->createUrl('TimetableEntries/settime'),array(
-        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays[2]['weekday'].'").dialog("open"); return false;',
-        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays[2]['weekday'],'type' =>'GET','data'=>array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays[2]['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
-        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays[2]['weekday'])) ;
+        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays['weekday'].'").dialog("open"); return false;',
+        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays['weekday'],'type' =>'GET','data'=>array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
+        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays['weekday'])) ;
 					}
 					else
 					{
@@ -315,14 +316,14 @@ $set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$te->batch
 							
 						  </div>
 						</div>
-						<div id="jobDialog'.$timing[$i]['id'].$weekdays[2]['weekday'].'"></div>
+						<div id="jobDialog'.$timing[$i]['id'].$weekdays['weekday'].'"></div>
 					  </td>';  
 			 }
 			?><!--timetable_td -->
         
       </tr><!--timetable_tr -->
       <?php }
-	  if($weekdays[3]['weekday']!=0)
+	  if($weekdays['weekday']!=0)
 	  { ?>
           <tr>
         <td class="td"><div class="name"><?php echo Yii::t('weekdays','WED');?></div></td>
@@ -334,16 +335,16 @@ $set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$te->batch
 						<div  onclick="" style="position: relative; ">
 						  <div class="tt-subject">
 							<div class="subject">';
-							$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays[3]['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
+							$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
 				if(count($set)==0)
 				{
 					$is_break = ClassTimings::model()->findByAttributes(array('id'=>$timing[$i]['id'],'is_break'=>1));
 					if($is_break==NULL)
 					{	
 						echo CHtml::ajaxLink(Yii::t('job','Assign'),$this->createUrl('TimetableEntries/settime'),array(
-        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays[3]['weekday'].'").dialog("open"); return false;',
-        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays[3]['weekday'],'type' =>'GET','data'=>array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays[3]['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
-        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays[3]['weekday'])) ;
+        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays['weekday'].'").dialog("open"); return false;',
+        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays['weekday'],'type' =>'GET','data'=>array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
+        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays['weekday'])) ;
 					}
 					else
 					{
@@ -363,14 +364,14 @@ $set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$te->batch
 							
 						  </div>
 						</div>
-						<div id="jobDialog'.$timing[$i]['id'].$weekdays[3]['weekday'].'"></div>
+						<div id="jobDialog'.$timing[$i]['id'].$weekdays['weekday'].'"></div>
 					  </td>';  
 			 }
 			?><!--timetable_td -->
         
       </tr><!--timetable_tr -->
       <?php }
-	  if($weekdays[4]['weekday']!=0)
+	  if($weekdays['weekday']!=0)
 	  {  ?>
           <tr>
         <td class="td"><div class="name"><?php echo Yii::t('weekdays','THU');?></div></td>
@@ -382,16 +383,16 @@ $set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$te->batch
 						<div  onclick="" style="position: relative; ">
 						  <div class="tt-subject">
 							<div class="subject">';
-				$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays[4]['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
+				$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
 				if(count($set)==0)
 				{	
 					$is_break = ClassTimings::model()->findByAttributes(array('id'=>$timing[$i]['id'],'is_break'=>1));
 					if($is_break==NULL)
 					{	
 						echo CHtml::ajaxLink(Yii::t('job','Assign'),$this->createUrl('TimetableEntries/settime'),array(
-        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays[4]['weekday'].'").dialog("open"); return false;',
-        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays[4]['weekday'],'type' =>'GET','data'=>array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays[4]['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
-        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays[4]['weekday'])) ;
+        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays['weekday'].'").dialog("open"); return false;',
+        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays['weekday'],'type' =>'GET','data'=>array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
+        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays['weekday'])) ;
 					}
 					else
 					{
@@ -412,14 +413,14 @@ $set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$te->batch
 							
 						  </div>
 						</div>
-						<div id="jobDialog'.$timing[$i]['id'].$weekdays[4]['weekday'].'"></div>
+						<div id="jobDialog'.$timing[$i]['id'].$weekdays['weekday'].'"></div>
 					  </td>';  
 			 }
 			?><!--timetable_td -->
         
       </tr><!--timetable_tr -->
       <?php }
-	  if($weekdays[5]['weekday']!=0)
+	  if($weekdays['weekday']!=0)
 	  { ?>
 	  
           <tr>
@@ -432,16 +433,16 @@ $set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$te->batch
 						<div  onclick="" style="position: relative; ">
 						  <div class="tt-subject">
 							<div class="subject">';
-				$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays[5]['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
+				$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
 				if(count($set)==0)
 				{
 					$is_break = ClassTimings::model()->findByAttributes(array('id'=>$timing[$i]['id'],'is_break'=>1));
 					if($is_break==NULL)
 					{	
 						echo CHtml::ajaxLink(Yii::t('job','Assign'),$this->createUrl('TimetableEntries/settime'),array(
-        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays[5]['weekday'].'").dialog("open"); return false;',
-        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays[5]['weekday'],'type' =>'GET','data'=>array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays[5]['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
-        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays[5]['weekday'])) ;
+        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays['weekday'].'").dialog("open"); return false;',
+        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays['weekday'],'type' =>'GET','data'=>array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
+        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays['weekday'])) ;
 					}
 					else
 					{
@@ -461,14 +462,14 @@ $set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$te->batch
 							
 						  </div>
 						</div>
-						<div id="jobDialog'.$timing[$i]['id'].$weekdays[5]['weekday'].'"></div>
+						<div id="jobDialog'.$timing[$i]['id'].$weekdays['weekday'].'"></div>
 					  </td>';  
 			 }
 			?><!--timetable_td -->
         
       </tr><!--timetable_tr -->
       <?php } 
-	  if($weekdays[6]['weekday']!=0)
+	  if($weekdays['weekday']!=0)
 	  { ?>
       <tr>
         <td class="td"><div class="name"><?php echo Yii::t('weekdays','SAT');?></div></td>
@@ -480,16 +481,16 @@ $set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$te->batch
 						<div  onclick="" style="position: relative; ">
 						  <div class="tt-subject">
 							<div class="subject">';
-							$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays[6]['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
+							$set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays['weekday'],'class_timing_id'=>$timing[$i]['id'])); 			
 				if(count($set)==0)
 				{
 					$is_break = ClassTimings::model()->findByAttributes(array('id'=>$timing[$i]['id'],'is_break'=>1));
 					if($is_break==NULL)
 					{	
 						echo CHtml::ajaxLink(Yii::t('job','Assign'),$this->createUrl('TimetableEntries/settime'),array(
-        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays[6]['weekday'].'").dialog("open"); return false;',
-        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays[6]['weekday'],'type' =>'GET','data'=>array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays[6]['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
-        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays[6]['weekday'])) ;
+        'onclick'=>'$("#jobDialog'.$timing[$i]['id'].$weekdays['weekday'].'").dialog("open"); return false;',
+        'update'=>'#jobDialog'.$timing[$i]['id'].$weekdays['weekday'],'type' =>'GET','data'=>array('batch_id'=>$_REQUEST['id'],'weekday_id'=>$weekdays['weekday'],'class_timing_id'=>$timing[$i]['id']),'dataType'=>'text',
+        ),array('id'=>'showJobDialog'.$timing[$i]['id'].$weekdays['weekday'])) ;
 					}
 					else
 					{
@@ -509,7 +510,7 @@ $set =  TimetableEntries::model()->findByAttributes(array('batch_id'=>$te->batch
 							
 						  </div>
 						</div>
-						<div id="jobDialog'.$timing[$i]['id'].$weekdays[6]['weekday'].'"></div>
+						<div id="jobDialog'.$timing[$i]['id'].$weekdays['weekday'].'"></div>
 					  </td>';  
 			 }
 			?><!--timetable_td -->

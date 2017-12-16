@@ -40,7 +40,8 @@ class TimetableEntries extends CActiveRecord
 		return array(
 		    array('batch_id, weekday_id, subject_id, employee_id', 'required'),
 			array('batch_id, weekday_id, class_timing_id, subject_id, employee_id', 'numerical', 'integerOnly'=>true),
-			// The following rule is used by search().
+			array('employee_id','teacher'),
+                        // The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, batch_id, weekday_id, class_timing_id, subject_id, employee_id', 'safe', 'on'=>'search'),
 		);
@@ -94,4 +95,33 @@ class TimetableEntries extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function teacher($attribute,$params)
+        {
+            $te = TimetableEntries::model()->findAll("weekday_id=:x AND employee_id=:y",array(':x'=>$this->weekday_id,'y'=>$this->employee_id));
+            foreach($te as $te_1)
+            {
+//                $classtiming = $te_1->class_timing_id;
+                $ct = ClassTimings::model()->findByAttributes(array("id"=>$te_1->class_timing_id));
+                $ct_starttime =  DATE("H:i", STRTOTIME($ct->start_time));
+                $ct_endtime = DATE("H:i", STRTOTIME($ct->end_time));
+                $pst = ClassTimings::model()->findByAttributes(array("id"=>$this->class_timing_id));
+                $mine = DATE("H:i", STRTOTIME($pst->start_time));
+                $yours = DATE("H:i", STRTOTIME($pst->end_time));
+                if($mine <= $ct_starttime)
+                {
+                    $this->addError($attribute,$mine);
+                }
+                elseif($yours >= $ct_endtime) 
+                {
+                    $this->addError($attribute,'vanam');
+                }
+//                $starttime = $this->start_time;
+//                $endtime = $this->end_time;
+//                $post_ct = $this->class_timing_id;
+               
+                
+            }
+            
+        }
 }

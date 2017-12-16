@@ -34,7 +34,7 @@
   	<td><?php echo $form->labelEx($model,Yii::t('timetable','subject_id'));  ?></td>
     <td><?php echo $form->dropDownList($model,'subject_id',CHtml::listData(Subjects::model()->findAll('batch_id=:x',array(':x'=>$batch_id)),'id', 'name'),
 	array('prompt'=>'Select Subject','style'=>'width:200px;','ajax' => array('type'=>'POST','url'=>CController::createUrl('TimetableEntries/dynamiccities'),'update'=>'#TimetableEntries_employee_id'))); ?>
-		</td>
+		<?php echo $form->error($model,'subject_id'); ?></td>
   </tr>
   <tr>
   	<td colspan="2">&nbsp;</td>
@@ -42,7 +42,7 @@
   <tr>
   <td><?php echo $form->labelEx($model,Yii::t('timetable','employee_id')); ?></td>
   <td><?php echo $form->dropDownList($model,'employee_id', array(),array('prompt'=>'Select Employee','style'=>'width:200px;')); ?>
-        
+        <?php echo $form->error($model,'employee_id'); ?>
 		</td>
   </tr>      
   

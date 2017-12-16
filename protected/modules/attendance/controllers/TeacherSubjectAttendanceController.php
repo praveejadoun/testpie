@@ -16,7 +16,7 @@ class TeacherSubjectAttendanceController extends RController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','pdf','create'),
+				'actions'=>array('index','pdf','create','createswa'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -73,35 +73,35 @@ class TeacherSubjectAttendanceController extends RController
         $html2pdf->Output($batch_name);
 	}
         
-        
-       public function actionAddnew()
-        {
-                $model=new StudentAttentance;
-        // Ajax Validation enabled
-        $this->performAjaxValidation($model);
-        // Flag to know if we will render the form or try to add 
-        // new jon.
-                $flag=true;
-        if(isset($_POST['StudentAttentance']))
-        {       $flag=false;
-            $model->attributes=$_POST['StudentAttentance'];
- 
-            if($model->save()) {
-                //Return an <option> and select it
-                           // echo CHtml::tag('option',array ( 'value'=>$model->jid,'selected'=>true),CHtml::encode($model->jdescr),true);
-						   //echo CHtml::tag('button', array('type'=>'submit'), '<div><div>Button</div></div>');
-						   //echo CHtml::tag('td',array ('id'=>'jobDialog123'.$_GET['day'].$_GET['emp_id']),CHtml::encode('Yes'),true);
-						  // echo "sssssssssssss";
-						//  exit;
-  								
-                        }
-                }
-                if($flag) {
-                    Yii::app()->clientScript->scriptMap['jquery.js'] = false;
-                    $this->renderPartial('create',array('model'=>$model,'day'=>$_GET['day'],'month'=>$_GET['month'],'year'=>$_GET['year'],'emp_id'=>$_GET['emp_id']),false,true);
-                }
-        }
-        
+//        
+//       public function actionAddnew()
+//        {
+//                $model=new StudentAttentance;
+//        // Ajax Validation enabled
+//        $this->performAjaxValidation($model);
+//        // Flag to know if we will render the form or try to add 
+//        // new jon.
+//                $flag=true;
+//        if(isset($_POST['StudentAttentance']))
+//        {       $flag=false;
+//            $model->attributes=$_POST['StudentAttentance'];
+// 
+//            if($model->save()) {
+//                //Return an <option> and select it
+//                           // echo CHtml::tag('option',array ( 'value'=>$model->jid,'selected'=>true),CHtml::encode($model->jdescr),true);
+//						   //echo CHtml::tag('button', array('type'=>'submit'), '<div><div>Button</div></div>');
+//						   //echo CHtml::tag('td',array ('id'=>'jobDialog123'.$_GET['day'].$_GET['emp_id']),CHtml::encode('Yes'),true);
+//						  // echo "sssssssssssss";
+//						//  exit;
+//  								
+//                        }
+//                }
+//                if($flag) {
+//                    Yii::app()->clientScript->scriptMap['jquery.js'] = false;
+//                    $this->renderPartial('create',array('model'=>$model,'day'=>$_GET['day'],'month'=>$_GET['month'],'year'=>$_GET['year'],'emp_id'=>$_GET['emp_id']),false,true);
+//                }
+//        }
+//        
         		
      public function actionEditLeave()
 	 {
@@ -160,6 +160,59 @@ class TeacherSubjectAttendanceController extends RController
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+        
+        public function actionAddnew1() {
+        $model=new EmployeeSubjectwiseAttendances;
+        // Ajax Validation enabled
+        $this->performAjaxValidation($model);
+        // Flag to know if we will render the form or try to add 
+        // new jon.
+        $flag=true;
+        if(isset($_POST['EmployeeSubjectwiseAttendances']))
+        {       
+			$flag=false;
+            $model->attributes=$_POST['EmployeeSubjectwiseAttendances'];
+ 
+            if($model->save()) 
+			{
+                echo CJSON::encode(array(
+                        'status'=>'success',
+                        ));
+                 exit;    
+  								
+            }
+			else
+			{
+				echo CJSON::encode(array(
+                        'status'=>'error',
+                        ));
+                 exit;    
+			}
+         }
+		if($flag) {
+			Yii::app()->clientScript->scriptMap['jquery.js'] = false;
+			$this->renderPartial('createswa',array('model'=>$model,'day'=>$_GET['day'],'month'=>$_GET['month'],'year'=>$_GET['year'],'emp_id'=>$_GET['emp_id']),false,true);
+		}
+    }
+    
+    public function actionCreateswa()
+	{
+		$model=new EmployeeSubjectwiseAttendances;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['EmployeeSubjectwiseAttendances']))
+		{
+			$model->attributes=$_POST['EmployeeSubjectwiseAttendances'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id));
+		}
+
+		$this->render('createswa',array(
+			'model'=>$model,
+		));
 	}
 }
 

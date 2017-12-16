@@ -62,7 +62,7 @@ class TimetableEntriesController extends RController
 	public function actionCreate()
 	{
 		$model=new TimetableEntries;
-
+               
 		// Uncomment the following line if AJAX validation is needed
 		 $this->performAjaxValidation($model);
 
@@ -103,14 +103,25 @@ class TimetableEntriesController extends RController
 	}
 	public function actionSettime()
 	{
-	
-		$model=new TimetableEntries;
+            $model=new TimetableEntries;
+		
+              
+                
+//                exit;
+//                print_r($_POST['TimetableEntries']);
+//                exit;
+               
 		$this->performAjaxValidation($model);
 		$flag=true;
 		if(isset($_POST['TimetableEntries']))
-        { 
+            { 
+               
 		   $model->attributes=$_POST['TimetableEntries'];
-		   
+//		    $te = TimetableEntries::model()->findAll("employee_id=:x AND weekday_id=:y",array(':x'=>$_POST['TimetableEntries']['employee_id'],':y'=>$_POST['TimetableEntries']['weekday_id']));
+//               foreach ($te as $te_1){
+//               echo $te_1->id;
+//                
+//               exit;
 			$flag=false;
 			
 			
