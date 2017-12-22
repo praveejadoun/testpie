@@ -477,7 +477,15 @@ if (Yii::app()->controller->action->id == 'create') {
 </div><!-- form -->
 <div class="clear"></div>
 <div style="padding:0px 0 0 0px; text-align:left">
-            <?php echo CHtml::submitButton($model->isNewRecord ? 'Parent Details »' : 'Save', array('class' => 'formbut')); ?>
+            <?php echo CHtml::submitButton($model->isNewRecord ? 'Parent Details »' : 'Save', array('class' => 'formbut','id' => 'btn', 'name' => 'bbtn', 'title' => 'Save')); ?>
     <input type="button" name="back" value="Back" onclick="javascript:history.back();" class="formbut" style="float:right;"/>
 </div>
             <?php $this->endWidget(); ?>
+
+<script>
+    $(document).ready(function(){
+        $("#students-form").submit(function(){
+            $("#btn").attr('disabled','true');
+        });
+    });''
+    </script>

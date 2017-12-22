@@ -62,9 +62,16 @@ $this->breadcrumbs=array(
  	</div>
     <div class="clear"></div>
     <div style="padding:0px 0 0 0px; text-align:left;">
-<?php echo CHtml::submitButton($model->isNewRecord ? 'Previous Details »' : 'Save',array('class'=>'formbut')); ?></div>
+<?php echo CHtml::submitButton($model->isNewRecord ? 'Previous Details »' : 'Save',array('class'=>'formbut','id' => 'btn', 'name' => 'bbtn', 'title' => 'Save')); ?></div>
 <?php $this->endWidget(); ?>
      	</div>
     </td>
   </tr>
 </table>
+<script>
+    $(document).ready(function(){
+        $("#guardians-form").submit(function(){
+            $("#btn").attr('disabled','true');
+        });
+    });''
+    </script>

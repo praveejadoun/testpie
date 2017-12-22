@@ -1,5 +1,5 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
-'id'=>'employees-form',
+'id'=>'employee-log-form',
 'enableAjaxValidation'=>false,
 'htmlOptions'=>array('enctype'=>'multipart/form-data'),
 )); ?>
@@ -74,7 +74,7 @@
           
            <div class="clear"></div>
     <div style="padding:45px 0 0 0px; text-align:left">
-    	<?php echo CHtml::submitButton($model->isNewRecord ? 'Submit' : 'Save',array('class'=>'formbut')); ?>
+    	<?php echo CHtml::submitButton($model->isNewRecord ? 'Submit' : 'Save',array('class'=>'formbut','id' => 'btn', 'name' => 'bbtn', 'title' => 'Save')); ?>
     </div>
         </div>
     </div>
@@ -82,3 +82,10 @@
    
    <?php $this->endWidget(); ?>
 
+<script>
+    $(document).ready(function(){
+        $("#employee-log-form").submit(function(){
+            $("#btn").attr('disabled','true');
+        });
+    });''
+    </script>

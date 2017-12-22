@@ -78,7 +78,7 @@
 	</div>
     
         <div style="padding:0px 0 0 0px; text-align:left">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Save' : 'Save',array('class'=>'formbut')); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'formbut','id' => 'btn', 'name' => 'bbtn', 'title' => 'Save')); ?>
 	</div>
 
    <br />
@@ -188,10 +188,18 @@
     
     <!-- Batch Form Ends -->
 	<!--<div style="padding:0px 0 0 0px; text-align:left">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Save' : 'Save',array('class'=>'formbut')); ?>
+		<?php // echo CHtml::submitButton($model->isNewRecord ? 'Save' : 'Save',array('class'=>'formbut')); ?>
 	</div>-->
 
 <?php $this->endWidget(); ?>
 </div>
     </div>
 </div><!-- form -->
+
+<script>
+    $(document).ready(function(){
+        $("#courses-form").submit(function(){
+            $("#btn").attr('disabled','true');
+        });
+    });''
+    </script>

@@ -113,7 +113,7 @@
     <?php endif; ?>
     <div class="row buttons" style="width:30%; clear:both;"><br /><br />
         <?php   echo CHtml::submitButton($model->isNewRecord ? 'Submit' : 'Save',array('class' =>
-        'formbut')); ?>    </div>
+        'formbut','id' => 'btn', 'name' => 'bbtn', 'title' => 'Save')); ?>    </div>
 
   <?php  $this->endWidget(); ?></div>
     <!-- form -->
@@ -135,4 +135,10 @@
 
 </script>
 
-
+<script>
+    $(document).ready(function(){
+        $("#student-categories-form").submit(function(){
+            $("#btn").attr('disabled','true');
+        });
+    });''
+    </script>

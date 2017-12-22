@@ -434,7 +434,7 @@ else
 </div>
 <div class="clear"></div>
 	<div style="padding:0px 0 0 0px; text-align:left">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Next Step »' : 'Save',array('class'=>'formbut')); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Next Step »' : 'Save',array('class'=>'formbut','id' => 'btn', 'name' => 'bbtn', 'title' => 'Save')); ?>
 	</div>
 
 
@@ -463,3 +463,10 @@ else
 		}
 	}
 </script>
+<script>
+    $(document).ready(function(){
+        $("#employees-form").submit(function(){
+            $("#btn").attr('disabled','true');
+        });
+    });''
+    </script>

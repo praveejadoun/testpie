@@ -293,7 +293,7 @@ else
 		<?php 
 		
 			//echo 'hi';
-			echo CHtml::submitButton($model->isNewRecord ? 'Save and Go to Emergency Contact »' : 'Save',array('class'=>'formbut')); 
+			echo CHtml::submitButton($model->isNewRecord ? 'Save and Go to Emergency Contact »' : 'Save',array('class'=>'formbut','id' => 'btn', 'name' => 'bbtn', 'title' => 'Save')); 
 //                        echo CHtml::link(Yii::t('employees','Go TO View'),array('students/view','id'=>$_REQUEST['id']),array('class'=>'formbut-n','style'=>'float:right'));
 		?>
 </div>
@@ -311,3 +311,11 @@ else
 </div>
 
 <?php $this->endWidget(); ?>
+
+<script>
+    $(document).ready(function(){
+        $("#guardians-form").submit(function(){
+            $("#btn").attr('disabled','true');
+        });
+    });''
+    </script>

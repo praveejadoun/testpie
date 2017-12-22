@@ -101,16 +101,17 @@ class ClassTimings extends CActiveRecord
         
         public function checktime($attribute,$params)
         {
-            $time = ClassTimings::model()->findAll("batch_id=:x",array(':x'=>42));
+            $time = ClassTimings::model()->findAll("batch_id=:x",array(':x'=>$_REQUEST['id']));
             foreach($time as $time_1)
             {
-            $starttime = $time_1->start_time;
-            $endtime = $time_1->end_time;
-            $selctedtime = $this->start_time;
-            if($selectedtime > $starttime )
+            $starttime =  DATE("H:i", STRTOTIME($time_1->start_time));
+            $endtime = DATE("H:i", STRTOTIME($time_1->end_time));
+            $selctedtime = DATE("H:i", STRTOTIME($this->start_time));
+            if($selctedtime <= $starttime )
             {
                 $this->addError($attribute,'Time already exist !' );
             }
+            
             }
             
             

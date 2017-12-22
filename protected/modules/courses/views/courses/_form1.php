@@ -1,4 +1,6 @@
+<div class="formCon">
 
+<div class="formConInner">
 
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -12,7 +14,7 @@
 
 	echo $form->errorSummary($model); ?>
     
-    <h3 style="padding-left:20px;">Course</h3>
+<!--    <h3 style="padding-left:20px;">Course</h3>-->
     <div style="padding:0 0 0 20px;">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -26,12 +28,12 @@
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
-   <tr>
-     <td><?php echo $form->labelEx($model,Yii::t('Courses','Enable Semester System')); ?></td>
+<!--   <tr>
+     <td><?php // echo $form->labelEx($model,Yii::t('Courses','Enable Semester System')); ?></td>
     <td width="3%">&nbsp;</td>
-    <td><?php echo $form->checkBox($model,'checkbox',array('value' => '1', 'uncheckValue'=>'0')); ?>
+    <td><?php // echo $form->checkBox($model,'checkbox',array('value' => '1', 'uncheckValue'=>'0')); ?>
 		<?php //echo $form->error($model,'course_name'); ?></td>
-  </tr>
+  </tr>-->
 <!--  <tr>
     <td><?php// echo $form->labelEx($model,Yii::t('courses','code')); ?></td>
     <td>&nbsp;</td>
@@ -49,20 +51,20 @@
     <td><?php //echo $form->textField($model,'section_name',array('size'=>30,'maxlength'=>255)); ?>
 		<?php //echo $form->error($model,'section_name'); ?></td>
   </tr>-->
-   <tr>
+<!--   <tr>
   	<td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-  </tr>
-   <tr>
+  </tr>-->
+<!--   <tr>
   	<td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td><?php echo CHtml::submitButton($model->isNewRecord ? 'Save' : 'Save',array('class'=>'formbut')); ?>
+    <td>
          <?php	/*echo CHtml::ajaxSubmitButton(Yii::t('job','Save'),CHtml::normalizeUrl(array('courses/Edit&val1='.$val1,'render'=>false)),array('success'=>'js: function(data) {
                        $("#jobDialog11").dialog("close");  window.location.reload();
 					   alert(\'Course Updated Successfully\');
                     }'),array('id'=>'closeJobDialog12','name'=>'Submit'));*/ ?></td>
-  </tr>
+  </tr>-->
  <?php $this->renderPartial('_flash',array('model'=>$model,'id'=>jobDialog)); ?>
 </table>
 </div>
@@ -91,7 +93,9 @@
     
     <!-- Batch Form Ends -->
 	<div style="padding:0px 0 0 0px; text-align:left">
-		
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Save' : 'Save',array('class'=>'formbut')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
+</div>
+</div>

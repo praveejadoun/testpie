@@ -61,7 +61,7 @@
 					
 					
 					      
-						array('label'=>Yii::t('Courses','List Courses & Batches').'<span>'.Yii::t('Courses','All Courses & Batches Details').'</span>', 'url'=>array('courses/managecourse'), 'active'=> ((Yii::app()->controller->id=='courses') and (in_array(Yii::app()->controller->action->id,array('managecourse','view'))) ? true : false),'linkOptions'=>array('class'=>'lbook_ico' )),
+						array('label'=>Yii::t('Courses','List Courses & Batches').'<span>'.Yii::t('Courses','All Courses & Batches Details').'</span>', 'url'=>array('courses/managecourse'), 'active'=> ((Yii::app()->controller->id=='courses' and Yii::app()->controller->action->id=='managecourse,view') or Yii::app()->controller->id=='subjects' and Yii::app()->controller->action->id=='create'),'linkOptions'=>array('class'=>'lbook_ico' )),
 						
 						
 						array('label'=>Yii::t('Courses','Create Courses').'<span>'.Yii::t('Courses','Add New Course Details').'</span>', 'url'=>array('courses/create'),

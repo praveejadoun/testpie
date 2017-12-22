@@ -34,9 +34,16 @@
 </table>
 
 	<div style="padding:0px 0 0 0px;">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'formbut')); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'formbut','id' => 'btn', 'name' => 'bbtn', 'title' => 'Save')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
 </div>
 </div><!-- form -->
+<script>
+    $(document).ready(function(){
+        $("#employee-departments-form").submit(function(){
+            $("#btn").attr('disabled','true');
+        });
+    });''
+    </script>

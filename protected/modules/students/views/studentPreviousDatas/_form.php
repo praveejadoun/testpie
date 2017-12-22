@@ -87,7 +87,7 @@
 
 	<div style="padding:0px 0 0 0px;text-align:left;">
     <?php //echo CHtml::link('Save And Add Another', array('students/create'),array('class'=>'formbut','style'=>'padding:8px 20px')); ?>
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'SAVE' : 'Save',array('class'=>'formbut')); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'SAVE' : 'Save',array('class'=>'formbut','id' => 'btn', 'name' => 'bbtn', 'title' => 'Save')); ?>
         <?php 
 			if(Yii::app()->controller->action->id=='update'){
 				echo '&nbsp;&nbsp;'.CHtml::button('Remove', array('submit' => array('StudentPreviousDatas/delete','id'=>$_REQUEST['pid'],'sid'=>$_REQUEST['id']),'class'=>'formbut','confirm'=>'Are you sure?'));
@@ -98,3 +98,11 @@
 <?php $this->endWidget(); ?>
 </div>
 </div><!-- form -->
+
+<script>
+    $(document).ready(function(){
+        $("#student-previous-datas-form").submit(function(){
+            $("#btn").attr('disabled','true');
+        });
+    });''
+    </script>

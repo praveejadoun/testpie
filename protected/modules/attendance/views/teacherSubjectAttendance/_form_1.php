@@ -175,7 +175,7 @@ echo '<br/></div></div>';
 //                                         echo '<td class="td">'.$subject->name.'</td>';
                                             $date  = date('Y', $d);
                                             foreach ($timing as $timings){
-                                              $class_timeing = TimetableEntries::model()->findByAttributes(array('class_timing_id'=>$timings['time_id'],'weekday_id'=>$te_1->weekday_id));
+                                              $class_timeing = TimetableEntries::model()->findByAttributes(array('class_timing_id'=>$timings['time_id'],'weekday_id'=>$te_1->weekday_id,'employee_id'=>$te_1->employee_id));
                                               $batch = Batches::model()->findByAttributes(array('id'=>$class_timeing->batch_id));
                                               $subject = Subjects::model()->findByAttributes(array('id'=>$class_timeing->subject_id));
                                               //echo "<pre/>";
@@ -188,12 +188,20 @@ echo '<br/></div></div>';
                                          {
                                              
                                               echo '<td class="td">'
-                                             .$this->renderPartial('ajax',array('day'=>'17','month'=>'12','year'=>'2013','emp_id'=>$_REQUEST['emp']))
+                                             ./*$this->renderPartial('ajax',array('day'=>'17','month'=>'12','year'=>'2013','emp_id'=>$_REQUEST['emp']))*/
+                                                 
                                                       
-                                                      /*CHtml::ajaxLink(Yii::t('job','Mark Leave'),$this->createUrl('EmployeeAttendances/addnew'),array(
+                                                   CHtml::ajaxLink('Mark Leave',$this->createUrl('teacherSubjectAttendance/addnew'),array(
+        'onclick'=>'$("#jobDialog").dialog("open"); return false;',
+        'update'=>'#jobDialog','type' =>'GET','data' => array( 'day' =>date('d', $d),'month'=>date('m', $d),'year'=>date('Y', $d),'emp_id'=>$_REQUEST['emp']),'dataType' => 'text',),array('id'=>'showJobDialog124'.$_REQUEST['emp']))  
+                                                      
+                                                      
+                                                      
+                                                      
+                                                      /*CHtml::ajaxLink(Yii::t('job','Mark Leave'),$this->createUrl('teacherSubjectAttendance/addnew'),array(
         'onclick'=>'$("#jobDialog").dialog("open"); return false;',
         'update'=>'#jobDialog','type' =>'GET','data'=>array('day' =>'16','month'=>'12','year'=>'2012','emp_id'=>$_REQUEST['emp']),
-        ),array('id'=>'showJobDialog'))*/.'<br><br>'
+        ),array('id'=>'showJobDialog1'.$_REQUEST['emp']))*/.'<div id="jobDialog"></div><br><br>'
                                                .date('d M', $d).'<br><br>'
                                               .$subject->name.'<br><br>'.$batch->name.
                                                  '</td>';

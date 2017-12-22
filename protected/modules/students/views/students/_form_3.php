@@ -123,10 +123,18 @@
           
            <div class="clear"></div>
     <div style="padding:10px 0 0 0px; text-align:left">
-    	<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'formbut')); ?>
+    	<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'formbut','id' => 'btn', 'name' => 'bbtn', 'title' => 'Save')); ?>
     </div>
         </div>
     </div>
     
    
    <?php $this->endWidget(); ?>
+    
+<script>
+    $(document).ready(function(){
+        $("#student-achievements-form").submit(function(){
+            $("#btn").attr('disabled','true');
+        });
+    });''
+    </script>

@@ -90,7 +90,8 @@ $this->breadcrumbs=array(
 	<div class="clear"></div>
 <br />
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'formbut')); ?>
+           
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'formbut','id' => 'btn', 'name' => 'bbtn', 'title' => 'Save')); ?>
 	</div>
         <div class="row">
                 <?php echo $form->hiddenField($model,'created_at',array('value'=>date('Y-m-d')));
@@ -185,3 +186,11 @@ foreach($inactive as $inactive_1)
     </td>
   </tr>
 </table>
+
+<script>
+    $(document).ready(function(){
+        $("#student-leave-types-form").submit(function(){
+            $("#btn").attr('disabled','true');
+        });
+    });''
+    </script>

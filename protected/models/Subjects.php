@@ -44,10 +44,11 @@ class Subjects extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-		
+                        
 			array('batch_id,course_id, no_exams, max_weekly_classes, elective_group_id, is_deleted,is_active', 'numerical', 'integerOnly'=>true),
-			array('name, code', 'length', 'max'=>255),
-			array('max_weekly_classes,name','required'),
+			array('max_weekly_classes, name','required'),
+                    array('name, code', 'length', 'max'=>255),
+			
 			//array('name','codes'),
 			array('created_at, updated_at', 'safe'),
 			// The following rule is used by search().
