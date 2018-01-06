@@ -102,8 +102,8 @@ $('.search-form form').submit(function(){
          <div class="tablebx"> 
 	<table width="100%" cellspacing="0p" cellpadding="0" border="0">
     	<tr class="tablebx_topbg">
-            <td>Course</td>
             <td>Batch</td>
+            <td>Course</td>
         </tr> 
         <?php $bat=Batches::model()->findAll('is_deleted=:x AND id=:y',array(':x'=>0,':y'=>$_REQUEST['id'])); ?>
         <tr>

@@ -87,7 +87,8 @@ class BatchesController extends RController
 			$model->start_date=$s_d;
 			$model->end_date=$e_d;
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                                 Yii::app()->user->setFlash('success','Batch Created Successfully');
+				$this->redirect(array('courses/managecourse'));
 		}
 
 		$this->render('create',array(
@@ -116,14 +117,17 @@ class BatchesController extends RController
 				$model->end_date=$date2;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
+//                                echo "<pre/>";
+//                                print_r($_POST['Batches']);
+//                                exit;
 		if(isset($_POST['Batches']))
 		{
 			$model->attributes=$_POST['Batches'];
 			$model->start_date=date('Y-m-d', strtotime($model->start_date)); 
 			$model->end_date=date('Y-m-d', strtotime($model->end_date)); 
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                                 Yii::app()->user->setFlash('success','Batch Updated Successfully');
+				$this->redirect(array('courses/managecourse'));
 		}
 
 		$this->render('update',array(

@@ -71,9 +71,13 @@ class ExamScoresController extends RController
 			
 			
 			$list = $_POST['ExamScores'];
-			
+//                        echo "<pre/>";
+//			print_r($list);
+//                        exit;
+//                       
 			$count = count($list['student_id']);
-			
+//                        echo $count;
+//			 exit;
 			for($i=0;$i<$count;$i++)
 			{
 				if($list['marks'][$i]!=NULL or $list['remarks'][$i]!=NULL)
@@ -84,15 +88,19 @@ class ExamScoresController extends RController
 					
 				$model->exam_id = $list['exam_id']; 
 				$model->student_id = $list['student_id'][$i];
-                                if(($list['marks'][$i]) > ($exam->maximum_marks) )
+                                if(($list['marks'][$i]) <= ($exam->maximum_marks) &&  ($list['marks'][$i]) >= 0 )
                                 {
-                                  $model->marks = 0;
+                                  $model->marks = $list['marks'][$i];
                                 }
                                 else
                                 {
-                                    $model->marks = $list['marks'][$i];
+//                                    $model->marks = 0;
+//                                    $student = Students::model()->findByAttributes(array('id'=>$model->student_id));
+                                    
+                                      Yii::app()->user->setFlash('success','Marks should be less than Max. marks('.$exam->maximum_marks.')');
+//                                     $this->redirect(array('examScores/create','id'=>$_REQUEST['id'],'examid'=>$_REQUEST['examid']));
                                 }
-				//$model->marks = $list['marks'][$i];
+//				$model->marks = $list['marks'][$i];
 				$model->remarks = $list['remarks'][$i];
 				$model->grading_level_id = $list['grading_level_id'];
 				if(($list['marks'][$i])< ($exam->minimum_marks)) 

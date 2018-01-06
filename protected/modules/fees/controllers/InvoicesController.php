@@ -72,6 +72,7 @@ class InvoicesController extends RController {
             $parttax[] = $taxes->value;
             $feeaccess = FinanceFeeParticularAccess::model()->findAll("finance_fee_particular_id=:x", array(':x' => $particularId));
              $invoiceAmount =array();
+            
             foreach ($feeaccess as $feeaccess_1) {
                 $accessType = $feeaccess_1->access_type;
                 $courseId = $feeaccess_1->course_id;
@@ -82,7 +83,9 @@ class InvoicesController extends RController {
 //                $payableAmount = $feeaccess_1->amount;
         } 
 //         echo "<pre/>";
-//            print_r($invoiceAmount);
+//            print_r($studentCategoryId);
+//            print_r($courseId);
+//            exit;
 //            
         $subtotal = array_sum($invoiceAmount);
         
@@ -172,10 +175,15 @@ class InvoicesController extends RController {
 //            
 //            exit;
                 //Using these 4 data fetch students list for whom invoice need to be generate
-
-                if ($studentCategoryId != "" && $batchId != "") {
+                        
+//                foreach($accessType as $key=>$val){
+//                   
+//                    echo $val.'<br/>';
+//                }
+            
+                if ($studentCategoryId != NULL && $batchId != NULL && $courseId != NULL) {
                    // $students = Students::model()->findAll("batch_id=:x,student_category_id=:y", array(':x'=>$batchId,':y' => $studentCategoryId));
-                     $students = Students::model()->findAll("student_category_id=:x", array(':x' => $studentCategoryId));
+                     $students = Students::model()->findAll("student_category_id=:x AND course_id=:y AND batch_id=:z", array(':x' => $studentCategoryId,':y' => $courseId,':z' => $batchId));
 
                     foreach ($students as $student) {
                         
@@ -206,7 +214,41 @@ class InvoicesController extends RController {
                     Yii::app()->user->setFlash('success','Invoice Generated Successfully !');
                     $this->redirect(array('/fees/invoices/manage', 'id' =>$_REQUEST['id']));
                     
-                } else {
+                }
+                elseif ($courseId != NULL && $batchId != NULL && $studentCategoryId == NULL) {
+                
+                      $students = Students::model()->findAll("course_id=:y AND batch_id=:z", array(':y' => $courseId,':z' => $batchId));
+
+                    foreach ($students as $student) {
+                        
+                        $row = array("batch_id" => $batchId,"fee_particular_id" => $particularId, "fee_access_id" => $feeaccess_1->id, "student_category_id" => $feeaccess_1->student_category_id, "student_batch_id" => $batchId, "student_id" => $student->id, "student_course_id" => $courseId, "invoice_amount" => $total, "amount_payable" => $total, "finance_fee_category_id" => $_REQUEST['id']);
+                    $invoice = new FinanceFeeInvoices;
+                     $a=rand(00000000, 99999999);
+                    $invoice->invoice_id = $a;
+                    $invoice->finance_fee_category_id = $row['finance_fee_category_id'];
+                    $invoice->amount = $row['invoice_amount'];
+                    $invoice->amount_payable = $row['amount_payable'];
+                    $invoice->student_id = $row['student_id'];
+                    $invoice->status = 0;
+                    $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
+                    foreach($subscription as $subscription_1){
+                        $invoice->due_date = $subscription_1->due_date;
+                    }
+                    
+                    $invoice->is_deleted = 0;
+                    $invoice->created_at = date('Y-m-d H:i:s');
+                    $invoice->updated_at = date('Y-m-d H:i:s');
+
+
+                    $invoice->save();
+                   
+                        
+                    }
+                    $feesCategory->saveAttributes(array("is_invoice"=>1));
+                    Yii::app()->user->setFlash('success','Invoice Generated Successfully !');
+                    $this->redirect(array('/fees/invoices/manage', 'id' =>$_REQUEST['id']));
+                }
+                else {
                     $row = array("batch_id" =>0,"fee_particular_id" => $particularId, "fee_access_id" => $feeaccess_1->id, "student_category_id" => $feeaccess_1->student_category_id, "student_batch_id" => $batchId, "student_id" => 0, "student_course_id" => $courseId, "invoice_amount" => $invoiceAmount);
                 }
                 //Inser row data into invoice table;

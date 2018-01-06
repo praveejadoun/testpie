@@ -22,6 +22,18 @@ function old_1(id)
 <div class="formCon">
 
 <div class="formConInner">
+     <?php
+                Yii::app()->clientScript->registerScript(
+                        'myHideEffect', '$(".errorSummary");', CClientScript::POS_READY
+                );
+                ?>
+                    <?php if(Yii::app()->user->hasFlash('success')):?>
+                    <div class="errorSummary" >
+
+                    <!--<div class="flash-success" style="color:#F00; padding-left:150px; font-size:15px">-->
+                        <?php echo Yii::app()->user->getFlash('success'); ?>
+                    </div>
+                    <?php endif; ?>
 <?php 
 $check = ExamGroups::model()->findByAttributes(array('id'=>$_REQUEST['exam_group_id'],'batch_id'=>$_REQUEST['id']));
 if($check!=NULL)

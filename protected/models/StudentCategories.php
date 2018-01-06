@@ -38,6 +38,7 @@ class StudentCategories extends CActiveRecord
 			array('is_deleted', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			array('name','required'),
+                        array('name', 'match','pattern' => '/^[a-zA-Z\s]+$/','message' => 'It can only contain alphabets,space'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, name, is_deleted', 'safe', 'on'=>'search'),
@@ -86,4 +87,8 @@ class StudentCategories extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        public function check()
+        {
+            
+        }
 }

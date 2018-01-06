@@ -75,7 +75,7 @@ if(isset($_REQUEST['cou']))
 	/*$data_1=Subjects::model()->findAll(array('join' => 'JOIN batches ON batch_id = batches.id','condition'=>'batches.course_id=:id', 
                   'params'=>array(':id'=>(int) $_REQUEST['cou'])));*/
 	$data_1 = CHtml::listData(Subjects::model()->findAll(array('join' => 'JOIN batches ON batch_id = batches.id','condition'=>'batches.course_id=:id', 
-                  'params'=>array(':id'=>(int) $_REQUEST['cou']))),'id','name');			  
+                  'params'=>array(':id'=>(int) $_REQUEST['cou']))),'id','name','batch_id');			  
 				  
 	 
 }

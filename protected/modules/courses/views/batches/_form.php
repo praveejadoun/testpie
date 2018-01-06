@@ -6,10 +6,12 @@
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'batches-form',
-	'enableAjaxValidation'=>true,
+	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p style="padding-left:20px;">Fields with <span class="required">*</span> are required.</p>
+	<p >Fields with <span class="required">*</span> are required.</p>
+        <div class="formCon">
+     <div class="formConInner">
 	<?php echo $form->errorSummary($model); ?>
     <?php $daterange=date('Y');
  		 $daterange_1=$daterange+20;
@@ -19,7 +21,7 @@
     <div style="padding-left:20px;">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="45%"><?php echo $form->labelEx($model,Yii::t('Batch','name')); ?></td>
+    <td width="10%"><?php echo $form->labelEx($model,Yii::t('Batch','name')); ?></td>
     <td width="5%">&nbsp;</td>
     <td width="45%"><div><?php echo $form->textField($model,'name',array('size'=>20,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'name'); ?></div></td>
@@ -117,12 +119,15 @@
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     
-    <td><?php //echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+<!--    <td><?php //echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
         
-        <?php	echo CHtml::ajaxSubmitButton(Yii::t('job','Save'),CHtml::normalizeUrl(array('batches/create','render'=>false)),array('success'=>'js: function(data) { $("#jobDialog").dialog("close"); window.location.reload();
+        <?php //	echo CHtml::ajaxSubmitButton(Yii::t('job','Save'),CHtml::normalizeUrl(array('batches/create','render'=>false)),array('success'=>'js: function(data) { $("#jobDialog").dialog("close"); window.location.reload();
                        
-                    }'),array('id'=>'closeJobDialog','name'=>'Submit')); ?>
-	</td>
+//                    }'),array('id'=>'closeJobDialog','name'=>'Submit')); ?>
+	</td>-->
+    
+    <td><?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'formbut','id' => 'btn', 'name' => 'bbtn', 'title' => 'Save')); ?>
+           </td> 
   </tr>
 </table>
 </div>
@@ -157,7 +162,15 @@
 	<div class="row buttons">
 		
 	</div>
-
+     </div>
+</div>
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+<script>
+    $(document).ready(function(){
+        $("#batches-form").submit(function(){
+            $("#btn").attr('disabled','true');
+        });
+    });''
+    </script>

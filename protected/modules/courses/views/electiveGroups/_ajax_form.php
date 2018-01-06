@@ -156,8 +156,8 @@
            value=" <?php echo $model->id; ?>"/>
     <?php endif; ?>
     <div class="row buttons" style="width:30%">
-        <?php   echo CHtml::submitButton($model->isNewRecord ? 'Save' : 'Save',array('class' =>
-        'formbut')); ?>    </div>
+        <?php   echo CHtml::submitButton($model->isNewRecord ? 'Submit' : 'Save',array('class'=>'formbut','id' => 'btn', 'name' => 'bbtn', 'title' => 'Save')); ?>
+    </div>
 
   <?php  $this->endWidget(); ?></div>
     <!-- form -->
@@ -178,5 +178,12 @@
 
 
 </script>
+<script>
+    $(document).ready(function(){
+        $("#applicants-form").submit(function(){
+            $("#btn").attr('disabled','true');
+        });
+    });''
+    </script>
 
 

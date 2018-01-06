@@ -87,12 +87,38 @@ $this->breadcrumbs=array(
                                <?php
                         $particularaccess = FinanceFeeParticularAccess::model()->findAll("finance_fee_particular_id=:x",array(':x'=>$feeParticular_1->id));
                         foreach($particularaccess as $particularaccess_1){
+//                            echo "<pre/>";
+//                            print_r($particularaccess_1);
+                         
                         ?>
                              
                               <p style="border-bottom: 1px solid #E8ECF1;">
+                                  <?php if($particularaccess_1->access_type == 1) {
+                                 if($particularaccess_1->course_id != NULL && $particularaccess_1->batch_id != NULL && $particularaccess_1->student_category_id != NULL)  { ?>
+                              
                               <div>course:<?php echo $particularaccess_1->course_id;?></div>
                               <div>Batch:<?php echo $particularaccess_1->batch_id;?></div>
                               <div>Student Category:<?php echo $particularaccess_1->student_category_id;?></div>
+                              
+                                <?php } elseif($particularaccess_1->course_id != NULL && $particularaccess_1->batch_id != NULL && $particularaccess_1->student_category_id == NULL) { ?>
+                             
+                              <div>course:<?php echo $particularaccess_1->course_id;?></div>
+                              <div>Batch:<?php echo $particularaccess_1->batch_id;?></div>
+                              <div>Student Category:All</div>
+                              
+                               <?php }elseif($particularaccess_1->course_id == NULL && $particularaccess_1->batch_id == NULL && $particularaccess_1->student_category_id != NULL){ ?>
+                              
+                              <div>course:All</div>
+                              <div>Batch:All</div>
+                              <div>Student Category:<?php echo $particularaccess_1->student_category_id;?></div>
+                            
+                               <?php } elseif($particularaccess_1->course_id == NULL && $particularaccess_1->batch_id == NULL && $particularaccess_1->student_category_id == NULL) { ?>
+                              
+                              <div>All</div>
+                              
+                                  <?php }}elseif($particularaccess_1->access_type == 2) {?>
+                               <div>Admission Number:<?php echo $particularaccess_1->admission_numbers; ?></div>
+                                  <?php } ?>
                               </p>
                              
                           <?php } ?>

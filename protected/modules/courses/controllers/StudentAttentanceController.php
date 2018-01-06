@@ -165,11 +165,24 @@ class StudentAttentanceController extends RController
         // Flag to know if we will render the form or try to add 
         // new jon.
                 $flag=true;
-        if(isset($_POST['StudentAttentance']))
+        if(isset($_POST['StudentAttentance']) and isset($_POST['StudentAttentance']['reason']))
         {       $flag=false;
             $model->attributes=$_POST['StudentAttentance'];
  
-            if($model->save()) {
+            if($model->save())
+                {
+              echo CJSON::encode(array(
+                        'status'=>'success',
+                        ));
+             exit;      
+  			}
+			else
+			{
+				echo CJSON::encode(array(
+                        'status'=>'error',
+                        ));
+                 exit;    
+			}
                 //Return an <option> and select it
                            // echo CHtml::tag('option',array ( 'value'=>$model->jid,'selected'=>true),CHtml::encode($model->jdescr),true);
 						   //echo CHtml::tag('button', array('type'=>'submit'), '<div><div>Button</div></div>');
@@ -177,7 +190,7 @@ class StudentAttentanceController extends RController
 						  // echo "sssssssssssss";
 						//  exit;
   								
-                        }
+                        
                 }
                 if($flag) {
                     Yii::app()->clientScript->scriptMap['jquery.js'] = false;

@@ -29,7 +29,7 @@ class FeesController extends RController {
                 'users' => array('@'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'batch', 'add'),
+                'actions' => array('create', 'update', 'batch', 'add','GetCitiesByCountryId'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -656,18 +656,16 @@ class FeesController extends RController {
         echo $val;
     }
 
-    public function actionDynamiccities() {
-//              echo "<pre/>";
-//              print_r($_POST);
-//              exit;
-
-        $data = Batches::model()->findAll('course_id=:course_id', array('course_id' => (int) $_POST['course_id']));
-
+   public function actionGetCitiesByCountryId() {
+        $data = Batches::model()->findAll('course_id=:course_id AND is_deleted=:x',
+            array(':course_id'=>(int) $_POST['course_id'],':x'=>0));
+ 
         $data = CHtml::listData($data, 'id', 'name');
-        echo CHtml::tag('option', array('value' => ''), CHtml::encode('select'), true);
-        foreach ($data as $value => $name) {
-            echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
+ 
+       
+        foreach($data as $value => $key) {
+            echo CHtml::tag('option', array('value' => $value), CHtml::encode($key), true);
         }
-    }
+    }         
 
 }

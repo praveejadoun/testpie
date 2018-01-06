@@ -49,6 +49,7 @@ class Exams extends CActiveRecord
 			array('exam_group_id, subject_id, grading_level_id, weightage, event_id', 'numerical', 'integerOnly'=>true),
 			array('maximum_marks, minimum_marks', 'length', 'max'=>10),
 			array('start_time, end_time, created_at, updated_at', 'safe'),
+                        array('maximum_marks, minimum_marks', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, exam_group_id, subject_id, start_time, end_time, maximum_marks, minimum_marks, grading_level_id, weightage, event_id, created_at, updated_at', 'safe', 'on'=>'search'),

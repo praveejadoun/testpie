@@ -42,7 +42,7 @@ class ClassTimings extends CActiveRecord
 			array('name', 'length', 'max'=>255),
 			array('start_time, end_time', 'length', 'max'=>120),
 			array('name, start_time, end_time', 'required'),
-                        array('start_time','checktime'),
+                        array('start_time','checktime','message'=>'sunil'),
 			array('name','CRegularExpressionValidator', 'pattern'=>'/^[A-Za-z0-9_ ]+$/','message'=>"{attribute} should contain only letters."),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -107,11 +107,14 @@ class ClassTimings extends CActiveRecord
             $starttime =  DATE("H:i", STRTOTIME($time_1->start_time));
             $endtime = DATE("H:i", STRTOTIME($time_1->end_time));
             $selctedtime = DATE("H:i", STRTOTIME($this->start_time));
-            if($selctedtime <= $starttime )
+            if($selctedtime == $starttime )
             {
                 $this->addError($attribute,'Time already exist !' );
             }
-            
+            else
+            {
+                 $this->addError($attribute,'Time already exist !' );
+            }
             }
             
             

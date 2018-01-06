@@ -45,6 +45,16 @@ class Batches extends CActiveRecord
 			array('start_date, end_date', 'safe'),
 			// The following rule is used by search().
 			array('name, start_date, end_date', 'required'),
+                        array('start_date, end_date','checkEndDate'),
+//                        array('end_date','checkEndDate'),
+                        array(
+                                'end_date',
+				'compare',
+				'compareAttribute'=>'start_date',
+				'operator'=>'>', 
+				'allowEmpty'=>false , 
+				'message'=>'{attribute} must be greater than start date.'
+                            ),
 			array('name','CRegularExpressionValidator', 'pattern'=>'/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/','message'=>"{attribute} should not contain any special character(s)."),
 			// Please remove those attributes that should not be searched.
 			array('id, name, course_id, start_date, end_date, is_active, is_deleted, employee_id', 'safe', 'on'=>'search'),
@@ -114,4 +124,39 @@ class Batches extends CActiveRecord
 		$course=Courses::model()->findByAttributes(array('id'=>$this->course_id,'is_deleted'=>0));
 			return $this->name.' ('.$course->course_name.')';
 	}
+        
+         public function checkDate($attribute,$params)
+        {
+            $ay = AcademicYears::model()->findByAttributes(array('status'=>'0'));
+            $sdate = date($ay->start_date);
+            $edate = date($ay->end_date);
+            $selectedDate = date($this->start_date);
+                    if($selectedDate < $sdate)
+                    {
+                        $this->addError($attribute,'Date should be in between current academic Year' );
+                    }
+                    
+        }
+        
+        public function checkEndDate($attribute,$params)
+        {
+             $ay = AcademicYears::model()->findByAttributes(array('status'=>0));
+            $sdate = date($ay->start_date);
+            $edate = date($ay->end_date);
+            $sd = date($this->start_date);
+            $selectedDate = date($this->end_date);
+                    if($selectedDate < $sdate)
+                    {
+                        $this->addError($attribute,'Date should be greater than academic Year' );
+                    }
+                    elseif($selectedDate > $edate)
+                    {
+                        $this->addError($attribute,'Date should be less than academic Year' );
+                    }
+                    elseif ($sd < $sdate) {
+                        $this->addError($attribute,'Date should be les than academic Year' );
+                    }elseif($sd > $edate){
+                        $this->addError($attribute,'Date should be le than academic Year' );
+                    }
+        }
 }

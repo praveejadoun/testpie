@@ -28,6 +28,8 @@ along with Open-School.  If not, see <http://www.gnu.org/licenses/>.*/
  * @Anupama,@Laijesh V Kumar,@Tanuja.
  * @license http://www.Open-School.org/
  */
+ 
+ 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -41,8 +43,10 @@ along with Open-School.  If not, see <http://www.gnu.org/licenses/>.*/
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/dashboard.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/formelements.css" />
     <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/coda-slider-2.0.css" type="text/css" media="screen" />  
+	
    
      <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-1.7.1.min.js"></script>
+	 
       <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/chart/highcharts.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/custom-form-elements.js"></script>   
    </script>
@@ -50,6 +54,7 @@ along with Open-School.  If not, see <http://www.gnu.org/licenses/>.*/
 
     <script>
 	$(document).ready(function() {
+	
 	$("#lodrop").click(function(){
 	
             	if ($("#account_drop").is(':hidden')){
@@ -443,14 +448,14 @@ $(".navigationbtm_wrapper_outer").show();
                 
                 <li>
                  <?php 
-				if(isset(Yii::app()->controller->module->id) and Yii::app()->controller->module->id=='notify')
+				if(isset(Yii::app()->controller->module->id) and Yii::app()->controller->module->id=='notifications')
 				{
                                    
-				    echo CHtml::link(Yii::t('app','Notify'), array('/notifications'),array('class'=>'ic14 active'));
+				    echo CHtml::link(Yii::t('app','notifications'), array('/notifications'),array('class'=>'ic14 active'));
 				}
 				else
 				{
-					echo CHtml::link(Yii::t('app','Notify'), array('/notifications'),array('class'=>'ic14'));
+					echo CHtml::link(Yii::t('app','notifications'), array('/notifications'),array('class'=>'ic14'));
 				}
 				?>
                 </li>

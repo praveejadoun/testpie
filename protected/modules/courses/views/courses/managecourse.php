@@ -71,6 +71,18 @@ function rowdelete(id)
  <?php 
   $posts=Courses::model()->findAll("is_deleted 	=:x", array(':x'=>0));
    ?>
+        <?php
+                Yii::app()->clientScript->registerScript(
+                        'myHideEffect', '$(".flash-success").animate({opacity: 1.0}, 3000).fadeOut("slow");', CClientScript::POS_READY
+                );
+                ?>
+                    <?php if(Yii::app()->user->hasFlash('success')):?>
+                    <div class="flash-success" style="color:white; padding:8px; font-size:14px;border: 1px #999999 solid;background:rgb(35, 161, 16);border-radius: 4px;">
+
+                    <!--<div class="flash-success" style="color:#F00; padding-left:150px; font-size:15px">-->
+                        <?php echo Yii::app()->user->getFlash('success'); ?>
+                    </div>
+                    <?php endif; ?>
  <?php $this->renderPartial('_flash');?>
 
  </div>
@@ -114,10 +126,12 @@ function rowdelete(id)
         </li>
         <li class="col3"><?php echo CHtml::link(Yii::t('Courses','Delete'),array('deactivate','id'=>$posts_1->id),array('confirm'=>"Are you sure?\n\n Note: All details (batches, students, timetable, fees, exam) related to this course will be deleted.",'class'=>'delete'));?></li>
         <li class="col4">
-         <?php echo CHtml::ajaxLink(Yii::t('Courses','Add Batch'),$this->createUrl('batches/Addnew'),array(
+         <?php /*echo CHtml::ajaxLink(Yii::t('Courses','Add Batch'),$this->createUrl('batches/Addnew'),array(
         'onclick'=>'$("#jobDialog").dialog("open"); return false;',
-        'update'=>'#jobDialog','type' =>'GET','data' => array( 'val1' =>$posts_1->id ),'dataType' => 'text',),array('id'=>'showJobDialog1'.$posts_1->id,'class'=>'add')); ?>
-        <div id="jobDialog"></div></li>
+        'update'=>'#jobDialog','type' =>'GET','data' => array( 'val1' =>$posts_1->id ),'dataType' => 'text',),array('id'=>'showJobDialog1'.$posts_1->id,'class'=>'add')); */?>
+<!--        <div id="jobDialog"></div>-->
+        <?php echo CHtml::link('Add Batch',array('batches/create','val1'=>$posts_1->id),array('class'=>'add'));?>
+        </li>
       
         <li class="col4">
               <?php if(count($batch)!=0){?>
@@ -180,9 +194,11 @@ function rowdelete(id)
 					echo '<td align="center">'.$date1.'</td>';
 					echo '<td align="center">'.$date2.'</td>';
 					echo '<td align="center"  class="sub_act">'; ?> 
-					<?php echo CHtml::ajaxLink(Yii::t('Courses','Edit'),$this->createUrl('batches/addupdate'),array(
+					<?php 
+                                         echo CHtml::link('Edit',array('batches/update','id'=>$batch_1->id),array('class'=>'add'));
+                                        /*echo CHtml::ajaxLink(Yii::t('Courses','Edit'),$this->createUrl('batches/addupdate'),array(
         'onclick'=>'$("#jobDialog123").dialog("open"); return false;',
-        'update'=>'#jobDialog123','type' =>'GET','data' => array( 'val1' =>$batch_1->id,'course_id'=>$posts_1->id ),'dataType' => 'text'),array('id'=>'showJobDialog12'.$batch_1->id,'class'=>'add')); 
+        'update'=>'#jobDialog123','type' =>'GET','data' => array( 'val1' =>$batch_1->id,'course_id'=>$posts_1->id ),'dataType' => 'text'),array('id'=>'showJobDialog12'.$batch_1->id,'class'=>'add')); */
 		 echo ''.CHtml::ajaxLink(
   "Delete", $this->createUrl('batches/remove'), array('success'=>'rowdelete('.$batch_1->id.')','type' =>'GET','data' => array( 'val1' =>$batch_1->id ),'dataType' => 'text'),array('confirm'=>"Are you sure?\n\n Note: All details (students, timetable, fees, exam) related to this batch will be deleted."));
  ?> <?php echo '  '.CHtml::link(Yii::t('Courses','Add Student'), array('/students/students/create','bid'=>$batch_1->id)).'<div id="jobDialog123"></div></td>';
@@ -208,6 +224,7 @@ function rowdelete(id)
 		  <tr class="pdtab-h">
 			<td align="center"><?php echo Yii::t('Courses','S.No');?></td>
                         <td align="center"><?php echo Yii::t('Courses','Subject Name');?></td>
+                        <td align="center"><?php echo Yii::t('Courses','Batch');?></td>
 			<td align="center"><?php echo Yii::t('Courses','Maximum Weekly Classes');?></td>
 		        <td align="center"><?php echo Yii::t('Courses','Actions');?></td>
 		  </tr>
@@ -231,6 +248,9 @@ function rowdelete(id)
 					echo '<tr id="batchrow'.$subject_1->id.'">';
                                         echo '<td style="text-align:center;  font-weight:bold;">'.$i.'</td>';
 					echo '<td style="text-align:center;  font-weight:bold;">'.$subject_1->name.'</td>';
+                                        $bat = Batches::model()->findByAttributes(array('id'=>$subject_1->batch_id));
+                                        if($bat!=NULL){echo '<td style="text-align:center;  font-weight:bold;">'.$bat->name.'</td>';}
+                                        else{echo '<td style="text-align:center;  font-weight:bold;">'.'-'.'</td>';}
                                         echo '<td style="text-align:center;  font-weight:bold;">'.$subject_1->max_weekly_classes.'</td>';
 					echo '<td align="center"  class="sub_act">';
 					?> 

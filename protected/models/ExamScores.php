@@ -44,6 +44,9 @@ class ExamScores extends CActiveRecord
 		return array(
 			array('student_id, exam_id, grading_level_id, is_failed', 'numerical', 'integerOnly'=>true),
 			array('marks', 'length', 'max'=>7),
+//                        array('marks','checkValidate'),
+			array(' marks, remarks', 'required'),
+                       
 			array('remarks', 'length', 'max'=>255),
 			array('created_at, updated_at', 'safe'),
 			// The following rule is used by search().
@@ -163,4 +166,20 @@ class ExamScores extends CActiveRecord
 			return 'No Grades';
 		}
 	}
+        
+//        public function checkValidate($attribute,$params)
+//        {
+//            
+//            $exam = Exams::model()->findByAttributes(array('id'=>1));
+//            
+//                $list = $_POST['ExamScores'];
+//                $count = count($list['student_id']);
+//                for($i=0;$i<$count;$i++)
+//                {
+//                    if(($this->marks)<=($exam->maximum_marks))
+//                    {
+//                        $this->addError($attribute,'sunil kumar !');
+//                    }
+//                }
+//        }
 }

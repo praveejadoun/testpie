@@ -140,9 +140,10 @@ class SubjectsController extends RController
 //				$model->code=$data->code;
 //				
 //			}
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
+			if($model->save()){
+                                  Yii::app()->user->setFlash('success','Subject Updated Successfully');
+				$this->redirect(array('courses/managecourse'));
+                }}
 
 //		            Yii::app()->clientScript->scriptMap['jquery.js'] = false;
                 $this->render('update',array('model'=>$model));
@@ -390,6 +391,7 @@ class SubjectsController extends RController
             $model->name = $list['name'] ;*/
             
          }
+           Yii::app()->user->setFlash('success','Subject Created Successfully');
           $this->redirect(array('/courses/'));
          }
          $this->render('create',array('model'=>$model));

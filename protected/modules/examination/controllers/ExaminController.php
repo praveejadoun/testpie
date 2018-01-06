@@ -96,8 +96,21 @@ class ExaminController extends RController
 			$model=new Exams;
 			$model->exam_group_id = $insert_id; 
 			$model->subject_id = $list['subject_id'][$i];
-			$model->maximum_marks = $list['maximum_marks'][$i];
-			$model->minimum_marks = $list['minimum_marks'][$i];
+                        $model->maximum_marks = $list['maximum_marks'][$i];
+                         if(($list['minimum_marks'][$i]) < ($list['maximum_marks'][$i]) &&  ($list['minimum_marks'][$i]) >= 0 )
+                                {
+                                 $model->minimum_marks = $list['minimum_marks'][$i];
+                                }
+                                else
+                                {
+//                                    $model->marks = 0;
+//                                    $student = Students::model()->findByAttributes(array('id'=>$model->student_id));
+                                    
+                                      Yii::app()->user->setFlash('success','Min. marks should be less than Max. marks('.$model->maximum_marks.')');
+//                                     $this->redirect(array('examScores/create','id'=>$_REQUEST['id'],'examid'=>$_REQUEST['examid']));
+                                }
+			
+//			$model->minimum_marks = $list['minimum_marks'][$i];
 			$model->start_time = $list['start_time'][$i];
 			$model->end_time = $list['end_time'][$i];
 			if($model->start_time)

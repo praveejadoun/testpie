@@ -1,7 +1,18 @@
 <div class="formCon">
 
 <div class="formConInner">
+ <?php
+                Yii::app()->clientScript->registerScript(
+                        'myHideEffect', '$(".errorSummary");', CClientScript::POS_READY
+                );
+                ?>
+                    <?php if(Yii::app()->user->hasFlash('success')):?>
+                    <div class="errorSummary" >
 
+                    <!--<div class="flash-success" style="color:#F00; padding-left:150px; font-size:15px">-->
+                        <?php echo Yii::app()->user->getFlash('success'); ?>
+                    </div>
+                    <?php endif; ?>
 <?php
 if(isset($_REQUEST['id']))
 {
@@ -13,7 +24,7 @@ if(isset($_REQUEST['id']))
     ?>
     <?php if($posts!=NULL)
     { ?>
-
+ 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'exam-scores-form',
 	'enableAjaxValidation'=>false,
@@ -201,6 +212,5 @@ else
     {
 	echo '<div class="notifications nt_red">'.'<i>'.Yii::t('Examscore','Nothing Found').'</i></div>'; 
 	}?>
-	
 	
 	

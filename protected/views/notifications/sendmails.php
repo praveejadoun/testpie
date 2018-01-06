@@ -128,7 +128,20 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     <td valign="top">
     <div class="cont_right formWrapper">
 <h1><?php echo Yii::t('notifications','Compose Email');?></h1>
-
+<?php
+            $this->widget('application.components.widgets.xheditor',array(
+                'language'=>'en', //options are en, zh-cn, zh-tw
+                'config'=>array(
+                    'id'=>'xh1',
+                    'name'=>'xh',
+                    'tools'=>'mini', // mini, simple, fill or from XHeditor::$_tools
+                    'width'=>'100%',
+                    //see XHeditor::$_configurableAttributes for more
+                ),
+                'contentValue'=>'Enter your text here', // default value displayed in textarea/wysiwyg editor field
+                'htmlOptions'=>array('rows'=>5, 'cols'=>10),// to be applied to textarea
+            ));
+            ?>
 </div>
     </td>
   </tr>

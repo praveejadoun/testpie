@@ -45,11 +45,11 @@ class Subjects extends CActiveRecord
 		// will receive user inputs.
 		return array(
                         
-			array('batch_id,course_id, no_exams, max_weekly_classes, elective_group_id, is_deleted,is_active', 'numerical', 'integerOnly'=>true),
+			array('no_exams, max_weekly_classes, elective_group_id, is_deleted,is_active', 'numerical', 'integerOnly'=>true),
 			array('max_weekly_classes, name','required'),
                     array('name, code', 'length', 'max'=>255),
 			
-			//array('name','codes'),
+			array('name','codes'),
 			array('created_at, updated_at', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -71,23 +71,23 @@ class Subjects extends CActiveRecord
 	}
 
 	
-//	public function codes($attribute,$params)
-//	{
-//		
-//	    $flag=0;
-//		$subject=Subjects::model()->findAllByAttributes(array('batch_id'=>$this->batch_id,'is_deleted'=>0));
-//		foreach($subject as $subject_1)
-//		{
-//			if($subject_1->name == $this->name)
-//			{
-//			$flag=1;
-//			}
-//		} 
-//		if($flag==1)
-//		{
-//		$this->addError($attribute, 'This subject is already added');
-//		}
-//	}	
+	public function codes($attribute,$params)
+	{
+		
+	    $flag=0;
+		$subject=Subjects::model()->findAllByAttributes(array('batch_id'=>$_REQUEST['id'],'is_deleted'=>0));
+		foreach($subject as $subject_1)
+		{
+			if($subject_1->name == $this->name)
+			{
+			$flag=1;
+			}
+		} 
+		if($flag==1)
+		{
+		$this->addError($attribute, 'This subject is already added');
+		}
+	}	
 	 
 	 /**
 	 * @return array customized attribute labels (name=>label)

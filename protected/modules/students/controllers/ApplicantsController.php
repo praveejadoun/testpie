@@ -116,8 +116,8 @@ class ApplicantsController extends RController {
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
-        //echo "<pre>";
-//print_r($_POST['Students']);exit;
+//        echo "<pre>";
+//print_r($_POST['Applicants']);exit;
         if (isset($_POST['Applicants'])) {
 
             $model->attributes = $_POST['Applicants'];
@@ -666,7 +666,10 @@ class ApplicantsController extends RController {
              if (isset($model)) {
                  
             if(!empty($model)){
+                 $batch = Batches::model()->findByAttributes(array('id'=>$model->batch_id));
+                 
                  $student->attributes = $model->attributes;
+                 $student->course_id = $batch->course_id;
                  $student->admission_no = $adm_no_1;
                  $student->admission_date = date('Y-m-d');
                  $student->created_at = date('Y-m-d');

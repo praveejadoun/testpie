@@ -68,11 +68,13 @@ echo '</div>';
 echo '&nbsp;&nbsp;'; ?>
  <div class="edit_bttns" style="top:8px; right:300px">
      <ul >
-      <li><?php echo CHtml::ajaxLink(Yii::t('Courses','Add Subject'),$this->createUrl('subjects/Addnew'),array(
+      <li><?php /*echo CHtml::ajaxLink(Yii::t('Courses','Add Subject'),$this->createUrl('subjects/Addnew'),array(
         'onclick'=>'$("#jobDialog1").dialog("open"); return false;',
         'update'=>'#jobDialog1','type' =>'GET','data' => array( 'val1' =>$_REQUEST['cou'] ),'dataType' => 'text',),array('id'=>'showJobDialog12'.$_REQUEST['cou'],'class'=>'addbttn','style'=>'padding:13px 30px 12px 16px;')); 
       
-         ?><div id="jobDialog1"></div></li>
+         */
+      echo CHtml::link('Add Subject',array('subjects/create','val1'=>$_REQUEST['cou']),array('class'=>'addbttn','style'=>'padding:13px 30px 12px 16px;'));
+      ?><div id="jobDialog1"></div></li>
      </ul> 
  </div> 
      </div>

@@ -5,7 +5,7 @@
 //    'htmlOptions' => array('enctype' => 'multipart/form-data'),
 //        ));
 ?> 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
         <td valign="top" width="245">
@@ -148,9 +148,40 @@
                                                                     <table class="defaultApplicable">
                                                                         <tr>
                                                                             <td>
-                                                                                
+                                                                                  <?php
+                                                                                            $criteria=new CDbCriteria;
+                                                                                            $criteria->condition='is_deleted=:is_del';
+                                                                                            $criteria->params=array(':is_del'=>0);
+                                                                                    ?>
+                                                                                <?php  
+//                                                                                        echo CHtml::dropDownList($mymodel, 'FeeParticularAccess[0][course][]', CHtml::listData(Courses::model()->findAll($criteria),'id','concatened'),
+//                                                                                          array(
+//                                                                                              'class' => 'particular-access-course',
+//                                                                                              'prompt' => 'Select the Course',
+//                                                                                              'style'=>'width:177px !important',
+                                                                                              
+//                                                                                              'ajax' => array(
+//                                                                                                  'type' => 'POST',
+//                                                                                                  'url' => CController::createUrl('Subjects/getCitiesByCountryId'),
+//                                                                                                  'update' => '#batch_id',
+//                                                                                                  'data' => array('course_id' => 'js:this.value'),
+//                                                                                              )
+//                                                                                          )
+//                                                                                      );
+
+                                                                                        ?> 
                                                                                 <?php
-                                                                                echo CHtml::dropDownList('FeeParticularAccess[0][course][]', $mymodel, CHtml::listData(Courses::model()->findAll(), 'id', 'course_name'), array('empty' => 'All Courses', 'class' => 'particular-access-course'));
+                                                                                echo CHtml::dropDownList('FeeParticularAccess[0][course][]', $mymodel, CHtml::listData(Courses::model()->findAll($criteria),'id','concatened'), 
+                                                                                        array(
+                                                                                            'empty' => 'All Courses',
+                                                                                            'class' => 'particular-access-course',
+                                                                                             'ajax' => array(
+                                                                                                  'type' => 'POST',
+                                                                                                  'url' => CController::createUrl('Fees/getCitiesByCountryId'),
+                                                                                                  'update' => '#batch_id',
+                                                                                                  'data' => array('course_id' => 'js:this.value'),
+                                                                                              )
+                                                                                            ));
                                                                                 ?>
                                                                             </td>
                                                                             <td>
@@ -248,31 +279,33 @@
 <script>
     $(document).ready(function () {
 
-        $(".particular-access-type").change(function(){
-            if($(this).val()==1){
-                //defaultApplicable admNoApplicable
-                $('.admNoApplicable').hide();
-                $(".defaultApplicable").show();
-                
-            }else{
-                $(".defaultApplicable").hide();
-                $('.admNoApplicable').show();
-            }
-        });
+        
+         $("#mdcontainer").on('change', '.particular-access-type', function () {
+              if ($(this).val() == 1) {
+                                                            $(this).closest('.particular-access').find('.defaultApplicable').show();
+                                                            $(this).closest('.particular-access').find('.admNoApplicable').hide();
+
+                                                        } else {
+
+                                                            $(this).closest('.particular-access').find('.defaultApplicable').hide();
+                                                            $(this).closest('.particular-access').find('.admNoApplicable').show();
+                                                        }       
+                                                       
+          });
 
 
         $("#add-fee-particular").click(function () {
             //alert($(".fee-particulars").size());
             var clonedParticularBox = $(".fee-particulars").last().clone();
-            var numBox = clonedParticularBox.find('.particular-access').size();
+            var numBox = clonedParticularBox.find('.particular-access').length;
             if (numBox > 1)
             {
                 clonedParticularBox.find('.particular-access').slice(1).remove();
             }
 
-            if (clonedParticularBox.find(".particular-access-type").size() == 1) {
+            if (clonedParticularBox.find(".particular-access-type").length == 1) {
                 //alert($(".fee-particulars").size());
-                var temp = $(".fee-particulars").size();
+                var temp = $(".fee-particulars").length;
 
                 //if ($(".fee-particulars").size() > 1) {
                 //dRow = clonedParticularBox.find('.add-particular-access').attr('data-row');
@@ -352,9 +385,12 @@
 
         }
 
-        console.log(clonedBox);
+       
+        
 
         clonedBox.find('.particular-access').slice(1).remove();
+         clonedBox.find('.admNoApplicable').css("display","none");
+        clonedBox.find('.defaultApplicable').css("display","block");
         $(thisObj).prev(".particular-accesses-ap").append(clonedBox);
     }
     function closeAccessBox(thisObj) {

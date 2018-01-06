@@ -154,13 +154,17 @@ class StudentsController extends RController {
              
         if (isset($_POST['Students']) || isset($_POST['Applicants'])) {
             
-  //        echo "<pre>";
-     //      print_r($_POST);exit;
+//          echo "<pre>";
+//           print_r($_POST['Applicants']);exit;
 
             if(!empty($_POST['Students'])){
+                $batch = Batches::model()->findByAttributes(array('id'=>$_POST['Students']['batch_id']));
+                $model->course_id = $batch->course_id;
                 $model->attributes = $_POST['Students'];
                 $list = $_POST['Students'];
             }else{
+                $batch = Batches::model()->findByAttributes(array('id'=>$_POST['Applicants']['batch_id']));
+                $model->course_id = $batch->course_id;
                 $model->attributes = $_POST['Applicants'];
                 $list = $_POST['Applicants'];
             }

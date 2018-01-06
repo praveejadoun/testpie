@@ -60,6 +60,7 @@ if (!$model->isNewRecord)
      'id'=>'subjects-form',
     //  'htmlOptions' => array('enctype' => 'multipart/form-data'),
          'action' => $actionUrl,
+        
     	//'enableAjaxValidation'=>true,
       'enableClientValidation'=>true,
      'focus'=>array($model,'name'),

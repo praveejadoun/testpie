@@ -1,5 +1,5 @@
-<div class="form">
-
+<div class="formCon">
+<div class="formConInner">
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'batches-form',
 	'enableAjaxValidation'=>false,
@@ -109,9 +109,9 @@
   <tr>
   	<td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td><?php //echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+    <td><?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'formbut','id' => 'btn', 'name' => 'bbtn', 'title' => 'Save')); ?>
         <?php	
-		echo CHtml::ajaxSubmitButton(Yii::t('job','Save'),CHtml::normalizeUrl(array('Batches/Addupdate&val1='.$batch_id,'render'=>false)),
+		/*echo CHtml::ajaxSubmitButton(Yii::t('job','Save'),CHtml::normalizeUrl(array('Batches/Addupdate&val1='.$batch_id,'render'=>false)),
 		array('success'=>'js: function(data) {
 									 $("#success_msg").html("Batch updated successfully!");
 									 setTimeout(function() {
@@ -120,7 +120,7 @@
 									 }, 1000);
 									 
 									 }',),
-		array('id'=>'closeJobDialog','name'=>'Submit')); ?></td>
+		array('id'=>'closeJobDialog','name'=>'Submit')); */?></td>
   </tr>
 </table>
 </div>
@@ -158,3 +158,11 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+</div>
+<script>
+    $(document).ready(function(){
+        $("#batches-form").submit(function(){
+            $("#btn").attr('disabled','true');
+        });
+    });''
+    </script>

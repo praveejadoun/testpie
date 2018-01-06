@@ -21,7 +21,14 @@
 		<?php echo $form->hiddenField($model,'date',array('value'=>$year.'-'.$month.'-'.$day)); ?>
 		<?php echo $form->error($model,'date'); ?>
 	</div>
-
+        
+        <div class="row">
+		<?php echo $form->labelEx($model,Yii::t('Attendance','student_leave_type_id')); ?>
+		<?php //echo $form->textField($model,'employee_leave_type_id'); ?>
+                <?php echo $form->dropDownList($model,'student_leave_type_id',CHtml::listData(Studentleavetype::model()->findAll(), 'id', 'name'),array('empty'=>'Select Type')); ?>
+		<?php echo $form->error($model,'student_leave_type_id'); ?>
+	</div>
+        
 	<div class="row">
 		<?php echo $form->labelEx($model,Yii::t('Attendance','reason')); ?>
 		<?php echo $form->textField($model,'reason',array('size'=>60,'maxlength'=>120)); ?>
@@ -30,7 +37,7 @@
 
 	<div class="row buttons">
 		<?php //echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-         <?php echo CHtml::ajaxSubmitButton(Yii::t('Attendance','Save'),CHtml::normalizeUrl(array('StudentAttentance/Addnew','render'=>false)),array('success'=>'js: function(data) {
+         <?php  echo CHtml::ajaxSubmitButton(Yii::t('Attendance','Save'),CHtml::normalizeUrl(array('StudentAttentance/Addnew','render'=>false)),array('success'=>'js: function(data) {
 						$("#td'.$day.$emp_id.'").text("");
 						$("#jobDialog123'.$day.$emp_id.'").html("<span class=\"abs\"></span>","");
 						$("#jobDialog'.$day.$emp_id.'").dialog("close");
