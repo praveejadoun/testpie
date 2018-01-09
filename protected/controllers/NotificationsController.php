@@ -323,9 +323,42 @@ class NotificationsController extends RController
 	
 	public function actionSendmails()
 	{
-		//$model=$this->loadModel($id);
-		
-
+		$model= new Notifications;
+                
+            if(isset($_POST['Notifications']))
+		{
+//                echo "<pre/>";
+//                print_r($_POST['Notifications']);
+//                exit;
+			$model->attributes=$_POST['Notifications'];   
+                        if($model->save())
+                        {
+                            
+                                $mail=Yii::app()->Smtpmail;
+                                 $mail->IsSMTP();
+                                $mail->From = $mail->Username;
+                                $mail->Subject    = $model->subject;
+                                $mail->MsgHTML($model->message);
+                                $mail->AddAddress($model->to, "");
+                                if(!$mail->Send()) {
+                                    echo "Mailer Error: " . $mail->ErrorInfo;
+                                    exit;
+                                }else {
+                                    echo "Message sent!";
+                                    exit;
+                                }
+                        }
+                }
+       
+   
+                
+                
+                
+//                echo "<pre/>";
+//		print_r($_POST);
+//                
+//                        exit;
+             
 		// Uncomment the following line if AJAX validation is needed
 		 //$this->performAjaxValidation($model);
 
@@ -668,4 +701,5 @@ class NotificationsController extends RController
 		echo $val;
 		
 	}
+       
 }

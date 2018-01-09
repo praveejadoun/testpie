@@ -180,6 +180,16 @@ return array(
 
 	// application components
 	'components'=>array(
+            'Smtpmail'=>array(
+                'class'=>'application.extensions.smtpmail.PHPMailer',
+                'Host'=>"smtp.gmail.com",
+                'Username'=>'sunilvanam10@gmail.com',
+                'Password'=>'*sunil@1995/*',
+                'Mailer'=>'smtp',
+                'Port'=>587,
+                'SMTPAuth'=>true, 
+                'SMTPSecure' => 'tls',
+        ),
 	'db'=>(defined('DB_CONNECTION') ? array(
                     'connectionString'=>DB_CONNECTION,
                     'username'=>DB_USER,
@@ -338,4 +348,6 @@ return array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
 	),
+   
+
 );
