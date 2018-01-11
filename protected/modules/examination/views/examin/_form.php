@@ -19,21 +19,27 @@ function old_1(id)
 	}
 }
 </script>
-<div class="formCon">
-
-<div class="formConInner">
-     <?php
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>-->
+ <?php
                 Yii::app()->clientScript->registerScript(
                         'myHideEffect', '$(".errorSummary");', CClientScript::POS_READY
                 );
                 ?>
                     <?php if(Yii::app()->user->hasFlash('success')):?>
-                    <div class="errorSummary" >
+                    <div class="errorSummary" style="padding:12px 20px 17px 50px;">
 
                     <!--<div class="flash-success" style="color:#F00; padding-left:150px; font-size:15px">-->
                         <?php echo Yii::app()->user->getFlash('success'); ?>
                     </div>
+                       
                     <?php endif; ?>
+<br/>
+<div class="formCon">
+
+<div class="formConInner">
+    
+                     
 <?php 
 $check = ExamGroups::model()->findByAttributes(array('id'=>$_REQUEST['exam_group_id'],'batch_id'=>$_REQUEST['id']));
 if($check!=NULL)
@@ -54,6 +60,7 @@ if(isset($_REQUEST['id']))
 $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'exams-form',
 	'enableAjaxValidation'=>false,
+    'htmlOptions'=>array('enctype'=>'multipart/form-data'),
 )); ?>
 
 <?php if(!isset($_REQUEST['exam_group_id']))
@@ -138,7 +145,7 @@ $form=$this->beginWidget('CActiveForm', array(
 		<?php echo '<tr>';
 		echo '<td width="20%">'.$posts_1->name.$form->hiddenField($model,'subject_id[]',array('value'=>$posts_1->id)).'</td>';
 		echo '<td width="20%">'.$form->textField($model,'maximum_marks[]',array('size'=>3,'maxlength'=>3,'id'=>'max_mark_org'.$i)).'</td>';
-		echo '<td width="20%">'.$form->textField($model,'minimum_marks[]',array('size'=>3,'maxlength'=>3,'id'=>'min_mark_org'.$i)).'</td>';
+		echo '<td width="20%">'.$form->textField($model,'minimum_marks[]',array('size'=>3,'maxlength'=>3,'id'=>'min_mark_org'.$i)).$form->error($model,'minimum_marks').'</td>';
 		echo '<td width="20%">';
 		
 		$settings=UserSettings::model()->findByAttributes(array('user_id'=>Yii::app()->user->id));
@@ -336,4 +343,27 @@ else
 {
 	echo '<div class="notifications nt_red" style="width:95%">'.'<i>'.Yii::t('Exams','Nothing Scheduled').'</i></div>'; 
 	}?>
-
+<!--<script>
+jQuery("#exams-form").validate({
+        rules: {
+            'Exams[maximum_marks][]': {
+                required: true
+            }
+        },
+    });
+  $("#exams-form").submit(function() {
+  var _txt1 = $('#max_mark_org1').val();
+  var _txt2 = $('#min_mark_org1').val();
+  
+  if (_txt2<_txt1)
+  {
+     alert('Matching!');
+     return true;
+  }
+  else
+  {
+    alert('Not matching!');
+    return false;
+  }
+});
+</script>-->

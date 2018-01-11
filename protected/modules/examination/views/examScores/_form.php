@@ -1,18 +1,22 @@
-<div class="formCon">
-
-<div class="formConInner">
  <?php
                 Yii::app()->clientScript->registerScript(
                         'myHideEffect', '$(".errorSummary");', CClientScript::POS_READY
                 );
                 ?>
                     <?php if(Yii::app()->user->hasFlash('success')):?>
-                    <div class="errorSummary" >
+                    <div class="errorSummary" style="padding:12px 20px 17px 50px;" >
 
                     <!--<div class="flash-success" style="color:#F00; padding-left:150px; font-size:15px">-->
                         <?php echo Yii::app()->user->getFlash('success'); ?>
                     </div>
                     <?php endif; ?>
+
+
+<br/>
+<div class="formCon">
+
+<div class="formConInner">
+
 <?php
 if(isset($_REQUEST['id']))
 {

@@ -180,16 +180,16 @@ return array(
 
 	// application components
 	'components'=>array(
-            'Smtpmail'=>array(
-                'class'=>'application.extensions.smtpmail.PHPMailer',
-                'Host'=>"smtp.gmail.com",
-                'Username'=>'sunilvanam10@gmail.com',
-                'Password'=>'*sunil@1995/*',
-                'Mailer'=>'smtp',
-                'Port'=>587,
-                'SMTPAuth'=>true, 
-                'SMTPSecure' => 'tls',
-        ),
+//            'Smtpmail'=>array(
+//                'class'=>'application.extensions.smtpmail.PHPMailer',
+//                'Host'=>"smtp.gmail.com",
+//                'Username'=>'chaithanya.rvs@ezeewholesale.com',
+//                'Password'=>'Iammyself@1247',
+//                'Mailer'=>'smtp',
+//                'Port'=>587,
+//                'SMTPAuth'=>true, 
+//                'SMTPSecure' => 'tls',
+//        ),
 	'db'=>(defined('DB_CONNECTION') ? array(
                     'connectionString'=>DB_CONNECTION,
                     'username'=>DB_USER,

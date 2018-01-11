@@ -1,5 +1,6 @@
 <?php
-
+//require_once('PHPMailer-master/PHPMailerAutoload.php');
+//require_once("protected/extensions/smtpmail/phpmailer.php");
 class NotificationsController extends RController
 {
 	/**
@@ -323,6 +324,7 @@ class NotificationsController extends RController
 	
 	public function actionSendmails()
 	{
+//            require_once('protected/extensions/smtpmail/class.smtp.php');
 		$model= new Notifications;
                 
             if(isset($_POST['Notifications']))
@@ -333,20 +335,61 @@ class NotificationsController extends RController
 			$model->attributes=$_POST['Notifications'];   
                         if($model->save())
                         {
+//                             echo (extension_loaded('openssl')?'SSL loaded':'SSL not loaded')."\n";
+//                            
+//                                $mail=Yii::app()->Smtpmail;
+//                                $mail->IsSMTP();
+//                                $mail->SMTPDebug = 2;
+//                                $mail->From = trim($mail->Username);
+//                                $mail->Subject    = $model->subject;
+//                                $mail->MsgHTML($model->message);
+//                                $mail->AddAddress($model->to, "");
+//                                if(!$mail->Send()) {
+//                                    echo "Mailer Error: " . $mail->ErrorInfo;
+//                                    exit;
+//                                }else {
+//                                    echo "Message sent!";
+//                                    exit;
+//                                }
                             
-                                $mail=Yii::app()->Smtpmail;
-                                 $mail->IsSMTP();
-                                $mail->From = $mail->Username;
-                                $mail->Subject    = $model->subject;
-                                $mail->MsgHTML($model->message);
-                                $mail->AddAddress($model->to, "");
-                                if(!$mail->Send()) {
-                                    echo "Mailer Error: " . $mail->ErrorInfo;
-                                    exit;
-                                }else {
-                                    echo "Message sent!";
-                                    exit;
-                                }
+                            
+                            
+                              Yii::import('application.extensions.phpmailer.JPhpMailer'); 
+                            $mail = new JPhpMailer; $mail->IsSMTP(); 
+//                            $mail->SetLanguage("es", '/protected/extensions/phpMailer/language/');
+//                            $mail->SMTPOptions = array(
+//                                                        'ssl' => array(
+//                                                        'verify_peer' => false,
+//                                                        'verify_peer_name' => false,
+//                                                        'allow_self_signed' => true
+//                                                        )
+//                                                        );
+                            $mail->SMTPSecure = "tls";  
+                            $mail->Host = 'smtp.gmail.com'; 
+                            $mail->SMTPAutoTLS = false;
+                            $mail->SMTPAuth = true; 
+                            $mail->SMTPSecure = true; 
+                            $mail->Username = 'sunilvanam10@gmail.com'; 
+                            $mail->Port = '587'; 
+                            $mail->Password = '*sunil@1995/*'; 
+                            $mail->SMTPKeepAlive = true;  
+                            $mail->Mailer = "smtp"; 
+//                            $mail->IsSMTP(); // telling the class to use SMTP  
+                            
+                            $mail->CharSet = 'utf-8';  
+                            $mail->SMTPDebug  = 4;
+                            $mail->SetFrom('sunilvanam10@gmail.com', 'myname'); 
+                            $mail->Subject = 'PHPMailer Test Subject via GMail, basic with authentication'; 
+                            $mail->AltBody = 'To view the message, please use an HTML compatible email viewer!'; 
+                            $mail->MsgHTML('<h1>JUST A TEST!</h1>'); 
+                            $mail->AddAddress('v.sunilkumar12@gmail.com', 'John Doe'); $mail->Send();
+                            Yii::app()->user->setFlash('contact','Thank you for... as possible.');
+//                            $this->refresh();
+                            echo "sunil";
+                            exit;
+   
+                            
+                            
                         }
                 }
        
