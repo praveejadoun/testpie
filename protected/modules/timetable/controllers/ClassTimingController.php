@@ -198,21 +198,41 @@ public function   init() {
 
 
   public function actionAjax_Create(){
-
+      
+                $model=new ClassTimings;
+                
+               $this->performAjaxValidation($model);
                if(isset($_POST['ClassTimings']))
 		{
-                       $model=new ClassTimings;
-                      //set the submitted values
-                        $model->attributes=$_POST['ClassTimings'];
-                       //return the JSON result to provide feedback.
-			            if($model->save(false)){
-                                echo json_encode(array('success'=>true,'id'=>$model->primaryKey) );
-                                exit;
-                        } else
+                    //set the submitted values
+                    $model->attributes=$_POST['ClassTimings'];
+                    
+                    if($model->validate())
+                        {
+                                    // form inputs are valid, do something here
+                                   
+                            if($model->save(false)){
+                            echo json_encode(array('success'=>true,'id'=>$model->primaryKey) );
+                            exit;
+                        }
+                        else
                         {
                             echo json_encode(array('success'=>false));
                             exit;
                         }
+                        }         
+                                    
+                        
+                     
+                       //return the JSON result to provide feedback.
+//			            if($model->save(false)){
+//                                echo json_encode(array('success'=>true,'id'=>$model->primaryKey) );
+//                                exit;
+//                        } else
+//                        {
+//                            echo json_encode(array('success'=>false));
+//                            exit;
+//                        }
 		}
   }
 	public function convertTime($time)

@@ -199,14 +199,25 @@ public function   init() {
 
 
     public function actionAjax_Create(){
+            
+        $model=new StudentCategories;
 
-               if(isset($_POST['StudentCategories']))
-		{
-                       $model=new StudentCategories;
-                      //set the submitted values
-                        $model->attributes=$_POST['StudentCategories'];
-                       //return the JSON result to provide feedback.
-			            if($model->save(false)){
+             
+                       
+                       if(isset($_POST['ajax']) && $_POST['ajax']==='student-categories-form')
+                        {
+                        echo CActiveForm::validate($model);
+                        Yii::app()->end();
+                        }
+                if(isset($_POST['StudentCategories']))
+                              {
+                       //set the submitted values
+                     $model->attributes=$_POST['StudentCategories'];
+                                if($model->validate())
+                                    {
+                                    // form inputs are valid, do something here
+                                   
+                                          if($model->save(false)){
                                 echo json_encode(array('success'=>true,'id'=>$model->primaryKey) );
                                 exit;
                         } else
@@ -214,6 +225,13 @@ public function   init() {
                             echo json_encode(array('success'=>false));
                             exit;
                         }
+                                  
+                                    
+                                    }
+                                             
+                       
+                       //return the JSON result to provide feedback.
+			          
 		}
   }
 

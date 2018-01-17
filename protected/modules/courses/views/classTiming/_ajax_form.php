@@ -49,7 +49,7 @@
      'id'=>'class-timings-form',
     //  'htmlOptions' => array('enctype' => 'multipart/form-data'),
          'action' => $actionUrl,
-    // 'enableAjaxValidation'=>true,
+     'enableAjaxValidation'=>true,
       'enableClientValidation'=>true,
      'focus'=>array($model,'name'),
      'errorMessageCssClass' => 'input-notification-error  error-simple png_bg',
@@ -114,8 +114,8 @@
 			}
 		
 			}
-			if($time=='h:i A')
-			{
+//			if($time=='h:i A')
+//			{
 				$this->widget('application.extensions.jui_timepicker.JTimePicker', array(
      'model'=>$model,
 	 'attribute'=>'start_time',
@@ -133,23 +133,23 @@
 	 
      
    )); 
-			}
-			else if($time=='H:i')
-			{
-			$this->widget('application.extensions.jui_timepicker.JTimePicker', array(
-     'model'=>$model,
-	 'attribute'=>'start_time',
-     'name'=>'ClassTimings[start_time]',
-	 'options'=>array(
-         'showPeriod'=>false,  
-    'closeButtonText'=> 'Done',     
-    'showNowButton'=> true,        
-   
-         ),
-	 
-     
-   ));
-			}
+//			}
+//			else if($time=='H:i')
+//			{
+//			$this->widget('application.extensions.jui_timepicker.JTimePicker', array(
+//     'model'=>$model,
+//	 'attribute'=>'start_time',
+//     'name'=>'ClassTimings[start_time]',
+//	 'options'=>array(
+//         'showPeriod'=>false,  
+//    'closeButtonText'=> 'Done',     
+//    'showNowButton'=> true,        
+//   
+//         ),
+//	 
+//     
+//   ));
+//			}
     ?> 
         <span id="success-ClassTimings_start_time"
               class="hid input-notification-success  success png_bg right"></span>

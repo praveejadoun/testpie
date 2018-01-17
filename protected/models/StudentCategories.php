@@ -38,6 +38,7 @@ class StudentCategories extends CActiveRecord
 			array('is_deleted', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			array('name','required'),
+                        array('name','check'),
                         array('name', 'match','pattern' => '/^[a-zA-Z\s]+$/','message' => 'It can only contain alphabets,space'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -87,8 +88,17 @@ class StudentCategories extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-        public function check()
+        public function check($attribute,$params)
         {
-            
+           $sc = StudentCategories::model()->findByAttributes(array('name'=>$this->name));
+           
+               
+               $get = $this->name;
+               if($sc->name == $get)
+               {
+                   $this->addError($attribute,'Time already exist !' );
+               }
+              
+           
         }
 }

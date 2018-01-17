@@ -190,7 +190,9 @@ echo '<br/></div></div>';
                                               echo '<td class="td">'
                                              ./*$this->renderPartial('ajax',array('day'=>'17','month'=>'12','year'=>'2013','emp_id'=>$_REQUEST['emp']))*/
                                                  
-                                                      
+//                                                  $set = EmployeeSubjectwiseAttendances::model()->findByAttributes(array('attendance_date'=>2018-01-14));     
+//                                              if(count($set)==0)
+//                                              {
                                                    CHtml::ajaxLink('Mark Leave',$this->createUrl('teacherSubjectAttendance/addnew'),array(
         'onclick'=>'$("#jobDialog").dialog("open"); return false;',
         'update'=>'#jobDialog','type' =>'GET','data' => array( 'day' =>date('d', $d),'month'=>date('m', $d),'year'=>date('Y', $d),'emp_id'=>$_REQUEST['emp']),'dataType' => 'text',),array('id'=>'showJobDialog124'.$_REQUEST['emp']))  
@@ -203,10 +205,15 @@ echo '<br/></div></div>';
         'update'=>'#jobDialog','type' =>'GET','data'=>array('day' =>'16','month'=>'12','year'=>'2012','emp_id'=>$_REQUEST['emp']),
         ),array('id'=>'showJobDialog1'.$_REQUEST['emp']))*/.'<div id="jobDialog"></div><br><br>'
                                                .date('d M', $d).'<br><br>'
-                                              .$subject->name.'<br><br>'.$batch->name.
-                                                 '</td>';
+                                              .$subject->name.'<br><br>'.$batch->name.'</td>';
+                                                
                                          
-                                         }
+//                                         }
+//                                        else {
+//                                                echo CHtml::link('',array('timetableEntries/remove'),array('confirm'=>'Are you sure?','class'=>'delete'));
+//                                        }
+                                        }
+                                         
                                          else{
                                              echo '<td class="td"></td>';
                                          }

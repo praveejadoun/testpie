@@ -42,7 +42,19 @@ class ClassTimings extends CActiveRecord
 			array('name', 'length', 'max'=>255),
 			array('start_time, end_time', 'length', 'max'=>120),
 			array('name, start_time, end_time', 'required'),
-                        array('start_time','checktime','message'=>'sunil'),
+//                        array('start_time','between'),
+//                    array(
+//                                'end_time',
+//				'compare',
+//				'compareAttribute'=>'start_time',
+//				'operator'=>'>', 
+//				'allowEmpty'=>false , 
+//				'message'=>'{attribute} must be greater than start time.'
+//                            ),
+                        array('start_time','checkStartTime'),
+                        array('end_time','checkEndTime'),
+                        array('end_time','compare'),
+                        array('name','check'),
 			array('name','CRegularExpressionValidator', 'pattern'=>'/^[A-Za-z0-9_ ]+$/','message'=>"{attribute} should contain only letters."),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -99,25 +111,73 @@ class ClassTimings extends CActiveRecord
 		));
 	}
         
-        public function checktime($attribute,$params)
+        public function checkStartTime($attribute,$params)
         {
-            $time = ClassTimings::model()->findAll("batch_id=:x",array(':x'=>$_REQUEST['id']));
-            foreach($time as $time_1)
+            $time = ClassTimings::model()->findAll("batch_id=:x",array(':x'=>$this->batch_id));
+                  
+            foreach($time as $time_1){
+            $starttime = $time_1->start_time; //DATE("H:i:s", STRTOTIME($time_1->start_time));
+            $endtime = $time_1->end_time; //DATE("H:i:s", STRTOTIME($time_1->end_time));
+            $selctedtime =  DATE("H:i:s", STRTOTIME($this->start_time));
+           if($selctedtime >= $starttime && $selctedtime < $endtime)
             {
-            $starttime =  DATE("H:i", STRTOTIME($time_1->start_time));
-            $endtime = DATE("H:i", STRTOTIME($time_1->end_time));
-            $selctedtime = DATE("H:i", STRTOTIME($this->start_time));
-            if($selctedtime == $starttime )
-            {
-                $this->addError($attribute,'Time already exist !' );
-            }
-            else
-            {
-                 $this->addError($attribute,'Time already exist !' );
+                $this->addError($attribute,'Selected Start Time Already Exist !');
             }
             }
-            
-            
-       
         }
-}
+//            else
+//            {
+//                 $this->addError($attribute,'Time !' );
+//            }
+            
+            public function checkEndTime($attribute,$params)
+        {
+            $time = ClassTimings::model()->findAll("batch_id=:x",array(':x'=>$this->batch_id));
+                  
+            foreach($time as $time_1){
+            $starttime =  $time_1->start_time; //DATE("H:i:s", STRTOTIME($time_1->start_time));
+            $endtime = $time_1->end_time; //DATE("H:i:s", STRTOTIME($time_1->end_time));
+            $selctedtime =  DATE("H:i:s", STRTOTIME($this->end_time));
+            if($selctedtime >= $starttime && $selctedtime < $endtime)
+            {
+                $this->addError($attribute,'Selected End Time Already Exist !' );
+            }
+            }
+        } 
+        
+            public function compare($attribute,$params)
+            {
+                $a = DATE("H:i:s", STRTOTIME($this->start_time));
+                $b = DATE("H:i:s", STRTOTIME($this->end_time));
+                if($a >= $b)
+                {
+                   $this->addError($attribute,'End Time Should Be Greater Than Start Time' ); 
+                }
+            }
+          
+         public function check($attribute,$params)
+        {
+           $time = ClassTimings::model()->findByAttributes(array('name'=>$this->name,'batch_id'=>$this->batch_id));
+           
+               
+               $get = $this->name;
+               if($time->name == $get)
+               {
+                   $this->addError($attribute,'Name You Entered Already Exist For Selected Batch !' );
+               }
+        }
+        
+         public function between($attribute,$params)
+         {
+             $a = DATE("H:i:s", STRTOTIME($this->start_time));
+                $b = DATE("H:i:s", STRTOTIME($this->end_time));
+//            $sql = mysql_query(SELECT * FROM class_timings WHERE batch_id=26 AND start_time BETWEEN '.$this->start_time.' and '.$this->end_time);
+             $time = ClassTimings::model()->findAllBySql('select * from class_timings where batch_id=26 AND start_time >= '.$a.' and end_time <= '.$b.'');
+             $count = count($time);
+             if($count > 1)
+             {
+              $this->addError($attribute,'Between' );
+             }
+             
+         }
+         }

@@ -198,14 +198,29 @@ public function   init() {
 
 
   public function actionAjax_Create(){
+      
+      $model=new ClassTimings;
+      
+      
+       if(isset($_POST['ajax']) && $_POST['ajax']==='class-timings-form')
+                        {
+                        echo CActiveForm::validate($model);
+                        Yii::app()->end();
+                        }
+                if(isset($_POST['ClassTimings']))
+                              {
+                       //set the submitted values
+                       $model->attributes=$_POST['ClassTimings'];
+//                    date('Y-m-d',strtotime($list['start_date']));
+                    $model->start_time = date('H:i:s', strtotime($_POST['ClassTimings']['start_time']));
+                    $model->end_time = date('H:i:s', strtotime($_POST['ClassTimings']['end_time']));
+                                         
 
-               if(isset($_POST['ClassTimings']))
-		{
-                       $model=new ClassTimings;
-                      //set the submitted values
-                        $model->attributes=$_POST['ClassTimings'];
-                       //return the JSON result to provide feedback.
-			            if($model->save(false)){
+                                if($model->validate())
+                                    {
+                                    // form inputs are valid, do something here
+                                   
+                                          if($model->save(false)){
                                 echo json_encode(array('success'=>true,'id'=>$model->primaryKey) );
                                 exit;
                         } else
@@ -213,7 +228,31 @@ public function   init() {
                             echo json_encode(array('success'=>false));
                             exit;
                         }
+                                  
+                                    
+                                    }
+                                             
+                       
+                       //return the JSON result to provide feedback.
+			          
 		}
+      
+
+//               if(isset($_POST['ClassTimings']))
+//		{
+//                       
+//                      //set the submitted values
+//                        $model->attributes=$_POST['ClassTimings'];
+//                       //return the JSON result to provide feedback.
+//			            if($model->save(false)){
+//                                echo json_encode(array('success'=>true,'id'=>$model->primaryKey) );
+//                                exit;
+//                        } else
+//                        {
+//                            echo json_encode(array('success'=>false));
+//                            exit;
+//                        }
+//		}
   }
 	public function convertTime($time)
 

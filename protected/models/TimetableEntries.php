@@ -106,15 +106,15 @@ class TimetableEntries extends CActiveRecord
                 $ct_starttime =  DATE("H:i", STRTOTIME($ct->start_time));
                 $ct_endtime = DATE("H:i", STRTOTIME($ct->end_time));
                 $pst = ClassTimings::model()->findByAttributes(array("id"=>$this->class_timing_id));
-                $mine = DATE("H:i", STRTOTIME($pst->start_time));
-                $yours = DATE("H:i", STRTOTIME($pst->end_time));
-                if($mine <= $ct_starttime)
+                $current_start_time = DATE("H:i", STRTOTIME($pst->start_time));
+                $current_end_time = DATE("H:i", STRTOTIME($pst->end_time));
+                if($current_start_time <= $ct_starttime)
                 {
-                    $this->addError($attribute,$mine);
+                    $this->addError($attribute,'Already Assigned The Selected Employee !');
                 }
-                elseif($yours >= $ct_endtime) 
+                elseif($current_end_time >= $ct_endtime) 
                 {
-                    $this->addError($attribute,'vanam');
+                    $this->addError($attribute,'Already Assigned The Selected Employee !');
                 }
 //                $starttime = $this->start_time;
 //                $endtime = $this->end_time;

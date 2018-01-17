@@ -57,7 +57,7 @@
      'id'=>'student-categories-form',
     //  'htmlOptions' => array('enctype' => 'multipart/form-data'),
          'action' => $actionUrl,
-    // 'enableAjaxValidation'=>true,
+     'enableAjaxValidation'=>true,
       'enableClientValidation'=>true,
      'focus'=>array($model,'name'),
      'errorMessageCssClass' => 'input-notification-error  error-simple png_bg',
