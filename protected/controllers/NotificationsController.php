@@ -335,7 +335,7 @@ class NotificationsController extends RController
 			$model->attributes=$_POST['Notifications'];   
                         if($model->save())
                         {
-//                             echo (extension_loaded('openssl')?'SSL loaded':'SSL not loaded')."\n";
+                             echo (extension_loaded('openssl')?'SSL loaded':'SSL not loaded')."\n";
 //                            
 //                                $mail=Yii::app()->Smtpmail;
 //                                $mail->IsSMTP();
@@ -364,13 +364,13 @@ class NotificationsController extends RController
 //                                                        'allow_self_signed' => true
 //                                                        )
 //                                                        );
-                            $mail->SMTPSecure = "tls";  
+                            $mail->SMTPSecure = "ssl";  
                             $mail->Host = 'smtp.gmail.com'; 
                             $mail->SMTPAutoTLS = false;
                             $mail->SMTPAuth = true; 
                             $mail->SMTPSecure = true; 
                             $mail->Username = 'sunilvanam10@gmail.com'; 
-                            $mail->Port = '587'; 
+                            $mail->Port = '465'; 
                             $mail->Password = '*sunil@1995/*'; 
                             $mail->SMTPKeepAlive = true;  
                             $mail->Mailer = "smtp"; 
