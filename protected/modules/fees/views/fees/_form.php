@@ -205,20 +205,24 @@
                                                                     </table>
                                                                     
                                                                     <table class="admNoApplicable" style="display:none;">
-                                                                        <tr><td>
+                                                                        <tr>
+                                                                            <td>
                                                                                 <input class="FeeParticularAccessadmissionNo" placeholder="Admission Numbers seperated by commas" style="width:300px !important;" name="FeeParticularAccess[0][admission_numbers][]" type="text" />
-                                                                            </td></tr>
+                                                                            </td>
+                                                                           
+                                                                        </tr>
                                                                     </table>
                                                                 </td>
-                                                                <td>
-                                                                    <input placeholder="Amount" style="width:70px !important; padding-top:6px; padding-bottom:6px;" class="particular-access-amount" name="FeeParticularAccess[0][amount][]" type="text" />
-                                                                </td>
+                                                                 <td>
+                                                                                <input placeholder="Amount" style="width:70px !important; padding-top:6px; padding-bottom:6px;" class="particular-access-amount" name="FeeParticularAccess[0][amount][]" type="text" />
+                                                                            </td>
                                                                 <td>
                                                                     <div style="position:relative;">
                                                                         <a href="javascript:void(0);" title="Click to remove access" class="remove-access fees-trash" style="top:-9px; right:-25px;" data-row="0" onClick="javascript:closeAccessBox(this)">X</a>
                                                                         </a>
                                                                     </div>
                                                                 </td>
+                                                                
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -326,6 +330,9 @@
 
                 var amtname = "FeeParticularAccess[" + temp + "][amount][]";
                 clonedParticularBox.find(".particular-access-amount").attr('name', amtname);
+                
+                var admname = "FeeParticularAccess[" + temp + "][admission_numbers][]";
+                clonedParticularBox.find(".FeeParticularAccessadmissionNo").attr('name', admname);
 
 
 
@@ -380,6 +387,10 @@
 
             var newmname = "FeeParticularAccess[" + dataRow + "][amount][]";
             clonedBox.find(".particular-access-amount").attr('name', newmname);
+            
+            var newmname = "FeeParticularAccess[" + dataRow + "][admission_numbers][]";
+            clonedBox.find(".FeeParticularAccessadmissionNo").attr('name', newmname);
+            
             //alert(clonedBox.find(".particular-access-amount").attr('name'));
             //Manage other dropdown 3
 

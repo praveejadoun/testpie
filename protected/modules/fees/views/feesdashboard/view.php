@@ -96,23 +96,34 @@ $this->breadcrumbs=array(
                                   <?php if($particularaccess_1->access_type == 1) {
                                  if($particularaccess_1->course_id != NULL && $particularaccess_1->batch_id != NULL && $particularaccess_1->student_category_id != NULL)  { ?>
                               
-                              <div>course:<?php echo $particularaccess_1->course_id;?></div>
-                              <div>Batch:<?php echo $particularaccess_1->batch_id;?></div>
-                              <div>Student Category:<?php echo $particularaccess_1->student_category_id;?></div>
+                              <div><b>Course : </b><?php $course = Courses::model()->findByAttributes(array('id'=>$particularaccess_1->course_id));  echo $course->course_name;?></div>
+                              <div><b>Batch : </b><?php $batches = Batches::model()->findByAttributes(array('id'=>$particularaccess_1->batch_id)); echo $batches->name;?></div>
+                              <div><b>Student Category : </b><?php $student_category = StudentCategories::model()->findByAttributes(array('id'=>$particularaccess_1->student_category_id));echo $student_category->name;?></div>
                               
                                 <?php } elseif($particularaccess_1->course_id != NULL && $particularaccess_1->batch_id != NULL && $particularaccess_1->student_category_id == NULL) { ?>
                              
-                              <div>course:<?php echo $particularaccess_1->course_id;?></div>
-                              <div>Batch:<?php echo $particularaccess_1->batch_id;?></div>
-                              <div>Student Category:All</div>
+                              <div><b>Course : </b><?php $course = Courses::model()->findByAttributes(array('id'=>$particularaccess_1->course_id));  echo $course->course_name;?></div>
+                              <div><b>Batch : </b><?php $batches = Batches::model()->findByAttributes(array('id'=>$particularaccess_1->batch_id)); echo $batches->name;?></div>
+                              <div><b>Student Category : </b>ALL</div>
                               
                                <?php }elseif($particularaccess_1->course_id == NULL && $particularaccess_1->batch_id == NULL && $particularaccess_1->student_category_id != NULL){ ?>
                               
-                              <div>course:All</div>
-                              <div>Batch:All</div>
-                              <div>Student Category:<?php echo $particularaccess_1->student_category_id;?></div>
-                            
-                               <?php } elseif($particularaccess_1->course_id == NULL && $particularaccess_1->batch_id == NULL && $particularaccess_1->student_category_id == NULL) { ?>
+                              <div><b>Course : </b>All</div>
+                              <div><b>Batch : </b>All</div>
+                              <div><b>Student Category : </b><?php $student_category = StudentCategories::model()->findByAttributes(array('id'=>$particularaccess_1->student_category_id));echo $student_category->name;?></div>
+                               <?php } elseif($particularaccess_1->course_id != NULL && $particularaccess_1->batch_id == NULL && $particularaccess_1->student_category_id == NULL) { ?>
+                              
+                              <div><b>Course : </b><?php $course = Courses::model()->findByAttributes(array('id'=>$particularaccess_1->course_id));  echo $course->course_name;?></div>
+                              <div><b>Batch : </b>All</div>
+                              <div><b>Student Category : </b>ALL</div>
+                              
+                               <?php } elseif($particularaccess_1->course_id != NULL && $particularaccess_1->batch_id == NULL && $particularaccess_1->student_category_id != NULL){ ?>
+                               
+                              <div><b>Course : </b><?php $course = Courses::model()->findByAttributes(array('id'=>$particularaccess_1->course_id));  echo $course->course_name;?></div>
+                              <div><b>Batch : </b>All</div>
+                              <div><b>Student Category : </b><?php $student_category = StudentCategories::model()->findByAttributes(array('id'=>$particularaccess_1->student_category_id));echo $student_category->name;?></div>
+                              
+                              <?php } elseif($particularaccess_1->course_id == NULL && $particularaccess_1->batch_id == NULL && $particularaccess_1->student_category_id == NULL) { ?>
                               
                               <div>All</div>
                               
