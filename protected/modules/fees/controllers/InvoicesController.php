@@ -245,6 +245,7 @@ class InvoicesController extends RController {
                      $a=rand(00000000, 99999999);
                     $invoice->invoice_id = $a;
                     $invoice->finance_fee_category_id = $row['finance_fee_category_id'];
+                    $invoice->finance_fee_particular_id = $row['fee_particular_id'];
                     $fee_particulars = FinanceFeeParticulars::model()->findByAttributes(array('id'=>$row['fee_particular_id'])); 
                     $tax_particular = Taxes::model()->findByAttributes(array('id'=>$fee_particulars->tax_id));
                     $tax = $tax_particular->value;
@@ -253,9 +254,10 @@ class InvoicesController extends RController {
                     $tax_calc = $tax/100;
                     $discount_value = ($discont_calc)*($row['invoice_amount']);
                     $tax_value = ($tax_calc)*($row['invoice_amount']);
-                    $total = ($row['invoice_amount'])-(($discount_value)+($tax_value));
+                   $total = ($row['invoice_amount'])-($discount_value)+($tax_value);
                     $invoice->amount = $total;
                     $invoice->amount_payable = $total;
+                    $invoice->actual_amount = $row['invoice_amount'];
                     $invoice->student_id = $row['student_id'];
                     $invoice->status = 0;
                     $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
@@ -291,6 +293,7 @@ class InvoicesController extends RController {
                      $a=rand(00000000, 99999999);
                     $invoice->invoice_id = $a;
                     $invoice->finance_fee_category_id = $row['finance_fee_category_id'];
+                    $invoice->finance_fee_particular_id = $row['fee_particular_id'];
                      $fee_particulars = FinanceFeeParticulars::model()->findByAttributes(array('id'=>$row['fee_particular_id'])); 
                     $tax_particular = Taxes::model()->findByAttributes(array('id'=>$fee_particulars->tax_id));
                     $tax = $tax_particular->value;
@@ -299,9 +302,10 @@ class InvoicesController extends RController {
                     $tax_calc = $tax/100;
                     $discount_value = ($discont_calc)*($row['invoice_amount']);
                     $tax_value = ($tax_calc)*($row['invoice_amount']);
-                    $total = ($row['invoice_amount'])-(($discount_value)+($tax_value));
+                    $total = ($row['invoice_amount'])-($discount_value)+($tax_value);
                     $invoice->amount = $total;
                     $invoice->amount_payable = $total;
+                    $invoice->actual_amount = $row['invoice_amount'];
                     $invoice->student_id = $row['student_id'];
                     $invoice->status = 0;
                     $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
@@ -337,6 +341,7 @@ class InvoicesController extends RController {
                      $a=rand(00000000, 99999999);
                     $invoice->invoice_id = $a;
                     $invoice->finance_fee_category_id = $row['finance_fee_category_id'];
+                    $invoice->finance_fee_particular_id = $row['fee_particular_id'];
                       $fee_particulars = FinanceFeeParticulars::model()->findByAttributes(array('id'=>$row['fee_particular_id'])); 
                     $tax_particular = Taxes::model()->findByAttributes(array('id'=>$fee_particulars->tax_id));
                     $tax = $tax_particular->value;
@@ -345,9 +350,10 @@ class InvoicesController extends RController {
                     $tax_calc = $tax/100;
                     $discount_value = ($discont_calc)*($row['invoice_amount']);
                     $tax_value = ($tax_calc)*($row['invoice_amount']);
-                    $total = ($row['invoice_amount'])-(($discount_value)+($tax_value));
+                    $total = ($row['invoice_amount'])-($discount_value)+($tax_value);
                     $invoice->amount = $total;
                     $invoice->amount_payable = $total;
+                    $invoice->actual_amount = $row['invoice_amount'];
                     $invoice->student_id = $row['student_id'];
                     $invoice->status = 0;
                     $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
@@ -383,6 +389,7 @@ class InvoicesController extends RController {
                      $a=rand(00000000, 99999999);
                     $invoice->invoice_id = $a;
                     $invoice->finance_fee_category_id = $row['finance_fee_category_id'];
+                    $invoice->finance_fee_particular_id = $row['fee_particular_id'];
                     $fee_particulars = FinanceFeeParticulars::model()->findByAttributes(array('id'=>$row['fee_particular_id'])); 
                     $tax_particular = Taxes::model()->findByAttributes(array('id'=>$fee_particulars->tax_id));
                     $tax = $tax_particular->value;
@@ -391,9 +398,10 @@ class InvoicesController extends RController {
                     $tax_calc = $tax/100;
                     $discount_value = ($discont_calc)*($row['invoice_amount']);
                     $tax_value = ($tax_calc)*($row['invoice_amount']);
-                    $total = ($row['invoice_amount'])-(($discount_value)+($tax_value));
+                    $total = ($row['invoice_amount'])-($discount_value)+($tax_value);
                     $invoice->amount = $total;
                     $invoice->amount_payable = $total;
+                    $invoice->actual_amount = $row['invoice_amount'];
                     $invoice->student_id = $row['student_id'];
                     $invoice->status = 0;
                     $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
@@ -429,6 +437,7 @@ class InvoicesController extends RController {
                      $a=rand(00000000, 99999999);
                     $invoice->invoice_id = $a;
                     $invoice->finance_fee_category_id = $row['finance_fee_category_id'];
+                    $invoice->finance_fee_particular_id = $row['fee_particular_id']; 
                      $fee_particulars = FinanceFeeParticulars::model()->findByAttributes(array('id'=>$row['fee_particular_id'])); 
                     $tax_particular = Taxes::model()->findByAttributes(array('id'=>$fee_particulars->tax_id));
                     $tax = $tax_particular->value;
@@ -437,9 +446,10 @@ class InvoicesController extends RController {
                     $tax_calc = $tax/100;
                     $discount_value = ($discont_calc)*($row['invoice_amount']);
                     $tax_value = ($tax_calc)*($row['invoice_amount']);
-                    $total = ($row['invoice_amount'])-(($discount_value)+($tax_value));
+                    $total = ($row['invoice_amount'])-($discount_value)+($tax_value);
                     $invoice->amount = $total;
                     $invoice->amount_payable = $total;
+                    $invoice->actual_amount = $row['invoice_amount'];
                     $invoice->student_id = $row['student_id'];
                     $invoice->status = 0;
                     $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
@@ -476,6 +486,7 @@ class InvoicesController extends RController {
                      $a=rand(00000000, 99999999);
                     $invoice->invoice_id = $a;
                     $invoice->finance_fee_category_id = $row['finance_fee_category_id'];
+                    $invoice->finance_fee_particular_id = $row['fee_particular_id'];
                      $fee_particulars = FinanceFeeParticulars::model()->findByAttributes(array('id'=>$row['fee_particular_id'])); 
                     $tax_particular = Taxes::model()->findByAttributes(array('id'=>$fee_particulars->tax_id));
                     $tax = $tax_particular->value;
@@ -484,9 +495,10 @@ class InvoicesController extends RController {
                     $tax_calc = $tax/100;
                     $discount_value = ($discont_calc)*($row['invoice_amount']);
                     $tax_value = ($tax_calc)*($row['invoice_amount']);
-                    $total = ($row['invoice_amount'])-(($discount_value)+($tax_value));
+                    $total = ($row['invoice_amount'])-($discount_value)+($tax_value);
                     $invoice->amount = $total;
                     $invoice->amount_payable = $total;
+                    $invoice->actual_amount = $row['invoice_amount'];
                     $invoice->student_id = $row['student_id'];
                     $invoice->status = 0;
                     $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
@@ -537,6 +549,7 @@ class InvoicesController extends RController {
                     $a=rand(00000000, 99999999);
                     $invoice->invoice_id = $a;
                     $invoice->finance_fee_category_id = $row['finance_fee_category_id'];
+                    $invoice->finance_fee_particular_id = $row['fee_particular_id'];
                     $fee_particulars = FinanceFeeParticulars::model()->findByAttributes(array('id'=>$row['fee_particular_id'])); 
                     $tax_particular = Taxes::model()->findByAttributes(array('id'=>$fee_particulars->tax_id));
                     $tax = $tax_particular->value;
@@ -545,9 +558,10 @@ class InvoicesController extends RController {
                     $tax_calc = $tax/100;
                     $discount_value = ($discont_calc)*($row['invoice_amount']);
                     $tax_value = ($tax_calc)*($row['invoice_amount']);
-                    $total = ($row['invoice_amount'])-(($discount_value)+($tax_value));
+                    $total = ($row['invoice_amount'])-($discount_value)+($tax_value);
                     $invoice->amount = $total;
                     $invoice->amount_payable = $total;
+                    $invoice->actual_amount = $row['invoice_amount'];
                     $invoice->student_id = $row['student_id'];
                     $invoice->status = 0;
                     $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
@@ -592,7 +606,8 @@ class InvoicesController extends RController {
 //        print_r($dataArray);
 //        exit;
         //Get particulars 
-       
+         $feesCategory->is_invoice = 1;
+         $feesCategory->save();
          $this->redirect(array('/fees/invoices/manage', 'id' =>$_REQUEST['id']));
         $this->render('generate');
     }

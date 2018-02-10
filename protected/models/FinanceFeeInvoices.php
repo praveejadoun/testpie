@@ -8,8 +8,10 @@
  * @property string $invoice_id
  * @property string $student_id
  * @property integer $finance_fee_category_id
+ * @property integer $finance_fee_particular_id
  * @property string $amount
  * @property string $amount_payable
+ * @property string $actual_amount
  * @property string $status
  * @property string $due_date
  * @property string $last_payment_date
@@ -51,7 +53,7 @@ class FinanceFeeInvoices extends CActiveRecord
 //			array('name','CRegularExpressionValidator', 'pattern'=>'/^[A-Za-z_ ]+$/','message'=>"{attribute} should contain only letters."),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, invoice_id,amount,amount_payable, finance_fee_category_id, status, student_id, due_date, last_payment_date, is_deleted, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, invoice_id,amount,amount_payable,actual_amount, finance_fee_category_id,finance_fee_particular_id, status, student_id, due_date, last_payment_date, is_deleted, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -75,8 +77,10 @@ class FinanceFeeInvoices extends CActiveRecord
 			'id' => 'ID',
 			'invoice_id' => 'Invoice',
 			'finance_fee_category_id' => 'Finance Fee Category',
+                        'finance_fee_particular_id' => 'Finance Fee PArticular',
                         'amount' => 'Amount',
                         'amount_payable' => 'Amount Payable',
+                        'actual_amount' => 'Actual Amount',
 			'student_id' => 'Student',
                         'status' => 'Status',
                         'due_date' => 'Due Date',
@@ -101,8 +105,10 @@ class FinanceFeeInvoices extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('invoice_id',$this->invoice_id,true);
                 $criteria->compare('finance_fee_category_id',$this->finance_fee_category_id);
+                $criteria->compare('finance_fee_particular_id',$this->finance_fee_particular_id);
                 $criteria->compare('amount',$this->amount,true);
                 $criteria->compare('amount_payable',$this->amount_payable,true);
+                $criteria->compare('actual_amount',$this->actual_amount,true);
 		$criteria->compare('student_id',$this->student_id);
                 $criteria->compare('status',$this->status);
                 $criteria->compare('due_date',$this->due_date,true);

@@ -128,7 +128,7 @@ $this->breadcrumbs=array(
                               <div>All</div>
                               
                                   <?php }}elseif($particularaccess_1->access_type == 2) {?>
-                               <div>Admission Number:<?php echo $particularaccess_1->admission_numbers; ?></div>
+                               <div><b>Admission Number : </b><?php echo $particularaccess_1->admission_numbers; ?></div>
                                   <?php } ?>
                               </p>
                              

@@ -7,7 +7,8 @@
     </td>
     <td valign="top" width="75%">
         <div class="cont_right formWrapper">
-            <h1>Invoice-</h1>
+            <?php $finance_invoices = FinanceFeeInvoices::model()->findByAttributes(array('id'=>$_REQUEST['id']));?>
+            <h1>Invoice&nbsp;-&nbsp;#<?= $finance_invoices->invoice_id;?></h1>
               <div style="margin-top:20px; position:relative;">
                         <div class="clear"></div>
                         <div style="display: inline-block;margin-bottom: 14px;margin-top:0px; width: 100%;">
@@ -144,43 +145,51 @@
                 </tbody> 
                 
                 <tbody>
-                   <?php $particular = FinanceFeeParticulars::model()->findAll("finance_fee_category_id=:x",array(':x'=>$feecategory->id));
+                   <?php
+                   
+                   $invoices = FinanceFeeInvoices::model()->findByAttributes(array('id'=>$_REQUEST['id']));
+                   
+                   $particular = FinanceFeeParticulars::model()->findByAttributes(array('id'=>$invoices->finance_fee_particular_id));
                    $subtotal = array();
                    $particulartotal = array();
                    $disc = array();
                    $ta[] = array();
                    $i=1;
-                   foreach ($particular as $particular_1){
+//                   foreach ($particular as $particular_1){
                    ?>
                     <tr>
                         <td align="center"><?php echo $i;?></td>
-                        <td align="center"><?php echo $particular_1->name;?></td>
-                        <td align="center"><?php echo $particular_1->description;?></td>
+                        <td align="center"><?php echo $particular->name;?></td>
+                        <td align="center"><?php echo $particular->description;?></td>
                        
                         <?php 
-                            $access = FinanceFeeParticularAccess::model()->findAll("finance_fee_particular_id=:x",array(':x'=>$particular_1->id));
+                            
+                        $access = FinanceFeeParticularAccess::model()->findAll("finance_fee_particular_id=:x",array(':x'=>$particular->id));
                             
                        ?>
              
                         <td align="center">
                             <?php 
-                            $total =array();
-                            foreach($access as $access_1){ ?>
+//                            $total =array();
+//                            foreach($access as $access_1){ ?>
                              <?php
-                             $total[]=$access_1->amount;
+//                             $total[]=$access_1->amount;
                             // echo "<p>".$access_1->amount."</p>"; ?>
-                           <?php  } echo $data = array_sum($total);?>
+                           <?php //  }
+                           echo $invoices->actual_amount;
+//                            echo $data = array_sum($total);
+                           ?>
                         </td>
                        
                        
                          <td align="center">
                             <?php   
-                                    echo $discount = $particular_1->amount;
+                                    echo $discount = $particular->amount;
                                         
                                    
                             ?>
                          </td>
-                         <?php $taxes = Taxes::model()->findByAttributes(array('id'=>$particular_1->tax_id));?>
+                         <?php $taxes = Taxes::model()->findByAttributes(array('id'=>$particular->tax_id));?>
                         
                         <td align="center"><?php if($taxes!=NULL)echo $tax = $taxes->value;else echo "-";?></td>
                         <td align="center">
@@ -193,20 +202,26 @@
 //                                {
 //                                    $totaldiscount = $discount;
 //                                }
-                                $totaltax = ($tax/100)*$data;
-                                $totaldiscount = ($discount/100)*$data;
+//                                $totaltax = ($tax/100)*$data;
+//                                $totaldiscount = ($discount/100)*$data;
+                                $discont_calc = $discount/100;
+                                $discount_value = ($discont_calc)*($invoices->actual_amount);
+                                $tax_calc = $tax/100;
+                                $tax_value = ($tax_calc)*($invoices->actual_amount);
                                 $disc[] = $totaldiscount;
                                 $ta[] = $totaltax;
                                 $sum =  $data - $totaldiscount +  $totaltax;
                                 $total = $sum;
                                 $subtotal[] = $total;
-                                echo $total;
+//                                echo $total;
+                                echo $invoices->amount;
                                 
                             ?>
                         </td>
                         
                     </tr>
-                    <?php $particulartotal[]=$data;$i++;} ?>
+                    <?php $particulartotal[]=$data;$i++;
+//                            } ?>
                 </tbody>
                  </table>
                 <table cellspacing="0" cellpadding="0" border="0" width="100%">
@@ -214,19 +229,23 @@
                 <tbody>
                     <tr>
                          <td  align="right" width="572px" style="padding-right:42px;"><strong>Sub total</strong></td>
-                        <td align="center"> <?php echo  array_sum($particulartotal);?></td>
+                        <td align="center"> 
+                            <?php 
+//                            echo  array_sum($particulartotal);
+                              echo $invoices->actual_amount;
+                            ?></td>
                     </tr>
                     <tr>
                          <td  align="right" width="572px" style="padding-right:42px;"><strong>Discount</strong></td>
-                        <td align="center"><?php echo array_sum($disc);?></td>
+                        <td align="center"><?php echo $discount_value;?></td>
                     </tr>
                     <tr>
                          <td  align="right" width="572px" style="padding-right:42px;"><strong>Tax</strong></td>
-                        <td align="center"><?php echo array_sum($ta);?></td>
+                        <td align="center"><?php echo $tax_value;?></td>
                     </tr>
                     <tr>
                          <td  align="right" width="572px" style="padding-right:42px;"><strong>Total</strong></td>
-                        <td align="center"><?php echo array_sum($subtotal);?></td>
+                        <td align="center"><?php echo  $total = ($invoices->actual_amount)-($discount_value)+($tax_value); ?></td>
                     </tr>
                 </tbody>
                 </table>   
