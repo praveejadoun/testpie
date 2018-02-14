@@ -65,6 +65,9 @@ class FinanceFeeInvoices extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'student'=>array( self::BELONGS_TO, 'Students', 'student_id' ),
+                    'category'=>array( self::BELONGS_TO, 'FinanceFeeCategories', 'finance_fee_category_id' ),
+                    
 		);
 	}
 
@@ -101,7 +104,8 @@ class FinanceFeeInvoices extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
+                $criteria->with = 'student';
+                
 		$criteria->compare('id',$this->id);
 		$criteria->compare('invoice_id',$this->invoice_id,true);
                 $criteria->compare('finance_fee_category_id',$this->finance_fee_category_id);
@@ -109,7 +113,11 @@ class FinanceFeeInvoices extends CActiveRecord
                 $criteria->compare('amount',$this->amount,true);
                 $criteria->compare('amount_payable',$this->amount_payable,true);
                 $criteria->compare('actual_amount',$this->actual_amount,true);
-		$criteria->compare('student_id',$this->student_id);
+                $criteria->compare('CONCAT(student.first_name,student.last_name)',$this->student_id,true);
+		//$criteria->compare('student.first_name',$this->student_id,true);
+                                
+               // $criteria->compare( 'author.username', $this->author_search, true );
+                
                 $criteria->compare('status',$this->status);
                 $criteria->compare('due_date',$this->due_date,true);
                 $criteria->compare('last_payment_date',$this->last_payment_date,true);
@@ -119,7 +127,17 @@ class FinanceFeeInvoices extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+                        'sort'=>array(
+                        'attributes'=>array(
+                        'student_id'=>array(
+                        'asc'=>'"student.first_name". ."student.last_name"',
+                        
+            ),
+            '*',
+        ),
+    ),
 		));
+               
 	}
 	
 	public function amount($data,$row){		
@@ -151,5 +169,7 @@ class FinanceFeeInvoices extends CActiveRecord
 			return '-';
 		}
 	}
+        
+        
 
 }

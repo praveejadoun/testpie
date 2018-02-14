@@ -47,6 +47,97 @@ $this->breadcrumbs=array(
     </div>
     <div class="clear"></div>
 </div>
+<?php 
+Yii::app()->clientScript->registerScript('search', "
+$('.search-button').click(function(){
+	$('.search-form').toggle();
+	return false;
+});
+$('.search-form form').submit(function(){
+	$.fn.yiiGridView.update('invoices-grid', {
+		data: $(this).serialize()
+	});
+	return false;
+});
+");
+
+?>
+<div class="search-form" style="display:none">
+<?php $this->renderPartial('_search',array(
+	'model'=>$model,
+)); ?>
+</div>
+<?php 
+
+$this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>'invoices-grid',
+	'dataProvider'=>$model->search(),
+	'filter'=>$model,
+	'pager'=>array('cssFile'=>Yii::app()->baseUrl.'/css/formstyle.css'),
+ 	'cssFile' => Yii::app()->baseUrl . '/css/formstyle.css',
+	'columns'=>array(
+	array('name'=>'invoice_id','header' => 'Invoice',
+				'type'=>'raw',
+				'value' => '$data->invoice_id'),
+				
+	array('name'=>'finance_fee_category_id',
+				'type'=>'raw',
+				'value'=>'$data->category->name'),
+        
+//        'student.first_name',
+         
+        array('name'=>'student_id',
+				
+                                //'filter' => CHtml::activeTextField($model, 'student_id'),
+                                'value'=>function($data){
+                                        echo $data->student->first_name.' '.$data->student->last_name;
+                                }
+                                
+                                //'filter' => CHtml::activeTextField($model, 'student_id'),
+                    ),
+          
+//	array('name'=>'ward_id',
+//				'type'=>'raw',
+//				'value' => array($model,'studentname'),
+//				'filter' => false,
+//				'htmlOptions' => array('style'=>'width:250px;')
+//				),
+//	array('name'=>'email',
+//				'type'=>'raw',
+//				'value'=>'$data->email'),
+							
+		/*'id',
+		'ward_id',
+		'first_name',
+		'last_name',
+		'relation',
+		'email',*/
+		/*
+		'office_phone1',
+		'office_phone2',
+		'mobile_phone',
+		'office_address_line1',
+		'office_address_line2',
+		'city',
+		'state',
+		'country_id',
+		'dob',
+		'occupation',
+		'income',
+		'education',
+		'created_at',
+		'updated_at',
+		*/
+		array(
+			'header'=>'Action',
+			'class'=>'CButtonColumn',
+			'htmlOptions' => array('style'=>'width:80px;'),
+			 'template' => '{delete}',
+			 'headerHtmlOptions'=>array('style'=>'font-size:12px; font-weight:bold;')
+			 
+		),
+	),
+)); ?>
 
  <div style="margin-top:20px; position:relative;">
                         <div class="clear"></div>
@@ -173,3 +264,27 @@ $this->breadcrumbs=array(
 </table>
 
 <?php } ?>
+
+<script type ="text/javascript">
+    $('body').click(function(){
+        $('#name').hide();
+        $('#gender').hide();
+    });
+    
+    $('.filterbxcntnt_inner').click(function (event) {
+        event.stopPropagation();
+    });
+
+    $('.load_filter').click(function (event) {
+        event.stopPropagation();
+    });
+    </script>
+    
+    <script language="javascript">
+    function hide(id)
+    {
+        $(".drop").hide();
+        $('#' + id).toggle();
+    }
+</script>
+    

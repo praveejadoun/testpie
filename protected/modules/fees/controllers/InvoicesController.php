@@ -639,6 +639,7 @@ class InvoicesController extends RController {
     
     public function actionIndex()
     {
+        $model = new FinanceFeeInvoices('search');  
         $criteria = new CDbCriteria;
                 $criteria->compare('is_deleted', 0);
                 $total = FinanceFeeInvoices::model()->count($criteria);
@@ -649,13 +650,16 @@ class InvoicesController extends RController {
                 $pages->applyLimit($criteria);  // the trick is here!
                 $posts = FinanceFeeInvoices::model()->findAll($criteria);
 
-
+                $model->unsetAttributes();  // clear any default values
+		if(isset($_GET['FinanceFeeInvoices']))
+			$model->attributes=$_GET['FinanceFeeInvoices'];
                 $this->render('index', array(
                     'total' => $total, 'list' => $posts,
 
                     'pages' => $pages,
                     'item_count' => $total,
                     'page_size' => Yii::app()->params['listPerPage'],
+                    'model' => $model
                 ));
     }
     public function actionView()
