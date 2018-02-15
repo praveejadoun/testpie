@@ -73,28 +73,48 @@ $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'invoices-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
+        'afterAjaxUpdate' => "function(){jQuery('#created_at_search').datepicker({'dateFormat': 'yy-mm-dd'})}",
 	'pager'=>array('cssFile'=>Yii::app()->baseUrl.'/css/formstyle.css'),
  	'cssFile' => Yii::app()->baseUrl . '/css/formstyle.css',
-	'columns'=>array(
+        // style to fix the overflow of table'table-layout: fixed;'.
+        'columns'=>array(
 	array('name'=>'invoice_id','header' => 'Invoice',
-				'type'=>'raw',
+				//'type'=>'raw',
+                                
+                                //'htmlOptions' => array('style' => 'width:50px;'),
 				'value' => '$data->invoice_id'),
 				
 	array('name'=>'finance_fee_category_id',
-				'type'=>'raw',
-				'value'=>'$data->category->name'),
+				//'type'=>'raw',
+				'value'=>'$data->category->name',
+                                'filter' => CHtml::listData(FinanceFeeCategories::model()->findAll("is_deleted=:x",array(':x'=>0)),'id','name'),
+                                
+             ),
         
-//        'student.first_name',
-         
+        
         array('name'=>'student_id',
 				
                                 //'filter' => CHtml::activeTextField($model, 'student_id'),
                                 'value'=>function($data){
                                         echo $data->student->first_name.' '.$data->student->last_name;
                                 }
-                                
-                                //'filter' => CHtml::activeTextField($model, 'student_id'),
-                    ),
+             ),
+        array('name'=>'created_at',
+                                //'type'=>'raw',
+                                'value'=>'$data->created_at',
+                                'filter' =>$this->widget('zii.widgets.jui.CJuiDatepicker', array(
+                'model'=>$model,
+                'attribute'=>'created_at',
+                'htmlOptions' => array(
+                    'id' => 'created_at_search'
+                ), 
+                'options' => array(
+                    'dateFormat' => 'yy-mm-dd'
+                )
+            ), true)
+
+            ),
+                            
           
 //	array('name'=>'ward_id',
 //				'type'=>'raw',
@@ -132,7 +152,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			'header'=>'Action',
 			'class'=>'CButtonColumn',
 			'htmlOptions' => array('style'=>'width:80px;'),
-			 'template' => '{delete}',
+			 'template' => '{view}',
 			 'headerHtmlOptions'=>array('style'=>'font-size:12px; font-weight:bold;')
 			 
 		),

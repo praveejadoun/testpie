@@ -122,8 +122,9 @@ class FinanceFeeInvoices extends CActiveRecord
                 $criteria->compare('due_date',$this->due_date,true);
                 $criteria->compare('last_payment_date',$this->last_payment_date,true);
 		$criteria->compare('is_deleted',$this->is_deleted);
-		$criteria->compare('created_at',$this->created_at,true);
+		$criteria->compare('t.created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);
+               // $criteria->compare('t.id', $this->id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
