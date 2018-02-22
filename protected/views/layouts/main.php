@@ -451,11 +451,11 @@ $(".navigationbtm_wrapper_outer").show();
 				if(isset(Yii::app()->controller->module->id) and Yii::app()->controller->module->id=='notifications')
 				{
                                    
-				    echo CHtml::link(Yii::t('app','notifications'), array('/notifications'),array('class'=>'ic14 active'));
+				    echo CHtml::link(Yii::t('app','notifications'), array('/notifications/default/sendmails'),array('class'=>'ic14 active'));
 				}
 				else
 				{
-					echo CHtml::link(Yii::t('app','notifications'), array('/notifications'),array('class'=>'ic14'));
+					echo CHtml::link(Yii::t('app','notifications'), array('/notifications/default/sendmails'),array('class'=>'ic14'));
 				}
 				?>
                 </li>

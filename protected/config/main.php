@@ -120,6 +120,7 @@ return array(
 	 'timetable',
 	 'hostel',
 	 'transport',
+         'notifications', 
 	 'parentportal',
 	 'studentportal',
 	 'report',
@@ -180,15 +181,32 @@ return array(
 
 	// application components
 	'components'=>array(
+            
+            'sendgrid' => array(  
+            'class' => 'ext.yii-sendgrid.YiiSendGrid', //path to YiiSendGrid class  
+            'username'=>'sunilvanam', //replace with your actual username  
+            'password'=>'sunil@1995', //replace with your actual password  
+            //alias to the layouts path. Optional  
+            //'viewPath' => 'application.views.mail',  
+            //wheter to log the emails sent. Optional  
+            //'enableLog' => YII_DEBUG, 
+            //if enabled, it won't actually send the emails, only log. Optional  
+            //'dryRun' => false, 
+            //ignore verification of SSL certificate  
+            //'disableSslVerification'=>true,
+        ),  
+            
+            
 //            'Smtpmail'=>array(
 //                'class'=>'application.extensions.smtpmail.PHPMailer',
 //                'Host'=>"smtp.gmail.com",
-//                'Username'=>'chaithanya.rvs@ezeewholesale.com',
-//                'Password'=>'Iammyself@1247',
+//                'Username'=>'sunilvanam10@gmail.com',
+//                'Password'=>'*sunil@1995/*',
 //                'Mailer'=>'smtp',
 //                'Port'=>587,
 //                'SMTPAuth'=>true, 
 //                'SMTPSecure' => 'tls',
+//                
 //        ),
 	'db'=>(defined('DB_CONNECTION') ? array(
                     'connectionString'=>DB_CONNECTION,
@@ -346,7 +364,7 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
+		'adminEmail'=>'sunilvanam10@gmail.com',
 	),
    
 

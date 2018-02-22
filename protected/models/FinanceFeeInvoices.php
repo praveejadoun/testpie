@@ -170,6 +170,19 @@ class FinanceFeeInvoices extends CActiveRecord
 			return '-';
 		}
 	}
+        public function getStatus($data,$row)
+        {
+            $status = $data->status;
+            if($status == 0)
+            {
+                return 'Un-Paid';
+            }elseif ($status == 1) {
+                return 'Paid';
+            }elseif($status == 2){
+                return 'Cancelled';
+            }
+        }
+        
         
         
 

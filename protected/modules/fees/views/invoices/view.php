@@ -103,7 +103,7 @@
                         </tr>
                         <tr>
                             <td width="25%" style="padding: 8px 5px;"><strong>Last Payment Date</strong></td>
-                            <td style="padding: 8px 5px;"><?php echo $date = date("d M Y", strtotime($invoice_1->last_payment_date));?></td>
+                            <td style="padding: 8px 5px;"><?php if($invoice_1->last_payment_date != NULL){ echo $date = date("d M Y", strtotime($invoice_1->last_payment_date));}else { echo '-' ;}?></td>
                         </tr>
                         <tr>
                             <td width="25%" style="padding: 8px 5px;"><strong>Status</strong></td>

@@ -95,7 +95,7 @@ $this->breadcrumbs=array(
                     <td align="center"><?php echo Yii::t('invoices','Recipient');?></td>
                     <td align="center"><?php echo Yii::t('invoices','Fee Category');?></td>
                     <td align="center"><?php echo Yii::t('invoices','Amount');?></td>
-                    <td align="center"><?php echo Yii::t('invoices','Balance');?></td>
+<!--                    <td align="center"><?php // echo Yii::t('invoices','Balance');?></td>-->
                     <td align="center"><?php echo Yii::t('invoices','Status');?></td>
                     <td align="center"><?php echo Yii::t('invoices','Actions');?></td>
                     </tr>
@@ -109,7 +109,7 @@ $this->breadcrumbs=array(
                         <?php $feecategory = FinanceFeeCategories::model()->findByAttributes(array('id'=>$list_1->finance_fee_category_id));?>
                         <td align="center"><?php echo $feecategory->name;?></td>
                         <td align="center"><?php echo $list_1->amount;?></td>
-                        <td align="center">balance</td>
+<!--                        <td align="center">balance</td>-->
                         <td align="center">
                         <?php $status = $list_1->status;
                                 if($status==0){
@@ -134,7 +134,7 @@ $this->breadcrumbs=array(
 
             </table>
              <div class="list_contner" style="margin: 0px 0px 0px 0px;">
-              <div class="pagecon">
+              <div class="pagecon" style="height:0px;">
                                     <?php
                                     $this->widget('CLinkPager', array(
                                         'currentPage' => $pages->getCurrentPage(),

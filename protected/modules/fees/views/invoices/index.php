@@ -67,6 +67,18 @@ $('.search-form form').submit(function(){
 	'model'=>$model,
 )); ?>
 </div>
+<div style="margin-top:20px; position:relative;">
+                        <div class="clear"></div>
+                        <div style="display: inline-block;margin-bottom: 14px;margin-top: 14px; width: 100%;">
+                            <div style="float:left;">
+
+                                <div class="ea_pdf" style="top:0px; right:6px;">
+                                    <?php echo CHtml::link('<img src="images/pdf-but.png">', array('invoices/indexpdf'), array('target' => '_blank')); ?>
+                                </div>
+                            </div> 
+
+                        </div>
+                    </div>
 <?php 
 
 $this->widget('zii.widgets.grid.CGridView', array(
@@ -74,18 +86,32 @@ $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
         'afterAjaxUpdate' => "function(){jQuery('#created_at_search').datepicker({'dateFormat': 'yy-mm-dd'})}",
-	'pager'=>array('cssFile'=>Yii::app()->baseUrl.'/css/formstyle.css'),
- 	'cssFile' => Yii::app()->baseUrl . '/css/formstyle.css',
+	'pager'=>array(
+                        'cssFile'=>Yii::app()->baseUrl.'/css/formstyle.css',
+                         
+//            'class'=>'CLinkPager',
+            'maxButtonCount'=>5, 
+//            'pageSize' => 05,
+//            'firstPageLabel'=>'First',
+//            'lastPageLabel'=>'Last',
+//            'nextPageLabel'=>'Next',
+//            'prevPageLabel'=>'Previous',
+//            'header'=>'',
+
+       
+                    ),
+ 	//'cssFile' => Yii::app()->baseUrl . '/css/formstyle.css',
         // style to fix the overflow of table'table-layout: fixed;'.
         'columns'=>array(
-	array('name'=>'invoice_id','header' => 'Invoice',
-				//'type'=>'raw',
+	array('name'=>'invoice_id','header' => 'Invoice Id',
+				'type'=>'raw',
                                 
                                 //'htmlOptions' => array('style' => 'width:50px;'),
 				'value' => '$data->invoice_id'),
 				
 	array('name'=>'finance_fee_category_id',
-				//'type'=>'raw',
+                                'header' => 'Fee Category',
+				'type'=>'raw',
 				'value'=>'$data->category->name',
                                 'filter' => CHtml::listData(FinanceFeeCategories::model()->findAll("is_deleted=:x",array(':x'=>0)),'id','name'),
                                 
@@ -93,14 +119,31 @@ $this->widget('zii.widgets.grid.CGridView', array(
         
         
         array('name'=>'student_id',
-				
-                                //'filter' => CHtml::activeTextField($model, 'student_id'),
+                                'header' => 'Student Name',
+				'type'=>'raw',
+                              //'filter' => CHtml::activeTextField($model, 'student_id'),
                                 'value'=>function($data){
                                         echo $data->student->first_name.' '.$data->student->last_name;
                                 }
              ),
+        
+         array('name'=>'status',
+				'type'=>'raw',
+                               	'value'=>'$data->getStatus($data)',
+                                'filter' => CHtml::dropDownList(
+                                        'FinanceFeeInvoices[status]', $model->status,  
+                array(
+                    ''=>'All',
+                    '1'=>'Paid',
+                    '0'=>'Un-Paid',
+                    '2'=>'Cancelled'
+                ),
+                array('options'=>array('$data->active'=>'selected'))                                   
+             ),
+            ),         
         array('name'=>'created_at',
-                                //'type'=>'raw',
+                                'header' => 'Invoice Date',
+                                'type'=>'raw',
                                 'value'=>'$data->created_at',
                                 'filter' =>$this->widget('zii.widgets.jui.CJuiDatepicker', array(
                 'model'=>$model,
@@ -114,139 +157,85 @@ $this->widget('zii.widgets.grid.CGridView', array(
             ), true)
 
             ),
-                            
-          
-//	array('name'=>'ward_id',
-//				'type'=>'raw',
-//				'value' => array($model,'studentname'),
-//				'filter' => false,
-//				'htmlOptions' => array('style'=>'width:250px;')
-//				),
-//	array('name'=>'email',
-//				'type'=>'raw',
-//				'value'=>'$data->email'),
-							
-		/*'id',
-		'ward_id',
-		'first_name',
-		'last_name',
-		'relation',
-		'email',*/
-		/*
-		'office_phone1',
-		'office_phone2',
-		'mobile_phone',
-		'office_address_line1',
-		'office_address_line2',
-		'city',
-		'state',
-		'country_id',
-		'dob',
-		'occupation',
-		'income',
-		'education',
-		'created_at',
-		'updated_at',
-		*/
+        
 		array(
 			'header'=>'Action',
 			'class'=>'CButtonColumn',
-			'htmlOptions' => array('style'=>'width:80px;'),
+			'htmlOptions' => array('style'=>'width:30px;'),
 			 'template' => '{view}',
 			 'headerHtmlOptions'=>array('style'=>'font-size:12px; font-weight:bold;')
 			 
 		),
 	),
+                    
 )); ?>
 
- <div style="margin-top:20px; position:relative;">
-                        <div class="clear"></div>
-                        <div style="display: inline-block;margin-bottom: 14px;margin-top: 14px; width: 100%;">
-                            <div style="float:left;">
-<!--                                <div class="box-one">
-                                <div class="bttns_addstudent-n">   
-                                    <ul>
-                                        <li><?php // echo CHtml::link(Yii::t('employees', 'Add Student'), array('create'), array('class' => 'formbut-n')); ?></li>
-
-                                        <li><a class="formbut-n" href="javascript:void(0)" id="delete_student">Delete Student</a></li>
-
-
-
-                                    </ul>
-                                </div>
-                            </div>-->
-                                <div class="ea_pdf" style="top:0px; right:6px;">
-                                    <?php echo CHtml::link('<img src="images/pdf-but.png">', array('invoices/indexpdf'), array('target' => '_blank')); ?>
-                                </div>
-                            </div> 
-
-                        </div>
-                    </div>
+ 
 
     <div class="pdtab_Con" style="width:100%">
-        <!--<div style="font-size:13px; padding:5px 0px"><?php echo Yii::t('invoices','<strong>Fee Categories</strong>');?></div>-->
+        <!--<div style="font-size:13px; padding:5px 0px"><?php //echo Yii::t('invoices','<strong>Fee Categories</strong>');?></div>-->
 
-            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+<!--            <table cellspacing="0" cellpadding="0" border="0" width="100%">
                 <tbody>
                     <tr class="pdtab-h">
-                    <td align="center" height="18"><?php echo Yii::t('invoices','Invoice ID');?></td>
-                    <td align="center"><?php echo Yii::t('invoices','Recipient');?></td>
-                    <td align="center"><?php echo Yii::t('invoices','Fee Category');?></td>
-                    <td align="center"><?php echo Yii::t('invoices','Amount');?></td>
-                    <td align="center"><?php echo Yii::t('invoices','Balance');?></td>
-                    <td align="center"><?php echo Yii::t('invoices','Status');?></td>
-                    <td align="center"><?php echo Yii::t('invoices','Actions');?></td>
+                    <td align="center" height="18"><?php //echo Yii::t('invoices','Invoice ID');?></td>
+                    <td align="center"><?php //echo Yii::t('invoices','Recipient');?></td>
+                    <td align="center"><?php //echo Yii::t('invoices','Fee Category');?></td>
+                    <td align="center"><?php //echo Yii::t('invoices','Amount');?></td>
+                    <td align="center"><?php //echo Yii::t('invoices','Balance');?></td>
+                    <td align="center"><?php //echo Yii::t('invoices','Status');?></td>
+                    <td align="center"><?php //echo Yii::t('invoices','Actions');?></td>
                     </tr>
                 </tbody>
-                <?php foreach($list as $list_1) { ?>
+                <?php //foreach($list as $list_1) { ?>
                 <tbody>
                     <tr>
-                        <td align="center"><?php echo $list_1->invoice_id;?></td>
-                        <?php $student = Students::model()->findByAttributes(array('id'=>$list_1->student_id));?>
-                        <td align="center"><?php echo CHtml::link($student->first_name . '  ' . $student->middle_name . '  ' . $student->last_name, array('/students/students/view', 'id' => $student->id),array('style'=>'color:#FF6600;'));?></td>
-                        <?php $feecategory = FinanceFeeCategories::model()->findByAttributes(array('id'=>$list_1->finance_fee_category_id));?>
-                        <td align="center"><?php echo $feecategory->name;?></td>
-                        <td align="center"><?php echo $list_1->amount;?></td>
-                        <td align="center"><?php echo $list_1->amount_payable;?></td>
+                        <td align="center"><?php //echo $list_1->invoice_id;?></td>
+                        <?php //$student = Students::model()->findByAttributes(array('id'=>$list_1->student_id));?>
+                        <td align="center"><?php // echo CHtml::link($student->first_name . '  ' . $student->middle_name . '  ' . $student->last_name, array('/students/students/view', 'id' => $student->id),array('style'=>'color:#FF6600;'));?></td>
+                        <?php // $feecategory = FinanceFeeCategories::model()->findByAttributes(array('id'=>$list_1->finance_fee_category_id));?>
+                        <td align="center"><?php // echo $feecategory->name;?></td>
+                        <td align="center"><?php // echo $list_1->amount;?></td>
+                        <td align="center"><?php // echo $list_1->amount_payable;?></td>
                         <td align="center">
-                        <?php $status = $list_1->status;
-                                if($status==0){
-                                    echo "Unpaid";
-                                }
-                                elseif ($status==1) {
-                                    echo "paid";
-                            }
-                            else {
-                                echo "Cancelled";
-                            }
+                        <?php // $status = $list_1->status;
+//                                if($status==0){
+//                                    echo "Unpaid";
+//                                }
+//                                elseif ($status==1) {
+//                                    echo "paid";
+//                            }
+//                            else {
+//                                echo "Cancelled";
+//                            }
                             ?>
                         </td>    
-                        <td align="center"><?php echo CHtml::link('View',array('invoices/view','id'=>$list_1->id),array('style'=>'color:#FF6600'));?></td>
+                        <td align="center"><?php // echo CHtml::link('View',array('invoices/view','id'=>$list_1->id),array('style'=>'color:#FF6600'));?></td>
                         
                     </tr>
                   <?php //  echo CHtml::link(Yii::t(
 //  'Logcategory','Delete'), array('delete', 'id' =>$logcategory_1->id,'class'=>'grdel'),array('confirm'=>"Are you sure You Want To Delete this LogCategory?")); ?>
                 </tbody>
                 
-                <?php } ?>
+                <?php // } ?>
 
-            </table>
-             <div class="list_contner" style="margin: 0px 0px 0px 0px;">
+            </table>-->
+<!--             <div class="list_contner" style="margin: 0px 0px 0px 0px;"> 
               <div class="pagecon">
                                     <?php
-                                    $this->widget('CLinkPager', array(
-                                        'currentPage' => $pages->getCurrentPage(),
-                                        'itemCount' => $item_count,
-                                        'pageSize' => $page_size,
-                                        'maxButtonCount' => 5,
-                                        //'nextPageLabel'=>'My text >',
-                                        'header' => '',
-                                        'htmlOptions' => array('class' => 'pages'),
-                                    ));
+//                                    $this->widget('CLinkPager', array(
+//                                        'currentPage' => $pages->getCurrentPage(),
+//                                        'itemCount' => $item_count,
+//                                        'pageSize' => $page_size,
+//                                        'maxButtonCount' => 5,
+//                                        'nextPageLabel'=>'My text >',
+//                                        'header' => '',
+//                                        'htmlOptions' => array('class' => 'pages'),
+//                                    ));
                                     ?>
                                 </div>
                  <div class="clear"></div>
-             </div>
+             </div>-->
             
     </div>
 
