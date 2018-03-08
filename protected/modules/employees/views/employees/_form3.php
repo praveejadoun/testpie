@@ -73,7 +73,7 @@
 		}
 		else
 		{
-			if($model->document_data==NULL)
+			if($model->achievdoc_data==NULL)
 			{
 				echo $form->fileField($model,'achievdoc_data'); 
 		        echo $form->error($model,'achievdoc_data'); 

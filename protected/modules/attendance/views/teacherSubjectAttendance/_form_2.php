@@ -20,6 +20,12 @@
 		<?php echo $form->hiddenField($model,'employee_id',array('value'=>$emp_id)); ?>
 		<?php echo $form->error($model,'employee_id'); ?>
 	</div>
+        
+         <div class="row">
+		<?php //echo $form->labelEx($model,'class_timing_id'); ?>
+		<?php echo $form->hiddenField($model,'class_timing_id',array('value'=>$c_t_id)); ?>
+		<?php echo $form->error($model,'class_timing_id'); ?>
+	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,Yii::t('employees','employee_leave_type_id')); ?>
@@ -47,12 +53,12 @@
 		echo CHtml::ajaxSubmitButton(Yii::t('job','Save'),CHtml::normalizeUrl(array('teacherSubjectAttendance/Addnew','render'=>false)),array('dataType'=>'json','success'=>'js: function(data) {
 					if (data.status == "success")
 					{
-						$("#td'.$day.$emp_id.'").text("");
-						$("#jobDialog123'.$day.$emp_id.'").html("<span class=\"abs\"></span>","");
-						$("#jobDialog'.$day.$emp_id.'").dialog("close");
+						$("#td").text("");
+						$("#jobDialog").html("<span class=\"abs\"></span>","");
+						$("#jobDialog").dialog("close");
 						window.location.reload();
 					}
-                    }'),array('id'=>'closeJobDialog'.$day.$emp_id,'name'=>'save'));
+                    }'),array('id'=>'closejobDialog','name'=>'save'));
 		
 		?>
 	</div><br />

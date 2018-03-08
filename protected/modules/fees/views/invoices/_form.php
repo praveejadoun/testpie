@@ -90,44 +90,81 @@
                             <?php echo $form->error($model,'amount'); ?></td>  
 <!--                    <td valign="bottom"><?php // echo $form->textField($model,'transaction_id',array('size'=>25,'maxlength'=>255)); ?>
                             <?php // echo $form->error($model,'transaction_id'); ?></td>-->
-                    <td>
+                   
+<!--                     <td>-->
+                    <?php
+//                    if ($model->isNewRecord) {
+//                        echo $form->fileField($model, 'file_data');
+//                        echo $form->error($model, 'file_data');
+//                    } else {
+//                        if ($model->file_data == NULL) {
+//                            echo $form->fileField($model, 'file_data');
+//                            echo $form->error($model, 'file_data');
+//                        } else {
+//                            if (Yii::app()->controller->action->id == 'update') {
+//                                echo CHtml::link(Yii::t('students', 'Remove'), array('Students/remove', 'id' => $model->id), array('confirm' => 'Are you sure?'));
+//                                echo '<img class="imgbrder" src="' . $this->createUrl('Students/DisplaySavedImage&id=' . $model->primaryKey) . '" alt="' . $model->file_name . '" width="100" height="100" />';
+//                            } else if (Yii::app()->controller->action->id == 'view') {
+//                                echo CHtml::hiddenField('file_name', $model->file_name);
+//                                echo CHtml::hiddenField('file_content_type', $model->file_content_type);
+//                                echo CHtml::hiddenField('file_size', $model->file_size);
+//                                echo CHtml::hiddenField('file_data', bin2hex($model->file_data));
+//                                echo '<img class="imgbrder" src="' . $this->createUrl('Students/DisplaySavedImage&id=' . $model->primaryKey) . '" alt="' . $model->file_name . '" width="100" height="100" />';
+//                            }
+//                        }
+//                    }
+                    ?>
+<!--                </td>       -->
+                            
+                            
+                            
+                            
+                            
+<!--                    <td>-->
                     <?php
 		
 		
-		if($model->isNewRecord)
-		{
-			echo $form->fileField($model,'file_data'); 
-		    echo $form->error($model,'file_data'); 
-		}
-		else
-		{
-			if($model->document_data==NULL)
-			{
-				echo $form->fileField($model,'file_data'); 
-		        echo $form->error($model,'file_data'); 
-			}
-			
-			else
-			{
-				if(Yii::app()->controller->action->id=='update') {
-					echo CHtml::link(Yii::t('students','Remove'), array('Employees/remove', 'id'=>$model->id),array('confirm'=>'Are you sure?')); 
-					echo '<img class="imgbrder" src="'.$this->createUrl('Employees/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->file_name.'" width="100" height="100" />';	
-				}
-				else if(Yii::app()->controller->action->id=='create') {
-					echo CHtml::hiddenField('file_name',$model->file_name);
-					echo CHtml::hiddenField('file_content_type',$model->file_content_type);
-					echo CHtml::hiddenField('file_size',$model->file_size);
-					echo CHtml::hiddenField('file_data',bin2hex($model->file_data));
-					echo '<img class="imgbrder" src="'.$this->createUrl('Employees/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->file_name.'" width="100" height="100" />';
-				}
-			}
-		}
+//		if($model->isNewRecord)
+//		{
+//			echo $form->fileField($model,'file_data'); 
+//		    echo $form->error($model,'file_data'); 
+//		}
+//		else
+//		{
+//			if($model->file_data==NULL)
+//			{
+//				echo $form->fileField($model,'file_data'); 
+//		        echo $form->error($model,'file_data'); 
+//			}
+//			
+//			else
+//			{
+//				if(Yii::app()->controller->action->id=='update') {
+//					echo CHtml::link(Yii::t('students','Remove'), array('Employees/remove', 'id'=>$model->id),array('confirm'=>'Are you sure?')); 
+//					echo '<img class="imgbrder" src="'.$this->createUrl('Employees/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->file_name.'" width="100" height="100" />';	
+//				}
+//				else if(Yii::app()->controller->action->id=='view') {
+//					echo CHtml::hiddenField('file_name',$model->file_name);
+//					echo CHtml::hiddenField('file_content_type',$model->file_content_type);
+//					echo CHtml::hiddenField('file_size',$model->file_size);
+//					echo CHtml::hiddenField('file_data',bin2hex($model->file_data));
+//					echo '<img class="imgbrder" src="'.$this->createUrl('Employees/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->file_name.'" width="100" height="100" />';
+//				}
+//			}
+//		}
 		
 		 ?>
         
-        </td>
+        <!--</td>-->
                 </tr>
              </table>  
+            <br>
+            <div class="row">
+                <?php echo "Please Upload A File" ?>
+                <br/><br/>
+                <?php echo $form->fileField($model,'file_data'); ?>
+                <?php echo $form->error($model,'file_data'); ?>
+            </div>
             <div class="row">
 				<?php //echo $form->labelEx($model,'updated_at'); ?>
                 <?php echo $form->hiddenField($model,'created_at',array('value'=>date('Y-m-d'))); ?>

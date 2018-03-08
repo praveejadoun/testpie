@@ -25,7 +25,7 @@ class InvoicesController extends RController {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'generate', 'manage', 'edit','managepdf','indexpdf','remove','Invoicepdf','Transactionpdf'),
+                'actions' => array('index', 'view', 'generate', 'manage', 'edit','managepdf','indexpdf','remove','Invoicepdf','Transactionpdf','DownloadImage'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -677,13 +677,13 @@ class InvoicesController extends RController {
                   $b=rand(0000000, 9999999);
                  $model->transaction_id = $b;
                 
-				if($file=CUploadedFile::getInstance($model,'file_data'))
-					 {
-					$model->file_name=$file->name;
-                                        $model->file_content_type=$file->type;
-					$model->file_size=$file->size;
-					$model->file_data=file_get_contents($file->tempName);
-					  }
+//				if($file=CUploadedFile::getInstance($model,'file_data'))
+//					 {
+//					$model->file_name=$file->name;
+//                                        $model->file_content_type=$file->type;
+//					$model->file_size=$file->size;
+//					$model->file_data=file_get_contents($file->tempName);
+//					  }
                  $model->status = 1;
                  if($model->amount <= $invoice->amount_payable)
                     $model->amount = $transaction['amount'];
@@ -781,6 +781,28 @@ class InvoicesController extends RController {
 		$html2pdf->WriteHTML($this->renderPartial('print_3',array(),true));
                 ob_end_clean();
         $html2pdf->Output( $invoice);
+    }
+    
+    public function actionDownloadImage() {
+        
+//        $model=$this->loadModel($_GET['id']);
+        $id = $_GET['id'];
+        $link=mysql_connect("localhost","root","");
+        if(!$link)
+           {
+              die("could not connect:".mysql_error());
+           }
+           mysql_select_db("sms",$link);
+           $que="select file_data from finance_fee_transactions where id LIKE $id";
+           $ret=mysql_query($que)or die("Invalid query: " . mysql_error());
+           $data = mysql_result($ret, 0);
+           header("Content-type: image/jpeg");
+           header('Content-Disposition: attachment; filename="image.jpg"');
+           header('Content-Length: '.strlen($data));
+
+           echo $data;
+           mysql_close($link);
+
     }
 }
 

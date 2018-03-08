@@ -142,13 +142,31 @@ class EmployeeAchievementsController extends RController
 	}
          public function actionDownloadImage()
             {
-             $model=$this->loadModel($_GET['id']); 
-             $fileDir=Yii::app()->request->baseUrl.'/image/';
-                Yii::app()->request->sendFile(
-             $model->achievdoc_file_name,
-             file_get_contents($fileDir . $model->achievdoc_file_name),
-             $model->achievdoc_data
-                        ); 
+             
+              $model=$this->loadModel($_GET['id']);
+        $id = $_GET['id'];
+        $link=mysql_connect("localhost","root","");
+        if(!$link)
+           {
+              die("could not connect:".mysql_error());
+           }
+           mysql_select_db("sms",$link);
+           $que="select achievdoc_data from employee_achievments where id LIKE $id";
+           $ret=mysql_query($que)or die("Invalid query: " . mysql_error());
+           $data = mysql_result($ret, 0);
+           header("Content-type: image/jpeg");
+           header('Content-Disposition: attachment; filename="image.jpg"');
+           header('Content-Length: '.strlen($data));
+
+           echo $data;
+           mysql_close($link);
+//             $model=$this->loadModel($_GET['id']); 
+//             $fileDir=Yii::app()->request->baseUrl.'/image/';
+//                Yii::app()->request->sendFile(
+//             $model->achievdoc_file_name,
+//             file_get_contents($fileDir . $model->achievdoc_file_name),
+//             $model->achievdoc_data
+//                        ); 
                
             }
     public function actionDisplaySavedImage()

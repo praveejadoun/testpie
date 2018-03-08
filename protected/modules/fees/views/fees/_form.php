@@ -53,7 +53,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input class="FeeCategories_name" style="width:100% !important;" name="cname" id="cname" type="text" maxlength="250" />           
+                                        <input class="FeeCategories_name" style="width:100% !important;" name="cname" id="cname" type="text" maxlength="250" required="required"/>           
                                     </td>
                                 </tr>
                                 <tr>
@@ -64,7 +64,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <textarea class="FeeCategories_description" style="width:100% !important; height:120px;" name="description" id="description"></textarea>
+                                        <textarea class="FeeCategories_description" style="width:100% !important; height:120px;" name="description" id="description" required="required"></textarea>
                                     </td>
                                 </tr>
                             </table>
@@ -92,11 +92,11 @@
                                             <table width="94%">
                                                 <tr>
                                                     <td width="20%" valign="top">
-                                                        <input class="FeeParticulars_name particular-name" placeholder="Particular Name" style="width:120px !important;" name="FeeParticulars[name][]" id="FeeParticulars[name][]" type="text" />
+                                                        <input class="FeeParticulars_name particular-name" placeholder="Particular Name" style="width:120px !important;" name="FeeParticulars[name][]" id="FeeParticulars[name][]" type="text" required="required"/>
                                                     </td>
                                                 <div id="warning"></div>
                                                 <td width="35%" valign="top">
-                                                    <input class="FeeParticulars_description" placeholder="Particular Description" style="width:200px !important;" name="FeeParticulars[description][]" type="text" />            </td>
+                                                    <input class="FeeParticulars_description" placeholder="Particular Description"  name="FeeParticulars[description][]" type="text" required="required" />            </td>
                                                 <td width="45%" valign="top">
 
                                                     <?php
@@ -105,7 +105,7 @@
                                                     ?>
 
                                                     <?php
-                                                    echo CHtml::dropDownList('FeeParticulars[tax_id][]', $mymodel, CHtml::listData(Taxes::model()->findAll(), 'id', 'label'), array('empty' => 'No Tax'));
+                                                    echo CHtml::dropDownList('FeeParticulars[tax_id][]', $mymodel, CHtml::listData(Taxes::model()->findAll(), 'id', 'label'), array('empty' => 'No Tax','style'=>'padding:5px 3px;'));
                                                     ?>
 
 
@@ -120,7 +120,7 @@
                                                 </td>
                                                 <td width="45%" valign="top">
 
-                                                    <?php echo CHtml::dropDownList('FeeParticulars[discount_type][]', $mymodel, array('1' => '%', '2' => 'INR')); ?>
+                                                    <?php echo CHtml::dropDownList('FeeParticulars[discount_type][]', $mymodel, array('1' => '%', '2' => 'INR'),array('style'=>'padding:5px 3px;')); ?>
 
 <!--                <select class="FeeParticulars_discount_type" style="width:100px !important;" name="FeeParticulars[discount_type][]"/>
                  <option value="1">%</option>
@@ -139,7 +139,7 @@
                                                         <table>
                                                             <tr>
                                                                 <td>
-                                                                    <select class="particular-access-type" style="width:120px !important;" name="FeeParticularAccess[0][access_type][]">
+                                                                    <select class="particular-access-type" style="width:120px !important;padding:5px 3px;" name="FeeParticularAccess[0][access_type][]">
                                                                         <option value="1">Default</option>
                                                                         <option value="2">Admission number</option>
                                                                     </select>
@@ -148,18 +148,28 @@
                                                                     <table class="defaultApplicable">
                                                                         <tr>
                                                                             <td>
-                                                                                  <?php
-                                                                                            $criteria=new CDbCriteria;
-                                                                                            $criteria->condition='is_deleted=:is_del';
-                                                                                            $criteria->params=array(':is_del'=>0);
+<!--                                                                                <select name="country" id="country-list" class="demoInputBox" onChange="getState(this.value);">
+                                                                                    <option value="">Select Country</option>
+                                                                                    <?php
+//                                                                                    $results = Courses::model()->findAll();
+//                                                                                    foreach($results as $country) {
                                                                                     ?>
-                                                                                <?php  
+                                                                                    <option value="<?php echo $country["id"]; ?>"><?php echo $country["course_name"]; ?></option>
+                                                                                    <?php
+//                                                                                    }
+                                                                                    ?>
+                                                                                    </select>-->
+                                                                                <?php
+                                                                                $criteria = new CDbCriteria;
+                                                                                $criteria->condition = 'is_deleted=:is_del';
+                                                                                $criteria->params = array(':is_del' => 0);
+                                                                                ?>
+                                                                                <?php
 //                                                                                        echo CHtml::dropDownList($mymodel, 'FeeParticularAccess[0][course][]', CHtml::listData(Courses::model()->findAll($criteria),'id','concatened'),
 //                                                                                          array(
 //                                                                                              'class' => 'particular-access-course',
 //                                                                                              'prompt' => 'Select the Course',
 //                                                                                              'style'=>'width:177px !important',
-                                                                                              
 //                                                                                              'ajax' => array(
 //                                                                                                  'type' => 'POST',
 //                                                                                                  'url' => CController::createUrl('Subjects/getCitiesByCountryId'),
@@ -168,25 +178,28 @@
 //                                                                                              )
 //                                                                                          )
 //                                                                                      );
-
-                                                                                        ?> 
+                                                                                ?> 
                                                                                 <?php
-                                                                                echo CHtml::dropDownList('FeeParticularAccess[0][course][]', $mymodel, CHtml::listData(Courses::model()->findAll($criteria),'id','concatened'), 
-                                                                                        array(
-                                                                                            'empty' => 'All Courses',
-                                                                                            'class' => 'particular-access-course',
-                                                                                             'ajax' => array(
-                                                                                                  'type' => 'POST',
-                                                                                                  'url' => CController::createUrl('Fees/getCitiesByCountryId'),
-                                                                                                  'update' => '#batch_id',
-                                                                                                  'data' => array('course_id' => 'js:this.value'),
-                                                                                              )
-                                                                                            ));
+                                                                                echo CHtml::dropDownList('FeeParticularAccess[0][course][]', $mymodel, CHtml::listData(Courses::model()->findAll($criteria), 'id', 'concatened'), array(
+                                                                                    'empty' => 'All Courses',
+                                                                                    'style' =>'padding:5px 3px;',
+                                                                                    'class' => 'particular-access-course',
+                                                                                    'ajax' => array(
+                                                                                        'type' => 'POST',
+                                                                                        'url' => CController::createUrl('Fees/getCitiesByCountryId'),
+                                                                                        'update' => '#batch_id',
+                                                                                        'data' => array('course_id' => 'js:this.value'),
+                                                                                    )
+                                                                                ));
                                                                                 ?>
                                                                             </td>
                                                                             <td>
+<!--                                                                                <select name="state" id="state-list" class="demoInputBox">
+                                                                                    <option value="">Select State</option>
+                                                                                </select>-->
+                                                                                
                                                                                 <?php
-                                                                                echo CHtml::dropDownList('FeeParticularAccess[0][batch][]', $mymodel, CHtml::listData(Batches::model()->findAll(), 'id', 'name'), array('empty' => 'All Batches', 'class' => 'particular-access-batch'));
+                                                                                echo CHtml::dropDownList('FeeParticularAccess[0][batch][]', $mymodel, CHtml::listData(Batches::model()->findAll(), 'id', 'name'), array('empty' => 'All Batches', 'class' => 'particular-access-batch','style'=>'padding:5px 3px;'));
                                                                                 ?>
                                                                                <!--<select class="access-batch" style="width:120px !important;" name="FeeParticularAccess[][batch][]">
                                                                                             <option value="">All Batch</option>
@@ -194,7 +207,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <?php
-                                                                                echo CHtml::dropDownList('FeeParticularAccess[0][student_category_id][]', $mymodel, CHtml::listData(StudentCategories::model()->findAll(), 'id', 'name'), array('empty' => 'All Category', 'class' => 'particular-access-studentcategory'));
+                                                                                echo CHtml::dropDownList('FeeParticularAccess[0][student_category_id][]', $mymodel, CHtml::listData(StudentCategories::model()->findAll(), 'id', 'name'), array('empty' => 'All Category', 'class' => 'particular-access-studentcategory','style'=>'padding:5px 3px'));
                                                                                 ?>
                                                                                 <!--<select style="width:120px !important;" name="FeeParticularAccess[][student_category_id][]">
                                                                                   <option value="">All Categories</option>
@@ -203,26 +216,26 @@
                                                                             </td>        
                                                                         </tr>
                                                                     </table>
-                                                                    
+
                                                                     <table class="admNoApplicable" style="display:none;">
                                                                         <tr>
                                                                             <td>
                                                                                 <input class="FeeParticularAccessadmissionNo" placeholder="Admission Numbers seperated by commas" style="width:300px !important;" name="FeeParticularAccess[0][admission_numbers][]" type="text" />
                                                                             </td>
-                                                                           
+
                                                                         </tr>
                                                                     </table>
                                                                 </td>
-                                                                 <td>
-                                                                                <input placeholder="Amount" style="width:70px !important; padding-top:6px; padding-bottom:6px;" class="particular-access-amount" name="FeeParticularAccess[0][amount][]" type="text" />
-                                                                            </td>
+                                                                <td>
+                                                                    <input placeholder="Amount" style="width:70px !important; padding-top:6px; padding-bottom:6px;" class="particular-access-amount" name="FeeParticularAccess[0][amount][]" type="text" required="required" />
+                                                                </td>
                                                                 <td>
                                                                     <div style="position:relative;">
                                                                         <a href="javascript:void(0);" title="Click to remove access" class="remove-access fees-trash" style="top:-9px; right:-25px;" data-row="0" onClick="javascript:closeAccessBox(this)">X</a>
                                                                         </a>
                                                                     </div>
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -279,23 +292,23 @@
 <div class="clear"></div>
 </div>
 </div>
-<?php //$this->endWidget(); ?>
+<?php //$this->endWidget();  ?>
 <script>
     $(document).ready(function () {
 
-        
-         $("#mdcontainer").on('change', '.particular-access-type', function () {
-              if ($(this).val() == 1) {
-                                                            $(this).closest('.particular-access').find('.defaultApplicable').show();
-                                                            $(this).closest('.particular-access').find('.admNoApplicable').hide();
 
-                                                        } else {
+        $("#mdcontainer").on('change', '.particular-access-type', function () {
+            if ($(this).val() == 1) {
+                $(this).closest('.particular-access').find('.defaultApplicable').show();
+                $(this).closest('.particular-access').find('.admNoApplicable').hide();
 
-                                                            $(this).closest('.particular-access').find('.defaultApplicable').hide();
-                                                            $(this).closest('.particular-access').find('.admNoApplicable').show();
-                                                        }       
-                                                       
-          });
+            } else {
+
+                $(this).closest('.particular-access').find('.defaultApplicable').hide();
+                $(this).closest('.particular-access').find('.admNoApplicable').show();
+            }
+
+        });
 
 
         $("#add-fee-particular").click(function () {
@@ -310,7 +323,7 @@
             if (clonedParticularBox.find(".particular-access-type").length == 1) {
                 //alert($(".fee-particulars").size());
                 var temp = $(".fee-particulars").length;
-
+//                    alert($(".fee-particulars").length);
                 //if ($(".fee-particulars").size() > 1) {
                 //dRow = clonedParticularBox.find('.add-particular-access').attr('data-row');
                 //  alert(dRow);
@@ -330,7 +343,7 @@
 
                 var amtname = "FeeParticularAccess[" + temp + "][amount][]";
                 clonedParticularBox.find(".particular-access-amount").attr('name', amtname);
-                
+
                 var admname = "FeeParticularAccess[" + temp + "][admission_numbers][]";
                 clonedParticularBox.find(".FeeParticularAccessadmissionNo").attr('name', admname);
 
@@ -347,7 +360,7 @@
             //alert(clonedParticularBox.find('.add-particular-access').attr('data-row'));
             $("#mdcontainer").append(clonedParticularBox);
         });
-
+        
 
 
 
@@ -356,16 +369,40 @@
 
 
     function validateform() {
-        if (document.getElementById('cname').value == "") {
-            alert('Please enter category name');
-            document.getElementById('cname').focus();
-            return false;
-        } else if (document.getElementById('description').value == "") {
-            alert('Please enter category description');
-            document.getElementById('description').focus();
+        if(document.getElementByClassName('FeeParticularAccessadmissionNo').value == ""){
+            alert("sunil");
+            
             return false;
         }
+//         var temp = $(".fee-particulars").length;
+//        alert($(".fee-particulars").length);
+//       var sun = $(".FeeParticulars[name][]").length;
+//        alert($("FeeParticulars[name][]").length);
+//        var temp = $(".fee-particulars").length;
+//        if(document.getElementByName('FeeParticularAccess[0][amount][]').value==""){
+//            alert('Please enter category amount');
+//            document.getElementByName('FeeParticularAccess[0][amount][]').focus();
+//            return false;
+//        }else
 
+      
+//        if (document.getElementById('cname').value == "") {
+//            alert('Please enter category name');
+//            document.getElementById('cname').focus();
+//            return false;
+//        } else if (document.getElementById('description').value == "") {
+//            alert('Please enter category description');
+//            document.getElementById('description').focus();
+//            return false;
+//        }
+//        }else if (document.getElementById('FeeParticulars[name][]').value == ""){
+//            alert('Please enter Particular Name');
+//            document.getElementById('FeeParticulars[name][]').focus();
+//            return false;
+//        }
+//          var x = document.getElementsByName("FeeParticularAccess[0][amount][]").length;
+//          if(document.getElementByName("FeeParticularAccess[0][amount][]").value == "")
+//          alert(x);
     }
 
     function cloneinnerbox(thisObj) {
@@ -387,21 +424,21 @@
 
             var newmname = "FeeParticularAccess[" + dataRow + "][amount][]";
             clonedBox.find(".particular-access-amount").attr('name', newmname);
-            
+
             var newmname = "FeeParticularAccess[" + dataRow + "][admission_numbers][]";
             clonedBox.find(".FeeParticularAccessadmissionNo").attr('name', newmname);
-            
+
             //alert(clonedBox.find(".particular-access-amount").attr('name'));
             //Manage other dropdown 3
 
         }
 
-       
-        
+
+
 
         clonedBox.find('.particular-access').slice(1).remove();
-         clonedBox.find('.admNoApplicable').css("display","none");
-        clonedBox.find('.defaultApplicable').css("display","block");
+        clonedBox.find('.admNoApplicable').css("display", "none");
+        clonedBox.find('.defaultApplicable').css("display", "block");
         $(thisObj).prev(".particular-accesses-ap").append(clonedBox);
     }
     function closeAccessBox(thisObj) {
@@ -414,4 +451,16 @@
 
 
 
+</script>
+<script>
+function getState(val) {
+	$.ajax({
+	type: "POST",
+	url: "get_state.php",
+	data:'course_id='+val,
+	success: function(data){
+		$("#state-list").html(data);
+	}
+	});
+}
 </script>

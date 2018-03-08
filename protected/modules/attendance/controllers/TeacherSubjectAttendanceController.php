@@ -11,12 +11,45 @@ class TeacherSubjectAttendanceController extends RController
 			'rights', // perform access control for CRUD operations
 		);
 	}
+        public function   init() {
+             $this->registerAssets();
+              parent::init();
+ }
+
+  private function registerAssets(){
+
+            Yii::app()->clientScript->registerCoreScript('jquery');
+
+         //IMPORTANT about Fancybox.You can use the newest 2.0 version or the old one
+        //If you use the new one,as below,you can use it for free only for your personal non-commercial site.For more info see
+		//If you decide to switch back to fancybox 1 you must do a search and replace in index view file for "beforeClose" and replace with 
+		//"onClosed"
+        // http://fancyapps.com/fancybox/#license
+          // FancyBox2
+        Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js_plugins/fancybox2/jquery.fancybox.js', CClientScript::POS_HEAD);
+        Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/js_plugins/fancybox2/jquery.fancybox.css', 'screen');
+         // FancyBox
+         //Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js_plugins/fancybox/jquery.fancybox-1.3.4.js', CClientScript::POS_HEAD);
+         // Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/js_plugins/fancybox/jquery.fancybox-1.3.4.css','screen');
+        //JQueryUI (for delete confirmation  dialog)
+         Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js_plugins/jqui1812/js/jquery-ui-1.8.12.custom.min.js', CClientScript::POS_HEAD);
+         Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/js_plugins/jqui1812/css/dark-hive/jquery-ui-1.8.12.custom.css','screen');
+          ///JSON2JS
+         Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js_plugins/json2/json2.js');
+       
+
+           //jqueryform js
+               Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js_plugins/ajaxform/jquery.form.js', CClientScript::POS_HEAD);
+              Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js_plugins/ajaxform/form_ajax_binding.js', CClientScript::POS_HEAD);
+              Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/js_plugins/ajaxform/client_val_form.css','screen');
+
+ }
 	
         public function accessRules()
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','pdf','create','createswa'),
+				'actions'=>array('index','pdf','create','createswa','returnForm'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -173,7 +206,11 @@ class TeacherSubjectAttendanceController extends RController
         {       
 			$flag=false;
             $model->attributes=$_POST['EmployeeSubjectwiseAttendances'];
- 
+//            print_r($_POST['EmployeeSubjectwiseAttendances']);
+//            exit;
+            $model->class_timing_id = $_REQUEST['c_t_id'];
+//            echo $_POST['EmployeeSubjectwiseAttendances'];
+//            exit;
             if($model->save()) 
 			{
                 echo CJSON::encode(array(
@@ -214,5 +251,86 @@ class TeacherSubjectAttendanceController extends RController
 			'model'=>$model,
 		));
 	}
+        
+          public function actionReturnForm(){
+
+              //Figure out if we are updating a Model or creating a new one.
+             if(isset($_POST['update_id']))$model= $this->loadModel($_POST['update_id']);
+			 else $model=new EmployeeSubjectwiseAttendances;
+                        
+            //  Comment out the following line if you want to perform ajax validation instead of client validation.
+            //  You should also set  'enableAjaxValidation'=>true and
+            //  comment  'enableClientValidation'=>true  in CActiveForm instantiation ( _ajax_form  file).
+
+
+             //$this->performAjaxValidation($model);
+
+               //don't reload these scripts or they will mess up the page
+                //yiiactiveform.js still needs to be loaded that's why we don't use
+                // Yii::app()->clientScript->scriptMap['*.js'] = false;
+                $cs=Yii::app()->clientScript;
+                $cs->scriptMap=array(
+                                                 'jquery.min.js'=>false,
+                                                 'jquery.js'=>false,
+                                                 'jquery.fancybox-1.3.4.js'=>false,
+                                                 'jquery.fancybox.js'=>false,
+                                                 'jquery-ui-1.8.12.custom.min.js'=>false,
+                                                 'json2.js'=>false,
+                                                 'jquery.form.js'=>false,
+                                                 'form_ajax_binding.js'=>false
+        );
+
+		if(isset($_POST['batch_id']) and $_POST['batch_id']==0)
+		{
+                    $this->renderPartial('_ajax_form', array('model'=>$model), false, true);
+		}
+		else
+		{
+        	$this->renderPartial('_ajax_form', array('model'=>$model), false, true);
+                
+		}
+                
+      }
+      
+       public function actionAjax_Create(){
+
+               if(isset($_POST['EmployeeSubjectwiseAttendances']))
+		{
+                       $model=new EmployeeSubjectwiseAttendances;
+					   
+                      //set the submitted values
+//                        $model->employee_id = $_POST['EmployeeSubjectwiseAttendances']['employee_id'];
+                        $model->attributes=$_POST['EmployeeSubjectwiseAttendances'];
+                      
+                      
+//                       $batch  = Batches::model()->findByAttributes(array('id'=>$model->batch_id));
+//                       $model->course_id = $batch->course_id;
+//                       $model->name = $_POST['Subjects']['name'];
+//                       $model->code = $_POST['Subjects']['code'];
+//                       $model->no_exams = $_POST['Subjects']['no_exams'];
+//                       $model->max_weekly_classes = $_POST['Subjects']['max_weekly_classes'];
+//                       $model->elective_group_id = $_POST['Subjects']['elective_group_id'];
+//                       $model->is_deleted = $_POST['Subjects']['is_deleted'];
+//                       $model->created_at = date('Y-m-d H:i:s');
+//                       $model->updated_at = date('Y-m-d H:i:s');
+//						
+						/*$data=SubjectName::model()->findByAttributes(array('id'=>$model->name));
+						if($data!=NULL)
+						{
+							$model->name=$data->name;
+							$model->code=$data->code;
+							
+						}*/
+                       //return the JSON result to provide feedback.
+			            if($model->save(false)){
+                                echo json_encode(array('success'=>true,'id'=>$model->primaryKey) );
+                                exit;
+                        } else
+                        {
+                            echo json_encode(array('success'=>false));
+                            exit;
+                        }
+		}
+  }
 }
 

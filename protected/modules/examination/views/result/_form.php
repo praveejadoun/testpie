@@ -339,21 +339,21 @@ if ($_REQUEST['search'] == 1) {
             ?>
 
 
-            <div class="pdtab_Con" style="width:97%;padding:25px 0px 0px 0px;">
-                <div style="font-size:13px; padding:5px 0px"><?php echo Yii::t('examination', '<strong>Recent Employee Admissions</strong>'); ?></div>
+            <div class="pdtab_Con" style="width:100%;padding:25px 0px 0px 0px;">
+                <div style="font-size:13px; padding:0px 0px 20px 0px"><?php echo Yii::t('examination', '<strong>Recent Employee Admissions</strong>'); ?></div>
 
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tbody> 
                         <tr class="pdtab-h">
 
               <!--<td align="center" height="18" style="padding:0px 0px"><?php echo Yii::t('examination', 'Sl.No'); ?></td>-->
-                            <td align="center"style="padding:0px 0px;"><?php echo Yii::t('examination', 'Student Name'); ?></td>
-                            <td align="center"style="padding:0px 0px;"><?php echo Yii::t('examination', 'Exam Name'); ?></td>
-                            <td align="center"style="padding:0px 0px;"><?php echo Yii::t('examination', 'Subject'); ?></td> 
-                            <td align="center" style="padding:0px 0px;"><?php echo Yii::t('examination', 'Course'); ?></td>
-                            <td align="center"style="padding:0px 0px;"><?php echo Yii::t('examination', 'Batch Name'); ?></td> 
-                            <td align="center" style="padding:0px 0px;"><?php echo Yii::t('examination', 'Mark'); ?></td>
-                            <td align="center" style="padding:0px 0px;"><?php echo Yii::t('examination', 'Status'); ?></td>
+                            <td align="center"><?php echo Yii::t('examination', 'Student Name'); ?></td>
+                            <td align="center"><?php echo Yii::t('examination', 'Exam Name'); ?></td>
+                            <td align="center"><?php echo Yii::t('examination', 'Subject'); ?></td> 
+                            <td align="center"><?php echo Yii::t('examination', 'Course'); ?></td>
+                            <td align="center"><?php echo Yii::t('examination', 'Batch Name'); ?></td> 
+                            <td align="center"><?php echo Yii::t('examination', 'Mark'); ?></td>
+                            <td align="center"><?php echo Yii::t('examination', 'Status'); ?></td>
 
                         </tr>
                     </tbody>
@@ -373,42 +373,68 @@ if ($_REQUEST['search'] == 1) {
 
                 <!--<td align="center" style="padding:0px 0px;"><?php ?></td>-->
 
-                <?php $examscores = ExamScores::model()->findAll("exam_id=:x", array(':x' => $exams_1->id));
-                foreach ($examscores as $examscores_1) { ?>
+                <?php 
 
-                                    <td align="center" style="padding:0px 0px;">
+                    $examscores = ExamScores::model()->findAll("exam_id=:x", array(':x' => $exams_1->id));
+                    foreach ($examscores as $examscores_1) { 
+                    
+                ?>
 
+                    <td align="center">
+                        
                     <?php $student = Students::model()->findAll("id=:x", array(':x' => $examscores_1->student_id));
                     foreach ($student as $student_1) {
                         echo $student_1->first_name;
                     }
-                    ?></td>
+                    ?>
+                        
+                    </td>
 
                     <?php $examgroup = ExamGroups::model()->findAll("id=:x", array(':x' => $_REQUEST['exm'])); ?>
 
-                                    <td align="center" style="padding:0px 0px;"><?php foreach ($examgroup as $examgroup_1) {
-                        echo $examgroup_1->name; ?></td>
+                    <td align="center">
+                        
+                        <?php foreach ($examgroup as $examgroup_1) { echo $examgroup_1->name; ?>
+                        
+                    </td>
 
-                                <?php $subject = Subjects::model()->findAll("id=:x", array(':x' => $exams_1->subject_id)); ?>
+                        <?php $subject = Subjects::model()->findAll("id=:x", array(':x' => $exams_1->subject_id)); ?>
 
-                                        <td align="center" style="padding:0px 0px;"><?php foreach ($subject as $subject_1) {
-                            echo $subject_1->name; ?></td>
+                    <td align="center">
+                        
+                        <?php foreach ($subject as $subject_1) { echo $subject_1->name; ?>
+                            
+                    </td>
 
-                                    <?php $course = Courses::model()->findAll("id=:x", array(':x' => $_REQUEST['cou'])); ?>  
+                        <?php $course = Courses::model()->findAll("id=:x", array(':x' => $_REQUEST['cou'])); ?>  
 
-                                            <td align="center" style="padding:0px 0px;"><?php foreach ($course as $course_1) {
-                                echo $course_1->course_name; ?></td>
+                    <td align="center">
+                        
+                        <?php foreach ($course as $course_1) {  echo $course_1->course_name; ?>
+                               
+                    </td>
 
-                                <?php $batch = Batches::model()->findAll("id=:x", array(':x' => $_REQUEST['sub'])); ?>  
+                        <?php $batch = Batches::model()->findAll("id=:x", array(':x' => $_REQUEST['sub'])); ?>  
 
-                                                <td align="center" style="padding:0px 0px;"><?php foreach ($batch as $batch_1) {
-                                    echo $batch_1->name; ?></td>
+                    <td align="center">
+                        
+                        <?php foreach ($batch as $batch_1) { echo $batch_1->name; ?>
+                                  
+                    </td>
 
-                                                    <td align="center" style="padding:0px 0px;"><?php echo $examscores_1->marks; ?></td>
+                    <td align="center">
+                        
+                        <?php echo $examscores_1->marks; ?>
+                    
+                    </td>
 
                                                         <?php //$dept = EmployeeDepartments::model()->findByAttributes(array('id'=>$list_1->employee_department_id)); ?>
                                     <!--<td align="center"><?php // if($dept!=NULL){echo $dept->name; }else{ echo '-';} ?> </td>-->
-                                                    <td align="center" style="padding:0px 0px;"><?php if($examscores_1->is_failed == '1'){ echo "Failed";}else{ echo "Passed";}?></td>
+                    <td align="center">
+                        
+                        <?php if($examscores_1->is_failed == '1'){ echo "Failed";}else{ echo "Passed";}?>
+                    
+                    </td>
                                     <?php //  $pos = EmployeePositions::model()->findByAttributes(array('id'=>$list_1->employee_position_id));  ?>
                                                     <!--<td align="center"><?php // if($pos!=NULL){echo $pos->name; }else{ echo '-';} ?> </td>-->
                                                    <!--<td style="padding:5px 44px;">-->
@@ -421,7 +447,7 @@ if ($_REQUEST['search'] == 1) {
                                                     <!--</select>-->
                                                     <!--</td>-->
 
-                                                </tr>
+                    </tr>
                                 <?php }
                             }
                         }

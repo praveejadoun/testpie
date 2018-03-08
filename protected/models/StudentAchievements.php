@@ -1,27 +1,27 @@
 <?php
 
 /**
- * This is the model class for table "student_achievments".
+ * This is the model class for table "student_achievement".
  *
- * The followings are the available columns in table 'student_achievments':
+ * The followings are the available columns in table 'student_achievement':
  * @property integer $id
- * @property string $student_id
- * @property integer $achievement_title
- * @property string $achievement_document_name
- * @property integer $achievement_description
- * @property string $achievdoc_file_name
- * @property string $achievdoc_content_type
- * @property string $achievdoc_data
+ * @property integer $student_id
+ * @property string $document_name
+ * @property string $document_file_name
+ * @property string $document_content_type
+ * @property string $document_data
  * @property integer $is_deleted
+ * @property integer $is_active
  * @property string $created_at
  * @property string $updated_at
- * @property integer $achievdoc_file_size
+ * @property integer $document_file_size
  */
 class StudentAchievements extends CActiveRecord
 {
+
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return ExamGroups the static model class
+	 * @return Employees the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -33,7 +33,7 @@ class StudentAchievements extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'student_achievments';
+		return 'student_achievement';
 	}
 
 	/**
@@ -43,16 +43,21 @@ class StudentAchievements extends CActiveRecord
 	{
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
+		
+		
 		return array(
-			array('id, student_id, achievdoc_file_size,is_deleted', 'numerical', 'integerOnly'=>true),
-			array('achievement_title, achievement_document_name, achievement_description, achievdoc_file_name, achievdoc_content_type', 'length', 'max'=>255),
-			array('achievdoc_data', 'file', 'types'=>'jpg, gif, png','allowEmpty' => true, 'maxSize' => 5242880),
-                        array('created_at, updated_at', 'safe'),
-			array('achievement_title, achievement_document_name, achievement_description', 'required'),
-			
+			array('student_id, document_file_size,is_active,is_deleted', 'numerical', 'integerOnly'=>true),
+			array('achievement_title,achievement_description,document_name, document_file_name, document_content_type', 'length', 'max'=>255),
+//                    array('length', 'max'=>255, 'on'=>'insert,update'),
+			array('created_at, updated_at', 'safe'),
+			array('document_name,achievement_title', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-                        array('id, student_id, achievement_title, achievement_document_name, achievement_description, achievdoc_file_name, achievdoc_content_type, achievdoc_data, is_deleted, created_at, updated_at, achievdoc_file_size', 'safe', 'on'=>'search'),
+			array('document_data', 'file', 'types'=>'jpg, gif, png','allowEmpty' => true, 'maxSize' => 5242880),
+			array('id, student_id,achievement_title,achievement_description, document_name, document_file_name, document_content_type, document_data, created_at, updated_at, is_active, is_deleted, document_file_size', 'safe', 'on'=>'search'),
+			
+			
+			//array('photo_data', 'file', 'allowEmpty'=>true, 'types'=>'jpg, jpeg, gif, png')
 
 
 		);
@@ -77,17 +82,19 @@ class StudentAchievements extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'student_id' => 'Student Id',
-			'achievement_title' => 'Achievement Title',
-			'achievement_document_name' => 'Achievement Document Name',
-			'achievement_description' => 'Achievement Description',
-                        'achievdoc_file_name' => 'Achievdoc File Name',
-			'achievdoc_content_type' => 'Achievdoc Content Type',
-			'achievdoc_data' => 'Achievdoc Data',
+                        'achievement_title' => 'Achievement Title',
+                        'achievement_description' =>'Achievement Description',
+			'document_name' => 'Document Name',
+			'document_file_name' => 'Document File Name',
+			'document_content_type' => 'Document Content Type',
+			'document_data' => 'Document Data',
                         'is_deleted' => 'Is Deleted',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
-			'achievdoc_file_size' => 'Achievdoc File Size',
+                        'is_active' =>'Is Active',
+			'document_file_size' => 'Document File Size',
 			
+                       
 		);
 	}
 
@@ -103,19 +110,37 @@ class StudentAchievements extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('student_id',$this->student_id,true);
-		$criteria->compare('achievement_title',$this->achievement_title);
-		$criteria->compare('achievement_document_name',$this->achievement_document_name,true);
-		$criteria->compare('achievement_description',$this->achievement_description);
-                $criteria->compare('achievdoc_file_name',$this->achievdoc_file_name,true);
-		$criteria->compare('achievdoc_content_type',$this->achievdoc_content_type,true);
-		$criteria->compare('achievdoc_data',$this->achievdoc_data,true);
+		$criteria->compare('student_id',$this->student_id);
+		$criteria->compare('achievement_title',$this->achievement_title,true);
+                $criteria->compare('achievement_description',$this->achievement_description,true);
+                $criteria->compare('document_name',$this->document_name,true);
+		$criteria->compare('is_active',$this->is_active,true);
+		$criteria->compare('document_file_name',$this->document_file_name,true);
+		$criteria->compare('document_content_type',$this->document_content_type,true);
+		$criteria->compare('document_data',$this->document_data,true);
                 $criteria->compare('is_deleted',$this->is_deleted,true);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);
-		$criteria->compare('achievdoc_file_size',$this->achievdoc_file_size);
+		$criteria->compare('document_file_size',$this->document_file_size);
+		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function exp_validation(){
+    if($this->experience_year == ''&&$this->experience_month == ''){
+         $this->addError('experience_month', 'Enter experience details');
+   	 }
+	}
+	
+	public function exp_details_validation(){
+    if(!$this->experience_detail){
+         $this->addError('experience_detail', 'Enter experience details');
+    }
+   }
+   
+   
+      
 }
+

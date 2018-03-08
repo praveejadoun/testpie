@@ -901,23 +901,26 @@ class StudentsController extends RController {
 		{
 			$model->attributes=$_POST['StudentAchievements'];
                         $list = $_POST['StudentAchievements'];
-                     if($file=CUploadedFile::getInstance($model,'achievdoc_data'))
+                          $model->document_name = $list['document_name'];
+				if($file=CUploadedFile::getInstance($model,'document_data'))
 					 {
-					$model->achievdoc_file_name=$file->name;
-					$model->achievdoc_content_type=$file->type;
-					$model->achievdoc_file_size=$file->size;
-					$model->achievdoc_data=file_get_contents($file->tempName);
+					$model->document_file_name=$file->name;
+					$model->document_content_type=$file->type;
+					$model->document_file_size=$file->size;
+					$model->document_data=file_get_contents($file->tempName);
 					 
-                                         
                                         if(!is_dir('uploadedfiles/')){
 				mkdir('uploadedfiles/');
 			}
-			if(!is_dir('uploadedfiles/student_achievements/')){
-				mkdir('uploadedfiles/student_achievements/');
-                        }            
-                          move_uploaded_file($file->tempName,'uploadedfiles/student_achievements/'.$file->name);              
+			if(!is_dir('uploadedfiles/employee_documents/')){
+				mkdir('uploadedfiles/employee_documents/');
+			}
+			move_uploaded_file($file->tempName,'uploadedfiles/employee_documents/'.$file->name);
+                                        
                                          }
-                      
+				  
+ 
+//         
 			if($model->save())
                         {
                             Yii::app()->user->setFlash('success','Achievement Created Successfully');

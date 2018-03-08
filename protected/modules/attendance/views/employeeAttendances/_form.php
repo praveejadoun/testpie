@@ -20,8 +20,8 @@
 		<?php echo $form->hiddenField($model,'employee_id',array('value'=>$emp_id)); ?>
 		<?php echo $form->error($model,'employee_id'); ?>
 	</div>
-
-	<div class="row">
+        
+       	<div class="row">
 		<?php echo $form->labelEx($model,Yii::t('employees','employee_leave_type_id')); ?>
 		<?php //echo $form->textField($model,'employee_leave_type_id'); ?>
         <?php echo $form->dropDownList($model,'employee_leave_type_id',CHtml::listData(EmployeeLeaveTypes::model()->findAll(), 'id', 'name'),array('empty'=>'Select Type')); ?>
