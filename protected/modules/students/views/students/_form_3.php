@@ -8,16 +8,17 @@ $form = $this->beginWidget('CActiveForm', array(
 ?>
 
 
-<?php if ($form->errorSummary($model)) {
-    ;
+<?php 
+//if ($form->errorSummary($model)) {
+    
     ?>
 
 
-    <div class="errorSummary">Input Error<br />
+<!--    <div class="errorSummary">Input Error<br />
         <span>Please fix the following error(s).</span>
-    </div>
+    </div>-->
 
-<?php } ?>
+<?php // } ?>
 <div class="formCon" style="background:url(images/yellow-pattern.png); width:100%; border:0px #fac94a solid; color:#000;">
 
 </div>
@@ -56,26 +57,28 @@ $form = $this->beginWidget('CActiveForm', array(
                     <?php echo $form->error($model, 'document_name'); ?></td>
                 <td>
                     <?php
-                    if ($model->isNewRecord) {
-                        echo $form->fileField($model, 'document_data');
-                        echo $form->error($model, 'document_data');
-                    } else {
-                        if ($model->document_data == NULL) {
-                            echo $form->fileField($model, 'document_data');
-                            echo $form->error($model, 'document_data');
-                        } else {
-                            if (Yii::app()->controller->action->id == 'update') {
-                                echo CHtml::link(Yii::t('students', 'Remove'), array('Employees/remove', 'id' => $model->id), array('confirm' => 'Are you sure?'));
-                                echo '<img class="imgbrder" src="' . $this->createUrl('Employees/DisplaySavedImage&id=' . $model->primaryKey) . '" alt="' . $model->document_file_name . '" width="100" height="100" />';
-                            } else if (Yii::app()->controller->action->id == 'create') {
-                                echo CHtml::hiddenField('document_file_name', $model->document_file_name);
-                                echo CHtml::hiddenField('document_content_type', $model->document_content_type);
-                                echo CHtml::hiddenField('document_file_size', $model->document_file_size);
-                                echo CHtml::hiddenField('document_data', bin2hex($model->document_data));
-                                echo '<img class="imgbrder" src="' . $this->createUrl('Employees/DisplaySavedImage&id=' . $model->primaryKey) . '" alt="' . $model->document_file_name . '" width="100" height="100" />';
-                            }
-                        }
-                    }
+                    echo CHtml::activeFileField($model, 'document_file_name'); 
+                 echo $form->error($model,'document_file_name');
+//                    if ($model->isNewRecord) {
+//                        echo $form->fileField($model, 'document_data');
+//                        echo $form->error($model, 'document_data');
+//                    } else {
+//                        if ($model->document_data == NULL) {
+//                            echo $form->fileField($model, 'document_data');
+//                            echo $form->error($model, 'document_data');
+//                        } else {
+//                            if (Yii::app()->controller->action->id == 'update') {
+//                                echo CHtml::link(Yii::t('students', 'Remove'), array('Employees/remove', 'id' => $model->id), array('confirm' => 'Are you sure?'));
+//                                echo '<img class="imgbrder" src="' . $this->createUrl('Employees/DisplaySavedImage&id=' . $model->primaryKey) . '" alt="' . $model->document_file_name . '" width="100" height="100" />';
+//                            } else if (Yii::app()->controller->action->id == 'create') {
+//                                echo CHtml::hiddenField('document_file_name', $model->document_file_name);
+//                                echo CHtml::hiddenField('document_content_type', $model->document_content_type);
+//                                echo CHtml::hiddenField('document_file_size', $model->document_file_size);
+//                                echo CHtml::hiddenField('document_data', bin2hex($model->document_data));
+//                                echo '<img class="imgbrder" src="' . $this->createUrl('Employees/DisplaySavedImage&id=' . $model->primaryKey) . '" alt="' . $model->document_file_name . '" width="100" height="100" />';
+//                            }
+//                        }
+//                    }
                     ?>
 
                 </td>
@@ -168,7 +171,7 @@ $form = $this->beginWidget('CActiveForm', array(
 </script>
 <script>
     $(document).ready(function () {
-        $("#studentDocument-form").submit(function () {
+        $("#studentAchievement-form").submit(function () {
             $("#btn").attr('disabled', 'true');
         });
     });

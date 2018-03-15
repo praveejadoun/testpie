@@ -165,6 +165,7 @@ foreach ($models as $model_1) {
                         ));
                     }
                     ?>
+                         
                     <?php echo $form->error($model, 'batch_id'); ?>
                 </td>
                     <!--<td valign="top">
@@ -461,6 +462,7 @@ foreach ($models as $model_1) {
             <div class="row">
 				<?php //echo $form->labelEx($model,'is_deleted'); ?>
                 <?php echo $form->hiddenField($model,'is_deleted'); ?>
+                
                 <?php echo $form->error($model,'is_deleted'); ?>
             </div>
             

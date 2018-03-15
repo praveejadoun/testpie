@@ -51,6 +51,7 @@ class StudentDocument extends CActiveRecord
 //                    array('length', 'max'=>255, 'on'=>'insert,update'),
 			array('created_at, updated_at', 'safe'),
 			array('document_name', 'required'),
+                        array('document_name', 'match','pattern' => '/^[a-zA-Z\s]+$/','message' => 'It can only contain alphabets,space'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('document_data', 'file', 'types'=>'jpg, gif, png','allowEmpty' => true, 'maxSize' => 5242880),

@@ -252,6 +252,14 @@ class TeacherSubjectAttendanceController extends RController
 		));
 	}
         
+            public function loadModel($id)
+            {
+                    $model=EmployeeSubjectwiseAttendances::model()->findByPk($id);
+                    if($model===null)
+                            throw new CHttpException(404,'The requested page does not exist.');
+                    return $model;
+            }
+        
           public function actionReturnForm(){
 
               //Figure out if we are updating a Model or creating a new one.
@@ -332,5 +340,49 @@ class TeacherSubjectAttendanceController extends RController
                         }
 		}
   }
+  
+  public function actionAjax_Update(){
+		if(isset($_POST['EmployeeSubjectwiseAttendances']))
+		{
+           $model=$this->loadModel($_POST['update_id']);
+			$model->attributes=$_POST['EmployeeSubjectwiseAttendances'];
+//                        $model->updated_at = date('Y-m-d H:i:s');
+			/*$data=SubjectName::model()->findByAttributes(array('id'=>$model->name));
+						if($data!=NULL)
+						{
+							$model->name=$data->name;
+							$model->code=$data->code;
+							
+						}*/
+			if( $model->save(false)){
+                         echo json_encode(array('success'=>true));
+		             }else
+                     echo json_encode(array('success'=>false));
+                }
+
+}
+ public function actionAjax_delete(){ 
+                 $id=$_POST['id'];
+                 $deleted=$this->loadModel($id);
+            
+                if ($deleted->delete() ){
+               echo json_encode (array('success'=>true,'msg'=>deleted));
+               exit;
+                }else{
+                  echo json_encode (array('success'=>false));
+                  exit;
+                           }
+      }
+      
+      public function actionDelete($id)
+	{
+		
+			$this->loadModel($id)->delete();
+                        $this->redirect(Yii::app()->request->urlReferrer);
+//            $this->redirect(array('index'));
+		
+			
+	}
+
 }
 

@@ -54,7 +54,7 @@ $this->breadcrumbs=array(
     <div class="emp_cntntbx" style="min-height:0px;">
     
  <?php
-	$studdoc = StudentDocument::model()->findAll("student_id=:x and is_deleted=:y and is_active=:z", array(':x'=>$_REQUEST['id'],':y'=>'0',':z'=>'1'));
+	//$studdoc = StudentDocument::model()->findAll("student_id=:x and is_deleted=:y and is_active=:z", array(':x'=>$_REQUEST['id'],':y'=>'0',':z'=>'1'));
 	?>
     
     <div class="document_table" style="margin-top: 10px;">
@@ -70,7 +70,10 @@ $this->breadcrumbs=array(
     </table>
         </div>
         </div>
-        <?php if($studdoc!=NULL){?>
+        <?php 
+        if($studdoc){
+        if($studdoc!=NULL){
+            ?>
         <?php 
         foreach($studdoc as $studdoc_1)
 	{ ?>
@@ -96,7 +99,21 @@ $this->breadcrumbs=array(
                 </tr>
             </tbody>
         </table>
-        <?php } } else { ?>
+        <?php } } ?> 
+        <div class="pagecon">
+    <?php                                          
+	                                                  $this->widget('CLinkPager', array(
+													  'currentPage'=>$pages->getCurrentPage(),
+													  'itemCount'=>$item_count,
+													  'pageSize'=>$page_size,
+													  'maxButtonCount'=>5,
+													  //'nextPageLabel'=>'My text >',
+													  'header'=>'',
+												  'htmlOptions'=>array('class'=>'pages'),
+												  ));?>
+               </div>   
+            <?php
+        } else { ?>
         <table width="100%" cellspacing="0" cellpadding="0" style="border-top:none;border-bottom: 2px solid #def;height:60px;" >
             <tbody>
                 <tr>

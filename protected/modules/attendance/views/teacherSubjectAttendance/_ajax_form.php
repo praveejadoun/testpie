@@ -53,7 +53,7 @@ if (!$model->isNewRecord)
 <?php   $formId='subjects-form';
    $actionUrl =
    ($model->isNewRecord)?CController::createUrl('teacherSubjectAttendance/ajax_create')
-                                                                 :CController::createUrl('subject/ajax_update');
+                                                                 :CController::createUrl('teacherSubjectAttendance/ajax_update');
 
 
     $form=$this->beginWidget('CActiveForm', array(
@@ -63,6 +63,7 @@ if (!$model->isNewRecord)
         
     	//'enableAjaxValidation'=>true,
       'enableClientValidation'=>true,
+//        'enableAjaxValidation'=>true,
      'focus'=>array($model,'name'),
      'errorMessageCssClass' => 'input-notification-error  error-simple png_bg',
      'clientOptions'=>array('validateOnSubmit'=>true,
@@ -149,6 +150,7 @@ if (!$model->isNewRecord)
             echo $form->hiddenField($model,'employee_id',array('value'=>$_POST['employee_id']));
             echo $form->hiddenField($model,'class_timing_id',array('value'=>$_POST['class_timing_id']));
             echo $form->hiddenField($model,'attendance_date',array('value'=>$_POST['attendance_date']));
+            echo $form->hiddenField($model,'batch_id',array('value'=>$_POST['batch_id']));
         ?>
         <?php echo $form->error($model,'employee_id');?>
     </div>
@@ -242,7 +244,7 @@ if (!$model->isNewRecord)
     <?php endif; ?>
     <div class="row buttons" style="width:30%">
         <?php   echo CHtml::submitButton($model->isNewRecord ? 'Submit' : 'Save',array('class' =>
-        'formbut')); ?>    </div>
+        'formbut','id'=>'btn')); ?>    </div>
 
   <?php  $this->endWidget(); ?></div>
     <!-- form -->
@@ -263,5 +265,12 @@ if (!$model->isNewRecord)
 
 
 </script>
+<script>
+    $(document).ready(function(){
+        $("#teachersubjectattendance-form").submit(function(){
+            $("#btn").attr('disabled','true');
+        });
+    });''
+    </script>
 
 

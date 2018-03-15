@@ -131,36 +131,77 @@ class StudentAchievementsController extends RController
         	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
+                  if (isset($_POST['StudentAchievements'])) {
+            $rnd = rand(0, 9999);  // generate random number between 0-9999
+            $model->attributes = $_POST['StudentAchievements'];
+           
+            $uploadedFile = CUploadedFile::getInstance($model, 'document_file_name');
+            $fileName = "{$rnd}-{$uploadedFile}";  // random number + file name
+//            echo "<pre/>";
+//            echo $uploadedFile;
+//           print_r($_POST['StudentAchievements']);
+//           exit;
+            if($model->document_file_name == "")
+            {
+                if($uploadedFile == ""){
+                $model->document_file_name = '';
+                    if($model->save()){
+                        
+                        //$uploadedFile->saveAs(Yii::app()->basePath . '/../uploadedfiles/' . $fileName);  // image will uplode to rootDirectory/banner/
+                        Yii::app()->user->setFlash('success', 'Achievement Updated Successfully');
+                        $this->redirect(array('students/achievements','id'=>$_REQUEST['student_id']));
+                        }
+            } 
+                    else {
+                         $model->document_file_name = $fileName;
+                        if($model->save()){
+                         $uploadedFile->saveAs(Yii::app()->basePath . '/../uploadedfiles/student_achievements/' . $fileName);  // image will uplode to rootDirectory/banner/
+                        Yii::app()->user->setFlash('success', 'Achievement Updated Successfully');
+                        $this->redirect(array('students/achievements','id'=>$_REQUEST['student_id']));
+                    }}
+                    
+                    
+            }
+            else
+            {
+                $model->document_file_name == $_POST['StudentAchievements']['document_file_name'];
+                    if($model->save()){
+                        Yii::app()->user->setFlash('success', 'Achievement Updated Successfully');
+                        $this->redirect(array('students/achievements','id'=>$_REQUEST['student_id']));
+                    }
+               
+                
+            }
+        }
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 		
-		if(isset($_POST['StudentAchievements']))
-		{
-			$model->attributes=$_POST['StudentAchievements'];
-                        if($file=CUploadedFile::getInstance($model,'file_data'))
-					 {
-					$model->file_name=$file->name;
-					$model->file_type=$file->type;
-					$model->file_size=$file->size;
-					$model->file_data=file_get_contents($file->tempName);
-					 
-                                         if(!is_dir('uploadedfiles/')){
-				mkdir('uploadedfiles/');
-			}
-			if(!is_dir('uploadedfiles/student_achievements/')){
-				mkdir('uploadedfiles/student_achievements/');
-                        }            
-                          move_uploaded_file($file->tempName,'uploadedfiles/student_achievements/'.$file->name);
-                                        
-                                        
-                                        
-                                        
-                                         }
-			if($model->save())
-                              Yii::app()->user->setFlash('success','Achievement Updated Successfully');
-				$this->redirect(array('students/achievements','id'=>$_REQUEST['student_id']));
-		}
+//		if(isset($_POST['StudentAchievements']))
+//		{
+//			$model->attributes=$_POST['StudentAchievements'];
+//                        if($file=CUploadedFile::getInstance($model,'file_data'))
+//					 {
+//					$model->file_name=$file->name;
+//					$model->file_type=$file->type;
+//					$model->file_size=$file->size;
+//					$model->file_data=file_get_contents($file->tempName);
+//					 
+//                                         if(!is_dir('uploadedfiles/')){
+//				mkdir('uploadedfiles/');
+//			}
+//			if(!is_dir('uploadedfiles/student_achievements/')){
+//				mkdir('uploadedfiles/student_achievements/');
+//                        }            
+//                          move_uploaded_file($file->tempName,'uploadedfiles/student_achievements/'.$file->name);
+//                                        
+//                                        
+//                                        
+//                                        
+//                                         }
+//			if($model->save())
+//                              Yii::app()->user->setFlash('success','Achievement Updated Successfully');
+//				$this->redirect(array('students/achievements','id'=>$_REQUEST['student_id']));
+//		}
 
 		$this->render('update',array(
 			'model'=>$model,
@@ -168,9 +209,14 @@ class StudentAchievementsController extends RController
 	}
 	 public function actionRemove()
 	{
-		$model = StudentAchievements::model()->findByAttributes(array('id'=>$_REQUEST['id']));
-		$model->saveAttributes(array('file_name'=>'','file_data'=>''));
-		$this->redirect(array('update','id'=>$_REQUEST['id'],'student_id'=>$_REQUEST['student_id']));
+               $model = StudentAchievements::model()->findByAttributes(array('id'=>$_REQUEST['id']));
+        unlink(Yii::app()->basePath . "/../uploadedfiles/student_achievements/" . $model->document_file_name);
+
+        $model->saveAttributes(array('document_file_name' => ''));
+        $this->redirect(array('update', 'id' => $_REQUEST['id'], 'student_id'=>$_REQUEST['student_id']));
+             
+		
+		
 	}
         
         public function loadModel($id)
@@ -234,6 +280,32 @@ class StudentAchievementsController extends RController
            mysql_close($link);
 
     }
+    
+    public function actionDownload(){
+    $model = $this->loadModel($_GET['id']);
+  $path = Yii::getPathOfAlias('webroot')."/uploadedfiles/student_achievements/";
+  $file_name = $model->document_file_name;
+  $this->downloadFile($path,$file_name);
+}
+ public function downloadFile($fullpath,$file_name){
+  if(!empty($fullpath)){
+       
+     $file = $fullpath.''.$file_name;
+      
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename='.$file_name);
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($file));
+        ob_clean();
+        flush();
+        readfile($file);
+        exit;
+  }
+}
        
 }
 ?>

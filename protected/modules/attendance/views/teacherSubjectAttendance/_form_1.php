@@ -128,13 +128,17 @@ if (isset($_REQUEST['emp']) != NULL) {
                                 <th width="60px" class="loader">&nbsp;</th>
                                 <?php
                                 $timing = array();
-
+                                
+                                $sql = "SELECT DISTINCT class_timing_id FROM timetable_entries WHERE employee_id = '".$_REQUEST['emp']."'";
+//                               $sql = "SELECT DISTINCT class_timing_id, employee_id, COUNT(*)FROM timetable_entries GROUP BY class_timing_id, employee_id HAVING COUNT(*) > 1";
                                 $criteria = new CDbCriteria;
                                 $criteria->compare('employee_id', $_REQUEST['emp']);
+                                $criteria->distinct = true;
                                 $total = TimetableEntries::model()->count($criteria);
                                 $criteria->order = 'class_timing_id ASC';
 
-                                $te = TimetableEntries::model()->findAll($criteria);
+//                                $te = TimetableEntries::model()->findAll($criteria);
+                                $te = TimetableEntries::model()->findAllBySql($sql);
                                 foreach ($te as $tte) {
                                     $ct = ClassTimings::model()->findAll("id=:x", array(':x' => $tte->class_timing_id));
 
@@ -195,8 +199,11 @@ if (isset($_REQUEST['emp']) != NULL) {
 //                                                  $set = EmployeeSubjectwiseAttendances::model()->findByAttributes(array('attendance_date'=>2018-01-14));     
 //                                              if(count($set)==0)
 //                                              {
-                                            $this->renderPartial('ajax',array('day'=>date('d', $d),'month'=>date('m', $d),'year'=>date('Y', $d),'emp_id'=>$_REQUEST['emp'],'c_t_id'=>$class_timeing->class_timing_id),array('class'=>'abs')). '</td>';
-
+                                                  
+//                                            $this->renderPartial('ajax',array('day'=>date('d', $d),'month'=>date('m', $d),'year'=>date('Y', $d),'emp_id'=>$_REQUEST['emp'],'c_t_id'=>$class_timeing->class_timing_id,'batch_id'=>$batch->id),array('class'=>'abs')).$subject->name.'<br><br>'.$batch->name
+                                            $subject->name . '<br><br>' . $batch->name 
+                                                    .'</td>';
+                                               
 
 //                                         }
 //                                        else {
@@ -224,7 +231,17 @@ if (isset($_REQUEST['emp']) != NULL) {
                                         //echo "<pre/>";
                                         //print_r($class_timeing);
                                         // echo $class_timeing->subject_id;
-                                        echo '<td class="td">' . $subject->name . '<br><br>' . $batch->name . '</td>';
+                                         if ($class_timeing != NULL) {
+                                        echo '<td class="td">' . 
+                                            $this->renderPartial('ajax',array('day'=>date('d', $d),'month'=>date('m', $d),'year'=>date('Y', $d),'emp_id'=>$_REQUEST['emp'],'c_t_id'=>$class_timeing->class_timing_id,'batch_id'=>$batch->id),array('class'=>'abs')).$subject->name.'<br><br>'.$batch->name
+
+                                                
+//                                                $subject->name . '<br><br>' . $batch->name 
+                                                . '</td>';
+                                    } else {
+                                            echo '<td class="td"></td>';
+                                        }
+                                        
                                     }
                                     echo "</tr>";
 //                                        echo " monday";
@@ -244,7 +261,18 @@ if (isset($_REQUEST['emp']) != NULL) {
                                         //echo "<pre/>";
                                         //print_r($class_timeing);
                                         // echo $class_timeing->subject_id;
-                                        echo '<td class="td">' . $subject->name . '<br><br>' . $batch->name . '</td>';
+                                        if ($class_timeing != NULL) {
+
+                                        echo '<td class="td">' .
+                                                
+//                                                $this->renderPartial('ajax',array('day'=>date('d', $d),'month'=>date('m', $d),'year'=>date('Y', $d),'emp_id'=>$_REQUEST['emp'],'c_t_id'=>$class_timeing->class_timing_id,'batch_id'=>$batch->id),array('class'=>'abs')).$subject->name.'<br><br>'.$batch->name
+
+                                                $subject->name . '<br><br>' . $batch->name 
+                                                . '</td>';
+                                        }else {
+                                            echo '<td class="td"></td>';
+                                        }       
+                                
                                     }
                                     echo "</tr>";
 //                                        echo " tuesday";
@@ -264,7 +292,17 @@ if (isset($_REQUEST['emp']) != NULL) {
                                         //echo "<pre/>";
                                         //print_r($class_timeing);
                                         // echo $class_timeing->subject_id;
-                                        echo '<td class="td">' . $subject->name . '<br><br>' . $batch->name . '</td>';
+                                        if ($class_timeing != NULL) {
+
+                                        echo '<td class="td">' .
+                                                
+//                                                $this->renderPartial('ajax',array('day'=>date('d', $d),'month'=>date('m', $d),'year'=>date('Y', $d),'emp_id'=>$_REQUEST['emp'],'c_t_id'=>$class_timeing->class_timing_id,'batch_id'=>$batch->id),array('class'=>'abs')).$subject->name.'<br><br>'.$batch->name
+
+                                                $subject->name . '<br><br>' . $batch->name . 
+                                                '</td>';
+                                        }else {
+                                            echo '<td class="td"></td>';
+                                        }   
                                     }
                                     echo "</tr>";
 //                                        echo " wednesday";

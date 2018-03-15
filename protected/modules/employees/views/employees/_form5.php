@@ -8,14 +8,14 @@
 ?>
 
 
-	<?php if($form->errorSummary($model)){; ?>
+	<?php // if($form->errorSummary($model)){; ?>
 
     
-    <div class="errorSummary">Input Error<br />
+<!--    <div class="errorSummary">Input Error<br />
     <span>Please fix the following error(s).</span>
-    </div>
+    </div>-->
     
-    <?php  } ?>
+    <?php//  } ?>
  <div class="formCon" style="background:url(images/yellow-pattern.png); width:100%; border:0px #fac94a solid; color:#000;">
      
     </div>

@@ -149,6 +149,7 @@ class EmployeesController extends RController
 		}
 	public function actionRemove()
 	{
+                
 		$model = Employees::model()->findByAttributes(array('id'=>$_REQUEST['id']));
 		$model->saveAttributes(array('photo_file_name'=>'','photo_data'=>''));
 		$this->redirect(array('update','id'=>$_REQUEST['id']));
@@ -296,6 +297,11 @@ class EmployeesController extends RController
          public function actionDocuments()
 	{
 		$model = new EmployeeDocument;
+                  $criteria = new CDbCriteria;
+		//$criteria->compare('is_deleted',0);
+                $criteria->addCondition('employee_id = :eid');
+          $criteria->addCondition('is_deleted = :del'); 
+          $criteria->params = array(':eid' => $_REQUEST['id'],':del'=>0);
 		if(isset($_POST['EmployeeDocument']))
 		{
 			$model->attributes=$_POST['EmployeeDocument'];
@@ -327,9 +333,24 @@ class EmployeesController extends RController
                         }
 		}
 
+                $criteria->order = 'id DESC';
+		
+		$total = EmployeeDocument::model()->count($criteria);
+		$pages = new CPagination($total);
+        $pages->setPageSize(Yii::app()->params['listPerPage']);
+        $pages->applyLimit($criteria);  // the trick is here!
+		$posts = EmployeeDocument::model()->findAll($criteria);
 		$this->render('documents',array(
 			'model'=>$model,
+                    'empdoc'=>$posts,
+		'pages' => $pages,
+		'item_count'=>$total,
+		'page_size'=>Yii::app()->params['listPerPage'],
 		));
+                
+//		$this->render('documents',array(
+//			'model'=>$model,
+//		));
 		
                 
                 
@@ -359,41 +380,72 @@ class EmployeesController extends RController
        public function actionAchievements()
 	{
 		$model=new EmployeeAchievements;
-                
+                $criteria = new CDbCriteria;
+		//$criteria->compare('is_deleted',0);
+                $criteria->addCondition('employee_id = :eid');
+          $criteria->addCondition('is_deleted = :del'); 
+          $criteria->params = array(':eid' => $_REQUEST['id'],':del'=>0);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['EmployeeAchievements']))
 		{
-			$model->attributes=$_POST['EmployeeAchievements'];
+			
+                        
+                        
+                        $rnd = rand(0,9999);  // generate random number between 0-9999
+                        $model->attributes=$_POST['EmployeeAchievements'];
                         $list = $_POST['EmployeeAchievements'];
-                     if($file=CUploadedFile::getInstance($model,'achievdoc_data'))
-					 {
-					$model->achievdoc_file_name=$file->name;
-					$model->achievdoc_content_type=$file->type;
-					$model->achievdoc_file_size=$file->size;
-					$model->achievdoc_data=file_get_contents($file->tempName);
-					 
-                                         
-                                        if(!is_dir('uploadedfiles/')){
-				mkdir('uploadedfiles/');
-			}
-			if(!is_dir('uploadedfiles/employee_achievements/')){
-				mkdir('uploadedfiles/employee_achievements/');
-                        }            
-                          move_uploaded_file($file->tempName,'uploadedfiles/employee_achievements/'.$file->name);              
-                                         }
-                      
-			if($model->save())
-                        {
-                            Yii::app()->user->setFlash('success','Achievement Created Successfully');
-				$this->redirect(array('achievements','id'=>$_REQUEST['id']));
+                        $uploadedFile=CUploadedFile::getInstance($model,'achievdoc_file_name');
+                        $fileName = "{$rnd}-{$uploadedFile}";  // random number + file name
+                        
+                        
+                        if($model->achievdoc_file_name == "")
+            {
+                if($uploadedFile == ""){
+                $model->achievdoc_file_name = '';
+                    if($model->save()){
+                        
+                        //$uploadedFile->saveAs(Yii::app()->basePath . '/../uploadedfiles/' . $fileName);  // image will uplode to rootDirectory/banner/
+                        Yii::app()->user->setFlash('success','Achievement Created Successfully');
+                         $this->redirect(array('achievements','id'=>$_REQUEST['id']));
                         }
+            } 
+                    else {
+                         $model->achievdoc_file_name = $fileName;
+                        if($model->save()){
+                         $uploadedFile->saveAs(Yii::app()->basePath . '/../uploadedfiles/employee_achievements/' . $fileName);  // image will uplode to rootDirectory/banner/
+                       Yii::app()->user->setFlash('success','Achievement Created Successfully');
+                         $this->redirect(array('achievements','id'=>$_REQUEST['id']));
+                    }}
+                    
+                    
+            }
+            else
+            {
+                $model->achievdoc_file_name == $_POST['EmployeeAchievements']['achievdoc_file_name'];
+                    if($model->save()){
+                       Yii::app()->user->setFlash('success','Achievement Created Successfully');
+                         $this->redirect(array('achievements','id'=>$_REQUEST['id']));
+                    }
+               
+                
+            }
 		}
-
+                $criteria->order = 'id DESC';
+		
+		$total = EmployeeAchievements::model()->count($criteria);
+		$pages = new CPagination($total);
+        $pages->setPageSize(Yii::app()->params['listPerPage']);
+        $pages->applyLimit($criteria);  // the trick is here!
+		$posts = EmployeeAchievements::model()->findAll($criteria);
 		$this->render('achievements',array(
 			'model'=>$model,
+                    'achievement'=>$posts,
+		'pages' => $pages,
+		'item_count'=>$total,
+		'page_size'=>Yii::app()->params['listPerPage'],
 		));
 		
 	}

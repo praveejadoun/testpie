@@ -43,11 +43,11 @@
                     <td valign="top" width="75%">
                     <div class="cont_right formWrapper" style="padding:3px 0px;">
                         
-                        <div class="news_cntnr">
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/latest_news_bnnr.png" width="720" height="130" />
+<!--                        <div class="news_cntnr">
+                        <img src="<?php // echo Yii::app()->request->baseUrl; ?>/images/latest_news_bnnr.png" width="720" height="130" />
                         <div class="latest_news_bx">
-                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/app_ftr_img.png" width="705" height="132" />
-                        <div class="latest_news_cntnt">
+                        <img src="<?php // echo Yii::app()->request->baseUrl; ?>/images/app_ftr_img.png" width="705" height="132" />-->
+                        <div class="latest_news_cntnt" style="margin: 146px 15px 0px 15px;">
                         	<div class="latest_news_app_bx"></div>
                         	<h1>Latest News</h1>
                             

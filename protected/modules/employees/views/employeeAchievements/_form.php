@@ -5,13 +5,13 @@
 )); ?>
 
 	<?php 
-	if($form->errorSummary($model)){
+	//if($form->errorSummary($model)){
 	?>
-        <div class="errorSummary">Input Error<br />
+<!--        <div class="errorSummary">Input Error<br />
         	<span>Please fix the following error(s).</span>
-        </div>
+        </div>-->
     <?php 
-	}
+	//}
 	?>
        
     <p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -24,7 +24,10 @@
             <table width="85%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                 <td valign="bottom" ><?php echo $form->labelEx($model,Yii::t('employees','Achievement Title <span class="required">*</span>')); ?></td>
-                <td>&nbsp;</td>
+                
+                </tr>
+               <br/>
+                <tr>
                  <td valign="bottom"><?php echo $form->textField($model,'achievement_title',array('size'=>30,'maxlength'=>255)); ?>
                 <?php echo $form->error($model,'achievement_title'); ?></td>
                 
@@ -40,8 +43,10 @@
                 </tr>
                 <tr>
                      <td valign="bottom"><?php echo $form->labelEx($model,Yii::t('employees','Description <span class="required">*</span>')); ?></td>
-                       <td>&nbsp;</td>
-                       <td valign="bottom"><?php echo $form->textArea($model,'achievement_description',array('size'=>25,'maxlength'=>255)); ?>
+                </tr> 
+                     
+                     <tr>
+                     <td valign="bottom"><?php echo $form->textField($model,'achievement_description',array('size'=>30,'maxlength'=>255)); ?>
                 <?php echo $form->error($model,'achievement_description'); ?></td>  
                 </tr>
                 
@@ -61,47 +66,78 @@
                 <tr>
                  <td valign="botttom" ><?php echo $form->textField($model,'achievement_document_name',array('size'=>30,'maxlength'=>255)); ?>
                 <?php echo $form->error($model,'achievement_document_name'); ?> </td>
+                
+                </tr>
+                <tr>
                 <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                </tr>
+                <tr>
                 <td>
 	<?php 
-		
-		
-		if($model->isNewRecord)
-		{
-			echo $form->fileField($model,'achievdoc_data'); 
-		    echo $form->error($model,'achievdoc_data'); 
-		}
-		else
-		{
-			if($model->achievdoc_data==NULL)
-			{
-				echo $form->fileField($model,'achievdoc_data'); 
-		        echo $form->error($model,'achievdoc_data'); 
-			}
-			
-			else
-			{
-                             
-				if(Yii::app()->controller->action->id=='update') {
-                                   echo   '<ul  class="sub_act" ><li style="list-style:none;">';
-                                        echo CHtml::link(Yii::t('students','Download'), array('Employeeachievements/downloadImage', 'id'=>$model->id,'employee_id'=>$model->employee_id),array('confirm'=>'Are you sure?'));
-					echo CHtml::link(Yii::t('students','Remove'), array('Employeeachievements/remove', 'id'=>$model->id,'employee_id'=>$model->employee_id),array('confirm'=>'Are you sure?'));
-                                    //  echo '<img class="imgbrder" src="'.$this->createUrl('achievements/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->achievdoc_file_name.'" width="100" height="100" />';	
-                                       echo '<img class="imgbrder" src="'.$this->createUrl('Employeeachievements/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->achievdoc_file_name.'" width="50" height="50" />';	
-                                       // echo '<img class="imgbrder" src="/sms/index.php?r=employees/Employeeachievements/DisplaySavedImage&id=73" alt="ec6.jpg" width="50" height="50">';
-                                        echo '</li></ul>';
-                                     
-					
-				}
-				else if(Yii::app()->controller->action->id=='create') {
-					echo CHtml::hiddenField('achievdoc_file_name',$model->achievdoc_file_name);
-					echo CHtml::hiddenField('achievdoc_content_type',$model->achievdoc_content_type);
-					echo CHtml::hiddenField('achievdoc_file_size',$model->achievdoc_file_size);
-					echo CHtml::hiddenField('achievdoc_data',bin2hex($model->achievdoc_data));
-					echo '<img class="imgbrder" src="'.$this->createUrl('achievements/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->achievdoc_file_name.'" width="100" height="100" />';
-				}
-			}
-		}
+		 
+                
+//                 if($model->isNewRecord!='1'){ 
+//
+//                echo CHtml::image(Yii::app()->request->baseUrl.'/uploadedfiles/'.$model->achievdoc_file_name,"image",array("width"=>100));  // Image shown here if page is update page
+//                echo CHtml::link(Yii::t('students','Remove'), array('Employeeachievements/remove', 'id'=>$model->id,'employee_id'=>$model->employee_id),array('confirm'=>'Are you sure?','class'=> 'formbut'));
+////                echo CHtml::link(Yii::t('Achievements','Delete'), array('employeeachievements/delete', 'id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure You Want To Delete This ?'));
+//                }
+//                    else {
+//                        echo CHtml::activeFileField($model, 'achievdoc_file_name');
+//                    }
+                    if($model->achievdoc_file_name != "")
+                    {
+                    echo CHtml::image(Yii::app()->request->baseUrl.'/uploadedfiles/employee_achievements/'.$model->achievdoc_file_name,"image",array("width"=>100));  // Image shown here if page is update page
+                    echo CHtml::link(Yii::t('students','Remove'), array('Employeeachievements/remove', 'id'=>$model->id,'employee_id'=>$model->employee_id),array('confirm'=>'Are you sure?','class'=> 'formbut'));
+                    echo $form->hiddenField($model,'achievdoc_file_name',array('value'=>$model->achievdoc_file_name));
+                    echo CHtml::link(Yii::t('students','Download'),array('Employeeachievements/download','id'=>$model->id,'employee_id'=>$model->employee_id),array('confirm'=>'Are you sure?','class'=> 'formbut'));
+                    }
+                    else
+                    {
+                    echo CHtml::activeFileField($model, 'achievdoc_file_name');
+                    
+                    }
+//		
+//		if($model->isNewRecord)
+//		{
+//			echo $form->fileField($model,'achievdoc_data'); 
+//		    echo $form->error($model,'achievdoc_data'); 
+//		}
+//		else
+//		{
+//			if($model->achievdoc_data==NULL)
+//			{
+//				echo $form->fileField($model,'achievdoc_data'); 
+//		        echo $form->error($model,'achievdoc_data'); 
+//			}
+//			
+//			else
+//			{
+//                             
+//				if(Yii::app()->controller->action->id=='update') {
+//                                   echo   '<ul  class="sub_act" ><li style="list-style:none;">';
+//                                        echo CHtml::link(Yii::t('students','Download'), array('Employeeachievements/downloadImage', 'id'=>$model->id,'employee_id'=>$model->employee_id),array('confirm'=>'Are you sure?'));
+//					echo CHtml::link(Yii::t('students','Remove'), array('Employeeachievements/remove', 'id'=>$model->id,'employee_id'=>$model->employee_id),array('confirm'=>'Are you sure?'));
+//                                    //  echo '<img class="imgbrder" src="'.$this->createUrl('achievements/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->achievdoc_file_name.'" width="100" height="100" />';	
+//                                       echo '<img class="imgbrder" src="'.$this->createUrl('Employeeachievements/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->achievdoc_file_name.'" width="50" height="50" />';	
+//                                       // echo '<img class="imgbrder" src="/sms/index.php?r=employees/Employeeachievements/DisplaySavedImage&id=73" alt="ec6.jpg" width="50" height="50">';
+//                                        echo '</li></ul>';
+//                                     
+//					
+//				}
+//				else if(Yii::app()->controller->action->id=='create') {
+//					echo CHtml::hiddenField('achievdoc_file_name',$model->achievdoc_file_name);
+//					echo CHtml::hiddenField('achievdoc_content_type',$model->achievdoc_content_type);
+//					echo CHtml::hiddenField('achievdoc_file_size',$model->achievdoc_file_size);
+//					echo CHtml::hiddenField('achievdoc_data',bin2hex($model->achievdoc_data));
+//					echo '<img class="imgbrder" src="'.$this->createUrl('achievements/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->achievdoc_file_name.'" width="100" height="100" />';
+//				}
+//			}
+//		}
 		
 		 ?>
         

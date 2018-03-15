@@ -21,7 +21,7 @@ $this->breadcrumbs=array(
     </ul>
     </div>
 <?php
-	$achievement = EmployeeAchievements::model()->findAll("employee_id=:x", array(':x'=>$_REQUEST['id']));
+	//$achievement = EmployeeAchievements::model()->findAll("employee_id=:x", array(':x'=>$_REQUEST['id']));
 	?>
        <?php
                 Yii::app()->clientScript->registerScript(
@@ -61,7 +61,9 @@ $this->breadcrumbs=array(
             </tr>
             </tbody>
             </table>
-     
+    
+     <?php  if($achievement){ ?>
+    
     <div class="tableinnerlist"> 
         
     <table width="100%" cellpadding="0" cellspacing="0">
@@ -73,6 +75,7 @@ $this->breadcrumbs=array(
     </tr>
 
     <?php
+   
 	if($achievement!=NULL){
 		foreach($achievement as $achievements)
 		{
@@ -83,21 +86,42 @@ $this->breadcrumbs=array(
 			echo '<td>'.$achievements->achievement_description.'</td>';
 			echo '<td>'.$achievements->achievement_document_name.'</td>';
 			echo '<td align="center"  class="sub_act">'; ?> 
+    <br/>
 					 <?php echo CHtml::link(Yii::t('Achievements','Edit'),array('employeeachievements/update','id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
-		 <?php echo CHtml::link(Yii::t('Achievements','Delete'), array('employeeachievements/delete', 'id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure You Want To Delete This ?')) ?>
-		 <?php echo CHtml::link(Yii::t('Achievements','Download'),array('employeeachievements/downloadImage','id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>	
+		<br/><br/>
+                 <?php echo CHtml::link(Yii::t('Achievements','Delete'), array('employeeachievements/delete', 'id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure You Want To Delete This ?')) ?>
+		<br/><br/>
+                <?php echo CHtml::link(Yii::t('Achievements','Download'),array('employeeachievements/download','id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>	
                  <?php //echo CHtml::link(Yii::t('Achievements','View'),array('','id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
  <?php echo'</td></tr>';?>
 		<?php }
 	}
-	else{
-		echo '<tr>';
-			echo '<td colspan="4"> No Achievement Details Available!</td>';
-		echo '<tr>';
-		
-	}
+//	else{
+//		echo '<tr>';
+//			echo '<td colspan="4"> No Achievement Details Available!</td>';
+//		echo '<tr>';
+//		
+//	}
 	?>    </table>
+        <div class="pagecon">
+    <?php                                          
+	                                                  $this->widget('CLinkPager', array(
+													  'currentPage'=>$pages->getCurrentPage(),
+													  'itemCount'=>$item_count,
+													  'pageSize'=>$page_size,
+													  'maxButtonCount'=>5,
+													  //'nextPageLabel'=>'My text >',
+													  'header'=>'',
+												  'htmlOptions'=>array('class'=>'pages'),
+												  ));?>
+               </div>                    
     </div>
+    
+     <?php }
+	else
+	{
+	echo '<div class="listhdg" align="center">'.Yii::t('employees','Nothing Found!!').'</div>';	
+	}?>
   
 
 </div>

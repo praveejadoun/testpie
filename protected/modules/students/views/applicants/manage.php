@@ -1052,15 +1052,16 @@ $(document).click(function() {
         $('#marital').hide();
         $('#bloodgroup').hide();
         $('#nationality').hide();
-        if ($("#dobtxt").val().length <= 0)
-        {
-            $('#dob').hide();
-        }
-        if ($("#admdatetxt").val().length <= 0)
-        {
-            $('#registration').hide();
-        }
-        $('#status').hide();
+//        if ($("#dobtxt").val().length == 0)
+//        {
+//            $('#dob').hide();
+//        }
+        
+//        if ($("#admdatetxt").val().length <= 0)
+//        {
+//            $('#registration').hide();
+//        }
+//        $('#status').hide();
 
     });
 

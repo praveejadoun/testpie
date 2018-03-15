@@ -119,8 +119,14 @@ class ApplicantsController extends RController {
 //        echo "<pre>";
 //print_r($_POST['Applicants']);exit;
         if (isset($_POST['Applicants'])) {
-
+            
+            $batches = Batches::model()->findByAttributes(array('id'=>$_POST[Applicants]['batch_id']));
+            
+            //$course = Courses::model()->findByAttributes(array('id'=>$batches->course_id));
+            
             $model->attributes = $_POST['Applicants'];
+            $model->course_id = $batches->course_id;
+            
             $list = $_POST['Applicants'];
             if ($model->registration_date)
                 $model->registration_date = date('Y-m-d', strtotime($model->registration_date));

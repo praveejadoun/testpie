@@ -857,6 +857,11 @@ class StudentsController extends RController {
       {
            
 		$model = new StudentDocument;
+                 $criteria = new CDbCriteria;
+//                $criteria->compare('is_deleted',0);
+                 $criteria->addCondition('student_id = :sid');
+                 $criteria->addCondition('is_deleted = :del'); 
+                 $criteria->params = array(':sid' => $_REQUEST['id'],':del'=>0);
 		if(isset($_POST['StudentDocument']))
 		{
 			$model->attributes=$_POST['StudentDocument'];
@@ -887,49 +892,90 @@ class StudentsController extends RController {
 				$this->redirect(array('document','id'=>$_REQUEST['id']));
                         }
 		}
-           
-          $this->render('document', array(
-            'model' => $model,
-        )); 
+             $criteria->order = 'id DESC';
+		
+		$total = StudentDocument::model()->count($criteria);
+		$pages = new CPagination($total);
+        $pages->setPageSize(Yii::app()->params['listPerPage']);
+        $pages->applyLimit($criteria);  // the trick is here!
+		$posts = StudentDocument::model()->findAll($criteria);
+		$this->render('document',array(
+			'model'=>$model,
+                    'studdoc'=>$posts,
+		'pages' => $pages,
+		'item_count'=>$total,
+		'page_size'=>Yii::app()->params['listPerPage'],
+		));
+//          $this->render('document', array(
+//            'model' => $model,
+//        )); 
       }
       
        public function actionAchievements() {
            
         $model = new StudentAchievements;
-        
-        if(isset($_POST['StudentAchievements']))
+         $criteria = new CDbCriteria;
+         //$criteria->compare('is_deleted',0);
+          $criteria->addCondition('student_id = :sid');
+          $criteria->addCondition('is_deleted = :del'); 
+          $criteria->params = array(':sid' => $_REQUEST['id'],':del'=>0);
+         if(isset($_POST['StudentAchievements']))
 		{
-			$model->attributes=$_POST['StudentAchievements'];
+			
+                        
+                        
+                        $rnd = rand(0,9999);  // generate random number between 0-9999
+                        $model->attributes=$_POST['StudentAchievements'];
                         $list = $_POST['StudentAchievements'];
-                          $model->document_name = $list['document_name'];
-				if($file=CUploadedFile::getInstance($model,'document_data'))
-					 {
-					$model->document_file_name=$file->name;
-					$model->document_content_type=$file->type;
-					$model->document_file_size=$file->size;
-					$model->document_data=file_get_contents($file->tempName);
-					 
-                                        if(!is_dir('uploadedfiles/')){
-				mkdir('uploadedfiles/');
-			}
-			if(!is_dir('uploadedfiles/employee_documents/')){
-				mkdir('uploadedfiles/employee_documents/');
-			}
-			move_uploaded_file($file->tempName,'uploadedfiles/employee_documents/'.$file->name);
-                                        
-                                         }
-				  
- 
-//         
-			if($model->save())
-                        {
-                            Yii::app()->user->setFlash('success','Achievement Created Successfully');
-				$this->redirect(array('achievements','id'=>$_REQUEST['id']));
+                        $uploadedFile=CUploadedFile::getInstance($model,'document_file_name');
+                        $fileName = "{$rnd}-{$uploadedFile}";  // random number + file name
+                        
+                        
+                        if($model->document_file_name == "")
+            {
+                if($uploadedFile == ""){
+                $model->document_file_name = '';
+                    if($model->save()){
+                        
+                        //$uploadedFile->saveAs(Yii::app()->basePath . '/../uploadedfiles/' . $fileName);  // image will uplode to rootDirectory/banner/
+                        Yii::app()->user->setFlash('success','Achievement Created Successfully');
+                         $this->redirect(array('achievements','id'=>$_REQUEST['id']));
                         }
+            } 
+                    else {
+                         $model->document_file_name = $fileName;
+                        if($model->save()){
+                         $uploadedFile->saveAs(Yii::app()->basePath . '/../uploadedfiles/student_achievements/' . $fileName);  // image will uplode to rootDirectory/banner/
+                       Yii::app()->user->setFlash('success','Achievement Created Successfully');
+                         $this->redirect(array('achievements','id'=>$_REQUEST['id']));
+                    }}
+                    
+                    
+            }
+            else
+            {
+                $model->document_file_name == $_POST['StudentAchievements']['document_file_name'];
+                    if($model->save()){
+                       Yii::app()->user->setFlash('success','Achievement Created Successfully');
+                         $this->redirect(array('achievements','id'=>$_REQUEST['id']));
+                    }
+               
+                
+            }
 		}
-
+                 $criteria->order = 'id DESC';
+		
+		$total = StudentAchievements::model()->count($criteria);
+		$pages = new CPagination($total);
+        $pages->setPageSize(Yii::app()->params['listPerPage']);
+        $pages->applyLimit($criteria);  // the trick is here!
+		$posts = StudentAchievements::model()->findAll($criteria);
 		$this->render('achievements',array(
 			'model'=>$model,
+                    'achievement'=>$posts,
+		'pages' => $pages,
+		'item_count'=>$total,
+		'page_size'=>Yii::app()->params['listPerPage'],
 		));
     }
 

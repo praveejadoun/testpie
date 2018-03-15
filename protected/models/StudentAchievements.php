@@ -50,10 +50,12 @@ class StudentAchievements extends CActiveRecord
 			array('achievement_title,achievement_description,document_name, document_file_name, document_content_type', 'length', 'max'=>255),
 //                    array('length', 'max'=>255, 'on'=>'insert,update'),
 			array('created_at, updated_at', 'safe'),
-			array('document_name,achievement_title', 'required'),
+			array('document_name,achievement_title,achievement_description', 'required'),
+                        array('achievement_title,achievement_description,document_name', 'match','pattern' => '/^[a-zA-Z\s]+$/','message' => 'It can only contain alphabets,space'),
+
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('document_data', 'file', 'types'=>'jpg, gif, png','allowEmpty' => true, 'maxSize' => 5242880),
+			array('document_file_name', 'file', 'types'=>'jpg, gif, png','allowEmpty' => true, 'maxSize' => 5242880),
 			array('id, student_id,achievement_title,achievement_description, document_name, document_file_name, document_content_type, document_data, created_at, updated_at, is_active, is_deleted, document_file_size', 'safe', 'on'=>'search'),
 			
 			

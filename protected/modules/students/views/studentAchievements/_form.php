@@ -1,6 +1,6 @@
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'studentDocument-form',
+	'id'=>'studentAchievement-form',
 	'enableAjaxValidation'=>false,
 	'htmlOptions'=>array('enctype'=>'multipart/form-data'),
     
@@ -8,14 +8,14 @@
 ?>
 
 
-	<?php if($form->errorSummary($model)){; ?>
+	<?php //if($form->errorSummary($model)){; ?>
 
     
-    <div class="errorSummary">Input Error<br />
+<!--    <div class="errorSummary">Input Error<br />
     <span>Please fix the following error(s).</span>
     </div>
-    
-    <?php  } ?>
+    -->
+    <?php  //} ?>
 <p class="note">Fields with <span class="required">*</span> are required.</p>
 
  <div class="formCon" style="background:url(images/yellow-pattern.png); width:100%; border:0px #fac94a solid; color:#000;">
@@ -44,51 +44,67 @@
                 <td valign="top" width="45%"><?php echo $form->textField($model, 'achievement_description', array('size' => 32, 'maxlength' => 255)); ?>
 <?php echo $form->error($model, 'achievement_description'); ?></td>
             </tr>
+            <tr><td>&nbsp;</td></tr>
             <tr>
                 <td valign="bottom" style="padding-bottom:3px;"><?php echo $form->labelEx($model, Yii::t('studentAchievements', 'document_name')); ?></td>
-                <td><p>Choose the file size is max. 200kb</p></td>
+                
             </tr>
             <tr>
 
 
                 <td valign="top" width="45%"><?php echo $form->textField($model, 'document_name', array('size' => 32, 'maxlength' => 255)); ?>
                     <?php echo $form->error($model, 'document_name'); ?></td>
+            </tr>
+             <tr><td>&nbsp;</td></tr>
+            <tr>
     <td>
 	<?php
+         if($model->document_file_name != "")
+                    {
+                    echo CHtml::image(Yii::app()->request->baseUrl.'/uploadedfiles/student_achievements/'.$model->document_file_name,"image",array("width"=>100));  // Image shown here if page is update page
+                    echo CHtml::link(Yii::t('students','Remove'), array('Studentachievements/remove', 'id'=>$model->id,'student_id'=>$model->student_id),array('confirm'=>'Are you sure?','class'=> 'formbut'));
+                    echo $form->hiddenField($model,'document_file_name',array('value'=>$model->document_file_name));
+                    echo CHtml::link(Yii::t('students','Download'),array('Studentachievements/download','id'=>$model->id,'student_id'=>$model->student_id),array('confirm'=>'Are you sure?','class'=> 'formbut'));
+                    }
+                    else
+                    {
+                    echo CHtml::activeFileField($model, 'document_file_name');
+                    
+                    }
 		
 		
-		if($model->isNewRecord)
-		{
-			echo $form->fileField($model,'document_data'); 
-		    echo $form->error($model,'document_data'); 
-		}
-		else
-		{
-			if($model->document_data==NULL)
-			{
-				echo $form->fileField($model,'document_data'); 
-		        echo $form->error($model,'document_data'); 
-			}
-			
-			else
-			{
-				if(Yii::app()->controller->action->id=='update') {
-                                     echo   '<ul  class="sub_act" ><li style="list-style:none;">';
-                                        echo CHtml::link(Yii::t('students','Download'), array('Studentachievements/downloadImage', 'id'=>$model->id,'student_id'=>$model->student_id),array('confirm'=>'Are you sure?'));
-					echo CHtml::link(Yii::t('students','Remove'), array('Studentachievements/remove', 'id'=>$model->id,'student_id'=>$_REQUEST['student_id']),array('confirm'=>'Are you sure?')); 
-					echo '<img class="imgbrder" src="'.$this->createUrl('Studentachievements/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->document_file_name.'" width="50" height="50" />';	
-                                    echo '</li></ul>';
-                                        
-                                }
-				else if(Yii::app()->controller->action->id=='achievements') {
-					echo CHtml::hiddenField('document_file_name',$model->document_file_name);
-					echo CHtml::hiddenField('document_content_type',$model->document_content_type);
-					echo CHtml::hiddenField('document_file_size',$model->document_file_size);
-					echo CHtml::hiddenField('document_data',bin2hex($model->document_data));
-					echo '<img class="imgbrder" src="'.$this->createUrl('Students/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->document_file_name.'" width="100" height="100" />';
-				}
-			}
-		}
+//		if($model->isNewRecord)
+//		{
+//			echo $form->fileField($model,'document_data'); 
+//		    echo $form->error($model,'document_data'); 
+//		}
+//		else
+//		{
+//			if($model->document_data==NULL)
+//			{
+//				echo $form->fileField($model,'document_data'); 
+//		        echo $form->error($model,'document_data'); 
+//			}
+//			
+//			else
+//			{
+//				if(Yii::app()->controller->action->id=='update') {
+//                                     echo   '<ul  class="sub_act" ><li style="list-style:none;">';
+//                                        echo CHtml::link(Yii::t('students','Download'), array('Studentachievements/downloadImage', 'id'=>$model->id,'student_id'=>$model->student_id),array('confirm'=>'Are you sure?'));
+//					echo CHtml::link(Yii::t('students','Remove'), array('Studentachievements/remove', 'id'=>$model->id,'student_id'=>$_REQUEST['student_id']),array('confirm'=>'Are you sure?')); 
+//					echo '<img class="imgbrder" src="'.$this->createUrl('Studentachievements/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->document_file_name.'" width="50" height="50" />';	
+//                                    echo '</li></ul>';
+//                                        
+//                                }
+//				else if(Yii::app()->controller->action->id=='achievements') {
+//					echo CHtml::hiddenField('document_file_name',$model->document_file_name);
+//					echo CHtml::hiddenField('document_content_type',$model->document_content_type);
+//					echo CHtml::hiddenField('document_file_size',$model->document_file_size);
+//					echo CHtml::hiddenField('document_data',bin2hex($model->document_data));
+//					echo '<img class="imgbrder" src="'.$this->createUrl('Students/DisplaySavedImage&id='.$model->primaryKey).'" alt="'.$model->document_file_name.'" width="100" height="100" />';
+//				}
+//			}
+//		}
 		
 		 ?>
         
@@ -134,8 +150,8 @@
                 <?php echo $form->error($model,'is_deleted'); ?>
             </div>
             <div class="row">
-                <?php echo $form->hiddenField($model,'created_at',array('value'=>date('Y-m-d')));
-		echo $form->error($model,'created_at'); ?> 
+                <?php //echo $form->hiddenField($model,'created_at',array('value'=>date('Y-m-d')));
+		//echo $form->error($model,'created_at'); ?> 
             </div>
         <div class="row">
              <?php echo $form->hiddenField($model,'updated_at',array('value'=>date('Y-m-d')));
@@ -146,7 +162,7 @@
 	<div style="padding:0px 0 0 0px; text-align:left">
 	
 		<?php //echo CHtml::Button($model->isNewRecord ? 'Add Another' : 'Save',array('class'=>'formbut')); ?>
-			<?php echo CHtml::submitButton($model->isNewRecord ? 'Save' : 'Save',array('class'=>'formbut')); ?>
+			<?php echo CHtml::submitButton($model->isNewRecord ? 'Save' : 'Save',array('class'=>'formbut','id' => 'btn', 'name' => 'bbtn', 'title' => 'Save')); ?>
 
         </div>
 
@@ -175,5 +191,13 @@
 			document.getElementById('required').style.visibility='visible';
 		}
 	}
+</script>
+<script>
+    $(document).ready(function () {
+        $("#studentAchievement-form").submit(function () {
+            $("#btn").attr('disabled', 'true');
+        });
+    });
+    
 </script>
 
