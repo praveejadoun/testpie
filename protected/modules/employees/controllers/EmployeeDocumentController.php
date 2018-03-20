@@ -125,8 +125,9 @@ class EmployeeDocumentController extends RController
            $que="select document_data from employee_document where id LIKE $id";
            $ret=mysql_query($que)or die("Invalid query: " . mysql_error());
            $data = mysql_result($ret, 0);
+           $file_name = $model->document_file_name;
            header("Content-type: image/jpeg");
-           header('Content-Disposition: attachment; filename="image.jpg"');
+           header('Content-Disposition: attachment; filename='.$file_name);
            header('Content-Length: '.strlen($data));
 
            echo $data;

@@ -9,13 +9,13 @@ if(count($find)==0)
 	*/
     
     
-        echo CHtml::link('<span>'.Yii::t('employeeSubjectWiseAttendance','Mark Leave').'</span>', array('#'),array('id'=>'add_subjectss','class' => 'at_abs','style'=>'color:#FF6600;'));
-
-//echo CHtml::ajaxLink(Yii::t('job','mark leave'),$this->createUrl('teachersubjectattendance/Addnew'),array(
-//        'onclick'=>'$("#jobDialog").dialog("open"); return false;',
-//        'update'=>'#jobDialog','type' =>'GET','data'=>array('day' =>$day,'month'=>$month,'year'=>$year,'emp_id'=>$emp_id),
-//        ),array('id'=>'showJobDialog','class' => 'at_abs', 'title' => 'Add leave'));
-		//echo '<div id="jobDialog'.$day.$emp_id.'"></div>';
+        //echo CHtml::link('<span>'.Yii::t('employeeSubjectWiseAttendance','Mark Leave').'</span>', array('#'),array('id'=>'add_subjectss','class' => 'at_abs','style'=>'color:#FF6600;'));
+       // echo CHtml::link('<span>'.Yii::t('employeeSubjectWiseAttendance','Mark Leave').'</span>',array('test','day'=>$day));
+echo CHtml::ajaxLink(Yii::t('job','mark leave'),$this->createUrl('teachersubjectattendance/Addnew'),array(
+        'onclick'=>'$("#jobDialog").dialog("open"); return false;',
+        'update'=>'#jobDialog','type' =>'GET','data'=>array('day' =>$day,'month'=>$month,'year'=>$year,'emp_id'=>$emp_id),
+        ),array('id'=>'showJobDialog','class' => 'at_abs', 'title' => 'Add leave'));
+		echo '<div id="jobDialog'.$day.$emp_id.'"></div>';
         // 'eid'=>$find[0]['id']
 }
  else {

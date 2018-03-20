@@ -75,32 +75,36 @@
  <h3>Setup a Subscription Method</h3>
   <tr>
       
-      <td ><div class="cr_align" >
+      <td><div class="cr_align" >
 		
-		<?php echo $form->radioButtonList($model,'subscription_type',array('1'=>'One Time'),array('checked'=>'1')); ?>
+		<?php echo $form->dropdownlist($model,'subscription_type',array('1'=>'One Time','2'=>'Repeat Every'),array('id'=>'selectMe')); ?>
 		<?php echo $form->error($model,'subscription_type'); ?>
 	</div></td>
+        
+     
        
   </tr>
   <tr>
       <td>&nbsp;</td>
   </tr>
    </table>
-          <div id="payment_types">
+        <div id="1" class="group">
+            <div id="payment_types">
         	<div class="white_bx">
 <div class="triangle-up"></div>
 <table width="45%">
     <tr>
          <td><?php echo $form->labelEx($model,Yii::t('subscription','due_date')); ?></td>
       <td><div>
+              <?php // echo $form->textField($model,'due_date[]',array('id'=>'myDate3','class'=>'datepicker'));?>
     <?php
 			
 			$date = 'dd-mm-yy';	
    				
 						$this->widget('zii.widgets.jui.CJuiDatePicker', array(
-								//'name'=>'Students[admission_date]',
+								'name'=>'FinanceFeeSubscription[one_time_due_date]',
 								'model'=>$model,
-								'attribute'=>'due_date',
+								//'attribute'=>'due_date',
 								// additional javascript options for the date picker plugin
 								'options'=>array(
 									'showAnim'=>'fold',
@@ -120,7 +124,188 @@
             <input value="1" name="FeeCategories[subscription_type]" id="FeeCategories_subscription_type" type="hidden" /><input readonly="readonly" id="FeeSubscriptions_due_date_1510040568" name="FeeSubscriptions[due_date][1510040568]" type="text" />        </td>-->
     </tr>
 </table>
-</div>        </div>	
+</div>        </div>
+        </div>
+        <div id="2" class="group">
+              <div id="payment_types">
+        	<div class="white_bx">
+<div class="triangle-up"></div>
+<table width="45%">
+    <tr>
+        <td><?php echo $form->labelEx($model,Yii::t('subscription','recurring_interval')); ?></td>
+        <td><?php echo $form->dropdownlist($model,'recurring_interval',array('3'=>'Half Yearly','4'=>'Quaterly'),array('id'=>'selectUs')); ?></td>
+    </tr>
+    <tr>
+        <td>
+    <div id="3" class ="sunil">
+       <?php echo $form->labelEx($model,Yii::t('subscription','due_date')); ?>
+        <br/>
+        <?php $date = 'dd-mm-yy';	
+   				
+						$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+								'name'=>'FinanceFeeSubscription[half_yearly_due_date][0]',
+								'model'=>$model,
+								//'attribute'=>'due_date',
+								// additional javascript options for the date picker plugin
+								'options'=>array(
+									'showAnim'=>'fold',
+									'dateFormat'=>$date,
+									'changeMonth'=> true,
+									'changeYear'=>true,
+									'yearRange'=>'1900:2030'
+								),
+								'htmlOptions'=>array(
+									'style'=>'height:20px;'
+								),
+							));?>
+        
+         <?php $date = 'dd-mm-yy';	
+   				
+						$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+								'name'=>'FinanceFeeSubscription[half_yearly_due_date][1]',
+								'model'=>$model,
+								//'attribute'=>'due_date',
+								// additional javascript options for the date picker plugin
+								'options'=>array(
+									'showAnim'=>'fold',
+									'dateFormat'=>$date,
+									'changeMonth'=> true,
+									'changeYear'=>true,
+									'yearRange'=>'1900:2030'
+								),
+								'htmlOptions'=>array(
+									'style'=>'height:20px;'
+								),
+							));?>
+        
+        
+        <?php //$due_date = array();?>
+        <?php //echo $form->textField($model,'due_date[]',array('id'=>'myDate1','class'=>'datepicker'));?>
+        <?php //echo $form->textField($model,'due_date[]',array('id'=>'myDate2','class'=>'datepicker'));?>
+<!--       <input type='text' id='myDate1' class="datepicker"/>        
+<input type="hidden"  id="myDate1_alt"/>        -->
+<br/><br/>
+<!--<input type='text' id='myDate2' class="datepicker"/>        
+<input type="hidden"  id="myDate2_alt"/>    -->
+    </div>
+            <div id="4" class="sunil">
+                 <?php $date = 'dd-mm-yy';	
+   				
+						$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+								'name'=>'FinanceFeeSubscription[quaterly_due_date][0]',
+								'model'=>$model,
+								//'attribute'=>'due_date',
+								// additional javascript options for the date picker plugin
+								'options'=>array(
+									'showAnim'=>'fold',
+									'dateFormat'=>$date,
+									'changeMonth'=> true,
+									'changeYear'=>true,
+									'yearRange'=>'1900:2030'
+								),
+								'htmlOptions'=>array(
+									'style'=>'height:20px;'
+								),
+							));?>
+                
+                  <?php $date = 'dd-mm-yy';	
+   				
+						$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+								'name'=>'FinanceFeeSubscription[quaterly_due_date][1]',
+								'model'=>$model,
+								//'attribute'=>'due_date',
+								// additional javascript options for the date picker plugin
+								'options'=>array(
+									'showAnim'=>'fold',
+									'dateFormat'=>$date,
+									'changeMonth'=> true,
+									'changeYear'=>true,
+									'yearRange'=>'1900:2030'
+								),
+								'htmlOptions'=>array(
+									'style'=>'height:20px;'
+								),
+							));?>
+                
+                  <?php $date = 'dd-mm-yy';	
+   				
+						$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+								'name'=>'FinanceFeeSubscription[quaterly_due_date][2]',
+								'model'=>$model,
+								//'attribute'=>'due_date',
+								// additional javascript options for the date picker plugin
+								'options'=>array(
+									'showAnim'=>'fold',
+									'dateFormat'=>$date,
+									'changeMonth'=> true,
+									'changeYear'=>true,
+									'yearRange'=>'1900:2030'
+								),
+								'htmlOptions'=>array(
+									'style'=>'height:20px;'
+								),
+							));?>
+                
+                  <?php $date = 'dd-mm-yy';	
+   				
+						$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+								'name'=>'FinanceFeeSubscription[quaterly_due_date][3]',
+								'model'=>$model,
+								//'attribute'=>'due_date',
+								// additional javascript options for the date picker plugin
+								'options'=>array(
+									'showAnim'=>'fold',
+									'dateFormat'=>$date,
+									'changeMonth'=> true,
+									'changeYear'=>true,
+									'yearRange'=>'1900:2030'
+								),
+								'htmlOptions'=>array(
+									'style'=>'height:20px;'
+								),
+							));?>
+                
+                
+            </div>
+        </td>
+</tr>
+<!--    <tr>
+        
+         <td><?php // echo $form->labelEx($model,Yii::t('subscription','due_date')); ?></td>
+      <td><div>
+    <?php
+			
+//			$date = 'dd-mm-yy';	
+//   				
+//						$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+//								//'name'=>'Students[admission_date]',
+//								'model'=>$model,
+//								'attribute'=>'due_date',
+//								// additional javascript options for the date picker plugin
+//								'options'=>array(
+//									'showAnim'=>'fold',
+//									'dateFormat'=>$date,
+//									'changeMonth'=> true,
+//									'changeYear'=>true,
+//									'yearRange'=>'1900:2030'
+//								),
+//								'htmlOptions'=>array(
+//									'style'=>'height:20px;'
+//								),
+//							));
+    ?>
+		<?php // echo $form->error($model,'due_date'); ?></div></td>
+        <td><label>Due Date <span class="required">*</span></label></td>
+        <td>
+            <input value="1" name="FeeCategories[subscription_type]" id="FeeCategories_subscription_type" type="hidden" /><input readonly="readonly" id="FeeSubscriptions_due_date_1510040568" name="FeeSubscriptions[due_date][1510040568]" type="text" />        </td>
+    </tr>-->
+</table>
+</div>        </div>
+            
+        </div>
+      
+          
+      
    <div class="row">
 		<?php //echo $form->labelEx($model,'is_deleted'); ?>
 		<?php echo $form->hiddenField($model,'is_deleted'); ?>
@@ -156,3 +341,46 @@
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Submit' : 'Save',array('class'=>'formbut')); ?>
 	</div>  
  <?php $this->endWidget(); ?>   
+<script type="text/javascript">
+ $(document).ready(function () {
+  $('.group').hide();
+  $('#1').show();
+  $('#selectMe').change(function () {
+    $('.group').hide();
+    $('#'+$(this).val()).show();
+  })
+
+  $('.sunil').hide();
+  $('#3').show();
+  $('#selectUs').change(function () {
+    $('.sunil').hide();
+    $('#'+$(this).val()).show();
+  })
+  
+    // Shared properties for all datepickers with class="datepicker"
+    $( ".datepicker" ).datepicker({
+        showOn: 'focus',
+        showButtonPanel: true,
+        showOtherMonths: true,
+        selectOtherMonths: true,
+        dateFormat: "dd-mm-yy"
+    });
+
+    // Specific properties for each datepicker
+    $("#myDate1").datepicker({ 
+      altFormat: "dd-mm-yy",
+      altField: "#myDate1_alt"
+    });
+
+    $("#myDate2").datepicker({ 
+      altFormat: "dd-mm-yy",
+      altField: "#myDate2_alt"
+    });
+    
+     $("#myDate3").datepicker({ 
+      altFormat: "dd-mm-yy",
+      altField: "#myDate2_alt"
+    });
+});
+
+    </script>

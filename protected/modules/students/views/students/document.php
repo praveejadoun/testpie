@@ -88,6 +88,7 @@ $this->breadcrumbs=array(
                       <li style="list-style:none;">
                            <?php echo CHtml::link(Yii::t('Achievements','Approved'),array(/*'','id'=>$empdoc_1->id,'id'=>$_REQUEST['id']*/),array('class'=>'edit','style'=>'background: #008000;color: white;'),array('disabled'=>'true')); ?>
 		           <?php echo CHtml::link(Yii::t('Achievements','Disapprove'),array('studentdocument/disapprove','id'=>$studdoc_1->id,'student_id'=>$_REQUEST['id']),array('class'=>'edit','confirm'=>'Are You Sure You Want To Disapprove This ?')); ?>	
+                          
                            <?php echo CHtml::link(Yii::t('Achievements','Edit'),array('studentdocument/update','id'=>$studdoc_1->id,'student_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
                          
                            <?php echo CHtml::link(Yii::t('Documents','Delete'), array('/students/studentdocument/delete', 'id'=>$studdoc_1->id,'student_id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure You Want To Delete This ?')) ?>

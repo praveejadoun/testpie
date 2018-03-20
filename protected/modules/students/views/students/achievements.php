@@ -75,9 +75,12 @@ $this->breadcrumbs=array(
 			echo '<td>'.$achievements->achievement_description.'</td>';
 			echo '<td>'.$achievements->document_name.'</td>';
 			echo '<td align="center"  class="sub_act">'; ?> 
+                                        <br/>
 					 <?php echo CHtml::link(Yii::t('Achievements','Edit'),array('studentachievements/update','id'=>$achievements->id,'student_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
-		 <?php echo CHtml::link(Yii::t('Achievements','Delete'), array('studentachievements/delete', 'id'=>$achievements->id,'student_id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure You Want To Delete This ?')) ?>
-		 <?php echo CHtml::link(Yii::t('Achievements','Download'),array('studentachievements/download','id'=>$achievements->id,'student_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>	
+                                        <br/><br/>
+                                             <?php echo CHtml::link(Yii::t('Achievements','Delete'), array('studentachievements/delete', 'id'=>$achievements->id,'student_id'=>$_REQUEST['id']),array('confirm'=>'Are You Sure You Want To Delete This ?')) ?>
+                                        <br/><br/>
+                                                 <?php echo CHtml::link(Yii::t('Achievements','Download'),array('studentachievements/download','id'=>$achievements->id,'student_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>	
                  <?php //echo CHtml::link(Yii::t('Achievements','View'),array('','id'=>$achievements->id,'employee_id'=>$_REQUEST['id']),array('class'=>'edit')); ?>
  <?php echo'</td></tr>';?>
 		<?php }

@@ -147,7 +147,7 @@ if (!$model->isNewRecord)
     <div class="row">
         <?php 
         
-            echo $form->hiddenField($model,'employee_id',array('value'=>$_POST['employee_id']));
+            echo $form->hiddenField($model,'employee_id',array('value'=>$employee_id));
             echo $form->hiddenField($model,'class_timing_id',array('value'=>$_POST['class_timing_id']));
             echo $form->hiddenField($model,'attendance_date',array('value'=>$_POST['attendance_date']));
             echo $form->hiddenField($model,'batch_id',array('value'=>$_POST['batch_id']));
