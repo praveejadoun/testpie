@@ -3,12 +3,18 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'subscription-form',
 	'enableAjaxValidation'=>false,
+        'htmlOptions' => array('enctype'=>'multipart/form-data'),
     )); 
 ?> 
+  
         <table width="80%" border="0" cellspacing="0" cellpadding="0">
            <tr>
            <h3>Setup a Subscription Method</h3>
-    <td><?php echo $form->labelEx($model,Yii::t('subscription','start_date')); ?></td>
+    <td>
+        <p>Start Date<span class="required">*</span></p>
+        <?php // echo $form->labelEx($model,Yii::t('subscription','start_date')); ?>
+    </td>
+    
    <td><div>
     <?php
 			
@@ -27,13 +33,19 @@
 									'yearRange'=>'1900:2030'
 								),
 								'htmlOptions'=>array(
-									'style'=>'height:20px;'
+									'style'=>'height:20px;',
+                                                                        'id'=>'start'
+                                                                        
 								),
 							));
     ?>
 		<?php echo $form->error($model,'start_date'); ?></div></td>
    
-     <td><?php echo $form->labelEx($model,Yii::t('subscription','end_date')); ?></td>
+     <td>
+          <p>End Date<span class="required">*</span></p>
+         <?php //echo $form->labelEx($model,Yii::t('subscription','end_date')); ?>
+     </td>
+     <td>&nbsp;</td>
       <td><div>
     <?php
 			
@@ -53,6 +65,7 @@
 								),
 								'htmlOptions'=>array(
 									'style'=>'height:20px;'
+                                                                        
 								),
 							));
     ?>
@@ -94,7 +107,10 @@
 <div class="triangle-up"></div>
 <table width="45%">
     <tr>
-         <td><?php echo $form->labelEx($model,Yii::t('subscription','due_date')); ?></td>
+         <td>
+             <?php //echo $form->labelEx($model,Yii::t('subscription','due_date')); ?>
+              <p>Due Date<span class="required">*</span></p>
+         </td>
       <td><div>
               <?php // echo $form->textField($model,'due_date[]',array('id'=>'myDate3','class'=>'datepicker'));?>
     <?php
@@ -138,7 +154,8 @@
     <tr>
         <td>
     <div id="3" class ="sunil">
-       <?php echo $form->labelEx($model,Yii::t('subscription','due_date')); ?>
+         <p>Due Date<span class="required">*</span></p>
+       <?php //echo $form->labelEx($model,Yii::t('subscription','due_date')); ?>
         <br/>
         <?php $date = 'dd-mm-yy';	
    				
@@ -158,7 +175,7 @@
 									'style'=>'height:20px;'
 								),
 							));?>
-        
+        <br/><br/>
          <?php $date = 'dd-mm-yy';	
    				
 						$this->widget('zii.widgets.jui.CJuiDatePicker', array(
@@ -189,6 +206,9 @@
 <input type="hidden"  id="myDate2_alt"/>    -->
     </div>
             <div id="4" class="sunil">
+                <p>Due Date<span class="required">*</span></p>
+                <?php //echo $form->labelEx($model,Yii::t('subscription','due_date')); ?>
+                <br/>
                  <?php $date = 'dd-mm-yy';	
    				
 						$this->widget('zii.widgets.jui.CJuiDatePicker', array(
@@ -207,7 +227,7 @@
 									'style'=>'height:20px;'
 								),
 							));?>
-                
+                <br/><br/>
                   <?php $date = 'dd-mm-yy';	
    				
 						$this->widget('zii.widgets.jui.CJuiDatePicker', array(
@@ -226,7 +246,7 @@
 									'style'=>'height:20px;'
 								),
 							));?>
-                
+                <br/><br/>
                   <?php $date = 'dd-mm-yy';	
    				
 						$this->widget('zii.widgets.jui.CJuiDatePicker', array(
@@ -245,7 +265,7 @@
 									'style'=>'height:20px;'
 								),
 							));?>
-                
+                <br/><br/>
                   <?php $date = 'dd-mm-yy';	
    				
 						$this->widget('zii.widgets.jui.CJuiDatePicker', array(
@@ -348,39 +368,17 @@
   $('#selectMe').change(function () {
     $('.group').hide();
     $('#'+$(this).val()).show();
-  })
+  });
 
   $('.sunil').hide();
   $('#3').show();
   $('#selectUs').change(function () {
     $('.sunil').hide();
     $('#'+$(this).val()).show();
-  })
+  });
   
-    // Shared properties for all datepickers with class="datepicker"
-    $( ".datepicker" ).datepicker({
-        showOn: 'focus',
-        showButtonPanel: true,
-        showOtherMonths: true,
-        selectOtherMonths: true,
-        dateFormat: "dd-mm-yy"
-    });
-
-    // Specific properties for each datepicker
-    $("#myDate1").datepicker({ 
-      altFormat: "dd-mm-yy",
-      altField: "#myDate1_alt"
-    });
-
-    $("#myDate2").datepicker({ 
-      altFormat: "dd-mm-yy",
-      altField: "#myDate2_alt"
-    });
-    
-     $("#myDate3").datepicker({ 
-      altFormat: "dd-mm-yy",
-      altField: "#myDate2_alt"
-    });
+ 
 });
+
 
     </script>

@@ -241,7 +241,9 @@ class InvoicesController extends RController {
                     foreach ($students as $student) {
                         
                         $row = array("batch_id" => $batchId[$i],"fee_particular_id" => $finance_fee_particular_id[$i], "fee_access_id" => $feeaccess_1->id, "student_category_id" => $studentCategoryId[$i], "student_batch_id" => $batchId[$i], "student_id" => $student->id, "student_course_id" => $courseId[$i], "invoice_amount" => $invoiceAmount[$i], "amount_payable" => $total, "finance_fee_category_id" => $_REQUEST['id']);
-                    $invoice = new FinanceFeeInvoices;
+                     $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
+                     foreach($subscription as $subscription_1){
+                     $invoice = new FinanceFeeInvoices;
                      $a=rand(00000000, 99999999);
                     $invoice->invoice_id = $a;
                     $invoice->finance_fee_category_id = $row['finance_fee_category_id'];
@@ -260,10 +262,9 @@ class InvoicesController extends RController {
                     $invoice->actual_amount = $row['invoice_amount'];
                     $invoice->student_id = $row['student_id'];
                     $invoice->status = 0;
-                    $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
-                    foreach($subscription as $subscription_1){
+                    
                         $invoice->due_date = $subscription_1->due_date;
-                    }
+                   
                     
                     $invoice->is_deleted = 0;
                     $invoice->created_at = date('Y-m-d H:i:s');
@@ -271,7 +272,7 @@ class InvoicesController extends RController {
 
                     
                     $invoice->save();
-                  
+                   }
                         
                     }
 //                    $feesCategory->saveAttributes(array("is_invoice"=>1));
@@ -289,7 +290,9 @@ class InvoicesController extends RController {
                     foreach ($students as $student) {
                         
                         $row = array("batch_id" => $batchId[$i],"fee_particular_id" => $finance_fee_particular_id[$i], "fee_access_id" => $feeaccess_1->id, "student_category_id" => $studentCategoryId[$i], "student_batch_id" => $batchId[$i], "student_id" => $student->id, "student_course_id" => $courseId[$i], "invoice_amount" => $invoiceAmount[$i], "amount_payable" => $total, "finance_fee_category_id" => $_REQUEST['id']);
-                    $invoice = new FinanceFeeInvoices;
+                     $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
+                      foreach($subscription as $subscription_1){ 
+                     $invoice = new FinanceFeeInvoices;
                      $a=rand(00000000, 99999999);
                     $invoice->invoice_id = $a;
                     $invoice->finance_fee_category_id = $row['finance_fee_category_id'];
@@ -308,10 +311,10 @@ class InvoicesController extends RController {
                     $invoice->actual_amount = $row['invoice_amount'];
                     $invoice->student_id = $row['student_id'];
                     $invoice->status = 0;
-                    $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
-                    foreach($subscription as $subscription_1){
+                   
+                    
                         $invoice->due_date = $subscription_1->due_date;
-                    }
+                   
                     
                     $invoice->is_deleted = 0;
                     $invoice->created_at = date('Y-m-d H:i:s');
@@ -319,7 +322,7 @@ class InvoicesController extends RController {
 
 
                     $invoice->save();
-                   
+                    }
                         
                     }
                   
@@ -337,6 +340,8 @@ class InvoicesController extends RController {
                     foreach ($students as $student) {
                         
                         $row = array("batch_id" => $batchId[$i],"fee_particular_id" => $finance_fee_particular_id[$i], "fee_access_id" => $feeaccess_1->id, "student_category_id" => $studentCategoryId[$i], "student_batch_id" => $batchId[$i], "student_id" => $student->id, "student_course_id" => $courseId[$i], "invoice_amount" => $invoiceAmount[$i], "amount_payable" => $total, "finance_fee_category_id" => $_REQUEST['id']);
+                    $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
+                     foreach($subscription as $subscription_1){  
                     $invoice = new FinanceFeeInvoices;
                      $a=rand(00000000, 99999999);
                     $invoice->invoice_id = $a;
@@ -356,11 +361,7 @@ class InvoicesController extends RController {
                     $invoice->actual_amount = $row['invoice_amount'];
                     $invoice->student_id = $row['student_id'];
                     $invoice->status = 0;
-                    $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
-                    foreach($subscription as $subscription_1){
-                        $invoice->due_date = $subscription_1->due_date;
-                    }
-                    
+                    $invoice->due_date = $subscription_1->due_date;
                     $invoice->is_deleted = 0;
                     $invoice->created_at = date('Y-m-d H:i:s');
                     $invoice->updated_at = date('Y-m-d H:i:s');
@@ -368,7 +369,7 @@ class InvoicesController extends RController {
 
                     $invoice->save();
                    
-                        
+                      }   
                     }
 //                    $feesCategory->saveAttributes(array("is_invoice"=>1));
 //                    Yii::app()->user->setFlash('success','Invoice Generated Successfully !');
@@ -385,7 +386,9 @@ class InvoicesController extends RController {
                     foreach ($students as $student) {
                         
                         $row = array("batch_id" => $batchId[$i],"fee_particular_id" => $finance_fee_particular_id[$i], "fee_access_id" => $feeaccess_1->id, "student_category_id" => $studentCategoryId[$i], "student_batch_id" => $batchId[$i], "student_id" => $student->id, "student_course_id" => $courseId[$i], "invoice_amount" => $invoiceAmount[$i], "amount_payable" => $total, "finance_fee_category_id" => $_REQUEST['id']);
-                    $invoice = new FinanceFeeInvoices;
+                    $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
+                    foreach($subscription as $subscription_1){
+                     $invoice = new FinanceFeeInvoices;
                      $a=rand(00000000, 99999999);
                     $invoice->invoice_id = $a;
                     $invoice->finance_fee_category_id = $row['finance_fee_category_id'];
@@ -404,19 +407,15 @@ class InvoicesController extends RController {
                     $invoice->actual_amount = $row['invoice_amount'];
                     $invoice->student_id = $row['student_id'];
                     $invoice->status = 0;
-                    $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
-                    foreach($subscription as $subscription_1){
-                        $invoice->due_date = $subscription_1->due_date;
-                    }
-                    
-                    $invoice->is_deleted = 0;
+                     $invoice->due_date = $subscription_1->due_date;
+                     $invoice->is_deleted = 0;
                     $invoice->created_at = date('Y-m-d H:i:s');
                     $invoice->updated_at = date('Y-m-d H:i:s');
 
 
                     $invoice->save();
                    
-                        
+                    }    
                     }
 //                    $feesCategory->saveAttributes(array("is_invoice"=>1));
 //                    Yii::app()->user->setFlash('success','Invoice Generated Successfully !');
@@ -433,7 +432,9 @@ class InvoicesController extends RController {
                     foreach ($students as $student) {
                         
                         $row = array("batch_id" => $batchId[$i],"fee_particular_id" => $finance_fee_particular_id[$i], "fee_access_id" => $feeaccess_1->id, "student_category_id" => $studentCategoryId[$i], "student_batch_id" => $batchId[$i], "student_id" => $student->id, "student_course_id" => $courseId[$i], "invoice_amount" => $invoiceAmount[$i], "amount_payable" => $total, "finance_fee_category_id" => $_REQUEST['id']);
-                    $invoice = new FinanceFeeInvoices;
+                    $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
+                    foreach($subscription as $subscription_1){
+                        $invoice = new FinanceFeeInvoices;
                      $a=rand(00000000, 99999999);
                     $invoice->invoice_id = $a;
                     $invoice->finance_fee_category_id = $row['finance_fee_category_id'];
@@ -452,11 +453,7 @@ class InvoicesController extends RController {
                     $invoice->actual_amount = $row['invoice_amount'];
                     $invoice->student_id = $row['student_id'];
                     $invoice->status = 0;
-                    $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
-                    foreach($subscription as $subscription_1){
-                        $invoice->due_date = $subscription_1->due_date;
-                    }
-                    
+                    $invoice->due_date = $subscription_1->due_date;
                     $invoice->is_deleted = 0;
                     $invoice->created_at = date('Y-m-d H:i:s');
                     $invoice->updated_at = date('Y-m-d H:i:s');
@@ -464,7 +461,7 @@ class InvoicesController extends RController {
 
                     $invoice->save();
                    
-                        
+                      }   
                     }
 //                    $feesCategory->saveAttributes(array("is_invoice"=>1));
 //                    Yii::app()->user->setFlash('success','Invoice Generated Successfully !');
@@ -482,7 +479,9 @@ class InvoicesController extends RController {
                     foreach ($students as $student) {
                         
                         $row = array("batch_id" => $batchId[$i],"fee_particular_id" => $finance_fee_particular_id[$i], "fee_access_id" => $feeaccess_1->id, "student_category_id" => $studentCategoryId[$i], "student_batch_id" => $batchId[$i], "student_id" => $student->id, "student_course_id" => $courseId[$i], "invoice_amount" => $invoiceAmount[$i], "amount_payable" => $total, "finance_fee_category_id" => $_REQUEST['id']);
-                    $invoice = new FinanceFeeInvoices;
+                    $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
+                    foreach($subscription as $subscription_1){
+                        $invoice = new FinanceFeeInvoices;
                      $a=rand(00000000, 99999999);
                     $invoice->invoice_id = $a;
                     $invoice->finance_fee_category_id = $row['finance_fee_category_id'];
@@ -501,11 +500,7 @@ class InvoicesController extends RController {
                     $invoice->actual_amount = $row['invoice_amount'];
                     $invoice->student_id = $row['student_id'];
                     $invoice->status = 0;
-                    $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
-                    foreach($subscription as $subscription_1){
-                        $invoice->due_date = $subscription_1->due_date;
-                    }
-                    
+                     $invoice->due_date = $subscription_1->due_date;
                     $invoice->is_deleted = 0;
                     $invoice->created_at = date('Y-m-d H:i:s');
                     $invoice->updated_at = date('Y-m-d H:i:s');
@@ -513,7 +508,7 @@ class InvoicesController extends RController {
 
                     $invoice->save();
                    
-                        
+                      }   
                     }
 //                    $feesCategory->saveAttributes(array("is_invoice"=>1));
 //                    Yii::app()->user->setFlash('success','Invoice Generated Successfully !');
@@ -545,6 +540,8 @@ class InvoicesController extends RController {
                     foreach ($students as $student) {
                       
                     $row = array("student_id" => $student->id, "invoice_amount" => $invoiceAmount[$i],"fee_particular_id" => $finance_fee_particular_id[$i], "amount_payable" => $total, "finance_fee_category_id" => $_REQUEST['id']);
+                   $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
+                    foreach($subscription as $subscription_1){
                     $invoice = new FinanceFeeInvoices;
                     $a=rand(00000000, 99999999);
                     $invoice->invoice_id = $a;
@@ -564,18 +561,13 @@ class InvoicesController extends RController {
                     $invoice->actual_amount = $row['invoice_amount'];
                     $invoice->student_id = $row['student_id'];
                     $invoice->status = 0;
-                    $subscription = FinanceFeeSubscription::model()->findAll("fee_category_id=:x",array(':x'=> $_REQUEST['id']));  
-                    foreach($subscription as $subscription_1){
-                        $invoice->due_date = $subscription_1->due_date;
-                    }
-                    
+                    $invoice->due_date = $subscription_1->due_date;
                     $invoice->is_deleted = 0;
                     $invoice->created_at = date('Y-m-d H:i:s');
                     $invoice->updated_at = date('Y-m-d H:i:s');
-
-
                     $invoice->save();
-                    }    
+                    }  
+                     }
                   }
                            
                     }

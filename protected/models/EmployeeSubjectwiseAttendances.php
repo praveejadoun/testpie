@@ -9,6 +9,7 @@
  * @property integer $batch_id 
  * @property integer $employee_id
  * @property integer $class_timing_id 	
+ * @property integer $weekday_id
  * @property integer $employee_leave_type_id
  * @property string $reason
  * @property integer $is_half_day
@@ -40,7 +41,7 @@ class EmployeeSubjectwiseAttendances extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('batch_id, class_timing_id, employee_id, employee_leave_type_id, is_half_day', 'numerical', 'integerOnly'=>true),
+			array('batch_id, class_timing_id,weekday_id, employee_id, employee_leave_type_id, is_half_day', 'numerical', 'integerOnly'=>true),
 			array('reason', 'length', 'max'=>255),
 			array('attendance_date', 'safe'),
 			array('reason,employee_leave_type_id', 'required'),
@@ -72,6 +73,7 @@ class EmployeeSubjectwiseAttendances extends CActiveRecord
 			'attendance_date' => 'Attendance Date',
                         'batch_id' => 'Batch',
                         'class_timing_id' => 'Class Timing',
+                        'weekday_id'=>'Week Day',
 			'employee_id' => 'Employee',
 			'employee_leave_type_id' => 'Employee Leave Type',
 			'reason' => 'Reason',
@@ -92,8 +94,9 @@ class EmployeeSubjectwiseAttendances extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('attendance_date',$this->attendance_date,true);
-		$criteria->compare('batch_id',$this->batch_id);
-                $criteria->compare('class_timing_id',$this->class_timing_id);
+		$criteria->compare('batch_id',$this->batch_id,true);
+                $criteria->compare('class_timing_id',$this->class_timing_id,true);
+                $criteria->compare('weekday_id',$this->weekday_id,true);
                 $criteria->compare('employee_id',$this->employee_id);
 		$criteria->compare('employee_leave_type_id',$this->employee_leave_type_id);
 		$criteria->compare('reason',$this->reason,true);

@@ -188,7 +188,7 @@ class TeacherSubjectAttendanceController extends RController
      
         protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='student-attentance-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='employee-subjectwise-attendances-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
@@ -206,11 +206,16 @@ class TeacherSubjectAttendanceController extends RController
         {       
 			$flag=false;
             $model->attributes=$_POST['EmployeeSubjectwiseAttendances'];
-//            print_r($_POST['EmployeeSubjectwiseAttendances']);
+//            $model->class_timing_id = $_REQUEST['c_t_id'];
+//            $model->batch_id = $_REQUEST['batch_id'];
+//            print_r($model->class_timing_id);
+//             print_r($model->batch_id);
 //            exit;
-            $model->class_timing_id = $_REQUEST['c_t_id'];
+            
 //            echo $_POST['EmployeeSubjectwiseAttendances'];
 //            exit;
+              $valid = $model->validate();
+               if($valid){
             if($model->save()) 
 			{
                 echo CJSON::encode(array(
@@ -219,14 +224,21 @@ class TeacherSubjectAttendanceController extends RController
                  exit;    
   								
             }
-			else
-			{
-				echo CJSON::encode(array(
-                        'status'=>'error',
-                        ));
-                 exit;    
-			}
-         }
+//			else
+//			{
+//				echo CJSON::encode(array(
+//                        'status'=>'error',
+//                        ));
+//                 exit;    
+//			}
+        }else{
+            $error =CActiveForm::validate($model);
+            if($error != '[]')
+                echo $error;
+            Yii::app()->end();
+        }
+        
+                        }
 		if($flag) {
 			Yii::app()->clientScript->scriptMap['jquery.js'] = false;
 			$this->renderPartial('createswa',array('model'=>$model,'day'=>$_GET['day'],'month'=>$_GET['month'],'year'=>$_GET['year'],'emp_id'=>$_GET['emp_id']),false,true);

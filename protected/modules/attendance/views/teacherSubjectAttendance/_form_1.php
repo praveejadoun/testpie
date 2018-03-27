@@ -233,7 +233,7 @@ if (isset($_REQUEST['emp']) != NULL) {
                                         // echo $class_timeing->subject_id;
                                          if ($class_timeing != NULL) {
                                         echo '<td class="td">' . 
-                                            $this->renderPartial('ajax',array('day'=>date('d', $d),'month'=>date('m', $d),'year'=>date('Y', $d),'emp_id'=>$_REQUEST['emp'],'c_t_id'=>$class_timeing->class_timing_id,'batch_id'=>$batch->id),array('class'=>'abs')).$subject->name.'<br><br>'.$batch->name
+                                            $this->renderPartial('ajax',array('day'=>date('d', $d),'month'=>date('m', $d),'year'=>date('Y', $d),'emp_id'=>$_REQUEST['emp'],'c_t_id'=>$class_timeing->class_timing_id,'batch_id'=>$batch->id,'weekday_id'=>$te_1->weekday_id),array('class'=>'abs')).$subject->name.'<br><br>'.$batch->name
 
                                                 
 //                                                $subject->name . '<br><br>' . $batch->name 

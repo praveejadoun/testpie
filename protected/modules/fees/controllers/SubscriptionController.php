@@ -25,7 +25,7 @@ class SubscriptionController extends RController {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'type'),
+                'actions' => array('index', 'type',' performAjaxValidation'),
                 'users' => array('*'),
             ),
         );
@@ -34,23 +34,54 @@ class SubscriptionController extends RController {
     public function actionIndex() {
 
         $model = new FinanceFeeSubscription;
-
+//         $this->performAjaxValidation($model);
+//          echo"<pre>";
+//           $list = $_POST['FinanceFeeSubscription'];
+//            print_r($_POST['FinanceFeeSubscription']);
+//            print_r($list);
+//            exit;
         if (isset($_POST['FinanceFeeSubscription'])) {
-
+            
             //if($ay!=$_POST['AcademicYears']->name){
             $list = $_POST['FinanceFeeSubscription'];
+            if($list['start_date'] == "" && $list['end_date'] == "")
+            {
+                 Yii::app()->user->setFlash('error', 'Please enter start date and end date !');
+                 $this->redirect(array('subscription/','id'=>$_GET['id']));
+            }elseif ($list['start_date'] == "") {
+                 Yii::app()->user->setFlash('error', 'Please enter start date!');
+                 $this->redirect(array('subscription/','id'=>$_GET['id']));
+            }elseif ($list['end_date'] == "") {
+                 Yii::app()->user->setFlash('error', 'Please enter end date !');
+                 $this->redirect(array('subscription/','id'=>$_GET['id']));
+            }elseif (date($list['end_date']) < date($list['start_date'])) {
+                Yii::app()->user->setFlash('error', 'end date should be greater than start date !');
+                $this->redirect(array('subscription/','id'=>$_GET['id']));
+            }
+           $ay = AcademicYears::model()->findByAttributes(array('status'=>'0'));
+           $start_date = date($ay->start_date);
+           $end_date = date($ay->end_date);
+            $selected_start_date = date($list['start_date']);
+            $selected_end_date = date($list['end_date']);
+            if($selected_start_date < $start_date && $selected_end_date < $end_date){
+                 Yii::app()->user->setFlash('error', 'start date should be in between current academic year !');
+                $this->redirect(array('subscription/','id'=>$_GET['id']));
+            }
             if($list['subscription_type'] == 1){
-                $model = new FinanceFeeSubscription;
+                   $model = new FinanceFeeSubscription;
+              // $model->attributes =$list;
                  $model->start_date = date('Y-m-d', strtotime($list['start_date']));
                $model->end_date = date('Y-m-d', strtotime($list['end_date']));
                $model->is_divide_fee_by_nos = $list['is_divide_fee_by_nos'];
                $model->subscription_type = $list['subscription_type'];
                $model->recurring_interval = "";
+             
                $model->due_date = date('Y-m-d', strtotime($list['one_time_due_date']));
                $model->fee_category_id = $_REQUEST['id'];
                $model->is_deleted = $list['is_deleted'];
                $model->created_at = $list['created_at'];
                $model->updated_at = $list['updated_at'];
+               
                $model->save();
             }elseif($list['subscription_type'] == 2){
                 
@@ -96,11 +127,7 @@ class SubscriptionController extends RController {
                 }
               
             }
-                
-//            echo"<pre>";
-//            print_r($_POST['FinanceFeeSubscription']);
-//            print_r($list['start_date']);
-//            exit;
+        
           
 //            $model->attributes = $_POST['FinanceFeeSubscription'];
 //            if ($model->start_date)
@@ -131,6 +158,13 @@ class SubscriptionController extends RController {
             
         } else {
             echo "vanam";
+        }
+    }
+    
+     protected function performAjaxValidation($model) {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'subscription-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
         }
     }
 

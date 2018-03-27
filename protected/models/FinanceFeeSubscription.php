@@ -45,39 +45,41 @@ class FinanceFeeSubscription extends CActiveRecord
 		return array(
 			array('fee_category_id,is_divide_fee_by_nos,subscription_type,recurring_interval, is_deleted', 'numerical', 'integerOnly'=>true),
 //			array('name', 'length', 'max'=>25),
-			array('start_date, end_date, due_date', 'safe'),
-			array('start_date, end_date, due_date','required'),
-                        array('start_date','checkStartDate'),
-                        array('end_date','checkEndDate'),
-                        array(
-                                'end_date',
-				'compare',
-				'compareAttribute'=>'start_date',
-				'operator'=>'>', 
-				'allowEmpty'=>false , 
-				'message'=>'{attribute} must be less than start date.'
-                            ),
-                        array(
-                            
-				'due_date',
-				'compare',
-				'compareAttribute'=>'start_date',
-				'operator'=>'>', 
-				'allowEmpty'=>false , 
-				'message'=>'{attribute} must be greater than start date.'
-			  ),
-                        array(
-				'due_date',
-				'compare',
-				'compareAttribute'=>'end_date',
-				'operator'=>'<', 
-				'allowEmpty'=>false , 
-				'message'=>'{attribute} must be less than end date.'
-			  ),
+			//array('start_date, end_date, due_date', 'safe'),
+			//array('start_date, end_date, due_date','required'),
+                        //array('start_date','required','message'=>'some error msg'),
+                        array('start_date,end_date','required'),
+//                        array('start_date','checkStartDate'),
+//                        array('end_date','checkEndDate'),
+//                        array(
+//                                'end_date',
+//				'compare',
+//				'compareAttribute'=>'start_date',
+//				'operator'=>'>', 
+//				'allowEmpty'=>false , 
+//				'message'=>'{attribute} must be less than start date.'
+//                            ),
+//                        array(
+//                            
+//				'due_date',
+//				'compare',
+//				'compareAttribute'=>'start_date',
+//				'operator'=>'>', 
+//				'allowEmpty'=>false , 
+//				'message'=>'{attribute} must be greater than start date.'
+//			  ),
+//                        array(
+//				'due_date',
+//				'compare',
+//				'compareAttribute'=>'end_date',
+//				'operator'=>'<', 
+//				'allowEmpty'=>false , 
+//				'message'=>'{attribute} must be less than end date.'
+//			  ),
 //			array('name','CRegularExpressionValidator', 'pattern'=>'/^[A-Za-z_ ]+$/','message'=>"{attribute} should contain only letters."),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, subscription_type,recurring_interval, start_date, end_date, due_date, fee_category_id, is_divide_fee_by_nos, is_deleted, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, subscription_type,recurring_interval, end_date, due_date, fee_category_id, is_divide_fee_by_nos, is_deleted, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
         

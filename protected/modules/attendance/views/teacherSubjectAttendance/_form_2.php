@@ -1,8 +1,9 @@
-<div class="form" style="padding-left:20px; height:auto; min-height:350px;">
+    <div class="form"  style="padding-left:20px; height:auto; min-height:350px;">
 <br />
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'employee-subjectwise-attendances-form',
 	'enableAjaxValidation'=>true,
+         
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -23,10 +24,14 @@
         
          <div class="row">
 		<?php //echo $form->labelEx($model,'class_timing_id'); ?>
-		<?php echo $form->hiddenField($model,'class_timing_id',array('value'=>$c_t_id)); ?>
-		<?php echo $form->error($model,'class_timing_id'); ?>
+		<?php  echo $form->hiddenField($model,'class_timing_id',array('value'=>$_REQUEST['c_t_id'])); ?>
+		<?php //echo $form->error($model,'class_timing_id'); ?>
 	</div>
-
+        <div class="row">
+        <?php echo $form->hiddenField($model,'batch_id',array('value'=>$_REQUEST['batch_id']));?>
+        <?php echo $form->hiddenField($model,'weekday_id',array('value'=>$_REQUEST['weekday_id']));?>
+            
+        </div>
 	<div class="row">
 		<?php echo $form->labelEx($model,Yii::t('employees','employee_leave_type_id')); ?>
 		<?php //echo $form->textField($model,'employee_leave_type_id'); ?>
@@ -37,7 +42,7 @@
 	<div class="row">
 		<?php echo $form->labelEx($model,Yii::t('employees','reason')); ?>
 		<?php echo $form->textField($model,'reason',array('size'=>30,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'reason'); ?>
+		<?php echo $form->error($model,'reason' ); ?>
 	</div>
 
 	<div class="row">
@@ -51,14 +56,20 @@
         <?php 
 		
 		echo CHtml::ajaxSubmitButton(Yii::t('job','Save'),CHtml::normalizeUrl(array('teacherSubjectAttendance/Addnew','render'=>false)),array('dataType'=>'json','success'=>'js: function(data) {
-					if (data.status == "success")
+					 $("#AjaxLoader").hide();
+                                        if (data.status == "success")
 					{
 						$("#td").text("");
 						$("#jobDialog").html("<span class=\"abs\"></span>","");
 						$("#jobDialog").dialog("close");
 						window.location.reload();
 					}
-                    }'),array('id'=>'closejobDialog','name'=>'save'));
+                    }',
+                    'beforeSend'=>'function(){
+                $(\'body\').undelegate(\'#submit\', \'click\');
+                $("#AjaxLoader").show();
+            }'
+                    ),array('id'=>'closejobDialog','name'=>'save'));
 		
 		?>
 	</div><br />

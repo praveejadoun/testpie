@@ -41,7 +41,7 @@ class FinanceFeeCategories extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('batch_id, is_deleted, is_master, is_invoice', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>25),
+			array('name', 'length', 'max'=>255),
 //			array('name','required'),
 			array('description, created_at, updated_at', 'safe'),
 //			array('name','CRegularExpressionValidator', 'pattern'=>'/^[A-Za-z_ ]+$/','message'=>"{attribute} should contain only letters."),
