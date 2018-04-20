@@ -128,8 +128,8 @@ if (isset($_REQUEST['emp']) != NULL) {
                                 <th width="60px" class="loader">&nbsp;</th>
                                 <?php
                                 $timing = array();
-                                
-                                $sql = "SELECT DISTINCT class_timing_id FROM timetable_entries WHERE employee_id = '".$_REQUEST['emp']."'";
+
+                                $sql = "SELECT DISTINCT class_timing_id FROM timetable_entries WHERE employee_id = '" . $_REQUEST['emp'] . "'";
 //                               $sql = "SELECT DISTINCT class_timing_id, employee_id, COUNT(*)FROM timetable_entries GROUP BY class_timing_id, employee_id HAVING COUNT(*) > 1";
                                 $criteria = new CDbCriteria;
                                 $criteria->compare('employee_id', $_REQUEST['emp']);
@@ -171,7 +171,7 @@ if (isset($_REQUEST['emp']) != NULL) {
                             $te = TimetableEntries::model()->findAll($criteria);
                             foreach ($te as $te_1) {
 
-//                                      
+//
                                 if ($te_1->weekday_id == 1) {
 
                                     $d = strtotime($year . "W" . $week . 0);
@@ -192,18 +192,17 @@ if (isset($_REQUEST['emp']) != NULL) {
 //                                       $this->renderPartial('/employeeAttendances/ajax',array('day'=>date('d', $d),'month'=>date('m', $d),'year'=>date('Y', $d),'emp_id'=>$_REQUEST['emp']),array('class'=>'abs'));
 
                                         if ($class_timeing != NULL) {
-                                         
+
                                             echo '<td class="td">'
                                             . /* $this->renderPartial('ajax',array('day'=>'17','month'=>'12','year'=>'2013','emp_id'=>$_REQUEST['emp'])) */
 
-//                                                  $set = EmployeeSubjectwiseAttendances::model()->findByAttributes(array('attendance_date'=>2018-01-14));     
+//                                                  $set = EmployeeSubjectwiseAttendances::model()->findByAttributes(array('attendance_date'=>2018-01-14));
 //                                              if(count($set)==0)
 //                                              {
-                                                  
 //                                            $this->renderPartial('ajax',array('day'=>date('d', $d),'month'=>date('m', $d),'year'=>date('Y', $d),'emp_id'=>$_REQUEST['emp'],'c_t_id'=>$class_timeing->class_timing_id,'batch_id'=>$batch->id),array('class'=>'abs')).$subject->name.'<br><br>'.$batch->name
-                                            $subject->name . '<br><br>' . $batch->name 
-                                                    .'</td>';
-                                               
+                                            $subject->name . '<br><br>' . $batch->name
+                                            . '</td>';
+
 
 //                                         }
 //                                        else {
@@ -231,17 +230,16 @@ if (isset($_REQUEST['emp']) != NULL) {
                                         //echo "<pre/>";
                                         //print_r($class_timeing);
                                         // echo $class_timeing->subject_id;
-                                         if ($class_timeing != NULL) {
-                                        echo '<td class="td">' . 
-                                            $this->renderPartial('ajax',array('day'=>date('d', $d),'month'=>date('m', $d),'year'=>date('Y', $d),'emp_id'=>$_REQUEST['emp'],'c_t_id'=>$class_timeing->class_timing_id,'batch_id'=>$batch->id,'weekday_id'=>$te_1->weekday_id),array('class'=>'abs')).$subject->name.'<br><br>'.$batch->name
+                                        if ($class_timeing != NULL) {
+                                            echo '<td class="td">' .
+                                            $this->renderPartial('ajax', array('day' => date('d', $d), 'month' => date('m', $d), 'year' => date('Y', $d), 'emp_id' => $_REQUEST['emp'], 'c_t_id' => $class_timeing->class_timing_id, 'batch_id' => $batch->id, 'weekday_id' => $te_1->weekday_id), array('class' => 'abs')) . $subject->name . '<br><br>' . $batch->name
 
-                                                
-//                                                $subject->name . '<br><br>' . $batch->name 
-                                                . '</td>';
-                                    } else {
+
+//                                                $subject->name . '<br><br>' . $batch->name
+                                            . '</td>';
+                                        } else {
                                             echo '<td class="td"></td>';
                                         }
-                                        
                                     }
                                     echo "</tr>";
 //                                        echo " monday";
@@ -263,16 +261,14 @@ if (isset($_REQUEST['emp']) != NULL) {
                                         // echo $class_timeing->subject_id;
                                         if ($class_timeing != NULL) {
 
-                                        echo '<td class="td">' .
-                                                
+                                            echo '<td class="td">' .
 //                                                $this->renderPartial('ajax',array('day'=>date('d', $d),'month'=>date('m', $d),'year'=>date('Y', $d),'emp_id'=>$_REQUEST['emp'],'c_t_id'=>$class_timeing->class_timing_id,'batch_id'=>$batch->id),array('class'=>'abs')).$subject->name.'<br><br>'.$batch->name
 
-                                                $subject->name . '<br><br>' . $batch->name 
-                                                . '</td>';
-                                        }else {
+                                            $subject->name . '<br><br>' . $batch->name
+                                            . '</td>';
+                                        } else {
                                             echo '<td class="td"></td>';
-                                        }       
-                                
+                                        }
                                     }
                                     echo "</tr>";
 //                                        echo " tuesday";
@@ -294,15 +290,14 @@ if (isset($_REQUEST['emp']) != NULL) {
                                         // echo $class_timeing->subject_id;
                                         if ($class_timeing != NULL) {
 
-                                        echo '<td class="td">' .
-                                                
+                                            echo '<td class="td">' .
 //                                                $this->renderPartial('ajax',array('day'=>date('d', $d),'month'=>date('m', $d),'year'=>date('Y', $d),'emp_id'=>$_REQUEST['emp'],'c_t_id'=>$class_timeing->class_timing_id,'batch_id'=>$batch->id),array('class'=>'abs')).$subject->name.'<br><br>'.$batch->name
 
-                                                $subject->name . '<br><br>' . $batch->name . 
-                                                '</td>';
-                                        }else {
+                                            $subject->name . '<br><br>' . $batch->name .
+                                            '</td>';
+                                        } else {
                                             echo '<td class="td"></td>';
-                                        }   
+                                        }
                                     }
                                     echo "</tr>";
 //                                        echo " wednesday";
@@ -417,7 +412,7 @@ if (isset($_REQUEST['emp']) != NULL) {
 <style type="text/css">
     .timetable-grid{
         width: 960px;
-        overflow: scroll;  
+        overflow: scroll;
     }
     .timetable-grid-scroll{
 

@@ -70,11 +70,13 @@ class StudentPreviousDatasController extends RController
 		{
 			//print_r($_POST); exit;
 			$model->attributes=$_POST['StudentPreviousDatas'];
-			if($model->institution!=NULL or $model->year!=NULL or $model->course!=NULL or $model->total_mark!=NULL){
-				$model->save();
-			}
+			//if($model->institution!=NULL or $model->year!=NULL or $model->course!=NULL or $model->total_mark!=NULL){
+				if($model->save())
+                                    echo"sunil";
+                                
+			//}   
 			//if($model->save())
-			$this->redirect(array('students/view','id'=>$_REQUEST['id']));
+			//$this->redirect(array('students/view','id'=>$_REQUEST['id']));
 		}
 
 		$this->render('create',array(

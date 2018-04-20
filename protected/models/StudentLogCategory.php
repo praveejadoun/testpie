@@ -10,102 +10,92 @@
  * @property string $created_at
  * @property string $updated_at
  */
-class StudentLogCategory extends CActiveRecord
-{
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @return Courses the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
+class StudentLogCategory extends CActiveRecord {
 
-	/**
-	 * @return string the associated database table name
-	 */
-	public function tableName()
-	{
-		return 'student_logcategory';
-	}
+    /**
+     * Returns the static model of the specified AR class.
+     * @return Courses the static model class
+     */
+    public static function model($className = __CLASS__) {
+        return parent::model($className);
+    }
 
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
-	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		return array(
-			//array('is_deleted', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>255),
-			array('created_at, updated_at', 'safe'),
-			array('name', 'required'),
-                    
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, name, is_deleted, created_at, updated_at', 'safe', 'on'=>'search'),
-		);
-	}
+    /**
+     * @return string the associated database table name
+     */
+    public function tableName() {
+        return 'student_logcategory';
+    }
 
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-		
-         'courses'=>array(self::HAS_ONE, 'Courses', 'id'),
-		 
-		 'batches'=>array(self::HAS_MANY, 'Batches', 'course_id'),
-		);
-	}
+    /**
+     * @return array validation rules for model attributes.
+     */
+    public function rules() {
+        // NOTE: you should only define rules for those attributes that
+        // will receive user inputs.
+        return array(
+            //array('is_deleted', 'numerical', 'integerOnly'=>true),
+            array('name', 'length', 'max' => 255),
+            array('created_at, updated_at', 'safe'),
+            array('name', 'required'),
+            array('name', 'match', 'pattern' => '/^[a-zA-Z\s]+$/', 'message' => 'It can only contain alphabets,space'),
+            // The following rule is used by search().
+            // Please remove those attributes that should not be searched.
+            array('id, name, is_deleted, created_at, updated_at', 'safe', 'on' => 'search'),
+        );
+    }
 
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return array(
-			'id' => 'ID',
-			'name' => 'Name',
-                    
-			'is_deleted' => 'Is Deleted',
-			'created_at' => 'Created At',
-			'updated_at' => 'Updated At',
-		);
-	}
+    /**
+     * @return array relational rules.
+     */
+    public function relations() {
+        // NOTE: you may need to adjust the relation name and the related
+        // class name for the relations automatically generated below.
+        return array(
+            'courses' => array(self::HAS_ONE, 'Courses', 'id'),
+            'batches' => array(self::HAS_MANY, 'Batches', 'course_id'),
+        );
+    }
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+    /**
+     * @return array customized attribute labels (name=>label)
+     */
+    public function attributeLabels() {
+        return array(
+            'id' => 'ID',
+            'name' => 'Name',
+            'is_deleted' => 'Is Deleted',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+        );
+    }
 
-		$criteria=new CDbCriteria;
+    /**
+     * Retrieves a list of models based on the current search/filter conditions.
+     * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+     */
+    public function search() {
+        // Warning: Please modify the following code to remove attributes that
+        // should not be searched.
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('name',$this->name,true);
-               
-		$criteria->compare('is_deleted',0);
-		$criteria->compare('created_at',$this->created_at,true);
-		$criteria->compare('updated_at',$this->updated_at,true);
+        $criteria = new CDbCriteria;
 
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
-        public function getConcatened()
-	{
-			return $this->name;
-	}
+        $criteria->compare('id', $this->id);
+        $criteria->compare('name', $this->name, true);
 
-	
+        $criteria->compare('is_deleted', 0);
+        $criteria->compare('created_at', $this->created_at, true);
+        $criteria->compare('updated_at', $this->updated_at, true);
+
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+        ));
+    }
+
+    public function getConcatened() {
+        return $this->name;
+    }
+
 }
 ?>
 

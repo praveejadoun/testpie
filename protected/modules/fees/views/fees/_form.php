@@ -4,13 +4,13 @@
 //    'enableAjaxValidation' => false,
 //    'htmlOptions' => array('enctype' => 'multipart/form-data'),
 //        ));
-?> 
+?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
         <td valign="top" width="245">
             <div class="cont_right formWrapper" style="padding: 6px 20px 20px 0px;">
-                <h1>Create Fees</h1>            
+                <h1>Create Fees</h1>
                 <div class="edit_bttns" style="width:175px; top:15px;"></div>
                 <style>
                     .fee-particular-head{
@@ -43,7 +43,7 @@
                 <form name="fee-categories-form" id="fee-categories-form" action="index.php?r=fees/fees/create" method="post" onSubmit="javascript:return validateform()">
                     <div class="formCon">
                         <div class="formConInner" style="width:95%;">
-                            <h3>Fee Category</h3>   
+                            <h3>Fee Category</h3>
                             <table width="98%">
                                 <tr>
                                     <td width="10%">
@@ -53,7 +53,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input class="FeeCategories_name" style="width:100% !important;" name="cname" id="cname" type="text" maxlength="250" required="required"/>           
+                                        <input class="FeeCategories_name" style="width:100% !important;" name="cname" id="cname" type="text" maxlength="250" required="required"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -83,7 +83,7 @@
                                                     <td width="33%"><label>Description</label></td>
                                                     <td width="17%"><label>Tax</label></td>
                                                     <td width="13%"><label>Discount</label></td>
-                                                    <td width="45%"><label>&nbsp;<a href="javascript:void(0)" onClick="javascript:closeParBox(this)">X</a></label></td>			
+                                                    <td width="45%"><label>&nbsp;<a href="javascript:void(0)" onClick="javascript:closeParBox(this)">X</a></label></td>
                                                 </tr>
                                             </table>
                                             <a href="javascript:void(0);" title="Click to remove particular" class="remove-particular fees-trash"></a>
@@ -105,33 +105,33 @@
                                                     ?>
 
                                                     <?php
-                                                    echo CHtml::dropDownList('FeeParticulars[tax_id][]', $mymodel, CHtml::listData(Taxes::model()->findAll(), 'id', 'label'), array('empty' => 'No Tax','style'=>'padding:5px 3px;'));
+                                                    echo CHtml::dropDownList('FeeParticulars[tax_id][]', $mymodel, CHtml::listData(Taxes::model()->findAll(), 'id', 'label'), array('empty' => 'No Tax', 'style' => 'padding:5px 3px;'));
                                                     ?>
 
 
-                                                    <?php // echo $form->dropDownlist($mymodel,'FeeParticulars[student_id][]',CHtml::listData(Taxes::model()->findAll($criteria),'id','label'),array('prompt' =>'select')); ?> 
+                                                    <?php // echo $form->dropDownlist($mymodel,'FeeParticulars[student_id][]',CHtml::listData(Taxes::model()->findAll($criteria),'id','label'),array('prompt' =>'select')); ?>
 <!--<select class="FeeParticulars_tax" style="width:100px !important;" name="FeeParticulars[tax][]">-->
                                                     <!--<option value="">No Tax</option>-->
                                                     <!--<option value="2">Tax1</option>-->
-                                                    <!--</select> -->           
+                                                    <!--</select> -->
                                                 </td>
                                                 <td width="45%" valign="top">
                                                     <input class="FeeParticulars_tax" placeholder="Discount" style="width:70px !important;" name="FeeParticulars[discount_value][]" type="text" />
                                                 </td>
                                                 <td width="45%" valign="top">
 
-                                                    <?php echo CHtml::dropDownList('FeeParticulars[discount_type][]', $mymodel, array('1' => '%', '2' => 'INR'),array('style'=>'padding:5px 3px;')); ?>
+                                                    <?php echo CHtml::dropDownList('FeeParticulars[discount_type][]', $mymodel, array('1' => '%', '2' => 'INR'), array('style' => 'padding:5px 3px;')); ?>
 
 <!--                <select class="FeeParticulars_discount_type" style="width:100px !important;" name="FeeParticulars[discount_type][]"/>
                  <option value="1">%</option>
                  <option value="2">INR</option>
                </select>-->
-                                                </td>            
-                                                <td width="10%" valign="middle">                
+                                                </td>
+                                                <td width="10%" valign="middle">
                                                 </td>
                                                 </tr>
                                             </table>
-                                            <br /> 
+                                            <br />
                                             <h3>Applicable to:</h3>
                                             <div class="particular-accesses-ap">
                                                 <div class="particular-access" data-row="0" id="toClo">
@@ -143,21 +143,21 @@
                                                                         <option value="1">Default</option>
                                                                         <option value="2">Admission number</option>
                                                                     </select>
-                                                                </td>                
+                                                                </td>
                                                                 <td class="access-datas">
                                                                     <table class="defaultApplicable">
                                                                         <tr>
                                                                             <td>
 <!--                                                                                <select name="country" id="country-list" class="demoInputBox" onChange="getState(this.value);">
                                                                                     <option value="">Select Country</option>
-                                                                                    <?php
+                                                                                <?php
 //                                                                                    $results = Courses::model()->findAll();
 //                                                                                    foreach($results as $country) {
-                                                                                    ?>
+                                                                                ?>
                                                                                     <option value="<?php echo $country["id"]; ?>"><?php echo $country["course_name"]; ?></option>
-                                                                                    <?php
+                                                                                <?php
 //                                                                                    }
-                                                                                    ?>
+                                                                                ?>
                                                                                     </select>-->
                                                                                 <?php
                                                                                 $criteria = new CDbCriteria;
@@ -178,11 +178,11 @@
 //                                                                                              )
 //                                                                                          )
 //                                                                                      );
-                                                                                ?> 
+                                                                                ?>
                                                                                 <?php
                                                                                 echo CHtml::dropDownList('FeeParticularAccess[0][course][]', $mymodel, CHtml::listData(Courses::model()->findAll($criteria), 'id', 'concatened'), array(
                                                                                     'empty' => 'All Courses',
-                                                                                    'style' =>'padding:5px 3px;',
+                                                                                    'style' => 'padding:5px 3px;',
                                                                                     'class' => 'particular-access-course',
                                                                                     'ajax' => array(
                                                                                         'type' => 'POST',
@@ -197,23 +197,23 @@
 <!--                                                                                <select name="state" id="state-list" class="demoInputBox">
                                                                                     <option value="">Select State</option>
                                                                                 </select>-->
-                                                                                
+
                                                                                 <?php
-                                                                                echo CHtml::dropDownList('FeeParticularAccess[0][batch][]', $mymodel, CHtml::listData(Batches::model()->findAll(), 'id', 'name'), array('empty' => 'All Batches', 'class' => 'particular-access-batch','style'=>'padding:5px 3px;'));
+                                                                                echo CHtml::dropDownList('FeeParticularAccess[0][batch][]', $mymodel, CHtml::listData(Batches::model()->findAll(), 'id', 'name'), array('empty' => 'All Batches', 'class' => 'particular-access-batch', 'style' => 'padding:5px 3px;'));
                                                                                 ?>
-                                                                               <!--<select class="access-batch" style="width:120px !important;" name="FeeParticularAccess[][batch][]">
-                                                                                            <option value="">All Batch</option>
-                                                                               </select>-->
+<!--<select class="access-batch" style="width:120px !important;" name="FeeParticularAccess[][batch][]">
+            <option value="">All Batch</option>
+</select>-->
                                                                             </td>
                                                                             <td>
                                                                                 <?php
-                                                                                echo CHtml::dropDownList('FeeParticularAccess[0][student_category_id][]', $mymodel, CHtml::listData(StudentCategories::model()->findAll(), 'id', 'name'), array('empty' => 'All Category', 'class' => 'particular-access-studentcategory','style'=>'padding:5px 3px'));
+                                                                                echo CHtml::dropDownList('FeeParticularAccess[0][student_category_id][]', $mymodel, CHtml::listData(StudentCategories::model()->findAll(), 'id', 'name'), array('empty' => 'All Category', 'class' => 'particular-access-studentcategory', 'style' => 'padding:5px 3px'));
                                                                                 ?>
                                                                                 <!--<select style="width:120px !important;" name="FeeParticularAccess[][student_category_id][]">
                                                                                   <option value="">All Categories</option>
                                                                                   <option value="1">General</option>
                                                                                 </select>-->
-                                                                            </td>        
+                                                                            </td>
                                                                         </tr>
                                                                     </table>
 
@@ -239,7 +239,7 @@
                                                             </tr>
                                                         </table>
                                                     </div>
-                                                </div> 
+                                                </div>
 
 
 
@@ -360,7 +360,7 @@
             //alert(clonedParticularBox.find('.add-particular-access').attr('data-row'));
             $("#mdcontainer").append(clonedParticularBox);
         });
-        
+
 
 
 
@@ -369,9 +369,9 @@
 
 
     function validateform() {
-        if(document.getElementByClassName('FeeParticularAccessadmissionNo').value == ""){
+        if (document.getElementByClassName('FeeParticularAccessadmissionNo').value == "") {
             alert("sunil");
-            
+
             return false;
         }
 //         var temp = $(".fee-particulars").length;
@@ -385,7 +385,7 @@
 //            return false;
 //        }else
 
-      
+
 //        if (document.getElementById('cname').value == "") {
 //            alert('Please enter category name');
 //            document.getElementById('cname').focus();
@@ -453,14 +453,51 @@
 
 </script>
 <script>
-function getState(val) {
-	$.ajax({
-	type: "POST",
-	url: "get_state.php",
-	data:'course_id='+val,
-	success: function(data){
-		$("#state-list").html(data);
-	}
-	});
+    function getState(val) {
+        $.ajax({
+            type: "POST",
+            url: "get_state.php",
+            data: 'course_id=' + val,
+            success: function (data) {
+                $("#state-list").html(data);
+            }
+        });
+    }
+
+</script>
+
+<script type="text/javascript">
+    $('#book_serices_id').change(function () {
+        var book_serices_id = $(this).val();
+        $.ajax({
+            type: "POST",
+            dataType: 'html',
+            method: 'POST',
+            data: {'book_serices_id': book_serices_id},
+            url: "<?php echo Yii::app()->baseUrl; ?>/index.php?r=fees/fees/select_books",
+            success: function (data) {
+                data = JSON.parse(data);
+                console.log(data);
+                // alert(data.length);
+                var selOpts = "<option value=''> Select Book </option>";
+                for (i = 0; i < data.length; i++)
+                {
+                    var id = data[i]['id'];
+                    var val = data[i]['book_name'];
+                    selOpts += "<option value='" + id + "' >" + val + "</option>";
+                }
+
+                $('#books_id').html(selOpts);
+<?php
+if (isset($web_support->books_id)) {
+    echo '$("#books_id").val(' . $web_support->books_id . ');';
 }
+?>
+            },
+            error: function (se) {
+                console.log(se);
+            }
+        });
+    }).change();
+
 </script>

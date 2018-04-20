@@ -1018,7 +1018,7 @@ $(document).click(function() {
                             </div> <!-- END div class="tablebx" -->
                             <?php
                             //Strings for the delete confirmation dialog.
-                            $del_con = Yii::t('students', 'Are you sure you want to delete this student category?');
+                            $del_con = Yii::t('students', 'Are you sure you want to delete this Applicant?');
                             $del_title=Yii::t('students', 'Delete Confirmation');
                             $del=Yii::t('students', 'Delete');
                             $cancel=Yii::t('students', 'Cancel');

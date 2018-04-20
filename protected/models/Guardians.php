@@ -26,164 +26,179 @@
  * @property string $updated_at
  * @property integer $batch_id
  */
-class Guardians extends CActiveRecord
-{
-	public $radio;
-	public $user_create;
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @return Guardians the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
+class Guardians extends CActiveRecord {
 
-	/**
-	 * @return string the associated database table name
-	 */
-	public function tableName()
-	{
-		return 'guardians';
-	}
+    public $radio;
+    public $user_create;
 
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
-	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		return array(
-			array('ward_id,batch_id, country_id,office_phone1, office_phone2, mobile_phone,income,uid', 'numerical', 'integerOnly'=>true),
-			array('first_name, last_name, relation, email, office_phone1, office_phone2, mobile_phone, office_address_line1, office_address_line2, city, state, occupation, income, education', 'length', 'max'=>255),
-			array('first_name, last_name, relation,mobile_phone', 'required'),
-			array('email','check'),
-			array('email', 'email'),
-                        array('mobile_phone','length','min'=>10,'max'=>10),
-			array('dob, created_at, updated_at', 'safe'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-                        array('first_name,last_name', 'match','pattern' => '/^[a-zA-Z\s]+$/','message' => 'It can only contain alphabets,space'),
-                        array('mobile_phone', 'match','pattern' => '/^([7-9])([0-9]){9}$/','message' => 'Phone number must start b/w 7-9'),
-//                        array('office_phone1', 'match','pattern' => '/^[0-9]{3,5}[-][0-9]{6,8}$/','message' => 'Phone number must start b/w 7-9'),
-
-			array('id, ward_id, first_name, last_name, relation, email, office_phone1, office_phone2, mobile_phone, office_address_line1, office_address_line2, city, state, country_id, dob, occupation, income, education, created_at, updated_at', 'safe', 'on'=>'search'),
-		);
-	}
-
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-		 'emergency'=>array(self::BELONGS_TO, 'Students', 'id'),
-		);
-	}
-	
-	public function check($attribute,$params)
-    {
-		if(Yii::app()->controller->action->id!='update' and $this->$attribute!='')
-		{
-		$validate = User::model()->findByAttributes(array('email'=>$this->$attribute));
-		if($validate!=NULL)
-		{
-        
-            $this->addError($attribute,'Email allready in use');
-		}
-		}
+    /**
+     * Returns the static model of the specified AR class.
+     * @return Guardians the static model class
+     */
+    public static function model($className = __CLASS__) {
+        return parent::model($className);
     }
 
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return array(
-			'id' => 'ID',
-			'ward_id' => 'Ward',
-			'first_name' => 'First Name',
-			'last_name' => 'Last Name',
-			'relation' => 'Relation',
-			'email' => 'Email',
-			'office_phone1' => 'Office Phone1',
-			'office_phone2' => 'Office Phone2',
-			'mobile_phone' => 'Mobile Phone',
-			'office_address_line1' => 'Office Address Line1',
-			'office_address_line2' => 'Office Address Line2',
-			'city' => 'City',
-			'state' => 'State',
-			'country_id' => 'Country',
-			'dob' => 'Dob',
-			'occupation' => 'Occupation',
-			'income' => 'Income',
-			'education' => 'Education',
-			'created_at' => 'Created At',
-			'updated_at' => 'Updated At',
-                        'batch_id'  => 'Batch Id'
-		);
-	}
+    /**
+     * @return string the associated database table name
+     */
+    public function tableName() {
+        return 'guardians';
+    }
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+    /**
+     * @return array validation rules for model attributes.
+     */
+    public function rules() {
+        // NOTE: you should only define rules for those attributes that
+        // will receive user inputs.
+        return array(
+            array('ward_id,batch_id, country_id,office_phone1, office_phone2, mobile_phone,income,uid', 'numerical', 'integerOnly' => true),
+            array('first_name, last_name, relation, email, office_phone1, office_phone2, mobile_phone, office_address_line1, office_address_line2, city, state, occupation, income, education', 'length', 'max' => 255),
+            array('first_name, last_name, relation, mobile_phone, dob', 'required'),
+            array('email', 'check'),
+            array('email', 'email'),
+            array('dob', 'dob'),
+            array('mobile_phone', 'length', 'min' => 10, 'max' => 10),
+            array('dob, created_at, updated_at, relation', 'safe'),
+            // The following rule is used by search().
+            // Please remove those attributes that should not be searched.
+            array('office_phone1,office_phone2', 'length', 'max' => 11),
+            array('income', 'length', 'max' => 11),
+            // array('income','match','pattern'=>'/^[0-9]$/','message'=>'Integers Only!'),
+            array('education', 'match', 'pattern' => '/^[A-Za-z0-9\s,.\/]+$/', 'message' => 'It can only contain alphanumeric,space,,./'),
+            array('office_address_line1,office_address_line2', 'match', 'pattern' => '/^[A-Za-z0-9\-\\s,.#\/]+$/', 'message' => 'It only contains alphanumeric,space,#,./'),
+            array('state,city,occupation', 'match', 'pattern' => '/^[a-zA-Z\s]+$/', 'message' => 'It can only contain word characters'),
+            array('first_name,last_name', 'match', 'pattern' => '/^[a-zA-Z\s]+$/', 'message' => 'It can only contain alphabets,space'),
+            array('mobile_phone', 'match', 'pattern' => '/^([7-9])([0-9]){9}$/', 'message' => 'Phone number must start b/w 7-9'),
+//                        array('office_phone1', 'match','pattern' => '/^[0-9]{3,5}[-][0-9]{6,8}$/','message' => 'Phone number must start b/w 7-9'),
+            array('id, ward_id, first_name, last_name, relation, email, office_phone1, office_phone2, mobile_phone, office_address_line1, office_address_line2, city, state, country_id, dob, occupation, income, education, created_at, updated_at', 'safe', 'on' => 'search'),
+        );
+    }
 
-		$criteria=new CDbCriteria;
+    /**
+     * @return array relational rules.
+     */
+    public function relations() {
+        // NOTE: you may need to adjust the relation name and the related
+        // class name for the relations automatically generated below.
+        return array(
+            'emergency' => array(self::BELONGS_TO, 'Students', 'id'),
+        );
+    }
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('ward_id',$this->ward_id);
-		$criteria->compare('first_name',$this->first_name,true);
-		$criteria->compare('last_name',$this->last_name,true);
-		$criteria->compare('relation',$this->relation,true);
-		$criteria->compare('email',$this->email,true);
-		$criteria->compare('office_phone1',$this->office_phone1,true);
-		$criteria->compare('office_phone2',$this->office_phone2,true);
-		$criteria->compare('mobile_phone',$this->mobile_phone,true);
-		$criteria->compare('office_address_line1',$this->office_address_line1,true);
-		$criteria->compare('office_address_line2',$this->office_address_line2,true);
-		$criteria->compare('city',$this->city,true);
-		$criteria->compare('state',$this->state,true);
-		$criteria->compare('country_id',$this->country_id);
-		$criteria->compare('dob',$this->dob,true);
-		$criteria->compare('occupation',$this->occupation,true);
-		$criteria->compare('income',$this->income,true);
-		$criteria->compare('education',$this->education,true);
-		$criteria->compare('created_at',$this->created_at,true);
-		$criteria->compare('updated_at',$this->updated_at,true);
+    public function check($attribute, $params) {
+        if (Yii::app()->controller->action->id != 'update' and $this->$attribute != '') {
+            $validate = User::model()->findByAttributes(array('email' => $this->$attribute));
+            if ($validate != NULL) {
 
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
-	
-	function studentname($data,$row)
-	{
-		$posts = Students::model()->findAllByAttributes(array('parent_id'=>$data->id));
-		if($posts!=NULL)
-		{
-			$students = array();
-			foreach($posts as $post)
-			{
-				echo $post->first_name.' '.$post->last_name.'<br/>';
-			}
-		}
-		else
-		{
-			return '-';
-		}
-	}
-	
-	function parentname($data,$row)
-	{
-		//$posts=Students::model()->findByAttributes(array('id'=>$data->ward_id));
-		return ucfirst($data->first_name).' '.ucfirst($data->last_name);	
-	}
+                $this->addError($attribute, 'Email allready in use');
+            }
+        }
+    }
+
+    /**
+     * @return array customized attribute labels (name=>label)
+     */
+    public function attributeLabels() {
+        return array(
+            'id' => 'ID',
+            'ward_id' => 'Ward',
+            'first_name' => 'First Name',
+            'last_name' => 'Last Name',
+            'relation' => 'Relation',
+            'email' => 'Email',
+            'office_phone1' => 'Office Phone1',
+            'office_phone2' => 'Office Phone2',
+            'mobile_phone' => 'Mobile Phone',
+            'office_address_line1' => 'Office Address Line1',
+            'office_address_line2' => 'Office Address Line2',
+            'city' => 'City',
+            'state' => 'State',
+            'country_id' => 'Country',
+            'dob' => 'Dob',
+            'occupation' => 'Occupation',
+            'income' => 'Income',
+            'education' => 'Education',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+            'batch_id' => 'Batch Id'
+        );
+    }
+
+    /**
+     * Retrieves a list of models based on the current search/filter conditions.
+     * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+     */
+    public function search() {
+        // Warning: Please modify the following code to remove attributes that
+        // should not be searched.
+
+        $criteria = new CDbCriteria;
+
+        $criteria->compare('id', $this->id);
+        $criteria->compare('ward_id', $this->ward_id);
+        $criteria->compare('first_name', $this->first_name, true);
+        $criteria->compare('last_name', $this->last_name, true);
+        $criteria->compare('relation', $this->relation, true);
+        $criteria->compare('email', $this->email, true);
+        $criteria->compare('office_phone1', $this->office_phone1, true);
+        $criteria->compare('office_phone2', $this->office_phone2, true);
+        $criteria->compare('mobile_phone', $this->mobile_phone, true);
+        $criteria->compare('office_address_line1', $this->office_address_line1, true);
+        $criteria->compare('office_address_line2', $this->office_address_line2, true);
+        $criteria->compare('city', $this->city, true);
+        $criteria->compare('state', $this->state, true);
+        $criteria->compare('country_id', $this->country_id);
+        $criteria->compare('dob', $this->dob, true);
+        $criteria->compare('occupation', $this->occupation, true);
+        $criteria->compare('income', $this->income, true);
+        $criteria->compare('education', $this->education, true);
+        $criteria->compare('created_at', $this->created_at, true);
+        $criteria->compare('updated_at', $this->updated_at, true);
+
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+        ));
+    }
+
+    function studentname($data, $row) {
+        $posts = Students::model()->findAllByAttributes(array('parent_id' => $data->id));
+        if ($posts != NULL) {
+            $students = array();
+            foreach ($posts as $post) {
+                echo $post->first_name . ' ' . $post->last_name . '<br/>';
+            }
+        } else {
+            return '-';
+        }
+    }
+
+    function parentname($data, $row) {
+        //$posts=Students::model()->findByAttributes(array('id'=>$data->ward_id));
+        return ucfirst($data->first_name) . ' ' . ucfirst($data->last_name);
+    }
+
+    public function dob($attribute, $params) {
+        if (isset($this->dob)) {
+            $bdate = date('Y-m-d', strtotime($this->dob));
+
+            $a = date("Y-m-d");
+            $age = (date("Y-m-d") - $bdate);
+        }  //if age if 17 or younger error msg
+        if ($age < 18) {
+            //echo "Must 18 or older.";
+            $this->addError($attribute, 'Must 18 or older');
+        } else { //if age is 120 or greather error msg
+            if ($age > 120) {
+                //echo "Real age please.";
+                $this->addError($attribute, $bdate);
+            }
+//            else {
+//                //echo "$age";
+//                 $this->addError($attribute, $bdate);
+//            }
+        }
+    }
+
 }

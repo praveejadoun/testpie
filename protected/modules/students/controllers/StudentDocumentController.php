@@ -106,26 +106,24 @@ class StudentDocumentController extends RController {
     }
 
     public function actionDownloadImage() {
-        
-        $model=$this->loadModel($_GET['id']);
+
+        $model = $this->loadModel($_GET['id']);
         $id = $_GET['id'];
-        $link=mysql_connect("localhost","root","");
-        if(!$link)
-           {
-              die("could not connect:".mysql_error());
-           }
-           mysql_select_db("sms",$link);
-           $que="select document_data from student_document where id LIKE $id";
-           $ret=mysql_query($que)or die("Invalid query: " . mysql_error());
-           $data = mysql_result($ret, 0);
-           $file_name = $model->document_file_name;
-           header("Content-type: image/jpeg");
-           header('Content-Disposition: attachment; filename='.$file_name);
-           header('Content-Length: '.strlen($data));
+        $link = mysql_connect("localhost", "root", "");
+        if (!$link) {
+            die("could not connect:" . mysql_error());
+        }
+        mysql_select_db("sms", $link);
+        $que = "select document_data from student_document where id LIKE $id";
+        $ret = mysql_query($que)or die("Invalid query: " . mysql_error());
+        $data = mysql_result($ret, 0);
+        $file_name = $model->document_file_name;
+        header("Content-type: image/jpeg");
+        header('Content-Disposition: attachment; filename=' . $file_name);
+        header('Content-Length: ' . strlen($data));
 
-           echo $data;
-           mysql_close($link);
-
+        echo $data;
+        mysql_close($link);
     }
 
     public function actionDownloadImage1() {
@@ -155,7 +153,7 @@ class StudentDocumentController extends RController {
 
     public function actionRemove() {
         $model = StudentDocument::model()->findByAttributes(array('id' => $_REQUEST['id']));
-        $model->saveAttributes(array('document_file_name' => '', 'document_data' => ''));
+        $model->saveAttributes(array('document_file_name' => NULL, 'document_data' => NULL, 'document_content_type' => NULL, 'document_file_size' => NULL));
         Yii::app()->user->setFlash('success', 'Document Attatchment Removed Successfully');
         $this->redirect(array('update', 'id' => $_REQUEST['id'], 'student_id' => $_REQUEST['student_id']));
     }

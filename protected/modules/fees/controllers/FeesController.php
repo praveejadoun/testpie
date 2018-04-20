@@ -25,11 +25,11 @@ class FeesController extends RController {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'Create2', 'update2', 'Manage', 'savesearch', 'DisplaySavedImage', 'pdf', 'Address', 'Contact', 'Addinfo', 'Remove'),
+                'actions' => array('index', 'view', 'Create2', 'update2', 'Manage', 'savesearch', 'DisplaySavedImage', 'pdf', 'Address', 'Contact', 'Addinfo', 'Remove', 'SelectBatch'),
                 'users' => array('@'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'batch', 'add','GetCitiesByCountryId'),
+                'actions' => array('create', 'update', 'batch', 'add', 'GetCitiesByCountryId'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -58,19 +58,19 @@ class FeesController extends RController {
      */
     public function actionCreate() {
         $ffc = new FinanceFeeCategories;
-        if(!empty($_POST["country_id"])) {
-	$query ="SELECT * FROM batches WHERE course_id = '" . $_POST["course_id"] . "'";
-	$results = $db_handle->runQuery($query);
-?>
-	<option value="">Select State</option>
-<?php
-	foreach($results as $state) {
-?>
-	<option value="<?php echo $state["id"]; ?>"><?php echo $state["name"]; ?></option>
-<?php
-	}
-}
-        //Uncomment 
+        if (!empty($_POST["country_id"])) {
+            $query = "SELECT * FROM batches WHERE course_id = '" . $_POST["course_id"] . "'";
+            $results = $db_handle->runQuery($query);
+            ?>
+            <option value="">Select State</option>
+            <?php
+            foreach ($results as $state) {
+                ?>
+                <option value="<?php echo $state["id"]; ?>"><?php echo $state["name"]; ?></option>
+                <?php
+            }
+        }
+        //Uncomment
         //echo "dfd";
         //echo "<pre>";
         //print_r($_SESSION['id']);exit;
@@ -90,7 +90,7 @@ class FeesController extends RController {
             $ffc->is_invoice = 0;
             $ffc->created_at = date('Y-m-d H:i:s');
             $ffc->updated_at = date('Y-m-d H:i:s');
- 
+
 
 //				$ffc->save();
 
@@ -114,60 +114,55 @@ class FeesController extends RController {
                     $ffp = new FinanceFeeParticulars;
                     $ffp->name = $particular_name;
                     $ffp->description = $particular_descriptions[$particular_key];
-                    $ffp->tax_id = !empty($particular_taxs[$particular_key])?$particular_taxs[$particular_key]:0;
-                    $ffp->discount_type = !empty($particular_discount_types[$particular_key])?$particular_discount_types[$particular_key]:0;//Other variable also will go here
-                    $ffp->amount = !empty($particular_discount_values[$particular_key])?$particular_discount_values[$particular_key]:0.00;
+                    $ffp->tax_id = !empty($particular_taxs[$particular_key]) ? $particular_taxs[$particular_key] : 0;
+                    $ffp->discount_type = !empty($particular_discount_types[$particular_key]) ? $particular_discount_types[$particular_key] : 0; //Other variable also will go here
+                    $ffp->amount = !empty($particular_discount_values[$particular_key]) ? $particular_discount_values[$particular_key] : 0.00;
                     $ffp->finance_fee_category_id = $ffc->id;
-                     $ffp->student_category_id = $particular_category[$particular_key];
+                    $ffp->student_category_id = $particular_category[$particular_key];
                     $ffp->created_at = date('Y-m-d H:i:s');
                     $ffp->updated_at = date('Y-m-d H:i:s');
-                  
+
                     $ffp->save();
 //                     echo "<pre/>";
 //                    print_r ($ffp);
 //                    exit;
-
                     //$particular_id = $ffp->id
                     //Save access for this particular if given
                     //Get access array using $particular_key
                     //Loop throug it to save into aceess table
-                    
-
 //                    $particular_id = $ffp->id;
-                        //Save access for this particular if given
-                        //Get access array using $particular_key
-                        //Loop throug it to save into aceess table
-                        $listFeeParticularAccesses = $list['FeeParticularAccess'][$particular_key];
-                        //echo "<pre>";
-                        //print_r($listFeeParticularAccesses);exit;
+                    //Save access for this particular if given
+                    //Get access array using $particular_key
+                    //Loop throug it to save into aceess table
+                    $listFeeParticularAccesses = $list['FeeParticularAccess'][$particular_key];
+                    //echo "<pre>";
+                    //print_r($listFeeParticularAccesses);exit;
 
-                        $particular_access_types = $listFeeParticularAccesses['access_type'];
-                        $particular_courses = $listFeeParticularAccesses['course'];
-                        $particular_batches = $listFeeParticularAccesses['batch'];
-                        $particular_student_category_ids = $listFeeParticularAccesses
-                                ['student_category_id'];
-                        $particular_amounts = $listFeeParticularAccesses['amount'];
-                        $particular_admission_numbers = $listFeeParticularAccesses['admission_numbers'];
-                        $particular_finance_fee_particular_ids = $listFeeParticularAccesses['finance_fee_particular_id'];
+                    $particular_access_types = $listFeeParticularAccesses['access_type'];
+                    $particular_courses = $listFeeParticularAccesses['course'];
+                    $particular_batches = $listFeeParticularAccesses['batch'];
+                    $particular_student_category_ids = $listFeeParticularAccesses
+                            ['student_category_id'];
+                    $particular_amounts = $listFeeParticularAccesses['amount'];
+                    $particular_admission_numbers = $listFeeParticularAccesses['admission_numbers'];
+                    $particular_finance_fee_particular_ids = $listFeeParticularAccesses['finance_fee_particular_id'];
 //                        echo "<pre/>";
 //                        print_r( $particular_amounts);
 //                        exit;
-                        foreach ($particular_access_types as $access_key => $particular_access_type) {
-                            $fpa = new FinanceFeeParticularAccess;
-                            $fpa->access_type = $particular_access_type;
-                            $fpa->course_id = !empty($particular_courses[$access_key])?$particular_courses[$access_key]:'';
-                            $fpa->batch_id = !empty($particular_batches[$access_key])?$particular_batches[$access_key]:'';
-                            $fpa->student_category_id = !empty($particular_student_category_ids[$access_key])?$particular_student_category_ids[$access_key]:'';
-                            $fpa->admission_numbers = !empty($particular_admission_numbers[$access_key])?$particular_admission_numbers[$access_key]:'';
-                            $fpa->amount = !empty($particular_amounts[$access_key])?$particular_amounts[$access_key]:0.00;
-                            $fpa->finance_fee_particular_id = $ffp->id;
-                            $fpa->created_at = date('Y-m-d H:i:s'); 
-                            $fpa->updated_at = date('Y-m-d H:i:s');
+                    foreach ($particular_access_types as $access_key => $particular_access_type) {
+                        $fpa = new FinanceFeeParticularAccess;
+                        $fpa->access_type = $particular_access_type;
+                        $fpa->course_id = !empty($particular_courses[$access_key]) ? $particular_courses[$access_key] : '';
+                        $fpa->batch_id = !empty($particular_batches[$access_key]) ? $particular_batches[$access_key] : '';
+                        $fpa->student_category_id = !empty($particular_student_category_ids[$access_key]) ? $particular_student_category_ids[$access_key] : '';
+                        $fpa->admission_numbers = !empty($particular_admission_numbers[$access_key]) ? $particular_admission_numbers[$access_key] : '';
+                        $fpa->amount = !empty($particular_amounts[$access_key]) ? $particular_amounts[$access_key] : 0.00;
+                        $fpa->finance_fee_particular_id = $ffp->id;
+                        $fpa->created_at = date('Y-m-d H:i:s');
+                        $fpa->updated_at = date('Y-m-d H:i:s');
 //                             print_r( $fpa);
 //                            exit;
-                            $fpa->save();
-                            
-                        
+                        $fpa->save();
                     }
                 }
 //                echo "Check DB for three tables";
@@ -445,7 +440,7 @@ class FeesController extends RController {
      * Lists all models.
      */
     public function actionIndex() {
-       
+
         $criteria = new CDbCriteria;
         $criteria->compare('is_deleted', 0);
         $total = Employees::model()->count($criteria);
@@ -667,16 +662,23 @@ class FeesController extends RController {
         echo $val;
     }
 
-   public function actionGetCitiesByCountryId() {
-        $data = Batches::model()->findAll('course_id=:course_id AND is_deleted=:x',
-            array(':course_id'=>(int) $_POST['course_id'],':x'=>0));
- 
+    public function actionGetCitiesByCountryId() {
+        $data = Batches::model()->findAll('course_id=:course_id AND is_deleted=:x', array(':course_id' => (int) $_POST['course_id'], ':x' => 0));
+
         $data = CHtml::listData($data, 'id', 'name');
- 
-       
-        foreach($data as $value => $key) {
+
+
+        foreach ($data as $value => $key) {
             echo CHtml::tag('option', array('value' => $value), CHtml::encode($key), true);
         }
-    }         
+    }
+
+    public function actionSelectBatch() {
+
+        $subject_id = $this->input->get_post('subject_id');
+        $data = $this->user_model->getbooks_websupport_front('subject_id', $subject_id);
+
+        echo json_encode($data);
+    }
 
 }
